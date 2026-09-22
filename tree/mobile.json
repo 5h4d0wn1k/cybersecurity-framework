@@ -1,0 +1,195 @@
+{
+  "id": "mobile",
+  "name": "Mobile Application Security (Android & iOS)",
+  "emoji": "📱",
+  "tagline": "Testing your own or authorized Android & iOS apps: static analysis, decompilation, runtime instrumentation, traffic interception, and attack-surface automation.",
+  "class": "offense",
+  "categories": [
+    {
+      "id": "static-analysis",
+      "name": "Static Analysis & Vulnerability Scanning",
+      "tools": [
+        {
+          "name": "MobSF (Mobile Security Framework)",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Automated all-in-one analyzer for APK, IPA, and Windows mobile binaries: permissions, exported components, insecure manifest/crypto config, hardcoded secrets, and OWASP MASTG-style checks surfaced in a clean web UI plus REST API for CI.",
+          "when": "Always the first pass on an app binary you are authorized to test — upload the APK or IPA, read the findings report, then drill into specific hits for manual follow-up.",
+          "install": "docker run --rm -it -p 8000:8000 opensecurity/mobile-security-framework-mobsf:latest",
+          "url": "https://github.com/MobSF/Mobile-Security-Framework-MobSF",
+          "alt": ["quark-engine", "apkid"]
+        },
+        {
+          "name": "Quark-Engine",
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Obfuscation-neglect APK scoring engine (distinct from the old LinkedIn 'qark'): matches the app's call graph against a rule set of suspicious behaviors — crypto misuse, dynamic dex loading, accessibility/SMS abuse, C2 calls — and emits confidence-scored reports.",
+          "when": "Quick second opinion on an APK for risky behavior patterns after MobSF, or to generate new detection rules from code you reverse yourself.",
+          "install": "pip3 install -U quark-engine && freshquark",
+          "url": "https://github.com/quark-engine/quark-engine",
+          "alt": ["mobsf", "apkid"]
+        },
+        {
+          "name": "APKiD",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "YARA-based detector for packers, protectors, and obfuscators (DexProtector, Bangcle, qihoo, etc.) inside an APK/DEX before any reversing effort begins.",
+          "when": "Scope a hardened app early: knowing it is packed tells you static-only analysis is not enough and you will need runtime dexdump (frida-dexdump).",
+          "install": "pip install apkid",
+          "url": "https://github.com/rednaga/APKiD",
+          "alt": ["quark-engine", "mobsf"]
+        }
+      ]
+    },
+    {
+      "id": "decompilers",
+      "name": "Decompilers & APK Tooling",
+      "tools": [
+        {
+          "name": "jadx",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "One-step DEX-to-Java decompiler with GUI and CLI that rebuilds readable Java source, resources, and AndroidManifest.xml into a searchable whole-project view.",
+          "when": "Default decompilation of a fresh APK: navigate the reconstructed project, follow flows across classes, and copy logic into notes.",
+          "install": "Download the latest zip from GitHub releases (or 'brew install jadx')",
+          "url": "https://github.com/skylot/jadx",
+          "alt": ["apktool", "dex2jar"]
+        },
+        {
+          "name": "apktool",
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Decodes Android resources and AndroidManifest.xml into editable form and rebuilds the APK; exposes smali/baksmali bytecode for patching when Java source is not needed.",
+          "when": "Modify res/ or smali and repackage the APK (behavior/repackage tests), or pull the manifest cleanly when jadx output gets mangled.",
+          "install": "Download the jar wrapper from GitHub releases (or 'sudo apt install apktool')",
+          "url": "https://github.com/iBotPeaches/Apktool",
+          "alt": ["jadx", "dex2jar"]
+        },
+        {
+          "name": "frida-dexdump",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Dumps in-memory DEX files from a running app via Frida, defeating packers and protectors that only materialize code at runtime.",
+          "when": "Analyze a packed/hardened app: launch it on a device, dump the loaded dex at runtime, then feed the recovered classes back into jadx.",
+          "install": "pip install frida-dexdump",
+          "url": "https://github.com/hluwa/frida-dexdump",
+          "alt": ["jadx", "apktool"]
+        },
+        {
+          "name": "dex2jar",
+          "rating": 3,
+          "effort": "easy",
+          "desc": "The classic DEX-to-JAR converter (paired with JD-GUI for a quick Java view); effectively unmaintained but still the format older guides and toolchains expect.",
+          "when": "Legacy fallback decompile when jadx chokes on an unusual format, or when a downstream tooling chain requires .jar/.class input.",
+          "install": "Download dex2jar-2.x.zip from GitHub releases",
+          "url": "https://github.com/pxb1988/dex2jar",
+          "alt": ["jadx", "apktool"]
+        }
+      ]
+    },
+    {
+      "id": "dynamic-instrumentation",
+      "name": "Dynamic Instrumentation & Runtime Testing",
+      "tools": [
+        {
+          "name": "Frida",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Cross-platform dynamic instrumentation toolkit: inject a frida-server process onto Android/iOS to hook functions, bypass SSL pinning and root detection, trace crypto calls, and invoke internal methods from a Python/JS REPL.",
+          "when": "The runtime layer of most mobile tests — bypass cert pinning, trace sensitive functions, dump buffers, and poke internals static analysis cannot reach.",
+          "install": "pip install frida-tools && push a matching-version frida-server to the device",
+          "url": "https://frida.re",
+          "alt": ["objection", "magisk"]
+        },
+        {
+          "name": "objection",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Frida-powered runtime exploration toolkit: one-liners to disable SSL pinning and root checks, browse Android/iOS storage (Keychain, SharedPrefs, Bundle), and explore exported classes without writing custom JS.",
+          "when": "Quick interactive runtime pass on your own app — disable pinning/root detection and inspect stored data — when hand-writing Frida scripts is overkill.",
+          "install": "pip install objection",
+          "url": "https://github.com/sensepost/objection",
+          "alt": ["frida"]
+        },
+        {
+          "name": "Magisk",
+          "rating": 3,
+          "effort": "advanced",
+          "desc": "Systemless rooting framework for physical Android devices and emulators that gives Frida, adb, and your injected agents the root context most dynamic tests need; it is a rooting kit first, not a pentest tool.",
+          "when": "Prepare a dedicated test device with an unlocked bootloader when an app refuses to run on stock or detects the emulator you were using.",
+          "install": "Install the Magisk APK or 'fastboot boot magisk_patched-<hash>.img' on an unlocked-bootloader device",
+          "url": "https://github.com/topjohnwu/Magisk",
+          "alt": ["frida", "objection"]
+        },
+        {
+          "name": "adb (Android Debug Bridge)",
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Google's core device bridge from Android platform-tools: install apps, push/pull files, shell in, port-forward, install CA certificates, and capture logcat.",
+          "when": "Every device setup step — enumerate devices, push frida-server and test certificates, and snapshot app data before and after a test run.",
+          "install": "sudo apt install adb",
+          "url": "https://developer.android.com/tools/adb",
+          "alt": ["magisk", "frida"]
+        }
+      ]
+    },
+    {
+      "id": "traffic-analysis",
+      "name": "Traffic Interception & Analysis",
+      "tools": [
+        {
+          "name": "mitmproxy",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Interactive HTTPS intercepting proxy built for mobile workflows: install its CA on the device, replay or rewrite HTTP/2 and gRPC flows, and script custom handling with Python addons; pair with a Frida/objection pinning bypass to decrypt app TLS.",
+          "when": "Any network-level test of your own apps — log, tamper, or replay API traffic from a rooted device, emulator, or iOS simulator.",
+          "install": "pip install mitmproxy",
+          "url": "https://mitmproxy.org",
+          "alt": ["charles proxy", "burp suite (see web domain)"]
+        },
+        {
+          "name": "Charles Proxy",
+          "class": "commercial",
+          "rating": 3,
+          "effort": "easy",
+          "desc": "Commercial GUI HTTPS proxy with click-through SSL proxying, rewrite/breakpoints, and a visual request timeline — the macOS-centric alternative to a terminal proxy.",
+          "when": "Point-and-click interception and rewriting during manual iOS testing on a workstation when you prefer a GUI over mitmproxy's keyboard-driven flow.",
+          "install": "Download from charlesproxy.com (trial, then paid license)",
+          "url": "https://www.charlesproxy.com",
+          "alt": ["mitmproxy"]
+        }
+      ]
+    },
+    {
+      "id": "automation-fuzzing",
+      "name": "Attack-Surface Automation & Fuzzing",
+      "tools": [
+        {
+          "name": "Drozer",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "The reference Android attack-surface framework: an on-device agent lets you assume the role of another app and enumerate/exploit exported activities, content providers, services, and broadcast receivers from a console.",
+          "when": "After static analysis, map the app's IPC/component attack surface and probe each exported component for authorization and data-exposure flaws.",
+          "install": "git clone https://github.com/ReversecLabs/drozer.git && cd drozer && pip install . (plus the drozer agent APK on the device)",
+          "url": "https://github.com/ReversecLabs/drozer",
+          "alt": ["android tamer"]
+        },
+        {
+          "name": "Android Tamer",
+          "rating": 3,
+          "effort": "advanced",
+          "desc": "Linux distro/VM prebundling dozens of Android-sec tools (jadx, apktool, MobSF, AndroBugs, Frida, radare2). Tamer 4 is end-of-life and Tamer 5 is under construction, so it is a convenience starting point, not a project to build on.",
+          "when": "Stand up a one-shot preconfigured Android-tools VM for a specific engagement; otherwise skip — each tool here installs more reliably on your own base OS.",
+          "install": "Download the Tamer 4 VM from TamerPlatform and import into VirtualBox/VMware",
+          "url": "https://github.com/AndroidTamer/AndroidTamer",
+          "alt": ["mobsf", "frida"]
+        }
+      ]
+    }
+  ]
+}

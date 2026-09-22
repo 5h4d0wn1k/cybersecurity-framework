@@ -1,0 +1,221 @@
+{
+  "id": "forensics",
+  "name": "Digital Forensics & Incident Response",
+  "emoji": "🔬",
+  "tagline": "Analyze memory, disk, carved files, artifacts, and timelines from your own systems, lab evidence, and incident-response cases you legally possess.",
+  "class": "defense",
+  "categories": [
+    {
+      "id": "memory-forensics",
+      "name": "Memory Forensics",
+      "tools": [
+        {
+          "name": "Volatility 3",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "The de-facto memory forensics framework: plugin-based analysis of RAM dumps (raw, EWF, crash/hibernation) across Windows, Linux, macOS, and Android — process listing, network artifacts, injected code, and more.",
+          "when": "Start here with any memory dump from a lab box or captured incident host; run pslist/pscan, netscan, and malfind to build the runtime picture.",
+          "install": "python3 -m pip install volatility3",
+          "url": "https://github.com/volatilityfoundation/volatility3",
+          "alt": ["MemProcFS", "Volatility 2"]
+        },
+        {
+          "name": "Volatility 2",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "The classic Python 2 framework (archived but stable) with the deepest plugin ecosystem and profile-based analysis for older Windows, Linux, and macOS dumps.",
+          "when": "Reach for it when a legacy or niche image lacks a Volatility 3 symbol table, or a plugin you need only exists in the classic tree.",
+          "install": "git clone https://github.com/volatilityfoundation/volatility",
+          "url": "https://github.com/volatilityfoundation/volatility",
+          "alt": ["Volatility 3"]
+        },
+        {
+          "name": "MemProcFS",
+          "rating": 5,
+          "effort": "advanced",
+          "desc": "Mounts a memory dump or live target (PCILeech FPGA/LeechAgent) as a virtual filesystem of processes, registry, and artifacts, with a batch forensic mode and YARA scanning.",
+          "when": "Fast interactive triage of a Windows dump without plugin CLI gymnastics, or live acquisition during your own incident response.",
+          "install": "git clone https://github.com/ufrisk/MemProcFS",
+          "url": "https://github.com/ufrisk/MemProcFS",
+          "alt": ["Volatility 3"]
+        }
+      ]
+    },
+    {
+      "id": "disk-forensics",
+      "name": "Disk Forensics & Imaging",
+      "tools": [
+        {
+          "name": "Autopsy",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "GUI platform built on The Sleuth Kit: opens images and live drives, recovers deleted files, and runs ingest modules for web history, keyword search, and carving inside a case workflow.",
+          "when": "First-pass interactive examination of a drive or memory-card image from your own casework or a lab exercise — ingest everything, then drill into findings.",
+          "install": "download installer from https://www.sleuthkit.org/autopsy/download.php",
+          "url": "https://www.sleuthkit.org/autopsy/",
+          "alt": ["The Sleuth Kit"]
+        },
+        {
+          "name": "The Sleuth Kit",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Command-line suite for raw/EWF images: mmls for partition layout, fls/icat to list and extract inodes, istat for metadata, and tsk_recover for file recovery — the engine under Autopsy.",
+          "when": "Scripted or headless analysis, or when you need precise inode-level answers Autopsy hides behind its GUI.",
+          "install": "sudo apt install sleuthkit",
+          "url": "https://sleuthkit.org/sleuthkit/",
+          "alt": ["Autopsy"]
+        },
+        {
+          "name": "dc3dd",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Forensic fork of GNU dd adding on-the-fly hashing, split output, pattern wiping, and detailed logging — evidence-grade imaging of a source drive to a file.",
+          "when": "Capture a definitive image of your own drive or USB stick before analysis so you examine the copy, not the live evidence.",
+          "install": "sudo apt install dc3dd",
+          "url": "https://sourceforge.net/projects/dc3dd/",
+          "alt": ["Guymager"]
+        },
+        {
+          "name": "Guymager",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "GUI forensic imager for Linux producing flat (dd), EWF (E01), and AFF images with multi-threaded, pipelined reads for fast verified acquisitions.",
+          "when": "Click-driven imaging with progress bars and check-verification when you prefer a window over dc3dd's command line.",
+          "install": "sudo apt install guymager",
+          "url": "https://guymager.sourceforge.io/",
+          "alt": ["dc3dd"]
+        }
+      ]
+    },
+    {
+      "id": "file-carving",
+      "name": "File Carving & Recovery",
+      "tools": [
+        {
+          "name": "foremost",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Header/footer and data-structure file carver (originally from AFOSI) that extracts JPEG, ZIP, PDF, and other signatures from raw images or drives via a configurable file-type table.",
+          "when": "Unallocated-space fishing: run it on an image or free-space carve to recover deleted files the live filesystem no longer lists.",
+          "install": "sudo apt install foremost",
+          "url": "https://foremost.sourceforge.net/",
+          "alt": ["scalpel", "PhotoRec/testdisk"]
+        },
+        {
+          "name": "bulk_extractor",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Scans any input byte-by-byte and extracts emails, URLs, credit-card numbers, JPEGs, and JSON to feature files — recursively decoding compressed or encoded blocks without parsing the filesystem.",
+          "when": "Rapid 'what is in this blob' extraction over images or wiped drives before deep filesystem analysis.",
+          "install": "sudo apt install bulk-extractor",
+          "url": "https://github.com/simsong/bulk_extractor",
+          "alt": ["foremost"]
+        },
+        {
+          "name": "scalpel",
+          "rating": 3,
+          "effort": "easy",
+          "desc": "Filesystem-independent carver using a header/footer definition database — a fast rewrite of foremost's carving engine with tunable per-type carve-size limits.",
+          "when": "When you need per-type carve-size tuning or an alterative engine for a stubborn image carve beyond foremost defaults.",
+          "install": "sudo apt install scalpel",
+          "url": "https://www.kali.org/tools/scalpel/",
+          "alt": ["foremost", "PhotoRec/testdisk"]
+        },
+        {
+          "name": "PhotoRec/testdisk",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Signature-based recovery of 440+ file formats plus TestDisk for partition-table repair and undelete; no filename reconstruction, but deep salvage on corrupted or reformatted media.",
+          "when": "Last-ditch recovery from a reformatted or damaged partition or thumb drive in your own hardware lab.",
+          "install": "sudo apt install testdisk",
+          "url": "https://www.cgsecurity.org/",
+          "alt": ["foremost", "scalpel"]
+        }
+      ]
+    },
+    {
+      "id": "log-timeline",
+      "name": "Timeline & Log Analysis",
+      "tools": [
+        {
+          "name": "plaso/log2timeline",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "log2timeline extracts timestamped events (filesystem, registry, EVTX, browser, application logs) from an image or mount point into a Plaso storage file; psort turns it into a filtered super-timeline.",
+          "when": "Build the master super-timeline of an image: collect once with log2timeline, then slice and filter per question with psort.",
+          "install": "python3 -m pip install plaso",
+          "url": "https://github.com/log2timeline/plaso",
+          "alt": ["Timesketch"]
+        },
+        {
+          "name": "Timesketch",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Google's web front-end for collaborative timeline analysis: import Plaso output and search, filter, star, and annotate events in your browser.",
+          "when": "Turn a giant Plaso timeline into something huntable — collaborative review and annotation for your own case and lab reports.",
+          "install": "git clone https://github.com/google/timesketch",
+          "url": "https://github.com/google/timesketch",
+          "alt": ["plaso/log2timeline"]
+        }
+      ]
+    },
+    {
+      "id": "artifact-analysis",
+      "name": "Windows Artifact Analysis",
+      "tools": [
+        {
+          "name": "KAPE",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Kroll Artifact Parser and Extractor: selects forensically useful artifacts (registry hives, EVTX, Prefetch, MFT, browser files) from a live device or mounted image, then parses them with bundled tools in minutes.",
+          "when": "Speed triage in your own incident response or lab: point it at a live Windows box or image and get parsed artifacts quickly; extend via community KapeFiles targets.",
+          "install": "download from ericzimmerman.github.io (Get-KAPE)",
+          "url": "https://github.com/EricZimmerman/KapeFiles",
+          "alt": ["Eric Zimmerman's Tools"]
+        },
+        {
+          "name": "Eric Zimmerman's Tools",
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Suite of focused parsers — RECmd/Registry Explorer, PECmd (Prefetch), LECmd (LNK), JLECmd (JumpLists), ShellBags, Amcache, MFTECmd — answering execution-timeline questions from individual artifacts.",
+          "when": "Deep-dive a targeted artifact set: ask 'what executed, when, by whom' via Prefetch, LNK/JumpList, Amcache, and registry traces.",
+          "install": "Get-ZimmermanTools.ps1 (PowerShell)",
+          "url": "https://ericzimmerman.github.io/",
+          "alt": ["KAPE"]
+        }
+      ]
+    },
+    {
+      "id": "incident-response",
+      "name": "Incident Response & Triage",
+      "tools": [
+        {
+          "name": "Velociraptor",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Open-source endpoint visibility and collection platform: deploy lightweight agents, run prebuilt forensic artifacts and fleet-wide hunts via VQL, and pull process, disk, and registry data to a central server.",
+          "when": "Your own lab or home-network incident: stand up a server, install agents, and answer 'what happened on these hosts' with artifacts and hunts.",
+          "install": "download velociraptor binary from GitHub releases; run server and deploy agent",
+          "url": "https://github.com/Velocidex/velociraptor",
+          "alt": ["UAC"]
+        },
+        {
+          "name": "UAC",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Unix-like Artifacts Collector: no-install shell script collecting processes, users, logs, cron, running-file hashes, and bodyfiles from Linux/macOS/BSD/ESXi in order of volatility, packaged for handoff.",
+          "when": "Rapid live triage on a Linux box you're responding to — run from a USB or read-only medium and hand the archive to your analysis machine.",
+          "install": "git clone https://github.com/tclahr/uac",
+          "url": "https://github.com/tclahr/uac",
+          "alt": ["Velociraptor"]
+        }
+      ]
+    }
+  ]
+}

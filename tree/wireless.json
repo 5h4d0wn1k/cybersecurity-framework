@@ -1,0 +1,217 @@
+{
+  "id": "wireless",
+  "name": "Wireless & Bluetooth Security",
+  "emoji": "📡",
+  "tagline": "WiFi capture and cracking, RF spectrum analysis, WPS auditing, and Bluetooth — for testing networks and gear you own or are authorized to audit.",
+  "class": "offense",
+  "categories": [
+    {
+      "id": "wifi-crack",
+      "name": "WiFi Capture & Cracking",
+      "tools": [
+        {
+          "name": "aircrack-ng",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "The reference 802.11 suite: captures WEP and WPA/WPA2-PSK handshakes, cracks them against wordlists/dictionaries, and verifies recovered keys; ships the airodump-ng and aireplay-ng binaries.",
+          "when": "Start every authorized Wi-Fi audit here: put a supported adapter into monitor mode and validate the key strength and fallback behavior of your own AP.",
+          "install": "sudo apt install aircrack-ng",
+          "url": "https://github.com/aircrack-ng/aircrack-ng",
+          "alt": ["wifite2", "hcxdumptool", "airodump-ng"]
+        },
+        {
+          "name": "airodump-ng",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Packet-capture and display tool that enumerates nearby access points and clients, logs capture files, and grabs 4-way handshakes for offline cracking.",
+          "when": "Any authorized Wi-Fi audit needs it first: channel-by-channel capture of BSSIDs, signal, encryption type, and handshake material on hardware you run.",
+          "install": "sudo apt install aircrack-ng",
+          "url": "https://github.com/aircrack-ng/aircrack-ng",
+          "alt": ["aircrack-ng", "wifite2", "kismet"]
+        },
+        {
+          "name": "aireplay-ng",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Frame-injection and replay tool of the suite: sends deauthentication frames and replays captured packets to trigger a fresh 4-way handshake when a station won't associate on its own.",
+          "when": "On a lab client that sits idle, use deauth to force a new handshake so you can verify your own PSK policy faster.",
+          "install": "sudo apt install aircrack-ng",
+          "url": "https://github.com/aircrack-ng/aircrack-ng",
+          "alt": ["aircrack-ng", "wifite2"]
+        },
+        {
+          "name": "Wifite2",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Automated Wi-Fi auditing wrapper: scans with a monitor-mode adapter, lets you pick targets from a menu, and chains deauth, handshake capture, and cracking (or WPS PIN work via bully/reaver) in one run.",
+          "when": "Fast repeatable lab checks on your own networks where you want the whole capture-to-crack pipeline driven from a single interactive menu.",
+          "install": "git clone https://github.com/derv82/wifite2.git && cd wifite2 && sudo python3 setup.py install",
+          "url": "https://github.com/derv82/wifite2",
+          "alt": ["aircrack-ng", "hcxdumptool", "reaver"]
+        },
+        {
+          "name": "hcxdumptool",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Raw PCAPNG capture tool for PMKID and handshake material using a single adapter; often the fastest way to gather WPA test data without injection tricks.",
+          "when": "Verify PSK strength on an AP you own that advertises PMKID — one passive-ish run beats orchestrating deauths.",
+          "install": "git clone https://github.com/ZerBea/hcxdumptool.git && cd hcxdumptool && make && sudo make install",
+          "url": "https://github.com/ZerBea/hcxdumptool",
+          "alt": ["aircrack-ng", "wifite2"]
+        }
+      ]
+    },
+    {
+      "id": "wifi-rf",
+      "name": "WiFi Analysis & RF",
+      "tools": [
+        {
+          "name": "Kismet",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Multi-protocol passive wireless detector and logging framework; captures and tracks 802.11, Bluetooth, and SDR sources with server + web UI.",
+          "when": "Long-running passive surveys and signal mapping of your own test environment, plus intrusion detection on your authorized airspace.",
+          "install": "sudo apt install kismet",
+          "url": "https://www.kismetwireless.net",
+          "alt": ["horst", "wireshark"]
+        },
+        {
+          "name": "Wireshark",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Universal packet dissector with deep 802.11 and Bluetooth protocol support; decrypts WPA/EAPOL traffic when supplied the PMK/keys.",
+          "when": "Post-capture forensics: walk frame-by-frame through handshakes, probe requests, and BT packets from your own gear to understand protocol behavior.",
+          "install": "sudo apt install wireshark",
+          "url": "https://www.wireshark.org",
+          "alt": ["kismet", "horst"]
+        },
+        {
+          "name": "gqrx",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Software-defined radio receiver built on GNU Radio; tunes an RTL-SDR dongle and demodulates, decodes, and spectrally displays received signals.",
+          "when": "Scan the ISM band around your lab to identify transmitters or interference sources before blaming your own Wi-Fi gear.",
+          "install": "sudo apt install gqrx-sdr",
+          "url": "https://gqrx.dk",
+          "alt": ["rtl-sdr", "inspectrum"]
+        },
+        {
+          "name": "RTL-SDR",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Cheap USB software-defined radio receiver with drivers and command-line utilities (rtl_fm, rtl_tcp, rtl_test) for raw spectral sampling.",
+          "when": "The base RF monitoring hardware and tooling: stream IQ captures into gqrx or inspectrum for analysis of signals in your own environment.",
+          "install": "sudo apt install rtl-sdr",
+          "url": "https://github.com/osmocom/rtl-sdr",
+          "alt": ["gqrx", "inspectrum", "kismet"]
+        },
+        {
+          "name": "inspectrum",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Offline signal-analysis tool that renders recorded IQ or audio files into an interactive waterfall for visual protocol and modulation identification.",
+          "when": "Analyze captured RF bursts (from RTL-SDR or other taps) to spot modulation patterns and packet structures after the fact.",
+          "install": "sudo apt install inspectrum",
+          "url": "https://github.com/miek/inspectrum",
+          "alt": ["gqrx", "rtl-sdr"]
+        },
+        {
+          "name": "horst",
+          "rating": 3,
+          "effort": "medium",
+          "desc": "Lightweight ncurses 802.11 traffic analyzer with channel scanning, signal histograms, and per-client statistics in a terminal.",
+          "when": "A minimal TUI alternative to Kismet for quick signal and traffic checks in the field on authorized networks.",
+          "install": "git clone https://github.com/br101/horst && cd horst && make && sudo make install",
+          "url": "https://github.com/br101/horst",
+          "alt": ["kismet", "wireshark"]
+        }
+      ]
+    },
+    {
+      "id": "bluetooth",
+      "name": "Bluetooth",
+      "tools": [
+        {
+          "name": "Ubertooth",
+          "best": true,
+          "rating": 5,
+          "effort": "advanced",
+          "desc": "Open-source 2.4 GHz radio hardware plus host software for Bluetooth capture and injection; analyzes frequency-hopping patterns, Classic BT, and BLE advertising on the Ubertooth One dongle.",
+          "when": "Hardware-level Bluetooth auditing of your own peripherals: sniffing hop patterns, identifying weak pairing, and verifying advertising behavior.",
+          "install": "git clone https://github.com/greatscottgadgets/ubertooth && cd ubertooth/host && mkdir build && cd build && cmake .. && make && sudo make install",
+          "url": "https://github.com/greatscottgadgets/ubertooth",
+          "alt": ["btlejack", "bettercap"]
+        },
+        {
+          "name": "bettercap",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Modular network attack/monitoring framework whose Bluetooth modules enumerate and intercept BLE and Classic BT devices and connections from the local host.",
+          "when": "Scriptable Bluetooth enumeration and connection monitoring against your own test devices without extra RF hardware.",
+          "install": "sudo apt install bettercap",
+          "url": "https://github.com/bettercap/bettercap",
+          "alt": ["bluez"]
+        },
+        {
+          "name": "btlejack",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Sniffs and interacts with BLE advertising and connection channels using nRF24-family USB dongles; supports jamming and session recovery using previously captured keys.",
+          "when": "Low-cost BLE protocol auditing of your own accessories: map advertising channels and check whether session keys are reused across connections.",
+          "install": "git clone https://github.com/virtualabs/btlejack && cd btlejack && make && sudo make install",
+          "url": "https://github.com/virtualabs/btlejack",
+          "alt": ["ubertooth", "bettercap"]
+        },
+        {
+          "name": "BlueZ",
+          "rating": 3,
+          "effort": "medium",
+          "desc": "The Linux Bluetooth protocol stack: hcitool, hcidump, btmon, and bluetoothctl expose controller state, HCI packets, and link logs.",
+          "when": "Free, instant BT visibility on Linux before reaching for dedicated hardware like Ubertooth.",
+          "install": "sudo apt install bluez bluez-hcidump",
+          "url": "https://github.com/bluez/bluez",
+          "alt": ["bettercap"]
+        }
+      ]
+    },
+    {
+      "id": "wps",
+      "name": "WPS Tools",
+      "tools": [
+        {
+          "name": "Reaver",
+          "best": true,
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "The reference WPS PIN brute-force tool: probes the registrar PIN transaction logic and, on vulnerable APs in your lab, recovers the WPS PIN and derived WPA-PSK.",
+          "when": "Validate whether a lab AP's WPS implementation is brute-force resistant — many modern routers lock out after failures, which is the outcome you want to confirm.",
+          "install": "sudo apt install reaver",
+          "url": "https://github.com/t6x/reaver-wps-fork-linux",
+          "alt": ["bully", "wash"]
+        },
+        {
+          "name": "Wash",
+          "rating": 3,
+          "effort": "medium",
+          "desc": "Companion scanner shipped with reaver that detects WPS-enabled access points and reads their WPS state (version, locked or not) without launching an active attack.",
+          "when": "Passive WPS recon across your own network estate before deciding whether a PIN-based audit is even relevant.",
+          "install": "sudo apt install reaver",
+          "url": "https://github.com/t6x/reaver-wps-fork-linux",
+          "alt": ["reaver", "bully"]
+        },
+        {
+          "name": "Bully",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Reimplementation of the WPS PIN brute-force client in C with tighter packet timing and tolerance for flaky associations than reaver's original implementation.",
+          "when": "When reaver stalls against your own AP, Bully's more robust locking logic often completes the audit where reaver cannot.",
+          "install": "sudo apt install bully",
+          "url": "https://github.com/aanarchyy/bully",
+          "alt": ["reaver", "wash"]
+        }
+      ]
+    }
+  ]
+}

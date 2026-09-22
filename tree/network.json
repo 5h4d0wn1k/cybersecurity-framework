@@ -1,0 +1,204 @@
+{
+  "id": "network",
+  "name": "Network Attacks & Analysis",
+  "emoji": "📡",
+  "tagline": "Packet capture, on-path interception, host discovery, and connectivity utilities for understanding and testing traffic on networks you operate.",
+  "class": "offense",
+  "categories": [
+    {
+      "id": "packet-capture",
+      "name": "Packet Capture & Analysis",
+      "tools": [
+        {
+          "name": "Wireshark",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Graphical packet analyzer that decodes hundreds of protocols, follows TCP streams, and reassembles sessions live or from a saved capture.",
+          "when": "See the actual bytes and protocol conversations behind a traffic sample, or replay an issue from a .pcap taken on a machine you control.",
+          "install": "sudo apt install wireshark",
+          "url": "https://www.wireshark.org",
+          "alt": ["tshark", "tcpdump", "tcpflow"]
+        },
+        {
+          "name": "tcpdump",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Command-line packet capture using Berkeley Packet Filter (BPF) expressions; the standard for headless logging and scripted sniffing.",
+          "when": "On servers, routers, or lab hosts where no GUI exists, or when writing a rolling capture to a file for later analysis.",
+          "install": "sudo apt install tcpdump",
+          "url": "https://www.tcpdump.org",
+          "alt": ["tshark", "wireshark"]
+        },
+        {
+          "name": "tshark",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Wireshark's terminal sibling: captures, decrypts, and prints live or offline traffic with the full dissector set and CSV/JSON output.",
+          "when": "Get Wireshark-grade dissection piped into grep, awk, or analysis scripts without launching a GUI.",
+          "install": "sudo apt install tshark",
+          "url": "https://www.wireshark.org/docs/man-pages/tshark.html",
+          "alt": ["tcpdump", "wireshark"]
+        },
+        {
+          "name": "tcpflow",
+          "rating": 4,
+          "effort": "beginner",
+          "desc": "Reassembles TCP sessions from a capture into separate per-connection files, ignoring lower-level packet noise.",
+          "when": "Reconstruct actual transferred content (files, HTTP bodies) from a .pcap you own instead of inspecting packets one at a time.",
+          "install": "sudo apt install tcpflow",
+          "url": "https://github.com/simsong/tcpflow",
+          "alt": ["wireshark", "tshark"]
+        }
+      ]
+    },
+    {
+      "id": "interception",
+      "name": "On-Path & Interception Frameworks",
+      "tools": [
+        {
+          "name": "bettercap",
+          "best": true,
+          "rating": 5,
+          "effort": "advanced",
+          "desc": "Modular framework for MITM, ARP/DNS/DHCP spoofing, and credential sniffing with an interactive shell and RESTful API for scripting.",
+          "when": "On a network you operate, to test which plaintext protocols (HTTP, FTP, telnet) leak over the wire and how clients react to spoofing.",
+          "install": "sudo apt install bettercap",
+          "url": "https://www.bettercap.org",
+          "alt": ["mitmproxy", "responder"]
+        },
+        {
+          "name": "mitmproxy",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Interactive HTTPS interception proxy with a terminal UI, Python addon scripting, and TLS interception via its own CA you install on your devices.",
+          "when": "Inspect and rewrite HTTP/HTTPS traffic from an app, device, or CLI you control, with the proxy cert explicitly trusted on that device.",
+          "install": "python3 -m pip install mitmproxy",
+          "url": "https://mitmproxy.org",
+          "alt": ["bettercap"]
+        },
+        {
+          "name": "responder",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Answers LLMNR/NBT-NS/mDNS name-resolution queries on a subnet and logs or relays credentials passed over those protocols to its own listeners.",
+          "when": "Test Windows-style authentication flows in a lab and check whether clients will send net-NTLM hashes when their expected resolver goes silent.",
+          "install": "sudo apt install responder",
+          "url": "https://github.com/lgandx/Responder",
+          "alt": ["bettercap"]
+        }
+      ]
+    },
+    {
+      "id": "host-discovery",
+      "name": "Host Discovery & Network Mapping",
+      "tools": [
+        {
+          "name": "arp-scan",
+          "best": true,
+          "rating": 5,
+          "effort": "beginner",
+          "desc": "Sends ARP requests to every address in a subnet and lists live hosts by IP and MAC/OUI vendor; the most reliable way to map a local network.",
+          "when": "First step when on a network you administer: enumerate every physical host on the LAN, since ARP is answered even where ICMP is filtered.",
+          "install": "sudo apt install arp-scan",
+          "url": "https://github.com/royhills/arp-scan",
+          "alt": ["netdiscover", "fping"]
+        },
+        {
+          "name": "netdiscover",
+          "rating": 4,
+          "effort": "beginner",
+          "desc": "Active and passive ARP-based host discovery with a live-updating table of MAC address, vendor, and IP.",
+          "when": "Continuous visual recon of a local network, or a quick live view while monitoring the LAN over time.",
+          "install": "sudo apt install netdiscover",
+          "url": "https://github.com/netdiscover-scanner/netdiscover",
+          "alt": ["arp-scan", "fping"]
+        },
+        {
+          "name": "fping",
+          "rating": 3,
+          "effort": "beginner",
+          "desc": "Bulk ICMP pinger that sweeps a range of targets in parallel and prints alive/dead results in a script-friendly stream.",
+          "when": "Fast liveness check of a large IP range when hosts are off-subnet, where ARP-based discovery cannot reach.",
+          "install": "sudo apt install fping",
+          "url": "https://fping.org",
+          "alt": ["arp-scan", "netdiscover"]
+        }
+      ]
+    },
+    {
+      "id": "conn-utils",
+      "name": "Connectivity & Packet Crafting",
+      "tools": [
+        {
+          "name": "socat",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Bidirectional relay that forwards, listens on, and connects across TCP, UDP, UNIX sockets, and files; flexible byte plumbing for testing services.",
+          "when": "Expose a local service through a relay, forward ports between lab hosts, or inject/monitor raw data flows in ad-hoc setups.",
+          "install": "sudo apt install socat",
+          "url": "http://www.dest-unreach.org/socat/",
+          "alt": ["ncat", "proxychains"]
+        },
+        {
+          "name": "ncat",
+          "rating": 5,
+          "effort": "beginner",
+          "desc": "Nmap's free, MIT-licensed netcat: connect, listen, and relay TCP/UDP with TLS, proxy modes, and easy scripting built in.",
+          "when": "Quick read/write tests against a listening port, banner grabbing, or one-shot TCP/UDP checks while debugging connectivity.",
+          "install": "sudo apt install ncat",
+          "url": "https://nmap.org/ncat/",
+          "alt": ["socat", "netcat-openbsd (netcat-free)"]
+        },
+        {
+          "name": "hping3",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Packet-crafting tool that builds custom TCP/UDP/ICMP packets via raw sockets, with control over flags, timing, and fragmentation.",
+          "when": "Answer questions like \"does this firewall actually drop that flagged packet?\" by sending hand-crafted probes from a host you control.",
+          "install": "sudo apt install hping3",
+          "url": "http://www.hping.org/",
+          "alt": ["nmap (recon)"]
+        },
+        {
+          "name": "proxychains",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Routes any TCP client through a strict, random, or dynamic chain of HTTP/SOCKS proxies, forcing connections out via chosen exits.",
+          "when": "Test whether an application can be tunneled through proxies and observe the egress path a tool takes in controlled lab scenarios.",
+          "install": "sudo apt install proxychains4",
+          "url": "https://github.com/haad/proxychains",
+          "alt": ["socat", "ncat"]
+        }
+      ]
+    },
+    {
+      "id": "dns-ip",
+      "name": "DNS & IP Utilities",
+      "tools": [
+        {
+          "name": "dig",
+          "best": true,
+          "rating": 5,
+          "effort": "beginner",
+          "desc": "The standard DNS query tool from the BIND suite: any record type, MX priority, zone-transfer attempts, and query tracing against a chosen resolver.",
+          "when": "Resolve names in isolation, verify records against a specific server, or trace how a lookup flows through resolvers in one command.",
+          "install": "sudo apt install dnsutils",
+          "url": "https://www.isc.org/bind/",
+          "alt": ["whois"]
+        },
+        {
+          "name": "whois",
+          "rating": 4,
+          "effort": "beginner",
+          "desc": "Queries WHOIS/registration databases for domain ownership, registrar, name servers, and IP allocation details.",
+          "when": "Collect registrant, registrar, and registration dates for a domain, or the owning organization of an IP range, before deeper analysis.",
+          "install": "sudo apt install whois",
+          "url": "https://github.com/rfc1036/whois",
+          "alt": ["dig"]
+        }
+      ]
+    }
+  ]
+}

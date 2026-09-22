@@ -1,0 +1,100 @@
+{
+  "id": "redteam",
+  "name": "Red Team Infrastructure & Operations",
+  "emoji": "🎯",
+  "tagline": "Authorized red team tooling: pivoting, tunnels, proxying, and practice lab environments.",
+  "class": "offense",
+  "categories": [
+    {
+      "id": "pivoting-tunnels",
+      "name": "Pivoting & Tunnels",
+      "tools": [
+        {
+          "name": "sshuttle",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Lightweight VPN-like pivot using SSH; routes traffic through a jump host without requiring root on the target.",
+          "when": "Need simple, reliable lateral routing to access internal networks from a single jump host during authorized engagements or labs.",
+          "install": "pip install sshuttle",
+          "url": "https://github.com/sshuttle/sshuttle",
+          "alt": ["chisel", "ligolo-ng"]
+        },
+        {
+          "name": "chisel",
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Fast TCP/HTTP tunneling over a single port with reverse or forward modes; portable and minimal.",
+          "when": "Tunneling a specific service through restrictive firewalls or NAT during controlled testing.",
+          "install": "go install github.com/jpillora/chisel@latest",
+          "url": "https://github.com/jpillora/chisel",
+          "alt": ["sshuttle", "frp"]
+        },
+        {
+          "name": "ligolo-ng",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "TUN-based tunneling agent for pivoting with automatic routes; simple interface for authorized red team operations.",
+          "when": "Need full network access through a pivot host with automatic routing in a lab or authorized engagement environment.",
+          "install": "go install github.com/nicocha30/ligolo-ng@latest",
+          "url": "https://github.com/nicocha30/ligolo-ng",
+          "alt": ["sshuttle", "frp"]
+        },
+        {
+          "name": "frp",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Fast reverse proxy for exposing local services through a remote server; stable and well-documented.",
+          "when": "Need controlled reverse proxying for lab infrastructure or authorized test setups behind NAT.",
+          "install": "go install github.com/fatedier/frp@latest",
+          "url": "https://github.com/fatedier/frp",
+          "alt": ["chisel"]
+        }
+      ]
+    },
+    {
+      "id": "proxy-management",
+      "name": "Proxy Management",
+      "tools": [
+        {
+          "name": "proxychains-ng",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Force any TCP application through a chain of proxies for controlled routing in authorized testing.",
+          "when": "Need to route existing tooling through a proxy chain during authorized red team exercises or lab scenarios.",
+          "install": "git clone https://github.com/rofl0r/proxychains-ng && cd proxychains-ng && ./configure --prefix=/usr && make && sudo make install",
+          "url": "https://github.com/rofl0r/proxychains-ng",
+          "alt": []
+        }
+      ]
+    },
+    {
+      "id": "ad-labs",
+      "name": "Active Directory Labs & Practice",
+      "tools": [
+        {
+          "name": "GOAD",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Great Oxide Active Directory lab for realistic, authorized red team practice with vulnerable AD domains.",
+          "when": "Practicing authorized AD attack/defense techniques in an isolated, controlled lab environment.",
+          "install": "git clone https://github.com/Orange-Cyberdefense/GOAD",
+          "url": "https://github.com/Orange-Cyberdefense/GOAD",
+          "alt": ["VECTR"]
+        },
+        {
+          "name": "VECTR",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Purple team tracking and assessment framework for mapping techniques to MITRE ATT&CK in controlled exercises.",
+          "when": "Running structured, authorized red/purple team exercises with measurable objectives and reporting.",
+          "install": "git clone https://github.com/SecurityRiskAdvisors/VECTR",
+          "url": "https://github.com/SecurityRiskAdvisors/VECTR",
+          "alt": ["GOAD"]
+        }
+      ]
+    }
+  ]
+}

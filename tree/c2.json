@@ -1,0 +1,170 @@
+{
+  "id": "c2",
+  "name": "Command & Control Frameworks",
+  "emoji": "🖥️",
+  "tagline": "C2 / post-exploitation frameworks, implants, and tunnel helpers — for authorized adversary simulation, C2-traffic detection testing, and lab post-exploitation.",
+  "class": "offense",
+  "categories": [
+    {
+      "id": "opensource-c2",
+      "name": "Open-Source C2 Frameworks",
+      "tools": [
+        {
+          "name": "Sliver",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Open-source cross-platform adversary-emulation framework (BishopFox); Go implants are dynamically compiled with per-binary encryption keys and support C2 over mTLS, WireGuard, HTTP(S), and DNS.",
+          "when": "Your default lab/red-team C2 when you want a framework blue teams can profile exhaustively without commercial licensing.",
+          "install": "curl https://sliver.sh/install | sudo bash",
+          "url": "https://github.com/BishopFox/sliver",
+          "alt": ["havoc", "mythic", "merlin", "villain"]
+        },
+        {
+          "name": "Havoc",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Modern malleable post-exploitation framework pairing a Qt client with a Go teamserver; the Demon agent speaks AES-encrypted HTTP(S)/SMB and uses indirect syscalls. Maintenance stopped — repo archived Feb 2026 — yet it stays a heavily studied, MITRE-tracked (S1229) traffic class.",
+          "when": "Lab and detection research against a well-documented post-exploitation stack (tunnel, AMSI/ETW patching, BOF/COFF loading) whose artifacts most EDRs now fingerprint.",
+          "install": "git clone https://github.com/HavocFramework/Havoc && cd Havoc && ./build.sh",
+          "url": "https://github.com/HavocFramework/Havoc",
+          "alt": ["sliver", "mythic", "villain"]
+        },
+        {
+          "name": "Mythic",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Collaborative, Docker-based post-exploitation platform whose core ships no agents; you install agent payload types (Apollo/.NET, Athena/Rust, and others) and C2 profiles as separate containers via mythic-cli and the Mythic scripting API.",
+          "when": "Long-running lab engagements needing a pluggable, community-vetted agent ecosystem, cross-team collaboration, and GraphQL/automation hooks for red-team reporting.",
+          "install": "curl -sSL https://raw.githubusercontent.com/its-a-feature/Mythic/master/install.sh | bash",
+          "url": "https://github.com/its-a-feature/Mythic",
+          "alt": ["sliver", "merlin", "covenant"]
+        },
+        {
+          "name": "Merlin",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Go-based post-exploitation server/agent pair communicating over HTTP/1.1, HTTP/2, h2c, and HTTP/3 (QUIC) — a practical model for non-TLS and modern protocol beaconing.",
+          "when": "Lab tests of HTTP/2 and QUIC transport detection, since most defensive tuning focuses on plain HTTPS beacon patterns.",
+          "install": "wget https://github.com/Ne0nd0g/merlin/releases/latest/download/merlinServer-Linux-x64.7z",
+          "url": "https://github.com/Ne0nd0g/merlin",
+          "alt": ["sliver", "mythic"]
+        },
+        {
+          "name": "Covenant",
+          "rating": 3,
+          "effort": "medium",
+          "desc": "Collaborative .NET C2 with a browser UI whose Grunt implants are dynamically compiled C# — the canonical worked example of .NET post-exploitation patterns (in-memory loading, AMSI/ETW patching, SMB P2P). Effectively unmaintained since ~2021 (last push 2024); now a lab/museum reference and signature-rich detection target.",
+          "when": "Studying .NET post-exploitation design and beating on well-known signatures in the lab; treat it as a legacy framework, not for live operations.",
+          "install": "git clone https://github.com/cobbr/Covenant && cd Covenant/Covenant && dotnet build -c Release",
+          "url": "https://github.com/cobbr/Covenant",
+          "alt": ["mythic", "sliver"]
+        },
+        {
+          "name": "Villain",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "High-level stage 0/1 C2 handler for many reverse-TCP and HoaxShell (HTTPS) shells, shipped with Windows/Linux payload templates, fileless scripting, and cross-instance session sharing.",
+          "when": "Quick-sided Kali lab work that needs concurrent shell handling and payload-template experimentation without standing up a full framework.",
+          "install": "sudo apt install villain",
+          "url": "https://github.com/t3l3machus/Villain",
+          "alt": ["sliver", "havoc"]
+        }
+      ]
+    },
+    {
+      "id": "commercial-c2",
+      "name": "Commercial C2 Frameworks",
+      "tools": [
+        {
+          "name": "Cobalt Strike",
+          "best": true,
+          "class": "commercial",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Commercial threat-emulation platform (Fortra) and the de-facto reference C2; Malleable C2 profiles reshape HTTP(S)/DNS beacon traffic into the traffic shapes blue teams tune their detections around. Vetted licensing only: new licenses roughly $3.5k–$10k/user/yr, with cracked builds aggressively taken down.",
+          "when": "When you are an authorized red team that can buy it, or to study the beacon patterns that dominate C2 detection research.",
+          "install": "licensed download from cobaltstrike.com (vendor-vetted)",
+          "url": "https://www.cobaltstrike.com",
+          "alt": ["sliver", "brute ratel c4", "nighthawk"]
+        },
+        {
+          "name": "Brute Ratel C4",
+          "class": "commercial",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Commercial evasion-first C2 (Dark Vortex) built around the Badger implant and Commander UI, with EDR-bypass techniques (sleep obfuscation, hook removal) and a custom compiler introduced in v2.3 'Flux'. Single-user one-year license ~$3250; authorized owners only.",
+          "when": "Stress-testing EDR detections against an evasion-focused implant in your licensed lab; build a Brute Ratel detection story before it is needed in an incident.",
+          "install": "licensed download from bruteratel.com (vendor-vetted)",
+          "url": "https://bruteratel.com",
+          "alt": ["nighthawk", "sliver"]
+        },
+        {
+          "name": "Nighthawk",
+          "class": "commercial",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Commercial C2 from MDSec's ActiveBreach team engineered for high-assurance detection evasion, with per-build watermarking (builds are attributable) and online-activated, hardware-locked licensing. ~$10k/user/yr, minimum three seats, UK export-controlled and vendor-vetted.",
+          "when": "Budgeted, mature red teams that can meet its vetting and seat minimum; otherwise, its published tradecraft makes a documented benchmark for hardening detector coverage.",
+          "install": "licensed download from nighthawkc2.io (vendor-vetted)",
+          "url": "https://nighthawkc2.io",
+          "alt": ["cobalt strike", "brute ratel c4"]
+        }
+      ]
+    },
+    {
+      "id": "agents-implant",
+      "name": "Agents & Implant Builders",
+      "tools": [
+        {
+          "name": "CrossC2",
+          "best": true,
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Extension that generates cross-platform beacons for Cobalt Strike (Linux, macOS, Android/ARM, even ESXi) from a configured HTTPS listener, via genCrossC2 plus automatic Malleable C2 profile handling.",
+          "when": "Extending a Cobalt Strike lab to authorized non-Windows assets where stock Beacon cannot run, or studying cross-platform beacon metadata.",
+          "install": "Download genCrossC2 + CrossC2.cna from the GitHub release",
+          "url": "https://github.com/gloxec/CrossC2",
+          "alt": ["donut"]
+        },
+        {
+          "name": "Donut",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Generates position-independent shellcode that stages .NET assemblies, PE files, and VBS/JScript entirely in memory, so a lab agent can be delivered without touching disk on the test host.",
+          "when": "Producing an in-memory delivery stage for a lab agent and observing how loaders that patch AMSI/ETW look from a defender's perspective.",
+          "install": "pip3 install donut-shellcode",
+          "url": "https://github.com/TheWover/donut",
+          "alt": ["crossc2"]
+        }
+      ]
+    },
+    {
+      "id": "helpers-boosters",
+      "name": "C2 Helpers & Tunnel Boosters",
+      "tools": [
+        {
+          "name": "Ligolo-ng",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Tunneling/pivoting tool that exposes a TUN interface and routes TCP/UDP through an agent over reverse TCP/TLS, reaching remote lab subnets without SOCKS/proxychains, with a web UI and autoroute since v0.8.",
+          "when": "Reaching the rest of an authorized test network from a C2 foothold — pivot activity blue teams should recognize and alert on.",
+          "install": "Download proxy & agent binaries from GitHub releases",
+          "url": "https://github.com/nicocha30/ligolo-ng",
+          "alt": ["chisel"]
+        },
+        {
+          "name": "Chisel",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Single-binary fast TCP/UDP tunnel carried over HTTP(S)/WebSocket (SSH-secured) with reverse port-forwarding and SOCKS — communication that reads as ordinary WebSocket/web traffic to defenders.",
+          "when": "Bridging egress-filtered lab segments to your C2, or tunnelling any service where the traffic should blend with normal HTTPS.",
+          "install": "go install github.com/jpillora/chisel@latest",
+          "url": "https://github.com/jpillora/chisel",
+          "alt": ["ligolo-ng"]
+        }
+      ]
+    }
+  ]
+}

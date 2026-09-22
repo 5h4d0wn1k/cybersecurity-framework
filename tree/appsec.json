@@ -1,0 +1,217 @@
+{
+  "id": "appsec",
+  "name": "Application Security (SAST, DAST, Secrets & SCA)",
+  "emoji": "🧪",
+  "tagline": "Product-security gates for the code and recipes you ship: SAST, DAST, secrets detection, dependency (SCA), and IaC scanning for dev and DevProd teams.",
+  "class": "defense",
+  "categories": [
+    {
+      "id": "sast-code-analysis",
+      "name": "Static Analysis (SAST)",
+      "tools": [
+        {
+          "name": "Semgrep",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Lightweight app-sec static analyzer for 30+ languages: YAML rules that read like the code they match, bundled security packs (p/security-audit, p/owasp-top-ten), and pre-commit/CI/IDE hooks; the free CLI covers single-function/file patterns while the commercial AppSec Platform adds cross-function taint.",
+          "when": "The default SAST layer for any dev team: run it per-PR in CI or in the editor to catch injection, dangerous-API misuse, and hardcoded secrets before merge.",
+          "install": "pipx install semgrep",
+          "url": "https://github.com/semgrep/semgrep",
+          "alt": ["codeql", "bandit", "gosec"]
+        },
+        {
+          "name": "SonarQube",
+          "class": "commercial",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Self-hosted code-quality and security platform: the free LGPL Community Edition runs hundreds of static rules over 30+ languages with dashboards, quality gates, and trended security reports; paid tiers add branch analysis and deeper coverage.",
+          "when": "When an org needs a shared, dashboard-visible quality gate and SAST history instead of per-commit CLI output.",
+          "install": "docker run -d --name sonarqube -p 9000:9000 sonarqube:lts-community",
+          "url": "https://github.com/SonarSource/sonarqube",
+          "alt": ["semgrep", "codeql"]
+        },
+        {
+          "name": "CodeQL",
+          "class": "commercial",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "GitHub's query-based analysis engine that databases your code and runs QL queries to find vulnerability classes; the CLI is free, and the strongest maintained rule sets ship through GitHub code scanning.",
+          "when": "High-signal coverage on GitHub-hosted repos: enable code scanning on schedules and PRs, then drop into the CodeQL CLI to run or author bespoke queries on a local database.",
+          "install": "Download the CodeQL CLI bundle from github.com/github/codeql-action/releases",
+          "url": "https://github.com/github/codeql",
+          "alt": ["semgrep", "sonarqube"]
+        },
+        {
+          "name": "Bandit",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "PyCQA's AST-based Python analyzer that flags common first-party security mistakes - SQLi, shell injection, pickles, eval, weak crypto, and path permissions - with a low-noise report of findings you can tune.",
+          "when": "A no-config SAST pass for Python services: pip-install, point it at the package directory, and wire into CI.",
+          "install": "pip3 install bandit",
+          "url": "https://github.com/PyCQA/bandit",
+          "alt": ["semgrep", "gosec"]
+        },
+        {
+          "name": "gosec",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "SecureGo's Go static analyzer walking ASTs and data flow to find hardcoded creds, weak TLS configs, unsafe sql/exec sinks, and integer-overflow risk in first-party Go code.",
+          "when": "The quick Go-specific SAST gate in CI, alongside or before a language-agnostic scanner like Semgrep.",
+          "install": "go install github.com/securego/gosec/v2/cmd/gosec@latest",
+          "url": "https://github.com/securego/gosec",
+          "alt": ["semgrep", "bandit"]
+        }
+      ]
+    },
+    {
+      "id": "dast-web-scanners",
+      "name": "Dynamic Analysis (DAST)",
+      "tools": [
+        {
+          "name": "OWASP ZAP",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Full web/API security scanner: intercepting proxy, spider, passive + active scanning, and a programmable REST API; ships zap-baseline.py and Docker images ready for automated CI DAST against the apps you deploy.",
+          "when": "Stand up per-app DAST: run the baseline scan against a staging build nightly or per-PR, then use the proxy for manual testing of tricky auth and authorization flows.",
+          "install": "sudo apt install zaproxy",
+          "url": "https://github.com/zaproxy/zaproxy",
+          "alt": ["burp suite community", "restler"]
+        },
+        {
+          "name": "Burp Suite Community",
+          "class": "commercial",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "PortSwigger's leading web application testing platform: the free Community Edition gives you the intercepting proxy, a searchable request/response history, and Repeater/Decoder/Comparer manual tools; the automated scanner requires paid Pro or Enterprise editions.",
+          "when": "Manual pentest-style review of your own apps: drive the app through the proxy, then replay, tamper, and fuzz individual requests by hand.",
+          "install": "preinstalled (web) - free Community download from portswigger.net",
+          "url": "https://portswigger.net/burp",
+          "alt": ["owasp zap", "restler"]
+        },
+        {
+          "name": "RESTler",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Microsoft's stateful REST API fuzzer: ingests your OpenAPI spec, infers producer-consumer request dependencies, then fuzzes request sequences against the live service to surface 5xx crashes, resource leaks, and security-checker violations.",
+          "when": "API-only DAST beyond the HTML UI: after a ZAP baseline, point RESTler at the schema to grind through every endpoint and parameter combination.",
+          "install": "Download the RESTler release archive from github.com/microsoft/restler-fuzzer/releases",
+          "url": "https://github.com/microsoft/restler-fuzzer",
+          "alt": ["owasp zap"]
+        }
+      ]
+    },
+    {
+      "id": "secrets-scanning",
+      "name": "Secrets Detection",
+      "tools": [
+        {
+          "name": "Gitleaks",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Fastest OSS secret scanner: a single Go binary that sweeps full git history or plain directories with 200+ regex rules for API keys, tokens, and passwords, exporting JSON/SARIF, with pre-commit and GitHub Action hooks.",
+          "when": "Gate every repo and pipeline: full-history sweep when onboarding, then pre-commit/PR scans from then on; the default before anything heavier.",
+          "install": "go install github.com/gitleaks/gitleaks/v8@latest",
+          "url": "https://github.com/gitleaks/gitleaks",
+          "alt": ["trufflehog", "detect-secrets", "ggshield"]
+        },
+        {
+          "name": "TruffleHog",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Secret scanner (trufflesecurity) with 600+ credential detectors that actively verify matches against vendor APIs to separate live credentials from noise; scans git, GitHub/GitLab orgs, S3, Docker, and filesystems.",
+          "when": "Org-wide and history-hardening sweeps where knowing which leaked credentials still work matters more than raw match counts.",
+          "install": "curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin",
+          "url": "https://github.com/trufflesecurity/trufflehog",
+          "alt": ["gitleaks", "detect-secrets", "ggshield"]
+        },
+        {
+          "name": "detect-secrets",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Yelp's Python scanner that audits a repo once into a .secrets.baseline then diffs only new lines in pre-commit/CI, so only genuinely new secrets get flagged instead of the same approved ones on every run.",
+          "when": "Teams worn out by re-flagged false positives: do the one-time audit + baseline review, then let it police new commits.",
+          "install": "pip3 install detect-secrets",
+          "url": "https://github.com/Yelp/detect-secrets",
+          "alt": ["gitleaks", "git-secrets"]
+        },
+        {
+          "name": "git-secrets",
+          "rating": 3,
+          "effort": "easy",
+          "desc": "AWS Labs' original git-hook guard that registers grep patterns (including a ready AWS credential set) as client-side commit hooks so secrets never land in history; legacy and effectively unmaintained.",
+          "when": "Last-resort hook-only protection on old, isolated repos - otherwise reach for Gitleaks or TruffleHog.",
+          "install": "git clone https://github.com/awslabs/git-secrets && cd git-secrets && make install",
+          "url": "https://github.com/awslabs/git-secrets",
+          "alt": ["gitleaks", "detect-secrets"]
+        }
+      ]
+    },
+    {
+      "id": "sca-dependency",
+      "name": "Dependency Scanning (SCA)",
+      "tools": [
+        {
+          "name": "OWASP Dependency-Check",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "OWASP's SCA utility that fingerprints declared dependencies (Java, .NET, Python, Node, Ruby, Go, Rust, and more) against NVD and other feeds, emitting HTML/XML reports of CVSS-scored known-CVE matches; ships CLI, Gradle/Maven plugins, and a GitHub Action.",
+          "when": "The reference dependency gate for build output: run on release builds to block known-vulnerable libraries before they ship; the first run downloads the full NVD feed, so schedule it early.",
+          "install": "docker run --rm -v \"$PWD\":/src owasp/dependency-check --scan /src --out /report",
+          "url": "https://github.com/dependency-check/DependencyCheck",
+          "alt": ["osv-scanner", "pip-audit", "trivy (container & SBOM scans)"]
+        },
+        {
+          "name": "osv-scanner",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Google's open-source vulnerability scanner (the engine behind GitHub Dependabot) that matches your lockfiles and SBOMs against the OSV.dev database - fast, quiet, and free of NVD feed friction.",
+          "when": "Snappy per-lockfile check in CI (package-lock.json, go.sum, requirements, poetry, etc.) when you want OSV-only coverage without a heavyweight feed.",
+          "install": "go install github.com/google/osv-scanner/cmd/osv-scanner@latest",
+          "url": "https://github.com/google/osv-scanner",
+          "alt": ["pip-audit", "owasp dependency-check"]
+        },
+        {
+          "name": "pip-audit",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Python Packaging Authority's scanner that audits direct and transitive PyPI requirements against OSV/advisory feeds, and can even auto-fix vulnerable packages installed locally (--fix).",
+          "when": "Python-only repos: the smallest honest way to keep requirements.txt/pyproject dependency lists clean as part of pre-commit or CI.",
+          "install": "pipx install pip-audit",
+          "url": "https://github.com/pypa/pip-audit",
+          "alt": ["osv-scanner", "owasp dependency-check"]
+        }
+      ]
+    },
+    {
+      "id": "iac-security",
+      "name": "Infrastructure-as-Code Security",
+      "tools": [
+        {
+          "name": "Checkov",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Prisma Cloud-maintained IaC static analyzer with 1,000+ built-in policies for Terraform (incl. plan output), CloudFormation, Kubernetes, Helm, Dockerfile, Bicep, ARM, and Serverless; graph-based and multi-resource aware, with Python/YAML custom policies.",
+          "when": "The default IaC gate: scan Terraform/K8s/Dockerfile in CI and on terraform plan to catch exposed resources, weak IAM, and missing encryption before apply.",
+          "install": "pip3 install checkov",
+          "url": "https://github.com/bridgecrewio/checkov",
+          "alt": ["kics", "terrascan (archived Nov 2025)", "trivy (also scans IaC via tfsec)"]
+        },
+        {
+          "name": "KICS",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Checkmarx's open-source IaC scanner (Keeping Infrastructure as Code Secure) running thousands of queries across 20+ platforms - Terraform, Kubernetes, Docker, Helm, CloudFormation, Ansible - with SARIF/SonarQube output and custom queries via OPA/Rego.",
+          "when": "A complementary cross-check on IaC after Checkov, or the pick when you want OPA/Rego policy authoring (the slot that archived Terrascan used to fill).",
+          "install": "docker run -t -v \"$PWD\":/path checkmarx/kics:latest scan -p /path -o /path",
+          "url": "https://github.com/Checkmarx/kics",
+          "alt": ["checkov", "terrascan (archived Nov 2025)"]
+        }
+      ]
+    }
+  ]
+}

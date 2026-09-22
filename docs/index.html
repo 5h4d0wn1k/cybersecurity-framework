@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cybersecurity Framework — Map of Every Cyber Tool &amp; Concept</title>
+<meta name="description" content="The open-source map of cybersecurity: every domain, every category, and the best tool for each job — organized like OSINT Framework, safety-gated, MIT licensed." />
+<style>
+  :root {
+    --bg:#0d1117; --panel:#161b22; --line:#30363d; --txt:#e6edf3;
+    --muted:#8b949e; --dim:#6e7681; --acc:#58a6ff; --grn:#3fb950;
+    --warn:#d29922; --red:#f85149; --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--txt); font:15px/1.6 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; }
+  pre,code,.mono { font-family:var(--mono); }
+  .wrap { max-width:1180px; margin:0 auto; padding:0 24px; }
+  header { border-bottom:1px solid var(--line); padding:26px 0 22px; background:linear-gradient(180deg,#11161d,#0d1117); }
+  header h1 { margin:0; font-size:26px; font-family:var(--mono); letter-spacing:-.5px; }
+  header h1 .prompt { color:var(--acc); } header h1 .sig { color:var(--grn); }
+  header p { color:var(--muted); margin:8px 0 0; max-width:66ch; }
+  .bar { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0; align-items:center; }
+  .bar input { flex:1; min-width:220px; background:var(--panel); border:1px solid var(--line); color:var(--txt); border-radius:8px; padding:9px 12px; font-size:14px; font-family:var(--mono); }
+  .bar button, .chip { background:var(--panel); border:1px solid var(--line); color:var(--muted); border-radius:999px; padding:7px 14px; font-size:12.5px; cursor:pointer; font-family:var(--mono); }
+  .bar button:hover { color:var(--txt); border-color:var(--acc); }
+  .chip.active { color:var(--bg); background:var(--acc); border-color:var(--acc); font-weight:600; }
+  .stats { color:var(--dim); font-size:12.5px; font-family:var(--mono); }
+  .stats b { color:var(--grn); }
+  main.wrap { padding-top:14px; padding-bottom:80px; }
+  .domain { border:1px solid var(--line); border-radius:10px; background:var(--panel); margin-bottom:14px; overflow:hidden; }
+  .dhead { display:flex; align-items:center; gap:12px; padding:13px 18px; cursor:pointer; user-select:none; }
+  .dhead:hover { background:#1a212b; }
+  .dhead .tgl { color:var(--acc); font-family:var(--mono); width:14px; }
+  .dhead .em { font-size:18px; }
+  .dhead .nm { font-family:var(--mono); font-weight:600; font-size:15px; flex:0 0 auto; }
+  .dhead .tg { color:var(--muted); font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }
+  .dhead .cnt { color:var(--dim); font-family:var(--mono); font-size:12px; }
+  .dbody { display:none; border-top:1px solid var(--line); }
+  .domain.open .dbody { display:block; }
+  .domain.open .tgl { transform:rotate(90deg); }
+  .cat { padding:14px 20px; border-top:1px dashed #21262d; }
+  .cat:first-child { border-top:none; }
+  .cat h3 { margin:0 0 10px; font-size:13.5px; font-family:var(--mono); color:var(--acc); text-transform:uppercase; letter-spacing:.08em; }
+  .tool { display:flex; gap:10px; padding:8px 10px; border-radius:8px; align-items:flex-start; }
+  .tool:hover { background:#1a212b; }
+  .tool .star { color:var(--warn); }
+  .tool .who { color:var(--txt); font-weight:600; font-family:var(--mono); font-size:13.5px; white-space:nowrap; }
+  .tool .dt { color:var(--muted); font-size:13px; flex:1; }
+  .tool .meta { color:var(--dim); font-size:11.5px; font-family:var(--mono); white-space:nowrap; text-align:right; }
+  .tool .eff { border:1px solid var(--line); border-radius:4px; padding:0 6px; font-size:11px; color:var(--muted); }
+  .eff[data-e="easy"] { color:var(--grn); border-color:#1f6f50; }
+  .eff[data-e="medium"] { color:var(--warn); border-color:#5d4e1e; }
+  .eff[data-e="advanced"] { color:var(--red); border-color:#6e1f1f; }
+  a { color:var(--acc); text-decoration:none; } a:hover { text-decoration:underline; }
+  .none { color:var(--dim); padding:20px; text-align:center; font-family:var(--mono); }
+  footer { border-top:1px solid var(--line); padding:26px 0; color:var(--dim); font-size:12.5px; text-align:center; font-family:var(--mono); }
+  .warnbar { border:1px solid #6e1f1f; background:#16161a; border-radius:10px; padding:16px 20px; margin:18px 0; font-size:13.5px; color:var(--muted); }
+  .warnbar b { color:var(--red); }
+  .warnbar a { color:var(--acc); }
+  @media (max-width:640px){ .tool{flex-wrap:wrap} .tool .meta{width:100%;text-align:left} .dhead .tg{display:none} }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1><span class="prompt">$</span> cybersecurity-<span class="sig">framework</span></h1>
+    <p>The open-source map of cybersecurity: every domain, every category, and <b>the best tool for each job</b>. Safety-gated, lab-focused, MIT licensed. Built to answer <i>“which tool do I need?”</i> in seconds.</p>
+  </div>
+</header>
+<main class="wrap">
+  <div class="bar">
+    <input id="q" type="text" placeholder="filter: tool, category, domain, or tag… (e.g. subdomain, scan, wifi, hashcat)" />
+    <button id="expand">expand all</button>
+    <button id="collapse">collapse</button>
+    <span class="stats"><b id="st-tools">…</b> tools · <b id="st-cats">…</b> categories · <b id="st-domains">…</b> domains</span>
+  </div>
+  <div class="warnbar">
+    <b>Authorized use only.</b> Every tool here is for testing and defending <b>systems you own</b> or have written permission to assess. Unauthorized access may violate the CFAA (18 U.S.C. §1030) and local law. Read <a href="ETHICS.md" target="_blank">ETHICS.md</a> and <a href="SCOPE.md" target="_blank">SCOPE.md</a>.
+  </div>
+  <div id="tree"></div>
+</main>
+<footer>
+  <div class="wrap">
+    open-source · MIT · <a href="https://github.com/5h4d0wn1k/cybersecurity-framework" target="_blank">github.com/5h4d0wn1k/cybersecurity-framework</a> · map of tools &amp; concepts, constantly updated
+  </div>
+</footer>
+<script>
+(async function () {
+  const $ = (s) => document.querySelector(s);
+  const q = $("#q"), tree = $("#tree");
+
+  let DATA;
+  try {
+    DATA = await (await fetch("data/tree.json")).json();
+  } catch (e) {
+    tree.innerHTML = '<div class="none">Could not load data/tree.json. Run: python3 scripts/build.py</div>';
+    return;
+  }
+  $("#st-tools").textContent = DATA.stats.tools;
+  $("#st-cats").textContent = DATA.stats.categories;
+  $("#st-domains").textContent = DATA.stats.domains;
+
+  let openSet = new Set(DATA.domains.map((d) => d.id).slice(0, 4));
+  let filterClass = "";
+
+  function esc(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+
+  function matchTool(t, catName, domName) {
+    const ql = q.value.trim().toLowerCase();
+    if (!ql) return true;
+    const hay = [t.name, t.desc, t.when || "", t.install || "", catName, domName, (t.alt || []).join(" ")].join(" ").toLowerCase();
+    return hay.includes(ql);
+  }
+
+  function render() {
+    const ql = q.value.trim().toLowerCase();
+    let out = "";
+    let shown = 0, shownCats = 0;
+    for (const d of DATA.domains) {
+      if (filterClass && d.class !== filterClass) continue;
+      const domMatches = !ql || [d.name, d.tagline].join(" ").toLowerCase().includes(ql);
+      let catHtml = "";
+      let catShown = 0;
+      for (const c of d.categories) {
+        const tools = c.tools.filter((t) => matchTool(t, c.name, d.name));
+        if (!tools.length) continue;
+        catShown++;
+        catHtml += `<div class="cat"><h3>${esc(c.name)}</h3>` +
+          tools.map((t) => {
+            shown++;
+            const star = t.best ? `<span class="star">★</span> ` : "";
+            const eff = `<span class="eff" data-e="${esc(t.effort || "beginner")}">${esc(t.effort || "beginner")}</span>`;
+            const meta = ` <span class="mono" style="color:var(--dim)">${t.rating || "–"}/5</span> ${eff}`;
+            return `<div class="tool">${star}<span class="who">${esc(t.name)}</span><span class="dt">${esc(t.desc)}</span><span class="meta">${meta}</span></div>`;
+          }).join("") + `</div>`;
+      }
+      if (!catHtml && !domMatches) continue;
+      const open = openSet.has(d.id);
+      out += `<div class="domain ${open ? "open" : ""}" data-id="${esc(d.id)}">` +
+        `<div class="dhead"><span class="tgl">▸</span><span class="em">${esc(d.emoji || "")}</span><span class="nm">${esc(d.name)}</span>` +
+        `<span class="tg">${esc(d.tagline || "")}</span><span class="cnt">${catShown}c</span></div>` +
+        `<div class="dbody">${catHtml}</div></div>`;
+      shownCats += catShown;
+    }
+    if (!out) out = '<div class="none">no matches</div>';
+    tree.innerHTML = out;
+    document.querySelectorAll(".dhead").forEach((hd) => {
+      hd.addEventListener("click", () => {
+        const dom = hd.closest(".domain");
+        dom.classList.toggle("open");
+        dom.classList.contains("open") ? openSet.add(dom.dataset.id) : openSet.delete(dom.dataset.id);
+      });
+    });
+  }
+
+  $("#expand").addEventListener("click", () => { openSet = new Set(DATA.domains.map(d => d.id)); render(); });
+  $("#collapse").addEventListener("click", () => { openSet = new Set(); render(); });
+  q.addEventListener("input", render);
+  render();
+})();
+</script>
+</body>
+</html>

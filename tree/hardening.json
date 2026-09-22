@@ -1,0 +1,167 @@
+{
+  "id": "hardening",
+  "name": "System Hardening, Compliance & Secure Configuration",
+  "emoji": "🔒",
+  "tagline": "Audit, harden, and prove it: system security scans, compliance benchmarks, config automation, and network-service lockdown for defenders securing their own systems.",
+  "class": "defense",
+  "categories": [
+    {
+      "id": "audit-scanners",
+      "name": "System Security Auditing & Compliance Scans",
+      "tools": [
+        {
+          "name": "Lynis",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Agentless security-auditing tool for Linux, BSD, and macOS that runs 200+ checks across the whole OS, scores everything, and ends with a hardening index, disclosure status, and actionable remediation hints.",
+          "when": "First pass on any UNIX-like host you own — run a baseline audit, apply the hardening suggestions, then run again to watch the hardening index climb.",
+          "install": "sudo apt install lynis",
+          "url": "https://github.com/CISOfy/lynis",
+          "alt": ["openscap", "cis-cat pro assessor"]
+        },
+        {
+          "name": "OpenSCAP",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "NIST-certified SCAP 1.2 toolkit: loads security content (XCCDF/OVAL data streams) and evaluates or remediates a system against specific profiles from the command line.",
+          "when": "Repeatable, scriptable compliance evaluations against scap-security-guide content — the profile kills long manual audit checklists.",
+          "install": "sudo apt install openscap-scanner",
+          "url": "https://github.com/OpenSCAP/openscap",
+          "alt": ["lynis", "cis-cat pro assessor"]
+        },
+        {
+          "name": "CIS-CAT Pro Assessor",
+          "class": "commercial",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Commercial CIS scanner (SecureSuite membership) that turns CIS Benchmarks into automated scans and compliance score/report output; a free CIS-CAT Lite covers a small set of select benchmarks.",
+          "when": "Audits that must document conformance to a specific CIS Benchmark version with vendor-supported mapping and reporting.",
+          "install": "preinstalled (web) — SecureSuite member portal download",
+          "url": "https://www.cisecurity.org/cybersecurity-tools/cis-cat-pro",
+          "alt": ["openscap", "lynis"]
+        },
+        {
+          "name": "auditd",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Linux Audit framework userspace (auditd, auditctl, ausearch) recording privileged actions, file access, and security-relevant events to an immutable log across reboots.",
+          "when": "Build the audit trail that CIS/STIG rules require before the auditor arrives; verify live rules with auditctl -l and query with ausearch.",
+          "install": "sudo apt install auditd",
+          "url": "https://github.com/linux-audit/audit-userspace",
+          "alt": ["lynis"]
+        }
+      ]
+    },
+    {
+      "id": "compliance-frameworks",
+      "name": "Compliance Benchmarks & Baseline Content",
+      "tools": [
+        {
+          "name": "scap-security-guide",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "OpenSCAP's official security content: prebuilt SCAP data streams with profiles for CIS, DISA STIG, PCI-DSS, and HIPAA, plus bundled bash and Ansible remediation scripts that actually apply the fixes.",
+          "when": "Every compliance scan starts here — grab the data stream for your distro, feed it to openscap, review failures, then remediate with the generated scripts.",
+          "install": "sudo apt install scap-security-guide",
+          "url": "https://github.com/OpenSCAP/scap-security-guide",
+          "alt": ["cis benchmarks", "stig viewer"]
+        },
+        {
+          "name": "CIS Benchmarks",
+          "rating": 4,
+          "effort": "beginner",
+          "desc": "Free, consensus-built configuration guides (PDF) for hundreds of OS, server, cloud, and application targets — the de-facto hardening standard that auditors and scanners measure against.",
+          "when": "Hand-hardening a system to a known-good baseline with no scanner available; open the benchmark PDF for your platform and apply the entries manually.",
+          "install": "preinstalled (web) — free PDF download after registering a CIS account",
+          "url": "https://www.cisecurity.org/cis-benchmarks",
+          "alt": ["stig viewer"]
+        },
+        {
+          "name": "STIG Viewer",
+          "rating": 4,
+          "effort": "beginner",
+          "desc": "Browser database of the entire DISA Security Technical Implementation Guide set — rule-by-rule requirements with severity, CCI/NIST 800-53 mappings, and concrete fix text.",
+          "when": "Federal or DISA-style compliance: look up the exact configuration a STIG rule demands and its severity before touching config files.",
+          "install": "preinstalled (web)",
+          "url": "https://www.stigviewer.com",
+          "alt": ["cis benchmarks"]
+        }
+      ]
+    },
+    {
+      "id": "config-hardening",
+      "name": "Automated Hardening & Configuration",
+      "tools": [
+        {
+          "name": "ansible-hardening",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "dev-sec's battle-tested Ansible collection (devsec.hardening) that hardens OS, SSH, nginx, and MySQL/MariaDB at scale, aligned with the InSpec baselines the same team maintains.",
+          "when": "Apply the same hardening repeatedly to many hosts you manage — idempotent automation beats hand-editing configs on every box.",
+          "install": "ansible-galaxy collection install devsec.hardening",
+          "url": "https://github.com/dev-sec/ansible-collection-hardening"
+        },
+        {
+          "name": "systemd-analyze security",
+          "rating": 3,
+          "effort": "easy",
+          "desc": "Built-in systemd command that scores each service unit 0-10 on exposure (PrivateTmp, NoNewPrivileges, ProtectSystem, and more) and lists the exact directives dragging the score down.",
+          "when": "Zero-install per-service hardening review on any systemd host — run it on your long-running units and tighten the worst offenders.",
+          "install": "preinstalled (systemd)",
+          "url": "https://www.freedesktop.org/software/systemd/man/latest/systemd-analyze.html",
+          "alt": ["ansible-hardening"]
+        }
+      ]
+    },
+    {
+      "id": "network-service-hardening",
+      "name": "Network & Service Hardening",
+      "tools": [
+        {
+          "name": "ssh-audit",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Audits SSH server and client configuration end-to-end: grades every KEX, cipher, MAC, and host-key algorithm, flags weak or vulnerable combos, and ships per-distro hardening guides.",
+          "when": "Audit sshd before changing anything, apply the printed hardening guide, then re-scan until the tool reports all-secure.",
+          "install": "pip3 install ssh-audit",
+          "url": "https://github.com/jtesta/ssh-audit",
+          "alt": ["mozilla openssh config"]
+        },
+        {
+          "name": "firewalld",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Dynamic firewall daemon with zone-based policy, a D-Bus service API, and runtime-vs-permanent config separation; the default firewall manager on RHEL/CentOS/Fedora/SUSE.",
+          "when": "Host firewalling on RHEL-family systems: open only the services a zone needs and test changes in runtime before committing them permanently.",
+          "install": "sudo apt install firewalld",
+          "url": "https://firewalld.org",
+          "alt": ["ufw"]
+        },
+        {
+          "name": "ufw",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Ubuntu's uncomplicated frontend over iptables: allow/deny rules for ports and services in a few commands, with sane IPv6 defaults and a status view.",
+          "when": "Simple proven host firewall on Debian/Ubuntu where firewalld is not the default; same job, less ceremony.",
+          "install": "sudo apt install ufw",
+          "url": "https://launchpad.net/ufw",
+          "alt": ["firewalld"]
+        },
+        {
+          "name": "Mozilla OpenSSH Config",
+          "rating": 3,
+          "effort": "easy",
+          "desc": "Reference hardening guide for sshd_config and moduli with Modern/Intermediate/MFA profiles and concrete HostKey, KEX, cipher, and MAC lists for each OpenSSH generation.",
+          "when": "Write a known-good SSH baseline — put the right profile block into /etc/ssh/sshd_config, then confirm the result with ssh-audit.",
+          "install": "preinstalled (web reference)",
+          "url": "https://infosec.mozilla.org/guidelines/openssh",
+          "alt": ["ssh-audit"]
+        }
+      ]
+    }
+  ]
+}

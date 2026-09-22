@@ -1,0 +1,261 @@
+{
+  "id": "vuln-scan",
+  "name": "Vulnerability Scanning & Assessment",
+  "emoji": "🔍",
+  "tagline": "Automated detection of known CVEs and misconfigurations at scale, plus manual triage.",
+  "class": "offense",
+  "categories": [
+    {
+      "id": "general",
+      "name": "General Vulnerability Scanners",
+      "tools": [
+        {
+          "name": "Nuclei",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Template-driven scanner (projectdiscovery) running thousands of YAML checks against your web, network, and infrastructure targets to confirm known CVEs and misconfigurations.",
+          "when": "First-pass automated sweep across a whole asset list; fast and CI-friendly enough to run on every build.",
+          "install": "go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest",
+          "url": "https://github.com/projectdiscovery/nuclei",
+          "alt": ["nessus", "openvas", "vuls"]
+        },
+        {
+          "name": "Nessus",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Tenable's market-standard commercial scanner with credentialed and remote checks across OSes, services, and web; the free Essentials tier covers a small lab.",
+          "when": "Deep credentialed findings and compliance-style reports on the servers you operate.",
+          "install": "sudo dpkg -i Nessus-10.x-ubuntu.deb  (free Essentials .deb from tenable.com)",
+          "url": "https://www.tenable.com/products/nessus",
+          "alt": ["openvas", "nuclei"]
+        },
+        {
+          "name": "OpenVAS (GVM)",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Greenbone's open-source stack forked from the old Nessus; schedules scans of thousands of network vulnerability tests (NVTs) with a web dashboard.",
+          "when": "Self-hosted, ongoing internal-network scanning without commercial licensing.",
+          "install": "sudo apt install gvm && sudo gvm-setup",
+          "url": "https://github.com/greenbone/openvas-scanner",
+          "alt": ["nessus", "nuclei"]
+        },
+        {
+          "name": "Vuls",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Agentless Go scanner that runs from one control host over SSH to inventory OS packages, middleware, and containers, then maps each server to applicable CVEs.",
+          "when": "Fleet-level Linux vulnerability tracking when installing agents on every box is not an option.",
+          "install": "go install github.com/vulsio/vuls@latest",
+          "url": "https://github.com/vulsio/vuls",
+          "alt": ["nuclei", "openvas"]
+        }
+      ]
+    },
+    {
+      "id": "web",
+      "name": "Web Vulnerability Scanners",
+      "tools": [
+        {
+          "name": "Nikto",
+          "best": true,
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Perl web server scanner running 7,000+ checks for known files, outdated software, and misconfigurations on your own sites.",
+          "when": "Fast baseline sweep of a web server's exposed surface before deeper application testing.",
+          "install": "sudo apt install nikto",
+          "url": "https://github.com/sullo/nikto",
+          "alt": ["owasp zap", "wapiti"]
+        },
+        {
+          "name": "OWASP ZAP",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Full-featured open-source web app scanner combining an intercepting proxy, spidering, and automated active and passive scanning behind a REST API.",
+          "when": "DAST runs against the apps you build, or as the intercepting proxy for manual test sessions.",
+          "install": "sudo apt install zaproxy",
+          "url": "https://github.com/zaproxy/zaproxy",
+          "alt": ["nikto", "wapiti", "arachni"]
+        },
+        {
+          "name": "Arachni",
+          "rating": 3,
+          "effort": "medium",
+          "desc": "Feature-rich Ruby web app scanner with modular platform checks, a REST API, and distributed scanning of your own applications.",
+          "when": "Headless or scripted scans that need to scale across many of your endpoints from one controller.",
+          "install": "Download and extract the arachni release archive from GitHub",
+          "url": "https://github.com/Arachni/arachni",
+          "alt": ["owasp zap", "wapiti"]
+        },
+        {
+          "name": "sqlmap",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Long-standing automated SQL injection detector with database fingerprinting; validates whether a suspected injection point on your own app is genuinely exploitable.",
+          "when": "Confirming and triaging reported SQLi findings on applications you own and operate.",
+          "install": "sudo apt install sqlmap",
+          "url": "https://github.com/sqlmapproject/sqlmap",
+          "alt": ["wapiti", "owasp zap"]
+        }
+      ]
+    },
+    {
+      "id": "network",
+      "name": "Network & Service Scanners",
+      "tools": [
+        {
+          "name": "Nettacker",
+          "best": true,
+          "rating": 4,
+          "effort": "medium",
+          "desc": "OWASP automation framework that scans your networks in layers (ports, services, subdomains), correlates the results, then runs follow-up module checks.",
+          "when": "Automating broad network discovery plus vulnerability checks against your own infrastructure in one pass.",
+          "install": "pip3 install nettacker",
+          "url": "https://github.com/OWASP/Nettacker",
+          "alt": ["nuclei", "openvas"]
+        },
+        {
+          "name": "Vulners",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Aggregated vulnerability and exploit database offering a free API plus an Nmap script that matches your scanned services against millions of CVEs.",
+          "when": "Enriching plain nmap service banners of your hosts with live CVE matches at no cost.",
+          "install": "Copy vulners.nse into /usr/share/nmap/scripts/ (get it from vulners.com)",
+          "url": "https://vulners.com",
+          "alt": ["nuclei", "nettacker", "openvas"]
+        },
+        {
+          "name": "OpenSCAP",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "NIST-certified scanner applying security-policy content (CIS, STIG) and OVAL CVE definitions to your Linux hosts for compliance and vulnerability posture.",
+          "when": "Auditing your servers against published baselines and tracking CVE coverage across them.",
+          "install": "sudo apt install openscap-scanner",
+          "url": "https://github.com/OpenSCAP/openscap",
+          "alt": ["openvas", "vuls"]
+        }
+      ]
+    },
+    {
+      "id": "cms",
+      "name": "CMS Scanners",
+      "tools": [
+        {
+          "name": "WPScan",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "WordPress scanner that fingerprints core, theme, and plugin versions against the WPScan vulnerability database and does user and weak-password checks.",
+          "when": "Regularly auditing the WordPress sites you maintain for outdated plugins and known CVEs.",
+          "install": "sudo apt install wpscan",
+          "url": "https://github.com/wpscanteam/wpscan",
+          "alt": ["cmsmap", "droopescan"]
+        },
+        {
+          "name": "CMSmap",
+          "rating": 3,
+          "effort": "medium",
+          "desc": "Python tool that scans WordPress, Joomla, and Drupal sites you own for known vulnerabilities and exposed file paths.",
+          "when": "A single-command health check across mixed small-CMS estates without installing separate scanners.",
+          "install": "git clone https://github.com/Dionach/CMSmap && cd CMSmap && python3 cmsmap.py",
+          "url": "https://github.com/Dionach/CMSmap",
+          "alt": ["wpscan", "droopescan"]
+        },
+        {
+          "name": "droopescan",
+          "rating": 3,
+          "effort": "easy",
+          "desc": "Lightweight Perl scanner focused on Drupal, with partial WordPress and Bolt coverage; strong on plugin and module fingerprinting.",
+          "when": "Targeted assessments of the Drupal sites in your fleet.",
+          "install": "pip install droopescan",
+          "url": "https://github.com/droope/droopescan",
+          "alt": ["wpscan", "cmsmap"]
+        }
+      ]
+    },
+    {
+      "id": "app-deps",
+      "name": "Application & Dependency Scanners",
+      "tools": [
+        {
+          "name": "Trivy",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Aqua's scanner that fingerprints vulnerable packages and CVEs in the container images, filesystems, IaC templates, and SBOMs you run.",
+          "when": "Adding vuln gates to your image builds and scanning local containers for known CVEs before deployment.",
+          "install": "sudo apt install trivy",
+          "url": "https://github.com/aquasecurity/trivy",
+          "alt": ["grype", "osv-scanner"]
+        },
+        {
+          "name": "Grype",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Anchore's fast scanner pairing with Syft to map dependency CVEs across the containers and filesystems you build and ship.",
+          "when": "Container and directory scans where you also want an SBOM generated in the same workflow.",
+          "install": "curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin",
+          "url": "https://github.com/anchore/grype",
+          "alt": ["trivy", "osv-scanner"]
+        },
+        {
+          "name": "osv-scanner",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Google's scanner that matches your project lockfiles and SBOMs against the open-source-focused OSV.dev vulnerability database.",
+          "when": "Quick CI check of dependency lockfiles in your own repos against a community-maintained vuln feed.",
+          "install": "go install github.com/google/osv-scanner/cmd/osv-scanner@latest",
+          "url": "https://github.com/google/osv-scanner",
+          "alt": ["grype", "trivy"]
+        },
+        {
+          "name": "cve-bin-tool",
+          "rating": 3,
+          "effort": "easy",
+          "desc": "Scans binary files and their strings to identify which known-vulnerable library and product components your software bundles.",
+          "when": "Checking compiled products you distribute for embedded third-party components with published CVEs.",
+          "install": "pip install cve-bin-tool",
+          "url": "https://github.com/intel/cve-bin-tool",
+          "alt": ["osv-scanner", "trivy"]
+        }
+      ]
+    },
+    {
+      "id": "knowledgebase",
+      "name": "CVE & Exploit Lookup",
+      "tools": [
+        {
+          "name": "searchsploit / Exploit-DB",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Offline grep over the ~40,000-entry Exploit-DB archive bundled with Kali, showing exploit scripts, Metasploit modules, and build instructions for your own lab.",
+          "when": "Looking up local proof-of-concept code to reproduce and verify a CVE on systems you control.",
+          "install": "sudo apt install exploitdb",
+          "url": "https://www.exploit-db.com",
+          "alt": ["cve-search", "nvd"]
+        },
+        {
+          "name": "cve-search",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Local MongoDB-backed engine that ingests NVD, CISA, and Exploit-DB feeds for fast bulk lookups across your whole inventory.",
+          "when": "Correlating a large asset list against CVE data offline when you cannot rely on external APIs.",
+          "install": "docker run -d -p 5000:5000 cve-search/cve-search",
+          "url": "https://github.com/cve-search/cve-search",
+          "alt": ["nvd", "searchsploit"]
+        },
+        {
+          "name": "NVD (NIST)",
+          "rating": 3,
+          "effort": "easy",
+          "desc": "Official NIST vulnerability feed and web UI; the reference source for CVE metadata, CPE mappings, and CVSS metrics.",
+          "when": "Confirming identifiers, severity scores, and affected product lists for a CVE under review.",
+          "install": "preinstalled (web/API)",
+          "url": "https://nvd.nist.gov",
+          "alt": ["cve-search", "vulners"]
+        }
+      ]
+    }
+  ]
+}

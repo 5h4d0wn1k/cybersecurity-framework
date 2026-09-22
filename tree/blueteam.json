@@ -1,0 +1,207 @@
+{
+  "id": "blueteam",
+  "name": "Blue Team — Defense & Detection",
+  "emoji": "🛡️",
+  "tagline": "Tools defenders run to detect, monitor, and protect their own estate: SIEM, endpoint telemetry, network monitoring, and hostile-HTTP defense.",
+  "class": "defense",
+  "categories": [
+    {
+      "id": "siem-soc",
+      "name": "SIEM & SOC Analytics",
+      "tools": [
+        {
+          "name": "Elastic Stack (ELK)",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Reference open-core SIEM: ingests logs via Beats/Elastic Agent into Elasticsearch (Kibana for UI), and runs the detection engine with EQL/ES|QL/Sigma rules, dashboards, and built-in threat hunting.",
+          "when": "Your first-stop SIEM when you want one cluster for security detections plus powerful full-text log search and can absorb Elasticsearch operations.",
+          "install": "docker run -d -p 9200:9200 -e discovery.type=single-node docker.elastic.co/elasticsearch/elasticsearch:9.5.1 (then add Kibana + Elastic Agent per the docs)",
+          "url": "https://www.elastic.co/security",
+          "alt": ["wazuh", "graylog", "splunk"]
+        },
+        {
+          "name": "Wazuh",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Open-source XDR/SIEM pairing an Elastic/OpenSearch backend with a unified agent delivering file-integrity monitoring, security configuration assessment, vulnerability detection, active response, and compliance dashboards.",
+          "when": "When you want SIEM plus endpoint agent in one cohesive open bundle with built-in compliance reporting (PCI-DSS/HIPAA/SOC 2) and less manual Elasticsearch plumbing.",
+          "install": "curl -sO https://packages.wazuh.com/4.14/wazuh-install.sh && sudo bash ./wazuh-install.sh -a",
+          "url": "https://wazuh.com",
+          "alt": ["elastic", "graylog"]
+        },
+        {
+          "name": "Splunk",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Commercial SIEM incumbent (Cisco-owned): SPL search over indexed events, mature dashboards/alerts, and the largest third-party integration ecosystem; licensed per GB/day.",
+          "when": "When budget exists and you need enterprise SIEM tooling, best-in-class search UX, and vendor support — or as the benchmark when evaluating an all-open stack.",
+          "install": "wget -O /tmp/splunk-<VERSION>-amd64.deb https://download.splunk.com/products/splunk/releases/<VERSION>/linux/splunk-<VERSION>-amd64.deb && sudo dpkg -i /tmp/splunk-<VERSION>-amd64.deb",
+          "url": "https://www.splunk.com",
+          "alt": ["elastic", "wazuh"]
+        },
+        {
+          "name": "Graylog",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Open-source log management and SIEM on Elasticsearch/OpenSearch storage, with flexible extraction pipelines (streams + pipeline rules) for parsing, routing, GEOIP, and threat-intel enrichment.",
+          "when": "Log centralization when you want clean server-side pipelines to poll, enrich, and route messages into destinations like Splunk or Elastic — without running agent fleets or Wazuh-style XDR.",
+          "install": "curl -L -o graylog-repo.deb https://packages.graylog2.org/repo/packages/graylog-7.1-repository_latest.deb && sudo dpkg -i graylog-repo.deb && sudo apt-get install graylog-server",
+          "url": "https://www.graylog.org",
+          "alt": ["elastic", "wazuh"]
+        },
+        {
+          "name": "Logstash",
+          "rating": 3,
+          "effort": "medium",
+          "desc": "Data-shaping pipeline (the 'L' in ELK) that pulls logs and metrics, transforms them — parse, enrich, filter, route — and ships them to Elasticsearch or any other output.",
+          "when": "The standalone parsing/enrichment middle layer when an agent's native handling or a Beats module isn't enough for messy or appliance-shaped log sources.",
+          "install": "curl -L -o logstash.deb https://artifacts.elastic.co/downloads/logstash/logstash-9.5.1-amd64.deb && sudo dpkg -i logstash.deb",
+          "url": "https://www.elastic.co/logstash",
+          "alt": ["vector", "fluentd"]
+        }
+      ]
+    },
+    {
+      "id": "edr-endpoint",
+      "name": "Endpoint Detection & Response",
+      "tools": [
+        {
+          "name": "Velociraptor",
+          "best": true,
+          "rating": 5,
+          "effort": "advanced",
+          "desc": "Open-source DFIR + endpoint-monitoring framework (Rapid7): the Velociraptor Query Language hunts the entire fleet for forensic artifacts, collects live evidence at scale, and the monitoring engine runs Sigma detections against ETW/eBPF events in real time.",
+          "when": "Endpoint hunting and incident response at scale — triage thousands of hosts, collect volatile evidence, then keep them monitored with live detections.",
+          "install": "curl -LO https://github.com/Velocidex/velociraptor/releases/download/v0.76.3/velociraptor-v0.76.3-linux-amd64 && chmod +x velociraptor-v0.76.3-linux-amd64 && ./velociraptor gui quickstart",
+          "url": "https://github.com/Velocidex/velociraptor",
+          "alt": ["osquery", "sysmon", "limacharlie"]
+        },
+        {
+          "name": "osquery",
+          "rating": 5,
+          "effort": "easy",
+          "desc": "SQL-powered agent that exposes OS state — processes, sockets, files, users, listeners — as queryable tables; defenders fire fleet-wide queries instantly and schedule packs for continuous inspection, managed via Fleet.",
+          "when": "Lightweight cross-platform endpoint telemetry when you want to 'SELECT' answers from every host and ship the results to a SIEM; pair with Fleet (fleetdm) for enroll/query management.",
+          "install": "curl -L https://pkg.osquery.io/deb/osquery_5.23.1-1.linux_amd64.deb -o /tmp/osquery.deb && sudo dpkg -i /tmp/osquery.deb",
+          "url": "https://osquery.io",
+          "alt": ["velociraptor", "limacharlie"]
+        },
+        {
+          "name": "Sysmon",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Windows Sysinternals driver that logs high-fidelity process creation, network connections, and file writes beyond default auditing; pair with the SwiftOnSecurity (or Modular) config for a solid threat-hunting baseline.",
+          "when": "On every Windows host where you need attacker-action visibility and can ship its event log to your SIEM — no heavy agent required.",
+          "install": "curl -LO https://download.sysinternals.com/files/Sysmon.zip && curl -LO https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml && sysmon64.exe -accepteula -i sysmonconfig-export.xml",
+          "url": "https://learn.microsoft.com/en-us/sysinternals/downloads/sysmon",
+          "alt": ["velociraptor", "osquery"]
+        },
+        {
+          "name": "LimaCharlie",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Cloud-native SecOps platform: an EDR sensor streams verbose endpoint telemetry over TLS in real time, and a YAML-based Detection & Response engine runs the full open Sigma ruleset with automated response actions.",
+          "when": "When you want EDR plus detection-as-code in the cloud without running a SIEM or agent server yourself; the free Community org covers small estates and labs.",
+          "install": "preinstalled (SaaS) — create a free Community org at limacharlie.io, then run the per-OS sensor installer and enable the Sigma ruleset",
+          "url": "https://limacharlie.io",
+          "alt": ["velociraptor", "osquery"]
+        }
+      ]
+    },
+    {
+      "id": "ids-nids",
+      "name": "Intrusion Detection / Network Monitoring",
+      "tools": [
+        {
+          "name": "Suricata",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "OISF's multi-threaded open-source IDS/IPS engine that inspects traffic with Snort-compatible rules at multi-Gbps speeds and emits structured EVE JSON alerts (plus PCAP) straight into your SIEM.",
+          "when": "High-throughput signature detection at your network edge or segmentation points; the default pick for a self-managed NIDS with IPS fallback.",
+          "install": "sudo add-apt-repository ppa:oisf/suricata-stable && sudo apt-get update && sudo apt-get install suricata && sudo suricata-update",
+          "url": "https://suricata.io",
+          "alt": ["snort", "zeek"]
+        },
+        {
+          "name": "Snort 3",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Cisco's next-generation open-source NIDS/IPS: Snort 3 adds multi-threading, a Lua-based policy language, and faster pattern matching over the classic 2.x line, tuned via Talos rules.",
+          "when": "When you prefer Cisco's Talos rules ecosystem, are migrating an existing Snort 2 deployment, or want SnortML-driven engine tuning.",
+          "install": "sudo apt-get install snort3 (Ubuntu 22.04+; otherwise build from the source tarball on snort.org)",
+          "url": "https://www.snort.org",
+          "alt": ["suricata", "zeek"]
+        },
+        {
+          "name": "Zeek",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Passive network-analysis framework (formerly Bro) that logs rich protocol metadata, file hashes, and events across 70+ log types for later forensics instead of blocking in real time.",
+          "when": "Deep protocol visibility feeding a SIEM or full-packet archive — run it beside Suricata/Snort because it answers 'what happened', while the engine answers 'alert'.",
+          "install": "docker pull zeek/zeek (or add the zeek.org apt repo: sudo apt-get install zeek)",
+          "url": "https://zeek.org",
+          "alt": ["suricata", "snort"]
+        },
+        {
+          "name": "Security Onion",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Turnkey NSM distribution that bundles Suricata (detection + full packet capture), Zeek metadata, Elasticsearch/Kibana dashboards, osquery host visibility, and alert/case management into a single install.",
+          "when": "Fastest way to stand up a complete detection-and-response platform on one box or a small grid when you don't want to assemble the components yourself.",
+          "install": "Download the ISO from https://securityonion.com, install, then run: sudo so-setup-network (guided wizard)",
+          "url": "https://securityonion.com",
+          "alt": ["suricata", "zeek"]
+        }
+      ]
+    },
+    {
+      "id": "waf",
+      "name": "Web Application Firewall",
+      "tools": [
+        {
+          "name": "ModSecurity",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "The OWASP open-source WAF engine (an OWASP Production project) that inspects HTTP traffic and enforces SecRule policies on Apache/nginx; load the OWASP CRS on top for real attack coverage.",
+          "when": "Inline HTTP-layer defense when you want the battle-tested rule ecosystem and can commit to tuning false positives against your apps.",
+          "install": "sudo apt-get install libapache2-mod-security2 (Apache; for nginx compile the module with --with-compat --add-dynamic-module=../ModSecurity-nginx)",
+          "url": "https://modsecurity.org",
+          "alt": ["coraza", "coreruleset (OWASP CRS)"]
+        },
+        {
+          "name": "Coraza",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "OWASP WAF written in Go with near-full ModSecurity compatibility — runs CRS v4 without the legacy C engine as a library or middleware for Caddy, Traefik, APISIX, and API gateways, ideal for detection-as-code.",
+          "when": "Cloud-native stacks (Go services, containers, Caddy/Traefik/APISIX) where ModSecurity's build model is awkward but you still want CRS protection.",
+          "install": "xcaddy build --with github.com/corazawaf/coraza-caddy/v2 (then add the coraza_waf block to the Caddyfile)",
+          "url": "https://coraza.io",
+          "alt": ["modsecurity", "coreruleset (OWASP CRS)"]
+        },
+        {
+          "name": "OWASP CRS",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "The OWASP flagship Core Rule Set — a community-maintained rule layer detecting SQLi, XSS, scanners, and other OWASP Top 10 attacks that runs on both ModSecurity and Coraza engines; a ruleset, not a standalone tool.",
+          "when": "The rule layer to load onto any WAF engine so a bare install actually detects web attacks; tune via the anomaly-scoring exclusions to cut false positives.",
+          "install": "git clone --depth 1 https://github.com/coreruleset/coreruleset.git (then Include the CRS config in your WAF engine)",
+          "url": "https://coreruleset.org",
+          "alt": ["modsecurity", "coraza"]
+        },
+        {
+          "name": "Cloudflare WAF",
+          "rating": 3,
+          "effort": "easy",
+          "desc": "Commercial managed edge WAF (SaaS) that filters traffic on Cloudflare's CDN using managed rulesets (including OWASP CRS coverage) plus bot and rate controls — no servers to run.",
+          "when": "When your apps already sit behind Cloudflare and you want managed rules, DDoS/bot defense, and zero self-hosting in one panel.",
+          "install": "preinstalled (SaaS) — enable in the dash.cloudflare.com Security panel, pick a managed ruleset, and tune via custom rules",
+          "url": "https://developers.cloudflare.com/waf/",
+          "alt": ["modsecurity", "coraza"]
+        }
+      ]
+    }
+  ]
+}

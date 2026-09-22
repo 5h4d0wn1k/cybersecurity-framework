@@ -1,0 +1,234 @@
+{
+  "id": "privesc",
+  "name": "Privilege Escalation (Linux & Windows)",
+  "emoji": "⬆️",
+  "tagline": "Local audit of Linux & Windows privilege boundaries: lax permissions, exposed SUID/sudo surface, scheduler jobs, and unpatched escalations — on systems you own.",
+  "class": "offense",
+  "categories": [
+    {
+      "id": "linux-enumeration",
+      "name": "Linux Enumeration",
+      "tools": [
+        {
+          "name": "LinPEAS",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Runs hundreds of privilege-boundary checks — SUID/GUID binaries, writable PATHs, cron entries, capabilities, credentials in files, known-vuln hints — on Linux/Unix/MacOS and color-codes findings by severity.",
+          "when": "First pass on any Linux host you are authorized to assess; `-s` for a faster/stealthier run, `-e` to enable extra checks before you dig into anything manually.",
+          "install": "curl -L https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh | sh",
+          "url": "https://github.com/peass-ng/PEASS-ng",
+          "alt": ["linenum", "lse", "linuxprivchecker"]
+        },
+        {
+          "name": "LinEnum",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Single-shell-script Linux enumeration collecting user, sudo, cron, SUID, PATH, and file-permission checks into one grep-able report; still ships as the Kali/BlackArch `linenum` package.",
+          "when": "A quick, dependency-free sweep when you want a portable .sh you can drop on a box and read results calmly offline.",
+          "install": "wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh && chmod +x LinEnum.sh && ./LinEnum.sh -t",
+          "url": "https://github.com/rebootuser/LinEnum",
+          "alt": ["linpeas", "lse", "linuxprivchecker"]
+        },
+        {
+          "name": "linux-smart-enumeration (lse)",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Ranked Linux enumerator that reveals findings progressively by importance level (-l0..-l2) and can watch for recurring cron/process activity while it runs.",
+          "when": "When you want signal-first output instead of a full dump; escalate verbosity only if the default level comes up empty.",
+          "install": "curl \"https://github.com/diego-treitos/linux-smart-enumeration/releases/latest/download/lse.sh\" -Lo lse.sh && chmod 700 lse.sh && ./lse.sh -l1",
+          "url": "https://github.com/diego-treitos/linux-smart-enumeration",
+          "alt": ["linpeas", "linenum", "linuxprivchecker"]
+        },
+        {
+          "name": "linuxprivchecker",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Python script that enumerates base system info and hunts world-writable files, misconfigurations, and cleartext passwords; written to suggest investigation targets rather than run exploits.",
+          "when": "An OSCP-friendly second opinion after LinPEAS when you want a leaner, Python-based cross-check on the same host.",
+          "install": "wget https://raw.githubusercontent.com/sleventyeleven/linuxprivchecker/master/linuxprivchecker.py && python3 linuxprivchecker.py -w",
+          "url": "https://github.com/sleventyeleven/linuxprivchecker",
+          "alt": ["linpeas", "linenum", "lse"]
+        },
+        {
+          "name": "unix-privesc-check",
+          "rating": 3,
+          "effort": "easy",
+          "desc": "PentestMonkey's classic shell script for weak file permissions and simple escalation vectors (world-writable files, exposed .netrc/.ssh), packaged in Kali; mature but only lightly maintained.",
+          "when": "A conservative, read-only check on aged Unix boxes (also Solaris/AIX/HP-UX) where you want a second, low-noise opinion on file-permission drift.",
+          "install": "sudo apt install unix-privesc-check && unix-privesc-check standard",
+          "url": "https://github.com/pentestmonkey/unix-privesc-check",
+          "alt": ["linpeas", "lse", "linenum"]
+        }
+      ]
+    },
+    {
+      "id": "windows-enumeration",
+      "name": "Windows Enumeration",
+      "tools": [
+        {
+          "name": "WinPEAS",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Windows counterpart to LinPEAS from the same PEASS suite: scans services, scheduled tasks, unquoted paths, AlwaysInstallElevated, stored credentials, and patch gaps; ships as winPEAS.exe (x64/x86) and winPEAS.bat in one release.",
+          "when": "First pass on any Windows host you are authorized to assess; run as a low-integrity user, then re-run elevated to compare the privilege surface.",
+          "install": "curl -L -o winPEASx64.exe https://github.com/peass-ng/PEASS-ng/releases/latest/download/winPEASx64.exe && ./winPEASx64.exe",
+          "url": "https://github.com/peass-ng/PEASS-ng",
+          "alt": ["seatbelt", "windows-exploit-suggester"]
+        },
+        {
+          "name": "Seatbelt",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "GhostPack C# host-survey tool bundling dozens of 'safety-check' modules (token privileges, services, autoruns, credential stores, scheduled tasks) runnable in grouped or single-command mode.",
+          "when": "Focused follow-up enumeration when you need a specific answer (e.g. only TokenPrivileges, Services, or the LOLBAS module); supports clean txt/json output.",
+          "install": "git clone https://github.com/GhostPack/Seatbelt && cd Seatbelt && dotnet build -c Release",
+          "url": "https://github.com/GhostPack/Seatbelt",
+          "alt": ["winpeas", "windows-exploit-suggester"]
+        },
+        {
+          "name": "Windows-Exploit-Suggester (legacy)",
+          "rating": 2,
+          "effort": "easy",
+          "desc": "The 2014 original that coined the term; now archived because it depends on Microsoft's Security Bulletin Excel dump, which has been frozen since Q1 2017 — it can only address XP/Vista-era systems.",
+          "when": "Only retro lab images from before 2017; for any current Windows host use WES-NG, which reads the live MSRC feed instead.",
+          "install": "git clone https://github.com/GDSSecurity/Windows-Exploit-Suggester && cd Windows-Exploit-Suggester && python windows-exploit-suggester.py --update",
+          "url": "https://github.com/GDSSecurity/Windows-Exploit-Suggester",
+          "alt": ["wesng", "winpeas"]
+        }
+      ]
+    },
+    {
+      "id": "exploit-suggestion",
+      "name": "Exploit Suggestion",
+      "tools": [
+        {
+          "name": "linux-exploit-suggester",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Off-host Linux audit tool (LES): reads kernel/distro fingerprints and cross-references them against current public exploit/PoC sets to rank exposure to known local privilege-escalation bugs.",
+          "when": "After enumeration, when you want a ranked, CVE-linked shortlist of which kernel-era exploits are plausibly worth testing on your own lab or CTF hosts.",
+          "install": "wget -O les.sh https://raw.githubusercontent.com/The-Z-Labs/linux-exploit-suggester/master/linux-exploit-suggester.sh && bash les.sh --check-all",
+          "url": "https://github.com/The-Z-Labs/linux-exploit-suggester",
+          "alt": ["linux-exploit-suggester-2", "gtfobins"]
+        },
+        {
+          "name": "WES-NG (wesng)",
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Windows Exploit Suggester - Next Generation: takes a `systeminfo` dump (or missing-patch list) and maps it against a continuously updated MSRC/NVD dataset to list missing patches and known exploits.",
+          "when": "Grab `systeminfo` from your Windows lab host, run wes.py on your workstation, and correlate patches offline for any supported OS from XP to Windows 11.",
+          "install": "pip install wesng && wes.py --update && wes.py systeminfo.txt",
+          "url": "https://github.com/bitsadmin/wesng",
+          "alt": ["windows-exploit-suggester", "linux-exploit-suggester"]
+        },
+        {
+          "name": "linux-exploit-suggester-2",
+          "rating": 3,
+          "effort": "medium",
+          "desc": "Perl-based next-gen suggester that matches kernel/package versions against an exploit-db-derived list and can pull matching PoCs for review.",
+          "when": "A second candidate shortlist when LES disagrees, or old-style searching where you want the actual exploit source downloaded into your lab to read first.",
+          "install": "git clone https://github.com/jondonas/linux-exploit-suggester-2 && cd linux-exploit-suggester-2 && ./linux-exploit-suggester-2.pl -k",
+          "url": "https://github.com/jondonas/linux-exploit-suggester-2",
+          "alt": ["linux-exploit-suggester"]
+        },
+        {
+          "name": "GTFOBins",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Reference site (not a tool): documents how standard Unix binaries — when sudo, SUID, or capability-misconfigured — can escape restricted contexts, read/write files, or escalate.",
+          "when": "Look up every SUID binary and sudo rule your enumeration surfaced; if the binary is listed, the page shows the exact boundary you wrongly granted.",
+          "install": "preinstalled (web)",
+          "url": "https://gtfobins.org",
+          "alt": ["linux-exploit-suggester", "lolbas"]
+        },
+        {
+          "name": "LOLBAS",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Windows sibling of GTFOBins: catalogs living-off-the-land binaries, scripts, and libraries that legitimate shipped Windows components can be coerced into doing beyond their intended job.",
+          "when": "Cross-check any signed binary or allowlisted script your enumeration surfaces on a Windows host — each entry lists the exact abuse command and MITRE mapping.",
+          "install": "preinstalled (web)",
+          "url": "https://lolbas-project.github.io",
+          "alt": ["gtfobins", "wesng"]
+        }
+      ]
+    },
+    {
+      "id": "kernel-exploits",
+      "name": "Kernel & Userspace Exploit POCs",
+      "tools": [
+        {
+          "name": "Dirty Pipe (CVE-2022-0847)",
+          "best": true,
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Root POC for CVE-2022-0847 (Linux 5.8–5.16.x): abuses an uninitialized pipe_buffer flag to overwrite read-only page-cache data; this build overwrites /etc/passwd and restores it after popping a shell.",
+          "when": "On lab or CTF kernels inside the affected range when no misconfiguration path exists; expect it to fail cleanly on 5.16.11+ or backported-fix kernels.",
+          "install": "git clone https://github.com/Arinerron/CVE-2022-0847-DirtyPipe-Exploit && cd CVE-2022-0847-DirtyPipe-Exploit && gcc -o exploit exploit.c && ./exploit",
+          "url": "https://github.com/Arinerron/CVE-2022-0847-DirtyPipe-Exploit",
+          "alt": ["dirtycow", "pwnkit"]
+        },
+        {
+          "name": "dirtycow (CVE-2016-5195)",
+          "rating": 3,
+          "effort": "advanced",
+          "desc": "The archived Dirty COW race-condition family (CVE-2016-5195) for kernels roughly up to 4.8.3: PoCs write into read-only mappings, e.g. splicing a new root account into /etc/passwd.",
+          "when": "Only legacy or sandboxed images that still run pre-2016-fix kernels; treat it as a historical exercise — modern distros are not exposed.",
+          "install": "git clone https://github.com/firefart/dirtycow && cd dirtycow && gcc -pthread dirty.c -o dirty -lcrypt && ./dirty",
+          "url": "https://github.com/firefart/dirtycow",
+          "alt": ["dirty-pipe", "pwnkit"]
+        },
+        {
+          "name": "PwnKit (CVE-2021-4034)",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Qualys-reported pkexec (polkit) memory-corruption exploit giving a one-command root shell on unpatched systems; technically a setuid userspace flaw, not the kernel, but near-unrivaled in reliability when present.",
+          "when": "Applies to many distros of 2009–2022 vintage; `make dry-run` tests whether your own host is vulnerable without popping a shell.",
+          "install": "git clone https://github.com/berdav/CVE-2021-4034 && cd CVE-2021-4034 && make && ./cve-2021-4034",
+          "url": "https://github.com/berdav/CVE-2021-4034",
+          "alt": ["dirty-pipe", "dirtycow"]
+        }
+      ]
+    },
+    {
+      "id": "process-monitoring",
+      "name": "Process & File Watching",
+      "tools": [
+        {
+          "name": "pspy",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Unprivileged process snooper: uses /proc scans triggered by inotify events to catch short-lived processes (cron jobs, root scripts, and the arguments they carry) that a normal `ps` sweep never sees.",
+          "when": "Park it for a couple of minutes after enumeration on a Linux host; timing-dependent scheduler jobs that static scans miss appear as they fire.",
+          "install": "curl -L -o pspy64 https://github.com/DominicBreuker/pspy/releases/latest/download/pspy64 && chmod +x pspy64 && ./pspy64",
+          "url": "https://github.com/DominicBreuker/pspy",
+          "alt": ["inotifywait", "fatrace"]
+        },
+        {
+          "name": "inotifywait",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "inotify-based file/directory event watcher (create/modify/access/delete) from the inotify-tools package; the building block for precise, pattern-able watching scripts.",
+          "when": "Point it at a specific writable directory or config file (e.g. a scheduler-owned path) and see exactly when and which files change on boxes you own.",
+          "install": "sudo apt install inotify-tools && inotifywait -m -r /tmp/watchme",
+          "url": "https://github.com/inotify-tools/inotify-tools",
+          "alt": ["fatrace", "pspy"]
+        },
+        {
+          "name": "fatrace",
+          "rating": 3,
+          "effort": "medium",
+          "desc": "fanotify-based system-wide file-access reporter (read/write/open/close per PID and path) — useful when a scheduled job touches files too briefly for process listing to catch.",
+          "when": "Wide-surface file watching on your own host where inotify recursion gets unwieldy; narrow it with `--dir` to a single directory of interest.",
+          "install": "sudo apt install fatrace && sudo fatrace --dir /var/spool",
+          "url": "https://github.com/martinpitt/fatrace",
+          "alt": ["inotifywait", "pspy"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "id": "recon",
+  "name": "Reconnaissance & OSINT",
+  "emoji": "🕵️",
+  "tagline": "Passive + active discovery: subdomains, DNS, historical data, people, leaks, and exposed assets.",
+  "class": "offense",
+  "categories": [
+    {
+      "id": "subdomains",
+      "name": "Subdomain Enumeration",
+      "tools": [
+        {
+          "name": "Amass",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "OWASP-recommended, querying dozens of sources for active/passive subdomains; builds graph and flagship-level relationships between discovered assets.",
+          "when": "Full-scope startup: let it run long against a big target while you work other recon.",
+          "install": "go install -v github.com/owasp-amass/amass/v4/...@master",
+          "url": "https://github.com/owasp-amass/amass",
+          "alt": ["subfinder", "crt.sh", "dnsx"]
+        },
+        {
+          "name": "Subfinder",
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Fast passive-only subdomain discovery from 30+ sources (APIs optional, works well without them).",
+          "when": "The daily driver when you want speed over depth, or when API keys are scarce.",
+          "install": "go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest",
+          "url": "https://github.com/projectdiscovery/subfinder",
+          "alt": ["amass", "crt.sh"]
+        },
+        {
+          "name": "crt.sh",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Transparency-log search over issued TLS certificates; zero-install, browser or curl.",
+          "when": "Instant no-setup check; great for history not visible via simple DNS queries.",
+          "install": "preinstalled (web)",
+          "url": "https://crt.sh",
+          "alt": ["subfinder", "certsh"]
+        },
+        {
+          "name": "dnsx",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Fast multi-threaded DNS resolver built to verify a big list of candidate subdomains (A/AAAA/CNAME/TXT).",
+          "when": "After enumeration: confirm which hosts resolve and grab their records in one pass.",
+          "install": "go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest",
+          "url": "https://github.com/projectdiscovery/dnsx",
+          "alt": ["massdns"]
+        }
+      ]
+    },
+    {
+      "id": "httpx",
+      "name": "HTTP Probing & Titles",
+      "tools": [
+        {
+          "name": "httpx",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Probes a list of hosts and returns live status codes, technologies, titles, and fingerprints.",
+          "when": "Convert hundreds of DNS names into a live-but-quiet target list before tooling takes over.",
+          "install": "go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest",
+          "url": "https://github.com/projectdiscovery/httpx",
+          "alt": ["naabu (port scan)", "masscan"]
+        }
+      ]
+    },
+    {
+      "id": "passive-dns",
+      "name": "Passive DNS & History",
+      "tools": [
+        {
+          "name": "SecurityTrails",
+          "best": true,
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Passive DNS history and subdomain API; free tier without keys.",
+          "when": "See records that no longer resolve but reveal old infrastructure (staging, dev).",
+          "install": "preinstalled (web)",
+          "url": "https://securitytrails.com",
+          "alt": ["crt.sh", "dnsdumpster"]
+        },
+        {
+          "name": "VirusTotal DNS",
+          "rating": 3,
+          "effort": "easy",
+          "desc": "Relations/passive-dns endpoints to map infrastructure and finding subdomains via historical resolution.",
+          "when": "Correlate IP→domains and flag anomalies when you already have an API key.",
+          "install": "preinstalled (web/API)",
+          "url": "https://www.virustotal.com",
+          "alt": ["crt.sh"]
+        }
+      ]
+    },
+    {
+      "id": "port-scan",
+      "name": "Port Discovery",
+      "tools": [
+        {
+          "name": "naabu",
+          "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Fast SYN port scanner (projectdiscovery) focused on top 100/1000 ports; integrates cleanly with httpx/nuclei.",
+          "when": "Quick-but-broad port discovery feeding the rest of the pipeline.",
+          "install": "go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest",
+          "url": "https://github.com/projectdiscovery/naabu",
+          "alt": ["masscan", "nmap", "rustscan"]
+        },
+        {
+          "name": "Masscan",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Most-port-fastest scanner; emits results in a format easily piped into nmap or naabu.",
+          "when": "Scan the entire internet range of your target (or very large CIDRs) quickly.",
+          "install": "sudo apt install masscan",
+          "url": "https://github.com/robertdavidgraham/masscan",
+          "alt": ["naabu", "nmap"]
+        },
+        {
+          "name": "nmap",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "The classic suite: port scan, OS/service detection, and scripting engine (NSE).",
+          "when": "Deep service identification and vulnerability scripts on a small, targeted set of hosts.",
+          "install": "sudo apt install nmap",
+          "url": "https://nmap.org",
+          "alt": ["naabu", "masscan", "rustscan"]
+        },
+        {
+          "name": "RustScan",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Rust-based scanner that sweeps all ports in seconds then hands specifics to nmap.",
+          "when": "When you want all-ports coverage faster than nmap's default and the pipeline output into nmap.",
+          "install": "cargo install rustscan",
+          "url": "https://github.com/RustScan/RustScan",
+          "alt": ["naabu", "masscan"]
+        }
+      ]
+    }
+  ]
+}
