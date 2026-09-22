@@ -3,162 +3,387 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Cybersecurity Framework — Map of Every Cyber Tool &amp; Concept</title>
-<meta name="description" content="The open-source map of cybersecurity: every domain, every category, and the best tool for each job — organized like OSINT Framework, safety-gated, MIT licensed." />
+<title>Cybersecurity Framework — the map of every tool in cyber</title>
+<meta name="description" content="Interactive map of cybersecurity: explore every domain and category as a recursive folder tree, 500+ curated tools with direct links, effort ratings, honest when-to-use. Safety-gated, MIT." />
 <style>
   :root {
-    --bg:#0d1117; --panel:#161b22; --line:#30363d; --txt:#e6edf3;
-    --muted:#8b949e; --dim:#6e7681; --acc:#58a6ff; --grn:#3fb950;
-    --warn:#d29922; --red:#f85149; --mono:'JetBrains Mono',ui-monospace,monospace;
+    --bg:#0b0e14; --bg2:#10141d; --panel:#141926; --panel2:#1a2131;
+    --line:#242e42; --line2:#2e3a55; --txt:#dfe7f3; --muted:#93a2bd;
+    --dim:#5f6c84; --acc:#59b8ff; --acc2:#3d8bff;
+    --grn:#3ddc97; --grn2:#26a96c; --warn:#ffc94d; --red:#ff6b6b;
+    --off:#ff8a5c; --def:#4dd6ff; --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
   }
   * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--txt); font:15px/1.6 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; }
-  pre,code,.mono { font-family:var(--mono); }
-  .wrap { max-width:1180px; margin:0 auto; padding:0 24px; }
-  header { border-bottom:1px solid var(--line); padding:26px 0 22px; background:linear-gradient(180deg,#11161d,#0d1117); }
-  header h1 { margin:0; font-size:26px; font-family:var(--mono); letter-spacing:-.5px; }
-  header h1 .prompt { color:var(--acc); } header h1 .sig { color:var(--grn); }
-  header p { color:var(--muted); margin:8px 0 0; max-width:66ch; }
-  .bar { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0; align-items:center; }
-  .bar input { flex:1; min-width:220px; background:var(--panel); border:1px solid var(--line); color:var(--txt); border-radius:8px; padding:9px 12px; font-size:14px; font-family:var(--mono); }
-  .bar button, .chip { background:var(--panel); border:1px solid var(--line); color:var(--muted); border-radius:999px; padding:7px 14px; font-size:12.5px; cursor:pointer; font-family:var(--mono); }
-  .bar button:hover { color:var(--txt); border-color:var(--acc); }
-  .chip.active { color:var(--bg); background:var(--acc); border-color:var(--acc); font-weight:600; }
-  .stats { color:var(--dim); font-size:12.5px; font-family:var(--mono); }
-  .stats b { color:var(--grn); }
-  main.wrap { padding-top:14px; padding-bottom:80px; }
-  .domain { border:1px solid var(--line); border-radius:10px; background:var(--panel); margin-bottom:14px; overflow:hidden; }
-  .dhead { display:flex; align-items:center; gap:12px; padding:13px 18px; cursor:pointer; user-select:none; }
-  .dhead:hover { background:#1a212b; }
-  .dhead .tgl { color:var(--acc); font-family:var(--mono); width:14px; }
-  .dhead .em { font-size:18px; }
-  .dhead .nm { font-family:var(--mono); font-weight:600; font-size:15px; flex:0 0 auto; }
-  .dhead .tg { color:var(--muted); font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }
-  .dhead .cnt { color:var(--dim); font-family:var(--mono); font-size:12px; }
-  .dbody { display:none; border-top:1px solid var(--line); }
-  .domain.open .dbody { display:block; }
-  .domain.open .tgl { transform:rotate(90deg); }
-  .cat { padding:14px 20px; border-top:1px dashed #21262d; }
-  .cat:first-child { border-top:none; }
-  .cat h3 { margin:0 0 10px; font-size:13.5px; font-family:var(--mono); color:var(--acc); text-transform:uppercase; letter-spacing:.08em; }
-  .tool { display:flex; gap:10px; padding:8px 10px; border-radius:8px; align-items:flex-start; }
-  .tool:hover { background:#1a212b; }
-  .tool .star { color:var(--warn); }
-  .tool .who { color:var(--txt); font-weight:600; font-family:var(--mono); font-size:13.5px; white-space:nowrap; }
-  .tool .dt { color:var(--muted); font-size:13px; flex:1; }
-  .tool .meta { color:var(--dim); font-size:11.5px; font-family:var(--mono); white-space:nowrap; text-align:right; }
-  .tool .eff { border:1px solid var(--line); border-radius:4px; padding:0 6px; font-size:11px; color:var(--muted); }
-  .eff[data-e="easy"] { color:var(--grn); border-color:#1f6f50; }
-  .eff[data-e="medium"] { color:var(--warn); border-color:#5d4e1e; }
-  .eff[data-e="advanced"] { color:var(--red); border-color:#6e1f1f; }
-  a { color:var(--acc); text-decoration:none; } a:hover { text-decoration:underline; }
-  .none { color:var(--dim); padding:20px; text-align:center; font-family:var(--mono); }
-  footer { border-top:1px solid var(--line); padding:26px 0; color:var(--dim); font-size:12.5px; text-align:center; font-family:var(--mono); }
-  .warnbar { border:1px solid #6e1f1f; background:#16161a; border-radius:10px; padding:16px 20px; margin:18px 0; font-size:13.5px; color:var(--muted); }
-  .warnbar b { color:var(--red); }
-  .warnbar a { color:var(--acc); }
-  @media (max-width:640px){ .tool{flex-wrap:wrap} .tool .meta{width:100%;text-align:left} .dhead .tg{display:none} }
+  html,body { margin:0; height:100%; }
+  body { background:var(--bg); color:var(--txt); font:14px/1.55 -apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; overflow:hidden; }
+  pre,code,.mono{font-family:var(--mono);}
+
+  /* ===== top bar ===== */
+  header {
+    height:54px; display:flex; align-items:center; gap:18px; padding:0 18px;
+    border-bottom:1px solid var(--line2); background:linear-gradient(180deg,#101827,#0b0e14);
+    position:relative; z-index:5; flex:0 0 auto;
+  }
+  .logo { display:flex; align-items:baseline; gap:8px; white-space:nowrap; }
+  .logo .prompt{ color:var(--acc2); font-family:var(--mono); font-size:16px; }
+  .logo .name{ font-family:var(--mono); font-size:16px; font-weight:700; letter-spacing:-.3px; }
+  .logo .name span{ color:var(--grn); }
+  .stat-pill { display:flex; gap:8px; margin-left:6px; align-items:center; }
+  .pill {
+    font-family:var(--mono); font-size:11px; color:var(--muted);
+    border:1px solid var(--line2); background:var(--panel); border-radius:999px; padding:3px 10px;
+  }
+  .pill b { color:var(--grn); font-weight:700; }
+  .search {
+    flex:1; max-width:520px; margin-left:auto; position:relative; display:flex; align-items:center;
+  }
+  .search input {
+    width:100%; background:var(--panel); border:1px solid var(--line2); color:var(--txt);
+    border-radius:9px; padding:8px 12px 8px 34px; font-size:13px; font-family:var(--mono); outline:none;
+    transition:border-color .15s;
+  }
+  .search input:focus { border-color:var(--acc2); }
+  .search .ic { position:absolute; left:10px; color:var(--dim); font-size:14px; }
+  .search .hits { position:absolute; right:10px; color:var(--dim); font-size:11px; font-family:var(--mono); }
+  .btn {
+    background:var(--panel); border:1px solid var(--line2); color:var(--muted); cursor:pointer;
+    border-radius:8px; font-family:var(--mono); font-size:11.5px; padding:7px 10px; transition:all .15s; white-space:nowrap;
+  }
+  .btn:hover { color:var(--txt); border-color:var(--acc2); }
+
+  /* ===== layout ===== */
+  main { display:flex; height:calc(100% - 54px); }
+  #sidebar {
+    width:290px; flex:0 0 290px; border-right:1px solid var(--line2); overflow-y:auto;
+    background:var(--bg2); padding:14px 10px;
+  }
+  #view { flex:1; overflow-y:auto; padding:18px 22px 60px; }
+
+  /* ===== sidebar ===== */
+  .sb-group { margin-bottom:8px; }
+  .sb-group-h {
+    font-family:var(--mono); font-size:10.5px; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--dim); padding:8px 8px 4px;
+  }
+  .sb-item {
+    display:flex; align-items:center; gap:8px; padding:6px 8px; margin:1px 0;
+    border-radius:7px; cursor:pointer; border:1px solid transparent; color:var(--muted); font-size:12.5px;
+  }
+  .sb-item:hover { background:var(--panel); color:var(--txt); }
+  .sb-item.active { background:var(--panel); border-color:var(--line2); color:var(--txt); }
+  .sb-item .dot { width:7px; height:7px; border-radius:50%; flex:0 0 auto; }
+  .sb-item .meta { margin-left:auto; font-family:var(--mono); font-size:10px; color:var(--dim); }
+  .sb-item.active .meta { color:var(--acc2); }
+
+  /* ===== domain hero ===== */
+  .hero { margin-bottom:18px; }
+  .hero .crumb { font-family:var(--mono); font-size:12px; color:var(--dim); margin-bottom:6px; }
+  .hero .crumb b { color:var(--acc2); }
+  .hero h1 { margin:0 0 4px; font-size:26px; letter-spacing:-.5px; font-family:var(--mono); }
+  .hero .emo { margin-right:10px; }
+  .hero p { margin:0; color:var(--muted); max-width:72ch; font-size:13.5px; }
+  .hero .clz {
+    display:inline-block; font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+    border:1px solid; border-radius:4px; padding:1px 8px; margin-top:10px;
+  }
+  .clz.offense { color:var(--off); border-color:rgba(255,138,92,.4); background:rgba(255,138,92,.07); }
+  .clz.defense { color:var(--def); border-color:rgba(77,214,255,.4); background:rgba(77,214,255,.07); }
+
+  /* ===== recursive tree ===== */
+  .tree { user-select:none; }
+  .folder {
+    border:1px solid var(--line); border-radius:10px; background:var(--panel); overflow:hidden; margin-bottom:8px;
+  }
+  .folder-head {
+    display:flex; align-items:center; gap:9px; padding:9px 14px; cursor:pointer;
+    font-family:var(--mono); font-size:12.5px; letter-spacing:.03em; color:var(--acc); transition:background .12s;
+  }
+  .folder-head:hover { background:var(--panel2); }
+  .folder-head .cursor { width:10px; color:var(--dim); transition:transform .15s; }
+  .folder-head .count { margin-left:auto; color:var(--dim); font-size:10.5px; }
+  .folder-head .best { color:var(--warn); margin-left:6px; font-size:10.5px; }
+  .folder.open > .folder-head .cursor { transform:rotate(90deg); }
+  .folder-body { display:none; border-top:1px solid var(--line); padding:4px 0; }
+  .folder.open > .folder-body { display:block; }
+  .folder-children { padding:4px 0 2px; }
+  .sub-folders { padding:5px 10px 5px 14px; }
+  .folder.leaf > .folder-head { color:var(--acc); }
+
+  .tool {
+    display:flex; align-items:center; gap:10px; padding:5px 14px 5px 16px;
+    border-bottom:1px solid rgba(36,46,66,.35); transition:background .1s;
+  }
+  .tool:last-child { border-bottom:none; }
+  .tool:hover { background:var(--panel2); }
+  .tool .idx { color:var(--dim); font-family:var(--mono); font-size:10.5px; width:22px; flex:0 0 auto; text-align:right; }
+  .tool .who { font-family:var(--mono); font-size:12.8px; font-weight:600; color:var(--txt); white-space:nowrap; }
+  .tool.best .who { color:var(--warn); }
+  .tool.best .who::after { content:" ★"; color:var(--warn); }
+  .tool .desc { color:var(--muted); font-size:12.3px; flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .tool .when { display:none; color:var(--dim); font-size:12px; }
+  .tool:hover .when { display:block; white-space:nowrap; }
+  .tool:hover .desc { display:none; }
+  .tool .eff { font-family:var(--mono); font-size:10px; border:1px solid; border-radius:4px; padding:1px 6px; flex:0 0 auto; }
+  .tool .eff.easy { color:var(--grn); border-color:rgba(61,220,151,.4); }
+  .tool .eff.medium { color:var(--warn); border-color:rgba(255,201,77,.4); }
+  .tool .eff.advanced { color:var(--red); border-color:rgba(255,107,107,.4); }
+  .tool .open {
+    flex:0 0 auto; text-decoration:none; font-family:var(--mono); font-size:11px;
+    color:var(--bg); background:var(--acc2); border-radius:6px; padding:3px 9px; font-weight:600; opacity:.85;
+    transition:opacity .12s;
+  }
+  .tool .open:hover { opacity:1; }
+  .tool .rate { color:var(--dim); font-family:var(--mono); font-size:10px; flex:0 0 auto; }
+
+  .none { color:var(--dim); font-family:var(--mono); text-align:center; padding:50px 0; }
+  .tree-legend { margin-bottom:12px; display:flex; gap:16px; color:var(--dim); font-size:11.5px; font-family:var(--mono); flex-wrap:wrap; }
+  .tree-legend span b { color:var(--muted); }
+  .tree-legend .ob { color:var(--warn); }
+  .tree-legend .nest { color:var(--acc2); }
+
+  .panel {
+    font-family:var(--mono); border:1px solid var(--line2); background:var(--panel);
+    border-radius:11px; box-shadow:0 12px 40px rgba(0,0,0,.5); width:430px; max-width:94vw;
+    position:fixed; top:64px; right:18px; z-index:20; display:none; overflow:hidden;
+  }
+  .panel .p-head { display:flex; align-items:center; gap:8px; padding:12px 16px; border-bottom:1px solid var(--line); }
+  .panel .p-title { font-size:14px; font-weight:700; }
+  .panel .p-close { margin-left:auto; background:none; border:none; color:var(--dim); cursor:pointer; font-size:16px; }
+  .panel .p-close:hover { color:var(--red); }
+  .panel .p-body { padding:14px 16px; max-height:56vh; overflow-y:auto; }
+  .p-row { margin-bottom:10px; }
+  .p-row .k { color:var(--dim); text-transform:uppercase; font-size:10px; letter-spacing:.1em; }
+  .p-row .v { color:var(--muted); font-size:12.5px; line-height:1.5; font-family:-apple-system,'Segoe UI',sans-serif; }
+  .p-row a.v { color:var(--acc2); }
+  .p-row .tags { display:flex; gap:6px; flex-wrap:wrap; margin-top:4px; }
+  .tag { font-size:10px; border:1px solid var(--line2); color:var(--muted); border-radius:5px; padding:1px 8px; }
+  .p-open {
+    display:block; text-align:center; background:var(--acc2); color:var(--bg); text-decoration:none;
+    font-family:var(--mono); font-weight:700; padding:9px; border-radius:8px; margin-top:4px;
+  }
+  .p-open:hover { filter:brightness(1.1); }
+  .panel-overlay { position:fixed; inset:0; background:rgba(5,8,13,.5); z-index:19; display:none; }
+
+  ::-webkit-scrollbar { width:9px; height:9px; }
+  ::-webkit-scrollbar-thumb { background:var(--line2); border-radius:6px; }
+  ::-webkit-scrollbar-track { background:transparent; }
+
+  @media (max-width:860px){
+    #sidebar { display:none; }
+    .stat-pill { display:none; }
+    .tool .desc { display:none; }
+    .tool .when { display:block; }
+    .tool .rate { display:none; }
+    header { gap:10px; padding:0 12px; }
+  }
 </style>
 </head>
 <body>
 <header>
-  <div class="wrap">
-    <h1><span class="prompt">$</span> cybersecurity-<span class="sig">framework</span></h1>
-    <p>The open-source map of cybersecurity: every domain, every category, and <b>the best tool for each job</b>. Safety-gated, lab-focused, MIT licensed. Built to answer <i>“which tool do I need?”</i> in seconds.</p>
+  <div class="logo"><span class="prompt">$</span><span class="name">cybersecurity-<span>framework</span></span></div>
+  <div class="stat-pill">
+    <span class="pill"><b id="st-domains">…</b> domains</span>
+    <span class="pill"><b id="st-cats">…</b> categories</span>
+    <span class="pill"><b id="st-tools">…</b> tools</span>
   </div>
+  <div class="search">
+    <span class="ic">⌕</span>
+    <input id="q" type="text" placeholder="search tools…  (e.g. subdomain, nmap, hashcat, siem)" autocomplete="off" spellcheck="false" />
+    <span class="hits" id="hits"></span>
+  </div>
+  <button class="btn" id="expandAll" title="Expand all">expand all</button>
+  <button class="btn" id="collapseAll" title="Collapse all">collapse</button>
 </header>
-<main class="wrap">
-  <div class="bar">
-    <input id="q" type="text" placeholder="filter: tool, category, domain, or tag… (e.g. subdomain, scan, wifi, hashcat)" />
-    <button id="expand">expand all</button>
-    <button id="collapse">collapse</button>
-    <span class="stats"><b id="st-tools">…</b> tools · <b id="st-cats">…</b> categories · <b id="st-domains">…</b> domains</span>
+<main>
+  <aside id="sidebar"></aside>
+  <div id="view">
+    <div class="tree-legend">
+      <span><b class="ob">★</b> best-in-class pick</span>
+      <span>color: <b style="color:var(--grn)">● easy</b> <b style="color:var(--warn)">● medium</b> <b style="color:var(--red)">● advanced</b></span>
+      <span><b class="nest">▾ nested folders</b> = unlimited depth</span>
+      <span>hover a tool for when-to-use · ↗ opens it</span>
+    </div>
+    <div id="tree"></div>
   </div>
-  <div class="warnbar">
-    <b>Authorized use only.</b> Every tool here is for testing and defending <b>systems you own</b> or have written permission to assess. Unauthorized access may violate the CFAA (18 U.S.C. §1030) and local law. Read <a href="ETHICS.md" target="_blank">ETHICS.md</a> and <a href="SCOPE.md" target="_blank">SCOPE.md</a>.
-  </div>
-  <div id="tree"></div>
 </main>
-<footer>
-  <div class="wrap">
-    open-source · MIT · <a href="https://github.com/5h4d0wn1k/cybersecurity-framework" target="_blank">github.com/5h4d0wn1k/cybersecurity-framework</a> · map of tools &amp; concepts, constantly updated
+
+<div class="panel-overlay" id="overlay"></div>
+<div class="panel" id="panel">
+  <div class="p-head">
+    <span class="p-title" id="p-name"></span>
+    <button class="p-close" id="p-close">✕</button>
   </div>
-</footer>
+  <div class="p-body" id="p-body"></div>
+</div>
+
 <script>
 (async function () {
-  const $ = (s) => document.querySelector(s);
-  const q = $("#q"), tree = $("#tree");
-
+  const $ = s => document.querySelector(s);
+  const tree = $("#tree"), sidebar = $("#sidebar"), q = $("#q");
   let DATA;
-  try {
-    DATA = await (await fetch("data/tree.json")).json();
-  } catch (e) {
-    tree.innerHTML = '<div class="none">Could not load data/tree.json. Run: python3 scripts/build.py</div>';
+  try { DATA = await (await fetch("data/tree.json")).json(); }
+  catch (e) {
+    tree.innerHTML = '<div class="none">Could not load data/tree.json — run: python3 scripts/build.py</div>';
     return;
   }
-  $("#st-tools").textContent = DATA.stats.tools;
-  $("#st-cats").textContent = DATA.stats.categories;
   $("#st-domains").textContent = DATA.stats.domains;
+  $("#st-cats").textContent = DATA.stats.categories;
+  $("#st-tools").textContent = DATA.stats.tools;
 
-  let openSet = new Set(DATA.domains.map((d) => d.id).slice(0, 4));
-  let filterClass = "";
+  const esc = s => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  const openPaths = new Set(); // keys like "dom.cat.subcat" etc — any depth
+  let activeDomain = DATA.domains[0].id;
+  let searchTerm = "";
 
-  function esc(s) {
-    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  }
-
-  function matchTool(t, catName, domName) {
-    const ql = q.value.trim().toLowerCase();
-    if (!ql) return true;
-    const hay = [t.name, t.desc, t.when || "", t.install || "", catName, domName, (t.alt || []).join(" ")].join(" ").toLowerCase();
-    return hay.includes(ql);
-  }
-
-  function render() {
-    const ql = q.value.trim().toLowerCase();
-    let out = "";
-    let shown = 0, shownCats = 0;
-    for (const d of DATA.domains) {
-      if (filterClass && d.class !== filterClass) continue;
-      const domMatches = !ql || [d.name, d.tagline].join(" ").toLowerCase().includes(ql);
-      let catHtml = "";
-      let catShown = 0;
-      for (const c of d.categories) {
-        const tools = c.tools.filter((t) => matchTool(t, c.name, d.name));
-        if (!tools.length) continue;
-        catShown++;
-        catHtml += `<div class="cat"><h3>${esc(c.name)}</h3>` +
-          tools.map((t) => {
-            shown++;
-            const star = t.best ? `<span class="star">★</span> ` : "";
-            const eff = `<span class="eff" data-e="${esc(t.effort || "beginner")}">${esc(t.effort || "beginner")}</span>`;
-            const meta = ` <span class="mono" style="color:var(--dim)">${t.rating || "–"}/5</span> ${eff}`;
-            return `<div class="tool">${star}<span class="who">${esc(t.name)}</span><span class="dt">${esc(t.desc)}</span><span class="meta">${meta}</span></div>`;
-          }).join("") + `</div>`;
-      }
-      if (!catHtml && !domMatches) continue;
-      const open = openSet.has(d.id);
-      out += `<div class="domain ${open ? "open" : ""}" data-id="${esc(d.id)}">` +
-        `<div class="dhead"><span class="tgl">▸</span><span class="em">${esc(d.emoji || "")}</span><span class="nm">${esc(d.name)}</span>` +
-        `<span class="tg">${esc(d.tagline || "")}</span><span class="cnt">${catShown}c</span></div>` +
-        `<div class="dbody">${catHtml}</div></div>`;
-      shownCats += catShown;
+  /* ---------- sidebar ---------- */
+  function sidebarDom() {
+    let html = "";
+    for (const g of ["offense", "defense"]) {
+      const doms = DATA.domains.filter(d => d.class === g);
+      if (!doms.length) continue;
+      html += `<div class="sb-group"><div class="sb-group-h">${g}</div>`;
+      html += doms.map(d =>
+        `<div class="sb-item${d.id===activeDomain?' active':''}" data-id="${esc(d.id)}">
+           <span class="dot" style="background:${d.class==='offense'?'var(--off)':'var(--def)'}"></span>
+           <span>${esc(d.emoji||'')} ${esc(d.name)}</span>
+           <span class="meta">${d.categories.length}▸</span>
+         </div>`).join("");
+      html += "</div>";
     }
-    if (!out) out = '<div class="none">no matches</div>';
-    tree.innerHTML = out;
-    document.querySelectorAll(".dhead").forEach((hd) => {
-      hd.addEventListener("click", () => {
-        const dom = hd.closest(".domain");
-        dom.classList.toggle("open");
-        dom.classList.contains("open") ? openSet.add(dom.dataset.id) : openSet.delete(dom.dataset.id);
-      });
-    });
+    sidebar.innerHTML = html;
+    sidebar.querySelectorAll(".sb-item").forEach(el =>
+      el.addEventListener("click", () => { activeDomain = el.dataset.id; openPaths.clear(); sidebarDom(); renderDomain(); }));
   }
 
-  $("#expand").addEventListener("click", () => { openSet = new Set(DATA.domains.map(d => d.id)); render(); });
-  $("#collapse").addEventListener("click", () => { openSet = new Set(); render(); });
-  q.addEventListener("input", render);
-  render();
+  /* ---------- recursive rendering ---------- */
+  function nodesHtml(node, depth, pathKey) {
+    let html = "";
+    for (const c of node) {
+      const sub = c.subcategories || [];
+      const tools = c.tools || [];
+      const key = pathKey + "::" + c.id;
+      const open = openPaths.has(key);
+      const best = tools.find(t => t.best);
+      const foldersHtml = sub.length ? `<div class="sub-folders">${nodesHtml(sub, depth+1, key)}</div>` : "";
+      const toolsHtml = `<div class="folder-children">${tools.map((t,i)=>toolRow(t,i+1)).join("")}</div>`;
+      html += `<div class="folder${open?' open':''}" data-key="${esc(key)}">
+        <div class="folder-head">
+          <span class="cursor">▸</span><span>${esc(c.name)}</span>
+          <span class="count">${tools.length}t${sub.length?' · '+sub.length+'▸':''}</span>
+          ${best?`<span class="best" title="best-in-class">★ ${esc(best.name)}</span>`:""}
+        </div>
+        <div class="folder-body">${foldersHtml}${sub.length? '' : toolsHtml}</div>
+      </div>`;
+    }
+    return html;
+  }
+
+  function toolRow(t, idx) {
+    const isBest = t.best ? " best" : "";
+    const eff = esc(t.effort || "easy");
+    const star = t.best ? `<span class="ob">★</span> ` : "";
+    return `<div class="tool${isBest}" data-name="${esc(t.name)}">
+      <span class="idx">${idx}</span>
+      <span class="who">${star}${esc(t.name)}</span>
+      <span class="desc">${esc(t.desc)}</span>
+      <span class="when">when: ${esc(t.when || "")}</span>
+      <span class="eff ${eff}">${eff}</span>
+      <span class="rate">${t.rating||"–"}/5</span>
+      ${t.url ? `<a class="open" href="${esc(t.url)}" target="_blank" rel="noopener" title="${esc(t.install||"")}">↗</a>` : ""}
+    </div>`;
+  }
+
+  function renderDomain() {
+    const d = DATA.domains.find(x => x.id === activeDomain);
+    if (!d) return;
+    $("#view").scrollTop = 0;
+    let html = `<div class="hero">
+      <div class="crumb"><b>cybersecurity-framework</b> / ${esc(d.name)}</div>
+      <h1><span class="emo">${esc(d.emoji||"")}</span> ${esc(d.name)}</h1>
+      <div class="clz ${d.class}">${d.class}</div>
+      <p>${esc(d.tagline || "")}</p></div><div class="tree">`;
+    html += nodesHtml(d.categories, 0, d.id);
+    html += "</div>";
+    tree.innerHTML = html;
+
+    // bind recursive collapse
+    tree.querySelectorAll(".folder-head").forEach(h => h.addEventListener("click", () => {
+      const f = h.closest(".folder"); const key = f.dataset.key;
+      f.classList.toggle("open");
+      f.classList.contains("open") ? openPaths.add(key) : openPaths.delete(key);
+    }));
+    tree.querySelectorAll(".tool").forEach(t => t.addEventListener("click", () => {
+      if (t.querySelector("a")) showPanel(t, d);
+    }));
+    applySearch();
+  }
+
+  function applySearch() {
+    const s = searchTerm.toLowerCase();
+    if (!s) { $("#hits").textContent = ""; tree.querySelectorAll(".tool").forEach(t=>t.style.display=""); tree.querySelectorAll(".folder").forEach(f=>f.style.display=""); return; }
+    let count = 0;
+    tree.querySelectorAll(".tool").forEach(t => {
+      const hit = (t.dataset.name||"").toLowerCase().includes(s);
+      t.style.display = hit ? "" : "none";
+      if (hit) count++;
+    });
+    // walk all ancestors up to root and force open
+    tree.querySelectorAll(".folder").forEach(f => {
+      const any = [...f.querySelectorAll(".tool")].some(t=>t.style.display!=="none");
+      f.style.display = any ? "" : "none";
+    });
+    tree.querySelectorAll(".tool").forEach(t => {
+      const hit = t.style.display !== "none";
+      if (hit) { let cur = t.parentElement; while (cur && cur.classList && !cur.classList.contains("tree")) { if (cur.classList.contains("folder")) cur.classList.add("open"); cur = cur.parentElement; } }
+    });
+    $("#hits").textContent = `${count} found`;
+  }
+
+  const expandAllBtn = $("#expandAll"), collapseAllBtn = $("#collapseAll");
+  function allKeys(node, pathKey, into=[]) {
+    for (const c of (node||[])) { const k = pathKey+"::"+c.id; into.push(k); allKeys(c.subcategories||[], k, into); }
+    return into;
+  }
+  expandAllBtn.addEventListener("click", () => { openPaths.clear(); allKeys(DATA.domains.find(d=>d.id===activeDomain).categories, activeDomain).forEach(k=>openPaths.add(k)); renderDomain(); });
+  collapseAllBtn.addEventListener("click", () => { openPaths.clear(); renderDomain(); });
+  q.addEventListener("input", () => { searchTerm = q.value; applySearch(); });
+
+  function showPanel(t, dom) {
+    const name = t.querySelector(".who").textContent.trim().replace(/^★ /,"").trim();
+    let tool=null, path=[dom.name];
+    (function walk(cats, p){
+      for (const c of cats) {
+        const f = c.tools.find(x => x.name === name);
+        if (f) { tool=f; path = p.concat([c.name]); return; }
+        walk(c.subcategories||[], p.concat([c.name]));
+      }
+    })(dom.categories, [dom.name]);
+    if (!tool) return;
+    $("#p-name").textContent = tool.best ? name + " ★" : name;
+    $("#p-body").innerHTML =
+      `<div class="p-row"><div class="k">path</div><div class="v">${path.map(esc).join("  →  ")}</div></div>` +
+      `<div class="p-row"><div class="k">what it does</div><div class="v">${esc(tool.desc)}</div></div>` +
+      `<div class="p-row"><div class="k">when to use it</div><div class="v">${esc(tool.when||"")}</div></div>` +
+      `<div class="p-row"><div class="k">tags</div><div class="tags">
+         <span class="tag">${esc(tool.effort)}</span><span class="tag">rating ${tool.rating}/5</span>
+         ${tool.class?`<span class="tag">${esc(tool.class)}</span>`:""}
+       </div></div>` +
+      `<div class="p-row"><div class="k">install</div><div class="v">${esc(tool.install||"see site")}</div></div>` +
+      `<div class="p-row"><div class="k">alternatives</div><div class="v">${esc((tool.alt||[]).join(" · "))||"—"}</div></div>` +
+      (tool.url?`<a class="p-open" href="${esc(tool.url)}" target="_blank" rel="noopener">open tool ↗</a>`:"");
+    $("#panel").style.display = "block"; $("#overlay").style.display = "block";
+  }
+
+  $("#p-close").addEventListener("click", closePanel);
+  $("#overlay").addEventListener("click", closePanel);
+  function closePanel(){ $("#panel").style.display="none"; $("#overlay").style.display="none"; }
+
+  sidebarDom();
+  renderDomain();
+  setTimeout(() => { // default-open first category chain
+    const d = DATA.domains.find(x=>x.id===activeDomain);
+    const first = d.categories[0]; if (first) { openPaths.add(d.id+"::"+first.id); if (first.subcategories&&first.subcategories[0]) openPaths.add(d.id+"::"+first.id+"::"+first.subcategories[0].id); renderDomain(); }
+  }, 10);
 })();
 </script>
 </body>

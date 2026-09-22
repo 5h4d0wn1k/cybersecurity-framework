@@ -4,7 +4,10 @@ Product-security gates for the code and recipes you ship: SAST, DAST, secrets de
 
 ## Static Analysis (SAST)
 
-### Semgrep ⭐
+Semgrep ⭐
+
+
+#### Semgrep ⭐
 
 Lightweight app-sec static analyzer for 30+ languages: YAML rules that read like the code they match, bundled security packs (p/security-audit, p/owasp-top-ten), and pre-commit/CI/IDE hooks; the free CLI covers single-function/file patterns while the commercial AppSec Platform adds cross-function taint.
 
@@ -19,7 +22,7 @@ Lightweight app-sec static analyzer for 30+ languages: YAML rules that read like
 **Alternatives:** codeql, bandit, gosec
 
 
-### SonarQube
+#### SonarQube
 
 Self-hosted code-quality and security platform: the free LGPL Community Edition runs hundreds of static rules over 30+ languages with dashboards, quality gates, and trended security reports; paid tiers add branch analysis and deeper coverage.
 
@@ -34,7 +37,7 @@ Self-hosted code-quality and security platform: the free LGPL Community Edition 
 **Alternatives:** semgrep, codeql
 
 
-### CodeQL
+#### CodeQL
 
 GitHub's query-based analysis engine that databases your code and runs QL queries to find vulnerability classes; the CLI is free, and the strongest maintained rule sets ship through GitHub code scanning.
 
@@ -49,7 +52,7 @@ GitHub's query-based analysis engine that databases your code and runs QL querie
 **Alternatives:** semgrep, sonarqube
 
 
-### Bandit
+#### Bandit
 
 PyCQA's AST-based Python analyzer that flags common first-party security mistakes - SQLi, shell injection, pickles, eval, weak crypto, and path permissions - with a low-noise report of findings you can tune.
 
@@ -64,7 +67,7 @@ PyCQA's AST-based Python analyzer that flags common first-party security mistake
 **Alternatives:** semgrep, gosec
 
 
-### gosec
+#### gosec
 
 SecureGo's Go static analyzer walking ASTs and data flow to find hardcoded creds, weak TLS configs, unsafe sql/exec sinks, and integer-overflow risk in first-party Go code.
 
@@ -79,9 +82,16 @@ SecureGo's Go static analyzer walking ASTs and data flow to find hardcoded creds
 **Alternatives:** semgrep, bandit
 
 
+
+
+
+
 ## Dynamic Analysis (DAST)
 
-### OWASP ZAP ⭐
+OWASP ZAP ⭐
+
+
+#### OWASP ZAP ⭐
 
 Full web/API security scanner: intercepting proxy, spider, passive + active scanning, and a programmable REST API; ships zap-baseline.py and Docker images ready for automated CI DAST against the apps you deploy.
 
@@ -96,7 +106,7 @@ Full web/API security scanner: intercepting proxy, spider, passive + active scan
 **Alternatives:** burp suite community, restler
 
 
-### Burp Suite Community
+#### Burp Suite Community
 
 PortSwigger's leading web application testing platform: the free Community Edition gives you the intercepting proxy, a searchable request/response history, and Repeater/Decoder/Comparer manual tools; the automated scanner requires paid Pro or Enterprise editions.
 
@@ -111,7 +121,7 @@ PortSwigger's leading web application testing platform: the free Community Editi
 **Alternatives:** owasp zap, restler
 
 
-### RESTler
+#### RESTler
 
 Microsoft's stateful REST API fuzzer: ingests your OpenAPI spec, infers producer-consumer request dependencies, then fuzzes request sequences against the live service to surface 5xx crashes, resource leaks, and security-checker violations.
 
@@ -126,9 +136,16 @@ Microsoft's stateful REST API fuzzer: ingests your OpenAPI spec, infers producer
 **Alternatives:** owasp zap
 
 
+
+
+
+
 ## Secrets Detection
 
-### Gitleaks ⭐
+Gitleaks ⭐
+
+
+#### Gitleaks ⭐
 
 Fastest OSS secret scanner: a single Go binary that sweeps full git history or plain directories with 200+ regex rules for API keys, tokens, and passwords, exporting JSON/SARIF, with pre-commit and GitHub Action hooks.
 
@@ -143,7 +160,7 @@ Fastest OSS secret scanner: a single Go binary that sweeps full git history or p
 **Alternatives:** trufflehog, detect-secrets, ggshield
 
 
-### TruffleHog
+#### TruffleHog
 
 Secret scanner (trufflesecurity) with 600+ credential detectors that actively verify matches against vendor APIs to separate live credentials from noise; scans git, GitHub/GitLab orgs, S3, Docker, and filesystems.
 
@@ -158,7 +175,7 @@ Secret scanner (trufflesecurity) with 600+ credential detectors that actively ve
 **Alternatives:** gitleaks, detect-secrets, ggshield
 
 
-### detect-secrets
+#### detect-secrets
 
 Yelp's Python scanner that audits a repo once into a .secrets.baseline then diffs only new lines in pre-commit/CI, so only genuinely new secrets get flagged instead of the same approved ones on every run.
 
@@ -173,7 +190,7 @@ Yelp's Python scanner that audits a repo once into a .secrets.baseline then diff
 **Alternatives:** gitleaks, git-secrets
 
 
-### git-secrets
+#### git-secrets
 
 AWS Labs' original git-hook guard that registers grep patterns (including a ready AWS credential set) as client-side commit hooks so secrets never land in history; legacy and effectively unmaintained.
 
@@ -188,9 +205,16 @@ AWS Labs' original git-hook guard that registers grep patterns (including a read
 **Alternatives:** gitleaks, detect-secrets
 
 
+
+
+
+
 ## Dependency Scanning (SCA)
 
-### OWASP Dependency-Check ⭐
+OWASP Dependency-Check ⭐
+
+
+#### OWASP Dependency-Check ⭐
 
 OWASP's SCA utility that fingerprints declared dependencies (Java, .NET, Python, Node, Ruby, Go, Rust, and more) against NVD and other feeds, emitting HTML/XML reports of CVSS-scored known-CVE matches; ships CLI, Gradle/Maven plugins, and a GitHub Action.
 
@@ -205,7 +229,7 @@ OWASP's SCA utility that fingerprints declared dependencies (Java, .NET, Python,
 **Alternatives:** osv-scanner, pip-audit, trivy (container & SBOM scans)
 
 
-### osv-scanner
+#### osv-scanner
 
 Google's open-source vulnerability scanner (the engine behind GitHub Dependabot) that matches your lockfiles and SBOMs against the OSV.dev database - fast, quiet, and free of NVD feed friction.
 
@@ -220,7 +244,7 @@ Google's open-source vulnerability scanner (the engine behind GitHub Dependabot)
 **Alternatives:** pip-audit, owasp dependency-check
 
 
-### pip-audit
+#### pip-audit
 
 Python Packaging Authority's scanner that audits direct and transitive PyPI requirements against OSV/advisory feeds, and can even auto-fix vulnerable packages installed locally (--fix).
 
@@ -235,9 +259,16 @@ Python Packaging Authority's scanner that audits direct and transitive PyPI requ
 **Alternatives:** osv-scanner, owasp dependency-check
 
 
+
+
+
+
 ## Infrastructure-as-Code Security
 
-### Checkov ⭐
+Checkov ⭐
+
+
+#### Checkov ⭐
 
 Prisma Cloud-maintained IaC static analyzer with 1,000+ built-in policies for Terraform (incl. plan output), CloudFormation, Kubernetes, Helm, Dockerfile, Bicep, ARM, and Serverless; graph-based and multi-resource aware, with Python/YAML custom policies.
 
@@ -252,7 +283,7 @@ Prisma Cloud-maintained IaC static analyzer with 1,000+ built-in policies for Te
 **Alternatives:** kics, terrascan (archived Nov 2025), trivy (also scans IaC via tfsec)
 
 
-### KICS
+#### KICS
 
 Checkmarx's open-source IaC scanner (Keeping Infrastructure as Code Secure) running thousands of queries across 20+ platforms - Terraform, Kubernetes, Docker, Helm, CloudFormation, Ansible - with SARIF/SonarQube output and custom queries via OPA/Rego.
 
@@ -265,4 +296,8 @@ Checkmarx's open-source IaC scanner (Keeping Infrastructure as Code Secure) runn
 **URL:** https://github.com/Checkmarx/kics
 
 **Alternatives:** checkov, terrascan (archived Nov 2025)
+
+
+
+
 

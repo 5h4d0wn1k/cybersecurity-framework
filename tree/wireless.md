@@ -4,7 +4,10 @@ WiFi capture and cracking, RF spectrum analysis, WPS auditing, and Bluetooth —
 
 ## WiFi Capture & Cracking
 
-### aircrack-ng ⭐
+aircrack-ng ⭐
+
+
+#### aircrack-ng ⭐
 
 The reference 802.11 suite: captures WEP and WPA/WPA2-PSK handshakes, cracks them against wordlists/dictionaries, and verifies recovered keys; ships the airodump-ng and aireplay-ng binaries.
 
@@ -19,7 +22,7 @@ The reference 802.11 suite: captures WEP and WPA/WPA2-PSK handshakes, cracks the
 **Alternatives:** wifite2, hcxdumptool, airodump-ng
 
 
-### airodump-ng
+#### airodump-ng
 
 Packet-capture and display tool that enumerates nearby access points and clients, logs capture files, and grabs 4-way handshakes for offline cracking.
 
@@ -34,7 +37,7 @@ Packet-capture and display tool that enumerates nearby access points and clients
 **Alternatives:** aircrack-ng, wifite2, kismet
 
 
-### aireplay-ng
+#### aireplay-ng
 
 Frame-injection and replay tool of the suite: sends deauthentication frames and replays captured packets to trigger a fresh 4-way handshake when a station won't associate on its own.
 
@@ -49,7 +52,7 @@ Frame-injection and replay tool of the suite: sends deauthentication frames and 
 **Alternatives:** aircrack-ng, wifite2
 
 
-### Wifite2
+#### Wifite2
 
 Automated Wi-Fi auditing wrapper: scans with a monitor-mode adapter, lets you pick targets from a menu, and chains deauth, handshake capture, and cracking (or WPS PIN work via bully/reaver) in one run.
 
@@ -64,7 +67,7 @@ Automated Wi-Fi auditing wrapper: scans with a monitor-mode adapter, lets you pi
 **Alternatives:** aircrack-ng, hcxdumptool, reaver
 
 
-### hcxdumptool
+#### hcxdumptool
 
 Raw PCAPNG capture tool for PMKID and handshake material using a single adapter; often the fastest way to gather WPA test data without injection tricks.
 
@@ -79,9 +82,16 @@ Raw PCAPNG capture tool for PMKID and handshake material using a single adapter;
 **Alternatives:** aircrack-ng, wifite2
 
 
+
+
+
+
 ## WiFi Analysis & RF
 
-### Kismet ⭐
+Kismet ⭐
+
+
+#### Kismet ⭐
 
 Multi-protocol passive wireless detector and logging framework; captures and tracks 802.11, Bluetooth, and SDR sources with server + web UI.
 
@@ -96,7 +106,7 @@ Multi-protocol passive wireless detector and logging framework; captures and tra
 **Alternatives:** horst, wireshark
 
 
-### Wireshark
+#### Wireshark
 
 Universal packet dissector with deep 802.11 and Bluetooth protocol support; decrypts WPA/EAPOL traffic when supplied the PMK/keys.
 
@@ -111,7 +121,7 @@ Universal packet dissector with deep 802.11 and Bluetooth protocol support; decr
 **Alternatives:** kismet, horst
 
 
-### gqrx
+#### gqrx
 
 Software-defined radio receiver built on GNU Radio; tunes an RTL-SDR dongle and demodulates, decodes, and spectrally displays received signals.
 
@@ -126,7 +136,7 @@ Software-defined radio receiver built on GNU Radio; tunes an RTL-SDR dongle and 
 **Alternatives:** rtl-sdr, inspectrum
 
 
-### RTL-SDR
+#### RTL-SDR
 
 Cheap USB software-defined radio receiver with drivers and command-line utilities (rtl_fm, rtl_tcp, rtl_test) for raw spectral sampling.
 
@@ -141,7 +151,7 @@ Cheap USB software-defined radio receiver with drivers and command-line utilitie
 **Alternatives:** gqrx, inspectrum, kismet
 
 
-### inspectrum
+#### inspectrum
 
 Offline signal-analysis tool that renders recorded IQ or audio files into an interactive waterfall for visual protocol and modulation identification.
 
@@ -156,7 +166,7 @@ Offline signal-analysis tool that renders recorded IQ or audio files into an int
 **Alternatives:** gqrx, rtl-sdr
 
 
-### horst
+#### horst
 
 Lightweight ncurses 802.11 traffic analyzer with channel scanning, signal histograms, and per-client statistics in a terminal.
 
@@ -171,9 +181,16 @@ Lightweight ncurses 802.11 traffic analyzer with channel scanning, signal histog
 **Alternatives:** kismet, wireshark
 
 
+
+
+
+
 ## Bluetooth
 
-### Ubertooth ⭐
+Ubertooth ⭐
+
+
+#### Ubertooth ⭐
 
 Open-source 2.4 GHz radio hardware plus host software for Bluetooth capture and injection; analyzes frequency-hopping patterns, Classic BT, and BLE advertising on the Ubertooth One dongle.
 
@@ -188,7 +205,7 @@ Open-source 2.4 GHz radio hardware plus host software for Bluetooth capture and 
 **Alternatives:** btlejack, bettercap
 
 
-### bettercap
+#### bettercap
 
 Modular network attack/monitoring framework whose Bluetooth modules enumerate and intercept BLE and Classic BT devices and connections from the local host.
 
@@ -203,7 +220,7 @@ Modular network attack/monitoring framework whose Bluetooth modules enumerate an
 **Alternatives:** bluez
 
 
-### btlejack
+#### btlejack
 
 Sniffs and interacts with BLE advertising and connection channels using nRF24-family USB dongles; supports jamming and session recovery using previously captured keys.
 
@@ -218,7 +235,7 @@ Sniffs and interacts with BLE advertising and connection channels using nRF24-fa
 **Alternatives:** ubertooth, bettercap
 
 
-### BlueZ
+#### BlueZ
 
 The Linux Bluetooth protocol stack: hcitool, hcidump, btmon, and bluetoothctl expose controller state, HCI packets, and link logs.
 
@@ -233,9 +250,16 @@ The Linux Bluetooth protocol stack: hcitool, hcidump, btmon, and bluetoothctl ex
 **Alternatives:** bettercap
 
 
+
+
+
+
 ## WPS Tools
 
-### Reaver ⭐
+Reaver ⭐
+
+
+#### Reaver ⭐
 
 The reference WPS PIN brute-force tool: probes the registrar PIN transaction logic and, on vulnerable APs in your lab, recovers the WPS PIN and derived WPA-PSK.
 
@@ -250,7 +274,7 @@ The reference WPS PIN brute-force tool: probes the registrar PIN transaction log
 **Alternatives:** bully, wash
 
 
-### Wash
+#### Wash
 
 Companion scanner shipped with reaver that detects WPS-enabled access points and reads their WPS state (version, locked or not) without launching an active attack.
 
@@ -265,7 +289,7 @@ Companion scanner shipped with reaver that detects WPS-enabled access points and
 **Alternatives:** reaver, bully
 
 
-### Bully
+#### Bully
 
 Reimplementation of the WPS PIN brute-force client in C with tighter packet timing and tolerance for flaky associations than reaver's original implementation.
 
@@ -278,4 +302,8 @@ Reimplementation of the WPS PIN brute-force client in C with tighter packet timi
 **URL:** https://github.com/aanarchyy/bully
 
 **Alternatives:** reaver, wash
+
+
+
+
 

@@ -4,7 +4,10 @@ Map, audit, and score Active Directory attack paths — graph enumeration, Kerbe
 
 ## Attack-Path Enumeration & Graphing
 
-### BloodHound CE ⭐
+BloodHound CE ⭐
+
+
+#### BloodHound CE ⭐
 
 The current-generation attack-path engine: ingests SharpHound data into a Neo4j graph and reveals how users, groups, computers, sessions, GPOs, ACLs, trusts, and ADCS enrollments chain into paths to Domain Admin — including ADCS, NTLM, and delegation abuse conditions.
 
@@ -19,7 +22,7 @@ The current-generation attack-path engine: ingests SharpHound data into a Neo4j 
 **Alternatives:** SharpHound, PlumHound, BloodHound.py
 
 
-### SharpHound
+#### SharpHound
 
 C# data collector for BloodHound CE that runs on domain-joined Windows and exports a zip of users, groups, sessions, local admins, ACLs, GPOs, trusts, and more via LDAP and SMB — the dataset the graph is built from.
 
@@ -34,7 +37,7 @@ C# data collector for BloodHound CE that runs on domain-joined Windows and expor
 **Alternatives:** BloodHound.py
 
 
-### PlumHound
+#### PlumHound
 
 Wraps BloodHound's Neo4j Cypher backend into repeatable HTML reports and task lists; surfaces the busiest paths to Domain Admin and which relationship to break to sever a given path.
 
@@ -49,9 +52,16 @@ Wraps BloodHound's Neo4j Cypher backend into repeatable HTML reports and task li
 **Alternatives:** BloodHound CE, BloodHound.py
 
 
+
+
+
+
 ## Protocol Toolkit (Linux-side)
 
-### Impacket
+NetExec ⭐
+
+
+#### Impacket
 
 Fortra's Python library of Windows network protocol implementations plus ~100 example scripts — secretsdump (remote SAM/LSA/NTDS credential extraction over DRSUAPI/DCOM/registry in mimikatz-compatible hash format), psexec/wmiexec/atexec remote execution, ntlmrelayx, and a full Kerberos toolbox.
 
@@ -66,7 +76,7 @@ Fortra's Python library of Windows network protocol implementations plus ~100 ex
 **Alternatives:** NetExec
 
 
-### NetExec ⭐
+#### NetExec ⭐
 
 The maintained successor to CrackMapExec: multi-protocol (SMB, LDAP, MSSQL, SSH, WinRM, RDP) credential validation that rapidly tests which identities work where, sprays passwords, and enumerates shares, users, sessions, domains, and password policy across a fleet.
 
@@ -81,7 +91,7 @@ The maintained successor to CrackMapExec: multi-protocol (SMB, LDAP, MSSQL, SSH,
 **Alternatives:** Impacket
 
 
-### Kerbrute
+#### Kerbrute
 
 Go tool that validates AD usernames and tests passwords through Kerberos AS-REQ/AS-REP exchanges; its userenum mode never triggers account lockout, while passwordspray/bruteforce do and are meant for policy-aware testing.
 
@@ -96,7 +106,7 @@ Go tool that validates AD usernames and tests passwords through Kerberos AS-REQ/
 **Alternatives:** Rubeus, NetExec
 
 
-### Rubeus
+#### Rubeus
 
 C# toolset for raw Kerberos interaction — ticket requests and passthe-ticket, overpass-the-hash, golden/silver/diamond ticket forging, Kerberoasting, AS-REP roasting, and s4u delegation testing, compiled to run on Windows.
 
@@ -111,9 +121,16 @@ C# toolset for raw Kerberos interaction — ticket requests and passthe-ticket, 
 **Alternatives:** Impacket (getTGT/getTGS), Kerbrute
 
 
+
+
+
+
 ## Credential Exposure Testing
 
-### Mimikatz ⭐
+Mimikatz ⭐
+
+
+#### Mimikatz ⭐
 
 The canonical Windows credential tool: sekurlsa extracts plaintext passwords, NTLM hashes, PINs, and Kerberos tickets from LSASS memory, while lsadump covers SAM, LSA secrets, DCSync, and DCShadow, plus pass-the-hash/ticket and token manipulation.
 
@@ -128,7 +145,7 @@ The canonical Windows credential tool: sekurlsa extracts plaintext passwords, NT
 **Alternatives:** pypykatz, lsassy
 
 
-### pypykatz
+#### pypykatz
 
 Pure-Python reimplementation of Mimikatz's sekurlsa: parses live LSASS memory or minidump files on any OS to recover NT hashes, plaintext credentials, Kerberos tickets, and DPAPI keys.
 
@@ -143,7 +160,7 @@ Pure-Python reimplementation of Mimikatz's sekurlsa: parses live LSASS memory or
 **Alternatives:** Mimikatz, lsassy
 
 
-### lsassy
+#### lsassy
 
 Python tool that remotely dumps LSASS (comsvcs, Procdump, nanodump, and more methods) over SMB/WMI from whole fleets at once and extracts credentials in place with pypykatz.
 
@@ -158,9 +175,16 @@ Python tool that remotely dumps LSASS (comsvcs, Procdump, nanodump, and more met
 **Alternatives:** Mimikatz, pypykatz
 
 
+
+
+
+
 ## PowerShell & Scripted Enumeration
 
-### PowerView ⭐
+PowerView ⭐
+
+
+#### PowerView ⭐
 
 Pure-PowerShell AD enumerator (PowerSploit) turning LDAP into one-liner cmdlets for users, groups, computers, GPOs, ACLs, shares, and trust maps; also hunts which machines specific users log into and where you have local admin.
 
@@ -175,7 +199,7 @@ Pure-PowerShell AD enumerator (PowerSploit) turning LDAP into one-liner cmdlets 
 **Alternatives:** PowerUp, BloodHound.py
 
 
-### PowerUp
+#### PowerUp
 
 PowerSploit module that audits a Windows host for common local privilege-escalation misconfigurations — unquoted service paths, writable service binaries, modifiable services, AlwaysInstallElevated — and reports each with abuse-ready detail.
 
@@ -190,7 +214,7 @@ PowerSploit module that audits a Windows host for common local privilege-escalat
 **Alternatives:** PowerView
 
 
-### BloodHound.py
+#### BloodHound.py
 
 Python/Impacket ingestor for BloodHound CE that collects users, computers, groups, trusts, ACLs, sessions, and local admins from Linux using only credentials — no Windows host or SharpHound binary required.
 
@@ -205,9 +229,16 @@ Python/Impacket ingestor for BloodHound CE that collects users, computers, group
 **Alternatives:** PowerView
 
 
+
+
+
+
 ## AD Risk & Health Auditing
 
-### PingCastle ⭐
+PingCastle ⭐
+
+
+#### PingCastle ⭐
 
 Active Directory risk and maturity audit (by Netwrix) that scores a domain 0–100 across ~10 axes — accounts, ADCS, Kerberos, trusts, delegation, GPOs, infrastructure — and emits a CISO-ready HTML report with prioritized remediation via a read-only healthcheck.
 
@@ -222,7 +253,7 @@ Active Directory risk and maturity audit (by Netwrix) that scores a domain 0–1
 **Alternatives:** Purple Knight, ADRecon
 
 
-### Purple Knight
+#### Purple Knight
 
 Free commercial assessment from Semperis scoring hybrid AD, Entra ID, and Okta estates against 150+ indicators of exposure and compromise, with MITRE ATT&CK mapping and prioritized executive guidance.
 
@@ -237,7 +268,7 @@ Free commercial assessment from Semperis scoring hybrid AD, Entra ID, and Okta e
 **Alternatives:** PingCastle, ADRecon
 
 
-### ADRecon
+#### ADRecon
 
 PowerShell tool that extracts a wide slice of AD state — users, groups, OUs, GPOs, trusts, ACLs, password policies, DNS zones, and optionally LAPS/BitLocker keys and Kerberoastable SPNs — and consolidates it into a summary Excel workbook.
 
@@ -252,7 +283,7 @@ PowerShell tool that extracts a wide slice of AD state — users, groups, OUs, G
 **Alternatives:** PingCastle, AD-Audit
 
 
-### AD-Audit
+#### AD-Audit
 
 Modular PowerShell auditing suite aligned to Microsoft security best practices: user/computer hygiene, group policy, domain-controller security, credential-theft prevention, least privilege, AD FS, event monitoring, and ADCS checks with SQLite-backed findings.
 
@@ -265,4 +296,8 @@ Modular PowerShell auditing suite aligned to Microsoft security best practices: 
 **URL:** https://github.com/adrian207/AD-Audit
 
 **Alternatives:** ADRecon, PingCastle
+
+
+
+
 

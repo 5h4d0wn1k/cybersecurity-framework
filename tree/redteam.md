@@ -4,7 +4,10 @@ Authorized red team tooling: pivoting, tunnels, proxying, and practice lab envir
 
 ## Pivoting & Tunnels
 
-### sshuttle ⭐
+sshuttle ⭐
+
+
+#### sshuttle ⭐
 
 Lightweight VPN-like pivot using SSH; routes traffic through a jump host without requiring root on the target.
 
@@ -19,7 +22,7 @@ Lightweight VPN-like pivot using SSH; routes traffic through a jump host without
 **Alternatives:** chisel, ligolo-ng
 
 
-### chisel
+#### chisel
 
 Fast TCP/HTTP tunneling over a single port with reverse or forward modes; portable and minimal.
 
@@ -34,7 +37,7 @@ Fast TCP/HTTP tunneling over a single port with reverse or forward modes; portab
 **Alternatives:** sshuttle, frp
 
 
-### ligolo-ng
+#### ligolo-ng
 
 TUN-based tunneling agent for pivoting with automatic routes; simple interface for authorized red team operations.
 
@@ -49,7 +52,7 @@ TUN-based tunneling agent for pivoting with automatic routes; simple interface f
 **Alternatives:** sshuttle, frp
 
 
-### frp
+#### frp
 
 Fast reverse proxy for exposing local services through a remote server; stable and well-documented.
 
@@ -64,9 +67,16 @@ Fast reverse proxy for exposing local services through a remote server; stable a
 **Alternatives:** chisel
 
 
+
+
+
+
 ## Proxy Management
 
-### proxychains-ng ⭐
+proxychains-ng ⭐
+
+
+#### proxychains-ng ⭐
 
 Force any TCP application through a chain of proxies for controlled routing in authorized testing.
 
@@ -79,9 +89,16 @@ Force any TCP application through a chain of proxies for controlled routing in a
 **URL:** https://github.com/rofl0r/proxychains-ng
 
 
+
+
+
+
 ## Active Directory Labs & Practice
 
-### GOAD ⭐
+GOAD ⭐
+
+
+#### GOAD ⭐
 
 Great Oxide Active Directory lab for realistic, authorized red team practice with vulnerable AD domains.
 
@@ -96,7 +113,7 @@ Great Oxide Active Directory lab for realistic, authorized red team practice wit
 **Alternatives:** VECTR
 
 
-### VECTR
+#### VECTR
 
 Purple team tracking and assessment framework for mapping techniques to MITRE ATT&CK in controlled exercises.
 
@@ -109,4 +126,8 @@ Purple team tracking and assessment framework for mapping techniques to MITRE AT
 **URL:** https://github.com/SecurityRiskAdvisors/VECTR
 
 **Alternatives:** GOAD
+
+
+
+
 

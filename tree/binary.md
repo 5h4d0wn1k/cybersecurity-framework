@@ -4,7 +4,10 @@ Debug, disassemble, decompile, and understand binaries — your own code, lab ta
 
 ## Debuggers & Dynamic Analysis
 
-### GDB ⭐
+GDB ⭐
+
+
+#### GDB ⭐
 
 The GNU Debugger — breakpoints, watchpoints, register/memory inspection, and scripting for any ELF or Mach-O binary you control.
 
@@ -19,7 +22,7 @@ The GNU Debugger — breakpoints, watchpoints, register/memory inspection, and s
 **Alternatives:** pwndbg, gef, lldb
 
 
-### pwndbg
+#### pwndbg
 
 GDB plugin adding exploit-focused conveniences: heap/stack/register views, ROP-gadget search, cyclic pattern generation, and prettier disassembly.
 
@@ -34,7 +37,7 @@ GDB plugin adding exploit-focused conveniences: heap/stack/register views, ROP-g
 **Alternatives:** gef
 
 
-### GEF
+#### GEF
 
 Standalone, dependency-light GDB plugin (a single script) with heap visualizations, format-string helpers, and live memory introspection.
 
@@ -49,7 +52,7 @@ Standalone, dependency-light GDB plugin (a single script) with heap visualizatio
 **Alternatives:** pwndbg
 
 
-### LLDB
+#### LLDB
 
 LLVM's debugger, well integrated with Mach-O binaries, clang-generated debug info, and Swift/Objective-C symbols.
 
@@ -64,7 +67,7 @@ LLVM's debugger, well integrated with Mach-O binaries, clang-generated debug inf
 **Alternatives:** gdb
 
 
-### Frida
+#### Frida
 
 Dynamic instrumentation toolkit that injects JavaScript into a running process (yours or a lab/CTF target) to hook functions and read live memory without recompiling.
 
@@ -79,9 +82,16 @@ Dynamic instrumentation toolkit that injects JavaScript into a running process (
 **Alternatives:** lldb, gdb
 
 
+
+
+
+
 ## Disassemblers & Decompilers
 
-### Ghidra ⭐
+Ghidra ⭐
+
+
+#### Ghidra ⭐
 
 NSA's free reverse-engineering suite with a GUI and a real decompiler that emits C-like pseudocode from machine code, plus a scriptable API.
 
@@ -96,7 +106,7 @@ NSA's free reverse-engineering suite with a GUI and a real decompiler that emits
 **Alternatives:** radare2, cutter, rizin
 
 
-### radare2
+#### radare2
 
 Command-line reverse-engineering framework with an analyzer, disassembler, and ESIL emulation, scriptable via r2pipe.
 
@@ -111,7 +121,7 @@ Command-line reverse-engineering framework with an analyzer, disassembler, and E
 **Alternatives:** rizin, cutter
 
 
-### rizin
+#### rizin
 
 Community fork of radare2 aiming for a cleaner, better-tested codebase while staying command-compatible and offering rz-pipe scripting and Rust bindings.
 
@@ -126,7 +136,7 @@ Community fork of radare2 aiming for a cleaner, better-tested codebase while sta
 **Alternatives:** radare2, cutter
 
 
-### Cutter
+#### Cutter
 
 Qt GUI front-end for the Rizin reversing engine giving point-and-click disassembly, patching, and analysis in a visual workspace.
 
@@ -141,9 +151,16 @@ Qt GUI front-end for the Rizin reversing engine giving point-and-click disassemb
 **Alternatives:** radare2, rizin, ghidra
 
 
+
+
+
+
 ## Binary Exploitation Helper Libraries
 
-### pwntools ⭐
+pwntools ⭐
+
+
+#### pwntools ⭐
 
 CTF pwn toolkit providing packing (p64/u64), ELF parsing, cyclic patterns, ROP-chain builders, and managed local/remote I/O for exploit prototyping.
 
@@ -158,7 +175,7 @@ CTF pwn toolkit providing packing (p64/u64), ELF parsing, cyclic patterns, ROP-c
 **Alternatives:** angr, ropper, one_gadget
 
 
-### angr
+#### angr
 
 Python binary analysis framework using symbolic/concolic execution to explore paths and solve constraints against a binary you control.
 
@@ -173,7 +190,7 @@ Python binary analysis framework using symbolic/concolic execution to explore pa
 **Alternatives:** pwntools, ropper
 
 
-### Ropper
+#### Ropper
 
 Python tool that inventories ROP gadgets and builds chains from ELF, PE, and Mach-O binaries; also powers the ROP search inside pwndbg.
 
@@ -188,7 +205,7 @@ Python tool that inventories ROP gadgets and builds chains from ELF, PE, and Mac
 **Alternatives:** one_gadget, pwntools
 
 
-### one_gadget
+#### one_gadget
 
 Matches libc builds to single-address execve('/bin/sh') gadgets whose register constraints are simple to satisfy.
 
@@ -203,9 +220,16 @@ Matches libc builds to single-address execve('/bin/sh') gadgets whose register c
 **Alternatives:** ropper, pwntools
 
 
+
+
+
+
 ## Binary Inspection Utilities
 
-### checksec ⭐
+checksec ⭐
+
+
+#### checksec ⭐
 
 Bash/Python script that reads ELF headers and reports the active mitigations: PIE, NX, canaries, RELRO, Fortify, and more.
 
@@ -220,7 +244,7 @@ Bash/Python script that reads ELF headers and reports the active mitigations: PI
 **Alternatives:** objdump/readelf, file
 
 
-### file
+#### file
 
 Identifies a file's type by reading magic bytes and headers, including the format and target architecture (e.g. ELF 64-bit x86-64).
 
@@ -235,7 +259,7 @@ Identifies a file's type by reading magic bytes and headers, including the forma
 **Alternatives:** strings, objdump/readelf
 
 
-### strings
+#### strings
 
 Prints printable character sequences from a binary, exposing embedded literals, format strings, and library references without executing it.
 
@@ -250,7 +274,7 @@ Prints printable character sequences from a binary, exposing embedded literals, 
 **Alternatives:** file, objdump/readelf
 
 
-### objdump/readelf
+#### objdump/readelf
 
 binutils disassembler and ELF reader: symbol tables, sections, headers, dynamic imports, and per-arch disassembly of your own binaries.
 
@@ -265,7 +289,7 @@ binutils disassembler and ELF reader: symbol tables, sections, headers, dynamic 
 **Alternatives:** file, strings
 
 
-### xorsearch
+#### xorsearch
 
 Finds payloads XORed with single-byte or multi-byte keys by matching against known plaintext strings inside packed or obfuscated binaries.
 
@@ -278,4 +302,8 @@ Finds payloads XORed with single-byte or multi-byte keys by matching against kno
 **URL:** https://github.com/DidierStevens/DidierStevensSuite
 
 **Alternatives:** strings
+
+
+
+
 

@@ -4,7 +4,10 @@ Defending your own clusters: image scanning, SBOM, runtime detection, CIS postur
 
 ## Image & Registry Vulnerability Scanning
 
-### Trivy ⭐
+Trivy ⭐
+
+
+#### Trivy ⭐
 
 Aqua Security's comprehensive scanner covering container images, filesystems, git repos, VMs, and Kubernetes; detects CVEs, misconfigurations, secrets, and licenses from one binary.
 
@@ -19,7 +22,7 @@ Aqua Security's comprehensive scanner covering container images, filesystems, gi
 **Alternatives:** grype, syft (SBOM), kubescape scan image
 
 
-### Grype
+#### Grype
 
 Anchore's fast vulnerability scanner for images, filesystems, and SBOMs; pairs with Syft and adds EPSS, KEV, and OpenVEX filtering to prioritize real risk.
 
@@ -34,9 +37,16 @@ Anchore's fast vulnerability scanner for images, filesystems, and SBOMs; pairs w
 **Alternatives:** trivy, syft (SBOM)
 
 
+
+
+
+
 ## SBOM Generation & Management
 
-### Syft ⭐
+Syft ⭐
+
+
+#### Syft ⭐
 
 Generates SBOMs for container images, filesystems, and archives in CycloneDX, SPDX, and Syft JSON; feeds Grype directly and supports signed in-toto attestations.
 
@@ -51,7 +61,7 @@ Generates SBOMs for container images, filesystems, and archives in CycloneDX, SP
 **Alternatives:** trivy, cyclonedx-cli
 
 
-### Trivy
+#### Trivy
 
 Cross-reference entry: `trivy image --format cyclonedx|spdx` emits SBOMs, and Trivy will also scan an existing SBOM document for vulnerabilities.
 
@@ -66,7 +76,7 @@ Cross-reference entry: `trivy image --format cyclonedx|spdx` emits SBOMs, and Tr
 **Alternatives:** syft
 
 
-### cyclonedx-cli
+#### cyclonedx-cli
 
 OWASP CycloneDX CLI to validate, merge, diff, convert, sign, and verify CycloneDX and SPDX BOMs; exits non-zero on invalid input for CI gating.
 
@@ -81,9 +91,16 @@ OWASP CycloneDX CLI to validate, merge, diff, convert, sign, and verify CycloneD
 **Alternatives:** syft, trivy
 
 
+
+
+
+
 ## Runtime Threat Detection
 
-### Falco ⭐
+Falco ⭐
+
+
+#### Falco ⭐
 
 CNCF-graduated kernel monitoring agent (eBPF or driver) that watches syscalls enriched with container and Kubernetes metadata, alerting via a flexible rules engine.
 
@@ -98,7 +115,7 @@ CNCF-graduated kernel monitoring agent (eBPF or driver) that watches syscalls en
 **Alternatives:** docker-bench-security, kubescape (operator runtime)
 
 
-### docker-bench-security
+#### docker-bench-security
 
 Docker's CIS Docker Benchmark script auditing the Docker/containerd host, daemon, and running containers against dozens of best-practice checks.
 
@@ -113,9 +130,16 @@ Docker's CIS Docker Benchmark script auditing the Docker/containerd host, daemon
 **Alternatives:** falco
 
 
+
+
+
+
 ## Cluster Posture & Compliance
 
-### Kubescape ⭐
+Kubescape ⭐
+
+
+#### Kubescape ⭐
 
 CNCF-incubating Kubernetes security platform scanning clusters, manifests, Helm charts, git repos, and images against CIS, NSA-CISA, and MITRE ATT&CK; operator mode adds continuous posture and eBPF runtime.
 
@@ -130,7 +154,7 @@ CNCF-incubating Kubernetes security platform scanning clusters, manifests, Helm 
 **Alternatives:** kube-bench, kube-hunter, popeye
 
 
-### kube-bench
+#### kube-bench
 
 Aqua's Go tool that runs the CIS Kubernetes Benchmark against control plane, etcd, and worker node configuration, matched to the running Kubernetes version.
 
@@ -145,7 +169,7 @@ Aqua's Go tool that runs the CIS Kubernetes Benchmark against control plane, etc
 **Alternatives:** kubescape, docker-bench-security
 
 
-### Popeye
+#### Popeye
 
 Read-only live-cluster sanitizer that lints deployed workloads for misconfigurations, dead resources, port mismatches, and missing probes, scoring overall cluster health.
 
@@ -160,7 +184,7 @@ Read-only live-cluster sanitizer that lints deployed workloads for misconfigurat
 **Alternatives:** kubescape
 
 
-### kube-hunter
+#### kube-hunter
 
 Legacy Aqua pen-test tool that finds cluster weaknesses from an attacker's perspective (exposed dashboards, leaked secrets, weak RBAC); officially no longer under active development.
 
@@ -175,9 +199,16 @@ Legacy Aqua pen-test tool that finds cluster weaknesses from an attacker's persp
 **Alternatives:** kubescape, trivy (k8s scan)
 
 
+
+
+
+
 ## Admission Control & Policy-as-Code
 
-### OPA Gatekeeper ⭐
+OPA Gatekeeper ⭐
+
+
+#### OPA Gatekeeper ⭐
 
 CNCF policy controller that enforces Rego-based policy through constraint templates and constraints, with admission webhooks, audit, and mutation support.
 
@@ -192,7 +223,7 @@ CNCF policy controller that enforces Rego-based policy through constraint templa
 **Alternatives:** kyverno, polaris
 
 
-### Kyverno
+#### Kyverno
 
 CNCF-graduated Kubernetes-native policy engine using YAML (no new language) to validate, mutate, generate, and clean up resources; verifies image signatures via cosign.
 
@@ -207,7 +238,7 @@ CNCF-graduated Kubernetes-native policy engine using YAML (no new language) to v
 **Alternatives:** opa gatekeeper, polaris
 
 
-### Polaris
+#### Polaris
 
 Fairwinds policy-as-code with 30+ built-in checks across security, networking, reliability, and efficiency; runs as a dashboard, CI CLI, or mutating admission webhook.
 
@@ -222,9 +253,16 @@ Fairwinds policy-as-code with 30+ built-in checks across security, networking, r
 **Alternatives:** kyverno, opa gatekeeper, popeye
 
 
+
+
+
+
 ## Dockerfile & Image Best-Practice Lint
 
-### hadolint ⭐
+hadolint ⭐
+
+
+#### hadolint ⭐
 
 Haskell Dockerfile linter that parses the Dockerfile AST and applies best-practice rules, delegating inline shell checks to ShellCheck (DL- and SC-prefixed findings).
 
@@ -239,7 +277,7 @@ Haskell Dockerfile linter that parses the Dockerfile AST and applies best-practi
 **Alternatives:** dockle, trivy (misconfig)
 
 
-### dockle
+#### dockle
 
 Container image linter that audits the built image against CIS Docker image checkpoints and best practices (non-root user, HEALTHCHECK, setuid/setgid files, content trust).
 
@@ -252,4 +290,8 @@ Container image linter that audits the built image against CIS Docker image chec
 **URL:** https://github.com/goodwithtech/dockle
 
 **Alternatives:** hadolint
+
+
+
+
 

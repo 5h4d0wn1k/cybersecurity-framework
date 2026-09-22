@@ -4,7 +4,10 @@ Packet capture, on-path interception, host discovery, and connectivity utilities
 
 ## Packet Capture & Analysis
 
-### Wireshark ⭐
+Wireshark ⭐
+
+
+#### Wireshark ⭐
 
 Graphical packet analyzer that decodes hundreds of protocols, follows TCP streams, and reassembles sessions live or from a saved capture.
 
@@ -19,7 +22,7 @@ Graphical packet analyzer that decodes hundreds of protocols, follows TCP stream
 **Alternatives:** tshark, tcpdump, tcpflow
 
 
-### tcpdump
+#### tcpdump
 
 Command-line packet capture using Berkeley Packet Filter (BPF) expressions; the standard for headless logging and scripted sniffing.
 
@@ -34,7 +37,7 @@ Command-line packet capture using Berkeley Packet Filter (BPF) expressions; the 
 **Alternatives:** tshark, wireshark
 
 
-### tshark
+#### tshark
 
 Wireshark's terminal sibling: captures, decrypts, and prints live or offline traffic with the full dissector set and CSV/JSON output.
 
@@ -49,7 +52,7 @@ Wireshark's terminal sibling: captures, decrypts, and prints live or offline tra
 **Alternatives:** tcpdump, wireshark
 
 
-### tcpflow
+#### tcpflow
 
 Reassembles TCP sessions from a capture into separate per-connection files, ignoring lower-level packet noise.
 
@@ -64,9 +67,16 @@ Reassembles TCP sessions from a capture into separate per-connection files, igno
 **Alternatives:** wireshark, tshark
 
 
+
+
+
+
 ## On-Path & Interception Frameworks
 
-### bettercap ⭐
+bettercap ⭐
+
+
+#### bettercap ⭐
 
 Modular framework for MITM, ARP/DNS/DHCP spoofing, and credential sniffing with an interactive shell and RESTful API for scripting.
 
@@ -81,7 +91,7 @@ Modular framework for MITM, ARP/DNS/DHCP spoofing, and credential sniffing with 
 **Alternatives:** mitmproxy, responder
 
 
-### mitmproxy
+#### mitmproxy
 
 Interactive HTTPS interception proxy with a terminal UI, Python addon scripting, and TLS interception via its own CA you install on your devices.
 
@@ -96,7 +106,7 @@ Interactive HTTPS interception proxy with a terminal UI, Python addon scripting,
 **Alternatives:** bettercap
 
 
-### responder
+#### responder
 
 Answers LLMNR/NBT-NS/mDNS name-resolution queries on a subnet and logs or relays credentials passed over those protocols to its own listeners.
 
@@ -111,9 +121,16 @@ Answers LLMNR/NBT-NS/mDNS name-resolution queries on a subnet and logs or relays
 **Alternatives:** bettercap
 
 
+
+
+
+
 ## Host Discovery & Network Mapping
 
-### arp-scan ⭐
+arp-scan ⭐
+
+
+#### arp-scan ⭐
 
 Sends ARP requests to every address in a subnet and lists live hosts by IP and MAC/OUI vendor; the most reliable way to map a local network.
 
@@ -128,7 +145,7 @@ Sends ARP requests to every address in a subnet and lists live hosts by IP and M
 **Alternatives:** netdiscover, fping
 
 
-### netdiscover
+#### netdiscover
 
 Active and passive ARP-based host discovery with a live-updating table of MAC address, vendor, and IP.
 
@@ -143,7 +160,7 @@ Active and passive ARP-based host discovery with a live-updating table of MAC ad
 **Alternatives:** arp-scan, fping
 
 
-### fping
+#### fping
 
 Bulk ICMP pinger that sweeps a range of targets in parallel and prints alive/dead results in a script-friendly stream.
 
@@ -158,9 +175,16 @@ Bulk ICMP pinger that sweeps a range of targets in parallel and prints alive/dea
 **Alternatives:** arp-scan, netdiscover
 
 
+
+
+
+
 ## Connectivity & Packet Crafting
 
-### socat ⭐
+socat ⭐
+
+
+#### socat ⭐
 
 Bidirectional relay that forwards, listens on, and connects across TCP, UDP, UNIX sockets, and files; flexible byte plumbing for testing services.
 
@@ -175,7 +199,7 @@ Bidirectional relay that forwards, listens on, and connects across TCP, UDP, UNI
 **Alternatives:** ncat, proxychains
 
 
-### ncat
+#### ncat
 
 Nmap's free, MIT-licensed netcat: connect, listen, and relay TCP/UDP with TLS, proxy modes, and easy scripting built in.
 
@@ -190,7 +214,7 @@ Nmap's free, MIT-licensed netcat: connect, listen, and relay TCP/UDP with TLS, p
 **Alternatives:** socat, netcat-openbsd (netcat-free)
 
 
-### hping3
+#### hping3
 
 Packet-crafting tool that builds custom TCP/UDP/ICMP packets via raw sockets, with control over flags, timing, and fragmentation.
 
@@ -205,7 +229,7 @@ Packet-crafting tool that builds custom TCP/UDP/ICMP packets via raw sockets, wi
 **Alternatives:** nmap (recon)
 
 
-### proxychains
+#### proxychains
 
 Routes any TCP client through a strict, random, or dynamic chain of HTTP/SOCKS proxies, forcing connections out via chosen exits.
 
@@ -220,9 +244,16 @@ Routes any TCP client through a strict, random, or dynamic chain of HTTP/SOCKS p
 **Alternatives:** socat, ncat
 
 
+
+
+
+
 ## DNS & IP Utilities
 
-### dig ⭐
+dig ⭐
+
+
+#### dig ⭐
 
 The standard DNS query tool from the BIND suite: any record type, MX priority, zone-transfer attempts, and query tracing against a chosen resolver.
 
@@ -237,7 +268,7 @@ The standard DNS query tool from the BIND suite: any record type, MX priority, z
 **Alternatives:** whois
 
 
-### whois
+#### whois
 
 Queries WHOIS/registration databases for domain ownership, registrar, name servers, and IP allocation details.
 
@@ -250,4 +281,8 @@ Queries WHOIS/registration databases for domain ownership, registrar, name serve
 **URL:** https://github.com/rfc1036/whois
 
 **Alternatives:** dig
+
+
+
+
 

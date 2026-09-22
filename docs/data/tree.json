@@ -1636,6 +1636,48 @@
               ]
             }
           ]
+        },
+        {
+          "id": "ios-testing",
+          "name": "iOS-specific testing",
+          "subcategories": [
+            {
+              "id": "ios-dynamic",
+              "name": "iOS dynamic analysis",
+              "tools": [
+                {
+                  "name": "Frida-iOS",
+                  "rating": 4,
+                  "effort": "advanced",
+                  "desc": "Frida on iOS for hooking, swizzling, and runtime inspection of app classes on jailbroken devices.",
+                  "when": "When you need to trace iOS app runtime behavior on jailbroken devices.",
+                  "install": "frida on device (see re.frida.server)",
+                  "url": "https://frida.re",
+                  "alt": [
+                    "objection"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "ios-static",
+              "name": "iOS static analysis",
+              "tools": [
+                {
+                  "name": "Frida-codeshare",
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "Collection of iOS-focused Frida scripts for class dumping and method tracing.",
+                  "when": "Need common iOS hooks without writing your own.",
+                  "install": "pip install frida",
+                  "url": "https://codeshare.frida.re",
+                  "alt": [
+                    "class-dump"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -3134,59 +3176,77 @@
         {
           "id": "subdomains",
           "name": "Subdomain Enumeration",
-          "tools": [
+          "tools": [],
+          "subcategories": [
             {
-              "name": "Amass",
-              "best": true,
-              "rating": 5,
-              "effort": "medium",
-              "desc": "OWASP-recommended, querying dozens of sources for active/passive subdomains; builds graph and flagship-level relationships between discovered assets.",
-              "when": "Full-scope startup: let it run long against a big target while you work other recon.",
-              "install": "go install -v github.com/owasp-amass/amass/v4/...@master",
-              "url": "https://github.com/owasp-amass/amass",
-              "alt": [
-                "subfinder",
-                "crt.sh",
-                "dnsx"
+              "id": "brute-methods",
+              "name": "Brute & dictionary methods",
+              "subcategories": [
+                {
+                  "id": "resolver-level",
+                  "name": "Resolver-level (verify candidates)",
+                  "tools": [
+                    {
+                      "name": "Amass",
+                      "best": true,
+                      "rating": 5,
+                      "effort": "medium",
+                      "desc": "OWASP-recommended, querying dozens of sources for active/passive subdomains; builds graph and flagship-level relationships between discovered assets.",
+                      "when": "Full-scope startup: let it run long against a big target while you work other recon.",
+                      "install": "go install -v github.com/owasp-amass/amass/v4/...@master",
+                      "url": "https://github.com/owasp-amass/amass",
+                      "alt": [
+                        "subfinder",
+                        "crt.sh",
+                        "dnsx"
+                      ]
+                    },
+                    {
+                      "name": "Subfinder",
+                      "rating": 5,
+                      "effort": "easy",
+                      "desc": "Fast passive-only subdomain discovery from 30+ sources (APIs optional, works well without them).",
+                      "when": "The daily driver when you want speed over depth, or when API keys are scarce.",
+                      "install": "go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest",
+                      "url": "https://github.com/projectdiscovery/subfinder",
+                      "alt": [
+                        "amass",
+                        "crt.sh"
+                      ]
+                    },
+                    {
+                      "name": "crt.sh",
+                      "rating": 4,
+                      "effort": "easy",
+                      "desc": "Transparency-log search over issued TLS certificates; zero-install, browser or curl.",
+                      "when": "Instant no-setup check; great for history not visible via simple DNS queries.",
+                      "install": "preinstalled (web)",
+                      "url": "https://crt.sh",
+                      "alt": [
+                        "subfinder",
+                        "certsh"
+                      ]
+                    },
+                    {
+                      "name": "dnsx",
+                      "rating": 4,
+                      "effort": "easy",
+                      "desc": "Fast multi-threaded DNS resolver built to verify a big list of candidate subdomains (A/AAAA/CNAME/TXT).",
+                      "when": "After enumeration: confirm which hosts resolve and grab their records in one pass.",
+                      "install": "go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest",
+                      "url": "https://github.com/projectdiscovery/dnsx",
+                      "alt": [
+                        "massdns"
+                      ]
+                    }
+                  ]
+                }
               ]
             },
             {
-              "name": "Subfinder",
-              "rating": 5,
-              "effort": "easy",
-              "desc": "Fast passive-only subdomain discovery from 30+ sources (APIs optional, works well without them).",
-              "when": "The daily driver when you want speed over depth, or when API keys are scarce.",
-              "install": "go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest",
-              "url": "https://github.com/projectdiscovery/subfinder",
-              "alt": [
-                "amass",
-                "crt.sh"
-              ]
-            },
-            {
-              "name": "crt.sh",
-              "rating": 4,
-              "effort": "easy",
-              "desc": "Transparency-log search over issued TLS certificates; zero-install, browser or curl.",
-              "when": "Instant no-setup check; great for history not visible via simple DNS queries.",
-              "install": "preinstalled (web)",
-              "url": "https://crt.sh",
-              "alt": [
-                "subfinder",
-                "certsh"
-              ]
-            },
-            {
-              "name": "dnsx",
-              "rating": 4,
-              "effort": "easy",
-              "desc": "Fast multi-threaded DNS resolver built to verify a big list of candidate subdomains (A/AAAA/CNAME/TXT).",
-              "when": "After enumeration: confirm which hosts resolve and grab their records in one pass.",
-              "install": "go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest",
-              "url": "https://github.com/projectdiscovery/dnsx",
-              "alt": [
-                "massdns"
-              ]
+              "id": "api-sources",
+              "name": "API / transparency-log sources",
+              "tools": []
             }
           ]
         },
@@ -3751,7 +3811,7 @@
       "id": "web",
       "name": "Web Application Security",
       "emoji": "\ud83d\udd78\ufe0f",
-      "tagline": "Intercepting proxies, content discovery, injection testing, and API tooling for authorized web assessments.",
+      "tagline": "The full web assessment stack: intercepting proxies, discovery, injection testing, API tooling, and OWASP-class vulnerability testing \u2014 nested by technique.",
       "class": "offense",
       "categories": [
         {
@@ -3762,9 +3822,9 @@
               "name": "Burp Suite",
               "best": true,
               "rating": 5,
-              "effort": "medium",
-              "desc": "The de-facto intercepting proxy: intercept and edit requests, inspect responses, map the app, and extend workflows with a large marketplace.",
-              "when": "When you need to manually inspect and shape every request against an app you're authorized to test, or want Professional-grade scanning and macro-based session handling.",
+              "effort": "easy",
+              "desc": "The de-facto intercepting proxy for manual testing: intercept/edit requests, inspect responses, map the app, and extend via a large BApp marketplace.",
+              "when": "Every manual web engagement; the default scratchpad for inspecting and shaping requests to an app you are authorized to test.",
               "install": "brew install --cask burp-suite",
               "url": "https://portswigger.net/burp",
               "alt": [
@@ -3775,9 +3835,9 @@
             {
               "name": "OWASP ZAP",
               "rating": 5,
-              "effort": "medium",
-              "desc": "Free and open-source OWASP proxy with automated scanning, a baseline API for CI, fuzzing, and a REST API for integration.",
-              "when": "When Burp is not an option due to licensing or budget, or you want scriptable scanning you can drive from a pipeline against a staging app you own.",
+              "effort": "easy",
+              "desc": "Free and open-source OWASP proxy with automated scanning, fuzzing, and a REST API for CI-driven baseline scanning.",
+              "when": "When you need a fully open, scriptable proxy with automated scanning you can drive from a pipeline against a staging app you own.",
               "install": "sudo snap install zaproxy --classic",
               "url": "https://github.com/zaproxy/zaproxy",
               "alt": [
@@ -3794,8 +3854,8 @@
               "install": "brew tap caido/caido && brew install caido",
               "url": "https://github.com/caido/caido",
               "alt": [
-                "OWASP ZAP",
-                "Burp Suite"
+                "Burp Suite",
+                "OWASP ZAP"
               ]
             }
           ]
@@ -3808,101 +3868,142 @@
               "name": "ffuf",
               "best": true,
               "rating": 5,
-              "effort": "medium",
-              "desc": "High-speed Go web fuzzer handling directory, virtual-host, parameter, and header fuzzing over reusable wordlists and encoders.",
-              "when": "Your default content-discovery engine on an authorized target: large wordlists, vhost fuzzing, and parameter guessing.",
+              "effort": "easy",
+              "desc": "Extremely fast web fuzzer written in Go for directories, files, parameters, vhosts, and more; supports filters, recursion, and matchers.",
+              "when": "Anytime you need fast brute-force discovery of paths or parameters against a target you are authorized to test.",
               "install": "go install github.com/ffuf/ffuf/v2@latest",
               "url": "https://github.com/ffuf/ffuf",
               "alt": [
                 "gobuster",
                 "feroxbuster",
-                "wfuzz"
+                "dirsearch"
               ]
             },
             {
               "name": "gobuster",
               "rating": 4,
               "effort": "easy",
-              "desc": "Lightweight Go brute-forcer for directories/files, DNS subdomains, and virtual hosts using custom wordlists.",
-              "when": "When you need a single-binary directory scan with zero dependencies, or a quick DNS or vhost brute force.",
+              "desc": "Simple multi-purpose fuzzer for directories, DNS subdomains, and virtual hosts using wordlists.",
+              "when": "When you want a lightweight, easy-to-script brute forcer without a big learning curve.",
               "install": "go install github.com/OJ/gobuster/v3@latest",
               "url": "https://github.com/OJ/gobuster",
               "alt": [
                 "ffuf",
-                "feroxbuster",
-                "dirsearch"
+                "feroxbuster"
               ]
             },
             {
               "name": "feroxbuster",
               "rating": 4,
               "effort": "easy",
-              "desc": "Rust-based recursive content scanner that follows discovered paths automatically and color-codes results by status.",
-              "when": "When recursive crawling of your own app's content tree matters more than raw wordlist throughput.",
-              "install": "cargo install feroxbuster --locked",
+              "desc": "Fast, recursive content discovery fuzzer built in Rust that automatically scans discovered directories.",
+              "when": "When you want recursion and auto-re-scanning of found directories out of the box.",
+              "install": "cargo install feroxbuster",
               "url": "https://github.com/epi052/feroxbuster",
               "alt": [
                 "ffuf",
-                "gobuster"
+                "gobuster",
+                "dirsearch"
               ]
             },
             {
               "name": "dirsearch",
-              "rating": 3,
+              "rating": 4,
               "effort": "easy",
-              "desc": "Python directory brute-forcer with a built-in wordlist, recursive mode, and extension/status filters to cut noise.",
-              "when": "When you want a battery-included scanner with sane defaults against a single host.",
-              "install": "git clone --depth 1 https://github.com/maurosoria/dirsearch.git",
+              "desc": "Mature Python path scanner with threading, proxy support, and extensive filter/ignored-status options.",
+              "when": "When a simple, cross-platform Python scanner with many wordlist and output options is all you need.",
+              "install": "pipx install dirsearch",
               "url": "https://github.com/maurosoria/dirsearch",
               "alt": [
-                "gobuster",
-                "feroxbuster"
+                "ffuf",
+                "feroxbuster",
+                "gobuster"
               ]
             },
             {
               "name": "wfuzz",
               "rating": 3,
               "effort": "medium",
-              "desc": "Flexible Python web fuzzer built on curl backends; supports multiple payload injection points and fine-grained response matching.",
-              "when": "When you need to fuzz several positions (headers, cookies, parameters) in one request with precise match filters.",
-              "install": "sudo pip3 install wfuzz",
+              "desc": "Flexible Python fuzzer for web content and parameter brute-forcing with rich payload/encoding options.",
+              "when": "When you need fine-grained iteration over multiple payload positions and encoding filters.",
+              "install": "sudo apt install wfuzz",
               "url": "https://github.com/xmendez/wfuzz",
               "alt": [
                 "ffuf",
-                "feroxbuster"
+                "ffuf"
               ]
             }
           ]
         },
         {
-          "id": "sql-injection",
-          "name": "SQL Injection Testing",
-          "tools": [
+          "id": "injection-testing",
+          "name": "Injection & Data-Plane Testing",
+          "subcategories": [
             {
-              "name": "sqlmap",
-              "best": true,
-              "rating": 5,
-              "effort": "medium",
-              "desc": "Automated SQL injection engine supporting boolean, time-based, error, union, and stacked techniques plus database fingerprinting.",
-              "when": "After a parameter in an app you're authorized to test looks injectable \u2014 it automates detection and database fingerprinting in one pass.",
-              "install": "git clone --depth 1 https://github.com/sqlmapproject/sqlmap.git",
-              "url": "https://github.com/sqlmapproject/sqlmap",
-              "alt": [
-                "NoSQLMap",
-                "manual payload probes via Burp Repeater"
+              "id": "sql-injection",
+              "name": "SQL Injection",
+              "tools": [
+                {
+                  "name": "sqlmap",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "The reference automated SQLi tool: detects and exploits injection in GET/POST/headers, enumerates DBMSes, and dumps data on targets you are authorized to test.",
+                  "when": "When a parameter looks injectable and you want thorough detection plus DB fingerprinting, safe limits, and batch modes.",
+                  "install": "sudo apt install sqlmap",
+                  "url": "https://github.com/sqlmapproject/sqlmap",
+                  "alt": [
+                    "NoSQLMap"
+                  ]
+                },
+                {
+                  "name": "NoSQLMap",
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "Automated pentesting tool for NoSQL databases (MongoDB, CouchDB) injection and misconfiguration.",
+                  "when": "When the backend is NoSQL and you need injection-point discovery against an app you own or have scope for.",
+                  "install": "git clone https://github.com/codingo/NoSQLMap && pip3 install -r NoSQLMap/requirements.txt",
+                  "url": "https://github.com/codingo/NoSQLMap",
+                  "alt": [
+                    "sqlmap"
+                  ]
+                }
               ]
             },
             {
-              "name": "NoSQLMap",
-              "rating": 3,
-              "effort": "advanced",
-              "desc": "Automated NoSQL database testing (MongoDB, CouchDB) focused on enumeration, injection, and blind testing of document-store backends.",
-              "when": "When the API you're testing is backed by a document store and classic SQL payloads don't apply.",
-              "install": "git clone --depth 1 https://github.com/codingo/NoSQLMap.git && cd NoSQLMap && python3 setup.py install",
-              "url": "https://github.com/codingo/NoSQLMap",
-              "alt": [
-                "sqlmap",
-                "manual query fuzzing via mitmproxy"
+              "id": "command-injection",
+              "name": "Command Injection",
+              "tools": [
+                {
+                  "name": "Commix",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Automated OS command injection detection and exploitation with support for many injection techniques and filter bypasses.",
+                  "when": "When you suspect command injection in a parameter or header and want an automated detector on authorized targets.",
+                  "install": "git clone https://github.com/commixproject/commix && cd commix && python3 commix.py -h",
+                  "url": "https://github.com/commixproject/commix",
+                  "alt": [
+                    "sqlmap (secondary)"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "template-injection",
+              "name": "Server-Side Template Injection (SSTI)",
+              "tools": [
+                {
+                  "name": "tplmap",
+                  "best": true,
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "Detects and exploits server-side template injection across engines (Jinja2, Twig, Freemarker, etc.).",
+                  "when": "When an app renders user input inside templates and you need to confirm SSTI on a scope-authorized target.",
+                  "install": "git clone https://github.com/epinna/tplmap && pip3 install -r tplmap/requirements.txt",
+                  "url": "https://github.com/epinna/tplmap",
+                  "alt": []
+                }
               ]
             }
           ]
@@ -3916,55 +4017,53 @@
               "best": true,
               "rating": 4,
               "effort": "easy",
-              "desc": "Go-based XSS scanner that runs a fast analysis pass, sends crafted payloads, and confirms findings with headless-browser verification.",
-              "when": "When you want automated, verifiable XSS coverage across many endpoints in a target you're authorized to test.",
+              "desc": "Fast, parameter-analysis XSS scanner written in Go with payload generation and Telegram/Discord notification support.",
+              "when": "When you want to automate XSS discovery against a list of endpoints on authorized targets and pipeline results.",
               "install": "go install github.com/hahwul/dalfox/v2@latest",
               "url": "https://github.com/hahwul/dalfox",
               "alt": [
-                "XSStrike",
-                "manual encoding checks via Burp Proxy"
+                "XSStrike"
               ]
             },
             {
               "name": "XSStrike",
-              "rating": 3,
-              "effort": "medium",
-              "desc": "Python XSS test suite with context-aware payload crafting, filter-detection heuristics, and a small built-in fuzzing engine.",
-              "when": "When straight payloads fail and you need context-aware payload generation to understand why a filter rejected them.",
-              "install": "git clone --depth 1 https://github.com/s0md3v/XSStrike.git",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "XSS detection suite with payload crafting, bruteforce, and WAF/filter-detection heuristics.",
+              "when": "When you need sophisticated payload crafting and WAF detection for manual XSS validation in your tests.",
+              "install": "git clone https://github.com/s0md3v/XSStrike && pip3 install -r XSStrike/requirements.txt",
               "url": "https://github.com/s0md3v/XSStrike",
               "alt": [
-                "Dalfox",
-                "manual testing via OWASP ZAP"
+                "Dalfox"
               ]
             }
           ]
         },
         {
           "id": "api-testing",
-          "name": "API Testing",
+          "name": "API Testing & Traffic Shaping",
           "tools": [
             {
               "name": "mitmproxy",
               "best": true,
               "rating": 4,
-              "effort": "medium",
-              "desc": "Interactive HTTPS proxy with a Python addon API for scripting request transformations, plus replay and mock flows for API traffic.",
-              "when": "When you need scriptable request manipulation, or want to log, inspect, and replay API traffic headlessly.",
-              "install": "pip3 install mitmproxy",
+              "effort": "easy",
+              "desc": "Interactive man-in-the-middle proxy with a powerful scriptable (Python) add-on API for request shaping and inspection.",
+              "when": "When you need programmatic control over intercepted API traffic (rewrite, capture, fuzz) in your tests.",
+              "install": "brew install mitmproxy",
               "url": "https://mitmproxy.org",
               "alt": [
-                "Burp Suite",
-                "Postman"
+                "Postman",
+                "httpie"
               ]
             },
             {
               "name": "Postman",
               "rating": 4,
               "effort": "easy",
-              "desc": "API client for organizing requests into collections, environment variables, and automated test runners; surfaces contract and auth issues early.",
-              "when": "During development of your own service for functional API exploration, regression checks, and documenting expected behavior.",
-              "install": "sudo snap install postman",
+              "desc": "API client and collection runner for crafting, saving, and automating HTTP requests against services under test.",
+              "when": "When you need organized collections, environments, and simple automation to reason about an API's behavior.",
+              "install": "brew install --cask postman",
               "url": "https://www.postman.com",
               "alt": [
                 "httpie",
@@ -3972,62 +4071,56 @@
               ]
             },
             {
-              "name": "httpie",
+              "name": "HTTPie",
               "rating": 3,
               "effort": "easy",
-              "desc": "Human-friendly HTTP client with readable colored output, JSON-first rewriting, and simple chaining of requests in the shell.",
-              "when": "When you want a quick one-liner API check without opening an app or writing verbose curl flags.",
-              "install": "sudo apt install httpie",
+              "desc": "User-friendly command-line HTTP client with readable, colorful output for quick manual requests.",
+              "when": "For fast ad-hoc requests in a terminal during investigation without a heavyweight GUI.",
+              "install": "brew install httpie",
               "url": "https://httpie.io",
               "alt": [
-                "curl",
-                "Postman"
+                "Postman",
+                "mitmproxy"
               ]
             }
           ]
         },
         {
           "id": "web-vulns",
-          "name": "Other Web Vulnerability Classes",
-          "tools": [
+          "name": "Class & Variable-Specific Testing",
+          "subcategories": [
             {
-              "name": "Commix",
-              "best": true,
-              "rating": 4,
-              "effort": "medium",
-              "desc": "Automates detection of command injection flaws in arbitrary request fields using time- and output-based techniques plus filter-bypass payloads.",
-              "when": "When a parameter in an authorized target appears to reach a shell (ping, logs, filename inputs) and you want automated confirmation.",
-              "install": "git clone --depth 1 https://github.com/commixproject/commix.git",
-              "url": "https://github.com/commixproject/commix",
-              "alt": [
-                "manual output/time-based probes via Burp Repeater",
-                "ffuf for payload fuzzing at the field"
+              "id": "jwt-security",
+              "name": "JWT / Token Security",
+              "tools": [
+                {
+                  "name": "jwt_tool",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Audits JSON Web Tokens: signature verification, algorithm confusion, and known CVE checks against tokens issued by apps you test.",
+                  "when": "When an application uses JWTs and you need to inspect claims, check alg:none/confusion, and validate signing secrets.",
+                  "install": "git clone https://github.com/ticarpi/jwt_tool && cd jwt_tool && python3 jwt_tool.py -h",
+                  "url": "https://github.com/ticarpi/jwt_tool",
+                  "alt": []
+                }
               ]
             },
             {
-              "name": "jwt_tool",
-              "rating": 4,
-              "effort": "easy",
-              "desc": "JWT audit toolkit that checks common misconfigurations: algorithm confusion, weak signing keys, and expired/mis-set claims.",
-              "when": "When the app under test uses JWTs and you want to audit key handling, which algorithms it accepts, and token lifetime settings.",
-              "install": "git clone --depth 1 https://github.com/ticarpi/jwt_tool.git",
-              "url": "https://github.com/ticarpi/jwt_tool",
-              "alt": [
-                "jwt.io decoder",
-                "manual token mutation in Burp"
-              ]
-            },
-            {
-              "name": "smuggler",
-              "rating": 3,
-              "effort": "advanced",
-              "desc": "HTTP request-smuggling detector that fuzzes CL/TE header combinations against a host and reports which parsing behavior won.",
-              "when": "When you control the web server stack and want to verify front/back-end header-parsing consistency on permitted infrastructure.",
-              "install": "git clone --depth 1 https://github.com/defparam/smuggler.git",
-              "url": "https://github.com/defparam/smuggler",
-              "alt": [
-                "manual CL/TE shaping in Burp Repeater",
-                "mitmproxy for crafted message injection"
+              "id": "http-smuggling",
+              "name": "HTTP Request Smuggling",
+              "tools": [
+                {
+                  "name": "smuggler",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Detects HTTP request smuggling variants (CL.TE, TE.CL, TE.TE obfuscation) against backend parsing mismatches.",
+                  "when": "When a stack splits differently between proxies/back-ends and you want to test smuggling scenarios on authorized targets.",
+                  "install": "git clone https://github.com/defparam/smuggler && python3 smuggler.py regex.txt urls.txt",
+                  "url": "https://github.com/defparam/smuggler",
+                  "alt": []
+                }
               ]
             }
           ]
@@ -4893,157 +4986,6 @@
           ]
         },
         {
-          "id": "aws-offense",
-          "name": "AWS Offense \u2014 Enumeration & Privilege Escalation",
-          "tools": [
-            {
-              "name": "Pacu",
-              "best": true,
-              "rating": 5,
-              "effort": "medium",
-              "desc": "The AWS exploitation framework: modular post-compromise attacks covering IAM privilege escalation, Lambda backdoors, log tampering, and EC2 RCE, with a session database for clean reporting.",
-              "when": "After you hold valid-but-least-privilege AWS keys and want to demonstrate what an attacker could escalate to; the offensive complement to Prowler on your own account.",
-              "install": "pip3 install -U pacu",
-              "url": "https://github.com/RhinoSecurityLabs/pacu",
-              "alt": [
-                "CloudFox",
-                "enumerate-iam",
-                "IAMActionHunter"
-              ]
-            },
-            {
-              "name": "CloudFox",
-              "rating": 5,
-              "effort": "easy",
-              "desc": "Bishop Fox's situational-awareness enumerator maps exploitable attack paths across AWS (34 commands) plus early Azure/GCP coverage, writing loot files for other tools.",
-              "when": "Run `cloudfox aws --profile X all-checks` first on any fresh AWS scope to learn the estate and spot privesc paths before deeper exploitation with Pacu.",
-              "install": "go install github.com/BishopFox/cloudfox@latest",
-              "url": "https://github.com/BishopFox/cloudfox",
-              "alt": [
-                "Pacu",
-                "enumerate-iam",
-                "IAMActionHunter"
-              ]
-            },
-            {
-              "name": "enumerate-iam",
-              "rating": 4,
-              "effort": "easy",
-              "desc": "Brute-forces every read-only AWS API call against a credential set to print exactly which IAM permissions it holds.",
-              "when": "You recovered AWS keys of unknown privilege and need the permission list fast, before choosing an escalation path.",
-              "install": "git clone https://github.com/andresriancho/enumerate-iam.git && cd enumerate-iam && pip3 install -r requirements.txt",
-              "url": "https://github.com/andresriancho/enumerate-iam",
-              "alt": [
-                "IAMActionHunter",
-                "CloudFox"
-              ]
-            },
-            {
-              "name": "IAMActionHunter",
-              "rating": 4,
-              "effort": "medium",
-              "desc": "Collects and queries AWS IAM policy statements to surface users and roles holding privesc-relevant permissions (iam:create*, iam:put*...) and exports CSV; also ships as a Pacu module.",
-              "when": "Hunt least-privilege violations and privilege-escalation levers across a large account in minutes, then review the CSV.",
-              "install": "pip3 install iamactionhunter",
-              "url": "https://github.com/RhinoSecurityLabs/IAMActionHunter",
-              "alt": [
-                "enumerate-iam",
-                "Pacu"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "azure-offense",
-          "name": "Azure Offense \u2014 Discovery, Graph & Post-Exploitation",
-          "tools": [
-            {
-              "name": "MicroBurst",
-              "best": true,
-              "rating": 4,
-              "effort": "medium",
-              "desc": "NetSPI's PowerShell toolkit for attacking Azure: service discovery, weak-config auditing, credential dumping (AzPasswords), and post-exploitation on VMs, Key Vault, and Automation accounts.",
-              "when": "The default Azure toolkit in authenticated engagements; Windows-only, so run it from a PowerShell host with the Az modules installed.",
-              "install": "git clone https://github.com/NetSPI/MicroBurst.git && Import-Module .\\MicroBurst.psm1",
-              "url": "https://github.com/NetSPI/MicroBurst",
-              "alt": [
-                "Stormspotter",
-                "ATEAM"
-              ]
-            },
-            {
-              "name": "Stormspotter",
-              "rating": 4,
-              "effort": "medium",
-              "desc": "Microsoft Azure Red Team's attack-graph tool: collects subscription and ARM resources into Neo4j and renders the attack surface with pivot opportunities.",
-              "when": "Map a large tenant visually and find cross-resource pivot paths once you hold reader-level access.",
-              "install": "git clone https://github.com/Azure/Stormspotter && docker-compose up",
-              "url": "https://github.com/Azure/Stormspotter",
-              "alt": [
-                "MicroBurst",
-                "ATEAM"
-              ]
-            },
-            {
-              "name": "ATEAM",
-              "rating": 4,
-              "effort": "easy",
-              "desc": "NetSPI's unaudited reconnaissance tool probes name permutations across App Services, Key Vault, Storage, DevOps, SharePoint, and Databricks to discover Azure resources and attribute their tenant IDs.",
-              "when": "From outside, discover forgotten Azure resources whose names leak a tenant \u2014 ideal for attack-surface checks on your own domains before logging in.",
-              "install": "git clone https://github.com/NetSPI/ATEAM.git && cd ATEAM && pip3 install -r requirements.txt",
-              "url": "https://github.com/NetSPI/ATEAM",
-              "alt": [
-                "MicroBurst"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "gcp-offense",
-          "name": "GCP Offense \u2014 Credential Scoping & Privilege Escalation",
-          "tools": [
-            {
-              "name": "gcp-scanner",
-              "best": true,
-              "rating": 4,
-              "effort": "medium",
-              "desc": "Google's scanner determines what a compromised credential can reach across GCE, GCS, GKE, Cloud SQL, BigQuery, KMS, and more, pulling from VM metadata, SA keys, or OAuth tokens.",
-              "when": "Assess blast radius after a leaked service account key or compromised VM, without needing gcloud installed.",
-              "install": "pip3 install gcp_scanner",
-              "url": "https://github.com/google/gcp_scanner",
-              "alt": [
-                "gcpwn",
-                "GCP IAM Privilege Escalation"
-              ]
-            },
-            {
-              "name": "GCP IAM Privilege Escalation",
-              "rating": 4,
-              "effort": "advanced",
-              "desc": "Rhino's documented GCP IAM privesc methods plus a scanner (enumerate_member_permissions.py then check_for_privesc.py) that flags principals able to escalate.",
-              "when": "Audit who in your projects could privilege-escalate to org ownership and validate hardened role design.",
-              "install": "git clone https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation.git",
-              "url": "https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation",
-              "alt": [
-                "gcp-scanner",
-                "gcpwn"
-              ]
-            },
-            {
-              "name": "gcpwn",
-              "rating": 4,
-              "effort": "advanced",
-              "desc": "NetSPI's GCP and Workspace pentesting framework: enumerates and downloads project data, builds BloodHound OpenGraph models, and bundles credential and exploit tooling.",
-              "when": "Deep GCP/Workspace engagements where you want structured enumeration feeding BloodHound-style attack-path analysis.",
-              "install": "git clone https://github.com/NetSPI/gcpwn.git",
-              "url": "https://github.com/NetSPI/gcpwn",
-              "alt": [
-                "gcp-scanner"
-              ]
-            }
-          ]
-        },
-        {
           "id": "bucket-public-scan",
           "name": "Public Bucket & Object-Storage Scan",
           "tools": [
@@ -5071,6 +5013,163 @@
               "url": "https://github.com/RhinoSecurityLabs/GCPBucketBrute",
               "alt": [
                 "S3Scanner"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "cloud-providers",
+          "name": "Provider-specific enumeration",
+          "subcategories": [
+            {
+              "id": "aws-tools",
+              "name": "AWS tools",
+              "tools": [
+                {
+                  "name": "Pacu",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "The AWS exploitation framework: modular post-compromise attacks covering IAM privilege escalation, Lambda backdoors, log tampering, and EC2 RCE, with a session database for clean reporting.",
+                  "when": "After you hold valid-but-least-privilege AWS keys and want to demonstrate what an attacker could escalate to; the offensive complement to Prowler on your own account.",
+                  "install": "pip3 install -U pacu",
+                  "url": "https://github.com/RhinoSecurityLabs/pacu",
+                  "alt": [
+                    "CloudFox",
+                    "enumerate-iam",
+                    "IAMActionHunter"
+                  ]
+                },
+                {
+                  "name": "CloudFox",
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "Bishop Fox's situational-awareness enumerator maps exploitable attack paths across AWS (34 commands) plus early Azure/GCP coverage, writing loot files for other tools.",
+                  "when": "Run `cloudfox aws --profile X all-checks` first on any fresh AWS scope to learn the estate and spot privesc paths before deeper exploitation with Pacu.",
+                  "install": "go install github.com/BishopFox/cloudfox@latest",
+                  "url": "https://github.com/BishopFox/cloudfox",
+                  "alt": [
+                    "Pacu",
+                    "enumerate-iam",
+                    "IAMActionHunter"
+                  ]
+                },
+                {
+                  "name": "enumerate-iam",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Brute-forces every read-only AWS API call against a credential set to print exactly which IAM permissions it holds.",
+                  "when": "You recovered AWS keys of unknown privilege and need the permission list fast, before choosing an escalation path.",
+                  "install": "git clone https://github.com/andresriancho/enumerate-iam.git && cd enumerate-iam && pip3 install -r requirements.txt",
+                  "url": "https://github.com/andresriancho/enumerate-iam",
+                  "alt": [
+                    "IAMActionHunter",
+                    "CloudFox"
+                  ]
+                },
+                {
+                  "name": "IAMActionHunter",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Collects and queries AWS IAM policy statements to surface users and roles holding privesc-relevant permissions (iam:create*, iam:put*...) and exports CSV; also ships as a Pacu module.",
+                  "when": "Hunt least-privilege violations and privilege-escalation levers across a large account in minutes, then review the CSV.",
+                  "install": "pip3 install iamactionhunter",
+                  "url": "https://github.com/RhinoSecurityLabs/IAMActionHunter",
+                  "alt": [
+                    "enumerate-iam",
+                    "Pacu"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "azure-tools",
+              "name": "Azure tools",
+              "tools": [
+                {
+                  "name": "MicroBurst",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "NetSPI's PowerShell toolkit for attacking Azure: service discovery, weak-config auditing, credential dumping (AzPasswords), and post-exploitation on VMs, Key Vault, and Automation accounts.",
+                  "when": "The default Azure toolkit in authenticated engagements; Windows-only, so run it from a PowerShell host with the Az modules installed.",
+                  "install": "git clone https://github.com/NetSPI/MicroBurst.git && Import-Module .\\MicroBurst.psm1",
+                  "url": "https://github.com/NetSPI/MicroBurst",
+                  "alt": [
+                    "Stormspotter",
+                    "ATEAM"
+                  ]
+                },
+                {
+                  "name": "Stormspotter",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Microsoft Azure Red Team's attack-graph tool: collects subscription and ARM resources into Neo4j and renders the attack surface with pivot opportunities.",
+                  "when": "Map a large tenant visually and find cross-resource pivot paths once you hold reader-level access.",
+                  "install": "git clone https://github.com/Azure/Stormspotter && docker-compose up",
+                  "url": "https://github.com/Azure/Stormspotter",
+                  "alt": [
+                    "MicroBurst",
+                    "ATEAM"
+                  ]
+                },
+                {
+                  "name": "ATEAM",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "NetSPI's unaudited reconnaissance tool probes name permutations across App Services, Key Vault, Storage, DevOps, SharePoint, and Databricks to discover Azure resources and attribute their tenant IDs.",
+                  "when": "From outside, discover forgotten Azure resources whose names leak a tenant \u2014 ideal for attack-surface checks on your own domains before logging in.",
+                  "install": "git clone https://github.com/NetSPI/ATEAM.git && cd ATEAM && pip3 install -r requirements.txt",
+                  "url": "https://github.com/NetSPI/ATEAM",
+                  "alt": [
+                    "MicroBurst"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "gcp-tools",
+              "name": "GCP tools",
+              "tools": [
+                {
+                  "name": "gcp-scanner",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Google's scanner determines what a compromised credential can reach across GCE, GCS, GKE, Cloud SQL, BigQuery, KMS, and more, pulling from VM metadata, SA keys, or OAuth tokens.",
+                  "when": "Assess blast radius after a leaked service account key or compromised VM, without needing gcloud installed.",
+                  "install": "pip3 install gcp_scanner",
+                  "url": "https://github.com/google/gcp_scanner",
+                  "alt": [
+                    "gcpwn",
+                    "GCP IAM Privilege Escalation"
+                  ]
+                },
+                {
+                  "name": "GCP IAM Privilege Escalation",
+                  "rating": 4,
+                  "effort": "advanced",
+                  "desc": "Rhino's documented GCP IAM privesc methods plus a scanner (enumerate_member_permissions.py then check_for_privesc.py) that flags principals able to escalate.",
+                  "when": "Audit who in your projects could privilege-escalate to org ownership and validate hardened role design.",
+                  "install": "git clone https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation.git",
+                  "url": "https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation",
+                  "alt": [
+                    "gcp-scanner",
+                    "gcpwn"
+                  ]
+                },
+                {
+                  "name": "gcpwn",
+                  "rating": 4,
+                  "effort": "advanced",
+                  "desc": "NetSPI's GCP and Workspace pentesting framework: enumerates and downloads project data, builds BloodHound OpenGraph models, and bundles credential and exploit tooling.",
+                  "when": "Deep GCP/Workspace engagements where you want structured enumeration feeding BloodHound-style attack-path analysis.",
+                  "install": "git clone https://github.com/NetSPI/gcpwn.git",
+                  "url": "https://github.com/NetSPI/gcpwn",
+                  "alt": [
+                    "gcp-scanner"
+                  ]
+                }
               ]
             }
           ]
@@ -6769,2539 +6868,2557 @@
     "bloodhound ce": [
       [
         "activedirectory",
-        "enumeration-graph"
+        "activedirectory/enumeration-graph"
       ]
     ],
     "sharphound": [
       [
         "activedirectory",
-        "enumeration-graph"
+        "activedirectory/enumeration-graph"
       ]
     ],
     "plumhound": [
       [
         "activedirectory",
-        "enumeration-graph"
+        "activedirectory/enumeration-graph"
       ]
     ],
     "impacket": [
       [
         "activedirectory",
-        "protocol-toolkit"
+        "activedirectory/protocol-toolkit"
       ]
     ],
     "netexec": [
       [
         "activedirectory",
-        "protocol-toolkit"
+        "activedirectory/protocol-toolkit"
       ]
     ],
     "kerbrute": [
       [
         "activedirectory",
-        "protocol-toolkit"
+        "activedirectory/protocol-toolkit"
       ]
     ],
     "rubeus": [
       [
         "activedirectory",
-        "protocol-toolkit"
+        "activedirectory/protocol-toolkit"
       ]
     ],
     "mimikatz": [
       [
         "activedirectory",
-        "credential-abuse"
+        "activedirectory/credential-abuse"
       ]
     ],
     "pypykatz": [
       [
         "activedirectory",
-        "credential-abuse"
+        "activedirectory/credential-abuse"
       ]
     ],
     "lsassy": [
       [
         "activedirectory",
-        "credential-abuse"
+        "activedirectory/credential-abuse"
       ]
     ],
     "powerview": [
       [
         "activedirectory",
-        "powershell"
+        "activedirectory/powershell"
       ]
     ],
     "powerup": [
       [
         "activedirectory",
-        "powershell"
+        "activedirectory/powershell"
       ]
     ],
     "bloodhound.py": [
       [
         "activedirectory",
-        "powershell"
+        "activedirectory/powershell"
       ]
     ],
     "pingcastle": [
       [
         "activedirectory",
-        "ad-audit"
+        "activedirectory/ad-audit"
       ]
     ],
     "purple knight": [
       [
         "activedirectory",
-        "ad-audit"
+        "activedirectory/ad-audit"
       ]
     ],
     "adrecon": [
       [
         "activedirectory",
-        "ad-audit"
+        "activedirectory/ad-audit"
       ]
     ],
     "ad-audit": [
       [
         "activedirectory",
-        "ad-audit"
+        "activedirectory/ad-audit"
       ]
     ],
     "semgrep": [
       [
         "appsec",
-        "sast-code-analysis"
+        "appsec/sast-code-analysis"
       ]
     ],
     "sonarqube": [
       [
         "appsec",
-        "sast-code-analysis"
+        "appsec/sast-code-analysis"
       ]
     ],
     "codeql": [
       [
         "appsec",
-        "sast-code-analysis"
+        "appsec/sast-code-analysis"
       ]
     ],
     "bandit": [
       [
         "appsec",
-        "sast-code-analysis"
+        "appsec/sast-code-analysis"
       ]
     ],
     "gosec": [
       [
         "appsec",
-        "sast-code-analysis"
+        "appsec/sast-code-analysis"
       ]
     ],
     "owasp zap": [
       [
         "appsec",
-        "dast-web-scanners"
+        "appsec/dast-web-scanners"
       ],
       [
         "vuln-scan",
-        "web"
+        "vuln-scan/web"
       ],
       [
         "web",
-        "intercepting-proxies"
+        "web/intercepting-proxies"
       ]
     ],
     "burp suite community": [
       [
         "appsec",
-        "dast-web-scanners"
+        "appsec/dast-web-scanners"
       ]
     ],
     "restler": [
       [
         "appsec",
-        "dast-web-scanners"
+        "appsec/dast-web-scanners"
       ]
     ],
     "gitleaks": [
       [
         "appsec",
-        "secrets-scanning"
+        "appsec/secrets-scanning"
       ]
     ],
     "trufflehog": [
       [
         "appsec",
-        "secrets-scanning"
+        "appsec/secrets-scanning"
       ]
     ],
     "detect-secrets": [
       [
         "appsec",
-        "secrets-scanning"
+        "appsec/secrets-scanning"
       ]
     ],
     "git-secrets": [
       [
         "appsec",
-        "secrets-scanning"
+        "appsec/secrets-scanning"
       ]
     ],
     "owasp dependency-check": [
       [
         "appsec",
-        "sca-dependency"
+        "appsec/sca-dependency"
       ]
     ],
     "osv-scanner": [
       [
         "appsec",
-        "sca-dependency"
+        "appsec/sca-dependency"
       ],
       [
         "vuln-scan",
-        "app-deps"
+        "vuln-scan/app-deps"
       ]
     ],
     "pip-audit": [
       [
         "appsec",
-        "sca-dependency"
+        "appsec/sca-dependency"
       ]
     ],
     "checkov": [
       [
         "appsec",
-        "iac-security"
+        "appsec/iac-security"
       ]
     ],
     "kics": [
       [
         "appsec",
-        "iac-security"
+        "appsec/iac-security"
       ]
     ],
     "gdb": [
       [
         "binary",
-        "debuggers"
+        "binary/debuggers"
       ],
       [
         "exploit",
-        "exploit-dev"
+        "exploit/exploit-dev"
       ],
       [
         "malware",
-        "dynamic-analysis"
+        "malware/dynamic-analysis"
       ]
     ],
     "pwndbg": [
       [
         "binary",
-        "debuggers"
+        "binary/debuggers"
       ],
       [
         "exploit",
-        "exploit-dev"
+        "exploit/exploit-dev"
       ]
     ],
     "gef": [
       [
         "binary",
-        "debuggers"
+        "binary/debuggers"
       ]
     ],
     "lldb": [
       [
         "binary",
-        "debuggers"
+        "binary/debuggers"
       ]
     ],
     "frida": [
       [
         "binary",
-        "debuggers"
+        "binary/debuggers"
       ],
       [
         "mobile",
-        "dynamic-instrumentation"
+        "mobile/dynamic-instrumentation"
       ]
     ],
     "ghidra": [
       [
         "binary",
-        "disassemblers"
+        "binary/disassemblers"
       ],
       [
         "malware",
-        "reverse-frameworks"
+        "malware/reverse-frameworks"
       ]
     ],
     "radare2": [
       [
         "binary",
-        "disassemblers"
+        "binary/disassemblers"
       ],
       [
         "malware",
-        "reverse-frameworks"
+        "malware/reverse-frameworks"
       ]
     ],
     "rizin": [
       [
         "binary",
-        "disassemblers"
+        "binary/disassemblers"
       ],
       [
         "malware",
-        "reverse-frameworks"
+        "malware/reverse-frameworks"
       ]
     ],
     "cutter": [
       [
         "binary",
-        "disassemblers"
+        "binary/disassemblers"
       ],
       [
         "malware",
-        "reverse-frameworks"
+        "malware/reverse-frameworks"
       ]
     ],
     "pwntools": [
       [
         "binary",
-        "exploit-helpers"
+        "binary/exploit-helpers"
       ],
       [
         "exploit",
-        "exploit-dev"
+        "exploit/exploit-dev"
       ]
     ],
     "angr": [
       [
         "binary",
-        "exploit-helpers"
+        "binary/exploit-helpers"
       ]
     ],
     "ropper": [
       [
         "binary",
-        "exploit-helpers"
+        "binary/exploit-helpers"
       ]
     ],
     "one_gadget": [
       [
         "binary",
-        "exploit-helpers"
+        "binary/exploit-helpers"
       ]
     ],
     "checksec": [
       [
         "binary",
-        "inspection"
+        "binary/inspection"
       ]
     ],
     "file": [
       [
         "binary",
-        "inspection"
+        "binary/inspection"
       ]
     ],
     "strings": [
       [
         "binary",
-        "inspection"
+        "binary/inspection"
       ]
     ],
     "objdump/readelf": [
       [
         "binary",
-        "inspection"
+        "binary/inspection"
       ]
     ],
     "xorsearch": [
       [
         "binary",
-        "inspection"
+        "binary/inspection"
       ]
     ],
     "elastic stack (elk)": [
       [
         "blueteam",
-        "siem-soc"
+        "blueteam/siem-soc"
       ]
     ],
     "wazuh": [
       [
         "blueteam",
-        "siem-soc"
+        "blueteam/siem-soc"
       ]
     ],
     "splunk": [
       [
         "blueteam",
-        "siem-soc"
+        "blueteam/siem-soc"
       ]
     ],
     "graylog": [
       [
         "blueteam",
-        "siem-soc"
+        "blueteam/siem-soc"
       ]
     ],
     "logstash": [
       [
         "blueteam",
-        "siem-soc"
+        "blueteam/siem-soc"
       ]
     ],
     "velociraptor": [
       [
         "blueteam",
-        "edr-endpoint"
+        "blueteam/edr-endpoint"
       ],
       [
         "forensics",
-        "incident-response"
+        "forensics/incident-response"
       ]
     ],
     "osquery": [
       [
         "blueteam",
-        "edr-endpoint"
+        "blueteam/edr-endpoint"
       ]
     ],
     "sysmon": [
       [
         "blueteam",
-        "edr-endpoint"
+        "blueteam/edr-endpoint"
       ]
     ],
     "limacharlie": [
       [
         "blueteam",
-        "edr-endpoint"
+        "blueteam/edr-endpoint"
       ]
     ],
     "suricata": [
       [
         "blueteam",
-        "ids-nids"
+        "blueteam/ids-nids"
       ]
     ],
     "snort 3": [
       [
         "blueteam",
-        "ids-nids"
+        "blueteam/ids-nids"
       ]
     ],
     "zeek": [
       [
         "blueteam",
-        "ids-nids"
+        "blueteam/ids-nids"
       ]
     ],
     "security onion": [
       [
         "blueteam",
-        "ids-nids"
+        "blueteam/ids-nids"
       ]
     ],
     "modsecurity": [
       [
         "blueteam",
-        "waf"
+        "blueteam/waf"
       ]
     ],
     "coraza": [
       [
         "blueteam",
-        "waf"
+        "blueteam/waf"
       ]
     ],
     "owasp crs": [
       [
         "blueteam",
-        "waf"
+        "blueteam/waf"
       ]
     ],
     "cloudflare waf": [
       [
         "blueteam",
-        "waf"
+        "blueteam/waf"
       ]
     ],
     "sliver": [
       [
         "c2",
-        "opensource-c2"
+        "c2/opensource-c2"
       ]
     ],
     "havoc": [
       [
         "c2",
-        "opensource-c2"
+        "c2/opensource-c2"
       ]
     ],
     "mythic": [
       [
         "c2",
-        "opensource-c2"
+        "c2/opensource-c2"
       ]
     ],
     "merlin": [
       [
         "c2",
-        "opensource-c2"
+        "c2/opensource-c2"
       ]
     ],
     "covenant": [
       [
         "c2",
-        "opensource-c2"
+        "c2/opensource-c2"
       ]
     ],
     "villain": [
       [
         "c2",
-        "opensource-c2"
+        "c2/opensource-c2"
       ]
     ],
     "cobalt strike": [
       [
         "c2",
-        "commercial-c2"
+        "c2/commercial-c2"
       ]
     ],
     "brute ratel c4": [
       [
         "c2",
-        "commercial-c2"
+        "c2/commercial-c2"
       ]
     ],
     "nighthawk": [
       [
         "c2",
-        "commercial-c2"
+        "c2/commercial-c2"
       ]
     ],
     "crossc2": [
       [
         "c2",
-        "agents-implant"
+        "c2/agents-implant"
       ]
     ],
     "donut": [
       [
         "c2",
-        "agents-implant"
+        "c2/agents-implant"
       ]
     ],
     "ligolo-ng": [
       [
         "c2",
-        "helpers-boosters"
+        "c2/helpers-boosters"
       ],
       [
         "redteam",
-        "pivoting-tunnels"
+        "redteam/pivoting-tunnels"
       ]
     ],
     "chisel": [
       [
         "c2",
-        "helpers-boosters"
+        "c2/helpers-boosters"
       ],
       [
         "redteam",
-        "pivoting-tunnels"
+        "redteam/pivoting-tunnels"
       ]
     ],
     "prowler": [
       [
         "cloud",
-        "posture-assessment"
+        "cloud/posture-assessment"
       ]
     ],
     "scout suite": [
       [
         "cloud",
-        "posture-assessment"
+        "cloud/posture-assessment"
       ]
     ],
     "cloudsploit": [
       [
         "cloud",
-        "posture-assessment"
-      ]
-    ],
-    "pacu": [
-      [
-        "cloud",
-        "aws-offense"
-      ]
-    ],
-    "cloudfox": [
-      [
-        "cloud",
-        "aws-offense"
-      ]
-    ],
-    "enumerate-iam": [
-      [
-        "cloud",
-        "aws-offense"
-      ]
-    ],
-    "iamactionhunter": [
-      [
-        "cloud",
-        "aws-offense"
-      ]
-    ],
-    "microburst": [
-      [
-        "cloud",
-        "azure-offense"
-      ]
-    ],
-    "stormspotter": [
-      [
-        "cloud",
-        "azure-offense"
-      ]
-    ],
-    "ateam": [
-      [
-        "cloud",
-        "azure-offense"
-      ]
-    ],
-    "gcp-scanner": [
-      [
-        "cloud",
-        "gcp-offense"
-      ]
-    ],
-    "gcp iam privilege escalation": [
-      [
-        "cloud",
-        "gcp-offense"
-      ]
-    ],
-    "gcpwn": [
-      [
-        "cloud",
-        "gcp-offense"
+        "cloud/posture-assessment"
       ]
     ],
     "s3scanner": [
       [
         "cloud",
-        "bucket-public-scan"
+        "cloud/bucket-public-scan"
       ]
     ],
     "gcpbucketbrute": [
       [
         "cloud",
-        "bucket-public-scan"
+        "cloud/bucket-public-scan"
+      ]
+    ],
+    "pacu": [
+      [
+        "cloud",
+        "cloud/cloud-providers/aws-tools"
+      ]
+    ],
+    "cloudfox": [
+      [
+        "cloud",
+        "cloud/cloud-providers/aws-tools"
+      ]
+    ],
+    "enumerate-iam": [
+      [
+        "cloud",
+        "cloud/cloud-providers/aws-tools"
+      ]
+    ],
+    "iamactionhunter": [
+      [
+        "cloud",
+        "cloud/cloud-providers/aws-tools"
+      ]
+    ],
+    "microburst": [
+      [
+        "cloud",
+        "cloud/cloud-providers/azure-tools"
+      ]
+    ],
+    "stormspotter": [
+      [
+        "cloud",
+        "cloud/cloud-providers/azure-tools"
+      ]
+    ],
+    "ateam": [
+      [
+        "cloud",
+        "cloud/cloud-providers/azure-tools"
+      ]
+    ],
+    "gcp-scanner": [
+      [
+        "cloud",
+        "cloud/cloud-providers/gcp-tools"
+      ]
+    ],
+    "gcp iam privilege escalation": [
+      [
+        "cloud",
+        "cloud/cloud-providers/gcp-tools"
+      ]
+    ],
+    "gcpwn": [
+      [
+        "cloud",
+        "cloud/cloud-providers/gcp-tools"
       ]
     ],
     "trivy": [
       [
         "container",
-        "image-scanning"
+        "container/image-scanning"
       ],
       [
         "container",
-        "sbom"
+        "container/sbom"
       ],
       [
         "vuln-scan",
-        "app-deps"
+        "vuln-scan/app-deps"
       ]
     ],
     "grype": [
       [
         "container",
-        "image-scanning"
+        "container/image-scanning"
       ],
       [
         "vuln-scan",
-        "app-deps"
+        "vuln-scan/app-deps"
       ]
     ],
     "syft": [
       [
         "container",
-        "sbom"
+        "container/sbom"
       ]
     ],
     "cyclonedx-cli": [
       [
         "container",
-        "sbom"
+        "container/sbom"
       ]
     ],
     "falco": [
       [
         "container",
-        "runtime-security"
+        "container/runtime-security"
       ]
     ],
     "docker-bench-security": [
       [
         "container",
-        "runtime-security"
+        "container/runtime-security"
       ]
     ],
     "kubescape": [
       [
         "container",
-        "cluster-posture"
+        "container/cluster-posture"
       ]
     ],
     "kube-bench": [
       [
         "container",
-        "cluster-posture"
+        "container/cluster-posture"
       ]
     ],
     "popeye": [
       [
         "container",
-        "cluster-posture"
+        "container/cluster-posture"
       ]
     ],
     "kube-hunter": [
       [
         "container",
-        "cluster-posture"
+        "container/cluster-posture"
       ]
     ],
     "opa gatekeeper": [
       [
         "container",
-        "policy-engines"
+        "container/policy-engines"
       ]
     ],
     "kyverno": [
       [
         "container",
-        "policy-engines"
+        "container/policy-engines"
       ]
     ],
     "polaris": [
       [
         "container",
-        "policy-engines"
+        "container/policy-engines"
       ]
     ],
     "hadolint": [
       [
         "container",
-        "dockerfile-lint"
+        "container/dockerfile-lint"
       ]
     ],
     "dockle": [
       [
         "container",
-        "dockerfile-lint"
+        "container/dockerfile-lint"
       ]
     ],
     "cyberchef": [
       [
         "crypto",
-        "encoding-decoders"
+        "crypto/encoding-decoders"
       ]
     ],
     "cyberchef (self-hosted)": [
       [
         "crypto",
-        "encoding-decoders"
+        "crypto/encoding-decoders"
       ]
     ],
     "xortool": [
       [
         "crypto",
-        "cipher-cracking"
+        "crypto/cipher-cracking"
       ]
     ],
     "hash_extender": [
       [
         "crypto",
-        "cipher-cracking"
+        "crypto/cipher-cracking"
       ]
     ],
     "cryptool": [
       [
         "crypto",
-        "cipher-cracking"
+        "crypto/cipher-cracking"
       ]
     ],
     "rsactftool": [
       [
         "crypto",
-        "rsa"
+        "crypto/rsa"
       ]
     ],
     "factordb": [
       [
         "crypto",
-        "rsa"
+        "crypto/rsa"
       ]
     ],
     "rsatool": [
       [
         "crypto",
-        "rsa"
+        "crypto/rsa"
       ]
     ],
     "openssl": [
       [
         "crypto",
-        "crypto-toolkit"
+        "crypto/crypto-toolkit"
       ]
     ],
     "gnupg": [
       [
         "crypto",
-        "crypto-toolkit"
+        "crypto/crypto-toolkit"
       ]
     ],
     "age": [
       [
         "crypto",
-        "crypto-toolkit"
+        "crypto/crypto-toolkit"
       ]
     ],
     "gnutls certtool": [
       [
         "crypto",
-        "crypto-toolkit"
+        "crypto/crypto-toolkit"
       ]
     ],
     "metasploit framework": [
       [
         "exploit",
-        "frameworks"
+        "exploit/frameworks"
       ]
     ],
     "beef": [
       [
         "exploit",
-        "frameworks"
+        "exploit/frameworks"
       ],
       [
         "phishing-social",
-        "social-engineering"
+        "phishing-social/social-engineering"
       ]
     ],
     "routersploit": [
       [
         "exploit",
-        "frameworks"
+        "exploit/frameworks"
       ]
     ],
     "msfvenom": [
       [
         "exploit",
-        "payload-gen"
+        "exploit/payload-gen"
       ]
     ],
     "payloadsallthethings": [
       [
         "exploit",
-        "payload-gen"
+        "exploit/payload-gen"
       ]
     ],
     "searchsploit": [
       [
         "exploit",
-        "exploit-db"
+        "exploit/exploit-db"
       ]
     ],
     "exploit-db (web)": [
       [
         "exploit",
-        "exploit-db"
+        "exploit/exploit-db"
       ]
     ],
     "nvd": [
       [
         "exploit",
-        "exploit-db"
+        "exploit/exploit-db"
       ]
     ],
     "socat": [
       [
         "exploit",
-        "shell-handling"
+        "exploit/shell-handling"
       ],
       [
         "network",
-        "conn-utils"
+        "network/conn-utils"
       ]
     ],
     "netcat / ncat": [
       [
         "exploit",
-        "shell-handling"
+        "exploit/shell-handling"
       ]
     ],
     "revshells": [
       [
         "exploit",
-        "shell-handling"
+        "exploit/shell-handling"
       ]
     ],
     "sbd": [
       [
         "exploit",
-        "shell-handling"
+        "exploit/shell-handling"
       ]
     ],
     "ropgadget": [
       [
         "exploit",
-        "exploit-dev"
+        "exploit/exploit-dev"
       ]
     ],
     "volatility 3": [
       [
         "forensics",
-        "memory-forensics"
+        "forensics/memory-forensics"
       ]
     ],
     "volatility 2": [
       [
         "forensics",
-        "memory-forensics"
+        "forensics/memory-forensics"
       ]
     ],
     "memprocfs": [
       [
         "forensics",
-        "memory-forensics"
+        "forensics/memory-forensics"
       ]
     ],
     "autopsy": [
       [
         "forensics",
-        "disk-forensics"
+        "forensics/disk-forensics"
       ]
     ],
     "the sleuth kit": [
       [
         "forensics",
-        "disk-forensics"
+        "forensics/disk-forensics"
       ]
     ],
     "dc3dd": [
       [
         "forensics",
-        "disk-forensics"
+        "forensics/disk-forensics"
       ]
     ],
     "guymager": [
       [
         "forensics",
-        "disk-forensics"
+        "forensics/disk-forensics"
       ]
     ],
     "foremost": [
       [
         "forensics",
-        "file-carving"
+        "forensics/file-carving"
       ]
     ],
     "bulk_extractor": [
       [
         "forensics",
-        "file-carving"
+        "forensics/file-carving"
       ]
     ],
     "scalpel": [
       [
         "forensics",
-        "file-carving"
+        "forensics/file-carving"
       ]
     ],
     "photorec/testdisk": [
       [
         "forensics",
-        "file-carving"
+        "forensics/file-carving"
       ]
     ],
     "plaso/log2timeline": [
       [
         "forensics",
-        "log-timeline"
+        "forensics/log-timeline"
       ]
     ],
     "timesketch": [
       [
         "forensics",
-        "log-timeline"
+        "forensics/log-timeline"
       ]
     ],
     "kape": [
       [
         "forensics",
-        "artifact-analysis"
+        "forensics/artifact-analysis"
       ]
     ],
     "eric zimmerman's tools": [
       [
         "forensics",
-        "artifact-analysis"
+        "forensics/artifact-analysis"
       ]
     ],
     "uac": [
       [
         "forensics",
-        "incident-response"
+        "forensics/incident-response"
       ]
     ],
     "lynis": [
       [
         "hardening",
-        "audit-scanners"
+        "hardening/audit-scanners"
       ]
     ],
     "openscap": [
       [
         "hardening",
-        "audit-scanners"
+        "hardening/audit-scanners"
       ],
       [
         "vuln-scan",
-        "network"
+        "vuln-scan/network"
       ]
     ],
     "cis-cat pro assessor": [
       [
         "hardening",
-        "audit-scanners"
+        "hardening/audit-scanners"
       ]
     ],
     "auditd": [
       [
         "hardening",
-        "audit-scanners"
+        "hardening/audit-scanners"
       ]
     ],
     "scap-security-guide": [
       [
         "hardening",
-        "compliance-frameworks"
+        "hardening/compliance-frameworks"
       ]
     ],
     "cis benchmarks": [
       [
         "hardening",
-        "compliance-frameworks"
+        "hardening/compliance-frameworks"
       ]
     ],
     "stig viewer": [
       [
         "hardening",
-        "compliance-frameworks"
+        "hardening/compliance-frameworks"
       ]
     ],
     "ansible-hardening": [
       [
         "hardening",
-        "config-hardening"
+        "hardening/config-hardening"
       ]
     ],
     "systemd-analyze security": [
       [
         "hardening",
-        "config-hardening"
+        "hardening/config-hardening"
       ]
     ],
     "ssh-audit": [
       [
         "hardening",
-        "network-service-hardening"
+        "hardening/network-service-hardening"
       ]
     ],
     "firewalld": [
       [
         "hardening",
-        "network-service-hardening"
+        "hardening/network-service-hardening"
       ]
     ],
     "ufw": [
       [
         "hardening",
-        "network-service-hardening"
+        "hardening/network-service-hardening"
       ]
     ],
     "mozilla openssh config": [
       [
         "hardening",
-        "network-service-hardening"
+        "hardening/network-service-hardening"
       ]
     ],
     "t-pot": [
       [
         "honeypots",
-        "platforms"
+        "honeypots/platforms"
       ]
     ],
     "modern honey network": [
       [
         "honeypots",
-        "platforms"
+        "honeypots/platforms"
       ]
     ],
     "honeyd": [
       [
         "honeypots",
-        "platforms"
+        "honeypots/platforms"
       ]
     ],
     "hpfeeds": [
       [
         "honeypots",
-        "platforms"
+        "honeypots/platforms"
       ]
     ],
     "cowrie": [
       [
         "honeypots",
-        "ssh-telnet"
+        "honeypots/ssh-telnet"
       ]
     ],
     "ssh-honeypot": [
       [
         "honeypots",
-        "ssh-telnet"
+        "honeypots/ssh-telnet"
       ]
     ],
     "sshesame": [
       [
         "honeypots",
-        "ssh-telnet"
+        "honeypots/ssh-telnet"
       ]
     ],
     "beelzebub": [
       [
         "honeypots",
-        "ssh-telnet"
+        "honeypots/ssh-telnet"
       ]
     ],
     "kippo": [
       [
         "honeypots",
-        "ssh-telnet"
+        "honeypots/ssh-telnet"
       ]
     ],
     "dionaea": [
       [
         "honeypots",
-        "service-web"
+        "honeypots/service-web"
       ]
     ],
     "snare (w/ tanner)": [
       [
         "honeypots",
-        "service-web"
+        "honeypots/service-web"
       ]
     ],
     "glastopf": [
       [
         "honeypots",
-        "service-web"
+        "honeypots/service-web"
       ]
     ],
     "canarytokens": [
       [
         "honeypots",
-        "tokens-deception"
+        "honeypots/tokens-deception"
       ]
     ],
     "opencanary": [
       [
         "honeypots",
-        "tokens-deception"
+        "honeypots/tokens-deception"
       ]
     ],
     "conpot": [
       [
         "honeypots",
-        "industrial-iot"
+        "honeypots/industrial-iot"
       ]
     ],
     "riotpot": [
       [
         "honeypots",
-        "industrial-iot"
+        "honeypots/industrial-iot"
       ]
     ],
     "binwalk": [
       [
         "iot",
-        "firmware-analysis"
+        "iot/firmware-analysis"
       ]
     ],
     "firmwalker": [
       [
         "iot",
-        "firmware-analysis"
+        "iot/firmware-analysis"
       ]
     ],
     "firmware-mod-kit (fmk)": [
       [
         "iot",
-        "firmware-analysis"
+        "iot/firmware-analysis"
       ]
     ],
     "qemu": [
       [
         "iot",
-        "emulation"
+        "iot/emulation"
       ]
     ],
     "firmae": [
       [
         "iot",
-        "emulation"
+        "iot/emulation"
       ]
     ],
     "firmware analysis toolkit (fat)": [
       [
         "iot",
-        "emulation"
+        "iot/emulation"
       ]
     ],
     "openocd": [
       [
         "iot",
-        "serial-debug"
+        "iot/serial-debug"
       ]
     ],
     "urjtag": [
       [
         "iot",
-        "serial-debug"
+        "iot/serial-debug"
       ]
     ],
     "bus pirate": [
       [
         "iot",
-        "serial-debug"
+        "iot/serial-debug"
       ]
     ],
     "minicom": [
       [
         "iot",
-        "serial-debug"
+        "iot/serial-debug"
       ]
     ],
     "j-link (segger)": [
       [
         "iot",
-        "serial-debug"
+        "iot/serial-debug"
       ]
     ],
     "chipwhisperer": [
       [
         "iot",
-        "hardware-sidechannel"
+        "iot/hardware-sidechannel"
       ]
     ],
     "proxmark3": [
       [
         "iot",
-        "rfid-nfc"
+        "iot/rfid-nfc"
       ]
     ],
     "libnfc": [
       [
         "iot",
-        "rfid-nfc"
+        "iot/rfid-nfc"
       ]
     ],
     "capev2": [
       [
         "malware",
-        "sandboxes"
+        "malware/sandboxes"
       ]
     ],
     "hybrid analysis": [
       [
         "malware",
-        "sandboxes"
+        "malware/sandboxes"
       ]
     ],
     "cuckoo sandbox": [
       [
         "malware",
-        "sandboxes"
+        "malware/sandboxes"
       ]
     ],
     "yara": [
       [
         "malware",
-        "static-analysis"
+        "malware/static-analysis"
       ],
       [
         "threatintel",
-        "detection-engineering"
+        "threatintel/detection-engineering"
       ]
     ],
     "capa": [
       [
         "malware",
-        "static-analysis"
+        "malware/static-analysis"
       ]
     ],
     "detect-it-easy (die)": [
       [
         "malware",
-        "static-analysis"
+        "malware/static-analysis"
       ]
     ],
     "oledump": [
       [
         "malware",
-        "static-analysis"
+        "malware/static-analysis"
       ]
     ],
     "exiftool": [
       [
         "malware",
-        "static-analysis"
+        "malware/static-analysis"
       ],
       [
         "osint",
-        "metadata-docs"
+        "osint/metadata-docs"
       ]
     ],
     "x64dbg": [
       [
         "malware",
-        "dynamic-analysis"
+        "malware/dynamic-analysis"
       ]
     ],
     "process monitor": [
       [
         "malware",
-        "dynamic-analysis"
+        "malware/dynamic-analysis"
       ]
     ],
     "ida free": [
       [
         "malware",
-        "reverse-frameworks"
+        "malware/reverse-frameworks"
       ]
     ],
     "remnux": [
       [
         "malware",
-        "distros-env"
+        "malware/distros-env"
       ]
     ],
     "flare vm": [
       [
         "malware",
-        "distros-env"
+        "malware/distros-env"
       ]
     ],
     "sift workstation": [
       [
         "malware",
-        "distros-env"
+        "malware/distros-env"
       ]
     ],
     "mobsf (mobile security framework)": [
       [
         "mobile",
-        "static-analysis"
+        "mobile/static-analysis"
       ]
     ],
     "quark-engine": [
       [
         "mobile",
-        "static-analysis"
+        "mobile/static-analysis"
       ]
     ],
     "apkid": [
       [
         "mobile",
-        "static-analysis"
+        "mobile/static-analysis"
       ]
     ],
     "jadx": [
       [
         "mobile",
-        "decompilers"
+        "mobile/decompilers"
       ]
     ],
     "apktool": [
       [
         "mobile",
-        "decompilers"
+        "mobile/decompilers"
       ]
     ],
     "frida-dexdump": [
       [
         "mobile",
-        "decompilers"
+        "mobile/decompilers"
       ]
     ],
     "dex2jar": [
       [
         "mobile",
-        "decompilers"
+        "mobile/decompilers"
       ]
     ],
     "objection": [
       [
         "mobile",
-        "dynamic-instrumentation"
+        "mobile/dynamic-instrumentation"
       ]
     ],
     "magisk": [
       [
         "mobile",
-        "dynamic-instrumentation"
+        "mobile/dynamic-instrumentation"
       ]
     ],
     "adb (android debug bridge)": [
       [
         "mobile",
-        "dynamic-instrumentation"
+        "mobile/dynamic-instrumentation"
       ]
     ],
     "mitmproxy": [
       [
         "mobile",
-        "traffic-analysis"
+        "mobile/traffic-analysis"
       ],
       [
         "network",
-        "interception"
+        "network/interception"
       ],
       [
         "web",
-        "api-testing"
+        "web/api-testing"
       ]
     ],
     "charles proxy": [
       [
         "mobile",
-        "traffic-analysis"
+        "mobile/traffic-analysis"
       ]
     ],
     "drozer": [
       [
         "mobile",
-        "automation-fuzzing"
+        "mobile/automation-fuzzing"
       ]
     ],
     "android tamer": [
       [
         "mobile",
-        "automation-fuzzing"
+        "mobile/automation-fuzzing"
+      ]
+    ],
+    "frida-ios": [
+      [
+        "mobile",
+        "mobile/ios-testing/ios-dynamic"
+      ]
+    ],
+    "frida-codeshare": [
+      [
+        "mobile",
+        "mobile/ios-testing/ios-static"
       ]
     ],
     "wireshark": [
       [
         "network",
-        "packet-capture"
+        "network/packet-capture"
       ],
       [
         "wireless",
-        "wifi-rf"
+        "wireless/wifi-rf"
       ]
     ],
     "tcpdump": [
       [
         "network",
-        "packet-capture"
+        "network/packet-capture"
       ]
     ],
     "tshark": [
       [
         "network",
-        "packet-capture"
+        "network/packet-capture"
       ]
     ],
     "tcpflow": [
       [
         "network",
-        "packet-capture"
+        "network/packet-capture"
       ]
     ],
     "bettercap": [
       [
         "network",
-        "interception"
+        "network/interception"
       ],
       [
         "wireless",
-        "bluetooth"
+        "wireless/bluetooth"
       ]
     ],
     "responder": [
       [
         "network",
-        "interception"
+        "network/interception"
       ]
     ],
     "arp-scan": [
       [
         "network",
-        "host-discovery"
+        "network/host-discovery"
       ]
     ],
     "netdiscover": [
       [
         "network",
-        "host-discovery"
+        "network/host-discovery"
       ]
     ],
     "fping": [
       [
         "network",
-        "host-discovery"
+        "network/host-discovery"
       ]
     ],
     "ncat": [
       [
         "network",
-        "conn-utils"
+        "network/conn-utils"
       ]
     ],
     "hping3": [
       [
         "network",
-        "conn-utils"
+        "network/conn-utils"
       ]
     ],
     "proxychains": [
       [
         "network",
-        "conn-utils"
+        "network/conn-utils"
       ]
     ],
     "dig": [
       [
         "network",
-        "dns-ip"
+        "network/dns-ip"
       ]
     ],
     "whois": [
       [
         "network",
-        "dns-ip"
+        "network/dns-ip"
       ]
     ],
     "sherlock": [
       [
         "osint",
-        "people-search"
+        "osint/people-search"
       ]
     ],
     "maigret": [
       [
         "osint",
-        "people-search"
+        "osint/people-search"
       ]
     ],
     "whatsmyname": [
       [
         "osint",
-        "people-search"
+        "osint/people-search"
       ]
     ],
     "namechk": [
       [
         "osint",
-        "people-search"
+        "osint/people-search"
       ]
     ],
     "theharvester": [
       [
         "osint",
-        "email-phone"
+        "osint/email-phone"
       ]
     ],
     "holehe": [
       [
         "osint",
-        "email-phone"
+        "osint/email-phone"
       ]
     ],
     "phoneinfoga": [
       [
         "osint",
-        "email-phone"
+        "osint/email-phone"
       ]
     ],
     "emailrep.io": [
       [
         "osint",
-        "email-phone"
+        "osint/email-phone"
       ]
     ],
     "instaloader": [
       [
         "osint",
-        "social-scrape"
+        "osint/social-scrape"
       ]
     ],
     "snscrape": [
       [
         "osint",
-        "social-scrape"
+        "osint/social-scrape"
       ]
     ],
     "osintgram": [
       [
         "osint",
-        "social-scrape"
+        "osint/social-scrape"
       ]
     ],
     "shodan": [
       [
         "osint",
-        "infra-engine"
+        "osint/infra-engine"
       ]
     ],
     "censys": [
       [
         "osint",
-        "infra-engine"
+        "osint/infra-engine"
       ]
     ],
     "zoomeye": [
       [
         "osint",
-        "infra-engine"
+        "osint/infra-engine"
       ]
     ],
     "netlas": [
       [
         "osint",
-        "infra-engine"
+        "osint/infra-engine"
       ]
     ],
     "metagoofil": [
       [
         "osint",
-        "metadata-docs"
+        "osint/metadata-docs"
       ]
     ],
     "foca": [
       [
         "osint",
-        "metadata-docs"
+        "osint/metadata-docs"
       ]
     ],
     "spiderfoot": [
       [
         "osint",
-        "automation-platforms"
+        "osint/automation-platforms"
       ]
     ],
     "maltego": [
       [
         "osint",
-        "automation-platforms"
+        "osint/automation-platforms"
       ]
     ],
     "recon-ng": [
       [
         "osint",
-        "automation-platforms"
+        "osint/automation-platforms"
       ]
     ],
     "google hacking database (ghdb)": [
       [
         "osint",
-        "dorks"
+        "osint/dorks"
       ]
     ],
     "hashcat": [
       [
         "passwords",
-        "gpu-cracking"
+        "passwords/gpu-cracking"
       ]
     ],
     "hashcat-utils": [
       [
         "passwords",
-        "gpu-cracking"
+        "passwords/gpu-cracking"
       ]
     ],
     "maskprocessor": [
       [
         "passwords",
-        "gpu-cracking"
+        "passwords/gpu-cracking"
       ]
     ],
     "john the ripper": [
       [
         "passwords",
-        "cpu-classic"
+        "passwords/cpu-classic"
       ]
     ],
     "john the ripper jumbo": [
       [
         "passwords",
-        "cpu-classic"
+        "passwords/cpu-classic"
       ]
     ],
     "ophcrack": [
       [
         "passwords",
-        "cpu-classic"
+        "passwords/cpu-classic"
       ]
     ],
     "hydra": [
       [
         "passwords",
-        "online-attacks"
+        "passwords/online-attacks"
       ]
     ],
     "medusa": [
       [
         "passwords",
-        "online-attacks"
+        "passwords/online-attacks"
       ]
     ],
     "ncrack": [
       [
         "passwords",
-        "online-attacks"
+        "passwords/online-attacks"
       ]
     ],
     "patator": [
       [
         "passwords",
-        "online-attacks"
+        "passwords/online-attacks"
       ]
     ],
     "seclists": [
       [
         "passwords",
-        "wordlists"
+        "passwords/wordlists"
       ]
     ],
     "rockyou.txt": [
       [
         "passwords",
-        "wordlists"
+        "passwords/wordlists"
       ]
     ],
     "cewl": [
       [
         "passwords",
-        "wordlists"
+        "passwords/wordlists"
       ]
     ],
     "crunch": [
       [
         "passwords",
-        "wordlists"
+        "passwords/wordlists"
       ]
     ],
     "kwprocessor": [
       [
         "passwords",
-        "wordlists"
+        "passwords/wordlists"
       ]
     ],
     "mentalist": [
       [
         "passwords",
-        "wordlists"
+        "passwords/wordlists"
       ]
     ],
     "hashid": [
       [
         "passwords",
-        "hash-id"
+        "passwords/hash-id"
       ]
     ],
     "hash-identifier": [
       [
         "passwords",
-        "hash-id"
+        "passwords/hash-id"
       ]
     ],
     "hashcat example-hashes": [
       [
         "passwords",
-        "hash-id"
+        "passwords/hash-id"
       ]
     ],
     "zip2john": [
       [
         "passwords",
-        "package-cracking"
+        "passwords/package-cracking"
       ]
     ],
     "fcrackzip": [
       [
         "passwords",
-        "package-cracking"
+        "passwords/package-cracking"
       ]
     ],
     "pdfcrack": [
       [
         "passwords",
-        "package-cracking"
+        "passwords/package-cracking"
       ]
     ],
     "rarcrack": [
       [
         "passwords",
-        "package-cracking"
+        "passwords/package-cracking"
       ]
     ],
     "keepass2john": [
       [
         "passwords",
-        "package-cracking"
+        "passwords/package-cracking"
       ]
     ],
     "gophish": [
       [
         "phishing-social",
-        "phishing-frameworks"
+        "phishing-social/phishing-frameworks"
       ]
     ],
     "king phisher": [
       [
         "phishing-social",
-        "phishing-frameworks"
+        "phishing-social/phishing-frameworks"
       ]
     ],
     "socialfish": [
       [
         "phishing-social",
-        "phishing-frameworks"
+        "phishing-social/phishing-frameworks"
       ]
     ],
     "social-engineer toolkit (set)": [
       [
         "phishing-social",
-        "social-engineering"
+        "phishing-social/social-engineering"
       ]
     ],
     "wifiphisher": [
       [
         "phishing-social",
-        "social-engineering"
+        "phishing-social/social-engineering"
       ]
     ],
     "evilginx2": [
       [
         "phishing-social",
-        "reverse-proxy-phish"
+        "phishing-social/reverse-proxy-phish"
       ]
     ],
     "modlishka": [
       [
         "phishing-social",
-        "reverse-proxy-phish"
+        "phishing-social/reverse-proxy-phish"
       ]
     ],
     "credsniper": [
       [
         "phishing-social",
-        "reverse-proxy-phish"
+        "phishing-social/reverse-proxy-phish"
       ]
     ],
     "evilgophish": [
       [
         "phishing-social",
-        "reverse-proxy-phish"
+        "phishing-social/reverse-proxy-phish"
       ]
     ],
     "zphisher": [
       [
         "phishing-social",
-        "email-credentials"
+        "phishing-social/email-credentials"
       ]
     ],
     "phishx": [
       [
         "phishing-social",
-        "email-credentials"
+        "phishing-social/email-credentials"
       ]
     ],
     "credential harvester (set)": [
       [
         "phishing-social",
-        "email-credentials"
+        "phishing-social/email-credentials"
       ]
     ],
     "phishmailer": [
       [
         "phishing-social",
-        "attachment-payloads"
+        "phishing-social/attachment-payloads"
       ]
     ],
     "linpeas": [
       [
         "privesc",
-        "linux-enumeration"
+        "privesc/linux-enumeration"
       ]
     ],
     "linenum": [
       [
         "privesc",
-        "linux-enumeration"
+        "privesc/linux-enumeration"
       ]
     ],
     "linux-smart-enumeration (lse)": [
       [
         "privesc",
-        "linux-enumeration"
+        "privesc/linux-enumeration"
       ]
     ],
     "linuxprivchecker": [
       [
         "privesc",
-        "linux-enumeration"
+        "privesc/linux-enumeration"
       ]
     ],
     "unix-privesc-check": [
       [
         "privesc",
-        "linux-enumeration"
+        "privesc/linux-enumeration"
       ]
     ],
     "winpeas": [
       [
         "privesc",
-        "windows-enumeration"
+        "privesc/windows-enumeration"
       ]
     ],
     "seatbelt": [
       [
         "privesc",
-        "windows-enumeration"
+        "privesc/windows-enumeration"
       ]
     ],
     "windows-exploit-suggester (legacy)": [
       [
         "privesc",
-        "windows-enumeration"
+        "privesc/windows-enumeration"
       ]
     ],
     "linux-exploit-suggester": [
       [
         "privesc",
-        "exploit-suggestion"
+        "privesc/exploit-suggestion"
       ]
     ],
     "wes-ng (wesng)": [
       [
         "privesc",
-        "exploit-suggestion"
+        "privesc/exploit-suggestion"
       ]
     ],
     "linux-exploit-suggester-2": [
       [
         "privesc",
-        "exploit-suggestion"
+        "privesc/exploit-suggestion"
       ]
     ],
     "gtfobins": [
       [
         "privesc",
-        "exploit-suggestion"
+        "privesc/exploit-suggestion"
       ]
     ],
     "lolbas": [
       [
         "privesc",
-        "exploit-suggestion"
+        "privesc/exploit-suggestion"
       ]
     ],
     "dirty pipe (cve-2022-0847)": [
       [
         "privesc",
-        "kernel-exploits"
+        "privesc/kernel-exploits"
       ]
     ],
     "dirtycow (cve-2016-5195)": [
       [
         "privesc",
-        "kernel-exploits"
+        "privesc/kernel-exploits"
       ]
     ],
     "pwnkit (cve-2021-4034)": [
       [
         "privesc",
-        "kernel-exploits"
+        "privesc/kernel-exploits"
       ]
     ],
     "pspy": [
       [
         "privesc",
-        "process-monitoring"
+        "privesc/process-monitoring"
       ]
     ],
     "inotifywait": [
       [
         "privesc",
-        "process-monitoring"
+        "privesc/process-monitoring"
       ]
     ],
     "fatrace": [
       [
         "privesc",
-        "process-monitoring"
+        "privesc/process-monitoring"
       ]
     ],
     "mitre caldera": [
       [
         "purpleteam",
-        "adversary-emulation"
+        "purpleteam/adversary-emulation"
       ]
     ],
     "adversary emulation library": [
       [
         "purpleteam",
-        "adversary-emulation"
+        "purpleteam/adversary-emulation"
       ]
     ],
     "atomic red team": [
       [
         "purpleteam",
-        "atomic-tests"
+        "purpleteam/atomic-tests"
       ],
       [
         "threatintel",
-        "detection-engineering"
+        "threatintel/detection-engineering"
       ]
     ],
     "atomictestharnesses": [
       [
         "purpleteam",
-        "atomic-tests"
+        "purpleteam/atomic-tests"
       ]
     ],
     "infection monkey": [
       [
         "purpleteam",
-        "bas-platforms"
+        "purpleteam/bas-platforms"
       ]
     ],
     "safebreach validate": [
       [
         "purpleteam",
-        "bas-platforms"
+        "purpleteam/bas-platforms"
       ]
     ],
     "stratus red team": [
       [
         "purpleteam",
-        "bas-platforms"
+        "purpleteam/bas-platforms"
       ],
       [
         "purpleteam",
-        "cloud-bas"
+        "purpleteam/cloud-bas"
       ]
     ],
     "dett&ct": [
       [
         "purpleteam",
-        "detection-mapping"
+        "purpleteam/detection-mapping"
       ]
     ],
     "mitre att&ck (website)": [
       [
         "purpleteam",
-        "detection-mapping"
+        "purpleteam/detection-mapping"
       ]
     ],
     "att&ck navigator": [
       [
         "purpleteam",
-        "detection-mapping"
+        "purpleteam/detection-mapping"
       ]
     ],
     "cloudgoat 2": [
       [
         "purpleteam",
-        "cloud-bas"
+        "purpleteam/cloud-bas"
       ]
     ],
     "vectr": [
       [
         "purpleteam",
-        "purple-team-tracking"
+        "purpleteam/purple-team-tracking"
       ],
       [
         "redteam",
-        "ad-labs"
+        "redteam/ad-labs"
       ]
     ],
     "amass": [
       [
         "recon",
-        "subdomains"
+        "recon/subdomains/brute-methods/resolver-level"
       ]
     ],
     "subfinder": [
       [
         "recon",
-        "subdomains"
+        "recon/subdomains/brute-methods/resolver-level"
       ]
     ],
     "crt.sh": [
       [
         "recon",
-        "subdomains"
+        "recon/subdomains/brute-methods/resolver-level"
       ]
     ],
     "dnsx": [
       [
         "recon",
-        "subdomains"
+        "recon/subdomains/brute-methods/resolver-level"
       ]
     ],
     "httpx": [
       [
         "recon",
-        "httpx"
+        "recon/httpx"
       ]
     ],
     "securitytrails": [
       [
         "recon",
-        "passive-dns"
+        "recon/passive-dns"
       ]
     ],
     "virustotal dns": [
       [
         "recon",
-        "passive-dns"
+        "recon/passive-dns"
       ]
     ],
     "naabu": [
       [
         "recon",
-        "port-scan"
+        "recon/port-scan"
       ]
     ],
     "masscan": [
       [
         "recon",
-        "port-scan"
+        "recon/port-scan"
       ]
     ],
     "nmap": [
       [
         "recon",
-        "port-scan"
+        "recon/port-scan"
       ]
     ],
     "rustscan": [
       [
         "recon",
-        "port-scan"
+        "recon/port-scan"
       ]
     ],
     "sshuttle": [
       [
         "redteam",
-        "pivoting-tunnels"
+        "redteam/pivoting-tunnels"
       ]
     ],
     "frp": [
       [
         "redteam",
-        "pivoting-tunnels"
+        "redteam/pivoting-tunnels"
       ]
     ],
     "proxychains-ng": [
       [
         "redteam",
-        "proxy-management"
+        "redteam/proxy-management"
       ]
     ],
     "goad": [
       [
         "redteam",
-        "ad-labs"
+        "redteam/ad-labs"
       ]
     ],
     "misp": [
       [
         "threatintel",
-        "threat-sharing"
+        "threatintel/threat-sharing"
       ],
       [
         "threatintel",
-        "ioc-pivoting"
+        "threatintel/ioc-pivoting"
       ]
     ],
     "opencti": [
       [
         "threatintel",
-        "threat-sharing"
+        "threatintel/threat-sharing"
       ]
     ],
     "taxii 2": [
       [
         "threatintel",
-        "threat-sharing"
+        "threatintel/threat-sharing"
       ]
     ],
     "sigma": [
       [
         "threatintel",
-        "detection-engineering"
+        "threatintel/detection-engineering"
       ]
     ],
     "mitre att&ck": [
       [
         "threatintel",
-        "detection-engineering"
+        "threatintel/detection-engineering"
       ]
     ],
     "alienvault otx": [
       [
         "threatintel",
-        "analytics-marketplaces"
+        "threatintel/analytics-marketplaces"
       ]
     ],
     "threatfox": [
       [
         "threatintel",
-        "analytics-marketplaces"
+        "threatintel/analytics-marketplaces"
       ],
       [
         "threatintel",
-        "ioc-pivoting"
+        "threatintel/ioc-pivoting"
       ]
     ],
     "malwarebazaar": [
       [
         "threatintel",
-        "analytics-marketplaces"
+        "threatintel/analytics-marketplaces"
       ]
     ],
     "urlhaus": [
       [
         "threatintel",
-        "analytics-marketplaces"
+        "threatintel/analytics-marketplaces"
       ]
     ],
     "intelowl": [
       [
         "threatintel",
-        "ioc-pivoting"
+        "threatintel/ioc-pivoting"
       ]
     ],
     "pulsedive": [
       [
         "threatintel",
-        "ioc-pivoting"
+        "threatintel/ioc-pivoting"
       ]
     ],
     "nuclei": [
       [
         "vuln-scan",
-        "general"
+        "vuln-scan/general"
       ]
     ],
     "nessus": [
       [
         "vuln-scan",
-        "general"
+        "vuln-scan/general"
       ]
     ],
     "openvas (gvm)": [
       [
         "vuln-scan",
-        "general"
+        "vuln-scan/general"
       ]
     ],
     "vuls": [
       [
         "vuln-scan",
-        "general"
+        "vuln-scan/general"
       ]
     ],
     "nikto": [
       [
         "vuln-scan",
-        "web"
+        "vuln-scan/web"
       ]
     ],
     "arachni": [
       [
         "vuln-scan",
-        "web"
+        "vuln-scan/web"
       ]
     ],
     "sqlmap": [
       [
         "vuln-scan",
-        "web"
+        "vuln-scan/web"
       ],
       [
         "web",
-        "sql-injection"
+        "web/injection-testing/sql-injection"
       ]
     ],
     "nettacker": [
       [
         "vuln-scan",
-        "network"
+        "vuln-scan/network"
       ]
     ],
     "vulners": [
       [
         "vuln-scan",
-        "network"
+        "vuln-scan/network"
       ]
     ],
     "wpscan": [
       [
         "vuln-scan",
-        "cms"
+        "vuln-scan/cms"
       ]
     ],
     "cmsmap": [
       [
         "vuln-scan",
-        "cms"
+        "vuln-scan/cms"
       ]
     ],
     "droopescan": [
       [
         "vuln-scan",
-        "cms"
+        "vuln-scan/cms"
       ]
     ],
     "cve-bin-tool": [
       [
         "vuln-scan",
-        "app-deps"
+        "vuln-scan/app-deps"
       ]
     ],
     "searchsploit / exploit-db": [
       [
         "vuln-scan",
-        "knowledgebase"
+        "vuln-scan/knowledgebase"
       ]
     ],
     "cve-search": [
       [
         "vuln-scan",
-        "knowledgebase"
+        "vuln-scan/knowledgebase"
       ]
     ],
     "nvd (nist)": [
       [
         "vuln-scan",
-        "knowledgebase"
+        "vuln-scan/knowledgebase"
       ]
     ],
     "burp suite": [
       [
         "web",
-        "intercepting-proxies"
+        "web/intercepting-proxies"
       ]
     ],
     "caido": [
       [
         "web",
-        "intercepting-proxies"
+        "web/intercepting-proxies"
       ]
     ],
     "ffuf": [
       [
         "web",
-        "content-discovery"
+        "web/content-discovery"
       ]
     ],
     "gobuster": [
       [
         "web",
-        "content-discovery"
+        "web/content-discovery"
       ]
     ],
     "feroxbuster": [
       [
         "web",
-        "content-discovery"
+        "web/content-discovery"
       ]
     ],
     "dirsearch": [
       [
         "web",
-        "content-discovery"
+        "web/content-discovery"
       ]
     ],
     "wfuzz": [
       [
         "web",
-        "content-discovery"
+        "web/content-discovery"
       ]
     ],
     "nosqlmap": [
       [
         "web",
-        "sql-injection"
-      ]
-    ],
-    "dalfox": [
-      [
-        "web",
-        "xss"
-      ]
-    ],
-    "xsstrike": [
-      [
-        "web",
-        "xss"
-      ]
-    ],
-    "postman": [
-      [
-        "web",
-        "api-testing"
-      ]
-    ],
-    "httpie": [
-      [
-        "web",
-        "api-testing"
+        "web/injection-testing/sql-injection"
       ]
     ],
     "commix": [
       [
         "web",
-        "web-vulns"
+        "web/injection-testing/command-injection"
+      ]
+    ],
+    "tplmap": [
+      [
+        "web",
+        "web/injection-testing/template-injection"
+      ]
+    ],
+    "dalfox": [
+      [
+        "web",
+        "web/xss"
+      ]
+    ],
+    "xsstrike": [
+      [
+        "web",
+        "web/xss"
+      ]
+    ],
+    "postman": [
+      [
+        "web",
+        "web/api-testing"
+      ]
+    ],
+    "httpie": [
+      [
+        "web",
+        "web/api-testing"
       ]
     ],
     "jwt_tool": [
       [
         "web",
-        "web-vulns"
+        "web/web-vulns/jwt-security"
       ]
     ],
     "smuggler": [
       [
         "web",
-        "web-vulns"
+        "web/web-vulns/http-smuggling"
       ]
     ],
     "aircrack-ng": [
       [
         "wireless",
-        "wifi-crack"
+        "wireless/wifi-crack"
       ]
     ],
     "airodump-ng": [
       [
         "wireless",
-        "wifi-crack"
+        "wireless/wifi-crack"
       ]
     ],
     "aireplay-ng": [
       [
         "wireless",
-        "wifi-crack"
+        "wireless/wifi-crack"
       ]
     ],
     "wifite2": [
       [
         "wireless",
-        "wifi-crack"
+        "wireless/wifi-crack"
       ]
     ],
     "hcxdumptool": [
       [
         "wireless",
-        "wifi-crack"
+        "wireless/wifi-crack"
       ]
     ],
     "kismet": [
       [
         "wireless",
-        "wifi-rf"
+        "wireless/wifi-rf"
       ]
     ],
     "gqrx": [
       [
         "wireless",
-        "wifi-rf"
+        "wireless/wifi-rf"
       ]
     ],
     "rtl-sdr": [
       [
         "wireless",
-        "wifi-rf"
+        "wireless/wifi-rf"
       ]
     ],
     "inspectrum": [
       [
         "wireless",
-        "wifi-rf"
+        "wireless/wifi-rf"
       ]
     ],
     "horst": [
       [
         "wireless",
-        "wifi-rf"
+        "wireless/wifi-rf"
       ]
     ],
     "ubertooth": [
       [
         "wireless",
-        "bluetooth"
+        "wireless/bluetooth"
       ]
     ],
     "btlejack": [
       [
         "wireless",
-        "bluetooth"
+        "wireless/bluetooth"
       ]
     ],
     "bluez": [
       [
         "wireless",
-        "bluetooth"
+        "wireless/bluetooth"
       ]
     ],
     "reaver": [
       [
         "wireless",
-        "wps"
+        "wireless/wps"
       ]
     ],
     "wash": [
       [
         "wireless",
-        "wps"
+        "wireless/wps"
       ]
     ],
     "bully": [
       [
         "wireless",
-        "wps"
+        "wireless/wps"
       ]
     ]
   },
   "stats": {
     "domains": 27,
-    "categories": 133,
-    "tools": 433
+    "categories": 145,
+    "tools": 436
   }
 }

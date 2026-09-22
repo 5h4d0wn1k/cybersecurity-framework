@@ -1,7 +1,7 @@
 {
   "id": "mobile",
   "name": "Mobile Application Security (Android & iOS)",
-  "emoji": "📱",
+  "emoji": "\ud83d\udcf1",
   "tagline": "Testing your own or authorized Android & iOS apps: static analysis, decompilation, runtime instrumentation, traffic interception, and attack-surface automation.",
   "class": "offense",
   "categories": [
@@ -15,20 +15,26 @@
           "rating": 5,
           "effort": "medium",
           "desc": "Automated all-in-one analyzer for APK, IPA, and Windows mobile binaries: permissions, exported components, insecure manifest/crypto config, hardcoded secrets, and OWASP MASTG-style checks surfaced in a clean web UI plus REST API for CI.",
-          "when": "Always the first pass on an app binary you are authorized to test — upload the APK or IPA, read the findings report, then drill into specific hits for manual follow-up.",
+          "when": "Always the first pass on an app binary you are authorized to test \u2014 upload the APK or IPA, read the findings report, then drill into specific hits for manual follow-up.",
           "install": "docker run --rm -it -p 8000:8000 opensecurity/mobile-security-framework-mobsf:latest",
           "url": "https://github.com/MobSF/Mobile-Security-Framework-MobSF",
-          "alt": ["quark-engine", "apkid"]
+          "alt": [
+            "quark-engine",
+            "apkid"
+          ]
         },
         {
           "name": "Quark-Engine",
           "rating": 5,
           "effort": "easy",
-          "desc": "Obfuscation-neglect APK scoring engine (distinct from the old LinkedIn 'qark'): matches the app's call graph against a rule set of suspicious behaviors — crypto misuse, dynamic dex loading, accessibility/SMS abuse, C2 calls — and emits confidence-scored reports.",
+          "desc": "Obfuscation-neglect APK scoring engine (distinct from the old LinkedIn 'qark'): matches the app's call graph against a rule set of suspicious behaviors \u2014 crypto misuse, dynamic dex loading, accessibility/SMS abuse, C2 calls \u2014 and emits confidence-scored reports.",
           "when": "Quick second opinion on an APK for risky behavior patterns after MobSF, or to generate new detection rules from code you reverse yourself.",
           "install": "pip3 install -U quark-engine && freshquark",
           "url": "https://github.com/quark-engine/quark-engine",
-          "alt": ["mobsf", "apkid"]
+          "alt": [
+            "mobsf",
+            "apkid"
+          ]
         },
         {
           "name": "APKiD",
@@ -38,7 +44,10 @@
           "when": "Scope a hardened app early: knowing it is packed tells you static-only analysis is not enough and you will need runtime dexdump (frida-dexdump).",
           "install": "pip install apkid",
           "url": "https://github.com/rednaga/APKiD",
-          "alt": ["quark-engine", "mobsf"]
+          "alt": [
+            "quark-engine",
+            "mobsf"
+          ]
         }
       ]
     },
@@ -55,7 +64,10 @@
           "when": "Default decompilation of a fresh APK: navigate the reconstructed project, follow flows across classes, and copy logic into notes.",
           "install": "Download the latest zip from GitHub releases (or 'brew install jadx')",
           "url": "https://github.com/skylot/jadx",
-          "alt": ["apktool", "dex2jar"]
+          "alt": [
+            "apktool",
+            "dex2jar"
+          ]
         },
         {
           "name": "apktool",
@@ -65,7 +77,10 @@
           "when": "Modify res/ or smali and repackage the APK (behavior/repackage tests), or pull the manifest cleanly when jadx output gets mangled.",
           "install": "Download the jar wrapper from GitHub releases (or 'sudo apt install apktool')",
           "url": "https://github.com/iBotPeaches/Apktool",
-          "alt": ["jadx", "dex2jar"]
+          "alt": [
+            "jadx",
+            "dex2jar"
+          ]
         },
         {
           "name": "frida-dexdump",
@@ -75,7 +90,10 @@
           "when": "Analyze a packed/hardened app: launch it on a device, dump the loaded dex at runtime, then feed the recovered classes back into jadx.",
           "install": "pip install frida-dexdump",
           "url": "https://github.com/hluwa/frida-dexdump",
-          "alt": ["jadx", "apktool"]
+          "alt": [
+            "jadx",
+            "apktool"
+          ]
         },
         {
           "name": "dex2jar",
@@ -85,7 +103,10 @@
           "when": "Legacy fallback decompile when jadx chokes on an unusual format, or when a downstream tooling chain requires .jar/.class input.",
           "install": "Download dex2jar-2.x.zip from GitHub releases",
           "url": "https://github.com/pxb1988/dex2jar",
-          "alt": ["jadx", "apktool"]
+          "alt": [
+            "jadx",
+            "apktool"
+          ]
         }
       ]
     },
@@ -99,20 +120,25 @@
           "rating": 5,
           "effort": "medium",
           "desc": "Cross-platform dynamic instrumentation toolkit: inject a frida-server process onto Android/iOS to hook functions, bypass SSL pinning and root detection, trace crypto calls, and invoke internal methods from a Python/JS REPL.",
-          "when": "The runtime layer of most mobile tests — bypass cert pinning, trace sensitive functions, dump buffers, and poke internals static analysis cannot reach.",
+          "when": "The runtime layer of most mobile tests \u2014 bypass cert pinning, trace sensitive functions, dump buffers, and poke internals static analysis cannot reach.",
           "install": "pip install frida-tools && push a matching-version frida-server to the device",
           "url": "https://frida.re",
-          "alt": ["objection", "magisk"]
+          "alt": [
+            "objection",
+            "magisk"
+          ]
         },
         {
           "name": "objection",
           "rating": 4,
           "effort": "medium",
           "desc": "Frida-powered runtime exploration toolkit: one-liners to disable SSL pinning and root checks, browse Android/iOS storage (Keychain, SharedPrefs, Bundle), and explore exported classes without writing custom JS.",
-          "when": "Quick interactive runtime pass on your own app — disable pinning/root detection and inspect stored data — when hand-writing Frida scripts is overkill.",
+          "when": "Quick interactive runtime pass on your own app \u2014 disable pinning/root detection and inspect stored data \u2014 when hand-writing Frida scripts is overkill.",
           "install": "pip install objection",
           "url": "https://github.com/sensepost/objection",
-          "alt": ["frida"]
+          "alt": [
+            "frida"
+          ]
         },
         {
           "name": "Magisk",
@@ -122,17 +148,23 @@
           "when": "Prepare a dedicated test device with an unlocked bootloader when an app refuses to run on stock or detects the emulator you were using.",
           "install": "Install the Magisk APK or 'fastboot boot magisk_patched-<hash>.img' on an unlocked-bootloader device",
           "url": "https://github.com/topjohnwu/Magisk",
-          "alt": ["frida", "objection"]
+          "alt": [
+            "frida",
+            "objection"
+          ]
         },
         {
           "name": "adb (Android Debug Bridge)",
           "rating": 5,
           "effort": "easy",
           "desc": "Google's core device bridge from Android platform-tools: install apps, push/pull files, shell in, port-forward, install CA certificates, and capture logcat.",
-          "when": "Every device setup step — enumerate devices, push frida-server and test certificates, and snapshot app data before and after a test run.",
+          "when": "Every device setup step \u2014 enumerate devices, push frida-server and test certificates, and snapshot app data before and after a test run.",
           "install": "sudo apt install adb",
           "url": "https://developer.android.com/tools/adb",
-          "alt": ["magisk", "frida"]
+          "alt": [
+            "magisk",
+            "frida"
+          ]
         }
       ]
     },
@@ -146,21 +178,26 @@
           "rating": 5,
           "effort": "medium",
           "desc": "Interactive HTTPS intercepting proxy built for mobile workflows: install its CA on the device, replay or rewrite HTTP/2 and gRPC flows, and script custom handling with Python addons; pair with a Frida/objection pinning bypass to decrypt app TLS.",
-          "when": "Any network-level test of your own apps — log, tamper, or replay API traffic from a rooted device, emulator, or iOS simulator.",
+          "when": "Any network-level test of your own apps \u2014 log, tamper, or replay API traffic from a rooted device, emulator, or iOS simulator.",
           "install": "pip install mitmproxy",
           "url": "https://mitmproxy.org",
-          "alt": ["charles proxy", "burp suite (see web domain)"]
+          "alt": [
+            "charles proxy",
+            "burp suite (see web domain)"
+          ]
         },
         {
           "name": "Charles Proxy",
           "class": "commercial",
           "rating": 3,
           "effort": "easy",
-          "desc": "Commercial GUI HTTPS proxy with click-through SSL proxying, rewrite/breakpoints, and a visual request timeline — the macOS-centric alternative to a terminal proxy.",
+          "desc": "Commercial GUI HTTPS proxy with click-through SSL proxying, rewrite/breakpoints, and a visual request timeline \u2014 the macOS-centric alternative to a terminal proxy.",
           "when": "Point-and-click interception and rewriting during manual iOS testing on a workstation when you prefer a GUI over mitmproxy's keyboard-driven flow.",
           "install": "Download from charlesproxy.com (trial, then paid license)",
           "url": "https://www.charlesproxy.com",
-          "alt": ["mitmproxy"]
+          "alt": [
+            "mitmproxy"
+          ]
         }
       ]
     },
@@ -177,17 +214,64 @@
           "when": "After static analysis, map the app's IPC/component attack surface and probe each exported component for authorization and data-exposure flaws.",
           "install": "git clone https://github.com/ReversecLabs/drozer.git && cd drozer && pip install . (plus the drozer agent APK on the device)",
           "url": "https://github.com/ReversecLabs/drozer",
-          "alt": ["android tamer"]
+          "alt": [
+            "android tamer"
+          ]
         },
         {
           "name": "Android Tamer",
           "rating": 3,
           "effort": "advanced",
           "desc": "Linux distro/VM prebundling dozens of Android-sec tools (jadx, apktool, MobSF, AndroBugs, Frida, radare2). Tamer 4 is end-of-life and Tamer 5 is under construction, so it is a convenience starting point, not a project to build on.",
-          "when": "Stand up a one-shot preconfigured Android-tools VM for a specific engagement; otherwise skip — each tool here installs more reliably on your own base OS.",
+          "when": "Stand up a one-shot preconfigured Android-tools VM for a specific engagement; otherwise skip \u2014 each tool here installs more reliably on your own base OS.",
           "install": "Download the Tamer 4 VM from TamerPlatform and import into VirtualBox/VMware",
           "url": "https://github.com/AndroidTamer/AndroidTamer",
-          "alt": ["mobsf", "frida"]
+          "alt": [
+            "mobsf",
+            "frida"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ios-testing",
+      "name": "iOS-specific testing",
+      "subcategories": [
+        {
+          "id": "ios-dynamic",
+          "name": "iOS dynamic analysis",
+          "tools": [
+            {
+              "name": "Frida-iOS",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Frida on iOS for hooking, swizzling, and runtime inspection of app classes on jailbroken devices.",
+              "when": "When you need to trace iOS app runtime behavior on jailbroken devices.",
+              "install": "frida on device (see re.frida.server)",
+              "url": "https://frida.re",
+              "alt": [
+                "objection"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "ios-static",
+          "name": "iOS static analysis",
+          "tools": [
+            {
+              "name": "Frida-codeshare",
+              "rating": 3,
+              "effort": "medium",
+              "desc": "Collection of iOS-focused Frida scripts for class dumping and method tracing.",
+              "when": "Need common iOS hooks without writing your own.",
+              "install": "pip install frida",
+              "url": "https://codeshare.frida.re",
+              "alt": [
+                "class-dump"
+              ]
+            }
+          ]
         }
       ]
     }

@@ -1,16 +1,19 @@
 # 🕸️ Web Application Security
 
-Intercepting proxies, content discovery, injection testing, and API tooling for authorized web assessments.
+The full web assessment stack: intercepting proxies, discovery, injection testing, API tooling, and OWASP-class vulnerability testing — nested by technique.
 
 ## Intercepting Proxies
 
-### Burp Suite ⭐
+Burp Suite ⭐
 
-The de-facto intercepting proxy: intercept and edit requests, inspect responses, map the app, and extend workflows with a large marketplace.
 
-**When:** When you need to manually inspect and shape every request against an app you're authorized to test, or want Professional-grade scanning and macro-based session handling.
+#### Burp Suite ⭐
 
-**Effort:** medium  ·  **Rating:** 5/5
+The de-facto intercepting proxy for manual testing: intercept/edit requests, inspect responses, map the app, and extend via a large BApp marketplace.
+
+**When:** Every manual web engagement; the default scratchpad for inspecting and shaping requests to an app you are authorized to test.
+
+**Effort:** easy  ·  **Rating:** 5/5
 
 **Install:** `brew install --cask burp-suite`
 
@@ -19,13 +22,13 @@ The de-facto intercepting proxy: intercept and edit requests, inspect responses,
 **Alternatives:** OWASP ZAP, Caido
 
 
-### OWASP ZAP
+#### OWASP ZAP
 
-Free and open-source OWASP proxy with automated scanning, a baseline API for CI, fuzzing, and a REST API for integration.
+Free and open-source OWASP proxy with automated scanning, fuzzing, and a REST API for CI-driven baseline scanning.
 
-**When:** When Burp is not an option due to licensing or budget, or you want scriptable scanning you can drive from a pipeline against a staging app you own.
+**When:** When you need a fully open, scriptable proxy with automated scanning you can drive from a pipeline against a staging app you own.
 
-**Effort:** medium  ·  **Rating:** 5/5
+**Effort:** easy  ·  **Rating:** 5/5
 
 **Install:** `sudo snap install zaproxy --classic`
 
@@ -34,7 +37,7 @@ Free and open-source OWASP proxy with automated scanning, a baseline API for CI,
 **Alternatives:** Burp Suite, Caido
 
 
-### Caido
+#### Caido
 
 Lightweight, modern intercepting proxy with a clean UI and fast request replay, built as a slim alternative to the heavyweight suites.
 
@@ -46,31 +49,38 @@ Lightweight, modern intercepting proxy with a clean UI and fast request replay, 
 
 **URL:** https://github.com/caido/caido
 
-**Alternatives:** OWASP ZAP, Burp Suite
+**Alternatives:** Burp Suite, OWASP ZAP
+
+
+
+
 
 
 ## Content Discovery & Fuzzing
 
-### ffuf ⭐
+ffuf ⭐
 
-High-speed Go web fuzzer handling directory, virtual-host, parameter, and header fuzzing over reusable wordlists and encoders.
 
-**When:** Your default content-discovery engine on an authorized target: large wordlists, vhost fuzzing, and parameter guessing.
+#### ffuf ⭐
 
-**Effort:** medium  ·  **Rating:** 5/5
+Extremely fast web fuzzer written in Go for directories, files, parameters, vhosts, and more; supports filters, recursion, and matchers.
+
+**When:** Anytime you need fast brute-force discovery of paths or parameters against a target you are authorized to test.
+
+**Effort:** easy  ·  **Rating:** 5/5
 
 **Install:** `go install github.com/ffuf/ffuf/v2@latest`
 
 **URL:** https://github.com/ffuf/ffuf
 
-**Alternatives:** gobuster, feroxbuster, wfuzz
+**Alternatives:** gobuster, feroxbuster, dirsearch
 
 
-### gobuster
+#### gobuster
 
-Lightweight Go brute-forcer for directories/files, DNS subdomains, and virtual hosts using custom wordlists.
+Simple multi-purpose fuzzer for directories, DNS subdomains, and virtual hosts using wordlists.
 
-**When:** When you need a single-binary directory scan with zero dependencies, or a quick DNS or vhost brute force.
+**When:** When you want a lightweight, easy-to-script brute forcer without a big learning curve.
 
 **Effort:** easy  ·  **Rating:** 4/5
 
@@ -78,93 +88,147 @@ Lightweight Go brute-forcer for directories/files, DNS subdomains, and virtual h
 
 **URL:** https://github.com/OJ/gobuster
 
-**Alternatives:** ffuf, feroxbuster, dirsearch
-
-
-### feroxbuster
-
-Rust-based recursive content scanner that follows discovered paths automatically and color-codes results by status.
-
-**When:** When recursive crawling of your own app's content tree matters more than raw wordlist throughput.
-
-**Effort:** easy  ·  **Rating:** 4/5
-
-**Install:** `cargo install feroxbuster --locked`
-
-**URL:** https://github.com/epi052/feroxbuster
-
-**Alternatives:** ffuf, gobuster
-
-
-### dirsearch
-
-Python directory brute-forcer with a built-in wordlist, recursive mode, and extension/status filters to cut noise.
-
-**When:** When you want a battery-included scanner with sane defaults against a single host.
-
-**Effort:** easy  ·  **Rating:** 3/5
-
-**Install:** `git clone --depth 1 https://github.com/maurosoria/dirsearch.git`
-
-**URL:** https://github.com/maurosoria/dirsearch
-
-**Alternatives:** gobuster, feroxbuster
-
-
-### wfuzz
-
-Flexible Python web fuzzer built on curl backends; supports multiple payload injection points and fine-grained response matching.
-
-**When:** When you need to fuzz several positions (headers, cookies, parameters) in one request with precise match filters.
-
-**Effort:** medium  ·  **Rating:** 3/5
-
-**Install:** `sudo pip3 install wfuzz`
-
-**URL:** https://github.com/xmendez/wfuzz
-
 **Alternatives:** ffuf, feroxbuster
 
 
-## SQL Injection Testing
+#### feroxbuster
 
-### sqlmap ⭐
+Fast, recursive content discovery fuzzer built in Rust that automatically scans discovered directories.
 
-Automated SQL injection engine supporting boolean, time-based, error, union, and stacked techniques plus database fingerprinting.
+**When:** When you want recursion and auto-re-scanning of found directories out of the box.
 
-**When:** After a parameter in an app you're authorized to test looks injectable — it automates detection and database fingerprinting in one pass.
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `cargo install feroxbuster`
+
+**URL:** https://github.com/epi052/feroxbuster
+
+**Alternatives:** ffuf, gobuster, dirsearch
+
+
+#### dirsearch
+
+Mature Python path scanner with threading, proxy support, and extensive filter/ignored-status options.
+
+**When:** When a simple, cross-platform Python scanner with many wordlist and output options is all you need.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `pipx install dirsearch`
+
+**URL:** https://github.com/maurosoria/dirsearch
+
+**Alternatives:** ffuf, feroxbuster, gobuster
+
+
+#### wfuzz
+
+Flexible Python fuzzer for web content and parameter brute-forcing with rich payload/encoding options.
+
+**When:** When you need fine-grained iteration over multiple payload positions and encoding filters.
+
+**Effort:** medium  ·  **Rating:** 3/5
+
+**Install:** `sudo apt install wfuzz`
+
+**URL:** https://github.com/xmendez/wfuzz
+
+**Alternatives:** ffuf, ffuf
+
+
+
+
+
+
+## Injection & Data-Plane Testing
+
+
+
+
+#### SQL Injection
+
+
+
+##### sqlmap ⭐
+
+The reference automated SQLi tool: detects and exploits injection in GET/POST/headers, enumerates DBMSes, and dumps data on targets you are authorized to test.
+
+**When:** When a parameter looks injectable and you want thorough detection plus DB fingerprinting, safe limits, and batch modes.
 
 **Effort:** medium  ·  **Rating:** 5/5
 
-**Install:** `git clone --depth 1 https://github.com/sqlmapproject/sqlmap.git`
+**Install:** `sudo apt install sqlmap`
 
 **URL:** https://github.com/sqlmapproject/sqlmap
 
-**Alternatives:** NoSQLMap, manual payload probes via Burp Repeater
+**Alternatives:** NoSQLMap
 
 
-### NoSQLMap
+##### NoSQLMap
 
-Automated NoSQL database testing (MongoDB, CouchDB) focused on enumeration, injection, and blind testing of document-store backends.
+Automated pentesting tool for NoSQL databases (MongoDB, CouchDB) injection and misconfiguration.
 
-**When:** When the API you're testing is backed by a document store and classic SQL payloads don't apply.
+**When:** When the backend is NoSQL and you need injection-point discovery against an app you own or have scope for.
 
-**Effort:** advanced  ·  **Rating:** 3/5
+**Effort:** medium  ·  **Rating:** 3/5
 
-**Install:** `git clone --depth 1 https://github.com/codingo/NoSQLMap.git && cd NoSQLMap && python3 setup.py install`
+**Install:** `git clone https://github.com/codingo/NoSQLMap && pip3 install -r NoSQLMap/requirements.txt`
 
 **URL:** https://github.com/codingo/NoSQLMap
 
-**Alternatives:** sqlmap, manual query fuzzing via mitmproxy
+**Alternatives:** sqlmap
+
+
+#### Command Injection
+
+
+
+##### Commix ⭐
+
+Automated OS command injection detection and exploitation with support for many injection techniques and filter bypasses.
+
+**When:** When you suspect command injection in a parameter or header and want an automated detector on authorized targets.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/commixproject/commix && cd commix && python3 commix.py -h`
+
+**URL:** https://github.com/commixproject/commix
+
+**Alternatives:** sqlmap (secondary)
+
+
+#### Server-Side Template Injection (SSTI)
+
+
+
+##### tplmap ⭐
+
+Detects and exploits server-side template injection across engines (Jinja2, Twig, Freemarker, etc.).
+
+**When:** When an app renders user input inside templates and you need to confirm SSTI on a scope-authorized target.
+
+**Effort:** medium  ·  **Rating:** 3/5
+
+**Install:** `git clone https://github.com/epinna/tplmap && pip3 install -r tplmap/requirements.txt`
+
+**URL:** https://github.com/epinna/tplmap
+
+
+
+
 
 
 ## Cross-Site Scripting (XSS) Testing
 
-### Dalfox ⭐
+Dalfox ⭐
 
-Go-based XSS scanner that runs a fast analysis pass, sends crafted payloads, and confirms findings with headless-browser verification.
 
-**When:** When you want automated, verifiable XSS coverage across many endpoints in a target you're authorized to test.
+#### Dalfox ⭐
+
+Fast, parameter-analysis XSS scanner written in Go with payload generation and Telegram/Discord notification support.
+
+**When:** When you want to automate XSS discovery against a list of endpoints on authorized targets and pipeline results.
 
 **Effort:** easy  ·  **Rating:** 4/5
 
@@ -172,114 +236,121 @@ Go-based XSS scanner that runs a fast analysis pass, sends crafted payloads, and
 
 **URL:** https://github.com/hahwul/dalfox
 
-**Alternatives:** XSStrike, manual encoding checks via Burp Proxy
+**Alternatives:** XSStrike
 
 
-### XSStrike
+#### XSStrike
 
-Python XSS test suite with context-aware payload crafting, filter-detection heuristics, and a small built-in fuzzing engine.
+XSS detection suite with payload crafting, bruteforce, and WAF/filter-detection heuristics.
 
-**When:** When straight payloads fail and you need context-aware payload generation to understand why a filter rejected them.
-
-**Effort:** medium  ·  **Rating:** 3/5
-
-**Install:** `git clone --depth 1 https://github.com/s0md3v/XSStrike.git`
-
-**URL:** https://github.com/s0md3v/XSStrike
-
-**Alternatives:** Dalfox, manual testing via OWASP ZAP
-
-
-## API Testing
-
-### mitmproxy ⭐
-
-Interactive HTTPS proxy with a Python addon API for scripting request transformations, plus replay and mock flows for API traffic.
-
-**When:** When you need scriptable request manipulation, or want to log, inspect, and replay API traffic headlessly.
-
-**Effort:** medium  ·  **Rating:** 4/5
-
-**Install:** `pip3 install mitmproxy`
-
-**URL:** https://mitmproxy.org
-
-**Alternatives:** Burp Suite, Postman
-
-
-### Postman
-
-API client for organizing requests into collections, environment variables, and automated test runners; surfaces contract and auth issues early.
-
-**When:** During development of your own service for functional API exploration, regression checks, and documenting expected behavior.
+**When:** When you need sophisticated payload crafting and WAF detection for manual XSS validation in your tests.
 
 **Effort:** easy  ·  **Rating:** 4/5
 
-**Install:** `sudo snap install postman`
+**Install:** `git clone https://github.com/s0md3v/XSStrike && pip3 install -r XSStrike/requirements.txt`
+
+**URL:** https://github.com/s0md3v/XSStrike
+
+**Alternatives:** Dalfox
+
+
+
+
+
+
+## API Testing & Traffic Shaping
+
+mitmproxy ⭐
+
+
+#### mitmproxy ⭐
+
+Interactive man-in-the-middle proxy with a powerful scriptable (Python) add-on API for request shaping and inspection.
+
+**When:** When you need programmatic control over intercepted API traffic (rewrite, capture, fuzz) in your tests.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `brew install mitmproxy`
+
+**URL:** https://mitmproxy.org
+
+**Alternatives:** Postman, httpie
+
+
+#### Postman
+
+API client and collection runner for crafting, saving, and automating HTTP requests against services under test.
+
+**When:** When you need organized collections, environments, and simple automation to reason about an API's behavior.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `brew install --cask postman`
 
 **URL:** https://www.postman.com
 
 **Alternatives:** httpie, mitmproxy
 
 
-### httpie
+#### HTTPie
 
-Human-friendly HTTP client with readable colored output, JSON-first rewriting, and simple chaining of requests in the shell.
+User-friendly command-line HTTP client with readable, colorful output for quick manual requests.
 
-**When:** When you want a quick one-liner API check without opening an app or writing verbose curl flags.
+**When:** For fast ad-hoc requests in a terminal during investigation without a heavyweight GUI.
 
 **Effort:** easy  ·  **Rating:** 3/5
 
-**Install:** `sudo apt install httpie`
+**Install:** `brew install httpie`
 
 **URL:** https://httpie.io
 
-**Alternatives:** curl, Postman
+**Alternatives:** Postman, mitmproxy
 
 
-## Other Web Vulnerability Classes
-
-### Commix ⭐
-
-Automates detection of command injection flaws in arbitrary request fields using time- and output-based techniques plus filter-bypass payloads.
-
-**When:** When a parameter in an authorized target appears to reach a shell (ping, logs, filename inputs) and you want automated confirmation.
-
-**Effort:** medium  ·  **Rating:** 4/5
-
-**Install:** `git clone --depth 1 https://github.com/commixproject/commix.git`
-
-**URL:** https://github.com/commixproject/commix
-
-**Alternatives:** manual output/time-based probes via Burp Repeater, ffuf for payload fuzzing at the field
 
 
-### jwt_tool
 
-JWT audit toolkit that checks common misconfigurations: algorithm confusion, weak signing keys, and expired/mis-set claims.
 
-**When:** When the app under test uses JWTs and you want to audit key handling, which algorithms it accepts, and token lifetime settings.
+## Class & Variable-Specific Testing
+
+
+
+
+#### JWT / Token Security
+
+
+
+##### jwt_tool ⭐
+
+Audits JSON Web Tokens: signature verification, algorithm confusion, and known CVE checks against tokens issued by apps you test.
+
+**When:** When an application uses JWTs and you need to inspect claims, check alg:none/confusion, and validate signing secrets.
 
 **Effort:** easy  ·  **Rating:** 4/5
 
-**Install:** `git clone --depth 1 https://github.com/ticarpi/jwt_tool.git`
+**Install:** `git clone https://github.com/ticarpi/jwt_tool && cd jwt_tool && python3 jwt_tool.py -h`
 
 **URL:** https://github.com/ticarpi/jwt_tool
 
-**Alternatives:** jwt.io decoder, manual token mutation in Burp
+
+#### HTTP Request Smuggling
 
 
-### smuggler
 
-HTTP request-smuggling detector that fuzzes CL/TE header combinations against a host and reports which parsing behavior won.
+##### smuggler ⭐
 
-**When:** When you control the web server stack and want to verify front/back-end header-parsing consistency on permitted infrastructure.
+Detects HTTP request smuggling variants (CL.TE, TE.CL, TE.TE obfuscation) against backend parsing mismatches.
 
-**Effort:** advanced  ·  **Rating:** 3/5
+**When:** When a stack splits differently between proxies/back-ends and you want to test smuggling scenarios on authorized targets.
 
-**Install:** `git clone --depth 1 https://github.com/defparam/smuggler.git`
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/defparam/smuggler && python3 smuggler.py regex.txt urls.txt`
 
 **URL:** https://github.com/defparam/smuggler
 
-**Alternatives:** manual CL/TE shaping in Burp Repeater, mitmproxy for crafted message injection
+
+
+
 

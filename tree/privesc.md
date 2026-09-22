@@ -4,7 +4,10 @@ Local audit of Linux & Windows privilege boundaries: lax permissions, exposed SU
 
 ## Linux Enumeration
 
-### LinPEAS ⭐
+LinPEAS ⭐
+
+
+#### LinPEAS ⭐
 
 Runs hundreds of privilege-boundary checks — SUID/GUID binaries, writable PATHs, cron entries, capabilities, credentials in files, known-vuln hints — on Linux/Unix/MacOS and color-codes findings by severity.
 
@@ -19,7 +22,7 @@ Runs hundreds of privilege-boundary checks — SUID/GUID binaries, writable PATH
 **Alternatives:** linenum, lse, linuxprivchecker
 
 
-### LinEnum
+#### LinEnum
 
 Single-shell-script Linux enumeration collecting user, sudo, cron, SUID, PATH, and file-permission checks into one grep-able report; still ships as the Kali/BlackArch `linenum` package.
 
@@ -34,7 +37,7 @@ Single-shell-script Linux enumeration collecting user, sudo, cron, SUID, PATH, a
 **Alternatives:** linpeas, lse, linuxprivchecker
 
 
-### linux-smart-enumeration (lse)
+#### linux-smart-enumeration (lse)
 
 Ranked Linux enumerator that reveals findings progressively by importance level (-l0..-l2) and can watch for recurring cron/process activity while it runs.
 
@@ -49,7 +52,7 @@ Ranked Linux enumerator that reveals findings progressively by importance level 
 **Alternatives:** linpeas, linenum, linuxprivchecker
 
 
-### linuxprivchecker
+#### linuxprivchecker
 
 Python script that enumerates base system info and hunts world-writable files, misconfigurations, and cleartext passwords; written to suggest investigation targets rather than run exploits.
 
@@ -64,7 +67,7 @@ Python script that enumerates base system info and hunts world-writable files, m
 **Alternatives:** linpeas, linenum, lse
 
 
-### unix-privesc-check
+#### unix-privesc-check
 
 PentestMonkey's classic shell script for weak file permissions and simple escalation vectors (world-writable files, exposed .netrc/.ssh), packaged in Kali; mature but only lightly maintained.
 
@@ -79,9 +82,16 @@ PentestMonkey's classic shell script for weak file permissions and simple escala
 **Alternatives:** linpeas, lse, linenum
 
 
+
+
+
+
 ## Windows Enumeration
 
-### WinPEAS ⭐
+WinPEAS ⭐
+
+
+#### WinPEAS ⭐
 
 Windows counterpart to LinPEAS from the same PEASS suite: scans services, scheduled tasks, unquoted paths, AlwaysInstallElevated, stored credentials, and patch gaps; ships as winPEAS.exe (x64/x86) and winPEAS.bat in one release.
 
@@ -96,7 +106,7 @@ Windows counterpart to LinPEAS from the same PEASS suite: scans services, schedu
 **Alternatives:** seatbelt, windows-exploit-suggester
 
 
-### Seatbelt
+#### Seatbelt
 
 GhostPack C# host-survey tool bundling dozens of 'safety-check' modules (token privileges, services, autoruns, credential stores, scheduled tasks) runnable in grouped or single-command mode.
 
@@ -111,7 +121,7 @@ GhostPack C# host-survey tool bundling dozens of 'safety-check' modules (token p
 **Alternatives:** winpeas, windows-exploit-suggester
 
 
-### Windows-Exploit-Suggester (legacy)
+#### Windows-Exploit-Suggester (legacy)
 
 The 2014 original that coined the term; now archived because it depends on Microsoft's Security Bulletin Excel dump, which has been frozen since Q1 2017 — it can only address XP/Vista-era systems.
 
@@ -126,9 +136,16 @@ The 2014 original that coined the term; now archived because it depends on Micro
 **Alternatives:** wesng, winpeas
 
 
+
+
+
+
 ## Exploit Suggestion
 
-### linux-exploit-suggester ⭐
+linux-exploit-suggester ⭐
+
+
+#### linux-exploit-suggester ⭐
 
 Off-host Linux audit tool (LES): reads kernel/distro fingerprints and cross-references them against current public exploit/PoC sets to rank exposure to known local privilege-escalation bugs.
 
@@ -143,7 +160,7 @@ Off-host Linux audit tool (LES): reads kernel/distro fingerprints and cross-refe
 **Alternatives:** linux-exploit-suggester-2, gtfobins
 
 
-### WES-NG (wesng)
+#### WES-NG (wesng)
 
 Windows Exploit Suggester - Next Generation: takes a `systeminfo` dump (or missing-patch list) and maps it against a continuously updated MSRC/NVD dataset to list missing patches and known exploits.
 
@@ -158,7 +175,7 @@ Windows Exploit Suggester - Next Generation: takes a `systeminfo` dump (or missi
 **Alternatives:** windows-exploit-suggester, linux-exploit-suggester
 
 
-### linux-exploit-suggester-2
+#### linux-exploit-suggester-2
 
 Perl-based next-gen suggester that matches kernel/package versions against an exploit-db-derived list and can pull matching PoCs for review.
 
@@ -173,7 +190,7 @@ Perl-based next-gen suggester that matches kernel/package versions against an ex
 **Alternatives:** linux-exploit-suggester
 
 
-### GTFOBins
+#### GTFOBins
 
 Reference site (not a tool): documents how standard Unix binaries — when sudo, SUID, or capability-misconfigured — can escape restricted contexts, read/write files, or escalate.
 
@@ -188,7 +205,7 @@ Reference site (not a tool): documents how standard Unix binaries — when sudo,
 **Alternatives:** linux-exploit-suggester, lolbas
 
 
-### LOLBAS
+#### LOLBAS
 
 Windows sibling of GTFOBins: catalogs living-off-the-land binaries, scripts, and libraries that legitimate shipped Windows components can be coerced into doing beyond their intended job.
 
@@ -203,9 +220,16 @@ Windows sibling of GTFOBins: catalogs living-off-the-land binaries, scripts, and
 **Alternatives:** gtfobins, wesng
 
 
+
+
+
+
 ## Kernel & Userspace Exploit POCs
 
-### Dirty Pipe (CVE-2022-0847) ⭐
+Dirty Pipe (CVE-2022-0847) ⭐
+
+
+#### Dirty Pipe (CVE-2022-0847) ⭐
 
 Root POC for CVE-2022-0847 (Linux 5.8–5.16.x): abuses an uninitialized pipe_buffer flag to overwrite read-only page-cache data; this build overwrites /etc/passwd and restores it after popping a shell.
 
@@ -220,7 +244,7 @@ Root POC for CVE-2022-0847 (Linux 5.8–5.16.x): abuses an uninitialized pipe_bu
 **Alternatives:** dirtycow, pwnkit
 
 
-### dirtycow (CVE-2016-5195)
+#### dirtycow (CVE-2016-5195)
 
 The archived Dirty COW race-condition family (CVE-2016-5195) for kernels roughly up to 4.8.3: PoCs write into read-only mappings, e.g. splicing a new root account into /etc/passwd.
 
@@ -235,7 +259,7 @@ The archived Dirty COW race-condition family (CVE-2016-5195) for kernels roughly
 **Alternatives:** dirty-pipe, pwnkit
 
 
-### PwnKit (CVE-2021-4034)
+#### PwnKit (CVE-2021-4034)
 
 Qualys-reported pkexec (polkit) memory-corruption exploit giving a one-command root shell on unpatched systems; technically a setuid userspace flaw, not the kernel, but near-unrivaled in reliability when present.
 
@@ -250,9 +274,16 @@ Qualys-reported pkexec (polkit) memory-corruption exploit giving a one-command r
 **Alternatives:** dirty-pipe, dirtycow
 
 
+
+
+
+
 ## Process & File Watching
 
-### pspy ⭐
+pspy ⭐
+
+
+#### pspy ⭐
 
 Unprivileged process snooper: uses /proc scans triggered by inotify events to catch short-lived processes (cron jobs, root scripts, and the arguments they carry) that a normal `ps` sweep never sees.
 
@@ -267,7 +298,7 @@ Unprivileged process snooper: uses /proc scans triggered by inotify events to ca
 **Alternatives:** inotifywait, fatrace
 
 
-### inotifywait
+#### inotifywait
 
 inotify-based file/directory event watcher (create/modify/access/delete) from the inotify-tools package; the building block for precise, pattern-able watching scripts.
 
@@ -282,7 +313,7 @@ inotify-based file/directory event watcher (create/modify/access/delete) from th
 **Alternatives:** fatrace, pspy
 
 
-### fatrace
+#### fatrace
 
 fanotify-based system-wide file-access reporter (read/write/open/close per PID and path) — useful when a scheduled job touches files too briefly for process listing to catch.
 
@@ -295,4 +326,8 @@ fanotify-based system-wide file-access reporter (read/write/open/close per PID a
 **URL:** https://github.com/martinpitt/fatrace
 
 **Alternatives:** inotifywait, pspy
+
+
+
+
 

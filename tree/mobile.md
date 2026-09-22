@@ -4,7 +4,10 @@ Testing your own or authorized Android & iOS apps: static analysis, decompilatio
 
 ## Static Analysis & Vulnerability Scanning
 
-### MobSF (Mobile Security Framework) ⭐
+MobSF (Mobile Security Framework) ⭐
+
+
+#### MobSF (Mobile Security Framework) ⭐
 
 Automated all-in-one analyzer for APK, IPA, and Windows mobile binaries: permissions, exported components, insecure manifest/crypto config, hardcoded secrets, and OWASP MASTG-style checks surfaced in a clean web UI plus REST API for CI.
 
@@ -19,7 +22,7 @@ Automated all-in-one analyzer for APK, IPA, and Windows mobile binaries: permiss
 **Alternatives:** quark-engine, apkid
 
 
-### Quark-Engine
+#### Quark-Engine
 
 Obfuscation-neglect APK scoring engine (distinct from the old LinkedIn 'qark'): matches the app's call graph against a rule set of suspicious behaviors — crypto misuse, dynamic dex loading, accessibility/SMS abuse, C2 calls — and emits confidence-scored reports.
 
@@ -34,7 +37,7 @@ Obfuscation-neglect APK scoring engine (distinct from the old LinkedIn 'qark'): 
 **Alternatives:** mobsf, apkid
 
 
-### APKiD
+#### APKiD
 
 YARA-based detector for packers, protectors, and obfuscators (DexProtector, Bangcle, qihoo, etc.) inside an APK/DEX before any reversing effort begins.
 
@@ -49,9 +52,16 @@ YARA-based detector for packers, protectors, and obfuscators (DexProtector, Bang
 **Alternatives:** quark-engine, mobsf
 
 
+
+
+
+
 ## Decompilers & APK Tooling
 
-### jadx ⭐
+jadx ⭐
+
+
+#### jadx ⭐
 
 One-step DEX-to-Java decompiler with GUI and CLI that rebuilds readable Java source, resources, and AndroidManifest.xml into a searchable whole-project view.
 
@@ -66,7 +76,7 @@ One-step DEX-to-Java decompiler with GUI and CLI that rebuilds readable Java sou
 **Alternatives:** apktool, dex2jar
 
 
-### apktool
+#### apktool
 
 Decodes Android resources and AndroidManifest.xml into editable form and rebuilds the APK; exposes smali/baksmali bytecode for patching when Java source is not needed.
 
@@ -81,7 +91,7 @@ Decodes Android resources and AndroidManifest.xml into editable form and rebuild
 **Alternatives:** jadx, dex2jar
 
 
-### frida-dexdump
+#### frida-dexdump
 
 Dumps in-memory DEX files from a running app via Frida, defeating packers and protectors that only materialize code at runtime.
 
@@ -96,7 +106,7 @@ Dumps in-memory DEX files from a running app via Frida, defeating packers and pr
 **Alternatives:** jadx, apktool
 
 
-### dex2jar
+#### dex2jar
 
 The classic DEX-to-JAR converter (paired with JD-GUI for a quick Java view); effectively unmaintained but still the format older guides and toolchains expect.
 
@@ -111,9 +121,16 @@ The classic DEX-to-JAR converter (paired with JD-GUI for a quick Java view); eff
 **Alternatives:** jadx, apktool
 
 
+
+
+
+
 ## Dynamic Instrumentation & Runtime Testing
 
-### Frida ⭐
+Frida ⭐
+
+
+#### Frida ⭐
 
 Cross-platform dynamic instrumentation toolkit: inject a frida-server process onto Android/iOS to hook functions, bypass SSL pinning and root detection, trace crypto calls, and invoke internal methods from a Python/JS REPL.
 
@@ -128,7 +145,7 @@ Cross-platform dynamic instrumentation toolkit: inject a frida-server process on
 **Alternatives:** objection, magisk
 
 
-### objection
+#### objection
 
 Frida-powered runtime exploration toolkit: one-liners to disable SSL pinning and root checks, browse Android/iOS storage (Keychain, SharedPrefs, Bundle), and explore exported classes without writing custom JS.
 
@@ -143,7 +160,7 @@ Frida-powered runtime exploration toolkit: one-liners to disable SSL pinning and
 **Alternatives:** frida
 
 
-### Magisk
+#### Magisk
 
 Systemless rooting framework for physical Android devices and emulators that gives Frida, adb, and your injected agents the root context most dynamic tests need; it is a rooting kit first, not a pentest tool.
 
@@ -158,7 +175,7 @@ Systemless rooting framework for physical Android devices and emulators that giv
 **Alternatives:** frida, objection
 
 
-### adb (Android Debug Bridge)
+#### adb (Android Debug Bridge)
 
 Google's core device bridge from Android platform-tools: install apps, push/pull files, shell in, port-forward, install CA certificates, and capture logcat.
 
@@ -173,9 +190,16 @@ Google's core device bridge from Android platform-tools: install apps, push/pull
 **Alternatives:** magisk, frida
 
 
+
+
+
+
 ## Traffic Interception & Analysis
 
-### mitmproxy ⭐
+mitmproxy ⭐
+
+
+#### mitmproxy ⭐
 
 Interactive HTTPS intercepting proxy built for mobile workflows: install its CA on the device, replay or rewrite HTTP/2 and gRPC flows, and script custom handling with Python addons; pair with a Frida/objection pinning bypass to decrypt app TLS.
 
@@ -190,7 +214,7 @@ Interactive HTTPS intercepting proxy built for mobile workflows: install its CA 
 **Alternatives:** charles proxy, burp suite (see web domain)
 
 
-### Charles Proxy
+#### Charles Proxy
 
 Commercial GUI HTTPS proxy with click-through SSL proxying, rewrite/breakpoints, and a visual request timeline — the macOS-centric alternative to a terminal proxy.
 
@@ -205,9 +229,16 @@ Commercial GUI HTTPS proxy with click-through SSL proxying, rewrite/breakpoints,
 **Alternatives:** mitmproxy
 
 
+
+
+
+
 ## Attack-Surface Automation & Fuzzing
 
-### Drozer ⭐
+Drozer ⭐
+
+
+#### Drozer ⭐
 
 The reference Android attack-surface framework: an on-device agent lets you assume the role of another app and enumerate/exploit exported activities, content providers, services, and broadcast receivers from a console.
 
@@ -222,7 +253,7 @@ The reference Android attack-surface framework: an on-device agent lets you assu
 **Alternatives:** android tamer
 
 
-### Android Tamer
+#### Android Tamer
 
 Linux distro/VM prebundling dozens of Android-sec tools (jadx, apktool, MobSF, AndroBugs, Frida, radare2). Tamer 4 is end-of-life and Tamer 5 is under construction, so it is a convenience starting point, not a project to build on.
 
@@ -235,4 +266,55 @@ Linux distro/VM prebundling dozens of Android-sec tools (jadx, apktool, MobSF, A
 **URL:** https://github.com/AndroidTamer/AndroidTamer
 
 **Alternatives:** mobsf, frida
+
+
+
+
+
+
+## iOS-specific testing
+
+
+
+
+#### iOS dynamic analysis
+
+
+
+##### Frida-iOS
+
+Frida on iOS for hooking, swizzling, and runtime inspection of app classes on jailbroken devices.
+
+**When:** When you need to trace iOS app runtime behavior on jailbroken devices.
+
+**Effort:** advanced  ·  **Rating:** 4/5
+
+**Install:** `frida on device (see re.frida.server)`
+
+**URL:** https://frida.re
+
+**Alternatives:** objection
+
+
+#### iOS static analysis
+
+
+
+##### Frida-codeshare
+
+Collection of iOS-focused Frida scripts for class dumping and method tracing.
+
+**When:** Need common iOS hooks without writing your own.
+
+**Effort:** medium  ·  **Rating:** 3/5
+
+**Install:** `pip install frida`
+
+**URL:** https://codeshare.frida.re
+
+**Alternatives:** class-dump
+
+
+
+
 

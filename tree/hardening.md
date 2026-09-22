@@ -4,7 +4,10 @@ Audit, harden, and prove it: system security scans, compliance benchmarks, confi
 
 ## System Security Auditing & Compliance Scans
 
-### Lynis ⭐
+Lynis ⭐
+
+
+#### Lynis ⭐
 
 Agentless security-auditing tool for Linux, BSD, and macOS that runs 200+ checks across the whole OS, scores everything, and ends with a hardening index, disclosure status, and actionable remediation hints.
 
@@ -19,7 +22,7 @@ Agentless security-auditing tool for Linux, BSD, and macOS that runs 200+ checks
 **Alternatives:** openscap, cis-cat pro assessor
 
 
-### OpenSCAP
+#### OpenSCAP
 
 NIST-certified SCAP 1.2 toolkit: loads security content (XCCDF/OVAL data streams) and evaluates or remediates a system against specific profiles from the command line.
 
@@ -34,7 +37,7 @@ NIST-certified SCAP 1.2 toolkit: loads security content (XCCDF/OVAL data streams
 **Alternatives:** lynis, cis-cat pro assessor
 
 
-### CIS-CAT Pro Assessor
+#### CIS-CAT Pro Assessor
 
 Commercial CIS scanner (SecureSuite membership) that turns CIS Benchmarks into automated scans and compliance score/report output; a free CIS-CAT Lite covers a small set of select benchmarks.
 
@@ -49,7 +52,7 @@ Commercial CIS scanner (SecureSuite membership) that turns CIS Benchmarks into a
 **Alternatives:** openscap, lynis
 
 
-### auditd
+#### auditd
 
 Linux Audit framework userspace (auditd, auditctl, ausearch) recording privileged actions, file access, and security-relevant events to an immutable log across reboots.
 
@@ -64,9 +67,16 @@ Linux Audit framework userspace (auditd, auditctl, ausearch) recording privilege
 **Alternatives:** lynis
 
 
+
+
+
+
 ## Compliance Benchmarks & Baseline Content
 
-### scap-security-guide ⭐
+scap-security-guide ⭐
+
+
+#### scap-security-guide ⭐
 
 OpenSCAP's official security content: prebuilt SCAP data streams with profiles for CIS, DISA STIG, PCI-DSS, and HIPAA, plus bundled bash and Ansible remediation scripts that actually apply the fixes.
 
@@ -81,7 +91,7 @@ OpenSCAP's official security content: prebuilt SCAP data streams with profiles f
 **Alternatives:** cis benchmarks, stig viewer
 
 
-### CIS Benchmarks
+#### CIS Benchmarks
 
 Free, consensus-built configuration guides (PDF) for hundreds of OS, server, cloud, and application targets — the de-facto hardening standard that auditors and scanners measure against.
 
@@ -96,7 +106,7 @@ Free, consensus-built configuration guides (PDF) for hundreds of OS, server, clo
 **Alternatives:** stig viewer
 
 
-### STIG Viewer
+#### STIG Viewer
 
 Browser database of the entire DISA Security Technical Implementation Guide set — rule-by-rule requirements with severity, CCI/NIST 800-53 mappings, and concrete fix text.
 
@@ -111,9 +121,16 @@ Browser database of the entire DISA Security Technical Implementation Guide set 
 **Alternatives:** cis benchmarks
 
 
+
+
+
+
 ## Automated Hardening & Configuration
 
-### ansible-hardening ⭐
+ansible-hardening ⭐
+
+
+#### ansible-hardening ⭐
 
 dev-sec's battle-tested Ansible collection (devsec.hardening) that hardens OS, SSH, nginx, and MySQL/MariaDB at scale, aligned with the InSpec baselines the same team maintains.
 
@@ -126,7 +143,7 @@ dev-sec's battle-tested Ansible collection (devsec.hardening) that hardens OS, S
 **URL:** https://github.com/dev-sec/ansible-collection-hardening
 
 
-### systemd-analyze security
+#### systemd-analyze security
 
 Built-in systemd command that scores each service unit 0-10 on exposure (PrivateTmp, NoNewPrivileges, ProtectSystem, and more) and lists the exact directives dragging the score down.
 
@@ -141,9 +158,16 @@ Built-in systemd command that scores each service unit 0-10 on exposure (Private
 **Alternatives:** ansible-hardening
 
 
+
+
+
+
 ## Network & Service Hardening
 
-### ssh-audit ⭐
+ssh-audit ⭐
+
+
+#### ssh-audit ⭐
 
 Audits SSH server and client configuration end-to-end: grades every KEX, cipher, MAC, and host-key algorithm, flags weak or vulnerable combos, and ships per-distro hardening guides.
 
@@ -158,7 +182,7 @@ Audits SSH server and client configuration end-to-end: grades every KEX, cipher,
 **Alternatives:** mozilla openssh config
 
 
-### firewalld
+#### firewalld
 
 Dynamic firewall daemon with zone-based policy, a D-Bus service API, and runtime-vs-permanent config separation; the default firewall manager on RHEL/CentOS/Fedora/SUSE.
 
@@ -173,7 +197,7 @@ Dynamic firewall daemon with zone-based policy, a D-Bus service API, and runtime
 **Alternatives:** ufw
 
 
-### ufw
+#### ufw
 
 Ubuntu's uncomplicated frontend over iptables: allow/deny rules for ports and services in a few commands, with sane IPv6 defaults and a status view.
 
@@ -188,7 +212,7 @@ Ubuntu's uncomplicated frontend over iptables: allow/deny rules for ports and se
 **Alternatives:** firewalld
 
 
-### Mozilla OpenSSH Config
+#### Mozilla OpenSSH Config
 
 Reference hardening guide for sshd_config and moduli with Modern/Intermediate/MFA profiles and concrete HostKey, KEX, cipher, and MAC lists for each OpenSSH generation.
 
@@ -201,4 +225,8 @@ Reference hardening guide for sshd_config and moduli with Modern/Intermediate/MF
 **URL:** https://infosec.mozilla.org/guidelines/openssh
 
 **Alternatives:** ssh-audit
+
+
+
+
 

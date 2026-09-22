@@ -4,7 +4,10 @@ Automated detection of known CVEs and misconfigurations at scale, plus manual tr
 
 ## General Vulnerability Scanners
 
-### Nuclei ⭐
+Nuclei ⭐
+
+
+#### Nuclei ⭐
 
 Template-driven scanner (projectdiscovery) running thousands of YAML checks against your web, network, and infrastructure targets to confirm known CVEs and misconfigurations.
 
@@ -19,7 +22,7 @@ Template-driven scanner (projectdiscovery) running thousands of YAML checks agai
 **Alternatives:** nessus, openvas, vuls
 
 
-### Nessus
+#### Nessus
 
 Tenable's market-standard commercial scanner with credentialed and remote checks across OSes, services, and web; the free Essentials tier covers a small lab.
 
@@ -34,7 +37,7 @@ Tenable's market-standard commercial scanner with credentialed and remote checks
 **Alternatives:** openvas, nuclei
 
 
-### OpenVAS (GVM)
+#### OpenVAS (GVM)
 
 Greenbone's open-source stack forked from the old Nessus; schedules scans of thousands of network vulnerability tests (NVTs) with a web dashboard.
 
@@ -49,7 +52,7 @@ Greenbone's open-source stack forked from the old Nessus; schedules scans of tho
 **Alternatives:** nessus, nuclei
 
 
-### Vuls
+#### Vuls
 
 Agentless Go scanner that runs from one control host over SSH to inventory OS packages, middleware, and containers, then maps each server to applicable CVEs.
 
@@ -64,9 +67,16 @@ Agentless Go scanner that runs from one control host over SSH to inventory OS pa
 **Alternatives:** nuclei, openvas
 
 
+
+
+
+
 ## Web Vulnerability Scanners
 
-### Nikto ⭐
+Nikto ⭐
+
+
+#### Nikto ⭐
 
 Perl web server scanner running 7,000+ checks for known files, outdated software, and misconfigurations on your own sites.
 
@@ -81,7 +91,7 @@ Perl web server scanner running 7,000+ checks for known files, outdated software
 **Alternatives:** owasp zap, wapiti
 
 
-### OWASP ZAP
+#### OWASP ZAP
 
 Full-featured open-source web app scanner combining an intercepting proxy, spidering, and automated active and passive scanning behind a REST API.
 
@@ -96,7 +106,7 @@ Full-featured open-source web app scanner combining an intercepting proxy, spide
 **Alternatives:** nikto, wapiti, arachni
 
 
-### Arachni
+#### Arachni
 
 Feature-rich Ruby web app scanner with modular platform checks, a REST API, and distributed scanning of your own applications.
 
@@ -111,7 +121,7 @@ Feature-rich Ruby web app scanner with modular platform checks, a REST API, and 
 **Alternatives:** owasp zap, wapiti
 
 
-### sqlmap
+#### sqlmap
 
 Long-standing automated SQL injection detector with database fingerprinting; validates whether a suspected injection point on your own app is genuinely exploitable.
 
@@ -126,9 +136,16 @@ Long-standing automated SQL injection detector with database fingerprinting; val
 **Alternatives:** wapiti, owasp zap
 
 
+
+
+
+
 ## Network & Service Scanners
 
-### Nettacker ⭐
+Nettacker ⭐
+
+
+#### Nettacker ⭐
 
 OWASP automation framework that scans your networks in layers (ports, services, subdomains), correlates the results, then runs follow-up module checks.
 
@@ -143,7 +160,7 @@ OWASP automation framework that scans your networks in layers (ports, services, 
 **Alternatives:** nuclei, openvas
 
 
-### Vulners
+#### Vulners
 
 Aggregated vulnerability and exploit database offering a free API plus an Nmap script that matches your scanned services against millions of CVEs.
 
@@ -158,7 +175,7 @@ Aggregated vulnerability and exploit database offering a free API plus an Nmap s
 **Alternatives:** nuclei, nettacker, openvas
 
 
-### OpenSCAP
+#### OpenSCAP
 
 NIST-certified scanner applying security-policy content (CIS, STIG) and OVAL CVE definitions to your Linux hosts for compliance and vulnerability posture.
 
@@ -173,9 +190,16 @@ NIST-certified scanner applying security-policy content (CIS, STIG) and OVAL CVE
 **Alternatives:** openvas, vuls
 
 
+
+
+
+
 ## CMS Scanners
 
-### WPScan ⭐
+WPScan ⭐
+
+
+#### WPScan ⭐
 
 WordPress scanner that fingerprints core, theme, and plugin versions against the WPScan vulnerability database and does user and weak-password checks.
 
@@ -190,7 +214,7 @@ WordPress scanner that fingerprints core, theme, and plugin versions against the
 **Alternatives:** cmsmap, droopescan
 
 
-### CMSmap
+#### CMSmap
 
 Python tool that scans WordPress, Joomla, and Drupal sites you own for known vulnerabilities and exposed file paths.
 
@@ -205,7 +229,7 @@ Python tool that scans WordPress, Joomla, and Drupal sites you own for known vul
 **Alternatives:** wpscan, droopescan
 
 
-### droopescan
+#### droopescan
 
 Lightweight Perl scanner focused on Drupal, with partial WordPress and Bolt coverage; strong on plugin and module fingerprinting.
 
@@ -220,9 +244,16 @@ Lightweight Perl scanner focused on Drupal, with partial WordPress and Bolt cove
 **Alternatives:** wpscan, cmsmap
 
 
+
+
+
+
 ## Application & Dependency Scanners
 
-### Trivy ⭐
+Trivy ⭐
+
+
+#### Trivy ⭐
 
 Aqua's scanner that fingerprints vulnerable packages and CVEs in the container images, filesystems, IaC templates, and SBOMs you run.
 
@@ -237,7 +268,7 @@ Aqua's scanner that fingerprints vulnerable packages and CVEs in the container i
 **Alternatives:** grype, osv-scanner
 
 
-### Grype
+#### Grype
 
 Anchore's fast scanner pairing with Syft to map dependency CVEs across the containers and filesystems you build and ship.
 
@@ -252,7 +283,7 @@ Anchore's fast scanner pairing with Syft to map dependency CVEs across the conta
 **Alternatives:** trivy, osv-scanner
 
 
-### osv-scanner
+#### osv-scanner
 
 Google's scanner that matches your project lockfiles and SBOMs against the open-source-focused OSV.dev vulnerability database.
 
@@ -267,7 +298,7 @@ Google's scanner that matches your project lockfiles and SBOMs against the open-
 **Alternatives:** grype, trivy
 
 
-### cve-bin-tool
+#### cve-bin-tool
 
 Scans binary files and their strings to identify which known-vulnerable library and product components your software bundles.
 
@@ -282,9 +313,16 @@ Scans binary files and their strings to identify which known-vulnerable library 
 **Alternatives:** osv-scanner, trivy
 
 
+
+
+
+
 ## CVE & Exploit Lookup
 
-### searchsploit / Exploit-DB ⭐
+searchsploit / Exploit-DB ⭐
+
+
+#### searchsploit / Exploit-DB ⭐
 
 Offline grep over the ~40,000-entry Exploit-DB archive bundled with Kali, showing exploit scripts, Metasploit modules, and build instructions for your own lab.
 
@@ -299,7 +337,7 @@ Offline grep over the ~40,000-entry Exploit-DB archive bundled with Kali, showin
 **Alternatives:** cve-search, nvd
 
 
-### cve-search
+#### cve-search
 
 Local MongoDB-backed engine that ingests NVD, CISA, and Exploit-DB feeds for fast bulk lookups across your whole inventory.
 
@@ -314,7 +352,7 @@ Local MongoDB-backed engine that ingests NVD, CISA, and Exploit-DB feeds for fas
 **Alternatives:** nvd, searchsploit
 
 
-### NVD (NIST)
+#### NVD (NIST)
 
 Official NIST vulnerability feed and web UI; the reference source for CVE metadata, CPE mappings, and CVSS metrics.
 
@@ -327,4 +365,8 @@ Official NIST vulnerability feed and web UI; the reference source for CVE metada
 **URL:** https://nvd.nist.gov
 
 **Alternatives:** cve-search, vulners
+
+
+
+
 

@@ -4,7 +4,10 @@ Offline + online cracking of hashes and logins you own: GPU/CPU recovery, wordli
 
 ## GPU & Accelerated Cracking
 
-### Hashcat ⭐
+Hashcat ⭐
+
+
+#### Hashcat ⭐
 
 World's fastest password recovery utility; GPU-optimized kernels for 590+ hash modes across dictionary (wordlist), mask/brute-force, hybrid, PCFG and rule-based attacks.
 
@@ -19,7 +22,7 @@ World's fastest password recovery utility; GPU-optimized kernels for 590+ hash m
 **Alternatives:** hashcat-utils, John the Ripper
 
 
-### hashcat-utils
+#### hashcat-utils
 
 Small MIT-licensed STDIN/STDOUT utilities (cap2hccapx, combipow, len, cutb, rulegen, …) meant to be chained into pipelines that feed hashcat candidates.
 
@@ -34,7 +37,7 @@ Small MIT-licensed STDIN/STDOUT utilities (cap2hccapx, combipow, len, cutb, rule
 **Alternatives:** maskprocessor, John the Ripper jumbo
 
 
-### MaskProcessor
+#### MaskProcessor
 
 High-performance per-position word generator using hashcat-style masks (?l, ?u, ?d, ?s, ?a) and up to four custom charsets; generates candidate words hashcat guesses.
 
@@ -49,9 +52,16 @@ High-performance per-position word generator using hashcat-style masks (?l, ?u, 
 **Alternatives:** hashcat, crunch, kwprocessor
 
 
+
+
+
+
 ## CPU & Classic Cracking
 
-### John the Ripper ⭐
+John the Ripper ⭐
+
+
+#### John the Ripper ⭐
 
 The classic Unix password cracker: dictionary, incremental (markov), and rule-based modes, plus hundreds of hash/cipher formats in its jumbo builds; runs on CPU, GPU (OpenCL) and more.
 
@@ -66,7 +76,7 @@ The classic Unix password cracker: dictionary, incremental (markov), and rule-ba
 **Alternatives:** John the Ripper jumbo, hashcat, ophcrack
 
 
-### John the Ripper jumbo
+#### John the Ripper jumbo
 
 Community-enhanced jumbo edition (bleeding-jumbo branch): hundreds of extra formats (Windows NTLM, macOS, PDF, RAR, KeePass) and bundled *2john converters for encrypted files.
 
@@ -81,7 +91,7 @@ Community-enhanced jumbo edition (bleeding-jumbo branch): hundreds of extra form
 **Alternatives:** John the Ripper, hashcat
 
 
-### ophcrack
+#### ophcrack
 
 Windows LM/NTLM password cracker based on rainbow tables; GUI + LiveCD, with free XP/Vista tables and SAM dumping from your own Windows installs.
 
@@ -96,9 +106,16 @@ Windows LM/NTLM password cracker based on rainbow tables; GUI + LiveCD, with fre
 **Alternatives:** John the Ripper, hashcat
 
 
+
+
+
+
 ## Online Login Attacks
 
-### Hydra ⭐
+Hydra ⭐
+
+
+#### Hydra ⭐
 
 Parallelized network login cracker supporting 50+ protocols/modules (ssh, rdp, http-get/post-form, ftp, smb, …) with -L/-P user/password lists and brute-force (-x).
 
@@ -113,7 +130,7 @@ Parallelized network login cracker supporting 50+ protocols/modules (ssh, rdp, h
 **Alternatives:** medusa, ncrack, patator
 
 
-### Medusa
+#### Medusa
 
 Thread-based modular parallel login brute-forcer (SMB, HTTP, MS-SQL, RDP, SSH, VNC and more), with combination files and host/user/password parallelism.
 
@@ -128,7 +145,7 @@ Thread-based modular parallel login brute-forcer (SMB, HTTP, MS-SQL, RDP, SSH, V
 **Alternatives:** hydra, ncrack, patator
 
 
-### Ncrack
+#### Ncrack
 
 Nmap-team high-speed network authentication cracker with an Nmap-like CLI and timing templates; supports SSH, RDP, Telnet, HTTP(S), SMB, VNC, Redis and more.
 
@@ -143,7 +160,7 @@ Nmap-team high-speed network authentication cracker with an Nmap-like CLI and ti
 **Alternatives:** hydra, medusa, patator
 
 
-### Patator
+#### Patator
 
 Multi-purpose flexible brute-forcer written in Python with modules for http_fuzz (web login), ssh_login, ftp_login, rdp_login and more; built to be more reliable than its predecessors.
 
@@ -158,9 +175,16 @@ Multi-purpose flexible brute-forcer written in Python with modules for http_fuzz
 **Alternatives:** hydra, medusa, ncrack
 
 
+
+
+
+
 ## Wordlists & Generation
 
-### SecLists ⭐
+SecLists ⭐
+
+
+#### SecLists ⭐
 
 The security tester's companion collection: passwords (10k/1M/rockyou-derived), usernames, default/router credentials, fuzzing payloads and discovery lists in one place.
 
@@ -175,7 +199,7 @@ The security tester's companion collection: passwords (10k/1M/rockyou-derived), 
 **Alternatives:** rockyou.txt, cewl
 
 
-### rockyou.txt
+#### rockyou.txt
 
 The 2009 RockYou breach password list (~14M passwords, historically the free default): a solid baseline dictionary for fast-hash testing on your own targets.
 
@@ -190,7 +214,7 @@ The 2009 RockYou breach password list (~14M passwords, historically the free def
 **Alternatives:** SecLists
 
 
-### CeWL
+#### CeWL
 
 Ruby spider that crawls a site to a depth, collects unique words (plus email/author metadata) and emits a custom wordlist for password recovery.
 
@@ -205,7 +229,7 @@ Ruby spider that crawls a site to a depth, collects unique words (plus email/aut
 **Alternatives:** crunch, mentalist
 
 
-### crunch
+#### crunch
 
 Wordlist generator that enumerates all combinations/permutations of a charset with pattern support (@,%^ placeholders), file-splitting, resume and gzip/7z output.
 
@@ -220,7 +244,7 @@ Wordlist generator that enumerates all combinations/permutations of a charset wi
 **Alternatives:** maskprocessor, kwprocessor, mentalist
 
 
-### kwprocessor
+#### kwprocessor
 
 Advanced keyboard-walk generator that produces passwords following keyboard routes (adjacent-key walks, zxcvbn-style patterns) from configurable basechars, keymaps and route files.
 
@@ -235,7 +259,7 @@ Advanced keyboard-walk generator that produces passwords following keyboard rout
 **Alternatives:** crunch, maskprocessor
 
 
-### Mentalist
+#### Mentalist
 
 Graphical wordlist generator built on human password paradigms (case mangling, keyboard walks, adding years/digits); exports full wordlists or ready-made hashcat and John rules.
 
@@ -250,9 +274,16 @@ Graphical wordlist generator built on human password paradigms (case mangling, k
 **Alternatives:** cewl, crunch
 
 
+
+
+
+
 ## Hash Identification
 
-### hashid ⭐
+hashid ⭐
+
+
+#### hashid ⭐
 
 Python tool identifying 220+ hash types via regex, printing the matching hashcat mode number and John format so your next command is correct the first time.
 
@@ -267,7 +298,7 @@ Python tool identifying 220+ hash types via regex, printing the matching hashcat
 **Alternatives:** hash-identifier, HashCat example-hashes
 
 
-### hash-identifier
+#### hash-identifier
 
 Classic interactive script that asks candidate lines and guesses the hash algorithm family; the free counterpart hashid was written to supersede.
 
@@ -282,7 +313,7 @@ Classic interactive script that asks candidate lines and guesses the hash algori
 **Alternatives:** hashid, HashCat example-hashes
 
 
-### HashCat example-hashes
+#### HashCat example-hashes
 
 Official reference table with one valid sample hash per hashcat mode (password is always 'hashcat'); the canonical way to confirm a hash type and test an attack command.
 
@@ -297,9 +328,16 @@ Official reference table with one valid sample hash per hashcat mode (password i
 **Alternatives:** hashid, hash-identifier
 
 
+
+
+
+
 ## Encrypted File & Archive Recovery
 
-### zip2john ⭐
+zip2john ⭐
+
+
+#### zip2john ⭐
 
 John the Ripper utility that converts encrypted ZIPs (and via siblings like rar2john, 7z2john, pdf2john) into a crackable hash for john or hashcat; fast and dependency-free.
 
@@ -314,7 +352,7 @@ John the Ripper utility that converts encrypted ZIPs (and via siblings like rar2
 **Alternatives:** fcrackzip, John the Ripper jumbo
 
 
-### fcrackzip
+#### fcrackzip
 
 Fast zip password cracker with dictionary and brute-force modes (libzip-based fork runs ~1000x faster than the original unzip-spawning version).
 
@@ -329,7 +367,7 @@ Fast zip password cracker with dictionary and brute-force modes (libzip-based fo
 **Alternatives:** zip2john, John the Ripper jumbo
 
 
-### pdfcrack
+#### pdfcrack
 
 Small GPL tool recovering owner/user passwords from PDFs using the standard security handler (rev 2-4) via wordlist or brute force, with job save/load state.
 
@@ -344,7 +382,7 @@ Small GPL tool recovering owner/user passwords from PDFs using the standard secu
 **Alternatives:** zip2john, John the Ripper jumbo
 
 
-### rarcrack
+#### rarcrack
 
 Brute-force password recovery for RAR, ZIP and 7Z archives with automatic resume via XML state file and thread/charset control; dormant since ~2010.
 
@@ -359,7 +397,7 @@ Brute-force password recovery for RAR, ZIP and 7Z archives with automatic resume
 **Alternatives:** zip2john, John the Ripper jumbo
 
 
-### keepass2john
+#### keepass2john
 
 John jumbo converter that extracts a sealed .kdbx KeePass database into a PBKDF2/AES hash crackable by john or hashcat ($keepass$ format).
 
@@ -372,4 +410,8 @@ John jumbo converter that extracts a sealed .kdbx KeePass database into a PBKDF2
 **URL:** https://github.com/openwall/john
 
 **Alternatives:** John the Ripper jumbo
+
+
+
+
 

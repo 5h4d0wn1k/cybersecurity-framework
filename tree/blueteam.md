@@ -4,7 +4,10 @@ Tools defenders run to detect, monitor, and protect their own estate: SIEM, endp
 
 ## SIEM & SOC Analytics
 
-### Elastic Stack (ELK) ⭐
+Elastic Stack (ELK) ⭐
+
+
+#### Elastic Stack (ELK) ⭐
 
 Reference open-core SIEM: ingests logs via Beats/Elastic Agent into Elasticsearch (Kibana for UI), and runs the detection engine with EQL/ES|QL/Sigma rules, dashboards, and built-in threat hunting.
 
@@ -19,7 +22,7 @@ Reference open-core SIEM: ingests logs via Beats/Elastic Agent into Elasticsearc
 **Alternatives:** wazuh, graylog, splunk
 
 
-### Wazuh
+#### Wazuh
 
 Open-source XDR/SIEM pairing an Elastic/OpenSearch backend with a unified agent delivering file-integrity monitoring, security configuration assessment, vulnerability detection, active response, and compliance dashboards.
 
@@ -34,7 +37,7 @@ Open-source XDR/SIEM pairing an Elastic/OpenSearch backend with a unified agent 
 **Alternatives:** elastic, graylog
 
 
-### Splunk
+#### Splunk
 
 Commercial SIEM incumbent (Cisco-owned): SPL search over indexed events, mature dashboards/alerts, and the largest third-party integration ecosystem; licensed per GB/day.
 
@@ -49,7 +52,7 @@ Commercial SIEM incumbent (Cisco-owned): SPL search over indexed events, mature 
 **Alternatives:** elastic, wazuh
 
 
-### Graylog
+#### Graylog
 
 Open-source log management and SIEM on Elasticsearch/OpenSearch storage, with flexible extraction pipelines (streams + pipeline rules) for parsing, routing, GEOIP, and threat-intel enrichment.
 
@@ -64,7 +67,7 @@ Open-source log management and SIEM on Elasticsearch/OpenSearch storage, with fl
 **Alternatives:** elastic, wazuh
 
 
-### Logstash
+#### Logstash
 
 Data-shaping pipeline (the 'L' in ELK) that pulls logs and metrics, transforms them — parse, enrich, filter, route — and ships them to Elasticsearch or any other output.
 
@@ -79,9 +82,16 @@ Data-shaping pipeline (the 'L' in ELK) that pulls logs and metrics, transforms t
 **Alternatives:** vector, fluentd
 
 
+
+
+
+
 ## Endpoint Detection & Response
 
-### Velociraptor ⭐
+Velociraptor ⭐
+
+
+#### Velociraptor ⭐
 
 Open-source DFIR + endpoint-monitoring framework (Rapid7): the Velociraptor Query Language hunts the entire fleet for forensic artifacts, collects live evidence at scale, and the monitoring engine runs Sigma detections against ETW/eBPF events in real time.
 
@@ -96,7 +106,7 @@ Open-source DFIR + endpoint-monitoring framework (Rapid7): the Velociraptor Quer
 **Alternatives:** osquery, sysmon, limacharlie
 
 
-### osquery
+#### osquery
 
 SQL-powered agent that exposes OS state — processes, sockets, files, users, listeners — as queryable tables; defenders fire fleet-wide queries instantly and schedule packs for continuous inspection, managed via Fleet.
 
@@ -111,7 +121,7 @@ SQL-powered agent that exposes OS state — processes, sockets, files, users, li
 **Alternatives:** velociraptor, limacharlie
 
 
-### Sysmon
+#### Sysmon
 
 Windows Sysinternals driver that logs high-fidelity process creation, network connections, and file writes beyond default auditing; pair with the SwiftOnSecurity (or Modular) config for a solid threat-hunting baseline.
 
@@ -126,7 +136,7 @@ Windows Sysinternals driver that logs high-fidelity process creation, network co
 **Alternatives:** velociraptor, osquery
 
 
-### LimaCharlie
+#### LimaCharlie
 
 Cloud-native SecOps platform: an EDR sensor streams verbose endpoint telemetry over TLS in real time, and a YAML-based Detection & Response engine runs the full open Sigma ruleset with automated response actions.
 
@@ -141,9 +151,16 @@ Cloud-native SecOps platform: an EDR sensor streams verbose endpoint telemetry o
 **Alternatives:** velociraptor, osquery
 
 
+
+
+
+
 ## Intrusion Detection / Network Monitoring
 
-### Suricata ⭐
+Suricata ⭐
+
+
+#### Suricata ⭐
 
 OISF's multi-threaded open-source IDS/IPS engine that inspects traffic with Snort-compatible rules at multi-Gbps speeds and emits structured EVE JSON alerts (plus PCAP) straight into your SIEM.
 
@@ -158,7 +175,7 @@ OISF's multi-threaded open-source IDS/IPS engine that inspects traffic with Snor
 **Alternatives:** snort, zeek
 
 
-### Snort 3
+#### Snort 3
 
 Cisco's next-generation open-source NIDS/IPS: Snort 3 adds multi-threading, a Lua-based policy language, and faster pattern matching over the classic 2.x line, tuned via Talos rules.
 
@@ -173,7 +190,7 @@ Cisco's next-generation open-source NIDS/IPS: Snort 3 adds multi-threading, a Lu
 **Alternatives:** suricata, zeek
 
 
-### Zeek
+#### Zeek
 
 Passive network-analysis framework (formerly Bro) that logs rich protocol metadata, file hashes, and events across 70+ log types for later forensics instead of blocking in real time.
 
@@ -188,7 +205,7 @@ Passive network-analysis framework (formerly Bro) that logs rich protocol metada
 **Alternatives:** suricata, snort
 
 
-### Security Onion
+#### Security Onion
 
 Turnkey NSM distribution that bundles Suricata (detection + full packet capture), Zeek metadata, Elasticsearch/Kibana dashboards, osquery host visibility, and alert/case management into a single install.
 
@@ -203,9 +220,16 @@ Turnkey NSM distribution that bundles Suricata (detection + full packet capture)
 **Alternatives:** suricata, zeek
 
 
+
+
+
+
 ## Web Application Firewall
 
-### ModSecurity ⭐
+ModSecurity ⭐
+
+
+#### ModSecurity ⭐
 
 The OWASP open-source WAF engine (an OWASP Production project) that inspects HTTP traffic and enforces SecRule policies on Apache/nginx; load the OWASP CRS on top for real attack coverage.
 
@@ -220,7 +244,7 @@ The OWASP open-source WAF engine (an OWASP Production project) that inspects HTT
 **Alternatives:** coraza, coreruleset (OWASP CRS)
 
 
-### Coraza
+#### Coraza
 
 OWASP WAF written in Go with near-full ModSecurity compatibility — runs CRS v4 without the legacy C engine as a library or middleware for Caddy, Traefik, APISIX, and API gateways, ideal for detection-as-code.
 
@@ -235,7 +259,7 @@ OWASP WAF written in Go with near-full ModSecurity compatibility — runs CRS v4
 **Alternatives:** modsecurity, coreruleset (OWASP CRS)
 
 
-### OWASP CRS
+#### OWASP CRS
 
 The OWASP flagship Core Rule Set — a community-maintained rule layer detecting SQLi, XSS, scanners, and other OWASP Top 10 attacks that runs on both ModSecurity and Coraza engines; a ruleset, not a standalone tool.
 
@@ -250,7 +274,7 @@ The OWASP flagship Core Rule Set — a community-maintained rule layer detecting
 **Alternatives:** modsecurity, coraza
 
 
-### Cloudflare WAF
+#### Cloudflare WAF
 
 Commercial managed edge WAF (SaaS) that filters traffic on Cloudflare's CDN using managed rulesets (including OWASP CRS coverage) plus bot and rate controls — no servers to run.
 
@@ -263,4 +287,8 @@ Commercial managed edge WAF (SaaS) that filters traffic on Cloudflare's CDN usin
 **URL:** https://developers.cloudflare.com/waf/
 
 **Alternatives:** modsecurity, coraza
+
+
+
+
 

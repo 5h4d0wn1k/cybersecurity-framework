@@ -4,7 +4,10 @@ Analyze memory, disk, carved files, artifacts, and timelines from your own syste
 
 ## Memory Forensics
 
-### Volatility 3 ⭐
+Volatility 3 ⭐
+
+
+#### Volatility 3 ⭐
 
 The de-facto memory forensics framework: plugin-based analysis of RAM dumps (raw, EWF, crash/hibernation) across Windows, Linux, macOS, and Android — process listing, network artifacts, injected code, and more.
 
@@ -19,7 +22,7 @@ The de-facto memory forensics framework: plugin-based analysis of RAM dumps (raw
 **Alternatives:** MemProcFS, Volatility 2
 
 
-### Volatility 2
+#### Volatility 2
 
 The classic Python 2 framework (archived but stable) with the deepest plugin ecosystem and profile-based analysis for older Windows, Linux, and macOS dumps.
 
@@ -34,7 +37,7 @@ The classic Python 2 framework (archived but stable) with the deepest plugin eco
 **Alternatives:** Volatility 3
 
 
-### MemProcFS
+#### MemProcFS
 
 Mounts a memory dump or live target (PCILeech FPGA/LeechAgent) as a virtual filesystem of processes, registry, and artifacts, with a batch forensic mode and YARA scanning.
 
@@ -49,9 +52,16 @@ Mounts a memory dump or live target (PCILeech FPGA/LeechAgent) as a virtual file
 **Alternatives:** Volatility 3
 
 
+
+
+
+
 ## Disk Forensics & Imaging
 
-### Autopsy ⭐
+Autopsy ⭐
+
+
+#### Autopsy ⭐
 
 GUI platform built on The Sleuth Kit: opens images and live drives, recovers deleted files, and runs ingest modules for web history, keyword search, and carving inside a case workflow.
 
@@ -66,7 +76,7 @@ GUI platform built on The Sleuth Kit: opens images and live drives, recovers del
 **Alternatives:** The Sleuth Kit
 
 
-### The Sleuth Kit
+#### The Sleuth Kit
 
 Command-line suite for raw/EWF images: mmls for partition layout, fls/icat to list and extract inodes, istat for metadata, and tsk_recover for file recovery — the engine under Autopsy.
 
@@ -81,7 +91,7 @@ Command-line suite for raw/EWF images: mmls for partition layout, fls/icat to li
 **Alternatives:** Autopsy
 
 
-### dc3dd
+#### dc3dd
 
 Forensic fork of GNU dd adding on-the-fly hashing, split output, pattern wiping, and detailed logging — evidence-grade imaging of a source drive to a file.
 
@@ -96,7 +106,7 @@ Forensic fork of GNU dd adding on-the-fly hashing, split output, pattern wiping,
 **Alternatives:** Guymager
 
 
-### Guymager
+#### Guymager
 
 GUI forensic imager for Linux producing flat (dd), EWF (E01), and AFF images with multi-threaded, pipelined reads for fast verified acquisitions.
 
@@ -111,9 +121,16 @@ GUI forensic imager for Linux producing flat (dd), EWF (E01), and AFF images wit
 **Alternatives:** dc3dd
 
 
+
+
+
+
 ## File Carving & Recovery
 
-### foremost ⭐
+foremost ⭐
+
+
+#### foremost ⭐
 
 Header/footer and data-structure file carver (originally from AFOSI) that extracts JPEG, ZIP, PDF, and other signatures from raw images or drives via a configurable file-type table.
 
@@ -128,7 +145,7 @@ Header/footer and data-structure file carver (originally from AFOSI) that extrac
 **Alternatives:** scalpel, PhotoRec/testdisk
 
 
-### bulk_extractor
+#### bulk_extractor
 
 Scans any input byte-by-byte and extracts emails, URLs, credit-card numbers, JPEGs, and JSON to feature files — recursively decoding compressed or encoded blocks without parsing the filesystem.
 
@@ -143,7 +160,7 @@ Scans any input byte-by-byte and extracts emails, URLs, credit-card numbers, JPE
 **Alternatives:** foremost
 
 
-### scalpel
+#### scalpel
 
 Filesystem-independent carver using a header/footer definition database — a fast rewrite of foremost's carving engine with tunable per-type carve-size limits.
 
@@ -158,7 +175,7 @@ Filesystem-independent carver using a header/footer definition database — a fa
 **Alternatives:** foremost, PhotoRec/testdisk
 
 
-### PhotoRec/testdisk
+#### PhotoRec/testdisk
 
 Signature-based recovery of 440+ file formats plus TestDisk for partition-table repair and undelete; no filename reconstruction, but deep salvage on corrupted or reformatted media.
 
@@ -173,9 +190,16 @@ Signature-based recovery of 440+ file formats plus TestDisk for partition-table 
 **Alternatives:** foremost, scalpel
 
 
+
+
+
+
 ## Timeline & Log Analysis
 
-### plaso/log2timeline ⭐
+plaso/log2timeline ⭐
+
+
+#### plaso/log2timeline ⭐
 
 log2timeline extracts timestamped events (filesystem, registry, EVTX, browser, application logs) from an image or mount point into a Plaso storage file; psort turns it into a filtered super-timeline.
 
@@ -190,7 +214,7 @@ log2timeline extracts timestamped events (filesystem, registry, EVTX, browser, a
 **Alternatives:** Timesketch
 
 
-### Timesketch
+#### Timesketch
 
 Google's web front-end for collaborative timeline analysis: import Plaso output and search, filter, star, and annotate events in your browser.
 
@@ -205,9 +229,16 @@ Google's web front-end for collaborative timeline analysis: import Plaso output 
 **Alternatives:** plaso/log2timeline
 
 
+
+
+
+
 ## Windows Artifact Analysis
 
-### KAPE ⭐
+KAPE ⭐
+
+
+#### KAPE ⭐
 
 Kroll Artifact Parser and Extractor: selects forensically useful artifacts (registry hives, EVTX, Prefetch, MFT, browser files) from a live device or mounted image, then parses them with bundled tools in minutes.
 
@@ -222,7 +253,7 @@ Kroll Artifact Parser and Extractor: selects forensically useful artifacts (regi
 **Alternatives:** Eric Zimmerman's Tools
 
 
-### Eric Zimmerman's Tools
+#### Eric Zimmerman's Tools
 
 Suite of focused parsers — RECmd/Registry Explorer, PECmd (Prefetch), LECmd (LNK), JLECmd (JumpLists), ShellBags, Amcache, MFTECmd — answering execution-timeline questions from individual artifacts.
 
@@ -237,9 +268,16 @@ Suite of focused parsers — RECmd/Registry Explorer, PECmd (Prefetch), LECmd (L
 **Alternatives:** KAPE
 
 
+
+
+
+
 ## Incident Response & Triage
 
-### Velociraptor ⭐
+Velociraptor ⭐
+
+
+#### Velociraptor ⭐
 
 Open-source endpoint visibility and collection platform: deploy lightweight agents, run prebuilt forensic artifacts and fleet-wide hunts via VQL, and pull process, disk, and registry data to a central server.
 
@@ -254,7 +292,7 @@ Open-source endpoint visibility and collection platform: deploy lightweight agen
 **Alternatives:** UAC
 
 
-### UAC
+#### UAC
 
 Unix-like Artifacts Collector: no-install shell script collecting processes, users, logs, cron, running-file hashes, and bodyfiles from Linux/macOS/BSD/ESXi in order of volatility, packaged for handoff.
 
@@ -267,4 +305,8 @@ Unix-like Artifacts Collector: no-install shell script collecting processes, use
 **URL:** https://github.com/tclahr/uac
 
 **Alternatives:** Velociraptor
+
+
+
+
 

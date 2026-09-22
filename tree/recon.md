@@ -4,7 +4,18 @@ Passive + active discovery: subdomains, DNS, historical data, people, leaks, and
 
 ## Subdomain Enumeration
 
-### Amass ⭐
+
+
+
+#### Brute & dictionary methods
+
+
+
+##### Resolver-level (verify candidates)
+
+
+
+###### Amass ⭐
 
 OWASP-recommended, querying dozens of sources for active/passive subdomains; builds graph and flagship-level relationships between discovered assets.
 
@@ -19,7 +30,7 @@ OWASP-recommended, querying dozens of sources for active/passive subdomains; bui
 **Alternatives:** subfinder, crt.sh, dnsx
 
 
-### Subfinder
+###### Subfinder
 
 Fast passive-only subdomain discovery from 30+ sources (APIs optional, works well without them).
 
@@ -34,7 +45,7 @@ Fast passive-only subdomain discovery from 30+ sources (APIs optional, works wel
 **Alternatives:** amass, crt.sh
 
 
-### crt.sh
+###### crt.sh
 
 Transparency-log search over issued TLS certificates; zero-install, browser or curl.
 
@@ -49,7 +60,7 @@ Transparency-log search over issued TLS certificates; zero-install, browser or c
 **Alternatives:** subfinder, certsh
 
 
-### dnsx
+###### dnsx
 
 Fast multi-threaded DNS resolver built to verify a big list of candidate subdomains (A/AAAA/CNAME/TXT).
 
@@ -64,9 +75,20 @@ Fast multi-threaded DNS resolver built to verify a big list of candidate subdoma
 **Alternatives:** massdns
 
 
+#### API / transparency-log sources
+
+
+
+
+
+
+
 ## HTTP Probing & Titles
 
-### httpx ⭐
+httpx ⭐
+
+
+#### httpx ⭐
 
 Probes a list of hosts and returns live status codes, technologies, titles, and fingerprints.
 
@@ -81,9 +103,16 @@ Probes a list of hosts and returns live status codes, technologies, titles, and 
 **Alternatives:** naabu (port scan), masscan
 
 
+
+
+
+
 ## Passive DNS & History
 
-### SecurityTrails ⭐
+SecurityTrails ⭐
+
+
+#### SecurityTrails ⭐
 
 Passive DNS history and subdomain API; free tier without keys.
 
@@ -98,7 +127,7 @@ Passive DNS history and subdomain API; free tier without keys.
 **Alternatives:** crt.sh, dnsdumpster
 
 
-### VirusTotal DNS
+#### VirusTotal DNS
 
 Relations/passive-dns endpoints to map infrastructure and finding subdomains via historical resolution.
 
@@ -113,9 +142,16 @@ Relations/passive-dns endpoints to map infrastructure and finding subdomains via
 **Alternatives:** crt.sh
 
 
+
+
+
+
 ## Port Discovery
 
-### naabu ⭐
+naabu ⭐
+
+
+#### naabu ⭐
 
 Fast SYN port scanner (projectdiscovery) focused on top 100/1000 ports; integrates cleanly with httpx/nuclei.
 
@@ -130,7 +166,7 @@ Fast SYN port scanner (projectdiscovery) focused on top 100/1000 ports; integrat
 **Alternatives:** masscan, nmap, rustscan
 
 
-### Masscan
+#### Masscan
 
 Most-port-fastest scanner; emits results in a format easily piped into nmap or naabu.
 
@@ -145,7 +181,7 @@ Most-port-fastest scanner; emits results in a format easily piped into nmap or n
 **Alternatives:** naabu, nmap
 
 
-### nmap
+#### nmap
 
 The classic suite: port scan, OS/service detection, and scripting engine (NSE).
 
@@ -160,7 +196,7 @@ The classic suite: port scan, OS/service detection, and scripting engine (NSE).
 **Alternatives:** naabu, masscan, rustscan
 
 
-### RustScan
+#### RustScan
 
 Rust-based scanner that sweeps all ports in seconds then hands specifics to nmap.
 
@@ -173,4 +209,8 @@ Rust-based scanner that sweeps all ports in seconds then hands specifics to nmap
 **URL:** https://github.com/RustScan/RustScan
 
 **Alternatives:** naabu, masscan
+
+
+
+
 

@@ -4,7 +4,10 @@ Deception for defenders: fake services, canaries, honeynets, and tripwires place
 
 ## Honeypot Platforms & Deception Networks
 
-### T-Pot ⭐
+T-Pot ⭐
+
+
+#### T-Pot ⭐
 
 Bundles 20+ honeypots (Cowrie, Dionaea, Conpot, Snare, Mailoney, LLM-based traps) behind one Docker Compose deploy, with the Elastic stack, Kibana dashboards, Suricata, and a live attack map from the German PSNC/Telekom Security team.
 
@@ -19,7 +22,7 @@ Bundles 20+ honeypots (Cowrie, Dionaea, Conpot, Snare, Mailoney, LLM-based traps
 **Alternatives:** mhn, hpfeeds
 
 
-### Modern Honey Network
+#### Modern Honey Network
 
 Centralized server and web UI that deploys honeypot sensors (Cowrie, Dionaea, Conpot, Glastopf) over SSH and aggregates their events via HPFeeds into Elasticsearch for viewing and searching.
 
@@ -34,7 +37,7 @@ Centralized server and web UI that deploys honeypot sensors (Cowrie, Dionaea, Co
 **Alternatives:** t-pot, hpfeeds
 
 
-### Honeyd
+#### Honeyd
 
 Classic low-interaction daemon (Niels Provos) that fabricates thousands of virtual hosts, each with a spoofed nmap/xprobe OS personality and configurable fake TCP/UDP services, on unused IP space.
 
@@ -49,7 +52,7 @@ Classic low-interaction daemon (Niels Provos) that fabricates thousands of virtu
 **Alternatives:** t-pot, mhn
 
 
-### HPFeeds
+#### HPFeeds
 
 Honeynet Project's authenticated publish-subscribe protocol that ships JSON and binary honeypot events (dionaea.capture, cowrie.sessions, conpot.events,...) from sensors to collectors, MISP, ELK, and SIEMs.
 
@@ -64,9 +67,16 @@ Honeynet Project's authenticated publish-subscribe protocol that ships JSON and 
 **Alternatives:** t-pot, mhn
 
 
+
+
+
+
 ## SSH & Telnet Honeypots
 
-### Cowrie ⭐
+Cowrie ⭐
+
+
+#### Cowrie ⭐
 
 Medium-to-high interaction SSH and Telnet honeypot that emulates a fake UNIX filesystem, logs every keystroke and transferred file, records replayable sessions, and can proxy to a real box or use LLMs for dynamic replies.
 
@@ -81,7 +91,7 @@ Medium-to-high interaction SSH and Telnet honeypot that emulates a fake UNIX fil
 **Alternatives:** ssh-honeypot, sshesame
 
 
-### ssh-honeypot
+#### ssh-honeypot
 
 C-based fake sshd (droberson) that accepts connections and logs IP, username, and password plus HASSH-fingerprints the SSH client — without ever granting a shell.
 
@@ -96,7 +106,7 @@ C-based fake sshd (droberson) that accepts connections and logs IP, username, an
 **Alternatives:** cowrie, sshesame
 
 
-### sshesame
+#### sshesame
 
 Go-based fake SSH server that lets any login through, never executes anything on the host, and logs channels, requests, commands, and port-forward activity as JSON.
 
@@ -111,7 +121,7 @@ Go-based fake SSH server that lets any login through, never executes anything on
 **Alternatives:** cowrie, ssh-honeypot
 
 
-### Beelzebub
+#### Beelzebub
 
 Low-code Go deception runtime (a T-Pot 24.04 component) that serves YAML-defined decoy SSH, HTTP, TCP, Telnet, and MCP services, with LLM backends generating convincing real-time replies to keep attackers engaged.
 
@@ -126,7 +136,7 @@ Low-code Go deception runtime (a T-Pot 24.04 component) that serves YAML-defined
 **Alternatives:** cowrie, sshesame
 
 
-### kippo
+#### kippo
 
 The original medium-interaction SSH honeypot (Upi Tamminen) whose fake 'ubuntu' root shell lured attackers into recording complete shell interactions with replayable TTY logs; Cowrie is its direct fork and successor.
 
@@ -141,9 +151,16 @@ The original medium-interaction SSH honeypot (Upi Tamminen) whose fake 'ubuntu' 
 **Alternatives:** cowrie
 
 
+
+
+
+
 ## Service & Web Honeypots
 
-### Dionaea ⭐
+Dionaea ⭐
+
+
+#### Dionaea ⭐
 
 Nepenthes-successor low-interaction honeypot emulating SMB, FTP, HTTP, MSSQL, MySQL, SIP, UPnP, and more; embeds Python, uses libemu to detect captured shellcode, and stashes malware binaries and connection metadata for analysis.
 
@@ -158,7 +175,7 @@ Nepenthes-successor low-interaction honeypot emulating SMB, FTP, HTTP, MSSQL, My
 **Alternatives:** snare, glastopf
 
 
-### Snare (w/ Tanner)
+#### Snare (w/ Tanner)
 
 Glastopf's successor: SNARE clones real web pages into sensor traps and forwards every request to TANNER, a central classification service that evaluates the attack and decides the reply — dynamic camouflage across many sensors.
 
@@ -173,7 +190,7 @@ Glastopf's successor: SNARE clones real web pages into sensor traps and forwards
 **Alternatives:** glastopf, dionaea
 
 
-### Glastopf
+#### Glastopf
 
 Honeynet Project's original web-application honeypot that emulated vulnerability types (LFI/RFI/SQLi) with a built-in PHP sandbox and Google dork luring; archived, with maintainers pointing to SNARE/TANNER as the successor.
 
@@ -188,9 +205,16 @@ Honeynet Project's original web-application honeypot that emulated vulnerability
 **Alternatives:** snare (successor), dionaea
 
 
+
+
+
+
 ## Tokens, Tripwires & Canaries
 
-### Canarytokens ⭐
+Canarytokens ⭐
+
+
+#### Canarytokens ⭐
 
 Thinkst's free hosted (or self-hosted Docker) tripwire factory generating DNS, URL, document (PDF/Word), AWS-key, QR-code, and Slack tokens that alert by email/webhook the instant someone touches them.
 
@@ -205,7 +229,7 @@ Thinkst's free hosted (or self-hosted Docker) tripwire factory generating DNS, U
 **Alternatives:** opencanary
 
 
-### OpenCanary
+#### OpenCanary
 
 Thinkst's open-source multi-protocol honeypot daemon (SSH, telnet, HTTP, FTP, SNMP, SMB, RDP, MySQL, and more) that fires syslog, email, Slack, and webhook alerts on any probe; the OSS sibling of the commercial Thinkst Canary.
 
@@ -220,9 +244,16 @@ Thinkst's open-source multi-protocol honeypot daemon (SSH, telnet, HTTP, FTP, SN
 **Alternatives:** canarytokens
 
 
+
+
+
+
 ## ICS, IoT & Hardware Deception
 
-### Conpot ⭐
+Conpot ⭐
+
+
+#### Conpot ⭐
 
 Honeynet Project's ICS/SCADA honeypot emulating Modbus, S7, BACnet, EtherNet/IP, IEC-104, SNMP, and HTTP HMI stacks to look like a real industrial process, with tunable service response delays for realism.
 
@@ -237,7 +268,7 @@ Honeynet Project's ICS/SCADA honeypot emulating Modbus, S7, BACnet, EtherNet/IP,
 **Alternatives:** riotpot
 
 
-### RIoTPot
+#### RIoTPot
 
 Honeynet Project's IoT and OT honeypot: a hybrid proxy that fronts emulated services — SSH, Telnet, HTTP, Modbus, MQTT, CoAP — and can route interactions to any backend honeypot, managed through a small web UI.
 
@@ -250,4 +281,8 @@ Honeynet Project's IoT and OT honeypot: a hybrid proxy that fronts emulated serv
 **URL:** https://github.com/honeynet/riotpot
 
 **Alternatives:** conpot
+
+
+
+
 

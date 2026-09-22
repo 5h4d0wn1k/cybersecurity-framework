@@ -4,7 +4,10 @@ Enrich your own defenses: share and consume intel, pivot on IOCs, and write port
 
 ## Threat Intelligence Sharing & Platforms
 
-### MISP ⭐
+MISP ⭐
+
+
+#### MISP ⭐
 
 The open-source intelligence sharing platform: community-synced events, TLP/orgs, feed syncing, and a REST API for exchanging malware and attack indicators with trusted partners at scale.
 
@@ -19,7 +22,7 @@ The open-source intelligence sharing platform: community-synced events, TLP/orgs
 **Alternatives:** OpenCTI, TAXII 2
 
 
-### OpenCTI
+#### OpenCTI
 
 Filigran's open cyber-threat-intelligence platform: ingests from 100+ connectors into a STIX-based knowledge graph with worker-managed import, investigations, and STIX/TAXII 2 exchange.
 
@@ -34,7 +37,7 @@ Filigran's open cyber-threat-intelligence platform: ingests from 100+ connectors
 **Alternatives:** MISP, TAXII 2
 
 
-### TAXII 2
+#### TAXII 2
 
 The STIX/TAXII 2.x protocol (OASIS standard) feed providers and ISACs use to push/pull structured intelligence; consume collections or publish your own vetted IOCs to partners.
 
@@ -49,9 +52,16 @@ The STIX/TAXII 2.x protocol (OASIS standard) feed providers and ISACs use to pus
 **Alternatives:** MISP, OpenCTI
 
 
+
+
+
+
 ## Detection Engineering
 
-### Sigma ⭐
+Sigma ⭐
+
+
+#### Sigma ⭐
 
 The generic, SIEM-agnostic detection format: YAML rules for log semantics; sigma-cli compiles them to Splunk, Elastic, Loki, QRadar, Sentinel, and dozens of other query languages.
 
@@ -66,7 +76,7 @@ The generic, SIEM-agnostic detection format: YAML rules for log semantics; sigma
 **Alternatives:** Atomic Red Team, YARA
 
 
-### Atomic Red Team
+#### Atomic Red Team
 
 Red Canary's adversary-simulation library mapping 700+ ATT&CK techniques to executable test definitions, used to prove a detection fires — or stays silent.
 
@@ -81,7 +91,7 @@ Red Canary's adversary-simulation library mapping 700+ ATT&CK techniques to exec
 **Alternatives:** Sigma, MITRE ATT&CK
 
 
-### YARA
+#### YARA
 
 Binary pattern-matching rule engine for malware families and byte-level IOCs; complements SIEM rules when the evidence is a file, not a log (fuller coverage in the malware domain).
 
@@ -96,7 +106,7 @@ Binary pattern-matching rule engine for malware families and byte-level IOCs; co
 **Alternatives:** Sigma
 
 
-### MITRE ATT&CK
+#### MITRE ATT&CK
 
 The common knowledge base of adversary tactics, techniques, and data sources that Sigma rules, atoms, defenders, and coverage reports all annotate against — a reference framework, not a tool.
 
@@ -111,9 +121,16 @@ The common knowledge base of adversary tactics, techniques, and data sources tha
 **Alternatives:** Atomic Red Team, Sigma
 
 
+
+
+
+
 ## Analytics & IOC Marketplaces
 
-### AlienVault OTX ⭐
+AlienVault OTX ⭐
+
+
+#### AlienVault OTX ⭐
 
 Free open threat exchange (AT&T/LevelBlue): subscribe to community pulses, query indicator enrichment, and sync IOCs via the OTXv2 SDK or DirectConnect agents.
 
@@ -128,7 +145,7 @@ Free open threat exchange (AT&T/LevelBlue): subscribe to community pulses, query
 **Alternatives:** ThreatFox, MalwareBazaar, URLhaus
 
 
-### ThreatFox
+#### ThreatFox
 
 abuse.ch's malware-IOC feed: submit and query malpedia-labeled IOCs (IPs, domains, URLs, hashes), with CSV/JSON dumps, Suricata ruleset, and MISP event exports.
 
@@ -143,7 +160,7 @@ abuse.ch's malware-IOC feed: submit and query malpedia-labeled IOCs (IPs, domain
 **Alternatives:** MalwareBazaar, URLhaus
 
 
-### MalwareBazaar
+#### MalwareBazaar
 
 abuse.ch's sample-sharing database: search by hash, signature, or imphash, download malware samples, and pull hourly/daily batch feeds.
 
@@ -158,7 +175,7 @@ abuse.ch's sample-sharing database: search by hash, signature, or imphash, downl
 **Alternatives:** ThreatFox, URLhaus
 
 
-### URLhaus
+#### URLhaus
 
 abuse.ch's malicious-URL feed complementing ThreatFox: a plain-text URL list plus RPZ, hostfile, and Suricata/Snort rulesets for proxy and log matching.
 
@@ -173,9 +190,16 @@ abuse.ch's malicious-URL feed complementing ThreatFox: a plain-text URL list plu
 **Alternatives:** ThreatFox, MalwareBazaar
 
 
+
+
+
+
 ## IOC Pivoting & Correlation
 
-### IntelOwl ⭐
+IntelOwl ⭐
+
+
+#### IntelOwl ⭐
 
 Self-hosted aggregation and analysis platform: one request runs a file/IP/domain/hash through 100+ analyzers (OTX, ThreatFox, MalwareBazaar, VirusTotal, GreyNoise, YARA) and chains them with pivots.
 
@@ -190,7 +214,7 @@ Self-hosted aggregation and analysis platform: one request runs a file/IP/domain
 **Alternatives:** MISP, ThreatFox, Pulsedive
 
 
-### MISP
+#### MISP
 
 (Also in threat-sharing): its correlation engine links identical and high-fidelity-cluster attributes across every event in your instance and its federated communities, surfacing related infrastructure from others' incidents.
 
@@ -205,7 +229,7 @@ Self-hosted aggregation and analysis platform: one request runs a file/IP/domain
 **Alternatives:** IntelOwl, ThreatFox
 
 
-### ThreatFox
+#### ThreatFox
 
 (Also in analytics-marketplaces): excels at pivoting a file hash to the hosts and IPs that served it plus its family label — the fastest 'what is this IOC attached to' lookup.
 
@@ -220,7 +244,7 @@ Self-hosted aggregation and analysis platform: one request runs a file/IP/domain
 **Alternatives:** Pulsedive, IntelOwl
 
 
-### Pulsedive
+#### Pulsedive
 
 Free IOC portal combining passive/active scans, risk scores, ATT&CK tags, and a pivot/Explore query language across its indicator database, with a browser extension for on-page enrichment.
 
@@ -233,4 +257,8 @@ Free IOC portal combining passive/active scans, risk scores, ATT&CK tags, and a 
 **URL:** https://pulsedive.com
 
 **Alternatives:** ThreatFox, MISP
+
+
+
+
 

@@ -4,7 +4,10 @@ Decode/encode data, identify encodings, and break weak ciphers and RSA on materi
 
 ## Encoding & Decoding
 
-### CyberChef ⭐
+CyberChef ⭐
+
+
+#### CyberChef ⭐
 
 GCHQ's browser 'Cyber Swiss Army Knife': 480+ chainable operations for decoding/encoding (Base64, hex, URL, Rot13), hashing, XOR and compression, plus the Magic operation that auto-detects and unwraps multi-layer encodings. Entirely client-side, zero install.
 
@@ -19,7 +22,7 @@ GCHQ's browser 'Cyber Swiss Army Knife': 480+ chainable operations for decoding/
 **Alternatives:** CyberChef (self-hosted)
 
 
-### CyberChef (self-hosted)
+#### CyberChef (self-hosted)
 
 The same GCHQ app run from the official pre-built Docker image (or a downloadable static build) so every operation executes inside your own network with no outbound traffic.
 
@@ -34,9 +37,16 @@ The same GCHQ app run from the official pre-built Docker image (or a downloadabl
 **Alternatives:** CyberChef
 
 
+
+
+
+
 ## Cipher Attack & Cryptanalysis
 
-### xortool ⭐
+xortool ⭐
+
+
+#### xortool ⭐
 
 Python tool for multi-byte XOR cipher analysis: guesses key length via equality-based scoring, recovers key bytes from the most frequent plaintext character, with charset filtering and known-plaintext (-p) options to confirm candidates.
 
@@ -51,7 +61,7 @@ Python tool for multi-byte XOR cipher analysis: guesses key length via equality-
 **Alternatives:** hash_extender, CrypTool
 
 
-### hash_extender
+#### hash_extender
 
 Ron Bowes' C tool for the hash length-extension attack on MD4/MD5/RIPEMD-160/SHA-0/SHA-1/SHA-256/SHA-512/Whirlpool: given a secret-prefix hash, forges a valid hash for appended data without knowing the secret, iterating guessed secret lengths.
 
@@ -66,7 +76,7 @@ Ron Bowes' C tool for the hash length-extension attack on MD4/MD5/RIPEMD-160/SHA
 **Alternatives:** xortool, CrypTool
 
 
-### CrypTool
+#### CrypTool
 
 Legacy university/open-source cryptology suite (CrypTool 2.1 + JCrypTool) for experimenting with classical ciphers (Caesar, Vigenère, Enigma, ADFGVX) and their built-in automated cryptanalysis on paste-in text.
 
@@ -81,9 +91,16 @@ Legacy university/open-source cryptology suite (CrypTool 2.1 + JCrypTool) for ex
 **Alternatives:** xortool, hash_extender
 
 
+
+
+
+
 ## RSA Attacks & Factorization
 
-### RsaCtfTool ⭐
+RsaCtfTool ⭐
+
+
+#### RsaCtfTool ⭐
 
 Python RSA multi-attack harness (60+ attacks): weak-key factorization (Fermat, Pollard rho, ECM, SIQS), lattice attacks on small d (Wiener, Boneh-Durfee), Hastad broadcast, shared-factor pools, ROCA, past-CTF/gimmick primes and Factordb integration; recovers the private key and/or decrypts files.
 
@@ -98,7 +115,7 @@ Python RSA multi-attack harness (60+ attacks): weak-key factorization (Fermat, P
 **Alternatives:** Factordb, rsatool
 
 
-### Factordb
+#### Factordb
 
 Online database of integer factorizations with a plain API (https://factordb.com/api?query=N) that returns a number's status (FF/C/PRP) and known factors, including factorized prime records.
 
@@ -113,7 +130,7 @@ Online database of integer factorizations with a plain API (https://factordb.com
 **Alternatives:** RsaCtfTool, rsatool
 
 
-### rsatool
+#### rsatool
 
 Small Python tool that reconstructs the full RSA key set (n, e, d, p, q, CRT params) and writes an OpenSSL-compatible PEM/DER private key from just (p, q) or (n, d), including n+dp-based factoring.
 
@@ -128,9 +145,16 @@ Small Python tool that reconstructs the full RSA key set (n, e, d, p, q, CRT par
 **Alternatives:** Factordb, RsaCtfTool
 
 
+
+
+
+
 ## Crypto Toolkit (Keys & Encrypt/Decrypt)
 
-### OpenSSL ⭐
+OpenSSL ⭐
+
+
+#### OpenSSL ⭐
 
 The de-facto CLI crypto Swiss-army knife: AES/ChaCha20/RSA/ECDSA encryption and decryption, key generation and parsing (PEM/DER), X.509 cert/genrsa/inspect, digests, and CMS/PKCS#7 envelopes in one command.
 
@@ -145,7 +169,7 @@ The de-facto CLI crypto Swiss-army knife: AES/ChaCha20/RSA/ECDSA encryption and 
 **Alternatives:** GnuPG, GnuTLS certtool
 
 
-### GnuPG
+#### GnuPG
 
 GNU Privacy Guard: full OpenPGP implementation for asymmetric and symmetric encryption, signing/verification, keyring management, and export/import interop with PGP e-mail workflows.
 
@@ -160,7 +184,7 @@ GNU Privacy Guard: full OpenPGP implementation for asymmetric and symmetric encr
 **Alternatives:** age, OpenSSL
 
 
-### age
+#### age
 
 Simple, modern, audited file encryption (X25519, optional passphrase; hybrid post-quantum ML-KEM-768 since v1.3) with small explicit keys, no configuration and UNIX-style composability; interoperable Rust port is 'rage'.
 
@@ -175,7 +199,7 @@ Simple, modern, audited file encryption (X25519, optional passphrase; hybrid pos
 **Alternatives:** GnuPG, OpenSSL
 
 
-### GnuTLS certtool
+#### GnuTLS certtool
 
 CLI from the GnuTLS project for X.509 certificate/key generation, PKCS#12 bundles, certificate and private-key inspection, and PKCS#11 token operations through a single binary.
 
@@ -188,4 +212,8 @@ CLI from the GnuTLS project for X.509 certificate/key generation, PKCS#12 bundle
 **URL:** https://www.gnutls.org
 
 **Alternatives:** OpenSSL, GnuPG
+
+
+
+
 

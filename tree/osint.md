@@ -4,7 +4,10 @@ Passive intelligence on people, exposed infrastructure, and document metadata �
 
 ## Username & People Discovery
 
-### Sherlock ⭐
+Sherlock ⭐
+
+
+#### Sherlock ⭐
 
 Checks a username across 400+ social networks using HTTP status/pattern heuristics; the most widely maintained CLI for username existence.
 
@@ -19,7 +22,7 @@ Checks a username across 400+ social networks using HTTP status/pattern heuristi
 **Alternatives:** maigret, whatsmyname, namechk (web)
 
 
-### Maigret
+#### Maigret
 
 Collects a username dossier across 3000+ sites, tagging each account by type (social, dating, code) and generating HTML/PDF/JSON reports; actively maintained with a frequently refreshed site database.
 
@@ -34,7 +37,7 @@ Collects a username dossier across 3000+ sites, tagging each account by type (so
 **Alternatives:** sherlock, whatsmyname
 
 
-### WhatsMyName
+#### WhatsMyName
 
 A community-maintained JSON dataset covering 700+ sites with exact success/not-found detections; the data layer behind many username checkers and the whatsmyname.app web UI since the bundled checker scripts were removed in 2023.
 
@@ -49,7 +52,7 @@ A community-maintained JSON dataset covering 700+ sites with exact success/not-f
 **Alternatives:** sherlock, maigret, namechk (web)
 
 
-### namechk
+#### namechk
 
 Free web service that checks a name across 100+ social platforms and 36 domain extensions in one view; a hosted service, not a self-hosted tool — no API and no bulk mode.
 
@@ -64,9 +67,16 @@ Free web service that checks a name across 100+ social platforms and 36 domain e
 **Alternatives:** whatsmyname, sherlock, maigret
 
 
+
+
+
+
 ## Email & Phone OSINT
 
-### theHarvester ⭐
+theHarvester ⭐
+
+
+#### theHarvester ⭐
 
 Passively harvests emails, employee names, subdomains, hosts, and API leaks for a domain from open sources; the reference OSINT email/subdomain harvester, actively maintained.
 
@@ -81,7 +91,7 @@ Passively harvests emails, employee names, subdomains, hosts, and API leaks for 
 **Alternatives:** holehe, emailrep.io (web)
 
 
-### Holehe
+#### Holehe
 
 Checks whether an email is registered on 120+ sites by replaying their password-recovery flows without sending anything to the mailbox, so the target address is not alerted.
 
@@ -96,7 +106,7 @@ Checks whether an email is registered on 120+ sites by replaying their password-
 **Alternatives:** theharvester, emailrep.io (web)
 
 
-### PhoneInfoga
+#### PhoneInfoga
 
 Framework for phone OSINT: country, area, carrier, line type, and footprint lookups via configurable scanners; stable but no longer actively maintained, so expect scanners to drift over time.
 
@@ -111,7 +121,7 @@ Framework for phone OSINT: country, area, carrier, line type, and footprint look
 **Alternatives:** holehe
 
 
-### emailrep.io
+#### emailrep.io
 
 Hosted API/service that scores an email's reputation, flags breach exposure and disposable/spammy providers, and lists the online profiles tied to it; a service, not a tool — the free tier needs no key, higher limits need one.
 
@@ -126,9 +136,16 @@ Hosted API/service that scores an email's reputation, flags breach exposure and 
 **Alternatives:** holehe, theharvester
 
 
+
+
+
+
 ## Social Media Scraping
 
-### Instaloader ⭐
+Instaloader ⭐
+
+
+#### Instaloader ⭐
 
 Downloads Instagram profiles, posts, hashtags, highlight stories, and companion metadata (captions, likes, comments) via its own private API without an official key; actively maintained and scriptable.
 
@@ -143,7 +160,7 @@ Downloads Instagram profiles, posts, hashtags, highlight stories, and companion 
 **Alternatives:** osintgram, snscrape
 
 
-### snscrape
+#### snscrape
 
 Python CLI/library that scrapes public posts and profiles from several platforms with JSONL output; Twitter/X scrapers are dead behind the login wall and Reddit needs the closed Pushshift, but Telegram, Weibo, and some Mastodon instances still work.
 
@@ -158,7 +175,7 @@ Python CLI/library that scrapes public posts and profiles from several platforms
 **Alternatives:** instaloader, osintgram, twscrape (github), twint (archived 2023)
 
 
-### OSINTgram
+#### OSINTgram
 
 Interactive shell that collects public Instagram data — profile info, captions, followers, tagged users, comments, and bio contact strings — using a scratch-account session or a free HikerAPI token; the project's own disclaimer limits use to educational/authorized targets.
 
@@ -173,9 +190,16 @@ Interactive shell that collects public Instagram data — profile info, captions
 **Alternatives:** instaloader, snscrape
 
 
+
+
+
+
 ## Internet Infrastructure Search
 
-### Shodan ⭐
+Shodan ⭐
+
+
+#### Shodan ⭐
 
 The reference internet device/port search engine indexing exposed services, banners, vulnerabilities, and history for any IP or domain; a commercial service with a lasting free tier and a separate no-key InternetDB lookup endpoint.
 
@@ -190,7 +214,7 @@ The reference internet device/port search engine indexing exposed services, bann
 **Alternatives:** censys, zoomeye, netlas
 
 
-### Censys
+#### Censys
 
 Internet-wide scan platform covering hosts, services, certificates, and web properties with structured query language; the free tier includes search plus host/cert/web-property lookup APIs.
 
@@ -205,7 +229,7 @@ Internet-wide scan platform covering hosts, services, certificates, and web prop
 **Alternatives:** shodan, netlas
 
 
-### ZoomEye
+#### ZoomEye
 
 Cyber-space search engine by KnownSec scanning IPv4/IPv6, services, and web layers via Xmap/Wmap; strongest on IoT/OT devices and Asian-region asset coverage, with roughly 10k free API queries/month.
 
@@ -220,7 +244,7 @@ Cyber-space search engine by KnownSec scanning IPv4/IPv6, services, and web laye
 **Alternatives:** shodan, censys, netlas
 
 
-### Netlas
+#### Netlas
 
 Internet scanning platform over 8B+ indexed hosts with response-body, DNS, WHOIS, and certificate search plus a full REST API and Python SDK; the free tier is key-limited at about 50 requests/day.
 
@@ -235,9 +259,16 @@ Internet scanning platform over 8B+ indexed hosts with response-body, DNS, WHOIS
 **Alternatives:** shodan, censys, zoomeye
 
 
+
+
+
+
 ## Document Metadata & Forensics
 
-### exiftool ⭐
+exiftool ⭐
+
+
+#### exiftool ⭐
 
 Reads, writes, and edits EXIF/GPS/IPTC/XMP and hundreds of tag formats across images, PDFs, Office files, and more; the metadata workhorse behind most doc-forensics pipelines.
 
@@ -252,7 +283,7 @@ Reads, writes, and edits EXIF/GPS/IPTC/XMP and hundreds of tag formats across im
 **Alternatives:** metagoofil, foca
 
 
-### Metagoofil
+#### Metagoofil
 
 Dork-driven document harvesting: finds indexed files (.pdf, .docx, .xlsx) on a domain and downloads them for stripping; the maintained opsdisk fork ships on Kali and deliberately defers metadata analysis to exiftool.
 
@@ -267,7 +298,7 @@ Dork-driven document harvesting: finds indexed files (.pdf, .docx, .xlsx) on a d
 **Alternatives:** exiftool, foca
 
 
-### FOCA
+#### FOCA
 
 Windows GUI (C# with a SQL Server back end) that searches a domain via Google/Bing/DuckDuckGo, fingerprints documents, and extracts metadata — users, folders, software — into a browsable project; a Windows GUI, not a POSIX tool, with slow updates.
 
@@ -282,9 +313,16 @@ Windows GUI (C# with a SQL Server back end) that searches a domain via Google/Bi
 **Alternatives:** metagoofil, exiftool
 
 
+
+
+
+
 ## OSINT Automation Platforms
 
-### SpiderFoot ⭐
+SpiderFoot ⭐
+
+
+#### SpiderFoot ⭐
 
 Automated OSINT correlation engine with 200+ modules and a YAML correlation engine, surfaced through a web UI and CLI; built to map an attack surface and connect entities automatically.
 
@@ -299,7 +337,7 @@ Automated OSINT correlation engine with 200+ modules and a YAML correlation engi
 **Alternatives:** maltego, recon-ng
 
 
-### Maltego
+#### Maltego
 
 Commercial graph-based link-analysis and OSINT platform (desktop and browser) with transforms into 1B+ identities, breach data, and infrastructure datasets; a free Community Edition (Basic plan) exists but is result-limited. A commercial service, not open source.
 
@@ -314,7 +352,7 @@ Commercial graph-based link-analysis and OSINT platform (desktop and browser) wi
 **Alternatives:** spiderfoot, recon-ng
 
 
-### recon-ng
+#### recon-ng
 
 Metasploit-style modular reconnaissance framework for web OSINT, with a marketplace of modules, workspace isolation, and database-backed reporting; stable but leisurely maintained.
 
@@ -329,9 +367,16 @@ Metasploit-style modular reconnaissance framework for web OSINT, with a marketpl
 **Alternatives:** spiderfoot, maltego
 
 
+
+
+
+
 ## Search Dorks Reference
 
-### Google Hacking Database (GHDB) ⭐
+Google Hacking Database (GHDB) ⭐
+
+
+#### Google Hacking Database (GHDB) ⭐
 
 Reference catalog of search-engine operators ('dorks') and example queries that surface exposed files, login panels, admin pages, and misconfigurations in public indexes. A reference page, not a tool.
 
@@ -344,4 +389,8 @@ Reference catalog of search-engine operators ('dorks') and example queries that 
 **URL:** https://www.exploit-db.com/google-hacking-database
 
 **Alternatives:** netlas dorks (github)
+
+
+
+
 

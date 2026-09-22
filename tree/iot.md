@@ -4,7 +4,10 @@ Reverse, emulate, and attack embedded devices in your lab: firmware extraction, 
 
 ## Firmware Extraction & Static Review
 
-### binwalk ⭐
+binwalk ⭐
+
+
+#### binwalk ⭐
 
 Identifies and extracts embedded files and filesystems (squashfs, cramfs, JFFS2, kernels, U-Boot) from a firmware image via magic signatures, with entropy analysis to find encrypted/compressed regions.
 
@@ -19,7 +22,7 @@ Identifies and extracts embedded files and filesystems (squashfs, cramfs, JFFS2,
 **Alternatives:** firmware-mod-kit, FirmWalker
 
 
-### FirmWalker
+#### FirmWalker
 
 Bash script that greps an extracted or mounted root filesystem for secrets: etc/shadow and passwd, SSL keys/certs, config files, admin/password keywords, dropbear/ssh, and URLs.
 
@@ -34,7 +37,7 @@ Bash script that greps an extracted or mounted root filesystem for secrets: etc/
 **Alternatives:** binwalk
 
 
-### firmware-mod-kit (FMK)
+#### firmware-mod-kit (FMK)
 
 Extract-and-rebuild toolkit for router firmware (squashfs/cramfs/JFFS2); lets you patch binaries or files and repack a bootable image. Legacy: descended from the Google Code project and largely unmaintained, so expect to fix toolchain issues.
 
@@ -49,9 +52,16 @@ Extract-and-rebuild toolkit for router firmware (squashfs/cramfs/JFFS2); lets yo
 **Alternatives:** binwalk
 
 
+
+
+
+
 ## Firmware Emulation & Dynamic Analysis
 
-### QEMU ⭐
+QEMU ⭐
+
+
+#### QEMU ⭐
 
 Full-system emulator covering ARM, MIPS, RISC-V, and more; boots extracted Linux root filesystems or bare-metal board images, and its user-mode builds runs single binaries or architectures different to your host.
 
@@ -66,7 +76,7 @@ Full-system emulator covering ARM, MIPS, RISC-V, and more; boots extracted Linux
 **Alternatives:** FirmAE, FAT
 
 
-### FirmAE
+#### FirmAE
 
 Fully-automated emulation framework (Firmadyne-derived) that uses arbitration heuristics to boot router/IP-camera firmware at ~79% success, exposing the web UI/SSH so you can fuzz and exploit it dynamically.
 
@@ -81,7 +91,7 @@ Fully-automated emulation framework (Firmadyne-derived) that uses arbitration he
 **Alternatives:** FAT
 
 
-### Firmware Analysis Toolkit (FAT)
+#### Firmware Analysis Toolkit (FAT)
 
 Attify's one-command wrapper around Firmadyne that boots Linux router firmware in QEMU without the PostgreSQL dependency; prints the emulated IP so you can hit its web server from the host.
 
@@ -96,9 +106,16 @@ Attify's one-command wrapper around Firmadyne that boots Linux router firmware i
 **Alternatives:** QEMU, FirmAE
 
 
+
+
+
+
 ## Serial & Debug Ports (UART / JTAG / SWD)
 
-### OpenOCD ⭐
+OpenOCD ⭐
+
+
+#### OpenOCD ⭐
 
 On-chip debugger for JTAG/SWD with a large catalog of CPU and flash targets, dozens of adapter drivers, and scripting via TCL; reads flash dumps, halts CPUs, and sets breakpoints on running firmware.
 
@@ -113,7 +130,7 @@ On-chip debugger for JTAG/SWD with a large catalog of CPU and flash targets, doz
 **Alternatives:** urJTAG, J-Link, Bus Pirate
 
 
-### urJTAG
+#### urJTAG
 
 Universal JTAG library and tools, descendant of the old openwince tools; strong at boundary-scan and flash programming where OpenOCD lacks target or chain support.
 
@@ -128,7 +145,7 @@ Universal JTAG library and tools, descendant of the old openwince tools; strong 
 **Alternatives:** OpenOCD
 
 
-### Bus Pirate
+#### Bus Pirate
 
 Open-source serial multi-tool (Bus Pirate 5 current): drive SPI/I2C/UART/1-Wire, read serial flash and EEPROMs, sniff buses, act as a low-speed logic analyzer, and glitch a target — all from a serial terminal.
 
@@ -143,7 +160,7 @@ Open-source serial multi-tool (Bus Pirate 5 current): drive SPI/I2C/UART/1-Wire,
 **Alternatives:** OpenOCD
 
 
-### minicom
+#### minicom
 
 The classic serial terminal for UART consoles at arbitrary baud rates; the everyday tool for reaching a bootloader, root shell, or firmware upgrade prompt over the debug UART.
 
@@ -158,7 +175,7 @@ The classic serial terminal for UART consoles at arbitrary baud rates; the every
 **Alternatives:** picocom, screen
 
 
-### J-Link (SEGGER)
+#### J-Link (SEGGER)
 
 Commercial debug-probe family (SEGGER) with polished SWD/JTAG software, flash loader support across thousands of micros, and RTT for fast printf-style logging from target firmware.
 
@@ -173,9 +190,16 @@ Commercial debug-probe family (SEGGER) with polished SWD/JTAG software, flash lo
 **Alternatives:** OpenOCD, urJTAG
 
 
+
+
+
+
 ## Side-Channel & Fault Injection
 
-### ChipWhisperer ⭐
+ChipWhisperer ⭐
+
+
+#### ChipWhisperer ⭐
 
 Open-source, open-hardware lab for power/EM side-channel analysis and voltage/clock glitching: capture power traces, run correlation power analysis to recover keys, and glitch to skip checks (CW-Lite, CW-Husky).
 
@@ -190,9 +214,16 @@ Open-source, open-hardware lab for power/EM side-channel analysis and voltage/cl
 **Alternatives:** Proxmark3 (RFID — see rfid-nfc)
 
 
+
+
+
+
 ## RFID & NFC (Physical Access Tokens)
 
-### Proxmark3 ⭐
+Proxmark3 ⭐
+
+
+#### Proxmark3 ⭐
 
 The Swiss-army RFID/NFC research device (125 kHz + 13.56 MHz) covering low- and high-frequency tags — Mifare, iClass, HID, ISO14443/ISO15693, EMV — to sniff, clone, and pen-test access credentials; use the actively maintained Iceman firmware fork.
 
@@ -207,7 +238,7 @@ The Swiss-army RFID/NFC research device (125 kHz + 13.56 MHz) covering low- and 
 **Alternatives:** libnfc
 
 
-### libnfc
+#### libnfc
 
 Low-level NFC library with CLI tools (nfc-list, nfc-mfclassic, nfclibnfc) that read, write, and clone ISO14443A tags through cheap USB readers like the ACR122U.
 
@@ -220,4 +251,8 @@ Low-level NFC library with CLI tools (nfc-list, nfc-mfclassic, nfclibnfc) that r
 **URL:** https://github.com/nfc-tools/libnfc
 
 **Alternatives:** Proxmark3
+
+
+
+
 

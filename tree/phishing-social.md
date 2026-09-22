@@ -4,7 +4,10 @@ Simulating the human factor: phishing campaigns, cloned logins, credential harve
 
 ## Phishing Campaign Frameworks
 
-### Gophish ⭐
+Gophish ⭐
+
+
+#### Gophish ⭐
 
 Go-based open-source phishing campaign platform: composes email templates, landing pages, target groups, and SMTP profiles, then tracks opens, clicks, and submitted credentials per recipient via web UI + REST API.
 
@@ -19,7 +22,7 @@ Go-based open-source phishing campaign platform: composes email templates, landi
 **Alternatives:** king phisher, socialfish
 
 
-### King Phisher
+#### King Phisher
 
 Python client/server toolkit (SecureState) with parallel campaigns, web-page cloning, credential-harvesting landing pages, geo-location, and SPF checks. The project is declared no longer maintained — treat as legacy.
 
@@ -34,7 +37,7 @@ Python client/server toolkit (SecureState) with parallel campaigns, web-page clo
 **Alternatives:** gophish
 
 
-### SocialFish
+#### SocialFish
 
 Active Python toolkit for cloning modern, JavaScript-heavy login pages and reporting clicks and submissions; ships page-candidate templates useful in training demos. It also bundles cookie/OTP hooks — use only in authorized simulations against consenting participants.
 
@@ -49,9 +52,16 @@ Active Python toolkit for cloning modern, JavaScript-heavy login pages and repor
 **Alternatives:** gophish, zphisher
 
 
+
+
+
+
 ## Social Engineering Kits
 
-### Social-Engineer Toolkit (SET) ⭐
+Social-Engineer Toolkit (SET) ⭐
+
+
+#### Social-Engineer Toolkit (SET) ⭐
 
 TrustedSec's menu-driven Python framework bundling social-engineering vectors — page cloning, credential harvesting, email mass-mailers, SMS, and more — behind one guided interface. Preinstalled on Kali and used by teams to run authorized awareness campaigns.
 
@@ -66,7 +76,7 @@ TrustedSec's menu-driven Python framework bundling social-engineering vectors �
 **Alternatives:** gophish, beef
 
 
-### BeEF
+#### BeEF
 
 Browser Exploitation Framework: serves a JavaScript hook that, once a consenting user's browser loads it, gives the operator a live inside view of that browser session with modules including fake login prompts and environment probing.
 
@@ -81,7 +91,7 @@ Browser Exploitation Framework: serves a JavaScript hook that, once a consenting
 **Alternatives:** set
 
 
-### Wifiphisher
+#### Wifiphisher
 
 Rogue-access-point framework that drives nearby clients to a captive-portal page to collect Wi-Fi credentials. An authorized physical-testing and awareness tool for demonstrating Wi-Fi credential exposure on scoped, consenting networks.
 
@@ -96,9 +106,16 @@ Rogue-access-point framework that drives nearby clients to a captive-portal page
 **Alternatives:** set
 
 
+
+
+
+
 ## Reverse-Proxy & AitM Phishing
 
-### Evilginx2 ⭐
+Evilginx2 ⭐
+
+
+#### Evilginx2 ⭐
 
 Go-based man-in-the-middle reverse proxy (authorized red-team phishing infrastructure) that fronts a real site and captures post-login session cookies, demonstrating why legacy 2FA alone does not protect a session. Requires a domain you control, TLS, and dedicated infrastructure; the reference tool for authorized MFA-phishing exercises.
 
@@ -113,7 +130,7 @@ Go-based man-in-the-middle reverse proxy (authorized red-team phishing infrastru
 **Alternatives:** modlishka, credsniper, evilgophish
 
 
-### Modlishka
+#### Modlishka
 
 Go reverse proxy that transparently proxies a whole multi-domain HTTPS site through a single phishing domain and captures credentials and session tokens (authorized red-team phishing infrastructure). Pioneered the modern Adversary-in-the-Middle technique in research; its author restricts use to authorized testing and defensive awareness.
 
@@ -128,7 +145,7 @@ Go reverse proxy that transparently proxies a whole multi-domain HTTPS site thro
 **Alternatives:** evilginx2, credsniper
 
 
-### CredSniper
+#### CredSniper
 
 Flask/Jinja2 framework serving cloned multi-step login pages (username → password → 2FA token) with Let's Encrypt SSL and an API for collected submissions. Unmaintained since 2020; use only in authorized test campaigns.
 
@@ -143,7 +160,7 @@ Flask/Jinja2 framework serving cloned multi-step login pages (username → passw
 **Alternatives:** evilginx2, modlishka
 
 
-### EvilGophish
+#### EvilGophish
 
 Combines the Gophish campaign engine with an evilginx2-class reverse proxy in one toolchain so an authorized red team can schedule phishing emails and capture session tokens from a single console.
 
@@ -158,9 +175,16 @@ Combines the Gophish campaign engine with an evilginx2-class reverse proxy in on
 **Alternatives:** evilginx2, modlishka
 
 
+
+
+
+
 ## Credential Harvesting Pages
 
-### zphisher ⭐
+zphisher ⭐
+
+
+#### zphisher ⭐
 
 Automated login-page cloning kit with 30+ ready templates for email and social platforms, served over localhost, cloudflared, or ngrok links with submissions logged locally. The most widely used open tool for building credential-phishing awareness demos.
 
@@ -175,7 +199,7 @@ Automated login-page cloning kit with 30+ ready templates for email and social p
 **Alternatives:** phishx, credsniper
 
 
-### PhishX
+#### PhishX
 
 Front-end-driven spear-phishing field kit (maintained fork of the original noobhackers PhishX) with ready login-page templates, tunnel serving, and a web dashboard for collected submissions and visit metadata. Authorized awareness use only.
 
@@ -190,7 +214,7 @@ Front-end-driven spear-phishing field kit (maintained fork of the original noobh
 **Alternatives:** zphisher, credsniper
 
 
-### Credential Harvester (SET)
+#### Credential Harvester (SET)
 
 SET's website-cloner + credential-harvester module: pulls a live login page, serves a lookalike, and logs POSTed usernames/passwords with a redirect after capture. Ships inside SET; use only against your own organization's employees in scoped campaigns.
 
@@ -205,9 +229,16 @@ SET's website-cloner + credential-harvester module: pulls a live login page, ser
 **Alternatives:** zphisher, phishx
 
 
+
+
+
+
 ## Email & Attachment Payloads
 
-### PhishMailer ⭐
+PhishMailer ⭐
+
+
+#### PhishMailer ⭐
 
 Generates realistic HTML and plain-text email messages with attachments for in-house phishing simulations, including per-recipient personalization and SMTP sending. Fills the content-creation step in authorized awareness campaigns.
 
@@ -220,4 +251,8 @@ Generates realistic HTML and plain-text email messages with attachments for in-h
 **URL:** https://github.com/BiZken/PhishMailer
 
 **Alternatives:** king phisher, gophish
+
+
+
+
 

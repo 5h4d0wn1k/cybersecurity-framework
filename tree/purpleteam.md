@@ -4,7 +4,10 @@ Validate your detections by emulating real adversaries, running atomic TTPs, and
 
 ## Adversary Emulation Platforms
 
-### MITRE Caldera ⭐
+MITRE Caldera ⭐
+
+
+#### MITRE Caldera ⭐
 
 Automated adversary emulation platform built on ATT&CK, now an Apache project: deploy agents, craft adversary profiles from ATT&CK techniques, and run them against your own estate for blue-team validation.
 
@@ -19,7 +22,7 @@ Automated adversary emulation platform built on ATT&CK, now an Apache project: d
 **Alternatives:** adversary-emulation-library
 
 
-### Adversary Emulation Library
+#### Adversary Emulation Library
 
 MITRE Center for Threat-Informed Defense's library of full (APT29, FIN6, Turla) and micro (webshells, process injection) emulation plans in human-readable plus machine-readable YAML for Caldera.
 
@@ -34,9 +37,16 @@ MITRE Center for Threat-Informed Defense's library of full (APT29, FIN6, Turla) 
 **Alternatives:** mitre-caldera
 
 
+
+
+
+
 ## Atomic Tests & Detection Validation
 
-### Atomic Red Team ⭐
+Atomic Red Team ⭐
+
+
+#### Atomic Red Team ⭐
 
 MITRE-aligned library of small, portable detection tests; each atomic test documents a technique's exact procedure plus the logs and telemetry a defender should see if their detection works.
 
@@ -51,7 +61,7 @@ MITRE-aligned library of small, portable detection tests; each atomic test docum
 **Alternatives:** atomictestharnesses
 
 
-### AtomicTestHarnesses
+#### AtomicTestHarnesses
 
 Red Canary's PowerShell module (Python for macOS/Linux) that executes many variations of a single technique and validates the telemetry each variation generates.
 
@@ -66,9 +76,16 @@ Red Canary's PowerShell module (Python for macOS/Linux) that executes many varia
 **Alternatives:** atomic-red-team
 
 
+
+
+
+
 ## Breach & Attack Simulation
 
-### Infection Monkey ⭐
+Infection Monkey ⭐
+
+
+#### Infection Monkey ⭐
 
 Open-source BAS/adversary emulation platform (Guardicore/Akamai) whose agent self-propagates across a network via real exploiters and reports to the Monkey Island console.
 
@@ -83,7 +100,7 @@ Open-source BAS/adversary emulation platform (Guardicore/Akamai) whose agent sel
 **Alternatives:** safebreach-validate, stratus-red-team
 
 
-### SafeBreach Validate
+#### SafeBreach Validate
 
 Commercial BAS pioneer: lightweight simulators on endpoints, network, and cloud run 30,000+ attack methods from its Hacker's Playbook to continuously validate controls.
 
@@ -98,7 +115,7 @@ Commercial BAS pioneer: lightweight simulators on endpoints, network, and cloud 
 **Alternatives:** infection-monkey
 
 
-### Stratus Red Team
+#### Stratus Red Team
 
 Cloud-oriented BAS: 'Atomic Red Team for the cloud', with granular AWS/Azure/GCP/Entra ID/K8s techniques that detonate then clean up after themselves; the star of the cloud-bas category.
 
@@ -113,9 +130,16 @@ Cloud-oriented BAS: 'Atomic Red Team for the cloud', with granular AWS/Azure/GCP
 **Alternatives:** infection-monkey
 
 
+
+
+
+
 ## Detection Coverage Mapping
 
-### DeTT&CT ⭐
+DeTT&CT ⭐
+
+
+#### DeTT&CT ⭐
 
 Rabobank's framework to administer and score data-source quality, visibility, and detection per ATT&CK technique, then export the resulting coverage as ATT&CK Navigator layers.
 
@@ -130,7 +154,7 @@ Rabobank's framework to administer and score data-source quality, visibility, an
 **Alternatives:** attack-navigator
 
 
-### MITRE ATT&CK (website)
+#### MITRE ATT&CK (website)
 
 The authoritative knowledge base: adversary tactics, techniques, sub-techniques, threat groups, and the data sources needed to detect them.
 
@@ -145,7 +169,7 @@ The authoritative knowledge base: adversary tactics, techniques, sub-techniques,
 **Alternatives:** attack-navigator
 
 
-### ATT&CK Navigator
+#### ATT&CK Navigator
 
 Web app for annotating and exploring ATT&CK matrices via shareable layer files; load DeTT&CT or VECTR output to render coverage heatmaps.
 
@@ -160,9 +184,16 @@ Web app for annotating and exploring ATT&CK matrices via shareable layer files; 
 **Alternatives:** dettect
 
 
+
+
+
+
 ## Cloud Breach & Attack Simulation
 
-### Stratus Red Team ⭐
+Stratus Red Team ⭐
+
+
+#### Stratus Red Team ⭐
 
 Datadog's cloud BAS: a self-contained Go binary that detonates granular cloud attack techniques for AWS, Azure, GCP, Entra ID, and K8s, mapped to the ATT&CK cloud matrix, with automatic warmup and cleanup.
 
@@ -177,7 +208,7 @@ Datadog's cloud BAS: a self-contained Go binary that detonates granular cloud at
 **Alternatives:** cloudgoat
 
 
-### CloudGoat 2
+#### CloudGoat 2
 
 Rhino Security Labs' 'Vulnerable by Design' AWS/Azure deployment tool that builds intentionally vulnerable, CTF-style scenarios for practicing cloud attack paths.
 
@@ -192,9 +223,16 @@ Rhino Security Labs' 'Vulnerable by Design' AWS/Azure deployment tool that build
 **Alternatives:** stratus-red-team
 
 
+
+
+
+
 ## Exercise Tracking & Metrics
 
-### VECTR ⭐
+VECTR ⭐
+
+
+#### VECTR ⭐
 
 Free purple-team platform (Security Risk Advisors) that tracks red/blue test cases, campaigns, and per-tool detection/prevention outcomes measured against MITRE ATT&CK over time.
 
@@ -207,4 +245,8 @@ Free purple-team platform (Security Risk Advisors) that tracks red/blue test cas
 **URL:** https://github.com/SecurityRiskAdvisors/VECTR
 
 **Alternatives:** dettect
+
+
+
+
 
