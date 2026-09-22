@@ -14480,21 +14480,7 @@
                   "install": "go install -v github.com/sa7mon/s3scanner@latest",
                   "url": "https://github.com/sa7mon/S3Scanner",
                   "alt": [
-                    "S3audit",
                     "CloudFox"
-                  ]
-                },
-                {
-                  "name": "S3audit",
-                  "rating": 4,
-                  "effort": "easy",
-                  "desc": "NCC Group's small Go tool checks S3 bucket permissions via the public ListObjects/GetObject/Acl APIs against a given bucket or custom wordlist.",
-                  "when": "Single-target bucket permission triage and wordlist-driven scan of buckets you own, without standing up a full scanner.",
-                  "install": "go install github.com/nccgroup/s3audit@latest",
-                  "url": "https://github.com/sa7mon/S3Scanner",
-                  "alt": [
-                    "S3Scanner",
-                    "AWS CLI & Batch Scripts"
                   ]
                 }
               ]
@@ -36259,21 +36245,7 @@
                           "install": "go install -v github.com/sa7mon/s3scanner@latest",
                           "url": "https://github.com/sa7mon/S3Scanner",
                           "alt": [
-                            "S3audit",
                             "CloudFox"
-                          ]
-                        },
-                        {
-                          "name": "S3audit",
-                          "rating": 4,
-                          "effort": "easy",
-                          "desc": "NCC Group's small Go tool checks S3 bucket permissions via the public ListObjects/GetObject/Acl APIs against a given bucket or custom wordlist.",
-                          "when": "Single-target bucket permission triage and wordlist-driven scan of buckets you own, without standing up a full scanner.",
-                          "install": "go install github.com/nccgroup/s3audit@latest",
-                          "url": "https://github.com/sa7mon/S3Scanner",
-                          "alt": [
-                            "S3Scanner",
-                            "AWS CLI & Batch Scripts"
                           ]
                         }
                       ]
@@ -40141,12 +40113,6 @@
       ]
     ],
     "s3scanner": [
-      [
-        "cloud",
-        "cloud/aws/aws-storage"
-      ]
-    ],
-    "s3audit": [
       [
         "cloud",
         "cloud/aws/aws-storage"
@@ -44678,6 +44644,6 @@
   "stats": {
     "domains": 27,
     "categories": 776,
-    "tools": 1068
+    "tools": 1067
   }
 }

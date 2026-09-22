@@ -3,585 +3,652 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Cybersecurity Framework — the tree map of cyber tooling</title>
-<meta name="description" content="An OSINT-Framework-style interactive tree map of the entire cybersecurity landscape: 27 domains, 770+ categories nested to any depth, 1000+ curated tools with effort ratings, direct links, and when-to-use guidance." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230b0e14'/%3E%3Cpath d='M8 2l5 2v3c0 3.2-2.1 5.7-5 7-2.9-1.3-5-3.8-5-7V4z' fill='none' stroke='%234aa8ff' stroke-width='1.3'/%3E%3Ccircle cx='8' cy='8' r='1.6' fill='%233ddc97'/%3E%3C/svg%3E" />
+<title>CyberOps Framework — interactive tree of cyber tooling</title>
+<meta name="description" content="A modern interactive tree-map of the entire cybersecurity landscape: 27 domains, 776 categories, 1068 curated tools with effort ratings, direct links, and when-to-use guidance." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%230b1220'/%3E%3Cpath d='M8 2l5 1.8v3.4c0 3.4-2.2 5.9-5 6.8-2.8-.9-5-3.4-5-6.8V3.8z' fill='none' stroke='%236f8bff' stroke-width='1.3'/%3E%3Ccircle cx='8' cy='8' r='1.7' fill='%2334d399'/%3E%3C/svg%3E" />
 <style>
   :root{
-    --bg:#0b0e14; --bg2:#10141d; --panel:#111724; --panel2:#161e2e;
-    --line:#223048; --line2:#2c3b57; --txt:#dbe4f2; --muted:#8fa0bd;
-    --dim:#64748e; --acc:#4aa8ff; --acc2:#3d8bff;
-    --grn:#3ddc97; --grn2:#2aa16f; --warn:#ffc94d; --red:#ff6b6b;
-    --off:#ff8a5c; --def:#4dd6ff; --auth:#c084fc;
-    --off-bg:#1a1118; --def-bg:#0d1520;
-    --node:#0f1522; --node-line:#2c3b57;
-    --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
-    --sans:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --bg:#070b13; --bg2:#0c1220;
+    --glass:rgba(13,18,30,.78); --card:#0d1424; --card2:#131c30;
+    --line:rgba(148,163,210,.14); --line2:rgba(148,163,210,.26);
+    --txt:#e7edfb; --muted:#93a0bd; --dim:#5f6d8a;
+    --acc:#6f8bff; --acc2:#8aa4ff;
+    --off:#ff6b57; --def:#37c6ff;
+    --off-dim:rgba(255,107,87,.14); --def-dim:rgba(55,198,255,.13);
+    --grn:#34d399; --warn:#fbbf24; --red:#f87171; --own:#a78bfa; --best:#ffb84d;
+    --mono:ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --shadow:0 18px 50px rgba(0,0,0,.45);
   }
   body.light{
-    --bg:#f4f6fa; --bg2:#e9edf5; --panel:#ffffff; --panel2:#f1f4fa;
-    --line:#d5dced; --line2:#c3cde4; --txt:#1c2740; --muted:#51617e;
-    --dim:#7a89a6; --acc:#1d7fe0; --acc2:#0f6bc4; --grn:#0f9d63;
-    --grn2:#0c7a4d; --warn:#b97600; --red:#d72f2f; --off:#d95a24;
-    --def:#0a7fae; --auth:#7c3aed; --node:#ffffff; --node-line:#c3cde4;
-    --off-bg:#ffe9e0; --def-bg:#e6f4fb;
+    --bg:#eef2fa; --bg2:#e2e8f4;
+    --glass:rgba(255,255,255,.82); --card:#ffffff; --card2:#f2f5fc;
+    --line:rgba(40,55,95,.12); --line2:rgba(40,55,95,.22);
+    --txt:#16203a; --muted:#4c5a78; --dim:#8491ad;
+    --acc:#4f6bf0; --acc2:#3b58e8;
+    --off:#d94e2b; --def:#067fb4;
+    --off-dim:rgba(217,78,43,.12); --def-dim:rgba(6,127,180,.10);
+    --grn:#0f9d63; --warn:#b07800; --red:#d73636; --own:#7c3aed; --best:#a86900;
+    --shadow:0 16px 40px rgba(25,40,90,.14);
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%}
-  body{background:var(--bg);color:var(--txt);font:13.5px/1.5 var(--sans);overflow:hidden}
-  pre,code,.mono{font-family:var(--mono)}
+  body{
+    background:
+      radial-gradient(1100px 600px at 78% -8%, var(--off-dim), transparent 60%),
+      radial-gradient(1000px 600px at 4% 110%, var(--def-dim), transparent 55%),
+      var(--bg);
+    color:var(--txt); font:13.5px/1.5 var(--sans); overflow:hidden;
+  }
+  button{font:inherit;cursor:pointer}
   a{color:var(--acc2)}
-  header{height:54px;display:flex;align-items:center;gap:12px;padding:0 16px;border-bottom:1px solid var(--line2);background:var(--bg2);position:relative;z-index:10}
-  .logo{display:flex;align-items:baseline;gap:8px;white-space:nowrap}
-  .logo .prompt{color:var(--acc2);font-family:var(--mono);font-size:16px}
-  .logo .name{font-family:var(--mono);font-size:16px;font-weight:700;letter-spacing:-.3px}
-  .logo .name span{color:var(--grn)}
-  .stats{display:flex;gap:8px;margin-left:4px}
-  .pill{font-family:var(--mono);font-size:10.5px;color:var(--muted);border:1px solid var(--line2);background:var(--panel);border-radius:999px;padding:2px 9px}
-  .pill b{color:var(--grn);font-weight:700}
-  .search{flex:1;max-width:640px;margin-left:auto;position:relative}
-  .search input{width:100%;background:var(--panel);border:1px solid var(--line2);color:var(--txt);border-radius:9px;padding:8px 12px 8px 34px;font-size:13px;font-family:var(--mono);outline:none}
-  .search input:focus{border-color:var(--acc2)}
-  .search .ic{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--dim);font-size:14px}
-  .search .res{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--panel);border:1px solid var(--line2);border-radius:10px;max-height:340px;overflow-y:auto;display:none;box-shadow:0 14px 40px rgba(0,0,0,.45);z-index:40}
-  .search .res.open{display:block}
-  .res .row{display:flex;flex-direction:column;gap:2px;padding:8px 12px;cursor:pointer;border-bottom:1px solid var(--line)}
-  .res .row:hover{background:var(--panel2)}
-  .res .row .t{font-family:var(--mono);font-weight:600;font-size:12.5px}
-  .res .row .p{font-size:10.5px;color:var(--dim);font-family:var(--mono);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .res .row .st{display:flex;gap:6px;font-size:10px;font-family:var(--mono)}
-  .res .row .st .tag{border:1px solid var(--line2);border-radius:4px;padding:0 6px;color:var(--muted)}
-  .res .count{font-size:9.5px;color:var(--dim);padding:6px 12px 3px;font-family:var(--mono);border-bottom:1px solid var(--line)}
-  .res .empty{padding:12px;color:var(--dim);font-family:var(--mono);font-size:11.5px}
-  .btn{background:var(--panel);border:1px solid var(--line2);color:var(--muted);cursor:pointer;border-radius:8px;font-family:var(--mono);font-size:11.5px;padding:6px 10px}
-  .btn:hover{color:var(--txt);border-color:var(--acc2)}
-  #stage{position:relative;height:calc(100% - 54px)}
-  svg#tree{width:100%;height:100%;display:block}
-  .link{fill:none;stroke:var(--line2);stroke-width:1.2;opacity:.7}
-  .node{cursor:pointer}
-  .node .bg{fill:var(--node);stroke:var(--node-line);stroke-width:1.2;transition:stroke .12s,fill .12s}
-  .node:hover .bg{filter:brightness(1.18)}
-  .tool:hover .bg{stroke:var(--acc2);stroke-width:1.8}
-  .node.d0 .bg{fill:transparent;stroke:none}
-  .node.d0 text{font-size:15px;font-weight:800;fill:var(--acc)}
-  .node.d1 .bg{fill:var(--bg2);stroke-width:2}
-  .node.d1.c-offense .bg{stroke:var(--off);fill:var(--off-bg)}
-  .node.d1.c-defense .bg{stroke:var(--def);fill:var(--def-bg)}
-  .node.d2 .bg{fill:var(--panel);stroke:var(--acc2);stroke-width:1.5}
-  .node.d3 .bg{fill:var(--panel);stroke:var(--line2);stroke-width:1.4}
-  .node.d3.c-offense .bg{stroke:var(--off)}
-  .node.d3.c-defense .bg{stroke:var(--def)}
-  .node.d4 .bg{fill:var(--node)}
-  .node.d5 .bg{fill:var(--node)}
-  .node text{fill:var(--txt);font:600 12.5px var(--mono);dominant-baseline:middle}
-  .node.d1 text{font-size:13.5px}
-  .node.d2 text{font-size:13px;fill:var(--acc)}
-  .node.d3 text{fill:var(--muted)}
-  .node.d4 text{fill:var(--dim);font-size:12px}
-  .node.d5 text{fill:var(--dim);font-size:11.5px}
-  .node .chev{fill:none;stroke:var(--dim);stroke-width:2}
-  .node.d1 .chev{stroke:var(--acc2)}
-  .node.d2 .chev{stroke:var(--acc2)}
-  .node .cnt{fill:var(--dim);font:10px var(--mono);dominant-baseline:middle}
-  .node.d1 .cnt{fill:var(--muted)}
-  .node .auth{fill:var(--auth);font:bold 9px var(--mono);dominant-baseline:middle}
-  .node.d1 .auth{fill:var(--auth)}
-  .tool{fill:var(--txt);font:600 11.5px var(--mono);dominant-baseline:middle}
-  .tool .bg{fill:none;stroke-width:1.4}
-  .tool .star{fill:var(--warn)}
-  .tool.best text{fill:var(--warn)}
-  .tool.best .bg{stroke:var(--warn);stroke-dasharray:3 2}
-  .tool.by5h4d0wn1k text{fill:var(--auth)}
-  .tool.ef-easy .bg{stroke:var(--grn)}
-  .tool.ef-medium .bg{stroke:var(--warn)}
-  .tool.ef-advanced .bg{stroke:var(--red)}
-  #hints{position:absolute;left:16px;bottom:12px;display:flex;gap:14px;color:var(--dim);font-family:var(--mono);font-size:10.5px;flex-wrap:wrap;max-width:56%;z-index:5;padding:5px 10px;background:var(--bg);border:1px solid var(--line2);border-radius:8px}
-  #hints b{color:var(--muted)}
-  #hints .auth-dot b{color:var(--auth)}
-  #panel{position:absolute;top:14px;right:14px;bottom:14px;width:400px;background:var(--panel);border:1px solid var(--line2);border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,.5);z-index:30;display:none;flex-direction:column;overflow:hidden}
-  #panel.open{display:flex}
-  #panel .ph{display:flex;align-items:center;gap:8px;padding:12px 14px;border-bottom:1px solid var(--line)}
-  #panel .pt{font-family:var(--mono);font-weight:700;font-size:14px;color:var(--acc)}
-  #panel .pt .bychip{color:var(--auth);font-size:9.5px;border:1px solid var(--auth);border-radius:4px;padding:0 6px;margin-left:8px;font-weight:700}
-  #panel .pt.best{color:var(--warn)}
-  #panel .pclose{margin-left:auto;background:none;border:none;color:var(--dim);cursor:pointer;font-size:15px}
-  #panel .pclose:hover{color:var(--red)}
-  #panel .pb{flex:1;overflow-y:auto;padding:12px 14px;font-size:12.8px}
-  #panel .crumb{font-family:var(--mono);font-size:10.5px;color:var(--dim);margin-bottom:10px;line-height:1.7;word-break:break-all}
-  #panel .crumb b{color:var(--acc2)}
-  #panel .sec{margin:0 0 12px}
-  #panel .sec .k{color:var(--dim);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;font-family:var(--mono);margin-bottom:2px}
-  #panel .sec .v{color:var(--muted);line-height:1.55}
-  #panel .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-  #panel .chap{border:1px solid;border-radius:5px;padding:1px 8px;font-family:var(--mono);font-size:10px}
-  .chap.easy{color:var(--grn);border-color:var(--grn)}
-  .chap.medium{color:var(--warn);border-color:var(--warn)}
-  .chap.advanced{color:var(--red);border-color:var(--red)}
-  .chap.offense{color:var(--off);border-color:var(--off)}
-  .chap.defense{color:var(--def);border-color:var(--def)}
-  .chap.by{color:var(--auth);border-color:var(--auth)}
-  #panel .plink{display:block;text-align:center;background:var(--acc2);color:#fff;text-decoration:none;font-family:var(--mono);font-weight:700;padding:10px;border-radius:8px;margin-top:4px}
-  #panel .plink.auth{background:var(--auth)}
-  #panel .plink:hover{filter:brightness(1.12)}
-  #footer{position:absolute;right:16px;bottom:12px;display:flex;gap:12px;font-family:var(--mono);font-size:10.5px;color:var(--dim);z-index:5}
-  #footer a{color:var(--dim);text-decoration:none}
-  #footer a:hover{color:var(--acc2)}
-  #dnav{position:absolute;top:14px;left:16px;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;z-index:5;background:var(--bg);border:1px solid var(--line2);border-radius:9px;padding:6px 8px;max-width:70vw}
-  #dnav .navbtn{background:none;border:1px solid var(--line2);color:var(--muted);border-radius:6px;cursor:pointer;font-family:var(--mono);padding:1px 8px}
-  #dnav button:hover:not(:disabled){color:var(--txt);border-color:var(--acc2)}
-  #dnav button:disabled{opacity:.35;cursor:default}
-  #dnav .cur{color:var(--acc);font-weight:700;white-space:nowrap}
-  #dnav .gobtn{background:var(--panel);border:1px solid var(--line2);color:var(--acc);border-radius:6px;cursor:pointer;font-family:var(--mono);font-size:10.5px;padding:2px 7px}
-  #dnav .gobtn:hover{color:var(--txt);border-color:var(--acc2)}
-  ::-webkit-scrollbar{width:9px;height:9px}
-  ::-webkit-scrollbar-thumb{background:var(--line2);border-radius:6px}
-  ::-webkit-scrollbar-track{background:transparent}
-  @media (max-width:860px){
-    .stats{display:none}
-    .logo .name{font-size:13px}
-    header{gap:8px;padding:0 10px}
-    #panel{left:12px;right:12px;width:auto}
-    #dnav{max-width:80vw}
+
+  header{
+    position:fixed;inset:0 0 auto 0;height:58px;z-index:50;
+    display:flex;align-items:center;gap:18px;padding:0 18px;
+    background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{display:flex;align-items:center;gap:12px;min-width:0;user-select:none}
+  .mark{width:34px;height:34px;flex:none}
+  .brand .name{font-size:16px;font-weight:800;letter-spacing:-.4px;white-space:nowrap}
+  .brand .name .acc{color:var(--acc2)}
+  .brand .name .g{color:var(--grn)}
+  .brand .tag{font:10.5px var(--mono);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:340px}
+
+  .search{position:relative;flex:1;max-width:520px;margin-left:auto;display:flex;align-items:center}
+  .search .ic{position:absolute;left:12px;color:var(--dim);pointer-events:none}
+  #q{
+    width:100%;padding:8px 62px 8px 34px;border-radius:12px;
+    border:1px solid var(--line2);background:var(--card);color:var(--txt);
+    outline:none;transition:border-color .15s,box-shadow .15s;
+  }
+  #q::placeholder{color:var(--dim)}
+  #q:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(111,139,255,.18)}
+  #qk{position:absolute;right:10px;font:10px var(--mono);color:var(--dim);border:1px solid var(--line2);border-radius:5px;padding:1px 6px;background:var(--bg2);cursor:pointer}
+  #res{
+    position:absolute;top:calc(100% + 8px);left:0;right:0;max-height:min(430px,68vh);
+    overflow:auto;border:1px solid var(--line2);border-radius:14px;background:var(--glass);
+    backdrop-filter:blur(16px);box-shadow:var(--shadow);display:none;z-index:60;
+  }
+  #res.open{display:block}
+  #res .count{font:10.5px var(--mono);color:var(--dim);padding:9px 14px 5px;position:sticky;top:0;background:var(--glass)}
+  #res .row{display:flex;flex-direction:column;gap:1px;padding:7px 14px;cursor:pointer;border-left:2px solid transparent}
+  #res .row:hover{background:var(--card2);border-left-color:var(--acc)}
+  #res .row .t{font-weight:600;font-size:13px;color:var(--txt)}
+  #res .row .p{font:10px var(--mono);color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  #res .row .st{display:flex;gap:6px;margin-top:3px;flex-wrap:wrap}
+  #res .tag{font:9.5px var(--mono);border:1px solid var(--line);color:var(--muted);border-radius:5px;padding:0 5px}
+  #res .tag.c-offense{color:var(--off);border-color:var(--off)}
+  #res .tag.c-defense{color:var(--def);border-color:var(--def)}
+  #res .tag.c-easy{color:var(--grn);border-color:var(--grn)}
+  #res .tag.c-advanced{color:var(--red);border-color:var(--red)}
+  #res .tag.c-moderate{color:var(--warn);border-color:var(--warn)}
+  #res .empty{font:11px var(--mono);color:var(--dim);padding:14px}
+
+  .tools{display:flex;gap:8px;align-items:center}
+  .tools select{
+    font:12px var(--sans);color:var(--txt);background:var(--card);border:1px solid var(--line2);
+    border-radius:10px;padding:6px 8px;outline:none;max-width:200px;
+    appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6'%3E%3Cpath d='M1 1l3 3 3-3' stroke='%235f6d8a' fill='none' stroke-width='1.4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;padding-right:26px;
+  }
+  .ibtn{
+    font:12px var(--sans);color:var(--muted);background:var(--card);border:1px solid var(--line2);
+    border-radius:10px;padding:6px 12px;display:flex;align-items:center;gap:6px;transition:.15s;white-space:nowrap;
+  }
+  .ibtn:hover{color:var(--txt);border-color:var(--acc)}
+
+  .legend{
+    position:fixed;left:16px;bottom:14px;z-index:40;display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+    background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;padding:8px 14px;
+  }
+  .chip{display:flex;align-items:center;gap:6px;font:10.5px var(--sans);color:var(--muted);white-space:nowrap}
+  .chip i{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+  .chip i.r{width:11px;height:11px;border:2px solid var(--off);background:transparent}
+  .chip i.d{width:11px;height:11px;border:2px solid var(--def);background:transparent}
+  .ch-best{background:var(--best)} .ch-own{background:var(--own)}
+  .ch-off{background:var(--off)} .ch-def{background:var(--def)}
+  .hint{position:fixed;right:16px;bottom:14px;z-index:40;font:10px var(--mono);color:var(--dim);text-align:right;line-height:1.6}
+
+  #stage{position:fixed;inset:58px 0 0 0}
+  #svg{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+  #svg.drag{cursor:grabbing}
+  #grid{opacity:.4}
+  .link{fill:none;stroke:var(--line2);stroke-width:1;opacity:.75}
+  .node{cursor:pointer;user-select:none}
+  .node .dot{transition:r .12s,filter .12s}
+  .node:hover .dot{filter:drop-shadow(0 0 7px var(--acc))}
+  .node .lb{font:600 12.5px var(--sans);fill:var(--txt);transition:fill .12s;letter-spacing:-.1px}
+  .node:hover .lb{fill:var(--acc2)}
+  .node .cnt{fill:var(--dim);font:9.5px var(--mono)}
+  .node .star{fill:var(--best);font-size:9px}
+  .node .own{fill:var(--own);font-size:8px}
+  .node.pillar .lb{font-weight:800;font-size:13.5px}
+  .node.pillar.c-offense .lb{fill:var(--off)}
+  .node.pillar.c-defense .lb{fill:var(--def)}
+  .node.domain .lb{font-weight:800}
+  .node.group .lb{font-weight:700}
+  .node.hl .dot{filter:drop-shadow(0 0 12px var(--acc))}
+  .node.hl .lb{fill:var(--acc2)}
+  .node.exiting{opacity:0;pointer-events:none;transition:opacity .3s}
+
+  #panel{
+    position:fixed;top:58px;right:0;bottom:0;width:min(430px,94vw);z-index:70;
+    background:var(--glass);backdrop-filter:blur(18px);border-left:1px solid var(--line2);
+    box-shadow:var(--shadow);transform:translateX(105%);transition:transform .28s cubic-bezier(.22,.61,.36,1);
+    display:flex;flex-direction:column;
+  }
+  #panel.open{transform:none}
+  #phead{display:flex;align-items:flex-start;gap:10px;padding:16px 18px 10px;border-bottom:1px solid var(--line)}
+  #ptitle{font-size:16px;font-weight:800;letter-spacing:-.3px;line-height:1.3;flex:1;padding-right:6px}
+  #ptitle .bychip{display:inline-block;font:10px var(--mono);color:var(--own);border:1px solid var(--own);border-radius:6px;padding:1px 7px;margin-left:8px;vertical-align:3px}
+  #ptitle.best{color:var(--best)}
+  #pclose{flex:none;width:30px;height:30px;border:none;background:var(--card);border:1px solid var(--line2);color:var(--muted);border-radius:9px;font-size:14px}
+  #pclose:hover{color:var(--txt);border-color:var(--acc)}
+  #pbody{flex:1;overflow:auto;padding:14px 18px 40px}
+  #pbody::-webkit-scrollbar{width:8px}
+  #pbody::-webkit-scrollbar-thumb{background:var(--line2);border-radius:4px}
+  .crumb{font:10px var(--mono);color:var(--dim);line-height:1.7;margin-bottom:12px;word-break:break-word}
+  .badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+  .chap{font:9.5px var(--mono);border:1px solid var(--line2);color:var(--muted);border-radius:6px;padding:2px 8px}
+  .chap.c-offense{color:var(--off);border-color:var(--off)}
+  .chap.c-defense{color:var(--def);border-color:var(--def)}
+  .chap.c-easy{color:var(--grn);border-color:var(--grn)}
+  .chap.c-advanced{color:var(--red);border-color:var(--red)}
+  .chap.c-moderate{color:var(--warn);border-color:var(--warn)}
+  .chap.best{color:var(--best);border-color:var(--best)}
+  .chap.by{color:var(--own);border-color:var(--own)}
+  .sec{margin-bottom:13px}
+  .sec .k{font:9.5px var(--mono);text-transform:uppercase;letter-spacing:1.1px;color:var(--dim);margin-bottom:3px}
+  .sec .v{font-size:12.5px;line-height:1.62;color:var(--muted)}
+  .sec .v.mono{font-family:var(--mono);font-size:11px;color:var(--txt);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;display:block;overflow-x:auto;line-height:1.7}
+  .plink{
+    display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;
+    padding:11px 14px;border-radius:12px;text-decoration:none;font-weight:700;font-size:13px;
+    color:#0a0f1c;background:linear-gradient(135deg,var(--acc2),var(--acc));
+    transition:filter .15s,transform .15s;
+  }
+  .plink:hover{filter:brightness(1.12);transform:translateY(-1px)}
+  .plink.auth{background:linear-gradient(135deg,var(--own),#7c6cf0)}
+  @media (max-width:900px){ .brand .tag{display:none} }
+  @media (max-width:820px){
+    #qk{display:none}
+    header{padding:0 12px;gap:10px}
+    .ibtn{padding:6px 9px}
+    .hint{display:none}
+  }
+  @media (max-width:640px){
+    .tools .ibtn{display:none}
+    .tools select{max-width:120px}
+    header{flex-wrap:wrap;height:auto;padding:10px 12px;gap:10px}
+    .search{order:3;flex:1 1 100%;max-width:none}
+    #stage{top:auto}
+    #panel{top:auto}
   }
 </style>
 </head>
 <body>
 <header>
-  <div class="logo"><span class="prompt">$</span><span class="name">cybersecurity-<span>framework</span></span></div>
-  <div class="stats">
-    <span class="pill"><b id="st-domains">…</b> domains</span>
-    <span class="pill"><b id="st-cats">…</b> categories</span>
-    <span class="pill"><b id="st-tools">…</b> tools</span>
+  <div class="brand">
+    <svg class="mark" viewBox="0 0 34 34"><defs><linearGradient id="shg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6f8bff"/><stop offset="1" stop-color="#34d399"/></linearGradient></defs><rect x="1" y="1" width="32" height="32" rx="9" fill="var(--card)" stroke="var(--line2)"/><path d="M17 7l8 3v5.5c0 5.4-3.4 9.2-8 10.5-4.6-1.3-8-5.1-8-10.5V10z" fill="none" stroke="url(#shg)" stroke-width="1.8"/><circle cx="17" cy="17" r="3" fill="var(--grn)"/></svg>
+    <div>
+      <div class="name"><span class="acc">Cyber</span>Ops <span class="g">Framework</span></div>
+      <div class="tag" id="stline">loading…</div>
+    </div>
   </div>
+
   <div class="search">
-    <span class="ic">⌕</span>
-    <input id="q" type="text" placeholder="search 1000+ tools… e.g. bloodhound, hashcat, nuclei, mimikatz" autocomplete="off" spellcheck="false" />
-    <div class="res" id="res"></div>
+    <svg class="ic" width="14" height="14" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4"/></svg>
+    <input id="q" placeholder="Search 1,068 tools…" autocomplete="off" />
+    <span id="qk">/</span>
+    <div id="res"></div>
   </div>
-  <button class="btn" id="expandAll">expand all</button>
-  <button class="btn" id="collapseAll">collapse</button>
-  <button class="btn" id="theme">light</button>
+
+  <div class="tools">
+    <select id="jumpBox" title="Jump to a domain" aria-label="Jump to a domain"><option value="">⛭ all domains</option></select>
+    <button class="ibtn" id="fitB" title="Fit tree to screen">⛶&nbsp;fit</button>
+    <button class="ibtn" id="coB" title="Collapse everything back to the top">⊟&nbsp;reset</button>
+    <button class="ibtn" id="exB" title="Expand the whole tree">⊞&nbsp;all</button>
+    <button class="ibtn" id="themeB" title="Toggle theme">◐</button>
+  </div>
 </header>
 
+<div class="legend">
+  <span class="chip"><i class="ch-best"></i>★ best-in-class</span>
+  <span class="chip"><i class="ch-own"></i>◆ by 5h4d0wn1k</span>
+  <span class="chip"><i class="r"></i>offense</span>
+  <span class="chip"><i class="d"></i>defense</span>
+</div>
+<div class="hint">click node · expand / open tool<br/>drag · pan&nbsp;&nbsp;wheel · zoom</div>
+
 <div id="stage">
-  <svg id="tree"></svg>
-  <div id="dnav">
-    <button class="navbtn" id="allView" title="Back to the full map of all 27 domains">◧ all</button>
-    <button class="navbtn" id="prevD">◀</button>
-    <span class="cur" id="dnavName">…</span>
-    <button class="navbtn" id="nextD">▶</button>
-  </div>
-  <div id="hints">
-    <span><b style="color:var(--off)">●</b> offense</span>
-    <span><b style="color:var(--def)">●</b> defense</span>
-    <span><b style="color:var(--warn)">★</b> best-in-class</span>
-    <span><b style="color:var(--auth)">◆</b> by 5h4d0wn1k</span>
-    <span><b>🖱 click</b> toggle</span>
-    <span><b>🖱 dbl-click domain</b> jump</span>
-    <span><b>drag</b> pan</span>
-    <span><b>scroll</b> zoom</span>
-  </div>
-  <div id="footer">
-    <a href="ETHICS.md" target="_blank">ETHICS</a>
-    <a href="SCOPE.md" target="_blank">SCOPE</a>
-    <a href="SCHEMA.md" target="_blank">SCHEMA</a>
-    <a href="https://github.com/5h4d0wn1k/cybersecurity-framework" target="_blank">GitHub</a>
-  </div>
+  <svg id="svg" role="figure" aria-label="Cybersecurity framework tree">
+    <g id="vp">
+      <g id="grid"></g>
+      <g id="links"></g>
+      <g id="nodes"></g>
+    </g>
+  </svg>
 </div>
 
-<div id="panel">
-  <div class="ph">
-    <span class="pt" id="ptitle"></span>
-    <button class="pclose" id="pclose">✕</button>
+<aside id="panel" role="dialog" aria-label="Tool details">
+  <div id="phead">
+    <div id="ptitle"></div>
+    <button id="pclose" aria-label="Close panel">✕</button>
   </div>
-  <div class="pb" id="pbody"></div>
-</div>
+  <div id="pbody"></div>
+</aside>
 
 <script>
 (function () {
-  const NS = "http://www.w3.org/2000/svg";
+  "use strict";
   const $ = s => document.querySelector(s);
-  const svg = $("#tree");
-  const g = document.createElementNS(NS, "g");
-  svg.appendChild(g);
+  const NS = "http://www.w3.org/2000/svg";
+  const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  const ROW = 30, COL = 224;
+  const svg = $("#svg"), linksG = $("#links"), nodesG = $("#nodes");
 
-  let DATA, stats, rawIndex = null;
+  /* ============ data model ============ */
+  let DATA = [], stats = null, allRoot = null;
 
-  const esc = s => (s ?? "").toString().replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  function labelOf(d) { return (d.emoji ? d.emoji + " " : "") + (d.name || d.id || ""); }
 
-  /* ---------------- model ---------------- */
-  function mkCat(c, dom, parPath) {
-    const p = parPath ? parPath + "/" + c.name : c.name;
-    const node = { type: "cat", label: c.name, cls: dom.cls, dom: dom.name, path: p,
-      collapsed: true, children: [], domIdx: dom._i };
-    for (const sub of (c.subcategories || [])) node.children.push(mkCat(sub, dom, p));
-    for (const t of (c.tools || [])) {
-      node.children.push({ type: "tool", label: t.name, cls: dom.cls, dom: dom.name,
-        effort: t.effort || "easy", rating: t.rating || 3, best: !!t.best,
-        desc: t.desc || "", when: t.when || "", install: t.install || "",
-        alt: t.alt || [], url: t.url || "", by: t.by || "", path: p + "/" + t.name });
+  function buildNodes() {
+    function mk(data, parent, type) {
+      const n = {
+        path: "", label: labelOf(data), type: type, cls: data.cls || data.class || "",
+        id: data.id, url: data.url, by: data.by || "", best: !!data.best,
+        rating: data.rating, effort: data.effort, desc: data.desc, when: data.when,
+        install: data.install, alt: data.alt, data: data, parent: parent,
+        depth: parent ? parent.depth + 1 : 0, open: false, children: [], tools: 0
+      };
+      n.path = (parent && parent.path !== "all" ? parent.path + "/" : "") + (data.seg || n.label);
+      return n;
     }
-    return node;
-  }
-  function mkDomain(dom, collapsed) {
-    const root = { type: "domain", label: (dom.emoji ? dom.emoji + " " : "") + dom.name,
-      cls: dom.cls, dom: dom.name, domIdx: DATA ? DATA.findIndex(d => d.id === dom.id) : -1, path: dom.name,
-      collapsed: !!collapsed, children: [] };
-    for (const c of dom.categories) root.children.push(mkCat(c, dom, dom.name));
-    return root;
-  }
-  function mkGroup(g, pillar) {
-    return { type: "group", label: g.name, cls: pillar.cls, pillar: pillar.id,
-      path: pillar.id + "/" + g.id, collapsed: true,
-      children: g.domains.map(d => mkDomain(d, true)) };
-  }
-  function mkPillar(p) {
-    return { type: "pillar", label: (p.emoji ? p.emoji + " " : "") + p.name,
-      cls: p.cls, path: p.id, tagline: p.tagline || "", collapsed: false,
-      children: (p.groups || []).map(g => mkGroup(g, p)) };
-  }
-  function setDepth(root) {
-    const rank = { all: 0, pillar: 1, group: 2, domain: 3 };
-    root.dv = 0;
-    (function walk(n, pd) {
-      for (const c of (n.children || [])) {
-        let d = rank[c.type];
-        if (d === undefined) d = pd + 1;   // categories & deeper
-        c.dv = Math.min(d, 5);
-        walk(c, d);
-      }
-    })(root, 0);
-    return root;
-  }
-
-  let PILLS = [];
-  let allRoot = null;
-  let curRoot = null;
-  let mode = "single";     // "single" | "all"
-  let di = 0;
-  const LV = 30, VL = 28, WDOM = 220, WGRP = 300, WOTH = 170;
-
-  function nodeWidth(n) {
-    const l = (n.label || "").length;
-    const w = n.type === "all"    ? Math.max(520, l * 9.6 + 120)
-           : n.type === "pillar"  ? Math.max(WDOM + 60, l * 9.6 + 90)
-           : n.type === "group"   ? Math.max(WGRP, l * 8.8 + 70)
-           : n.type === "domain"  ? Math.max(WDOM, l * 8.8 + 64)
-           : n.type === "cat"     ? Math.max(WOTH, l * 8.4 + 60)
-           : Math.max(150, l * 8.2 + (n.by ? 60 : 40));
-    return w;
-  }
-
-  /* ---------------- layout ---------------- */
-  function layoutRoot(root) {
-    const nodes = [], links = [];
-    let cursor = 0;
-    (function depth(n, d) { n.d = d; for (const c of (n.children || [])) depth(c, d + 1); })(root, 0);
-
-    (function assign(n, parentOpen) {
-      const kids = n.children || [];
-      const open = parentOpen && n.type !== "tool" && !n.collapsed;
-      n.slot = cursor;
-      nodes.push(n);
-      cursor++;
-      n.open = open;
-      if (open) {
-        for (const c of kids) {
-          links.push({ s: n, t: c });
-          assign(c, true);
-        }
-      }
-    })(root, true);
-
-    for (const n of nodes) { n.x = n.d * LV; n.y = n.slot * VL; }
-    return { nodes, links };
-  }
-
-  /* ---------------- render ---------------- */
-  let transform = { x: 24, y: 60, k: 1 };
-
-  function chevPath(open) { return open ? "M 3 -4 L -2 0 L 3 4" : "M -3 -4 L 3 0 L -3 4"; }
-
-  function build() {
-    g.innerHTML = "";
-    const { nodes, links } = layoutRoot(curRoot);
-    for (const l of links) {
-      const el = document.createElementNS(NS, "path");
-      const mx = (l.s.x + l.t.x) / 2;
-      el.setAttribute("d", `M ${l.s.x} ${l.s.y} C ${mx} ${l.s.y}, ${mx} ${l.t.y}, ${l.t.x} ${l.t.y}`);
-      el.setAttribute("class", "link");
-      g.appendChild(el);
-    }
-    for (const n of nodes) {
-      const el = document.createElementNS(NS, "g");
-      if (n.type === "tool") {
-        el.setAttribute("class", "node tool ef-" + n.effort + (n.best ? " best" : "") + (n.by ? " by" + n.by : ""));
-        const w = nodeWidth(n);
-        innerHTML(el, `
-          <rect class="bg" x="-6" y="-11" width="${w}" height="22" rx="11"/>
-          <text x="${n.best ? 10 : 6}" y="0">${n.best ? "★ " : ""}${esc(n.label)}</text>
-          ${n.by ? `<rect class="authbg" x="${w - 24}" y="-9" width="18" height="12" rx="4" fill="var(--auth)" opacity="0.18"/><text class="auth" x="${w - 15}" y="0" text-anchor="middle" style="fill:var(--auth)">by</text>` : ""}`);
-        bind(el, n);
-      } else {
-        const kidsT = (n.children || []).filter(k => k.type === "tool").length;
-        const kidsC = (n.children || []).filter(k => k.type !== "tool").length;
-        el.setAttribute("class", "node d" + n.dv + " t" + n.type + " c-" + n.cls);
-        const w = nodeWidth(n);
-        const lx = n.type === "pillar" ? 26 : n.type === "group" ? 22 : n.type === "domain" ? 20 : 12;
-        const tpl = n.type === "all"
-          ? (`
-            <text x="-6" y="1">◎ ${esc(n.label)}</text>
-            <text class="cnt" x="${w - 10}" y="1" text-anchor="end">${stats ? stats.domains + " domains · " + stats.tools + " tools · " + stats.categories + " categories" : ""}</text>`)
-          : n.type === "pillar"
-          ? (`
-            <rect class="bg" x="-14" y="-17" width="${w}" height="34" rx="11"/>
-            <path class="chev" d="${chevPath(n.open)}"/>
-            <text x="${lx}" y="1">${esc(n.label)}</text>
-            <text class="cnt" x="${w - 10}" y="1" text-anchor="end">${childrenTools(n)} tools</text>
-            <title>${esc(n.label)} — ${childrenTools(n)} tools. Click to expand/collapse.</title>`)
-          : n.type === "group"
-          ? (`
-            <rect class="bg" x="-12" y="-15" width="${w}" height="30" rx="10"/>
-            <path class="chev" d="${chevPath(n.open)}"/>
-            <text x="${lx}" y="1">${esc(n.label)}</text>
-            <text class="cnt" x="${w - 8}" y="1" text-anchor="end">${childrenTools(n)} tools</text>
-            <title>${esc(n.label)} — ${childrenTools(n)} tools in ${n.children.length} domain(s).</title>`)
-          : (`
-            <rect class="bg" x="-10" y="-13" width="${w}" height="26" rx="8"/>
-            <path class="chev" d="${chevPath(n.open)}"/>
-            <text x="${lx}" y="1">${esc(n.label)}</text>
-            <text class="cnt" x="${w - 8}" y="1" text-anchor="end">${kidsT ? kidsT + " 🛠" : ""}${kidsC ? (kidsT ? " " : "") + kidsC + " ▸" : ""}</text>
-            <title>${esc(n.label)} — ${kidsT ? kidsT + " tools, " : ""}${kidsC ? kidsC + " subcategories" : "empty"}. Click to toggle.</title>`);
-        innerHTML(el, tpl);
-        bind(el, n);
-      }
-      el.setAttribute("transform", `translate(${n.x} ${n.y})`);
-      g.appendChild(el);
+    function populate(n) {
+      if (!n.data) return;
+      if (n.children.length) return;
+      const kids = [];
+      let type = null, lst = null;
+      if (Array.isArray(n.data.groups)) { type = "group"; lst = n.data.groups; }
+      else if (Array.isArray(n.data.domains)) { type = "domain"; lst = n.data.domains; }
+      else if (Array.isArray(n.data.categories)) { type = "cat"; lst = n.data.categories; }
+      else if (Array.isArray(n.data.subcategories)) { type = "cat"; lst = n.data.subcategories; }
+      if (type && lst) for (const c of lst) { const cn = mk(c, n, type); populate(cn); kids.push(cn); }
+      if (Array.isArray(n.data.tools)) for (const t of n.data.tools) kids.push(mk(t, n, "tool"));
+      n.children = kids;
+      n.tools = 0;
+      for (const c of kids) n.tools += c.type === "tool" ? 1 : c.tools;
     }
 
-    if (!g.__fitted) {
-      fitBox(nodes);
-      g.__fitted = 1;
-      apply();
-    } else {
-      // keep user's pan/zoom only if everything is still on screen; else re-fit
-      const maxY = nodes.reduce((m, n) => Math.max(m, n.y), 0) * transform.k + transform.y;
-      const maxX = nodes.reduce((m, n) => Math.max(m, n.x + nodeWidth(n)), 0) * transform.k + transform.x;
-      const vw = svg.clientWidth || 1200, vh = svg.clientHeight || 800;
-      if (maxY > vh + 10 || maxX > vw + 10 || transform.y > -5) {
-        fitBox(nodes);
-        apply();
+    allRoot = {
+      path: "all", label: "◎ all " + stats.domains + " domains", type: "all", cls: "defense",
+      depth: 0, open: true, children: [], tools: stats.tools, id: "all", data: null
+    };
+    allRoot.children = DATA.map(p => { const pn = mk(p, allRoot, "pillar"); populate(pn); pn.open = true; return pn; });
+  }
+
+  /* ============ tidy tree layout (Buchheim et al.) ============ */
+  function sep(a, b) { return a.parent === b.parent ? 1 : 2; }
+  function nextLeft(v) { return v.children ? v.children[0] : v.t; }
+  function nextRight(v) { return v.children ? v.children[v.children.length - 1] : v.t; }
+  function moveSubtree(wm, wp, shift) {
+    const ch = shift / (wp.i - wm.i);
+    wp.c -= ch; wp.s += shift; wm.c += ch; wp.z += shift; wp.m += shift;
+  }
+  function executeShifts(v) {
+    let shift = 0, change = 0, i = v.children.length, w;
+    while (--i >= 0) { w = v.children[i]; w.z += shift; w.m += shift; shift += w.s + (change += w.c); }
+  }
+  function ancestorOf(vim, v, anc) { return vim.a.parent === v.parent ? vim.a : anc; }
+  function apportion(v, w, anc) {
+    if (!w) return anc;
+    let vip = v, vop = v, vim = w, vom = vip.parent.children[0],
+      sip = vip.m, sop = vop.m, sim = vim.m, som = vom.m, shift;
+    while ((vim = nextRight(vim), vip = nextLeft(vip), vim && vip)) {
+      vom = nextLeft(vom); vop = nextRight(vop); vop.a = v;
+      shift = vim.z + sim - vip.z - sip + sep(vim, vip);
+      if (shift > 0) { moveSubtree(ancestorOf(vim, v, anc), v, shift); sip += shift; sop += shift; }
+      sim += vim.m; sip += vip.m; som += vom.m; sop += vop.m;
+    }
+    if (vim && !nextRight(vop)) { vop.t = vim; vop.m += sim - sop; }
+    if (vip && !nextLeft(vom)) { vom.t = vip; vom.m += sip - som; anc = v; }
+    return anc;
+  }
+  function firstWalk(v) {
+    const children = v.children, sibs = v.parent.children, w = v.i ? sibs[v.i - 1] : null;
+    if (children && children.length) {
+      executeShifts(v);
+      const mid = (children[0].z + children[children.length - 1].z) / 2;
+      if (w) { v.z = w.z + sep(v, w); v.m = v.z - mid; } else v.z = mid;
+    } else if (w) v.z = w.z + sep(v, w);
+    v.parent.A = apportion(v, w, v.parent.A || sibs[0]);
+  }
+  function secondWalk(v) { v._.x = v.z + v.parent.m; v.m += v.parent.m; }
+
+  function W(node, i) { this._ = node; this.parent = null; this.children = null; this.A = null; this.a = this; this.z = 0; this.m = 0; this.c = 0; this.s = 0; this.t = null; this.i = i; }
+
+  function layoutV(root) {
+    const t = new W(root, 0), stack = [t];
+    let v;
+    while ((v = stack.pop())) {
+      const kids = (v._.open && v._.children) ? v._.children : null;
+      if (kids) {
+        v.children = new Array(kids.length);
+        for (let i = kids.length - 1; i >= 0; --i) { stack.push(v.children[i] = new W(kids[i], i)); v.children[i].parent = v; }
       }
     }
+    (t.parent = new W(null, 0)).children = [t];
+    (function post(v2) { if (v2.children) for (const c of v2.children) post(c); firstWalk(v2); })(t);
+    t.parent.m = -t.z;
+    (function pre(v2) { secondWalk(v2); if (v2.children) for (const c of v2.children) pre(c); })(t);
+    const out = [];
+    (function collect(v2) { out.push(v2._); if (v2.children) for (const c of v2.children) collect(c); })(t);
+    for (const n of out) n.y = n.depth * COL;
+    let mn = Infinity, mx = -Infinity;
+    for (const n of out) { if (n.x < mn) mn = n.x; if (n.x > mx) mx = n.x; }
+    const spanUnits = (mx - mn) || 1;
+    const spanPx = spanUnits * ROW;
+    const vhCap = (svg.clientHeight || 800) * 1.5;
+    const Hv = Math.min(spanPx + 2 * ROW, vhCap);
+    for (const n of out) n.x = ROW + ((n.x - mn) / spanUnits) * (Hv - 2 * ROW);
+    return out;
   }
 
-  function fitBox(nodes) {
-    const bw = Math.max(...nodes.map(n => n.x + nodeWidth(n)));
-    const bh = nodes.reduce((m, n) => Math.max(m, n.y), 0) + VL * 2;
-    const vw = svg.clientWidth || 1200, vh = svg.clientHeight || 800;
-    let k = Math.min(vw / bw, vh / bh);
-    transform = { x: 36, y: 92, k: Math.max(0.5, Math.min(k, 1.15)) };
+  /* ============ rendering ============ */
+  let transform = { x: 40, y: 40, k: 1 };
+  const nodeEls = new Map(), linkEls = new Map();
+  let visState = [], animId = null;
+
+  function apply() { $("#vp").setAttribute("transform", `translate(${transform.x} ${transform.y}) scale(${transform.k})`); }
+
+  function dispLabel(n) {
+    const max = n.type === "tool" ? 26 : 22;
+    return n.label.length > max ? n.label.slice(0, max - 1) + "…" : n.label;
   }
-
-  function innerHTML(el, html) { el.innerHTML = html; }
-
-  function childrenTools(n) {
-    let c = 0;
-    (function w(x) { for (const k of (x.children || [])) { if (k.type === "tool") c++; else w(k); } })(n);
-    return c ? c + " 🛠" : "";
-  }
-
-  function bind(el, n) {
+  function dotShape(n) {
+    const branch = n.children.length > 0;
+    if (n.type === "all") return '<circle class="dot" r="7" fill="var(--acc)" stroke="var(--acc2)" stroke-width="1.8"/>';
     if (n.type === "tool") {
-      el.addEventListener("click", () => openPanel(n));
-      el.addEventListener("dblclick", e => { e.stopPropagation(); if (n.url) window.open(n.url, "_blank"); });
-    } else if (n.type === "all") {
-      el.style.cursor = "default";
-    } else if (n.type === "domain") {
-      if (n === curRoot) {
-        el.style.cursor = "default";
-      } else {
-        el.addEventListener("click", () => { n.collapsed = !n.collapsed; build(); });
-        el.addEventListener("dblclick", e => { e.stopPropagation(); pick(n.domIdx); });
-      }
-    } else {
-      el.addEventListener("click", () => { n.collapsed = !n.collapsed; build(); });
+      const c = n.best ? "var(--best)" : (n.by ? "var(--own)" : (n.cls === "offense" ? "var(--off)" : "var(--def)"));
+      return `<circle class="dot" r="3.4" fill="${c}"/>`;
     }
+    if (branch && n.open) return `<circle class="dot" r="4.6" fill="${n.cls === "offense" ? "var(--off)" : "var(--def)"}" stroke="var(--bg2)" stroke-width="1"/>`;
+    return `<circle class="dot" r="4.6" fill="var(--bg2)" stroke="${n.cls === "offense" ? "var(--off)" : "var(--def)"}" stroke-width="1.6"/>`;
+  }
+  function nodeInner(n) {
+    const bits = [dotShape(n)];
+    const lbl = dispLabel(n);
+    if (n.type === "tool") {
+      if (n.best) bits.push('<text class="star" x="12" dy=".36em" text-anchor="start">★</text>');
+      bits.push(`<text class="lb" x="${n.best ? 21 : 12}" dy=".36em" text-anchor="start">${esc(lbl)}</text>`);
+      if (n.by) bits.push('<text class="own" x="12" y="12" dy=".34em" text-anchor="middle">◆</text>');
+    } else {
+      bits.push(`<text class="lb" x="${n.type === "all" ? -18 : -12}" dy=".36em" text-anchor="end">${esc(lbl)}</text>`);
+      if (n.tools) bits.push(`<text class="cnt" x="13" dy=".36em" text-anchor="start">${n.tools}</text>`);
+    }
+    if (n.desc || n.label !== lbl) bits.push(`<title>${esc(n.desc || n.label)}</title>`);
+    return bits.join("");
+  }
+  function elClass(n) {
+    const c = ["node", n.type, "d" + Math.min(n.depth, 6)];
+    if (n.cls) c.push("c-" + n.cls);
+    if (n.by) c.push("by");
+    if (n.best) c.push("best");
+    return c.join(" ");
+  }
+  function linkD(sx, sy, tx, ty) {
+    const mx = (sx + tx) / 2;
+    return `M ${sx} ${sy} C ${mx} ${sy}, ${mx} ${ty}, ${tx} ${ty}`;
+  }
+  function extent(n) {
+    const L = dispLabel(n).length * 7 + 14;
+    if (n.type === "tool") { const extra = (n.best ? 11 : 0) + (n.by ? 10 : 0); return { l: 8, r: L + extra + 6 }; }
+    if (n.tools) return { l: L + 10, r: 22 };
+    if (n.type === "all") return { l: L + 20, r: 14 };
+    return { l: L + 10, r: 14 };
   }
 
-  function apply() { g.setAttribute("transform", `translate(${transform.x} ${transform.y}) scale(${transform.k})`); }
+  function render() {
+    visState = layoutV(allRoot);
+    const byPath = new Map(visState.map(n => [n.path, n]));
 
-  /* ---------------- views ---------------- */
-  function pick(i) {
-    mode = "single";
-    di = (i + DATA.length) % DATA.length;
-    curRoot = mkDomain(DATA[di]);
-    setDepth(curRoot);
-    g.__fitted = 0;
-    transform = { x: 24, y: 60, k: 1 };
-    $("#dnavName").textContent = DATA[di].emoji + " " + DATA[di].name;
-    build();
+    /* links */
+    const want = new Set();
+    for (const n of visState) if (n.open) for (const c of n.children) if (byPath.has(c.path)) want.add(c.path);
+    for (const [p, el] of linkEls) if (!want.has(p)) { el.remove(); linkEls.delete(p); }
+    for (const p of want) {
+      const c = byPath.get(p), s = c.parent;
+      if (linkEls.has(p)) linkEls.get(p).setAttribute("d", linkD(s.y, s.x, c.y, c.x));
+      else { const el = document.createElementNS(NS, "path"); el.setAttribute("class", "link"); el.setAttribute("d", linkD(s.y, s.x, c.y, c.x)); linksG.appendChild(el); linkEls.set(p, el); }
+    }
+
+    /* nodes */
+    for (const [p, el] of nodeEls) if (!byPath.has(p)) { el.classList.add("exiting"); setTimeout(() => el.remove(), 320); nodeEls.delete(p); }
+    for (const n of visState) {
+      if (!nodeEls.has(n.path)) {
+        const g = document.createElementNS(NS, "g");
+        g.setAttribute("class", elClass(n));
+        g.setAttribute("data-path", n.path);
+        g.innerHTML = nodeInner(n);
+        bindNode(g, n);
+        nodesG.appendChild(g);
+        nodeEls.set(n.path, g);
+      } else {
+        const g = nodeEls.get(n.path);
+        g.setAttribute("class", elClass(n));
+        const wasTool = g.classList.contains("tool");
+        g.innerHTML = nodeInner(n);
+        if (wasTool) bindNode(g, n); // refresh leaf listeners if re-rendered
+      }
+    }
+    if (animId) cancelAnimationFrame(animId);
+
+    const first = nodeEls.size >= visState.length && !nodeEls.values().next().value.__hasAnim;
+    const starts = new Map();
+    for (const n of visState) {
+      const g = nodeEls.get(n.path);
+      const prev = g && g.__d;
+      starts.set(n.path, prev ? prev : { x: n.x, y: n.y, o: 1 });
+    }
+    const t0 = performance.now(), T = 520;
+    function easeInOut(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+    function frame(now) {
+      const e0 = Math.min(1, (now - t0) / T), e = easeInOut(e0);
+      for (const n of visState) {
+        const g = nodeEls.get(n.path); if (!g) continue;
+        const st = starts.get(n.path);
+        const vx = st.x + (n.x - st.x) * e, vy = st.y + (n.y - st.y) * e;
+        g.setAttribute("transform", `translate(${vy} ${vx})`);
+        g.__d = { x: vx, y: vy };
+        g.__hasAnim = 1;
+        if (st.o < 1) g.style.opacity = st.o + (1 - st.o) * e;
+      }
+      if (e0 < 1) animId = requestAnimationFrame(frame);
+      else for (const n of visState) { const g = nodeEls.get(n.path); if (g) { g.__d = { x: n.x, y: n.y }; g.setAttribute("transform", `translate(${n.y} ${n.x})`); g.style.opacity = 1; } }
+    }
+    animId = requestAnimationFrame(frame);
   }
-  function pickAll() {
-    mode = "all";
-    curRoot = setDepth(allRoot);
-    g.__fitted = 0;
-    transform = { x: 24, y: 60, k: 1 };
-    $("#dnavName").textContent = "all " + stats.domains + " domains — " + stats.tools + " tools";
-    build();
+
+  function bindNode(g, n) {
+    g._n = n;
+    g.addEventListener("click", e => {
+      e.stopPropagation();
+      if (n.type === "tool") openPanel(n);
+      else if (n.type === "all") { resetTop(); render(); autoFit(); }
+      else { n.open = !n.open; render(); }
+    });
+    g.addEventListener("dblclick", e => {
+      if (n.type === "tool" && n.url) window.open(n.url, "_blank");
+    });
   }
 
-  $("#allView").addEventListener("click", pickAll);
-  $("#prevD").addEventListener("click", () => pick(di - 1));
-  $("#nextD").addEventListener("click", () => pick(di + 1));
+  /* ============ fit / pan / zoom ============ */
+  function autoFit() {
+    if (!visState.length) return;
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const n of visState) {
+      const ex = extent(n);
+      minX = Math.min(minX, n.y - ex.l); maxX = Math.max(maxX, n.y + ex.r);
+      minY = Math.min(minY, n.x - 16); maxY = Math.max(maxY, n.x + 16);
+    }
+    const vw = svg.clientWidth || 1200, vh = svg.clientHeight || 800, pad = 60;
+    const bw = (maxX - minX) || 1, bh = (maxY - minY) || 1;
+    let k = Math.min((vw - pad * 2) / bw, (vh - pad * 2) / bh);
+    k = Math.max(0.3, Math.min(k, 1.25));
+    const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
+    transform = { x: vw / 2 - cx * k, y: vh / 2 - cy * k, k };
+    apply();
+  }
+  $("#fitB").addEventListener("click", autoFit);
 
-  /* ---------------- pan / zoom / keyboard ---------------- */
   let dragging = false, sx = 0, sy = 0;
-  svg.addEventListener("mousedown", e => { if (e.target.closest(".node")) return; dragging = true; sx = e.clientX - transform.x; sy = e.clientY - transform.y; });
-  window.addEventListener("mousemove", e => { if (!dragging) return; transform.x = e.clientX - sx; transform.y = e.clientY - sy; apply(); });
-  window.addEventListener("mouseup", () => dragging = false);
+  svg.addEventListener("mousedown", e => {
+    if (e.target.closest(".node") || e.target.closest(".link")) return;
+    dragging = true; sx = e.clientX - transform.x; sy = e.clientY - transform.y; svg.classList.add("drag");
+  });
+  window.addEventListener("mousemove", e => { if (dragging) { transform.x = e.clientX - sx; transform.y = e.clientY - sy; apply(); } });
+  window.addEventListener("mouseup", () => { dragging = false; svg.classList.remove("drag"); });
   svg.addEventListener("wheel", e => {
     e.preventDefault();
-    const rect = svg.getBoundingClientRect();
-    const mx = e.clientX - rect.left, my = e.clientY - rect.top;
-    const f = e.deltaY < 0 ? 1.12 : 0.89;
-    const k2 = Math.max(0.12, Math.min(3, transform.k * f));
+    const r = svg.getBoundingClientRect();
+    const mx = e.clientX - r.left, my = e.clientY - r.top;
+    const f = e.deltaY < 0 ? 1.1 : 0.9;
+    const k2 = Math.max(0.15, Math.min(4, transform.k * f));
     const wx = (mx - transform.x) / transform.k, wy = (my - transform.y) / transform.k;
-    transform.k = k2;
-    transform.x = mx - wx * k2;
-    transform.y = my - wy * k2;
+    transform.k = k2; transform.x = mx - wx * k2; transform.y = my - wy * k2;
     apply();
   }, { passive: false });
-  document.addEventListener("keydown", e => {
-    if (e.target.id === "q") return;
-    if (e.key === "Escape") panel.classList.remove("open");
-  });
 
-  /* ---------------- search ---------------- */
-  const q = $("#q"), res = $("#res");
-  let tools = [];
-  function buildIndex() {
-    tools = [];
-    rawIndex = {};
-    for (const dom of DATA) {
-      const root = mkDomain(dom, false);
-      (function each(n) {
-        if (n.type === "tool") { tools.push(n); rawIndex[n.path] = n; }
-        for (const c of (n.children || [])) each(c);
-      })(root);
-    }
+  /* ============ expand / collapse / reset ============ */
+  function resetTop() {
+    allRoot.open = true;
+    for (const pp of allRoot.children) { pp.open = true; for (const cc of pp.children) cc.open = false; }
   }
+  function expandAll(n) {
+    n.open = n.children.length > 0;
+    for (const c of n.children) if (c.children.length) expandAll(c);
+  }
+  $("#exB").addEventListener("click", () => { expandAll(allRoot); render(); autoFit(); });
+  $("#coB").addEventListener("click", () => { resetTop(); render(); autoFit(); });
 
+  /* ============ search ============ */
+  const q = $("#q"), res = $("#res");
+  let toolIndex = [];
+  function buildIndex() {
+    toolIndex = [];
+    (function walk(n) { if (n.type === "tool") toolIndex.push(n); for (const c of n.children) walk(c); })(allRoot);
+  }
+  function findByPath(p) {
+    let r = null;
+    (function f(n) { if (n.path === p) { r = n; return; } for (const c of n.children) f(c); })(allRoot);
+    return r;
+  }
+  function reveal(target) {
+    resetTop();
+    const chain = [];
+    for (let p2 = target.parent; p2 && p2.parent; p2 = p2.parent) chain.push(p2);
+    chain.reverse();
+    for (const a of chain) a.open = true;
+    if (target.type !== "tool") target.open = true;
+    else target.parent.open = true;
+    render();
+    const vw = svg.clientWidth || 1200, vh = svg.clientHeight || 800;
+    const k = Math.max(transform.k, 0.9);
+    transform.k = k;
+    transform.x = vw / 2 - target.y * k - 80;
+    transform.y = vh / 2 - target.x * k;
+    apply();
+    const g = nodeEls.get(target.path);
+    if (g) { g.classList.add("hl"); setTimeout(() => g.classList.remove("hl"), 1600); }
+    if (target.type === "tool") openPanel(target);
+  }
   function doSearch(s) {
     s = (s || "").trim().toLowerCase();
     if (!s) { res.classList.remove("open"); res.innerHTML = ""; return; }
-    const hits = tools.filter(t => t.label.toLowerCase().includes(s) || t.path.toLowerCase().includes(s)).slice(0, 40);
-    const html = hits.slice(0, 25).map((t, i) => `<div class="row" data-dom="${esc(t.dom)}" data-path="${esc(t.path)}">
-      <span class="t">${t.best ? "★ " : ""}${t.by ? "◆ " : ""}${esc(t.label)}</span>
-      <span class="p">${esc(t.path)}</span>
-      <span class="st"><span class="tag" style="color:var(--${effColor(t.effort)})">${esc(t.effort)}</span><span class="tag">${t.rating}/5</span><span class="tag">${esc(t.cls)}</span></span>
-    </div>`).join("");
+    const hits = toolIndex.filter(t => t.label.toLowerCase().includes(s) || t.path.toLowerCase().includes(s)).slice(0, 40);
     res.innerHTML =
-      `<div class="count">${hits.length} of ${tools.length} tools indexed</div>` +
-      (html || `<div class="empty">no matches for “${esc(s)}”</div>`);
+      `<div class="count">${hits.length} of ${toolIndex.length} tools indexed</div>` +
+      (hits.slice(0, 24).map((t, i) =>
+        `<div class="row" data-i="${i}">
+          <span class="t">${t.best ? "★ " : ""}${t.by ? "◆ " : ""}${esc(t.label)}</span>
+          <span class="p">${esc(t.path)}</span>
+          <span class="st">
+            ${t.effort ? `<span class="tag c-${esc(t.effort)}">${esc(t.effort)}</span>` : ""}
+            <span class="tag">${t.rating}/5</span>
+            ${t.cls ? `<span class="tag c-${esc(t.cls)}">${esc(t.cls)}</span>` : ""}
+          </span>
+        </div>`).join("") || `<div class="empty">no matches for "${esc(s)}"</div>`);
     res.__hits = hits;
     res.classList.add("open");
   }
-  function effColor(e) { return e === "easy" ? "grn" : e === "advanced" ? "red" : "warn"; }
-
   q.addEventListener("input", () => doSearch(q.value));
+  $("#qk").addEventListener("click", () => q.focus());
   res.addEventListener("click", e => {
     const row = e.target.closest(".row");
     if (!row || !res.__hits) return;
-    const domK = row.dataset.dom;
-    const path = row.dataset.path;
-    const dIdx = DATA.findIndex(d => d.name === domK || d.id === domK);
-    if (dIdx < 0) return;
-    pick(dIdx);                       // switch to that domain
-    const segs = path.split("/");
-    let node = curRoot;
-    for (let i = 1; i < segs.length - 1; i++) {   // skip domain root + tool segment
-      const nxt = (node.children || []).find(c => c.type === "cat" && c.label === segs[i]);
-      if (!nxt) break;
-      nxt.collapsed = false;
-      node = nxt;
-    }
-    build();
-    const { nodes } = layoutRoot(curRoot);
-    const target = nodes.find(n => n.path === path);
-    if (target) {
-      transform.k = Math.max(transform.k, 0.85);
-      transform.x = (svg.clientWidth / 2) - target.x * transform.k - nodeWidth(target) / 2 * transform.k;
-      transform.y = (svg.clientHeight / 2) - target.y * transform.k;
-      apply();
-      const win = (node.children || []).find(c => c.path === path);
-      openPanel(win || findTool(path));
-    }
+    reveal(res.__hits[+row.dataset.i]);
     res.classList.remove("open");
+    q.blur();
   });
-  function findTool(path) {
-    for (const t of tools) if (t.path === path) return t;
-    return null;
-  }
   document.addEventListener("click", e => { if (!e.target.closest(".search")) res.classList.remove("open"); });
 
-  /* ---------------- panel ---------------- */
+  /* ============ panel ============ */
   const panel = $("#panel");
   function openPanel(t) {
-    if (!t) return;
     const pt = $("#ptitle");
     pt.innerHTML = (t.best ? "★ " : "") + esc(t.label) + (t.by ? `<span class="bychip">by ${esc(t.by)}</span>` : "");
-    pt.className = "pt" + (t.best ? " best" : "");
+    pt.className = t.best ? "best" : "";
     $("#pbody").innerHTML = `
-      <div class="crumb">${esc(t.path.split("/").map((p, i) => i === 0 ? `<b>${esc(p)}</b>` : esc(p)).join(" <span style='color:var(--line2)'>&#47;</span> "))}</div>
+      <div class="crumb">${esc(t.path)}</div>
       <div class="badges">
-        <span class="chap ${esc(t.effort)}">${esc(t.effort)}</span>
-        <span class="chap ${esc(t.cls)}">${esc(t.cls)}</span>
-        <span class="chap" style="border-color:var(--line2);color:var(--muted)">${t.rating}/5</span>
-        ${t.best ? '<span class="chap" style="border-color:var(--warn);color:var(--warn)">★ best-in-class</span>' : ""}
+        ${t.effort ? `<span class="chap c-${esc(t.effort)}">${esc(t.effort)}</span>` : ""}
+        ${t.cls ? `<span class="chap c-${esc(t.cls)}">${esc(t.cls)}</span>` : ""}
+        ${t.rating ? `<span class="chap">${t.rating}/5</span>` : ""}
+        ${t.best ? '<span class="chap best">★ best-in-class</span>' : ""}
         ${t.by ? `<span class="chap by">◆ by ${esc(t.by)}</span>` : ""}
+        ${t.effort === "easy" || t.effort === "moderate" || t.effort === "advanced" ? "" : ""}
       </div>
-      <div class="sec"><div class="k">What it does</div><div class="v">${esc(t.desc) || "—"}</div></div>
-      <div class="sec"><div class="k">When to use it</div><div class="v">${esc(t.when) || "—"}</div></div>
-      <div class="sec"><div class="k">Install</div><div class="v" style="font-family:var(--mono);font-size:11.5px">${esc(t.install) || "—"}</div></div>
-      <div class="sec"><div class="k">Alternatives</div><div class="v">${esc((t.alt || []).join(" · ")) || "—"}</div></div>
+      ${t.desc ? `<div class="sec"><div class="k">What it does</div><div class="v">${esc(t.desc)}</div></div>` : ""}
+      ${t.when ? `<div class="sec"><div class="k">When to use it</div><div class="v">${esc(t.when)}</div></div>` : ""}
+      ${t.install ? `<div class="sec"><div class="k">Install</div><div class="v mono">${esc(t.install)}</div></div>` : ""}
+      ${t.alt && t.alt.length ? `<div class="sec"><div class="k">Alternatives</div><div class="v">${esc(t.alt.join(" · "))}</div></div>` : ""}
       ${t.url ? `<a class="plink${t.by ? " auth" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">${t.by ? "open on GitHub ↗" : "open tool ↗"}</a>` : ""}`;
     panel.classList.add("open");
   }
   $("#pclose").addEventListener("click", () => panel.classList.remove("open"));
   document.addEventListener("mousedown", e => {
-    if (panel.classList.contains("open") && !panel.contains(e.target) && !e.target.closest(".node")) {
-      panel.classList.remove("open");
-      res.classList.remove("open");
-    }
+    if (panel.classList.contains("open") && !panel.contains(e.target) && !e.target.closest(".node") && !e.target.closest(".search")) panel.classList.remove("open");
   });
 
-  /* ---------------- expand / collapse ---------------- */
-  $("#expandAll").addEventListener("click", () => {
-    (function e(n) { for (const c of (n.children || [])) { if (c.type === "tool") continue; c.collapsed = false; e(c); } })(curRoot);
-    build();
-  });
-  $("#collapseAll").addEventListener("click", () => {
-    (function c(n) {
-      for (const ch of (n.children || [])) {
-        if (ch.type === "tool") continue;
-        if (ch.type !== "pillar") ch.collapsed = true;
-        c(ch);
-      }
-    })(curRoot);
-    build();
-  });
-
-  /* ---------------- theme ---------------- */
-  const themeBtn = $("#theme");
+  /* ============ theme / keys ============ */
+  const themeBtn = $("#themeB");
   themeBtn.addEventListener("click", () => {
-    const b = document.body; b.classList.toggle("light");
-    themeBtn.textContent = b.classList.contains("light") ? "dark" : "light";
-    localStorage.setItem("theme", b.classList.contains("light") ? "light" : "dark");
+    document.body.classList.toggle("light");
+    localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
   });
-  if (localStorage.getItem("theme") === "light") { document.body.classList.add("light"); themeBtn.textContent = "dark"; }
+  if (localStorage.getItem("theme") === "light") document.body.classList.add("light");
+  document.addEventListener("keydown", e => {
+    if (e.key === "/" && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+    if (e.key === "Escape") panel.classList.remove("open");
+  });
 
-  /* ---------------- boot ---------------- */
+  /* ============ domain jump ============ */
+  const jumpBox = $("#jumpBox");
+  function fillJump() {
+    const opts = [];
+    (function walk(n) { if (n.type === "domain") opts.push(n); for (const c of n.children) walk(c); })(allRoot);
+    opts.sort((a, b) => a.label.localeCompare(b.label));
+    for (const d of opts) {
+      const o = document.createElement("option");
+      o.value = d.path;
+      o.textContent = d.label;
+      jumpBox.appendChild(o);
+    }
+    jumpBox.addEventListener("change", () => { if (jumpBox.value) { const t = findByPath(jumpBox.value); if (t) reveal(t); } });
+  }
+
+  /* ============ boot ============ */
   (async function () {
     let data;
     try { data = await (await fetch("data/tree.json")).json(); }
@@ -589,17 +656,15 @@
       document.body.innerHTML = '<div style="padding:40px;font-family:monospace">Could not load data/tree.json — run <b>python3 scripts/build.py</b></div>';
       return;
     }
-    DATA = data.domains;
+    DATA = data.pillars || [];
     stats = data.stats;
-    PILLS = data.pillars || [];
-    DATA.forEach((dom, i) => dom._i = i);
-    $("#st-domains").textContent = stats.domains;
-    $("#st-cats").textContent = stats.categories;
-    $("#st-tools").textContent = stats.tools;
+    $("#stline").textContent = `${stats.domains} domains · ${stats.categories} categories · ${stats.tools} tools`;
+    buildNodes();
     buildIndex();
-    allRoot = { type: "all", label: "all " + stats.domains + " domains", cls: "defense", dom: "all", path: "all",
-      collapsed: false, children: PILLS.map(mkPillar) };
-    pickAll();
+    fillJump();
+    render();
+    autoFit();
+    setTimeout(autoFit, 80);
   })();
 })();
 </script>

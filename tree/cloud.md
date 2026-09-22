@@ -277,22 +277,7 @@ Scans lists of bucket names across AWS and S3-compatible stores (GCP, DigitalOce
 
 **URL:** https://github.com/sa7mon/S3Scanner
 
-**Alternatives:** S3audit, CloudFox
-
-
-##### S3audit
-
-NCC Group's small Go tool checks S3 bucket permissions via the public ListObjects/GetObject/Acl APIs against a given bucket or custom wordlist.
-
-**When:** Single-target bucket permission triage and wordlist-driven scan of buckets you own, without standing up a full scanner.
-
-**Effort:** easy  ·  **Rating:** 4/5
-
-**Install:** `go install github.com/nccgroup/s3audit@latest`
-
-**URL:** https://github.com/sa7mon/S3Scanner
-
-**Alternatives:** S3Scanner, AWS CLI & Batch Scripts
+**Alternatives:** CloudFox
 
 
 
