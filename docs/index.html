@@ -59,7 +59,9 @@
   svg#tree{width:100%;height:100%;display:block}
   .link{fill:none;stroke:var(--line2);stroke-width:1.2;opacity:.7}
   .node{cursor:pointer}
-  .node .bg{fill:var(--node);stroke:var(--node-line);stroke-width:1.2}
+  .node .bg{fill:var(--node);stroke:var(--node-line);stroke-width:1.2;transition:stroke .12s,fill .12s}
+  .node:hover .bg{filter:brightness(1.18)}
+  .tool:hover .bg{stroke:var(--acc2);stroke-width:1.8}
   .node.d0 .bg{fill:transparent;stroke:none}
   .node.d0 text{font-size:15px;font-weight:800;fill:var(--acc)}
   .node.d1 .bg{fill:var(--bg2);stroke-width:2}
@@ -547,20 +549,26 @@
     panel.classList.add("open");
   }
   $("#pclose").addEventListener("click", () => panel.classList.remove("open"));
+  document.addEventListener("mousedown", e => {
+    if (panel.classList.contains("open") && !panel.contains(e.target) && !e.target.closest(".node")) {
+      panel.classList.remove("open");
+      res.classList.remove("open");
+    }
+  });
 
   /* ---------------- expand / collapse ---------------- */
-  const foldable = n => n.type !== "tool" && n.type !== "all";
   $("#expandAll").addEventListener("click", () => {
     (function e(n) { for (const c of (n.children || [])) { if (c.type === "tool") continue; c.collapsed = false; e(c); } })(curRoot);
     build();
   });
   $("#collapseAll").addEventListener("click", () => {
-    (function c(n, top) {
+    (function c(n) {
       for (const ch of (n.children || [])) {
         if (ch.type === "tool") continue;
-        if (foldable(ch)) { ch.collapsed = true; c(ch, false); }
+        if (ch.type !== "pillar") ch.collapsed = true;
+        c(ch);
       }
-    })(curRoot, true);
+    })(curRoot);
     build();
   });
 
