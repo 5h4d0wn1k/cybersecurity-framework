@@ -54,6 +54,11 @@ def build():
         "domains": len(domains), "categories": total_cats, "tools": total_tools}}
 
     DOCS.mkdir(parents=True, exist_ok=True)
+    for name in ("README.md", "ETHICS.md", "SCOPE.md", "SCHEMA.md"):
+        src = ROOT / name
+        if src.exists():
+            (DOCS / name).write_text(src.read_text())
+
     (DOCS / "tree.json").write_text(json.dumps(merged, indent=2))
 
     # markdown mirrors
