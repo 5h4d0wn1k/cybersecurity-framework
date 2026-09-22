@@ -137,7 +137,8 @@ def build():
     }
 
     DOCS.mkdir(parents=True, exist_ok=True)
-    for name in ("README.md", "ETHICS.md", "SCOPE.md", "SCHEMA.md"):
+    for name in ("README.md", "ETHICS.md", "SCOPE.md", "SCHEMA.md", "VISION.md",
+                 "CONTRIBUTING.md", "CODE_OF_CONDUCT.md", "LICENSE"):
         src = ROOT / name
         if src.exists():
             (DOCS / name).write_text(src.read_text())

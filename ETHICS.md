@@ -47,4 +47,6 @@ educational, authorized, and defensible.
 ---
 
 *Contributions are welcome. If you believe a listing crosses the line above, open an issue —
-the map improves by review.*
+the map improves by review.* Go to [SCOPE.md](SCOPE.md) for the operational checklist,
+[VISION.md](VISION.md) for the education-platform vision and hard boundaries, and
+[CONTRIBUTING.md](CONTRIBUTING.md) to help build it.

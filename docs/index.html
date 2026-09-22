@@ -3,104 +3,148 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>CyberOps Framework — interactive tree of cyber tooling</title>
-<meta name="description" content="A modern interactive tree-map of the entire cybersecurity landscape: 27 domains, 776 categories, 1068 curated tools with effort ratings, direct links, and when-to-use guidance." />
+<title>CyberOps Framework — Interactive Map of Every Cybersecurity Tool</title>
+<meta name="description" content="An open-source interactive tree-map of the entire cybersecurity landscape: 27 domains, 776 categories, 1067 curated offensive and defensive security tools with effort ratings, install commands, when-to-use guidance, and best-in-class picks (★)." />
+<meta name="keywords" content="cybersecurity framework, security tools map, offensive security, defensive security, penetration testing, red team, blue team, OSINT, vulnerability scanning, web app security, network security, digital forensics, malware analysis, DFIR, cloud security, cybersecurity education" />
+<meta name="author" content="5h4d0wn1k" />
+<meta name="robots" content="index, follow" />
+<meta name="theme-color" content="#070b13" />
+<link rel="canonical" href="https://5h4d0wn1k.github.io/cybersecurity-framework/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="CyberOps Framework" />
+<meta property="og:title" content="CyberOps Framework — Interactive Map of Every Cybersecurity Tool" />
+<meta property="og:description" content="The open-source map of everything in cybersecurity: 27 domains, 776 categories, 1067 curated offensive & defensive tools with effort ratings and when-to-use guidance." />
+<meta property="og:url" content="https://5h4d0wn1k.github.io/cybersecurity-framework/" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="CyberOps Framework — Interactive Map of Every Cybersecurity Tool" />
+<meta name="twitter:description" content="27 domains, 776 categories, 1067 curated offensive & defensive security tools — the open-source map of everything in cybersecurity." />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%230b1220'/%3E%3Cpath d='M8 2l5 1.8v3.4c0 3.4-2.2 5.9-5 6.8-2.8-.9-5-3.4-5-6.8V3.8z' fill='none' stroke='%236f8bff' stroke-width='1.3'/%3E%3Ccircle cx='8' cy='8' r='1.7' fill='%2334d399'/%3E%3C/svg%3E" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "CyberOps Framework",
+  "alternateName": "Cybersecurity Framework",
+  "url": "https://5h4d0wn1k.github.io/cybersecurity-framework/",
+  "description": "An open-source interactive tree-map of the entire cybersecurity landscape: 27 domains, 776 categories and 1067 curated offensive and defensive security tools, each with effort ratings and when-to-use guidance.",
+  "inLanguage": "en",
+  "publisher": { "@type": "Organization", "name": "5h4d0wn1k", "url": "https://github.com/5h4d0wn1k" }
+}
+</script>
 <style>
   :root{
-    --bg:#070b13; --bg2:#0c1220;
-    --glass:rgba(13,18,30,.78); --card:#0d1424; --card2:#131c30;
-    --line:rgba(148,163,210,.14); --line2:rgba(148,163,210,.26);
-    --txt:#e7edfb; --muted:#93a0bd; --dim:#5f6d8a;
-    --acc:#6f8bff; --acc2:#8aa4ff;
-    --off:#ff6b57; --def:#37c6ff;
-    --off-dim:rgba(255,107,87,.14); --def-dim:rgba(55,198,255,.13);
+    --bg:#070b13; --bg2:#0b111e;
+    --glass:rgba(12,17,30,.72); --card:#0e1526; --card2:#16203a;
+    --line:rgba(148,163,210,.14); --line2:rgba(148,163,210,.28);
+    --txt:#e9effc; --muted:#9aa7c5; --dim:#61708f;
+    --acc:#6f8bff; --acc2:#93aaff;
+    --off:#ff6b57; --def:#38c7ff;
+    --off-dim:rgba(255,107,87,.15); --def-dim:rgba(56,199,255,.13);
     --grn:#34d399; --warn:#fbbf24; --red:#f87171; --own:#a78bfa; --best:#ffb84d;
+    --vign:rgba(2,5,12,.62);
+    --shadow:0 18px 50px rgba(0,0,0,.5);
+    --ease:cubic-bezier(.16,1,.3,1);
     --mono:ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,Consolas,monospace;
     --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
-    --shadow:0 18px 50px rgba(0,0,0,.45);
   }
   body.light{
-    --bg:#eef2fa; --bg2:#e2e8f4;
-    --glass:rgba(255,255,255,.82); --card:#ffffff; --card2:#f2f5fc;
-    --line:rgba(40,55,95,.12); --line2:rgba(40,55,95,.22);
-    --txt:#16203a; --muted:#4c5a78; --dim:#8491ad;
+    --bg:#eef2fb; --bg2:#e3e9f6;
+    --glass:rgba(255,255,255,.82); --card:#ffffff; --card2:#f1f5fd;
+    --line:rgba(40,55,95,.12); --line2:rgba(40,55,95,.24);
+    --txt:#141d38; --muted:#4b5a7a; --dim:#8593b2;
     --acc:#4f6bf0; --acc2:#3b58e8;
     --off:#d94e2b; --def:#067fb4;
     --off-dim:rgba(217,78,43,.12); --def-dim:rgba(6,127,180,.10);
-    --grn:#0f9d63; --warn:#b07800; --red:#d73636; --own:#7c3aed; --best:#a86900;
-    --shadow:0 16px 40px rgba(25,40,90,.14);
+    --grn:#0f9d63; --warn:#9a6c00; --red:#c53030; --own:#7c3aed; --best:#a86900;
+    --vign:rgba(150,175,225,.22);
+    --shadow:0 16px 40px rgba(25,40,90,.16);
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%}
   body{
     background:
-      radial-gradient(1100px 600px at 78% -8%, var(--off-dim), transparent 60%),
-      radial-gradient(1000px 600px at 4% 110%, var(--def-dim), transparent 55%),
+      radial-gradient(1200px 700px at 80% -10%, var(--off-dim), transparent 60%),
+      radial-gradient(1100px 700px at -6% 112%, var(--def-dim), transparent 55%),
       var(--bg);
     color:var(--txt); font:13.5px/1.5 var(--sans); overflow:hidden;
   }
   button{font:inherit;cursor:pointer}
   a{color:var(--acc2)}
+  :focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:6px}
 
   header{
     position:fixed;inset:0 0 auto 0;height:58px;z-index:50;
-    display:flex;align-items:center;gap:18px;padding:0 18px;
-    background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    display:flex;align-items:center;gap:16px;padding:0 18px;
+    background:var(--glass);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);
     border-bottom:1px solid var(--line);
   }
   .brand{display:flex;align-items:center;gap:12px;min-width:0;user-select:none}
-  .mark{width:34px;height:34px;flex:none}
+  .mark{width:34px;height:34px;flex:none;filter:drop-shadow(0 4px 14px rgba(111,139,255,.4))}
   .brand .name{font-size:16px;font-weight:800;letter-spacing:-.4px;white-space:nowrap}
   .brand .name .acc{color:var(--acc2)}
-  .brand .name .g{color:var(--grn)}
-  .brand .tag{font:10.5px var(--mono);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:340px}
+  .brand .name .g{background:linear-gradient(90deg,var(--grn),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .brand .tag{font:10px var(--mono);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:300px}
 
-  .search{position:relative;flex:1;max-width:520px;margin-left:auto;display:flex;align-items:center}
-  .search .ic{position:absolute;left:12px;color:var(--dim);pointer-events:none}
+  .search{position:relative;flex:1;max-width:480px;margin-left:auto;display:flex;align-items:center}
+  .search .ic{position:absolute;left:13px;color:var(--dim);pointer-events:none}
   #q{
-    width:100%;padding:8px 62px 8px 34px;border-radius:12px;
+    width:100%;padding:9px 64px 9px 36px;border-radius:12px;
     border:1px solid var(--line2);background:var(--card);color:var(--txt);
-    outline:none;transition:border-color .15s,box-shadow .15s;
+    outline:none;transition:border-color .18s,box-shadow .18s;
   }
   #q::placeholder{color:var(--dim)}
-  #q:focus{border-color:var(--acc);box-shadow:0 0 0 3px rgba(111,139,255,.18)}
-  #qk{position:absolute;right:10px;font:10px var(--mono);color:var(--dim);border:1px solid var(--line2);border-radius:5px;padding:1px 6px;background:var(--bg2);cursor:pointer}
+  #q:focus{border-color:var(--acc);box-shadow:0 0 0 4px rgba(111,139,255,.16),0 8px 24px -12px rgba(111,139,255,.55)}
+  #qk{position:absolute;right:11px;font:10px var(--mono);color:var(--dim);border:1px solid var(--line2);border-radius:5px;padding:1px 7px;background:var(--bg2);cursor:pointer;transition:.15s}
+  #qk:hover{color:var(--acc2);border-color:var(--acc)}
   #res{
     position:absolute;top:calc(100% + 8px);left:0;right:0;max-height:min(430px,68vh);
-    overflow:auto;border:1px solid var(--line2);border-radius:14px;background:var(--glass);
-    backdrop-filter:blur(16px);box-shadow:var(--shadow);display:none;z-index:60;
+    overflow:auto;border:1px solid var(--line2);border-radius:16px;background:var(--glass);
+    backdrop-filter:blur(20px) saturate(1.3);box-shadow:var(--shadow);display:none;z-index:60;
   }
-  #res.open{display:block}
-  #res .count{font:10.5px var(--mono);color:var(--dim);padding:9px 14px 5px;position:sticky;top:0;background:var(--glass)}
-  #res .row{display:flex;flex-direction:column;gap:1px;padding:7px 14px;cursor:pointer;border-left:2px solid transparent}
+  #res.open{display:block;animation:resIn .18s var(--ease)}
+  @keyframes resIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+  #res .count{font:10.5px var(--mono);color:var(--dim);padding:10px 16px 6px;position:sticky;top:0;background:var(--glass);backdrop-filter:blur(8px)}
+  #res .row{display:flex;flex-direction:column;gap:1px;padding:8px 16px;cursor:pointer;border-left:2px solid transparent;transition:background .12s}
   #res .row:hover{background:var(--card2);border-left-color:var(--acc)}
   #res .row .t{font-weight:600;font-size:13px;color:var(--txt)}
   #res .row .p{font:10px var(--mono);color:var(--dim);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   #res .row .st{display:flex;gap:6px;margin-top:3px;flex-wrap:wrap}
-  #res .tag{font:9.5px var(--mono);border:1px solid var(--line);color:var(--muted);border-radius:5px;padding:0 5px}
+  #res .tag{font:9.5px var(--mono);border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:0 6px}
   #res .tag.c-offense{color:var(--off);border-color:var(--off)}
   #res .tag.c-defense{color:var(--def);border-color:var(--def)}
   #res .tag.c-easy{color:var(--grn);border-color:var(--grn)}
   #res .tag.c-advanced{color:var(--red);border-color:var(--red)}
   #res .tag.c-moderate{color:var(--warn);border-color:var(--warn)}
-  #res .empty{font:11px var(--mono);color:var(--dim);padding:14px}
+  #res .empty{font:11px var(--mono);color:var(--dim);padding:14px 16px}
 
   .tools{display:flex;gap:8px;align-items:center}
   .tools select{
     font:12px var(--sans);color:var(--txt);background:var(--card);border:1px solid var(--line2);
-    border-radius:10px;padding:6px 8px;outline:none;max-width:200px;
-    appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6'%3E%3Cpath d='M1 1l3 3 3-3' stroke='%235f6d8a' fill='none' stroke-width='1.4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 9px center;padding-right:26px;
+    border-radius:10px;padding:7px 9px;outline:none;max-width:190px;cursor:pointer;
+    appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6'%3E%3Cpath d='M1 1l3 3 3-3' stroke='%2361708f' fill='none' stroke-width='1.4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:26px;
+    transition:border-color .15s,box-shadow .15s;
   }
+  .tools select:hover{border-color:var(--line2)}
   .ibtn{
     font:12px var(--sans);color:var(--muted);background:var(--card);border:1px solid var(--line2);
-    border-radius:10px;padding:6px 12px;display:flex;align-items:center;gap:6px;transition:.15s;white-space:nowrap;
+    border-radius:10px;padding:7px 12px;display:flex;align-items:center;gap:6px;white-space:nowrap;
+    transition:transform .15s var(--ease),border-color .15s,color .15s,box-shadow .15s;
   }
-  .ibtn:hover{color:var(--txt);border-color:var(--acc)}
+  .ibtn:hover{color:var(--txt);border-color:var(--acc);transform:translateY(-1px);box-shadow:0 8px 20px -12px rgba(111,139,255,.55)}
+
+  #crd{
+    position:fixed;top:66px;left:50%;transform:translateX(-50%);z-index:55;
+    pointer-events:none;opacity:0;transition:opacity .18s,transform .25s var(--ease);
+    font:10.5px var(--mono);color:var(--muted);background:var(--glass);
+    border:1px solid var(--line2);border-radius:10px;padding:5px 13px;
+    backdrop-filter:blur(10px);white-space:nowrap;max-width:72vw;overflow:hidden;text-overflow:ellipsis;
+  }
+  #crd.show{opacity:1;transform:translateX(-50%) translateY(3px)}
 
   .legend{
     position:fixed;left:16px;bottom:14px;z-index:40;display:flex;flex-wrap:wrap;gap:10px;align-items:center;
-    background:var(--glass);backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:12px;padding:8px 14px;
+    background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:14px;padding:9px 16px;
   }
   .chip{display:flex;align-items:center;gap:6px;font:10.5px var(--sans);color:var(--muted);white-space:nowrap}
   .chip i{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
@@ -108,18 +152,30 @@
   .chip i.d{width:11px;height:11px;border:2px solid var(--def);background:transparent}
   .ch-best{background:var(--best)} .ch-own{background:var(--own)}
   .ch-off{background:var(--off)} .ch-def{background:var(--def)}
-  .hint{position:fixed;right:16px;bottom:14px;z-index:40;font:10px var(--mono);color:var(--dim);text-align:right;line-height:1.6}
+  .hint{position:fixed;right:16px;bottom:14px;z-index:40;font:10px var(--mono);color:var(--dim);text-align:right;line-height:1.7}
 
-  #stage{position:fixed;inset:58px 0 0 0}
-  #svg{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+  #stage{position:fixed;inset:58px 0 0 0;overflow:hidden;
+    background:radial-gradient(115% 115% at 50% 32%, transparent 52%, var(--vign) 100%);}
+  #stage::before,#stage::after{content:"";position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+  #stage::before{width:540px;height:540px;left:-150px;top:-130px;
+    background:radial-gradient(circle at 50% 50%,var(--off) 0%,transparent 66%);opacity:.14;animation:drift1 27s ease-in-out infinite}
+  #stage::after{width:680px;height:680px;right:-190px;bottom:-170px;
+    background:radial-gradient(circle at 50% 50%,var(--def) 0%,transparent 66%);opacity:.14;animation:drift2 33s ease-in-out infinite}
+  @keyframes drift1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(46px,-34px) scale(1.16)}}
+  @keyframes drift2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-56px,26px) scale(1.22)}}
+
+  #svg{position:relative;z-index:1;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
   #svg.drag{cursor:grabbing}
-  #grid{opacity:.4}
-  .link{fill:none;stroke:var(--line2);stroke-width:1;opacity:.75}
+  #grid{opacity:.55}
+
+  .link{fill:none;stroke-width:1.3;stroke-linecap:round;opacity:.42;transition:stroke-width .18s var(--ease),opacity .18s}
+  .link.lit{opacity:.9;stroke-width:1.8}
+
   .node{cursor:pointer;user-select:none}
-  .node .dot{transition:r .12s,filter .12s}
-  .node:hover .dot{filter:drop-shadow(0 0 7px var(--acc))}
-  .node .lb{font:600 12.5px var(--sans);fill:var(--txt);transition:fill .12s;letter-spacing:-.1px}
+  .node .skin{transform-origin:center;transform-box:fill-box;transform:scale(var(--s,1));transition:transform .18s var(--ease)}
+  .node:hover .skin{transform:scale(calc(var(--s,1)*1.09))}
   .node:hover .lb{fill:var(--acc2)}
+  .node .lb{font:600 12.5px var(--sans);fill:var(--txt);transition:fill .12s;letter-spacing:-.1px}
   .node .cnt{fill:var(--dim);font:9.5px var(--mono)}
   .node .star{fill:var(--best);font-size:9px}
   .node .own{fill:var(--own);font-size:8px}
@@ -128,29 +184,51 @@
   .node.pillar.c-defense .lb{fill:var(--def)}
   .node.domain .lb{font-weight:800}
   .node.group .lb{font-weight:700}
-  .node.hl .dot{filter:drop-shadow(0 0 12px var(--acc))}
-  .node.hl .lb{fill:var(--acc2)}
-  .node.exiting{opacity:0;pointer-events:none;transition:opacity .3s}
+
+  .node rect.pill{fill:var(--card);stroke:var(--line2);stroke-width:1.2;transition:fill .2s,stroke-opacity .2s}
+  .node.c-offense rect.pill{stroke:var(--off);stroke-opacity:.5}
+  .node.c-defense rect.pill{stroke:var(--def);stroke-opacity:.5}
+  .node.open rect.pill{fill:var(--card2)}
+  .node.open.c-offense rect.pill{stroke-opacity:1}
+  .node.open.c-defense rect.pill{stroke-opacity:1}
+  .node rect.pill.tp{fill:var(--card2)}
+  .node.best rect.pill.tp{stroke:var(--best);stroke-opacity:1}
+  .node.by rect.pill.tp{stroke:var(--own);stroke-opacity:1}
+  .node.hl .skin{filter:drop-shadow(0 0 16px var(--acc))}
+  .node.pulse .skin{animation:pulseglow .55s var(--ease)}
+  @keyframes pulseglow{0%,100%{filter:drop-shadow(0 0 0 rgba(111,139,255,0))}45%{filter:drop-shadow(0 0 20px var(--acc))}}
+
+  .node .chev{transform-origin:center;transform-box:fill-box;transition:transform .3s var(--ease)}
+  .node .chev path{fill:none;stroke:var(--muted);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .node.open .chev{transform:rotate(90deg)}
+
+  .node.all .rootc{fill:url(#rg);stroke:var(--acc2);stroke-width:2}
+  .node.all .rot{stroke:var(--acc);stroke-width:1;stroke-dasharray:3 10;animation:spin 18s linear infinite;transform-origin:center;transform-box:fill-box;opacity:.7}
+  .node.all .halo{stroke:var(--acc2);stroke-width:.8;opacity:.35;stroke-dasharray:1 6}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .node.all .lb{font-weight:800;font-size:13px}
 
   #panel{
     position:fixed;top:58px;right:0;bottom:0;width:min(430px,94vw);z-index:70;
-    background:var(--glass);backdrop-filter:blur(18px);border-left:1px solid var(--line2);
-    box-shadow:var(--shadow);transform:translateX(105%);transition:transform .28s cubic-bezier(.22,.61,.36,1);
+    background:var(--glass);backdrop-filter:blur(22px) saturate(1.25);border-left:1px solid var(--line2);
+    box-shadow:var(--shadow);transform:translateX(105%);transition:transform .3s var(--ease);
     display:flex;flex-direction:column;
   }
+  #panel::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--off),var(--acc),var(--def));opacity:.85}
   #panel.open{transform:none}
-  #phead{display:flex;align-items:flex-start;gap:10px;padding:16px 18px 10px;border-bottom:1px solid var(--line)}
+  #phead{display:flex;align-items:flex-start;gap:10px;padding:18px 18px 12px;border-bottom:1px solid var(--line)}
   #ptitle{font-size:16px;font-weight:800;letter-spacing:-.3px;line-height:1.3;flex:1;padding-right:6px}
   #ptitle .bychip{display:inline-block;font:10px var(--mono);color:var(--own);border:1px solid var(--own);border-radius:6px;padding:1px 7px;margin-left:8px;vertical-align:3px}
   #ptitle.best{color:var(--best)}
-  #pclose{flex:none;width:30px;height:30px;border:none;background:var(--card);border:1px solid var(--line2);color:var(--muted);border-radius:9px;font-size:14px}
-  #pclose:hover{color:var(--txt);border-color:var(--acc)}
-  #pbody{flex:1;overflow:auto;padding:14px 18px 40px}
+  #pclose{flex:none;width:30px;height:30px;border:none;background:var(--card);border:1px solid var(--line2);color:var(--muted);border-radius:9px;font-size:14px;transition:.15s}
+  #pclose:hover{color:var(--txt);border-color:var(--acc);transform:rotate(90deg)}
+  #pbody{flex:1;overflow:auto;padding:16px 18px 44px}
   #pbody::-webkit-scrollbar{width:8px}
   #pbody::-webkit-scrollbar-thumb{background:var(--line2);border-radius:4px}
-  .crumb{font:10px var(--mono);color:var(--dim);line-height:1.7;margin-bottom:12px;word-break:break-word}
+  .crumb{font:10px var(--mono);color:var(--dim);line-height:1.7;margin-bottom:14px;word-break:break-word}
   .badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
-  .chap{font:9.5px var(--mono);border:1px solid var(--line2);color:var(--muted);border-radius:6px;padding:2px 8px}
+  .chap{font:9.5px var(--mono);border:1px solid var(--line2);color:var(--muted);border-radius:7px;padding:2px 9px}
   .chap.c-offense{color:var(--off);border-color:var(--off)}
   .chap.c-defense{color:var(--def);border-color:var(--def)}
   .chap.c-easy{color:var(--grn);border-color:var(--grn)}
@@ -158,23 +236,30 @@
   .chap.c-moderate{color:var(--warn);border-color:var(--warn)}
   .chap.best{color:var(--best);border-color:var(--best)}
   .chap.by{color:var(--own);border-color:var(--own)}
-  .sec{margin-bottom:13px}
-  .sec .k{font:9.5px var(--mono);text-transform:uppercase;letter-spacing:1.1px;color:var(--dim);margin-bottom:3px}
+  .rate{display:flex;gap:5px;align-items:center}
+  .rate i{width:22px;height:7px;border-radius:4px;background:var(--card2);border:1px solid var(--line)}
+  .rate i.on{background:linear-gradient(90deg,var(--best),var(--warn));border-color:var(--best)}
+  .rate span{font:9.5px var(--mono);color:var(--dim);margin-left:6px}
+  .sec{margin-bottom:15px}
+  .sec .k{font:9.5px var(--mono);text-transform:uppercase;letter-spacing:1.2px;color:var(--dim);margin-bottom:4px}
   .sec .v{font-size:12.5px;line-height:1.62;color:var(--muted)}
-  .sec .v.mono{font-family:var(--mono);font-size:11px;color:var(--txt);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px;display:block;overflow-x:auto;line-height:1.7}
+  .sec .v.mono{font-family:var(--mono);font-size:11px;color:var(--txt);background:var(--card);border:1px solid var(--line);border-radius:9px;padding:9px 11px;display:flex;align-items:center;justify-content:space-between;gap:10px;overflow-x:auto;line-height:1.7}
+  .cpy{flex:none;font:9.5px var(--mono);color:var(--muted);background:var(--bg2);border:1px solid var(--line2);border-radius:7px;padding:3px 9px;transition:.15s}
+  .cpy:hover{color:var(--grn);border-color:var(--grn)}
   .plink{
-    display:flex;align-items:center;justify-content:center;gap:8px;margin-top:16px;
-    padding:11px 14px;border-radius:12px;text-decoration:none;font-weight:700;font-size:13px;
+    display:flex;align-items:center;justify-content:center;gap:8px;margin-top:18px;
+    padding:12px 14px;border-radius:13px;text-decoration:none;font-weight:700;font-size:13px;
     color:#0a0f1c;background:linear-gradient(135deg,var(--acc2),var(--acc));
-    transition:filter .15s,transform .15s;
+    box-shadow:0 14px 30px -14px rgba(111,139,255,.7);
+    transition:filter .18s,transform .18s var(--ease),box-shadow .18s;
   }
-  .plink:hover{filter:brightness(1.12);transform:translateY(-1px)}
+  .plink:hover{filter:brightness(1.12);transform:translateY(-2px);box-shadow:0 18px 36px -14px rgba(111,139,255,.85)}
   .plink.auth{background:linear-gradient(135deg,var(--own),#7c6cf0)}
   @media (max-width:900px){ .brand .tag{display:none} }
   @media (max-width:820px){
     #qk{display:none}
     header{padding:0 12px;gap:10px}
-    .ibtn{padding:6px 9px}
+    .ibtn{padding:7px 9px}
     .hint{display:none}
   }
   @media (max-width:640px){
@@ -199,7 +284,7 @@
 
   <div class="search">
     <svg class="ic" width="14" height="14" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4"/></svg>
-    <input id="q" placeholder="Search 1,068 tools…" autocomplete="off" />
+    <input id="q" placeholder="Search tools…" autocomplete="off" />
     <span id="qk">/</span>
     <div id="res"></div>
   </div>
@@ -213,25 +298,37 @@
   </div>
 </header>
 
+<div id="crd"></div>
+
 <div class="legend">
   <span class="chip"><i class="ch-best"></i>★ best-in-class</span>
   <span class="chip"><i class="ch-own"></i>◆ by 5h4d0wn1k</span>
   <span class="chip"><i class="r"></i>offense</span>
   <span class="chip"><i class="d"></i>defense</span>
 </div>
-<div class="hint">click node · expand / open tool<br/>drag · pan&nbsp;&nbsp;wheel · zoom</div>
+<div class="hint">click · expand / open tool<br/>drag · pan&nbsp;&nbsp;wheel · zoom<br/>dbl-click tool · jump to page</div>
 
 <div id="stage">
   <svg id="svg" role="figure" aria-label="Cybersecurity framework tree">
+    <defs>
+      <radialGradient id="rg" cx=".5" cy=".5" r=".5">
+        <stop offset="0%" stop-color="var(--acc2)"/>
+        <stop offset="55%" stop-color="var(--acc)"/>
+        <stop offset="100%" stop-color="var(--card)"/>
+      </radialGradient>
+      <pattern id="dg" width="26" height="26" patternUnits="userSpaceOnUse">
+        <circle cx="1.2" cy="1.2" r="1" fill="var(--line2)"/>
+      </pattern>
+    </defs>
     <g id="vp">
-      <g id="grid"></g>
+      <rect id="grid" width="100%" height="100%" fill="url(#dg)"></rect>
       <g id="links"></g>
       <g id="nodes"></g>
     </g>
   </svg>
 </div>
 
-<aside id="panel" role="dialog" aria-label="Tool details">
+<aside id="panel" role="dialog" aria-label="Details">
   <div id="phead">
     <div id="ptitle"></div>
     <button id="pclose" aria-label="Close panel">✕</button>
@@ -245,7 +342,7 @@
   const $ = s => document.querySelector(s);
   const NS = "http://www.w3.org/2000/svg";
   const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
-  const ROW = 30, COL = 224;
+  const ROW = 30, COL = 236;
   const svg = $("#svg"), linksG = $("#links"), nodesG = $("#nodes");
 
   /* ============ data model ============ */
@@ -344,7 +441,22 @@
     (function pre(v2) { secondWalk(v2); if (v2.children) for (const c of v2.children) pre(c); })(t);
     const out = [];
     (function collect(v2) { out.push(v2._); if (v2.children) for (const c of v2.children) collect(c); })(t);
-    for (const n of out) n.y = n.depth * COL;
+    /* per-depth column widths: columns grow to fit the widest pill at that
+       depth so long category names never overlap their children */
+    const gap = 56;
+    const maxHalf = [];
+    for (const n of out) {
+      const ex = extent(n);
+      const h = Math.max(ex.l, ex.r);
+      if (!(maxHalf[n.depth] >= h)) maxHalf[n.depth] = h;
+    }
+    const colY = [0];
+    for (let d = 1; d < maxHalf.length; d++) {
+      const prev = maxHalf[d - 1] != null ? maxHalf[d - 1] : 80;
+      const cur = maxHalf[d] != null ? maxHalf[d] : 80;
+      colY[d] = colY[d - 1] + prev + cur + gap;
+    }
+    for (const n of out) n.y = colY[n.depth] != null ? colY[n.depth] : n.depth * COL;
     let mn = Infinity, mx = -Infinity;
     for (const n of out) { if (n.x < mn) mn = n.x; if (n.x > mx) mx = n.x; }
     const spanUnits = (mx - mn) || 1;
@@ -358,43 +470,59 @@
   /* ============ rendering ============ */
   let transform = { x: 40, y: 40, k: 1 };
   const nodeEls = new Map(), linkEls = new Map();
-  let visState = [], animId = null;
+  let visState = [], animId = null, pendingLinks = new Set();
 
   function apply() { $("#vp").setAttribute("transform", `translate(${transform.x} ${transform.y}) scale(${transform.k})`); }
 
   function dispLabel(n) {
-    const max = n.type === "tool" ? 26 : 22;
+    const max = n.type === "tool" ? 42 : 48;
     return n.label.length > max ? n.label.slice(0, max - 1) + "…" : n.label;
   }
-  function dotShape(n) {
-    const branch = n.children.length > 0;
-    if (n.type === "all") return '<circle class="dot" r="7" fill="var(--acc)" stroke="var(--acc2)" stroke-width="1.8"/>';
+  const CHARW = 6.7;
+
+  function pillW(n) {
+    const txt = dispLabel(n).length;
     if (n.type === "tool") {
-      const c = n.best ? "var(--best)" : (n.by ? "var(--own)" : (n.cls === "offense" ? "var(--off)" : "var(--def)"));
-      return `<circle class="dot" r="3.4" fill="${c}"/>`;
+      const m = (n.best ? 12 : 0) + (n.by ? 10 : 0);
+      return Math.max(46, txt * CHARW + 26 + m);
     }
-    if (branch && n.open) return `<circle class="dot" r="4.6" fill="${n.cls === "offense" ? "var(--off)" : "var(--def)"}" stroke="var(--bg2)" stroke-width="1"/>`;
-    return `<circle class="dot" r="4.6" fill="var(--bg2)" stroke="${n.cls === "offense" ? "var(--off)" : "var(--def)"}" stroke-width="1.6"/>`;
+    const cnt = n.tools ? String(n.tools).length : 0;
+    return Math.max(48, txt * CHARW + 22 + cnt * 5.6 + 18);
   }
   function nodeInner(n) {
-    const bits = [dotShape(n)];
-    const lbl = dispLabel(n);
-    if (n.type === "tool") {
-      if (n.best) bits.push('<text class="star" x="12" dy=".36em" text-anchor="start">★</text>');
-      bits.push(`<text class="lb" x="${n.best ? 21 : 12}" dy=".36em" text-anchor="start">${esc(lbl)}</text>`);
-      if (n.by) bits.push('<text class="own" x="12" y="12" dy=".34em" text-anchor="middle">◆</text>');
+    let inner = "";
+    if (n.type === "all") {
+      const txt = dispLabel(n);
+      inner = `<circle class="halo" r="34" fill="none"/>
+        <circle class="rot" r="25" fill="none"/>
+        <circle class="rootc" r="19"/>
+        <text class="lb" y="40" text-anchor="middle">${esc(txt)}</text>`;
+    } else if (n.type === "tool") {
+      const W = pillW(n), cx = -W / 2, txt = dispLabel(n);
+      let lx = cx + 14;
+      inner = `<rect class="pill tp" x="${cx}" y="-10" width="${W}" height="20" rx="10"/>`;
+      if (n.best) { inner += `<text class="star" x="${lx}" dy=".36em">★</text>`; lx += 12; }
+      if (n.by) { inner += `<text class="own" x="${lx}" dy=".36em">◆</text>`; lx += 11; }
+      inner += `<text class="lb" x="${lx}" dy=".36em">${esc(txt)}</text>`;
     } else {
-      bits.push(`<text class="lb" x="${n.type === "all" ? -18 : -12}" dy=".36em" text-anchor="end">${esc(lbl)}</text>`);
-      if (n.tools) bits.push(`<text class="cnt" x="13" dy=".36em" text-anchor="start">${n.tools}</text>`);
+      const W = pillW(n), cx = -W / 2, txt = dispLabel(n);
+      let lx = cx + 15;
+      inner = `<rect class="pill" x="${cx}" y="-13" width="${W}" height="26" rx="13"/>`;
+      inner += `<text class="lb" x="${lx}" dy=".36em">${esc(txt)}</text>`;
+      if (n.tools) { const cnt = String(n.tools); inner += `<text class="cnt" x="${lx + txt.length * CHARW + 7}" dy=".36em">${cnt}</text>`; }
+      const chevX = W / 2 - 17;
+      inner += `<g class="chev" transform="translate(${chevX} 0)"><path d="M0 -4 L5 0 0 4"/></g>`;
     }
-    if (n.desc || n.label !== lbl) bits.push(`<title>${esc(n.desc || n.label)}</title>`);
-    return bits.join("");
+    n._W = (n.type === "all") ? 0 : pillW(n);
+    if (n.desc || n.label !== dispLabel(n)) inner += `<title>${esc(n.desc || n.label)}</title>`;
+    return `<g class="skin">${inner}</g>`;
   }
   function elClass(n) {
     const c = ["node", n.type, "d" + Math.min(n.depth, 6)];
     if (n.cls) c.push("c-" + n.cls);
     if (n.by) c.push("by");
     if (n.best) c.push("best");
+    if (n.open && n.children.length) c.push("open");
     return c.join(" ");
   }
   function linkD(sx, sy, tx, ty) {
@@ -402,72 +530,152 @@
     return `M ${sx} ${sy} C ${mx} ${sy}, ${mx} ${ty}, ${tx} ${ty}`;
   }
   function extent(n) {
-    const L = dispLabel(n).length * 7 + 14;
-    if (n.type === "tool") { const extra = (n.best ? 11 : 0) + (n.by ? 10 : 0); return { l: 8, r: L + extra + 6 }; }
-    if (n.tools) return { l: L + 10, r: 22 };
-    if (n.type === "all") return { l: L + 20, r: 14 };
-    return { l: L + 10, r: 14 };
+    if (n.type === "all") { const wv = dispLabel(n).length * 7 + 10; return { l: Math.max(26, wv / 2), r: Math.max(26, wv / 2 + 10) }; }
+    const W = n._W || pillW(n);
+    return { l: W / 2 + 8, r: W / 2 + 8 };
   }
+  function setPos(g, x, y) {
+    g.setAttribute("transform", "translate(" + x.toFixed(2) + " " + y.toFixed(2) + ")");
+    g.__x = x; g.__y = y;
+  }
+  const lerp = (a, b, e) => a + (b - a) * e;
+  const easeOut = t => 1 - Math.pow(1 - t, 3);
 
   function render() {
+    if (animId) cancelAnimationFrame(animId);
+    const prev = visState;
+    const prevByPath = new Map(prev.map(n => [n.path, n]));
+    const prevPos = new Map();
+    for (const n of prev) { const g = nodeEls.get(n.path); if (g) prevPos.set(n.path, { x: g.__x != null ? g.__x : n.y, y: g.__y != null ? g.__y : n.x }); }
+    /* drop orphaned elements left behind by a cancelled exit animation */
+    for (const [p, g] of nodeEls) if (!prevByPath.has(p)) { g.remove(); nodeEls.delete(p); }
+
     visState = layoutV(allRoot);
     const byPath = new Map(visState.map(n => [n.path, n]));
 
-    /* links */
+    /* links — create for visible parent-child pairs; pruning happens after animation */
     const want = new Set();
-    for (const n of visState) if (n.open) for (const c of n.children) if (byPath.has(c.path)) want.add(c.path);
-    for (const [p, el] of linkEls) if (!want.has(p)) { el.remove(); linkEls.delete(p); }
+    for (const n of visState) if (n.open && n.children) for (const c of n.children) if (byPath.has(c.path)) want.add(c.path);
+    pendingLinks = want;
     for (const p of want) {
-      const c = byPath.get(p), s = c.parent;
-      if (linkEls.has(p)) linkEls.get(p).setAttribute("d", linkD(s.y, s.x, c.y, c.x));
-      else { const el = document.createElementNS(NS, "path"); el.setAttribute("class", "link"); el.setAttribute("d", linkD(s.y, s.x, c.y, c.x)); linksG.appendChild(el); linkEls.set(p, el); }
-    }
-
-    /* nodes */
-    for (const [p, el] of nodeEls) if (!byPath.has(p)) { el.classList.add("exiting"); setTimeout(() => el.remove(), 320); nodeEls.delete(p); }
-    for (const n of visState) {
-      if (!nodeEls.has(n.path)) {
-        const g = document.createElementNS(NS, "g");
-        g.setAttribute("class", elClass(n));
-        g.setAttribute("data-path", n.path);
-        g.innerHTML = nodeInner(n);
-        bindNode(g, n);
-        nodesG.appendChild(g);
-        nodeEls.set(n.path, g);
-      } else {
-        const g = nodeEls.get(n.path);
-        g.setAttribute("class", elClass(n));
-        const wasTool = g.classList.contains("tool");
-        g.innerHTML = nodeInner(n);
-        if (wasTool) bindNode(g, n); // refresh leaf listeners if re-rendered
+      if (!linkEls.has(p)) {
+        const el = document.createElementNS(NS, "path");
+        el.setAttribute("class", "link");
+        const c = byPath.get(p);
+        el.__pp = c.parent.path;
+        el.style.stroke = c.cls === "offense" ? "var(--off)" : "var(--def)";
+        linksG.appendChild(el);
+        linkEls.set(p, el);
       }
     }
-    if (animId) cancelAnimationFrame(animId);
 
-    const first = nodeEls.size >= visState.length && !nodeEls.values().next().value.__hasAnim;
-    const starts = new Map();
+    /* nodes — create / update */
     for (const n of visState) {
       const g = nodeEls.get(n.path);
-      const prev = g && g.__d;
-      starts.set(n.path, prev ? prev : { x: n.x, y: n.y, o: 1 });
+      if (!g) {
+        const el = document.createElementNS(NS, "g");
+        el.setAttribute("class", elClass(n));
+        el.setAttribute("data-path", n.path);
+        el.innerHTML = nodeInner(n);
+        bindNode(el, n);
+        nodesG.appendChild(el);
+        nodeEls.set(n.path, el);
+      } else {
+        g.setAttribute("class", elClass(n));
+        g.innerHTML = nodeInner(n);
+        if (n.type === "tool") bindNode(g, n);
+      }
     }
-    const t0 = performance.now(), T = 520;
-    function easeInOut(t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
-    function frame(now) {
-      const e0 = Math.min(1, (now - t0) / T), e = easeInOut(e0);
+
+    /* classify phases */
+    const entering = [], moving = [];
+    for (const n of visState) {
+      if (!prevByPath.has(n.path)) {
+        const par = n.parent ? byPath.get(n.parent.path) : null;
+        entering.push({ n, from: { x: par ? par.y : n.y, y: par ? par.x : n.x }, to: { x: n.y, y: n.x } });
+      } else {
+        const pp = prevPos.get(n.path);
+        moving.push({ n, from: { x: pp ? pp.x : n.y, y: pp ? pp.y : n.x }, to: { x: n.y, y: n.x } });
+      }
+    }
+    const exiting = [];
+    for (const [p, on] of prevByPath) {
+      if (byPath.has(p)) continue;
+      let anc = on.parent;
+      while (anc && !byPath.has(anc.path)) anc = anc.parent;
+      const tp = anc ? byPath.get(anc.path) : null;
+      const pp = prevPos.get(p);
+      exiting.push({
+        n: on,
+        from: { x: pp ? pp.x : on.y, y: pp ? pp.y : on.x },
+        to: tp ? { x: tp.y, y: tp.x } : { x: on.y, y: on.x }
+      });
+    }
+
+    const moveDur = (entering.length || exiting.length) ? 480 : 440;
+    const entDur = 400, exitDur = 320;
+    const dEnter = n => Math.min(420, Math.max(0, (n.depth - 1) * 60));
+
+    for (const it of entering) { const g = nodeEls.get(it.n.path); if (g) { setPos(g, it.from.x, it.from.y); g.style.opacity = "0"; g.style.setProperty("--s", "0.55"); } }
+    for (const it of exiting) { const g = nodeEls.get(it.n.path); if (g) { setPos(g, it.from.x, it.from.y); g.style.opacity = "1"; g.style.setProperty("--s", "1"); } }
+    for (const it of moving) { const g = nodeEls.get(it.n.path); if (g) { setPos(g, it.from.x, it.from.y); g.style.opacity = "1"; g.style.setProperty("--s", "1"); } }
+
+    const t0 = performance.now();
+
+    function tick(now) {
+      const t = now - t0;
+      let alive = false;
+      for (const it of moving) {
+        const e = Math.min(1, t / moveDur), k = easeOut(e);
+        const g = nodeEls.get(it.n.path); if (!g) continue;
+        setPos(g, lerp(it.from.x, it.to.x, k), lerp(it.from.y, it.to.y, k));
+        if (e < 1) alive = true;
+      }
+      for (const it of entering) {
+        const dt = t - dEnter(it.n);
+        if (dt < 0) { alive = true; continue; }
+        const e = Math.min(1, dt / entDur), k = easeOut(e);
+        const g = nodeEls.get(it.n.path); if (!g) continue;
+        setPos(g, lerp(it.from.x, it.to.x, k), lerp(it.from.y, it.to.y, k));
+        g.style.opacity = String(k);
+        g.style.setProperty("--s", String(0.55 + 0.45 * k));
+        if (e < 1) alive = true;
+      }
+      for (const it of exiting) {
+        if (it.done) continue;
+        const e = Math.min(1, t / exitDur), k = easeOut(e);
+        const g = nodeEls.get(it.n.path); if (!g) continue;
+        setPos(g, lerp(it.from.x, it.to.x, k), lerp(it.from.y, it.to.y, k));
+        g.style.opacity = String(1 - e);
+        g.style.setProperty("--s", String(1 - 0.45 * e));
+        if (e >= 1) { g.remove(); nodeEls.delete(it.n.path); it.done = true; }
+        alive = true;
+      }
+      for (const [p, el] of linkEls) {
+        const c = byPath.get(p);
+        const pg = el.__pp ? nodeEls.get(el.__pp) : (c ? nodeEls.get(c.parent.path) : null);
+        const cg = nodeEls.get(p);
+        if (pg && cg) el.setAttribute("d", linkD(pg.__x != null ? pg.__x : (c ? c.parent.y : 0), pg.__y != null ? pg.__y : (c ? c.parent.x : 0), cg.__x != null ? cg.__x : (c ? c.y : 0), cg.__y != null ? cg.__y : (c ? c.x : 0)));
+      }
+      if (alive) { animId = requestAnimationFrame(tick); }
+      else finalize();
+    }
+
+    function finalize() {
       for (const n of visState) {
         const g = nodeEls.get(n.path); if (!g) continue;
-        const st = starts.get(n.path);
-        const vx = st.x + (n.x - st.x) * e, vy = st.y + (n.y - st.y) * e;
-        g.setAttribute("transform", `translate(${vy} ${vx})`);
-        g.__d = { x: vx, y: vy };
-        g.__hasAnim = 1;
-        if (st.o < 1) g.style.opacity = st.o + (1 - st.o) * e;
+        setPos(g, n.y, n.x); g.style.opacity = "1"; g.style.setProperty("--s", "1");
       }
-      if (e0 < 1) animId = requestAnimationFrame(frame);
-      else for (const n of visState) { const g = nodeEls.get(n.path); if (g) { g.__d = { x: n.x, y: n.y }; g.setAttribute("transform", `translate(${n.y} ${n.x})`); g.style.opacity = 1; } }
+      for (const [p, el] of linkEls) if (!pendingLinks.has(p)) { el.remove(); linkEls.delete(p); }
+      for (const [p, el] of linkEls) {
+        const c = byPath.get(p);
+        const pg = el.__pp ? nodeEls.get(el.__pp) : (c ? nodeEls.get(c.parent.path) : null);
+        const cg = nodeEls.get(p);
+        if (pg && cg) el.setAttribute("d", linkD(pg.__x != null ? pg.__x : (c ? c.parent.y : 0), pg.__y != null ? pg.__y : (c ? c.parent.x : 0), cg.__x != null ? cg.__x : (c ? c.y : 0), cg.__y != null ? cg.__y : (c ? c.x : 0)));
+      }
     }
-    animId = requestAnimationFrame(frame);
+    if (entering.length || exiting.length || moving.length) { animId = requestAnimationFrame(tick); }
+    else finalize();
   }
 
   function bindNode(g, n) {
@@ -476,10 +684,26 @@
       e.stopPropagation();
       if (n.type === "tool") openPanel(n);
       else if (n.type === "all") { resetTop(); render(); autoFit(); }
-      else { n.open = !n.open; render(); }
+      else {
+        n.open = !n.open;
+        const el = nodeEls.get(n.path);
+        if (el) { el.classList.add("pulse"); setTimeout(() => el.classList.remove("pulse"), 650); }
+        render();
+      }
     });
     g.addEventListener("dblclick", e => {
       if (n.type === "tool" && n.url) window.open(n.url, "_blank");
+      else if (n.type !== "all" && n !== allRoot) openPanel(n);
+    });
+    g.addEventListener("mouseenter", () => {
+      if (n.open && n.children) for (const c of n.children) { const L = linkEls.get(c.path); if (L) L.classList.add("lit"); }
+      const crd = $("#crd");
+      crd.textContent = n.path + (n.tools ? "  ·  " + n.tools + (n.tools === 1 ? " tool" : " tools") : "");
+      crd.classList.add("show");
+    });
+    g.addEventListener("mouseleave", () => {
+      for (const [, L] of linkEls) L.classList.remove("lit");
+      $("#crd").classList.remove("show");
     });
   }
 
@@ -490,7 +714,7 @@
     for (const n of visState) {
       const ex = extent(n);
       minX = Math.min(minX, n.y - ex.l); maxX = Math.max(maxX, n.y + ex.r);
-      minY = Math.min(minY, n.x - 16); maxY = Math.max(maxY, n.x + 16);
+      minY = Math.min(minY, n.x - 18); maxY = Math.max(maxY, n.x + 18);
     }
     const vw = svg.clientWidth || 1200, vh = svg.clientHeight || 800, pad = 60;
     const bw = (maxX - minX) || 1, bh = (maxY - minY) || 1;
@@ -599,19 +823,23 @@
     const pt = $("#ptitle");
     pt.innerHTML = (t.best ? "★ " : "") + esc(t.label) + (t.by ? `<span class="bychip">by ${esc(t.by)}</span>` : "");
     pt.className = t.best ? "best" : "";
+    const rate = (t.rating ? t.rating : 0);
+    const rateBar = `<div class="rate">` + [1, 2, 3, 4, 5].map(i => `<i class="${i <= Math.round(rate) ? "on" : ""}"></i>`).join("") +
+      `<span>${rate ? rate + "/5" : "unrated"}</span></div>`;
+    const countLine = (t.type !== "tool" && t.tools) ? `<div class="sec"><div class="k">Scope</div><div class="v">${t.children.length} branches · ${t.tools} tools below</div></div>` : "";
     $("#pbody").innerHTML = `
       <div class="crumb">${esc(t.path)}</div>
       <div class="badges">
         ${t.effort ? `<span class="chap c-${esc(t.effort)}">${esc(t.effort)}</span>` : ""}
         ${t.cls ? `<span class="chap c-${esc(t.cls)}">${esc(t.cls)}</span>` : ""}
-        ${t.rating ? `<span class="chap">${t.rating}/5</span>` : ""}
         ${t.best ? '<span class="chap best">★ best-in-class</span>' : ""}
         ${t.by ? `<span class="chap by">◆ by ${esc(t.by)}</span>` : ""}
-        ${t.effort === "easy" || t.effort === "moderate" || t.effort === "advanced" ? "" : ""}
       </div>
+      ${t.type === "tool" ? `<div class="sec"><div class="k">Rating</div>${rateBar}</div>` : ""}
+      ${countLine}
       ${t.desc ? `<div class="sec"><div class="k">What it does</div><div class="v">${esc(t.desc)}</div></div>` : ""}
       ${t.when ? `<div class="sec"><div class="k">When to use it</div><div class="v">${esc(t.when)}</div></div>` : ""}
-      ${t.install ? `<div class="sec"><div class="k">Install</div><div class="v mono">${esc(t.install)}</div></div>` : ""}
+      ${t.install ? `<div class="sec"><div class="k">Install</div><div class="v mono"><code>${esc(t.install)}</code><button class="cpy" data-copy="${esc(t.install)}">copy</button></div></div>` : ""}
       ${t.alt && t.alt.length ? `<div class="sec"><div class="k">Alternatives</div><div class="v">${esc(t.alt.join(" · "))}</div></div>` : ""}
       ${t.url ? `<a class="plink${t.by ? " auth" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">${t.by ? "open on GitHub ↗" : "open tool ↗"}</a>` : ""}`;
     panel.classList.add("open");
@@ -619,6 +847,18 @@
   $("#pclose").addEventListener("click", () => panel.classList.remove("open"));
   document.addEventListener("mousedown", e => {
     if (panel.classList.contains("open") && !panel.contains(e.target) && !e.target.closest(".node") && !e.target.closest(".search")) panel.classList.remove("open");
+  });
+  $("#pbody").addEventListener("click", e => {
+    const b = e.target.closest(".cpy");
+    if (!b) return;
+    const txt = b.dataset.copy || "";
+    const done = () => { b.textContent = "✓ copied"; b.style.color = "var(--grn)"; setTimeout(() => { b.textContent = "copy"; b.style.color = ""; }, 1400); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done);
+    else {
+      const ta = document.createElement("textarea"); ta.value = txt; document.body.appendChild(ta); ta.select();
+      try { document.execCommand("copy"); } catch (err) {}
+      ta.remove(); done();
+    }
   });
 
   /* ============ theme / keys ============ */
@@ -630,7 +870,7 @@
   if (localStorage.getItem("theme") === "light") document.body.classList.add("light");
   document.addEventListener("keydown", e => {
     if (e.key === "/" && document.activeElement !== q) { e.preventDefault(); q.focus(); }
-    if (e.key === "Escape") panel.classList.remove("open");
+    if (e.key === "Escape") { panel.classList.remove("open"); res.classList.remove("open"); }
   });
 
   /* ============ domain jump ============ */
@@ -659,12 +899,13 @@
     DATA = data.pillars || [];
     stats = data.stats;
     $("#stline").textContent = `${stats.domains} domains · ${stats.categories} categories · ${stats.tools} tools`;
+    q.placeholder = `Search ${stats.tools} tools…`;
     buildNodes();
     buildIndex();
     fillJump();
     render();
     autoFit();
-    setTimeout(autoFit, 80);
+    setTimeout(autoFit, 120);
   })();
 })();
 </script>
