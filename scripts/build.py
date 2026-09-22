@@ -40,7 +40,9 @@ def read_structure(domains_by_id):
                 if did in domains_by_id:
                     doms.append(domains_by_id[did])
             groups.append({"id": g["id"], "name": g["name"], "domains": doms})
-        pillars.append({k: pillar.get(k) for k in ("id", "name", "emoji", "class", "tagline")} | {"groups": groups})
+        cls = pillar.get("class")
+        pillars.append({"id": pillar["id"], "name": pillar["name"], "emoji": pillar.get("emoji", ""),
+                        "class": cls, "cls": cls, "tagline": pillar.get("tagline", "")} | {"groups": groups})
     return pillars
 
 
@@ -117,6 +119,9 @@ def build():
             normalize_effort(cat)
 
     domains.sort(key=sort_key)
+
+    for d in domains:
+        d["cls"] = d.get("class")
 
     domains_by_id = {d["id"]: d for d in domains}
     pillars = read_structure(domains_by_id)

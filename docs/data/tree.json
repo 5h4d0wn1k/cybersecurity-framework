@@ -823,7 +823,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "binary",
@@ -1395,7 +1396,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "c2",
@@ -2007,7 +2009,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "crypto",
@@ -2501,7 +2504,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "exploit",
@@ -2990,7 +2994,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "iot",
@@ -3835,7 +3840,8 @@
           ],
           "subcategories": []
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "mobile",
@@ -4456,7 +4462,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "network",
@@ -5346,7 +5353,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "osint",
@@ -6333,7 +6341,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "passwords",
@@ -7281,7 +7290,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "phishing-social",
@@ -7890,7 +7900,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "privesc",
@@ -8376,7 +8387,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "recon",
@@ -9502,7 +9514,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "redteam",
@@ -9950,7 +9963,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "vuln-scan",
@@ -10906,7 +10920,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "web",
@@ -11936,7 +11951,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "wireless",
@@ -12698,7 +12714,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "offense"
     },
     {
       "id": "appsec",
@@ -13430,7 +13447,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "defense"
     },
     {
       "id": "blueteam",
@@ -14196,7 +14214,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "defense"
     },
     {
       "id": "cloud",
@@ -14881,7 +14900,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "defense"
     },
     {
       "id": "container",
@@ -15639,7 +15659,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "defense"
     },
     {
       "id": "forensics",
@@ -16208,7 +16229,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "defense"
     },
     {
       "id": "hardening",
@@ -16906,7 +16928,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "defense"
     },
     {
       "id": "honeypots",
@@ -17493,7 +17516,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "defense"
     },
     {
       "id": "malware",
@@ -18023,7 +18047,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "defense"
     },
     {
       "id": "purpleteam",
@@ -18597,7 +18622,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "defense"
     },
     {
       "id": "threatintel",
@@ -19219,7 +19245,8 @@
             }
           ]
         }
-      ]
+      ],
+      "cls": "defense"
     }
   ],
   "pillars": [
@@ -19228,6 +19255,7 @@
       "name": "Offensive Security",
       "emoji": "\u2694\ufe0f",
       "class": "offense",
+      "cls": "offense",
       "tagline": "Recon \u2192 attack \u2192 breach: the tools an attacker (or authorized red teamer) reaches for at each stage.",
       "groups": [
         {
@@ -20219,7 +20247,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             },
             {
               "id": "recon",
@@ -21345,7 +21374,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             }
           ]
         },
@@ -22307,7 +22337,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             },
             {
               "id": "network",
@@ -23197,7 +23228,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             }
           ]
         },
@@ -24233,7 +24265,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             },
             {
               "id": "mobile",
@@ -24854,7 +24887,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             }
           ]
         },
@@ -25685,7 +25719,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             }
           ]
         },
@@ -26639,7 +26674,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             },
             {
               "id": "crypto",
@@ -27133,7 +27169,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             }
           ]
         },
@@ -27628,7 +27665,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             },
             {
               "id": "binary",
@@ -28200,7 +28238,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             },
             {
               "id": "privesc",
@@ -28686,7 +28725,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             }
           ]
         },
@@ -29304,7 +29344,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             },
             {
               "id": "redteam",
@@ -29752,7 +29793,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             }
           ]
         },
@@ -30367,7 +30409,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             }
           ]
         },
@@ -31135,7 +31178,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "offense"
             },
             {
               "id": "iot",
@@ -31980,7 +32024,8 @@
                   ],
                   "subcategories": []
                 }
-              ]
+              ],
+              "cls": "offense"
             }
           ]
         }
@@ -31991,6 +32036,7 @@
       "name": "Defensive Security",
       "emoji": "\ud83d\udee1\ufe0f",
       "class": "defense",
+      "cls": "defense",
       "tagline": "Detect \u2192 defend \u2192 recover: the tools for monitoring, hardening, forensics and resilience.",
       "groups": [
         {
@@ -32761,7 +32807,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "defense"
             },
             {
               "id": "threatintel",
@@ -33383,7 +33430,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "defense"
             }
           ]
         },
@@ -34121,7 +34169,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "defense"
             }
           ]
         },
@@ -34696,7 +34745,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "defense"
             }
           ]
         },
@@ -35232,7 +35282,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "defense"
             }
           ]
         },
@@ -35936,7 +35987,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "defense"
             }
           ]
         },
@@ -36627,7 +36679,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "defense"
             },
             {
               "id": "container",
@@ -37385,7 +37438,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "defense"
             }
           ]
         },
@@ -37978,7 +38032,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "defense"
             },
             {
               "id": "purpleteam",
@@ -38552,7 +38607,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "cls": "defense"
             }
           ]
         }

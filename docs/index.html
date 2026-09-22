@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Cybersecurity Framework — the tree map of cyber tooling</title>
 <meta name="description" content="An OSINT-Framework-style interactive tree map of the entire cybersecurity landscape: 27 domains, 770+ categories nested to any depth, 1000+ curated tools with effort ratings, direct links, and when-to-use guidance." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%230b0e14'/%3E%3Cpath d='M8 2l5 2v3c0 3.2-2.1 5.7-5 7-2.9-1.3-5-3.8-5-7V4z' fill='none' stroke='%234aa8ff' stroke-width='1.3'/%3E%3Ccircle cx='8' cy='8' r='1.6' fill='%233ddc97'/%3E%3C/svg%3E" />
 <style>
   :root{
     --bg:#0b0e14; --bg2:#10141d; --panel:#111724; --panel2:#161e2e;
@@ -59,29 +60,30 @@
   .link{fill:none;stroke:var(--line2);stroke-width:1.2;opacity:.7}
   .node{cursor:pointer}
   .node .bg{fill:var(--node);stroke:var(--node-line);stroke-width:1.2}
-  .node.d0 .bg{fill:var(--bg2);stroke-width:2}
-  .node.d0.c-offense .bg{stroke:var(--off);fill:var(--off-bg)}
-  .node.d0.c-defense .bg{stroke:var(--def);fill:var(--def-bg)}
-  .node.d1 .bg{fill:var(--panel);stroke:var(--acc2);stroke-width:1.6}
-  .node.d2 .bg{fill:var(--panel);stroke:var(--line2);stroke-width:1.4}
-  .node.d2.c-offense .bg{stroke:var(--off)}
-  .node.d2.c-defense .bg{stroke:var(--def)}
-  .node.d3 .bg{fill:var(--node)}
+  .node.d0 .bg{fill:transparent;stroke:none}
+  .node.d0 text{font-size:15px;font-weight:800;fill:var(--acc)}
+  .node.d1 .bg{fill:var(--bg2);stroke-width:2}
+  .node.d1.c-offense .bg{stroke:var(--off);fill:var(--off-bg)}
+  .node.d1.c-defense .bg{stroke:var(--def);fill:var(--def-bg)}
+  .node.d2 .bg{fill:var(--panel);stroke:var(--acc2);stroke-width:1.5}
+  .node.d3 .bg{fill:var(--panel);stroke:var(--line2);stroke-width:1.4}
+  .node.d3.c-offense .bg{stroke:var(--off)}
+  .node.d3.c-defense .bg{stroke:var(--def)}
   .node.d4 .bg{fill:var(--node)}
   .node.d5 .bg{fill:var(--node)}
   .node text{fill:var(--txt);font:600 12.5px var(--mono);dominant-baseline:middle}
-  .node.d0 text{font-size:14px}
-  .node.d1 text{font-size:13.5px;fill:var(--acc)}
-  .node.d2 text{fill:var(--muted)}
-  .node.d3 text{fill:var(--muted);font-size:12px}
-  .node.d4 text{fill:var(--dim);font-size:11.5px}
+  .node.d1 text{font-size:13.5px}
+  .node.d2 text{font-size:13px;fill:var(--acc)}
+  .node.d3 text{fill:var(--muted)}
+  .node.d4 text{fill:var(--dim);font-size:12px}
   .node.d5 text{fill:var(--dim);font-size:11.5px}
   .node .chev{fill:none;stroke:var(--dim);stroke-width:2}
-  .node.d0 .chev{stroke:var(--acc2)}
+  .node.d1 .chev{stroke:var(--acc2)}
+  .node.d2 .chev{stroke:var(--acc2)}
   .node .cnt{fill:var(--dim);font:10px var(--mono);dominant-baseline:middle}
-  .node.d0 .cnt{fill:var(--muted)}
+  .node.d1 .cnt{fill:var(--muted)}
   .node .auth{fill:var(--auth);font:bold 9px var(--mono);dominant-baseline:middle}
-  .node.d0 .auth{fill:var(--auth)}
+  .node.d1 .auth{fill:var(--auth)}
   .tool{fill:var(--txt);font:600 11.5px var(--mono);dominant-baseline:middle}
   .tool .bg{fill:none;stroke-width:1.4}
   .tool .star{fill:var(--warn)}
@@ -91,7 +93,7 @@
   .tool.ef-easy .bg{stroke:var(--grn)}
   .tool.ef-medium .bg{stroke:var(--warn)}
   .tool.ef-advanced .bg{stroke:var(--red)}
-  #hints{position:absolute;left:16px;bottom:14px;display:flex;gap:14px;color:var(--dim);font-family:var(--mono);font-size:11px;flex-wrap:wrap;max-width:74%;z-index:5;padding:8px 12px;background:var(--bg);border:1px solid var(--line2);border-radius:9px}
+  #hints{position:absolute;left:16px;bottom:12px;display:flex;gap:14px;color:var(--dim);font-family:var(--mono);font-size:10.5px;flex-wrap:wrap;max-width:56%;z-index:5;padding:5px 10px;background:var(--bg);border:1px solid var(--line2);border-radius:8px}
   #hints b{color:var(--muted)}
   #hints .auth-dot b{color:var(--auth)}
   #panel{position:absolute;top:14px;right:14px;bottom:14px;width:400px;background:var(--panel);border:1px solid var(--line2);border-radius:12px;box-shadow:0 16px 48px rgba(0,0,0,.5);z-index:30;display:none;flex-direction:column;overflow:hidden}
@@ -168,12 +170,14 @@
     <button class="navbtn" id="nextD">▶</button>
   </div>
   <div id="hints">
-    <span><b style="color:var(--acc2)">◈</b> domain</span>
+    <span><b style="color:var(--off)">●</b> offense</span>
+    <span><b style="color:var(--def)">●</b> defense</span>
     <span><b style="color:var(--warn)">★</b> best-in-class</span>
-    <span class="auth-dot"><b style="color:var(--auth)">◆</b> by 5h4d0wn1k</span>
-    <span>effort: <b style="color:var(--grn)">green</b>=easy · <b style="color:var(--warn)">yellow</b>=medium · <b style="color:var(--red)">red</b>=advanced</span>
-    <span>click ▸ expand/collapse · click a tool → details</span>
-    <span><b>drag</b>=pan · <b>scroll</b>=zoom · <b>dbl-click tool</b>=open link</span>
+    <span><b style="color:var(--auth)">◆</b> by 5h4d0wn1k</span>
+    <span><b>🖱 click</b> toggle</span>
+    <span><b>🖱 dbl-click domain</b> jump</span>
+    <span><b>drag</b> pan</span>
+    <span><b>scroll</b> zoom</span>
   </div>
   <div id="footer">
     <a href="ETHICS.md" target="_blank">ETHICS</a>
@@ -219,7 +223,7 @@
   }
   function mkDomain(dom, collapsed) {
     const root = { type: "domain", label: (dom.emoji ? dom.emoji + " " : "") + dom.name,
-      cls: dom.cls, dom: dom.name, domIdx: dom._i, path: dom.name,
+      cls: dom.cls, dom: dom.name, domIdx: DATA ? DATA.findIndex(d => d.id === dom.id) : -1, path: dom.name,
       collapsed: !!collapsed, children: [] };
     for (const c of dom.categories) root.children.push(mkCat(c, dom, dom.name));
     return root;
@@ -235,14 +239,15 @@
       children: (p.groups || []).map(g => mkGroup(g, p)) };
   }
   function setDepth(root) {
+    const rank = { all: 0, pillar: 1, group: 2, domain: 3 };
+    root.dv = 0;
     (function walk(n, pd) {
-      let d;
-      if (n.type === "pillar") d = 0;
-      else if (n.type === "group") d = 1;
-      else if (n.type === "domain") d = 2;
-      else d = pd + 1;
-      n.dv = Math.min(d, 5);
-      for (const c of (n.children || [])) walk(c, d);
+      for (const c of (n.children || [])) {
+        let d = rank[c.type];
+        if (d === undefined) d = pd + 1;   // categories & deeper
+        c.dv = Math.min(d, 5);
+        walk(c, d);
+      }
     })(root, 0);
     return root;
   }
@@ -256,7 +261,8 @@
 
   function nodeWidth(n) {
     const l = (n.label || "").length;
-    const w = n.type === "pillar" ? Math.max(WDOM + 60, l * 9.6 + 90)
+    const w = n.type === "all"    ? Math.max(520, l * 9.6 + 120)
+           : n.type === "pillar"  ? Math.max(WDOM + 60, l * 9.6 + 90)
            : n.type === "group"   ? Math.max(WGRP, l * 8.8 + 70)
            : n.type === "domain"  ? Math.max(WDOM, l * 8.8 + 64)
            : n.type === "cat"     ? Math.max(WOTH, l * 8.4 + 60)
@@ -320,24 +326,30 @@
         el.setAttribute("class", "node d" + n.dv + " t" + n.type + " c" + n.cls);
         const w = nodeWidth(n);
         const lx = n.type === "pillar" ? 26 : n.type === "group" ? 22 : n.type === "domain" ? 20 : 12;
-        const tpl = n.type === "pillar"
+        const tpl = n.type === "all"
+          ? (`
+            <text x="-6" y="1">◎ ${esc(n.label)}</text>
+            <text class="cnt" x="${w - 10}" y="1" text-anchor="end">${stats ? stats.domains + " domains · " + stats.tools + " tools · " + stats.categories + " categories" : ""}</text>`)
+          : n.type === "pillar"
           ? (`
             <rect class="bg" x="-14" y="-17" width="${w}" height="34" rx="11"/>
             <path class="chev" d="${chevPath(n.open)}"/>
             <text x="${lx}" y="1">${esc(n.label)}</text>
             <text class="cnt" x="${w - 10}" y="1" text-anchor="end">${childrenTools(n)} tools</text>
-            <title>${esc(n.tagline)}</title>`)
+            <title>${esc(n.label)} — ${childrenTools(n)} tools. Click to expand/collapse.</title>`)
           : n.type === "group"
           ? (`
             <rect class="bg" x="-12" y="-15" width="${w}" height="30" rx="10"/>
             <path class="chev" d="${chevPath(n.open)}"/>
             <text x="${lx}" y="1">${esc(n.label)}</text>
-            <text class="cnt" x="${w - 8}" y="1" text-anchor="end">${childrenTools(n)}</text>`)
+            <text class="cnt" x="${w - 8}" y="1" text-anchor="end">${childrenTools(n)} tools</text>
+            <title>${esc(n.label)} — ${childrenTools(n)} tools in ${n.children.length} domain(s).</title>`)
           : (`
             <rect class="bg" x="-10" y="-13" width="${w}" height="26" rx="8"/>
             <path class="chev" d="${chevPath(n.open)}"/>
             <text x="${lx}" y="1">${esc(n.label)}</text>
-            <text class="cnt" x="${w - 8}" y="1" text-anchor="end">${kidsT ? kidsT + " 🛠" : ""}${kidsC ? (kidsT ? " " : "") + kidsC + " ▸" : ""}</text>`);
+            <text class="cnt" x="${w - 8}" y="1" text-anchor="end">${kidsT ? kidsT + " 🛠" : ""}${kidsC ? (kidsT ? " " : "") + kidsC + " ▸" : ""}</text>
+            <title>${esc(n.label)} — ${kidsT ? kidsT + " tools, " : ""}${kidsC ? kidsC + " subcategories" : "empty"}. Click to toggle.</title>`);
         innerHTML(el, tpl);
         bind(el, n);
       }
@@ -346,16 +358,27 @@
     }
 
     if (!g.__fitted) {
-      const bw = Math.max(...nodes.map(n => n.x)) + nodeWidth(curRoot) + 40;
-      const bh = Math.max(...nodes.map(n => n.y)) + VL + 40;
-      const vw = svg.clientWidth || 1200, vh = svg.clientHeight || 800;
-      const k = Math.min(vw / bw, vh / bh, 1.05);
-      if (k > 0.15 && k < 1) transform.k = k;
-      transform.x = (vw - bw * transform.k) / 2;
-      transform.y = 8;
+      fitBox(nodes);
       g.__fitted = 1;
       apply();
+    } else {
+      // keep user's pan/zoom only if everything is still on screen; else re-fit
+      const maxY = nodes.reduce((m, n) => Math.max(m, n.y), 0) * transform.k + transform.y;
+      const maxX = nodes.reduce((m, n) => Math.max(m, n.x + nodeWidth(n)), 0) * transform.k + transform.x;
+      const vw = svg.clientWidth || 1200, vh = svg.clientHeight || 800;
+      if (maxY > vh + 10 || maxX > vw + 10 || transform.y > -5) {
+        fitBox(nodes);
+        apply();
+      }
     }
+  }
+
+  function fitBox(nodes) {
+    const bw = Math.max(...nodes.map(n => n.x + nodeWidth(n)));
+    const bh = nodes.reduce((m, n) => Math.max(m, n.y), 0) + VL * 2;
+    const vw = svg.clientWidth || 1200, vh = svg.clientHeight || 800;
+    let k = Math.min(vw / bw, vh / bh);
+    transform = { x: 36, y: 92, k: Math.max(0.5, Math.min(k, 1.15)) };
   }
 
   function innerHTML(el, html) { el.innerHTML = html; }
@@ -370,10 +393,15 @@
     if (n.type === "tool") {
       el.addEventListener("click", () => openPanel(n));
       el.addEventListener("dblclick", e => { e.stopPropagation(); if (n.url) window.open(n.url, "_blank"); });
+    } else if (n.type === "all") {
+      el.style.cursor = "default";
     } else if (n.type === "domain") {
-      // single click toggles; double-click jumps into the domain
-      el.addEventListener("click", () => { if (mode === "all") { n.collapsed = !n.collapsed; build(); } else { n.collapsed = !n.collapsed; build(); } });
-      el.addEventListener("dblclick", e => { e.stopPropagation(); pick(n.domIdx); });
+      if (n === curRoot) {
+        el.style.cursor = "default";
+      } else {
+        el.addEventListener("click", () => { n.collapsed = !n.collapsed; build(); });
+        el.addEventListener("dblclick", e => { e.stopPropagation(); pick(n.domIdx); });
+      }
     } else {
       el.addEventListener("click", () => { n.collapsed = !n.collapsed; build(); });
     }
@@ -397,7 +425,7 @@
     curRoot = setDepth(allRoot);
     g.__fitted = 0;
     transform = { x: 24, y: 60, k: 1 };
-    $("#dnavName").textContent = "all 27 domains — " + stats.tools + " tools";
+    $("#dnavName").textContent = "all " + stats.domains + " domains — " + stats.tools + " tools";
     build();
   }
 
@@ -561,7 +589,7 @@
     $("#st-cats").textContent = stats.categories;
     $("#st-tools").textContent = stats.tools;
     buildIndex();
-    allRoot = { type: "all", label: "◎ all " + stats.domains + " domains", cls: "defense", dom: "all", path: "all",
+    allRoot = { type: "all", label: "all " + stats.domains + " domains", cls: "defense", dom: "all", path: "all",
       collapsed: false, children: PILLS.map(mkPillar) };
     pickAll();
   })();
