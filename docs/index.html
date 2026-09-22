@@ -1000,7 +1000,7 @@
   let haysBuilt = false;
   function doSearch(s) {
     s = (s || "").trim().toLowerCase();
-    if (!s) { res.classList.remove("open"); res.innerHTML = ""; res.__hits = []; return; }
+    if (!s) { res.classList.remove("open"); res.innerHTML = ""; res.__hits = []; q.setAttribute("aria-expanded", "false"); return; }
     if (!haysBuilt) { buildHays(); haysBuilt = true; }
     const all = toolIndex.filter(t => t._hay.includes(s));
     const hits = all.slice(0, 40);
@@ -1018,6 +1018,7 @@
           </span>
         </div>`).join("") || `<div class="empty">no matches for "${esc(s)}"</div>`);
     res.classList.add("open");
+    q.setAttribute("aria-expanded", "true");
   }
   function markRow() {
     const rows = res.querySelectorAll(".row");
@@ -1038,7 +1039,7 @@
     if (e.key === "Enter" && res.classList.contains("open") && res.__idx >= 0) {
       e.preventDefault();
       const t = res.__hits[res.__idx];
-      if (t) { reveal(t); res.classList.remove("open"); res.__hits = []; q.value = ""; }
+      if (t) { reveal(t); res.classList.remove("open"); res.__hits = []; q.value = ""; q.setAttribute("aria-expanded", "false"); }
     }
   });
   res.addEventListener("click", e => {
@@ -1048,9 +1049,10 @@
     res.classList.remove("open");
     q.value = "";
     res.__hits = [];
+    q.setAttribute("aria-expanded", "false");
     q.blur();
   });
-  document.addEventListener("click", e => { if (!e.target.closest(".search")) res.classList.remove("open"); });
+  document.addEventListener("click", e => { if (!e.target.closest(".search")) { res.classList.remove("open"); q.setAttribute("aria-expanded", "false"); } });
 
   /* ============ panel ============ */
   const panel = $("#panel");
@@ -1128,6 +1130,7 @@
         return;
       }
       res.classList.remove("open");
+      q.setAttribute("aria-expanded", "false");
     }
   });
 
