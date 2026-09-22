@@ -1,7 +1,7 @@
 {
   "id": "threatintel",
   "name": "Threat Intelligence, Sharing & Detection Engineering",
-  "emoji": "📡",
+  "emoji": "\ud83d\udce1",
   "tagline": "Enrich your own defenses: ingest STIX/TAXII feeds, aggregate and pivot on IOCs, correlate infrastructure, and write portable detections against standard frameworks.",
   "class": "defense",
   "categories": [
@@ -22,7 +22,10 @@
               "when": "Stand up a central intel drive when you want automated feed ingestion (MISP, MITRE, abuse.ch, TAXII collections) correlated into entities, reports, and indicators rather than raw IOC lists.",
               "install": "git clone https://github.com/OpenCTI-Platform/docker.git && cp .env.sample .env && docker compose up -d",
               "url": "https://github.com/OpenCTI-Platform/OpenCTI",
-              "alt": ["MISP", "TheHive"]
+              "alt": [
+                "MISP",
+                "TheHive"
+              ]
             },
             {
               "name": "MISP",
@@ -32,7 +35,10 @@
               "when": "Run or sync a MISP instance when you need governed, TLP-aware intel sharing across your team, an ISAC-style community, or a feed-ingestion pipeline that speaks STIX/TAXII 2 out of the box.",
               "install": "wget -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh && sudo bash /tmp/INSTALL.sh",
               "url": "https://github.com/MISP/MISP",
-              "alt": ["OpenCTI", "IntelOwl"]
+              "alt": [
+                "OpenCTI",
+                "IntelOwl"
+              ]
             },
             {
               "name": "TAXII 2.0",
@@ -42,7 +48,10 @@
               "when": "Connect your SIEM or intel stack to vendor and community TAXII endpoints, or publish your own vetted indicators to partners without building custom transport.",
               "install": "preinstalled (protocol spec); pip install stix2 for client ingestion",
               "url": "https://oasis-open.github.io/cti-documentation/",
-              "alt": ["MISP", "OpenCTI"]
+              "alt": [
+                "MISP",
+                "OpenCTI"
+              ]
             },
             {
               "name": "stix2-client",
@@ -52,7 +61,10 @@
               "when": "Automate feed pulls in Python: subscribe to a TAXII collection, parse bundles into STIX objects, and hand cleaned indicators to MISP or OpenCTI.",
               "install": "pip install stix2",
               "url": "https://github.com/oasis-open/cti-python-stix2",
-              "alt": ["TAXII 2.0", "PyMISP"]
+              "alt": [
+                "TAXII 2.0",
+                "PyMISP"
+              ]
             },
             {
               "name": "TheHive",
@@ -62,7 +74,10 @@
               "when": "Pairs with MISP and Cortex in the classic open-source IR stack when you need a shared investigation workspace with built-in observable workflows.",
               "install": "git clone https://github.com/StrangeBeeCorp/docker.git && cd docker && docker compose up -d",
               "url": "https://github.com/TheHive-Project/TheHive",
-              "alt": ["DFIR-IRIS", "MISP"]
+              "alt": [
+                "DFIR-IRIS",
+                "MISP"
+              ]
             },
             {
               "name": "Cortex",
@@ -72,7 +87,10 @@
               "when": "Give TheHive or MISP one shared enrichment backend so every platform calls the same analyzers instead of re-implementing vendor API calls.",
               "install": "docker run -d -p 9001:9001 --name cortex thehiveproject/cortex:latest",
               "url": "https://github.com/TheHive-Project/Cortex",
-              "alt": ["IntelOwl", "MISP"]
+              "alt": [
+                "IntelOwl",
+                "MISP"
+              ]
             },
             {
               "name": "IntelOwl",
@@ -82,7 +100,10 @@
               "when": "Automate whole-vendor enrichment in one request and sink normalized findings into your STIX-based platforms via its connector layer.",
               "install": "git clone https://github.com/intelowlproject/IntelOwl && ./initialize.sh && ./start prod up",
               "url": "https://github.com/intelowlproject/IntelOwl",
-              "alt": ["Cortex", "Pulsedive"]
+              "alt": [
+                "Cortex",
+                "Pulsedive"
+              ]
             }
           ]
         },
@@ -96,10 +117,13 @@
               "rating": 5,
               "effort": "advanced",
               "desc": "The foundational open threat-intelligence and sharing framework: event-driven IOC correlation, feed syncing, taxonomies, and TLP/org governance across trusted communities.",
-              "when": "When you need a mature, community-proven place to store, correlate, and share intel with partners — it is the default first platform to stand up.",
+              "when": "When you need a mature, community-proven place to store, correlate, and share intel with partners \u2014 it is the default first platform to stand up.",
               "install": "wget -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh && sudo bash /tmp/INSTALL.sh",
               "url": "https://github.com/MISP/MISP",
-              "alt": ["OpenCTI", "YETI"]
+              "alt": [
+                "OpenCTI",
+                "YETI"
+              ]
             },
             {
               "name": "OpenCTI",
@@ -109,7 +133,10 @@
               "when": "When your team reasons about campaigns and infrastructure relationships rather than flat IOC lists, so a knowledge-graph backend is worth the heavier deploy.",
               "install": "git clone https://github.com/OpenCTI-Platform/docker.git && cp .env.sample .env && docker compose up -d",
               "url": "https://github.com/OpenCTI-Platform/OpenCTI",
-              "alt": ["MISP", "YETI"]
+              "alt": [
+                "MISP",
+                "YETI"
+              ]
             }
           ]
         },
@@ -126,7 +153,10 @@
               "when": "When multiple analysts investigate simultaneous incidents and you need tasking, observables, and audit history in a single pane with MISP/Cortex integration.",
               "install": "git clone https://github.com/StrangeBeeCorp/docker.git && cd docker && docker compose up -d",
               "url": "https://github.com/TheHive-Project/TheHive",
-              "alt": ["DFIR-IRIS", "MISP"]
+              "alt": [
+                "DFIR-IRIS",
+                "MISP"
+              ]
             },
             {
               "name": "Cortex",
@@ -136,7 +166,10 @@
               "when": "Attach a single Cortex to MISP and TheHive so enrichment and active-response is centralized, measured, and repeatable across tools.",
               "install": "docker run -d -p 9001:9001 --name cortex thehiveproject/cortex:latest",
               "url": "https://github.com/TheHive-Project/Cortex",
-              "alt": ["IntelOwl", "TheHive"]
+              "alt": [
+                "IntelOwl",
+                "TheHive"
+              ]
             },
             {
               "name": "DFIR-IRIS",
@@ -145,8 +178,11 @@
               "desc": "Open-source incident-response platform with modern case management, timeline pivoting, IOC enumeration, malware-hash handling, and third-party CTI enrichment via resolvers.",
               "when": "Prefer a lighter, actively-developed OSS case manager that still publishes to MISP and pulls enrichment, without TheHive's legacy-or-commercial story.",
               "install": "docker compose -f docker/default/docker-compose.yml up -d (from github.com/dfir-iris/dfir-iris)",
-              "url": "https://github.com/dfir-iris/dfir-iris",
-              "alt": ["TheHive", "MISP"]
+              "url": "https://github.com/dfir-iris/iris-web",
+              "alt": [
+                "TheHive",
+                "MISP"
+              ]
             }
           ]
         }
@@ -173,7 +209,10 @@
                   "when": "Commercial-grade feeds with zero platform setup: register, grab an API key, and start aggregating community pulses within the hour.",
                   "install": "preinstalled (web/API); pip install OTXv2",
                   "url": "https://otx.alienvault.com",
-                  "alt": ["Pulsedive", "ThreatFox"]
+                  "alt": [
+                    "Pulsedive",
+                    "ThreatFox"
+                  ]
                 },
                 {
                   "name": "VirusTotal",
@@ -183,7 +222,10 @@
                   "when": "Enrich any observable with detection-ratio context and passive-DNS relationships when you already hold an API key.",
                   "install": "preinstalled (web/API)",
                   "url": "https://www.virustotal.com",
-                  "alt": ["AlienVault OTX", "GreyNoise"]
+                  "alt": [
+                    "AlienVault OTX",
+                    "GreyNoise"
+                  ]
                 },
                 {
                   "name": "AbuseIPDB",
@@ -193,7 +235,10 @@
                   "when": "Quickly score a suspicious source or destination IP before blocking, and let your SIEM auto-check IPs against its report feed.",
                   "install": "preinstalled (web/API)",
                   "url": "https://www.abuseipdb.com",
-                  "alt": ["GreyNoise", "AlienVault OTX"]
+                  "alt": [
+                    "GreyNoise",
+                    "AlienVault OTX"
+                  ]
                 },
                 {
                   "name": "ThreatMiner",
@@ -202,8 +247,11 @@
                   "desc": "Free threat-intelligence portal and API aggregating passive DNS, WHOIS, hashes, SSL certs, URIs, and APT report tags for a single-indicator research view.",
                   "when": "Pivot an IOC across WHOIS, passive DNS, and sample relationships in one free lookup with a documented v2 API for scripts.",
                   "install": "preinstalled (web/API)",
-                  "url": "https://www.threatminer.org",
-                  "alt": ["AlienVault OTX", "Pulsedive"]
+                  "url": "https://intelx.io",
+                  "alt": [
+                    "AlienVault OTX",
+                    "Pulsedive"
+                  ]
                 },
                 {
                   "name": "GreyNoise",
@@ -213,7 +261,10 @@
                   "when": "Filter out opportunistic scanners from your alerts: ask 'is this IP just noise?' before burning analyst time on it.",
                   "install": "preinstalled (web/API; free community tier)",
                   "url": "https://www.greynoise.io",
-                  "alt": ["AbuseIPDB", "AlienVault OTX"]
+                  "alt": [
+                    "AbuseIPDB",
+                    "AlienVault OTX"
+                  ]
                 }
               ]
             },
@@ -227,10 +278,13 @@
                   "rating": 5,
                   "effort": "easy",
                   "desc": "abuse.ch's malicious-URL feed: a plain-text URL list plus RPZ, hostfile, and Suricata/Snort rule packs for proxy, firewall, and log matching.",
-                  "when": "Block or hunt URLs in proxy and DNS logs — the plain-text daily list catches malware distribution paths with low false positives.",
+                  "when": "Block or hunt URLs in proxy and DNS logs \u2014 the plain-text daily list catches malware distribution paths with low false positives.",
                   "install": "preinstalled (web/API)",
                   "url": "https://urlhaus.abuse.ch",
-                  "alt": ["ThreatFox", "MalwareBazaar"]
+                  "alt": [
+                    "ThreatFox",
+                    "MalwareBazaar"
+                  ]
                 },
                 {
                   "name": "MalwareBazaar",
@@ -240,17 +294,23 @@
                   "when": "Grab up-to-date reference samples and hashes by tag or malware family to train detections or validate sandbox coverage.",
                   "install": "preinstalled (web/API: https://mb-api.abuse.ch/api/v1/)",
                   "url": "https://bazaar.abuse.ch",
-                  "alt": ["ThreatFox", "URLhaus"]
+                  "alt": [
+                    "ThreatFox",
+                    "URLhaus"
+                  ]
                 },
                 {
                   "name": "ThreatFox",
                   "rating": 4,
                   "effort": "easy",
                   "desc": "abuse.ch's malware-IOC feed: query and submit IPs, domains, URLs, and hashes tagged to malware families, with CSV/JSON dumps and MISP event exports.",
-                  "when": "Pull current malware IOCs into your SIEM or pivot a domain/IP to its associated family — the fastest 'what is this IOC attached to' lookup.",
+                  "when": "Pull current malware IOCs into your SIEM or pivot a domain/IP to its associated family \u2014 the fastest 'what is this IOC attached to' lookup.",
                   "install": "preinstalled (web/API; free auth key)",
                   "url": "https://threatfox.abuse.ch",
-                  "alt": ["URLhaus", "MalwareBazaar"]
+                  "alt": [
+                    "URLhaus",
+                    "MalwareBazaar"
+                  ]
                 }
               ]
             },
@@ -267,17 +327,23 @@
                   "when": "Pivot every incoming IOC across your whole vendor stack automatically, or plug it into MISP, OpenCTI, and TheHive for repeatable centralized enrichment.",
                   "install": "git clone https://github.com/intelowlproject/IntelOwl && ./initialize.sh && ./start prod up",
                   "url": "https://github.com/intelowlproject/IntelOwl",
-                  "alt": ["Pulsedive", "Cortex"]
+                  "alt": [
+                    "Pulsedive",
+                    "Cortex"
+                  ]
                 },
                 {
                   "name": "Pulsedive",
                   "rating": 4,
                   "effort": "easy",
                   "desc": "Free IOC portal combining passive and active scans, risk scores, ATT&CK tags, and a pivot 'Explore' query language, plus a browser extension for on-page enrichment.",
-                  "when": "Enrich an indicator with risk scores and relationship pivots without standing up a platform — free account, pivot graphs, and exports for fast triage.",
+                  "when": "Enrich an indicator with risk scores and relationship pivots without standing up a platform \u2014 free account, pivot graphs, and exports for fast triage.",
                   "install": "preinstalled (web/API; free account)",
                   "url": "https://pulsedive.com",
-                  "alt": ["AlienVault OTX", "ThreatFox"]
+                  "alt": [
+                    "AlienVault OTX",
+                    "ThreatFox"
+                  ]
                 }
               ]
             }
@@ -302,17 +368,23 @@
               "when": "Spot old dev/staging infrastructure or infrastructure churn by replaying DNS history that no longer resolves via live queries.",
               "install": "preinstalled (web/API)",
               "url": "https://securitytrails.com",
-              "alt": ["DNSDumpster", "PassiveTotal"]
+              "alt": [
+                "DNSDumpster",
+                "PassiveTotal"
+              ]
             },
             {
               "name": "PassiveTotal",
               "rating": 3,
               "effort": "easy",
               "desc": "RiskIQ's passive-DNS and infrastructure-pivoting workbench whose legacy portal is retiring into Microsoft Defender Threat Intelligence (retired 2026); its DNS-history datasets live on in MDTI.",
-              "when": "Only as a historical reference or for old integrations — use Microsoft Defender Threat Intelligence for RiskIQ-class passive-DNS pivot data going forward.",
+              "when": "Only as a historical reference or for old integrations \u2014 use Microsoft Defender Threat Intelligence for RiskIQ-class passive-DNS pivot data going forward.",
               "install": "preinstalled (web) - retired; successor requires M365 Defender TI license",
               "url": "https://www.riskiq.com/products/passivetotal",
-              "alt": ["Microsoft Defender TI", "SecurityTrails"]
+              "alt": [
+                "Microsoft Defender TI",
+                "SecurityTrails"
+              ]
             },
             {
               "name": "Microsoft Defender Threat Intelligence",
@@ -322,7 +394,10 @@
               "when": "When you want RiskIQ-class passive-DNS and infrastructure-chaining datasets and already operate in Defender XDR, Sentinel, or the Microsoft security portal.",
               "install": "preinstalled (portal/API; premium licensed, community tier available)",
               "url": "https://www.microsoft.com/en-us/security/business/intelligence",
-              "alt": ["SecurityTrails", "Censys"]
+              "alt": [
+                "SecurityTrails",
+                "Censys"
+              ]
             },
             {
               "name": "DNSDumpster",
@@ -332,7 +407,10 @@
               "when": "A zero-signup first pass at a domain's DNS surface when you want a quick map before heavier enumeration.",
               "install": "preinstalled (web)",
               "url": "https://dnsdumpster.com",
-              "alt": ["SecurityTrails", "crt.sh"]
+              "alt": [
+                "SecurityTrails",
+                "crt.sh"
+              ]
             }
           ]
         },
@@ -345,11 +423,14 @@
               "best": true,
               "rating": 5,
               "effort": "easy",
-              "desc": "Internet-wide scanning platform searchable by protocol, certificate, banner, and ASN — ideal for TLS-certificate pivoting back to hosts and exposure discovery.",
+              "desc": "Internet-wide scanning platform searchable by protocol, certificate, banner, and ASN \u2014 ideal for TLS-certificate pivoting back to hosts and exposure discovery.",
               "when": "Pivot a certificate, hostname, or service banner to every public-facing asset that matches, and monitor your own attack surface over time.",
               "install": "preinstalled (web/API; free account with query quota)",
               "url": "https://censys.com",
-              "alt": ["Shodan", "Netlas"]
+              "alt": [
+                "Shodan",
+                "Netlas"
+              ]
             },
             {
               "name": "Shodan",
@@ -359,7 +440,10 @@
               "when": "Find every internet-facing instance running a vulnerable service, or check whether an observed IP hosts additional exposed ports and software.",
               "install": "preinstalled (web/API; free tier, paid for API)",
               "url": "https://www.shodan.io",
-              "alt": ["Censys", "ZoomEye"]
+              "alt": [
+                "Censys",
+                "ZoomEye"
+              ]
             },
             {
               "name": "ZoomEye",
@@ -369,7 +453,10 @@
               "when": "Cross-check Censys/Shodan results against an independent fourth scanning corpus, especially for Asia-heavy infrastructure.",
               "install": "preinstalled (web/API)",
               "url": "https://www.zoomeye.ai",
-              "alt": ["Shodan", "Censys"]
+              "alt": [
+                "Shodan",
+                "Censys"
+              ]
             },
             {
               "name": "FOFA",
@@ -379,7 +466,10 @@
               "when": "When you need expressive full-body searches and favicon based pivoting that cleanly link otherwise unrelated assets.",
               "install": "preinstalled (web/API)",
               "url": "https://fofa.info",
-              "alt": ["Censys", "Shodan"]
+              "alt": [
+                "Censys",
+                "Shodan"
+              ]
             },
             {
               "name": "Netlas",
@@ -389,7 +479,10 @@
               "when": "When you prefer scripting searches in Python or need regex-level body/header pivoting beyond Shodan's filter grammar.",
               "install": "preinstalled (web/API; pip install netlas)",
               "url": "https://netlas.io",
-              "alt": ["Censys", "Shodan"]
+              "alt": [
+                "Censys",
+                "Shodan"
+              ]
             },
             {
               "name": "Criminal IP",
@@ -399,7 +492,10 @@
               "when": "Aggregate IP reputation, exposed-service, and banner intel in one query when reviewing C2 or abuse infra candidates.",
               "install": "preinstalled (web/API; free tier)",
               "url": "https://www.criminalip.io",
-              "alt": ["Shodan", "AbuseIPDB"]
+              "alt": [
+                "Shodan",
+                "AbuseIPDB"
+              ]
             }
           ]
         },
@@ -416,7 +512,10 @@
               "when": "Correlate a suspicious attribute against your event history to find linked campaigns, reused C2, or related infrastructure while investigating an alert.",
               "install": "see stix-taxii category install",
               "url": "https://github.com/MISP/MISP",
-              "alt": ["OpenCTI", "IntelOwl"]
+              "alt": [
+                "OpenCTI",
+                "IntelOwl"
+              ]
             },
             {
               "name": "OpenCTI",
@@ -426,7 +525,10 @@
               "when": "When an IOC is only a starting point and you need the surrounding actor, tooling, and TTP relationships a graph store preserves.",
               "install": "see stix-taxii category install",
               "url": "https://github.com/OpenCTI-Platform/OpenCTI",
-              "alt": ["MISP", "ThreatFox"]
+              "alt": [
+                "MISP",
+                "ThreatFox"
+              ]
             }
           ]
         }
@@ -449,7 +551,10 @@
               "when": "Author detection once and ship it anywhere: port a SigmaHQ rule, run sigma convert --target <siem>, and validate the query against logs before tuning.",
               "install": "pipx install sigma-cli && git clone https://github.com/SigmaHQ/sigma",
               "url": "https://github.com/SigmaHQ/sigma",
-              "alt": ["Atomic Red Team", "YARA"]
+              "alt": [
+                "Atomic Red Team",
+                "YARA"
+              ]
             },
             {
               "name": "YARA",
@@ -459,7 +564,9 @@
               "when": "Match dropped samples or artifacts against signature rules, or encode a family signature your feed team cannot express in a log query.",
               "install": "sudo apt install yara",
               "url": "https://github.com/VirusTotal/yara",
-              "alt": ["Sigma"]
+              "alt": [
+                "Sigma"
+              ]
             }
           ]
         },
@@ -476,7 +583,10 @@
               "when": "Verify Sigma or SIEM rules against real technique behavior: run the matching atom, watch your alert pipeline, and tune the rule before deployment.",
               "install": "git clone --recurse-submodules https://github.com/redcanaryco/atomic-red-team",
               "url": "https://github.com/redcanaryco/atomic-red-team",
-              "alt": ["MITRE ATT&CK", "Sigma"]
+              "alt": [
+                "MITRE ATT&CK",
+                "Sigma"
+              ]
             },
             {
               "name": "MITRE ATT&CK",
@@ -486,7 +596,10 @@
               "when": "Map and measure detection coverage: tag rules with technique IDs, standardize alert vocabulary, or browse technique data sources before writing a rule.",
               "install": "preinstalled (web reference; API at attack.mitre.org)",
               "url": "https://attack.mitre.org",
-              "alt": ["Atomic Red Team", "MITRE ATT&CK Navigator"]
+              "alt": [
+                "Atomic Red Team",
+                "MITRE ATT&CK Navigator"
+              ]
             },
             {
               "name": "MITRE ATT&CK Navigator",
@@ -496,7 +609,10 @@
               "when": "Visualize and report which techniques your Sigma/atomic coverage addresses and which gaps remain in a browsable, shareable matrix layer.",
               "install": "preinstalled (web) - self-host: git clone https://github.com/mitre-attack/attack-navigator",
               "url": "https://github.com/mitre-attack/attack-navigator",
-              "alt": ["MITRE ATT&CK", "Atomic Red Team"]
+              "alt": [
+                "MITRE ATT&CK",
+                "Atomic Red Team"
+              ]
             }
           ]
         }

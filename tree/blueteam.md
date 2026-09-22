@@ -233,6 +233,36 @@ Passive network-analysis framework (formerly Bro) feeding rich protocol metadata
 
 
 
+#### sentinelwall ◆ by 5h4d0wn1k
+
+Autonomous AI network threat detection & correlation engine — MITRE ATT&CK mapping, ML anomaly detection, rule DSL, STIX/Navigator/HTML exports, dashboard.
+
+**When:** Continuous network telemetry review and correlation in your own SOC lab.
+
+**Effort:** medium  ·  **Rating:** 5/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/sentinelwall`
+
+**URL:** https://github.com/5h4d0wn1k/sentinelwall
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
+#### netsentinel ◆ by 5h4d0wn1k
+
+Detection engine suite — signature NIDS, ML flow-anomaly, kernel-watch, MITM detectors, SIEM-lite correlation, JSON alert API.
+
+**When:** Building detection coverage and testing alert quality on controlled traffic.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/netsentinel`
+
+**URL:** https://github.com/5h4d0wn1k/netsentinel
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 #### Network Sensors
 
 
@@ -450,6 +480,21 @@ Binary pattern-matching rule engine for malware families and byte-level IOCs; co
 ## Response Automation, SOAR & Playbooks
 
 
+
+
+#### sentinai ◆ by 5h4d0wn1k
+
+Agentic AI SOC copilot — autonomous detect/triage/correlate/respond plus incident narrative on own-lab environments; rule playbook offline.
+
+**When:** Automating triage and initial response for lab-derived incidents.
+
+**Effort:** medium  ·  **Rating:** 5/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/sentinai`
+
+**URL:** https://github.com/5h4d0wn1k/sentinai
+
+**Alternatives:** Own tool — lab/authorized use only
 
 
 #### SOAR / Workflow Automation

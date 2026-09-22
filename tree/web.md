@@ -377,6 +377,21 @@ Classic raft wordlists (small/medium/large) for directories and files, maintaine
 
 
 
+#### webbreach ◆ by 5h4d0wn1k
+
+OWASP Top-10 attack engine with built-in localhost vulnerable targets and an AI-guided scan queue — safe web exploitation practice.
+
+**When:** Practicing web app attacks without touching the internet.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/webbreach`
+
+**URL:** https://github.com/5h4d0wn1k/webbreach
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 #### Database Injection
 
 

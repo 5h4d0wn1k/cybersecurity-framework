@@ -1,7 +1,7 @@
 {
   "id": "vuln-scan",
   "name": "Vulnerability Scanning & Assessment",
-  "emoji": "🔍",
+  "emoji": "\ud83d\udd0d",
   "tagline": "Automated detection of known CVEs and misconfigurations at scale, plus manual triage.",
   "class": "offense",
   "categories": [

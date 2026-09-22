@@ -52,6 +52,21 @@ Commercial self-hostable phishing-simulation platform with SPF/DKIM/DMARC setup 
 **Alternatives:** gophish, king phisher
 
 
+#### socialforge ◆ by 5h4d0wn1k
+
+Hard-gated social-engineering & OSINT awareness lab — campaign planning, pretext/vishing drills; consent-gated, no network-send.
+
+**When:** Running consent-gated awareness exercises for training teams.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/socialforge`
+
+**URL:** https://github.com/5h4d0wn1k/socialforge
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 #### Adversary-in-the-Middle Simulation
 
 

@@ -70,7 +70,7 @@ Bash script that greps an extracted or mounted filesystem for secrets: shadow/pa
 
 **Install:** `git clone https://github.com/craigz28/firmwalker`
 
-**URL:** https://github.com/craigz28/firmwalker
+**URL:** https://github.com/scriptingxss/firmwalker
 
 **Alternatives:** binwalk
 
@@ -219,7 +219,7 @@ Open-source serial multi-tool (current Bus Pirate 5): drives SPI/I2C/UART/1-Wire
 
 **Install:** `hardware (dangerousprototypes.com) + sudo apt install picocom`
 
-**URL:** https://github.com/DangerousPrototypes/BusPirate
+**URL:** https://github.com/DangerousPrototypes/Bus_Pirate
 
 **Alternatives:** PulseView, OpenOCD
 
@@ -287,7 +287,7 @@ Five-dollar USB SPI/I2C/parallel programmer (and its clones) that flashrom drive
 
 **Install:** `sudo apt install flashrom && use with ch341a_spi programmer`
 
-**URL:** https://wiki.flashrom.org/CH341A
+**URL:** https://flashrom.org/supported_hw/supported_prog/ch341ab.html
 
 **Alternatives:** flashrom
 
@@ -401,6 +401,21 @@ Solder-free tag-connect breakout kit from TrueRandom that reroutes narrow-pitch 
 ## RF Protocol & Application Analysis
 
 
+
+
+#### iotbreach ◆ by 5h4d0wn1k
+
+IoT/SCADA/embedded offensive framework — MQTT/CoAP/UPnP/Modbus/CAN/BLE/Zigbee/433MHz, firmware extraction, ICS kill-chain simulation.
+
+**When:** Testing embedded/IoT targets in your own lab.
+
+**Effort:** advanced  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/iotbreach`
+
+**URL:** https://github.com/5h4d0wn1k/iotbreach
+
+**Alternatives:** Own tool — lab/authorized use only
 
 
 #### Link-Layer Radios (Z-Wave / Zigbee / BLE)
@@ -581,7 +596,7 @@ Akamai's Python toolchain (mqttez, mqtts-tv, mqttgama) that scans MQTT brokers, 
 
 **Install:** `git clone https://github.com/akamai/mqtt-pwn && pip install -r requirements.txt`
 
-**URL:** https://github.com/akamai/mqtt-pwn
+**URL:** https://github.com/akamai-threat-research/mqtt-pwn
 
 **Alternatives:** mosquitto_pub, MQTT Explorer
 

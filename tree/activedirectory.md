@@ -250,7 +250,7 @@ Microsoft's built-in snap-in for direct read/write access to every AD object and
 
 **Install:** `Add via 'Turn Windows features on or off' → AD DS and AD LDS Tools (native on domain controllers)`
 
-**URL:** https://learn.microsoft.com/windows-server/identity/ad-ds/get-started/adsi-edit
+**URL:** https://learn.microsoft.com/en-us/windows/win32/adsi/active-directory-service-interfaces-adsi
 
 **Alternatives:** AD Explorer, ldapsearch
 

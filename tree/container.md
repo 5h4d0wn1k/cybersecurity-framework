@@ -148,6 +148,21 @@ Container image linter that audits the built image against CIS Docker image chec
 
 
 
+#### supplysec ◆ by 5h4d0wn1k
+
+Supply-chain security gate — dependency manifest parsing, SBOM (CycloneDX/SPDX), offline advisory matching, policy gates, post-quantum scanning.
+
+**When:** Gating CI builds on dependency/supply-chain posture before merge.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/supplysec`
+
+**URL:** https://github.com/5h4d0wn1k/supplysec
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 #### Generators
 
 

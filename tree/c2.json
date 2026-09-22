@@ -1,14 +1,28 @@
 {
   "id": "c2",
   "name": "Command & Control Frameworks",
-  "emoji": "🖥️",
-  "tagline": "C2 / post-exploitation frameworks, communication profiles, payload & beacon kits, and infrastructure helpers — for authorized adversary simulation, C2-traffic detection testing, and lab post-exploitation.",
+  "emoji": "\ud83d\udda5\ufe0f",
+  "tagline": "C2 / post-exploitation frameworks, communication profiles, payload & beacon kits, and infrastructure helpers \u2014 for authorized adversary simulation, C2-traffic detection testing, and lab post-exploitation.",
   "class": "offense",
   "categories": [
     {
       "id": "full-frameworks",
       "name": "Command & Control Frameworks",
-      "tools": [],
+      "tools": [
+        {
+          "name": "hermesc2",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Lab C2 & post-exploitation framework \u2014 listeners, stagers, beacons, encrypted transport, payload generation, killswitch.",
+          "when": "Building/studying C2 flows only against your own lab servers.",
+          "install": "git clone https://github.com/5h4d0wn1k/hermesc2",
+          "url": "https://github.com/5h4d0wn1k/hermesc2",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
+        }
+      ],
       "subcategories": [
         {
           "id": "oss-frameworks",
@@ -23,7 +37,12 @@
               "when": "Your default lab/red-team C2 when you want a framework blue teams can profile exhaustively without commercial licensing.",
               "install": "curl https://sliver.sh/install | sudo bash",
               "url": "https://github.com/BishopFox/sliver",
-              "alt": ["havoc", "mythic", "merlin", "villain"]
+              "alt": [
+                "havoc",
+                "mythic",
+                "merlin",
+                "villain"
+              ]
             },
             {
               "name": "Mythic",
@@ -33,7 +52,11 @@
               "when": "Long-running lab engagements needing a pluggable, community-vetted agent ecosystem, cross-team collaboration, and GraphQL/automation hooks for red-team reporting.",
               "install": "curl -sSL https://raw.githubusercontent.com/its-a-feature/Mythic/master/install.sh | bash",
               "url": "https://github.com/its-a-feature/Mythic",
-              "alt": ["sliver", "merlin", "covenant"]
+              "alt": [
+                "sliver",
+                "merlin",
+                "covenant"
+              ]
             },
             {
               "name": "Empire",
@@ -43,37 +66,51 @@
               "when": "Classic PowerShell-heavy post-exploitation tradecraft whose agent traffic pairs naturally with the Starkiller UI; still the reference for Empire-style stager patterns.",
               "install": "git clone --recursive https://github.com/BC-SECURITY/Empire.git",
               "url": "https://github.com/BC-SECURITY/Empire",
-              "alt": ["starkiller", "sliver", "mythic"]
+              "alt": [
+                "starkiller",
+                "sliver",
+                "mythic"
+              ]
             },
             {
               "name": "Havoc",
               "rating": 4,
               "effort": "advanced",
-              "desc": "Modern malleable post-exploitation framework pairing a Qt client with a Go teamserver; the Demon agent speaks AES-encrypted HTTP(S)/SMB and uses indirect syscalls. Maintenance stopped — repo archived Feb 2026 — yet it stays a heavily studied, MITRE-tracked (S1229) traffic class.",
+              "desc": "Modern malleable post-exploitation framework pairing a Qt client with a Go teamserver; the Demon agent speaks AES-encrypted HTTP(S)/SMB and uses indirect syscalls. Maintenance stopped \u2014 repo archived Feb 2026 \u2014 yet it stays a heavily studied, MITRE-tracked (S1229) traffic class.",
               "when": "Lab and detection research against a well-documented post-exploitation stack (tunnel, AMSI/ETW patching, BOF/COFF loading) whose artifacts most EDRs now fingerprint.",
               "install": "git clone https://github.com/HavocFramework/Havoc && cd Havoc && ./build.sh",
               "url": "https://github.com/HavocFramework/Havoc",
-              "alt": ["sliver", "mythic", "villain"]
+              "alt": [
+                "sliver",
+                "mythic",
+                "villain"
+              ]
             },
             {
               "name": "Merlin",
               "rating": 4,
               "effort": "medium",
-              "desc": "Go-based post-exploitation server/agent pair communicating over HTTP/1.1, HTTP/2, h2c, and HTTP/3 (QUIC) — a practical model for non-TLS and modern protocol beaconing.",
+              "desc": "Go-based post-exploitation server/agent pair communicating over HTTP/1.1, HTTP/2, h2c, and HTTP/3 (QUIC) \u2014 a practical model for non-TLS and modern protocol beaconing.",
               "when": "Lab tests of HTTP/2 and QUIC transport detection, since most defensive tuning focuses on plain HTTPS beacon patterns.",
               "install": "wget https://github.com/Ne0nd0g/merlin/releases/latest/download/merlinServer-Linux-x64.7z",
               "url": "https://github.com/Ne0nd0g/merlin",
-              "alt": ["sliver", "mythic"]
+              "alt": [
+                "sliver",
+                "mythic"
+              ]
             },
             {
               "name": "Covenant",
               "rating": 3,
               "effort": "medium",
-              "desc": "Collaborative .NET C2 with a browser UI whose Grunt implants are dynamically compiled C# — the canonical worked example of .NET post-exploitation patterns (in-memory loading, AMSI/ETW patching, SMB P2P). Effectively unmaintained since ~2021 (last push 2024); now a lab/museum reference and signature-rich detection target.",
+              "desc": "Collaborative .NET C2 with a browser UI whose Grunt implants are dynamically compiled C# \u2014 the canonical worked example of .NET post-exploitation patterns (in-memory loading, AMSI/ETW patching, SMB P2P). Effectively unmaintained since ~2021 (last push 2024); now a lab/museum reference and signature-rich detection target.",
               "when": "Studying .NET post-exploitation design and beating on well-known signatures in the lab; treat it as a legacy framework, not for live operations.",
               "install": "git clone https://github.com/cobbr/Covenant && cd Covenant/Covenant && dotnet build -c Release",
               "url": "https://github.com/cobbr/Covenant",
-              "alt": ["mythic", "sliver"]
+              "alt": [
+                "mythic",
+                "sliver"
+              ]
             },
             {
               "name": "Villain",
@@ -83,17 +120,23 @@
               "when": "Quick-sided Kali lab work that needs concurrent shell handling and payload-template experimentation without standing up a full framework.",
               "install": "sudo apt install villain",
               "url": "https://github.com/t3l3machus/Villain",
-              "alt": ["sliver", "havoc"]
+              "alt": [
+                "sliver",
+                "havoc"
+              ]
             },
             {
               "name": "PoshC2",
               "rating": 4,
               "effort": "medium",
-              "desc": "Python-based C2 with PowerShell and C# tasking, impacket-driven implant generation, and in-memory staging — a lightweight, well-documented write-up of multi-listener C2 architecture.",
+              "desc": "Python-based C2 with PowerShell and C# tasking, impacket-driven implant generation, and in-memory staging \u2014 a lightweight, well-documented write-up of multi-listener C2 architecture.",
               "when": "A small, quick-to-stand-up C2 for teaching listener/server concepts or comparing stager patterns against a mainstream framework.",
               "install": "git clone --recurse-submodules https://github.com/nettitude/PoshC2.git",
               "url": "https://github.com/nettitude/PoshC2",
-              "alt": ["sliver", "empire"]
+              "alt": [
+                "sliver",
+                "empire"
+              ]
             },
             {
               "name": "Metasploit Framework",
@@ -103,7 +146,10 @@
               "when": "A lab C2/orchestrator when you want built-in listeners plus post-exploitation modules in one place; the baseline everyone's detection stack is tuned to.",
               "install": "curl https://raw.githubusercontent.com/rapid7/metasploit-framework/master/msfupdate | sudo bash",
               "url": "https://github.com/rapid7/metasploit-framework",
-              "alt": ["msfvenom", "sliver"]
+              "alt": [
+                "msfvenom",
+                "sliver"
+              ]
             }
           ]
         },
@@ -117,11 +163,14 @@
               "class": "commercial",
               "rating": 5,
               "effort": "medium",
-              "desc": "Commercial threat-emulation platform (Fortra) and the de-facto reference C2; Malleable C2 profiles reshape HTTP(S)/DNS beacon traffic into the traffic shapes blue teams tune their detections around. Vetted licensing only: new licenses roughly $3.5k–$10k/user/yr, with cracked builds aggressively taken down.",
+              "desc": "Commercial threat-emulation platform (Fortra) and the de-facto reference C2; Malleable C2 profiles reshape HTTP(S)/DNS beacon traffic into the traffic shapes blue teams tune their detections around. Vetted licensing only: new licenses roughly $3.5k\u2013$10k/user/yr, with cracked builds aggressively taken down.",
               "when": "When you are an authorized red team that can buy it, or to study the beacon patterns that dominate C2 detection research.",
               "install": "licensed download from cobaltstrike.com (vendor-vetted)",
               "url": "https://www.cobaltstrike.com",
-              "alt": ["sliver", "havoc"]
+              "alt": [
+                "sliver",
+                "havoc"
+              ]
             }
           ]
         },
@@ -138,7 +187,28 @@
               "when": "Pair with Empire when a GUI makes listener/agent management and lab demos easier to follow.",
               "install": "npm install -g starkiller",
               "url": "https://github.com/BC-SECURITY/Starkiller",
-              "alt": ["empire"]
+              "alt": [
+                "empire"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "post-exploitation-dwell-lab",
+          "name": "Post-Exploitation & Dwell (Lab)",
+          "tools": [
+            {
+              "name": "postpwn",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Post-exploitation & persistence toolkit (lab) \u2014 privilege-escalation audit, implants, tunneling, dwell-time detection.",
+              "when": "Practice post-exploitation and persistence-demo scenarios in an isolated range.",
+              "install": "git clone https://github.com/5h4d0wn1k/postpwn",
+              "url": "https://github.com/5h4d0wn1k/postpwn",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
             }
           ]
         }
@@ -167,7 +237,10 @@
                   "when": "Generate a fresh, randomized C2 profile per lab campaign so beacon traffic doesn't match known profile hashes.",
                   "install": "git clone https://github.com/RedSiege/C2concealer.git",
                   "url": "https://github.com/RedSiege/C2concealer",
-                  "alt": ["malleable-c2-randomizer", "pymalleablec2"]
+                  "alt": [
+                    "malleable-c2-randomizer",
+                    "pymalleablec2"
+                  ]
                 },
                 {
                   "name": "Malleable-C2-Randomizer",
@@ -177,7 +250,10 @@
                   "when": "Lab experiments in yanking profile parts around and measuring how detection shifts between variants.",
                   "install": "git clone https://github.com/bluscreenofjeff/Malleable-C2-Randomizer.git",
                   "url": "https://github.com/bluscreenofjeff/Malleable-C2-Randomizer",
-                  "alt": ["c2concealer", "pymalleablec2"]
+                  "alt": [
+                    "c2concealer",
+                    "pymalleablec2"
+                  ]
                 },
                 {
                   "name": "pyMalleableC2",
@@ -187,7 +263,9 @@
                   "when": "Deterministic profile transformation in scripts rather than hand-editing .profile files.",
                   "install": "pip3 install pymalleablec2",
                   "url": "https://github.com/byt3bl33d3r/pyMalleableC2",
-                  "alt": ["c2concealer"]
+                  "alt": [
+                    "c2concealer"
+                  ]
                 }
               ]
             },
@@ -204,7 +282,10 @@
                   "when": "Start from maintained, syntax-correct profiles when learning the Malleable C2 language and its transforms.",
                   "install": "git clone https://github.com/rsmudge/malleable-c2-profiles.git",
                   "url": "https://github.com/rsmudge/malleable-c2-profiles",
-                  "alt": ["threatexpress-malleable-c2", "bc-security-malleable"]
+                  "alt": [
+                    "threatexpress-malleable-c2",
+                    "bc-security-malleable"
+                  ]
                 },
                 {
                   "name": "threatexpress malleable-c2",
@@ -214,17 +295,23 @@
                   "when": "Pick measurement-ready profiles with documented jitter/sleep tunables for detection lab comparisons.",
                   "install": "git clone https://github.com/threatexpress/malleable-c2.git",
                   "url": "https://github.com/threatexpress/malleable-c2",
-                  "alt": ["bc-security-malleable", "rsmudge"]
+                  "alt": [
+                    "bc-security-malleable",
+                    "rsmudge"
+                  ]
                 },
                 {
                   "name": "BC-SECURITY Malleable-C2-Profiles",
                   "rating": 4,
                   "effort": "easy",
-                  "desc": "Andy Hsu's curated profile set with editor/validator support and packaging guidance — a maintained alternative to the older collections.",
+                  "desc": "Andy Hsu's curated profile set with editor/validator support and packaging guidance \u2014 a maintained alternative to the older collections.",
                   "when": "Structured, commented profiles for education and easy diffing against base beacon defaults.",
                   "install": "git clone https://github.com/BC-SECURITY/Malleable-C2-Profiles.git",
                   "url": "https://github.com/BC-SECURITY/Malleable-C2-Profiles",
-                  "alt": ["rsmudge", "threatexpress-malleable-c2"]
+                  "alt": [
+                    "rsmudge",
+                    "threatexpress-malleable-c2"
+                  ]
                 }
               ]
             }
@@ -267,7 +354,10 @@
               "when": "Authorized tests needing a payload in exactly the format your C2 staging (or a loader like Donut/ScareCrow) expects.",
               "install": "apt install metasploit-framework  # then: msfvenom --list payloads",
               "url": "https://github.com/rapid7/metasploit-framework",
-              "alt": ["donut", "scarecrow"]
+              "alt": [
+                "donut",
+                "scarecrow"
+              ]
             },
             {
               "name": "Donut",
@@ -277,17 +367,21 @@
               "when": "Producing an in-memory delivery stage for a lab agent and observing how loaders that patch AMSI/ETW look from a defender's perspective.",
               "install": "pip3 install donut-shellcode",
               "url": "https://github.com/TheWover/donut",
-              "alt": ["crossc2"]
+              "alt": [
+                "crossc2"
+              ]
             },
             {
               "name": "ScareCrow",
               "rating": 4,
               "effort": "medium",
               "desc": "Tylous's loader builder that wraps position-independent shellcode in benign-trusted formats (MSI, XLL, DLL sideload/renamed, HTA) using signed JScript/JS patterns for lab delivery testing.",
-              "when": "Lab research on how standard loaders hold up against modern EDR signatures — generate a loader and see what telemetry it leaves behind.",
+              "when": "Lab research on how standard loaders hold up against modern EDR signatures \u2014 generate a loader and see what telemetry it leaves behind.",
               "install": "git clone https://github.com/Tylous/ScareCrow.git",
               "url": "https://github.com/Tylous/ScareCrow",
-              "alt": ["donut"]
+              "alt": [
+                "donut"
+              ]
             }
           ]
         },
@@ -304,17 +398,22 @@
               "when": "Extending a Cobalt Strike lab to authorized non-Windows assets where stock Beacon cannot run, or studying cross-platform beacon metadata.",
               "install": "Download genCrossC2 + CrossC2.cna from the GitHub release",
               "url": "https://github.com/gloxec/CrossC2",
-              "alt": ["donut"]
+              "alt": [
+                "donut"
+              ]
             },
             {
               "name": "SILENTTRINITY",
               "rating": 4,
               "effort": "advanced",
-              "desc": "byt3bl33d3r's cross-platform post-exploitation C2 shell with a Python audit kit whose agents stage C# assemblies entirely in memory over HTTP — a reference for IronPython/C# and memory-only agent design.",
+              "desc": "byt3bl33d3r's cross-platform post-exploitation C2 shell with a Python audit kit whose agents stage C# assemblies entirely in memory over HTTP \u2014 a reference for IronPython/C# and memory-only agent design.",
               "when": "Studying memory-only C# stager architecture and the older 'Tasking the CLR' implant generation model in a lab.",
               "install": "git clone https://github.com/byt3bl33d3r/SILENTTRINITY.git",
               "url": "https://github.com/byt3bl33d3r/SILENTTRINITY",
-              "alt": ["crossc2", "donut"]
+              "alt": [
+                "crossc2",
+                "donut"
+              ]
             }
           ]
         },
@@ -331,7 +430,9 @@
               "when": "Run a library of lab BOFs (situational awareness, etc.) standalone, or turn BOFs into binaries that other tooling can invoke.",
               "install": "git clone https://github.com/trustedsec/COFFLoader.git",
               "url": "https://github.com/trustedsec/COFFLoader",
-              "alt": ["cs-situational-awareness-bof"]
+              "alt": [
+                "cs-situational-awareness-bof"
+              ]
             },
             {
               "name": "CS-Situational-Awareness-BOF",
@@ -341,7 +442,9 @@
               "when": "Lab practice: run battle-tested BOFs via COFFLoader or your C2 and study what beacon/BOF behavior defenders watch for.",
               "install": "git clone --recursive https://github.com/trustedsec/CS-Situational-Awareness-BOF.git",
               "url": "https://github.com/trustedsec/CS-Situational-Awareness-BOF",
-              "alt": ["coffloader"]
+              "alt": [
+                "coffloader"
+              ]
             }
           ]
         }
@@ -362,20 +465,24 @@
               "rating": 5,
               "effort": "medium",
               "desc": "Tunneling/pivoting tool that exposes a TUN interface and routes TCP/UDP through an agent over reverse TCP/TLS, reaching remote lab subnets without SOCKS/proxychains, with a web UI and autoroute since v0.8.",
-              "when": "Reaching the rest of an authorized test network from a C2 foothold — pivot activity blue teams should recognize and alert on.",
+              "when": "Reaching the rest of an authorized test network from a C2 foothold \u2014 pivot activity blue teams should recognize and alert on.",
               "install": "Download proxy & agent binaries from GitHub releases",
               "url": "https://github.com/nicocha30/ligolo-ng",
-              "alt": ["chisel"]
+              "alt": [
+                "chisel"
+              ]
             },
             {
               "name": "Chisel",
               "rating": 4,
               "effort": "easy",
-              "desc": "Single-binary fast TCP/UDP tunnel carried over HTTP(S)/WebSocket (SSH-secured) with reverse port-forwarding and SOCKS — communication that reads as ordinary WebSocket/web traffic to defenders.",
+              "desc": "Single-binary fast TCP/UDP tunnel carried over HTTP(S)/WebSocket (SSH-secured) with reverse port-forwarding and SOCKS \u2014 communication that reads as ordinary WebSocket/web traffic to defenders.",
               "when": "Bridging egress-filtered lab segments to your C2, or tunnelling any service where the traffic should blend with normal HTTPS.",
               "install": "go install github.com/jpillora/chisel@latest",
               "url": "https://github.com/jpillora/chisel",
-              "alt": ["ligolo-ng"]
+              "alt": [
+                "ligolo-ng"
+              ]
             }
           ]
         },
@@ -392,7 +499,9 @@
               "when": "Before fronting a C2 listener: know whether there's already a CDN/WAF in front of a host and whether the origin leaks elsewhere.",
               "install": "go install -v github.com/projectdiscovery/cdncheck/cmd/cdncheck@latest",
               "url": "https://github.com/projectdiscovery/cdncheck",
-              "alt": ["cloudflared"]
+              "alt": [
+                "cloudflared"
+              ]
             },
             {
               "name": "cloudflared",
@@ -402,7 +511,9 @@
               "when": "Putting a lab C2 behind a legitimate edge service and validating that middlebox-only checks still detect your channel.",
               "install": "wget https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64",
               "url": "https://github.com/cloudflare/cloudflared",
-              "alt": ["cdncheck"]
+              "alt": [
+                "cdncheck"
+              ]
             }
           ]
         },
@@ -415,11 +526,14 @@
               "best": true,
               "rating": 4,
               "effort": "medium",
-              "desc": "GO Simple Tunnel: multi-hop proxy chains (SOCKS5/HTTP/SSH/relay) with port forwarding, load balancing, and protocol obfuscation — a scriptable chaining engine for C2 redirector piping.",
+              "desc": "GO Simple Tunnel: multi-hop proxy chains (SOCKS5/HTTP/SSH/relay) with port forwarding, load balancing, and protocol obfuscation \u2014 a scriptable chaining engine for C2 redirector piping.",
               "when": "Chain multiple redirectors/proxies on an authorized lab path and get per-hop logs while tuning traffic shapes.",
               "install": "bash <(curl -fsSL https://raw.githubusercontent.com/go-gost/gost/main/install.sh)",
               "url": "https://github.com/go-gost/gost",
-              "alt": ["stowaway", "chisel"]
+              "alt": [
+                "stowaway",
+                "chisel"
+              ]
             },
             {
               "name": "Stowaway",
@@ -429,7 +543,9 @@
               "when": "Multi-hop proxy meshes in lab engagements where you want per-node encryption layers instead of plain port-forwarding.",
               "install": "git clone https://github.com/ph4ntonn/Stowaway.git",
               "url": "https://github.com/ph4ntonn/Stowaway",
-              "alt": ["gost"]
+              "alt": [
+                "gost"
+              ]
             }
           ]
         }
@@ -453,17 +569,21 @@
               "when": "Pick a C2 or compare implementation kits: one table to evaluate listeners, transports, and reporting before you install anything.",
               "install": "preinstalled (web)",
               "url": "https://www.thec2matrix.com",
-              "alt": ["mitre-attack"]
+              "alt": [
+                "mitre-attack"
+              ]
             },
             {
               "name": "MITRE ATT&CK",
               "rating": 5,
               "effort": "easy",
-              "desc": "The authoritative knowledge base of adversary tactics and techniques — read the C2-relevant techniques (T1071 Application Layer Protocol, T1573 Encrypted Channel) and the data sources defenders link back to them.",
+              "desc": "The authoritative knowledge base of adversary tactics and techniques \u2014 read the C2-relevant techniques (T1071 Application Layer Protocol, T1573 Encrypted Channel) and the data sources defenders link back to them.",
               "when": "Map which techniques your framework exercises and check the data sources you'll need to capture while testing.",
               "install": "preinstalled (web)",
               "url": "https://attack.mitre.org",
-              "alt": ["c2-matrix"]
+              "alt": [
+                "c2-matrix"
+              ]
             }
           ]
         },
@@ -480,7 +600,9 @@
               "when": "Stand up an instrumented AD lab to show blue teams exactly what your C2 traffic emits across endpoints and network.",
               "install": "git clone https://github.com/clong/DetectionLab.git",
               "url": "https://github.com/clong/DetectionLab",
-              "alt": ["c2-matrix"]
+              "alt": [
+                "c2-matrix"
+              ]
             }
           ]
         }

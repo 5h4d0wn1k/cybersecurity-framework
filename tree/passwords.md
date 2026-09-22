@@ -466,6 +466,21 @@ Free online hash cracker (MD5, SHA1, NTLM, and 220+ other algorithms) that match
 
 
 
+#### sprayshed ◆ by 5h4d0wn1k
+
+Lockout-aware password-spray / brute-force orchestrator against localhost lab services; dry-run by default so nothing is touched without confirmation.
+
+**When:** Staged, lockout-safe credential testing against services you own (lab only).
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/sprayshed`
+
+**URL:** https://github.com/5h4d0wn1k/sprayshed
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 #### Kerberos & domain endpoints
 
 

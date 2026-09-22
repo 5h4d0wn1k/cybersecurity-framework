@@ -1,7 +1,7 @@
 {
   "id": "redteam",
   "name": "Red Team Infrastructure & Operations",
-  "emoji": "🎯",
+  "emoji": "\ud83c\udfaf",
   "tagline": "Authorized red team tooling: offensive toolkits, operations & reporting, emulation replays, objectives, pivoting, and practice labs.",
   "class": "offense",
   "categories": [
@@ -20,10 +20,13 @@
               "rating": 5,
               "effort": "medium",
               "desc": "Fortra's Python suite for network protocols: SMB/RPC/DCOM/WinRM/Kerberos plus the canonical example scripts (secretsdump, psexec, wmiexec, ntlmrelayx, GetADUsers) for credential harvesting and lateral movement.",
-              "when": "The workhorse of Windows-lab lateral movement and credential extraction during authorized tests — and the tooling blue teams build artifacts for.",
+              "when": "The workhorse of Windows-lab lateral movement and credential extraction during authorized tests \u2014 and the tooling blue teams build artifacts for.",
               "install": "pipx install impacket",
               "url": "https://github.com/fortra/impacket",
-              "alt": ["netexec", "responder"]
+              "alt": [
+                "netexec",
+                "responder"
+              ]
             },
             {
               "name": "NetExec",
@@ -33,7 +36,9 @@
               "when": "Fast credential-spraying and share/deployment outreach across a Windows estate in an authorized engagement or AD lab.",
               "install": "pipx install netexec",
               "url": "https://github.com/Pennyw0rth/NetExec",
-              "alt": ["impacket"]
+              "alt": [
+                "impacket"
+              ]
             },
             {
               "name": "Responder",
@@ -43,7 +48,10 @@
               "when": "In a lab or scoped internal test with an explicit rule of engagement, to demonstrate why legacy name-resolution protocols must be disabled.",
               "install": "git clone https://github.com/lgandx/Responder.git",
               "url": "https://github.com/lgandx/Responder",
-              "alt": ["impacket", "netexec"]
+              "alt": [
+                "impacket",
+                "netexec"
+              ]
             }
           ]
         },
@@ -60,17 +68,23 @@
               "when": "Studying classic PowerShell post-exploitation module patterns and testing AMSI/logging detections against well-known tool output.",
               "install": "git clone https://github.com/PowerShellMafia/PowerSploit.git",
               "url": "https://github.com/PowerShellMafia/PowerSploit",
-              "alt": ["sharpsploit", "nishang"]
+              "alt": [
+                "sharpsploit",
+                "nishang"
+              ]
             },
             {
               "name": "SharpSploit",
               "rating": 4,
               "effort": "advanced",
-              "desc": "cobbr's C# post-exploitation library — the compiled mirror of PowerSploit-style tradecraft (execution, persistence, lateral movement, credentialing) for .NET agents.",
+              "desc": "cobbr's C# post-exploitation library \u2014 the compiled mirror of PowerSploit-style tradecraft (execution, persistence, lateral movement, credentialing) for .NET agents.",
               "when": "Reference for .NET-based post-exploitation modules and for training why compiled tooling changes the detection story.",
               "install": "git clone https://github.com/cobbr/SharpSploit.git",
               "url": "https://github.com/cobbr/SharpSploit",
-              "alt": ["powersploit", "nishang"]
+              "alt": [
+                "powersploit",
+                "nishang"
+              ]
             },
             {
               "name": "Nishang",
@@ -80,7 +94,9 @@
               "when": "Quick PowerShell payload/auxiliary scripts in a Windows lab without dragging in a full framework.",
               "install": "git clone https://github.com/samratashok/nishang.git",
               "url": "https://github.com/samratashok/nishang",
-              "alt": ["powersploit"]
+              "alt": [
+                "powersploit"
+              ]
             }
           ]
         },
@@ -102,7 +118,10 @@
                   "when": "Keep a lab exploitation pipeline current: pull fresh, citation-tracked PoCs to evaluate and adapt in authorized testing.",
                   "install": "preinstalled (web/git)",
                   "url": "https://github.com/nomi-sec/PoC-in-GitHub",
-                  "alt": ["ired-team", "hacktricks"]
+                  "alt": [
+                    "ired-team",
+                    "hacktricks"
+                  ]
                 }
               ]
             },
@@ -115,23 +134,61 @@
                   "best": true,
                   "rating": 4,
                   "effort": "easy",
-                  "desc": "The 'red team notes & experiments' GitBook by @spotheplanet — a structured walkthrough of offensive techniques (code execution, injection, persistence, lateral movement) with tool usage and detection notes, documented for education.",
+                  "desc": "The 'red team notes & experiments' GitBook by @spotheplanet \u2014 a structured walkthrough of offensive techniques (code execution, injection, persistence, lateral movement) with tool usage and detection notes, documented for education.",
                   "when": "Read-and-try technique references while building your own lab; the notes pair each experiment with what to look for from a defender's seat.",
                   "install": "preinstalled (web)",
                   "url": "https://ired.team",
-                  "alt": ["hacktricks", "poc-in-github"]
+                  "alt": [
+                    "hacktricks",
+                    "poc-in-github"
+                  ]
                 },
                 {
                   "name": "HackTricks",
                   "rating": 5,
                   "effort": "easy",
-                  "desc": "The community wiki of pentesting techniques across web, Windows, Linux, AD, and cloud with tooling recipes and methodology — now maintained as the HackTricks-wiki GitBook project, runnable locally via Docker.",
+                  "desc": "The community wiki of pentesting techniques across web, Windows, Linux, AD, and cloud with tooling recipes and methodology \u2014 now maintained as the HackTricks-wiki GitBook project, runnable locally via Docker.",
                   "when": "Look up a technique or methodology in seconds; the most current single reference for esoteric protocol abuse and tool recipes.",
                   "install": "preinstalled (web)  # or: docker run -p 3337:3000 ghcr.io/hacktricks-wiki/hacktricks-cloud/translator-image",
                   "url": "https://github.com/HackTricks-wiki/hacktricks",
-                  "alt": ["ired-team", "poc-in-github"]
+                  "alt": [
+                    "ired-team",
+                    "poc-in-github"
+                  ]
                 }
               ]
+            }
+          ]
+        },
+        {
+          "id": "ai-llm-offense",
+          "name": "AI & LLM Offense",
+          "tools": [
+            {
+              "name": "mythicforge",
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Adversarial LLM prompt-injection & jailbreak testing framework \u2014 37 techniques benchmarked against OWASP/NIST/MITRE ATLAS, cost-aware, SARIF reports.",
+              "when": "Testing your own LLM apps/pipelines for prompt-injection and jailbreak exposure.",
+              "install": "git clone https://github.com/5h4d0wn1k/mythicforge",
+              "url": "https://github.com/5h4d0wn1k/mythicforge",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            },
+            {
+              "name": "aiarsenal",
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "Adversarial AI/ML security studio \u2014 data poisoning, model backdoors, extraction, evasion, prompt injection and agentic red-team; offline-first.",
+              "when": "Offensive exercises against AI systems you operate.",
+              "install": "git clone https://github.com/5h4d0wn1k/aiarsenal",
+              "url": "https://github.com/5h4d0wn1k/aiarsenal",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
             }
           ]
         }
@@ -146,21 +203,26 @@
           "best": true,
           "rating": 4,
           "effort": "medium",
-          "desc": "CISA + PNNL's visual analytic for red-team operations: parses Cobalt Strike and other C2 logs, renders the multi-host attack graph, and supports 'campaign' export for blue-team handoff. Archived to maintenance mode — still the reference for C2 log visualization.",
+          "desc": "CISA + PNNL's visual analytic for red-team operations: parses Cobalt Strike and other C2 logs, renders the multi-host attack graph, and supports 'campaign' export for blue-team handoff. Archived to maintenance mode \u2014 still the reference for C2 log visualization.",
           "when": "Turn raw C2 logs into a shareable, annotated attack-path visualization to debrief stakeholders after an assessment.",
           "install": "Download the RedEye binary from https://github.com/cisagov/RedEye/releases",
           "url": "https://github.com/cisagov/RedEye",
-          "alt": ["ghostwriter"]
+          "alt": [
+            "ghostwriter"
+          ]
         },
         {
           "name": "Ghostwriter",
           "rating": 4,
           "effort": "medium",
           "desc": "SpecterOps' open-source web application for red-team operations: client tracking, report writing, engagement documents (report templates, infographics), and evidence storage in one place.",
-          "when": "Run the operational/admin side of a red-team engagement — consistent client documentation, task tracking, and report generation.",
+          "when": "Run the operational/admin side of a red-team engagement \u2014 consistent client documentation, task tracking, and report generation.",
           "install": "git clone https://github.com/GhostManager/Ghostwriter.git && cd Ghostwriter && docker compose up",
           "url": "https://github.com/GhostManager/Ghostwriter",
-          "alt": ["redeye", "pwndoc"]
+          "alt": [
+            "redeye",
+            "pwndoc"
+          ]
         },
         {
           "name": "PwnDoc",
@@ -170,7 +232,10 @@
           "when": "Structure and export aggregated findings and evidence into a client-ready report during or right after an engagement.",
           "install": "docker pull pwndoc/pwndoc",
           "url": "https://github.com/pwndoc/pwndoc",
-          "alt": ["ghostwriter", "writehat"]
+          "alt": [
+            "ghostwriter",
+            "writehat"
+          ]
         },
         {
           "name": "WriteHat",
@@ -180,7 +245,10 @@
           "when": "Generate clean PDF deliverables from structured findings without hand-assembling Word templates.",
           "install": "git clone https://github.com/blacklanternsecurity/writehat.git",
           "url": "https://github.com/blacklanternsecurity/writehat",
-          "alt": ["pwndoc", "ghostwriter"]
+          "alt": [
+            "pwndoc",
+            "ghostwriter"
+          ]
         }
       ]
     },
@@ -197,17 +265,23 @@
           "when": "Replay the same emulated operation repeatedly after detection changes and measure which signals fire each run.",
           "install": "git clone --recursive https://github.com/apache/caldera.git",
           "url": "https://github.com/apache/caldera",
-          "alt": ["attack-flow", "vectr"]
+          "alt": [
+            "attack-flow",
+            "vectr"
+          ]
         },
         {
           "name": "MITRE Attack Flow",
           "rating": 4,
           "effort": "medium",
           "desc": "Center for Threat-Informed Defense's STIX-based model and toolchain for linking individual ATT&CK techniques into the flow of a full campaign.",
-          "when": "Document an entire emulated campaign — not isolated techniques — so reporting shows the attack path from initial access to objective.",
+          "when": "Document an entire emulated campaign \u2014 not isolated techniques \u2014 so reporting shows the attack path from initial access to objective.",
           "install": "git clone https://github.com/center-for-threat-informed-defense/attack-flow.git",
           "url": "https://github.com/center-for-threat-informed-defense/attack-flow",
-          "alt": ["mitre-caldera", "vectr"]
+          "alt": [
+            "mitre-caldera",
+            "vectr"
+          ]
         }
       ]
     },
@@ -224,27 +298,34 @@
           "when": "Capture objectives and results for each engagement and trend coverage improvements across your program.",
           "install": "git clone https://github.com/SecurityRiskAdvisors/VECTR.git",
           "url": "https://github.com/SecurityRiskAdvisors/VECTR",
-          "alt": ["attack-navigator"]
+          "alt": [
+            "attack-navigator"
+          ]
         },
         {
           "name": "MITRE ATT&CK Navigator",
           "rating": 5,
           "effort": "easy",
-          "desc": "Web UI for annotating and exploring ATT&CK matrices with shareable layer files — the standard way to plan and communicate engagement objectives.",
+          "desc": "Web UI for annotating and exploring ATT&CK matrices with shareable layer files \u2014 the standard way to plan and communicate engagement objectives.",
           "when": "Scope an engagement by marking intended technique coverage, then save the layer for the reporting phase.",
           "install": "preinstalled (web)",
           "url": "https://github.com/mitre-attack/attack-navigator",
-          "alt": ["vectr", "mitre-attack"]
+          "alt": [
+            "vectr",
+            "mitre-attack"
+          ]
         },
         {
           "name": "MITRE ATT&CK",
           "rating": 5,
           "effort": "easy",
-          "desc": "The authoritative knowledge base of adversary tactics, techniques, and data sources — the shared vocabulary for defining engagement objectives.",
+          "desc": "The authoritative knowledge base of adversary tactics, techniques, and data sources \u2014 the shared vocabulary for defining engagement objectives.",
           "when": "Resolve technique IDs and constraints before planning, and align each engagement's objectives to the matrix.",
           "install": "preinstalled (web)",
           "url": "https://attack.mitre.org",
-          "alt": ["attack-navigator"]
+          "alt": [
+            "attack-navigator"
+          ]
         }
       ]
     },
@@ -266,7 +347,10 @@
               "when": "An isolated, purpose-built AD domain range for rehearsing the attack paths your toolkits will run in authorized tests.",
               "install": "git clone https://github.com/Orange-Cyberdefense/GOAD.git",
               "url": "https://github.com/Orange-Cyberdefense/GOAD",
-              "alt": ["badblood", "metasploitable3"]
+              "alt": [
+                "badblood",
+                "metasploitable3"
+              ]
             },
             {
               "name": "BadBlood",
@@ -276,7 +360,9 @@
               "when": "Before practicing enumeration and credential techniques, populate an otherwise empty DC to get realistic object counts and permissions.",
               "install": "git clone https://github.com/davidprowe/BadBlood.git",
               "url": "https://github.com/davidprowe/BadBlood",
-              "alt": ["goad"]
+              "alt": [
+                "goad"
+              ]
             }
           ]
         },
@@ -289,11 +375,14 @@
               "best": true,
               "rating": 4,
               "effort": "medium",
-              "desc": "Rapid7's intentionally vulnerable Windows VM (Vagrant/Packer) packed with unpatched services, weak creds, and web/SMB flaws — a standard target for rehearsing toolkits and C2 staging.",
+              "desc": "Rapid7's intentionally vulnerable Windows VM (Vagrant/Packer) packed with unpatched services, weak creds, and web/SMB flaws \u2014 a standard target for rehearsing toolkits and C2 staging.",
               "when": "A reproducible target for lateral-movement and exploitation run-throughs in an isolated VirtualBox/VMware range.",
               "install": "git clone https://github.com/rapid7/metasploitable3.git",
               "url": "https://github.com/rapid7/metasploitable3",
-              "alt": ["vulnhub", "goad"]
+              "alt": [
+                "vulnhub",
+                "goad"
+              ]
             },
             {
               "name": "VulnHub",
@@ -303,7 +392,9 @@
               "when": "Practice methodology and tooling against curated vulnerable VMs before applying them to authorized targets.",
               "install": "preinstalled (web)",
               "url": "https://www.vulnhub.com",
-              "alt": ["metasploitable3"]
+              "alt": [
+                "metasploitable3"
+              ]
             }
           ]
         }
@@ -322,7 +413,10 @@
           "when": "Need simple, reliable lateral routing to access internal networks from a single jump host during authorized engagements or labs.",
           "install": "pip install sshuttle",
           "url": "https://github.com/sshuttle/sshuttle",
-          "alt": ["frp", "chisel"]
+          "alt": [
+            "frp",
+            "chisel"
+          ]
         },
         {
           "name": "frp",
@@ -332,7 +426,9 @@
           "when": "Need controlled reverse proxying for lab infrastructure or authorized test setups behind NAT.",
           "install": "go install github.com/fatedier/frp@latest",
           "url": "https://github.com/fatedier/frp",
-          "alt": ["sshuttle"]
+          "alt": [
+            "sshuttle"
+          ]
         },
         {
           "name": "proxychains-ng",
@@ -342,7 +438,9 @@
           "when": "Need to route existing tooling through a proxy chain during authorized red team exercises or lab scenarios.",
           "install": "git clone https://github.com/rofl0r/proxychains-ng && cd proxychains-ng && ./configure --prefix=/usr && make && sudo make install",
           "url": "https://github.com/rofl0r/proxychains-ng",
-          "alt": ["sshuttle"]
+          "alt": [
+            "sshuttle"
+          ]
         }
       ]
     }

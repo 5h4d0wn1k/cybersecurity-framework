@@ -1,7 +1,7 @@
 {
   "id": "crypto",
   "name": "Cryptography Toolkit & Cryptoanalysis",
-  "emoji": "🧮",
+  "emoji": "\ud83e\uddee",
   "tagline": "Decode/encode data, identify encodings, and break weak ciphers and RSA on materials you own: CTF crypto, historical ciphers, and flawed implementations. Password recovery lives in 'passwords'.",
   "class": "offense",
   "categories": [
@@ -20,9 +20,12 @@
               "effort": "easy",
               "desc": "GCHQ's browser 'Cyber Swiss Army Knife': 480+ chainable operations for decoding/encoding (Base64, hex, URL, Rot13), hashing, XOR and compression, plus the Magic operation that auto-detects and unwraps multi-layer encodings. Entirely client-side, zero install.",
               "when": "First stop for any blob, hex dump or encoded string: click the Magic icon to auto-decode, then drag operations to peel off the layers you identify.",
-              "install": "preinstalled (web — https://gchq.github.io/CyberChef/)",
+              "install": "preinstalled (web \u2014 https://gchq.github.io/CyberChef/)",
               "url": "https://github.com/gchq/CyberChef",
-              "alt": ["CyberChef (self-hosted)", "dCode"]
+              "alt": [
+                "CyberChef (self-hosted)",
+                "dCode"
+              ]
             },
             {
               "name": "CyberChef (self-hosted)",
@@ -32,7 +35,9 @@
               "when": "Offline, air-gapped or VM work where the input must never leave your machine - identical recipes and Magic, no internet dependency after the image pull.",
               "install": "docker run -it -p 8080:8080 ghcr.io/gchq/cyberchef:latest",
               "url": "https://gchq.github.io/CyberChef/",
-              "alt": ["CyberChef"]
+              "alt": [
+                "CyberChef"
+              ]
             }
           ]
         },
@@ -49,17 +54,24 @@
               "when": "Any recovered hash before cracking: feed it the value, note the top algorithm plus its hashcat/John mode, then jump to the passwords domain.",
               "install": "pip install hashid && hashid '$P$8ohUJ.1sdFw09/bMaAQPTGDNi2BIUt1' -mj",
               "url": "https://github.com/psypanda/hashID",
-              "alt": ["file (libmagic)", "dCode", "RsaCtfTool"]
+              "alt": [
+                "file (libmagic)",
+                "dCode",
+                "RsaCtfTool"
+              ]
             },
             {
               "name": "file (libmagic)",
               "rating": 3,
               "effort": "easy",
               "desc": "The standard `file` command built on libmagic: identifies thousands of file types from magic bytes, from PEM/DER keys and PKCS#12 bundles to plaintext/uncompressed containers.",
-              "when": "Determine what a raw blob actually is before decoding — distinguish a DER key, a zlib stream, a base64 text, or a random-looking ciphertext file.",
+              "when": "Determine what a raw blob actually is before decoding \u2014 distinguish a DER key, a zlib stream, a base64 text, or a random-looking ciphertext file.",
               "install": "sudo apt install file && file suspect.bin",
               "url": "https://darwinsys.com/file/",
-              "alt": ["hashID", "CyberChef"]
+              "alt": [
+                "hashID",
+                "CyberChef"
+              ]
             }
           ]
         }
@@ -78,21 +90,28 @@
               "best": true,
               "rating": 4,
               "effort": "easy",
-              "desc": "Web reference hosting hundreds of small solvers for classical schemes (Caesar, Vigenère, Enigma, ADFGVX, Playfair...) plus a Cipher Identifier that scores which of 300+ ciphers a message fits via n-gram and index-of-coincidence analysis.",
+              "desc": "Web reference hosting hundreds of small solvers for classical schemes (Caesar, Vigen\u00e8re, Enigma, ADFGVX, Playfair...) plus a Cipher Identifier that scores which of 300+ ciphers a message fits via n-gram and index-of-coincidence analysis.",
               "when": "CTF or challenge text in a historical cipher: paste it into the Cipher Identifier for a ranked guess, then open the matching solver for the plaintext.",
               "install": "preinstalled (web)",
               "url": "https://www.dcode.fr",
-              "alt": ["CrypTool", "CyberChef", "xortool"]
+              "alt": [
+                "CrypTool",
+                "CyberChef",
+                "xortool"
+              ]
             },
             {
               "name": "CrypTool",
               "rating": 3,
               "effort": "medium",
-              "desc": "Legacy university/open-source cryptology suite (CrypTool 2.1 + JCrypTool) for experimenting with classical ciphers (Caesar, Vigenère, Enigma, ADFGVX) and their built-in automated cryptanalysis on paste-in text.",
+              "desc": "Legacy university/open-source cryptology suite (CrypTool 2.1 + JCrypTool) for experimenting with classical ciphers (Caesar, Vigen\u00e8re, Enigma, ADFGVX) and their built-in automated cryptanalysis on paste-in text.",
               "when": "Interactive analysis of historical substitution/transposition ciphers or learning the attack against a classical scheme on your own text, where a GUI beats hand-rolled scripts.",
               "install": "download CrypTool 2.1 installer from https://www.cryptool.org/en/ct2/download",
               "url": "https://www.cryptool.org",
-              "alt": ["dCode", "xortool"]
+              "alt": [
+                "dCode",
+                "xortool"
+              ]
             }
           ]
         },
@@ -109,17 +128,24 @@
               "when": "Ciphertext is XOR-encoded with an unknown repeating key - feed the raw bytes, let it rank key lengths, then solve for the right length and character.",
               "install": "pip3 install xortool",
               "url": "https://github.com/hellman/xortool",
-              "alt": ["cribdrag", "CyberChef", "dCode"]
+              "alt": [
+                "cribdrag",
+                "CyberChef",
+                "dCode"
+              ]
             },
             {
               "name": "cribdrag",
               "rating": 3,
               "effort": "easy",
               "desc": "Interactive crib-dragging script for stream-cipher keystream reuse: XOR two ciphertexts (or against a guessed crib) and step through candidate plaintext substrings interactively.",
-              "when": "Two ciphertexts share a one-time pad key, or a stream cipher reuses its keystream — drag a known plaintext word to recover the keystream and decrypt the rest by hand.",
+              "when": "Two ciphertexts share a one-time pad key, or a stream cipher reuses its keystream \u2014 drag a known plaintext word to recover the keystream and decrypt the rest by hand.",
               "install": "git clone https://github.com/SpiderLabs/cribdrag && python2 cribdrag.py encrypted.hex",
               "url": "https://github.com/SpiderLabs/cribdrag",
-              "alt": ["xortool", "CyberChef"]
+              "alt": [
+                "xortool",
+                "CyberChef"
+              ]
             }
           ]
         },
@@ -133,12 +159,30 @@
               "rating": 4,
               "effort": "medium",
               "desc": "Perl script automating padding-oracle attacks: decrypts arbitrary CBC ciphertext, encrypts arbitrary plaintext, and probes an endpoint to fingerprint the oracle that leaks padding validity.",
-              "when": "A web app returns distinguishable error codes on bad PKCS#7 padding and the app is yours to test — recover and forge CBC messages without the key.",
+              "when": "A web app returns distinguishable error codes on bad PKCS#7 padding and the app is yours to test \u2014 recover and forge CBC messages without the key.",
               "install": "git clone https://github.com/GDSSecurity/PadBuster && cd PadBuster && perl padBuster.pl https://app.example/decrypt -encoding 0",
               "url": "https://github.com/GDSSecurity/PadBuster",
-              "alt": ["CyberChef", "xortool"]
+              "alt": [
+                "CyberChef",
+                "xortool"
+              ]
             }
           ]
+        }
+      ],
+      "tools": [
+        {
+          "name": "cryptocrack",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Crypto attacks + credential cracking \u2014 hash identify/crack with rules, RSA/AES/DH attacks, cipher auto-decode, XTS-CPA.",
+          "when": "Cracking/solving crypto-lab challenges and authorized recovery.",
+          "install": "git clone https://github.com/5h4d0wn1k/cryptocrack",
+          "url": "https://github.com/5h4d0wn1k/cryptocrack",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
         }
       ]
     },
@@ -156,10 +200,13 @@
               "rating": 4,
               "effort": "medium",
               "desc": "Ron Bowes' C tool for the hash length-extension attack on MD4/MD5/RIPEMD-160/SHA-0/SHA-1/SHA-256/SHA-512/Whirlpool: given a secret-prefix hash, forges a valid hash for appended data without knowing the secret, iterating guessed secret lengths.",
-              "when": "A service signs 'secret || message' with a Merkle-Damgård hash (CTF or your own app) and you can control appended data - produce the new payload+signature pair the server accepts.",
+              "when": "A service signs 'secret || message' with a Merkle-Damg\u00e5rd hash (CTF or your own app) and you can control appended data - produce the new payload+signature pair the server accepts.",
               "install": "git clone https://github.com/iagox86/hash_extender && make",
               "url": "https://github.com/iagox86/hash_extender",
-              "alt": ["Hashcat", "RsaCtfTool"]
+              "alt": [
+                "Hashcat",
+                "RsaCtfTool"
+              ]
             }
           ]
         },
@@ -176,7 +223,10 @@
               "when": "A recovered hash or extracted TGS ticket needs cracking; pair the hashcat mode from hashID with a rule/mask attack after confirming the target algorithm.",
               "install": "sudo apt install hashcat && hashcat -m 1000 ntlm.hash rockyou.txt",
               "url": "https://hashcat.net/hashcat/",
-              "alt": ["John the Ripper", "hashID"]
+              "alt": [
+                "John the Ripper",
+                "hashID"
+              ]
             },
             {
               "name": "John the Ripper",
@@ -186,7 +236,9 @@
               "when": "Cracking on CPU with the jumbo format set, or when a target format (gpg, ssh, rakefile) is only handled by John rather than Hashcat.",
               "install": "sudo apt install john && john --wordlist=rockyou.txt hashes.txt",
               "url": "https://www.openwall.com/john/",
-              "alt": ["Hashcat"]
+              "alt": [
+                "Hashcat"
+              ]
             }
           ]
         }
@@ -209,7 +261,11 @@
               "when": "Given a weak RSA public key and ciphertext (CTF, lab, keys you own) without knowing the weakness - run the default attack set, then target the specific winning attack.",
               "install": "git clone https://github.com/RsaCtfTool/RsaCtfTool && cd RsaCtfTool && pip3 install -r requirements.txt",
               "url": "https://github.com/RsaCtfTool/RsaCtfTool",
-              "alt": ["factorDB", "rsatool", "SageMath"]
+              "alt": [
+                "factorDB",
+                "rsatool",
+                "SageMath"
+              ]
             }
           ],
           "subcategories": [
@@ -222,11 +278,15 @@
                   "best": true,
                   "rating": 4,
                   "effort": "advanced",
-                  "desc": "Open-source mathematics system with built-in number theory used for RSA cryptanalysis: lattice basis reduction (LLL), Pollard p-1/p-ρ, discrete log, small-roots (Coppersmith), and private-key reconstruction from recovered parameters.",
-                  "when": "When no one-shot tool covers the attack — hand-build a lattice basis, solve a modular equation, or derive d from partial parameters with a few lines of Sage.",
+                  "desc": "Open-source mathematics system with built-in number theory used for RSA cryptanalysis: lattice basis reduction (LLL), Pollard p-1/p-\u03c1, discrete log, small-roots (Coppersmith), and private-key reconstruction from recovered parameters.",
+                  "when": "When no one-shot tool covers the attack \u2014 hand-build a lattice basis, solve a modular equation, or derive d from partial parameters with a few lines of Sage.",
                   "install": "sudo apt install sagemath",
                   "url": "https://www.sagemath.org",
-                  "alt": ["RsaCtfTool", "rsatool", "yafu"]
+                  "alt": [
+                    "RsaCtfTool",
+                    "rsatool",
+                    "yafu"
+                  ]
                 }
               ]
             }
@@ -245,17 +305,25 @@
               "when": "A modulus (or any big integer) may already be factored in the public corpus - script the API from curl; RsaCtfTool queries it automatically via --attack factordb.",
               "install": "preinstalled (web/API)",
               "url": "https://factordb.com",
-              "alt": ["RsaCtfTool", "yafu", "msieve"]
+              "alt": [
+                "RsaCtfTool",
+                "yafu",
+                "msieve"
+              ]
             },
             {
               "name": "yafu",
               "rating": 4,
               "effort": "medium",
               "desc": "Automated integer-factoring command-line utility chaining trial division, Pollard, ECM, SIQS, and GNFS on numbers up to ~200 digits, with prebuilt Windows binaries and clean `factor(n)` syntax.",
-              "when": "A 256–1024-bit modulus you own that defeats online lookup — run `yafu 'factor(n)'` and let it auto-select the fastest factoring stage.",
+              "when": "A 256\u20131024-bit modulus you own that defeats online lookup \u2014 run `yafu 'factor(n)'` and let it auto-select the fastest factoring stage.",
               "install": "git clone https://github.com/bbuhrow/yafu && cd yafu && make yafu",
               "url": "https://github.com/bbuhrow/yafu",
-              "alt": ["FactorDB", "msieve", "SageMath"]
+              "alt": [
+                "FactorDB",
+                "msieve",
+                "SageMath"
+              ]
             },
             {
               "name": "msieve",
@@ -265,7 +333,11 @@
               "when": "Factoring tasks where yafu stalls or where you want the standalone QS/NFS engine; typically invoked from a script that feeds candidates one at a time.",
               "install": "git clone https://github.com/radii/msieve && cd msieve && make",
               "url": "https://github.com/radii/msieve",
-              "alt": ["yafu", "FactorDB", "RsaCtfTool"]
+              "alt": [
+                "yafu",
+                "FactorDB",
+                "RsaCtfTool"
+              ]
             }
           ]
         },
@@ -282,7 +354,11 @@
               "when": "After any attack yields p and q (or n+d): turn recovered parameters into a real private key file you can decrypt with, instead of rolling the CRT math by hand.",
               "install": "wget -O rsatool.py https://raw.githubusercontent.com/ius/rsatool/master/rsatool.py && pip3 install gmpy2 pyasn1",
               "url": "https://github.com/ius/rsatool",
-              "alt": ["Factordb", "RsaCtfTool", "SageMath"]
+              "alt": [
+                "Factordb",
+                "RsaCtfTool",
+                "SageMath"
+              ]
             }
           ]
         }
@@ -305,7 +381,11 @@
               "when": "Full TLS configuration audit of an endpoint you own; the default single-line invocation yields findings graded vulnerable/weak/OK you can drop straight into a report.",
               "install": "git clone --depth 1 https://github.com/testssl/testssl.sh && ./testssl.sh example.com",
               "url": "https://github.com/testssl/testssl.sh",
-              "alt": ["SSLyze", "sslscan", "OpenSSL"]
+              "alt": [
+                "SSLyze",
+                "sslscan",
+                "OpenSSL"
+              ]
             },
             {
               "name": "sslscan",
@@ -315,7 +395,10 @@
               "when": "A quick closed-port cipher enumeration or legacy-protocol check where you want one line per cipher and color-coded strength annotations.",
               "install": "sudo apt install sslscan && sslscan example.com:443",
               "url": "https://github.com/rbsec/sslscan",
-              "alt": ["testssl.sh", "SSLyze"]
+              "alt": [
+                "testssl.sh",
+                "SSLyze"
+              ]
             },
             {
               "name": "SSLyze",
@@ -325,7 +408,10 @@
               "when": "Automated TLS gate in CI/CD or bulk scanning of many hosts; exit code flips on Mozilla 'intermediate' non-compliance, so it doubles as a regression check.",
               "install": "pip3 install sslyze && python3 -m sslyze example.com",
               "url": "https://github.com/nabla-c0d3/sslyze",
-              "alt": ["testssl.sh", "sslscan"]
+              "alt": [
+                "testssl.sh",
+                "sslscan"
+              ]
             }
           ]
         }
@@ -344,7 +430,11 @@
           "when": "Quick symmetric or asymmetric encrypt/decrypt of your files, dumping or inspecting keys and certificates, and validating algorithm behavior against a standards reference implementation.",
           "install": "sudo apt install openssl",
           "url": "https://www.openssl.org",
-          "alt": ["GnuPG", "GnuTLS certtool", "age"]
+          "alt": [
+            "GnuPG",
+            "GnuTLS certtool",
+            "age"
+          ]
         },
         {
           "name": "GnuPG",
@@ -354,7 +444,10 @@
           "when": "Working with .gpg/PGP messages or OpenPGP keys where the PGP container format - not raw OpenSSL cipher - is expected.",
           "install": "sudo apt install gnupg",
           "url": "https://www.gnupg.org",
-          "alt": ["age", "OpenSSL"]
+          "alt": [
+            "age",
+            "OpenSSL"
+          ]
         },
         {
           "name": "age",
@@ -364,7 +457,10 @@
           "when": "Modern default for encrypting archives/files you own end-to-end (backups, secrets transfer) when you want minimal friction and small keys over legacy OpenPGP keyrings.",
           "install": "go install filippo.io/age/cmd/age@latest",
           "url": "https://github.com/FiloSottile/age",
-          "alt": ["GnuPG", "OpenSSL"]
+          "alt": [
+            "GnuPG",
+            "OpenSSL"
+          ]
         },
         {
           "name": "GnuTLS certtool",
@@ -374,7 +470,23 @@
           "when": "Generating or inspecting certificates and PKCS#12 files with readable options, or poking at PKCS#11 tokens, when OpenSSL's flag surface gets in the way.",
           "install": "sudo apt install gnutls-bin",
           "url": "https://www.gnutls.org",
-          "alt": ["OpenSSL", "GnuPG"]
+          "alt": [
+            "OpenSSL",
+            "GnuPG"
+          ]
+        },
+        {
+          "name": "shadowvault",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "AES-256-GCM cryptographic secrets lifecycle manager for offensive ops \u2014 vaulted keys/creds, OPSEC zeroize on demand, team RBAC, migration tooling.",
+          "when": "When you need to hold many tool creds/keys safely during an engagement and wipe them fast at the end.",
+          "install": "git clone https://github.com/5h4d0wn1k/shadowvault",
+          "url": "https://github.com/5h4d0wn1k/shadowvault",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
         }
       ]
     }

@@ -1,7 +1,7 @@
 {
   "id": "purpleteam",
   "name": "Purple Team, BAS & Adversary Emulation",
-  "emoji": "🟣",
+  "emoji": "\ud83d\udfe3",
   "tagline": "Validate your detections by emulating real adversaries, running atomic TTPs, and mapping coverage against MITRE ATT&CK.",
   "class": "defense",
   "categories": [
@@ -22,7 +22,10 @@
               "when": "Build a repeatable adversary operation once and re-run it after every detection change or control rollout.",
               "install": "git clone --recursive https://github.com/apache/caldera.git",
               "url": "https://github.com/apache/caldera",
-              "alt": ["atomic-red-team", "adversary-emulation-library"]
+              "alt": [
+                "atomic-red-team",
+                "adversary-emulation-library"
+              ]
             },
             {
               "name": "Adversary Emulation Library",
@@ -32,7 +35,10 @@
               "when": "Execute a threat-intel-grounded scenario as a ready-made purple-team script instead of writing one from scratch.",
               "install": "git clone https://github.com/center-for-threat-informed-defense/adversary_emulation_library.git",
               "url": "https://github.com/center-for-threat-informed-defense/adversary_emulation_library",
-              "alt": ["mitre-caldera", "ptef"]
+              "alt": [
+                "mitre-caldera",
+                "ptef"
+              ]
             },
             {
               "name": "PurpleSharp",
@@ -42,7 +48,10 @@
               "when": "Run in-host purple exercises fast: trigger technique sequences and immediately check which SIEM/EDR detections fired.",
               "install": "git clone https://github.com/mvelazc0/PurpleSharp.git",
               "url": "https://github.com/mvelazc0/PurpleSharp",
-              "alt": ["atomic-red-team", "caldera"]
+              "alt": [
+                "atomic-red-team",
+                "caldera"
+              ]
             }
           ]
         },
@@ -59,7 +68,10 @@
               "when": "Prove a specific detection fires by running the precise TTP procedure it was built to catch.",
               "install": "Install-Module -Name invoke-atomicredteam -Scope CurrentUser -Force",
               "url": "https://github.com/redcanaryco/atomic-red-team",
-              "alt": ["atomictestharnesses", "caldera"]
+              "alt": [
+                "atomictestharnesses",
+                "caldera"
+              ]
             },
             {
               "name": "AtomicTestHarnesses",
@@ -69,7 +81,9 @@
               "when": "Check your detections hold up across technique variants, not just the single canonical procedure.",
               "install": "Install-Module -Name AtomicTestHarnesses -Scope CurrentUser -Force",
               "url": "https://github.com/redcanaryco/AtomicTestHarnesses",
-              "alt": ["atomic-red-team"]
+              "alt": [
+                "atomic-red-team"
+              ]
             }
           ]
         },
@@ -82,11 +96,14 @@
               "best": true,
               "rating": 5,
               "effort": "medium",
-              "desc": "Datadog's granular cloud emulation library — 'Atomic Red Team for the cloud' — detonating AWS, Azure, GCP, Entra ID, and K8s techniques mapped to ATT&CK with automatic warmup and cleanup.",
+              "desc": "Datadog's granular cloud emulation library \u2014 'Atomic Red Team for the cloud' \u2014 detonating AWS, Azure, GCP, Entra ID, and K8s techniques mapped to ATT&CK with automatic warmup and cleanup.",
               "when": "Validate cloud SIEM detections against real TTPs in a dedicated sandbox cloud account, never production.",
               "install": "brew install stratus-red-team",
               "url": "https://github.com/DataDog/stratus-red-team",
-              "alt": ["cloudgoat", "infection-monkey"]
+              "alt": [
+                "cloudgoat",
+                "infection-monkey"
+              ]
             },
             {
               "name": "CloudGoat 2",
@@ -96,7 +113,9 @@
               "when": "Stand up an authorized practice range in a throwaway cloud account to rehearse TTPs before running real emulation.",
               "install": "pipx install cloudgoat",
               "url": "https://github.com/RhinoSecurityLabs/cloudgoat",
-              "alt": ["stratus-red-team"]
+              "alt": [
+                "stratus-red-team"
+              ]
             }
           ]
         },
@@ -113,7 +132,10 @@
               "when": "Scope an emulation exercise by marking the techniques on the matrix before touching any platform.",
               "install": "preinstalled (web)",
               "url": "https://github.com/mitre-attack/attack-navigator",
-              "alt": ["mitre-attack", "dettect"]
+              "alt": [
+                "mitre-attack",
+                "dettect"
+              ]
             },
             {
               "name": "MITRE ATT&CK",
@@ -123,9 +145,26 @@
               "when": "Resolve technique IDs and read detection guidance before any scoring, emulation, or rule building.",
               "install": "preinstalled (web)",
               "url": "https://attack.mitre.org",
-              "alt": ["attack-navigator"]
+              "alt": [
+                "attack-navigator"
+              ]
             }
           ]
+        }
+      ],
+      "tools": [
+        {
+          "name": "rogueai",
+          "rating": 5,
+          "effort": "advanced",
+          "desc": "Agentic AI red-team \u2014 autonomous decide->execute->observe->reflect loops against own-lab targets with human-in-the-loop safety gates.",
+          "when": "Automated adversarial emulation in a sandbox you control.",
+          "install": "git clone https://github.com/5h4d0wn1k/rogueai",
+          "url": "https://github.com/5h4d0wn1k/rogueai",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
         }
       ]
     },
@@ -146,7 +185,10 @@
               "when": "Automated lateral-movement and control-gap testing on a lab segment or isolated data-center island.",
               "install": "docker pull guardicore/monkey-island:latest",
               "url": "https://github.com/guardicore/monkey",
-              "alt": ["openbas", "stratus-red-team"]
+              "alt": [
+                "openbas",
+                "stratus-red-team"
+              ]
             },
             {
               "name": "OpenBAS",
@@ -156,7 +198,10 @@
               "when": "When you need a free multi-team BAS platform that couples technical simulations with exercise tracking, integrated with OpenCTI threat intel.",
               "install": "git clone https://github.com/OpenBAS-Platform/openbas.git",
               "url": "https://github.com/OpenBAS-Platform/openbas",
-              "alt": ["infection-monkey", "vectr"]
+              "alt": [
+                "infection-monkey",
+                "vectr"
+              ]
             }
           ]
         },
@@ -173,7 +218,10 @@
               "when": "Continuous, enterprise-scale security-control validation when you have budget for a licensed BAS product.",
               "install": "commercial (trial via safebreach.com)",
               "url": "https://www.safebreach.com/validate-breach-and-attack-simulation/",
-              "alt": ["attackiq", "cymulate"]
+              "alt": [
+                "attackiq",
+                "cymulate"
+              ]
             },
             {
               "name": "AttackIQ",
@@ -183,7 +231,10 @@
               "when": "Continuous control validation with ATT&CK coverage reporting baked into the vendor platform.",
               "install": "commercial (freemium via attackiq.com)",
               "url": "https://www.attackiq.com/",
-              "alt": ["safebreach-validate", "cymulate"]
+              "alt": [
+                "safebreach-validate",
+                "cymulate"
+              ]
             },
             {
               "name": "Cymulate",
@@ -193,7 +244,10 @@
               "when": "Benchmark your controls against sector peers and get prioritized gap remediation from one dashboard.",
               "install": "commercial (trial via cymulate.com)",
               "url": "https://www.cymulate.com/",
-              "alt": ["safebreach-validate", "attackiq"]
+              "alt": [
+                "safebreach-validate",
+                "attackiq"
+              ]
             }
           ]
         }
@@ -216,7 +270,10 @@
               "when": "Spin up a known-good instrumented AD lab to test detections against realistic Windows telemetry.",
               "install": "git clone https://github.com/clong/DetectionLab.git",
               "url": "https://github.com/clong/DetectionLab",
-              "alt": ["splunk-attack-range", "detectionlab-primer"]
+              "alt": [
+                "splunk-attack-range",
+                "detectionlab-primer"
+              ]
             },
             {
               "name": "DetectionLab Primer",
@@ -225,8 +282,10 @@
               "desc": "The official DetectionLab documentation/introduction: architecture, deployment guides for VirtualBox, AWS, Azure, and Hyper-V, and walkthroughs of each pre-installed tool.",
               "when": "Read before first build so you pick the right provider and understand what logging you are getting.",
               "install": "preinstalled (web docs)",
-              "url": "https://detectionlab.network/introduction/",
-              "alt": ["detectionlab"]
+              "url": "https://github.com/clong/DetectionLab",
+              "alt": [
+                "detectionlab"
+              ]
             },
             {
               "name": "Splunk Attack Range",
@@ -236,7 +295,10 @@
               "when": "Develop and CI-test Splunk detections against reproducible attack data in an isolated cloud range.",
               "install": "docker compose -f docker/docker-compose.yml up",
               "url": "https://github.com/splunk/attack_range",
-              "alt": ["detectionlab", "atomic-red-team"]
+              "alt": [
+                "detectionlab",
+                "atomic-red-team"
+              ]
             }
           ]
         },
@@ -253,7 +315,10 @@
               "when": "Structure your first (or fiftieth) purple exercise so CTI, red, and blue roles, evidence collection, and lessons-learned are all defined up front.",
               "install": "git clone https://github.com/scythe-io/purple-team-exercise-framework.git",
               "url": "https://github.com/scythe-io/purple-team-exercise-framework",
-              "alt": ["owasp-purpleteam", "vectr"]
+              "alt": [
+                "owasp-purpleteam",
+                "vectr"
+              ]
             },
             {
               "name": "OWASP PurpleTeam",
@@ -263,7 +328,9 @@
               "when": "Add repeatable purpleteam-style scanning checks to an application/TLS hardening pipeline.",
               "install": "git clone https://github.com/purpleteam-labs/purpleteam-orchestrator.git",
               "url": "https://owasp.org/www-project-purpleteam/",
-              "alt": ["ptef"]
+              "alt": [
+                "ptef"
+              ]
             }
           ]
         }
@@ -286,7 +353,10 @@
               "when": "Build a scored, evidence-based map of detection and visibility coverage and prioritize blue-team effort on the gaps.",
               "install": "git clone https://github.com/rabobank-cdc/DeTTECT.git",
               "url": "https://github.com/rabobank-cdc/DeTTECT",
-              "alt": ["attack-navigator", "mitre-car"]
+              "alt": [
+                "attack-navigator",
+                "mitre-car"
+              ]
             },
             {
               "name": "MITRE ATT&CK Navigator",
@@ -296,7 +366,10 @@
               "when": "Visualize and communicate detection coverage across the matrix during and after purple exercises.",
               "install": "preinstalled (web)",
               "url": "https://github.com/mitre-attack/attack-navigator",
-              "alt": ["dettect", "mitre-attack"]
+              "alt": [
+                "dettect",
+                "mitre-attack"
+              ]
             }
           ]
         },
@@ -313,17 +386,23 @@
               "when": "Find analytics worth implementing when you know which ATT&CK technique you need coverage for.",
               "install": "preinstalled (web)",
               "url": "https://car.mitre.org",
-              "alt": ["d3fend", "shield"]
+              "alt": [
+                "d3fend",
+                "shield"
+              ]
             },
             {
               "name": "MITRE D3FEND",
               "rating": 3,
               "effort": "easy",
-              "desc": "Counter-adversary engineering knowledge graph of digital artifacts, tactics, and hardening techniques — the defensive counterpart to ATT&CK for describing how countermeasures work.",
+              "desc": "Counter-adversary engineering knowledge graph of digital artifacts, tactics, and hardening techniques \u2014 the defensive counterpart to ATT&CK for describing how countermeasures work.",
               "when": "Name and structure defensive countermeasures precisely when documenting what each control actually prevents.",
               "install": "preinstalled (web)",
               "url": "https://d3fend.mitre.org",
-              "alt": ["mitre-car", "shield"]
+              "alt": [
+                "mitre-car",
+                "shield"
+              ]
             },
             {
               "name": "MITRE SHIELD",
@@ -333,7 +412,10 @@
               "when": "Plan proactive or deception-based defenses that complement your detection coverage map.",
               "install": "preinstalled (web)",
               "url": "https://shield.mitre.org",
-              "alt": ["d3fend", "mitre-car"]
+              "alt": [
+                "d3fend",
+                "mitre-car"
+              ]
             }
           ]
         },
@@ -351,10 +433,13 @@
                   "rating": 4,
                   "effort": "easy",
                   "desc": "VirusTotal's Rust rewrite of YARA with a strict compiler that surfaces syntax errors and warnings early, plus a fast CLI for scanning samples with your rules.",
-                  "when": "Compile and regression-test YARA rules in CI — stricter diagnostics catch broken rules before deployment.",
+                  "when": "Compile and regression-test YARA rules in CI \u2014 stricter diagnostics catch broken rules before deployment.",
                   "install": "cargo install yara-x --bins",
                   "url": "https://github.com/VirusTotal/yara-x",
-                  "alt": ["yara", "yara-validator"]
+                  "alt": [
+                    "yara",
+                    "yara-validator"
+                  ]
                 },
                 {
                   "name": "YARA",
@@ -364,7 +449,10 @@
                   "when": "The baseline check: compile your rules locally and run them against known samples to confirm hits and false positives.",
                   "install": "sudo apt install yara",
                   "url": "https://github.com/VirusTotal/yara",
-                  "alt": ["yara-x", "yara-validator"]
+                  "alt": [
+                    "yara-x",
+                    "yara-validator"
+                  ]
                 },
                 {
                   "name": "CIRCL yara-validator",
@@ -374,7 +462,10 @@
                   "when": "Bulk-validate a shared rule repository before merging changes.",
                   "install": "pip3 install yara_validator",
                   "url": "https://github.com/CIRCL/yara-validator",
-                  "alt": ["yara-x", "cccs-yara"]
+                  "alt": [
+                    "yara-x",
+                    "cccs-yara"
+                  ]
                 },
                 {
                   "name": "YaraValidator online",
@@ -384,7 +475,10 @@
                   "when": "Instant one-off compatibility check of a rule paste across engine versions.",
                   "install": "preinstalled (web)",
                   "url": "https://yaravalidator.manalyzer.org/",
-                  "alt": ["yara-x", "yara"]
+                  "alt": [
+                    "yara-x",
+                    "yara"
+                  ]
                 }
               ]
             },
@@ -401,7 +495,10 @@
                   "when": "Write detection content once and compile it to every SIEM you run; the shared syntax is also easy to unit-test.",
                   "install": "pip3 install sigma-cli",
                   "url": "https://github.com/SigmaHQ/sigma",
-                  "alt": ["sigma-cli", "elastic-detection-rules"]
+                  "alt": [
+                    "sigma-cli",
+                    "elastic-detection-rules"
+                  ]
                 },
                 {
                   "name": "Sigma CLI",
@@ -411,7 +508,10 @@
                   "when": "Automate rule conversion and linting in CI so bad Sigma never reaches a SIEM.",
                   "install": "pip3 install sigma-cli",
                   "url": "https://github.com/SigmaHQ/sigma-cli",
-                  "alt": ["sigma", "elastic-detection-rules"]
+                  "alt": [
+                    "sigma",
+                    "elastic-detection-rules"
+                  ]
                 },
                 {
                   "name": "Elastic detection-rules",
@@ -421,7 +521,9 @@
                   "when": "Benchmark your own rule quality against vendor-maintained content and test rules before shipping to Elastic.",
                   "install": "pip3 install -r requirements.txt",
                   "url": "https://github.com/elastic/detection-rules",
-                  "alt": ["sigma"]
+                  "alt": [
+                    "sigma"
+                  ]
                 }
               ]
             }
@@ -446,17 +548,23 @@
               "when": "Record exercise results and trend detection coverage over months so purple-team improvements are measurable.",
               "install": "git clone https://github.com/SecurityRiskAdvisors/VECTR.git",
               "url": "https://github.com/SecurityRiskAdvisors/VECTR",
-              "alt": ["dettect", "attack-flow"]
+              "alt": [
+                "dettect",
+                "attack-flow"
+              ]
             },
             {
               "name": "MITRE Attack Flow",
               "rating": 4,
               "effort": "medium",
               "desc": "Center for Threat-Informed Defense's STIX-based format and tooling for modeling how adversary behaviors chain together within an operation or campaign.",
-              "when": "Document the full flow of an emulated campaign — not just isolated techniques — for reporting and ATT&CK mapping.",
+              "when": "Document the full flow of an emulated campaign \u2014 not just isolated techniques \u2014 for reporting and ATT&CK mapping.",
               "install": "git clone https://github.com/center-for-threat-informed-defense/attack-flow.git",
               "url": "https://github.com/center-for-threat-informed-defense/attack-flow",
-              "alt": ["vectr", "dettect"]
+              "alt": [
+                "vectr",
+                "dettect"
+              ]
             }
           ]
         }

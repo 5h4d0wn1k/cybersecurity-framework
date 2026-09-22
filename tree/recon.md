@@ -7,6 +7,21 @@ Passive + active discovery: subdomains, DNS, historical data, people, leaks, and
 
 
 
+#### grainrecon ◆ by 5h4d0wn1k
+
+Automated recon / attack-surface mapper — subdomains, DNS, port/service, tech-detect, CIDR inventory, OSINT, dir fuzzing.
+
+**When:** Building a full attack-surface map of assets you are authorized to test.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/grainrecon`
+
+**URL:** https://github.com/5h4d0wn1k/grainrecon
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 #### Passive Sources
 
 

@@ -396,6 +396,21 @@ Nmap's netcat with TLS, proxy chaining, IPv6, and connection brokering built int
 
 
 
+#### netpwn ◆ by 5h4d0wn1k
+
+L2/L3 MITM & network attack suite — ARP/DHCP/DNS/VLAN spoofing, port-knock, pcap tooling; dry-run default.
+
+**When:** On-path network experiments on isolated segments you own.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/netpwn`
+
+**URL:** https://github.com/5h4d0wn1k/netpwn
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 #### Capture & Analysis
 
 

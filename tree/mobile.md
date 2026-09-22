@@ -7,6 +7,21 @@ Testing your own or authorized Android & iOS apps: static analysis, decompilatio
 
 
 
+#### mobsek ◆ by 5h4d0wn1k
+
+Offline mobile app security suite — APK/AXML/DEX, Mach-O, X.509 analysis, Frida hooks, deterministic threat score.
+
+**When:** Triage mobile apps you have permission to analyze.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/mobsek`
+
+**URL:** https://github.com/5h4d0wn1k/mobsek
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 #### Decompilers
 
 

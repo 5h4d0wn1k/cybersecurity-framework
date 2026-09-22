@@ -1,7 +1,7 @@
 {
   "id": "recon",
   "name": "Reconnaissance & OSINT",
-  "emoji": "🕵️",
+  "emoji": "\ud83d\udd75\ufe0f",
   "tagline": "Passive + active discovery: subdomains, DNS, historical data, people, leaks, and exposed assets.",
   "class": "offense",
   "categories": [
@@ -224,6 +224,21 @@
               ]
             }
           ]
+        }
+      ],
+      "tools": [
+        {
+          "name": "grainrecon",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Automated recon / attack-surface mapper \u2014 subdomains, DNS, port/service, tech-detect, CIDR inventory, OSINT, dir fuzzing.",
+          "when": "Building a full attack-surface map of assets you are authorized to test.",
+          "install": "git clone https://github.com/5h4d0wn1k/grainrecon",
+          "url": "https://github.com/5h4d0wn1k/grainrecon",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
         }
       ]
     },

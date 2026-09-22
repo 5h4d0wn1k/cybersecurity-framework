@@ -249,7 +249,7 @@
                   "desc": "Microsoft's built-in snap-in for direct read/write access to every AD object and attribute, including configuration and schema partitions.",
                   "when": "Point-and-click verification of specific attribute values and ACLs during audits without writing scripts.",
                   "install": "Add via 'Turn Windows features on or off' \u2192 AD DS and AD LDS Tools (native on domain controllers)",
-                  "url": "https://learn.microsoft.com/windows-server/identity/ad-ds/get-started/adsi-edit",
+                  "url": "https://learn.microsoft.com/en-us/windows/win32/adsi/active-directory-service-interfaces-adsi",
                   "alt": [
                     "AD Explorer",
                     "ldapsearch"
@@ -1407,7 +1407,21 @@
         {
           "id": "full-frameworks",
           "name": "Command & Control Frameworks",
-          "tools": [],
+          "tools": [
+            {
+              "name": "hermesc2",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Lab C2 & post-exploitation framework \u2014 listeners, stagers, beacons, encrypted transport, payload generation, killswitch.",
+              "when": "Building/studying C2 flows only against your own lab servers.",
+              "install": "git clone https://github.com/5h4d0wn1k/hermesc2",
+              "url": "https://github.com/5h4d0wn1k/hermesc2",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
+          ],
           "subcategories": [
             {
               "id": "oss-frameworks",
@@ -1575,6 +1589,25 @@
                   "alt": [
                     "empire"
                   ]
+                }
+              ]
+            },
+            {
+              "id": "post-exploitation-dwell-lab",
+              "name": "Post-Exploitation & Dwell (Lab)",
+              "tools": [
+                {
+                  "name": "postpwn",
+                  "rating": 4,
+                  "effort": "advanced",
+                  "desc": "Post-exploitation & persistence toolkit (lab) \u2014 privilege-escalation audit, implants, tunneling, dwell-time detection.",
+                  "when": "Practice post-exploitation and persistence-demo scenarios in an isolated range.",
+                  "install": "git clone https://github.com/5h4d0wn1k/postpwn",
+                  "url": "https://github.com/5h4d0wn1k/postpwn",
+                  "alt": [
+                    "Own tool \u2014 lab/authorized use only"
+                  ],
+                  "by": "5h4d0wn1k"
                 }
               ]
             }
@@ -2147,6 +2180,21 @@
                 }
               ]
             }
+          ],
+          "tools": [
+            {
+              "name": "cryptocrack",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Crypto attacks + credential cracking \u2014 hash identify/crack with rules, RSA/AES/DH attacks, cipher auto-decode, XTS-CPA.",
+              "when": "Cracking/solving crypto-lab challenges and authorized recovery.",
+              "install": "git clone https://github.com/5h4d0wn1k/cryptocrack",
+              "url": "https://github.com/5h4d0wn1k/cryptocrack",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
           ]
         },
         {
@@ -2437,6 +2485,19 @@
                 "OpenSSL",
                 "GnuPG"
               ]
+            },
+            {
+              "name": "shadowvault",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "AES-256-GCM cryptographic secrets lifecycle manager for offensive ops \u2014 vaulted keys/creds, OPSEC zeroize on demand, team RBAC, migration tooling.",
+              "when": "When you need to hold many tool creds/keys safely during an engagement and wipe them fast at the end.",
+              "install": "git clone https://github.com/5h4d0wn1k/shadowvault",
+              "url": "https://github.com/5h4d0wn1k/shadowvault",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
             }
           ]
         }
@@ -2491,7 +2552,21 @@
         {
           "id": "custom-pocs",
           "name": "Custom PoC Development",
-          "tools": [],
+          "tools": [
+            {
+              "name": "exploitcraft",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Exploit development framework \u2014 vuln-binary builds, cyclic patterns, PTRACE crash analysis, ROP-gadget scan, PoC generation, fuzzing.",
+              "when": "Learning exploit dev end-to-end on deliberately vulnerable binaries.",
+              "install": "git clone https://github.com/5h4d0wn1k/exploitcraft",
+              "url": "https://github.com/5h4d0wn1k/exploitcraft",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
+          ],
           "subcategories": [
             {
               "id": "scripting-toolkit",
@@ -2985,7 +3060,7 @@
                   "desc": "Bash script that greps an extracted or mounted filesystem for secrets: shadow/passwd, SSL keys and certs, config files, admin/password keywords, dropbear/ssh artifacts, and URLs.",
                   "when": "Ten seconds after extraction, to surface default creds, key material, and backdoors before you read anything by hand.",
                   "install": "git clone https://github.com/craigz28/firmwalker",
-                  "url": "https://github.com/craigz28/firmwalker",
+                  "url": "https://github.com/scriptingxss/firmwalker",
                   "alt": [
                     "binwalk"
                   ]
@@ -3127,7 +3202,7 @@
                       "desc": "Open-source serial multi-tool (current Bus Pirate 5): drives SPI/I2C/UART/1-Wire, reads SPI flash and EEPROMs, sniffs buses, and doubles as a low-speed logic analyzer and host adapter from any serial terminal.",
                       "when": "Talking directly to a chip over SPI/I2C, reading EEPROMs, or probing a bus before you break out a dedicated analyzer.",
                       "install": "hardware (dangerousprototypes.com) + sudo apt install picocom",
-                      "url": "https://github.com/DangerousPrototypes/BusPirate",
+                      "url": "https://github.com/DangerousPrototypes/Bus_Pirate",
                       "alt": [
                         "PulseView",
                         "OpenOCD"
@@ -3197,7 +3272,7 @@
                   "desc": "Five-dollar USB SPI/I2C/parallel programmer (and its clones) that flashrom drives directly; the budget way to dump 25-series SPI flash with a SOIC-8 clip without desoldering.",
                   "when": "Cheap, disposable SPI reads on consumer hardware where you don't want to risk a J-Link or full probe.",
                   "install": "sudo apt install flashrom && use with ch341a_spi programmer",
-                  "url": "https://wiki.flashrom.org/CH341A",
+                  "url": "https://flashrom.org/supported_hw/supported_prog/ch341ab.html",
                   "alt": [
                     "flashrom"
                   ]
@@ -3310,7 +3385,21 @@
         {
           "id": "protocol-analysis",
           "name": "RF Protocol & Application Analysis",
-          "tools": [],
+          "tools": [
+            {
+              "name": "iotbreach",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "IoT/SCADA/embedded offensive framework \u2014 MQTT/CoAP/UPnP/Modbus/CAN/BLE/Zigbee/433MHz, firmware extraction, ICS kill-chain simulation.",
+              "when": "Testing embedded/IoT targets in your own lab.",
+              "install": "git clone https://github.com/5h4d0wn1k/iotbreach",
+              "url": "https://github.com/5h4d0wn1k/iotbreach",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
+          ],
           "subcategories": [
             {
               "id": "link-layer-protocols",
@@ -3503,7 +3592,7 @@
                       "desc": "Akamai's Python toolchain (mqttez, mqtts-tv, mqttgama) that scans MQTT brokers, recovers credentials from device images, and lets you interact with topics (subscribe/inject) against smart devices running MQTT.",
                       "when": "Assessing an MQTT-enabled IoT fleet on a lab broker: credential hunting and topic-level injection.",
                       "install": "git clone https://github.com/akamai/mqtt-pwn && pip install -r requirements.txt",
-                      "url": "https://github.com/akamai/mqtt-pwn",
+                      "url": "https://github.com/akamai-threat-research/mqtt-pwn",
                       "alt": [
                         "mosquitto_pub",
                         "MQTT Explorer"
@@ -3908,6 +3997,21 @@
                   ]
                 }
               ]
+            }
+          ],
+          "tools": [
+            {
+              "name": "mobsek",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Offline mobile app security suite \u2014 APK/AXML/DEX, Mach-O, X.509 analysis, Frida hooks, deterministic threat score.",
+              "when": "Triage mobile apps you have permission to analyze.",
+              "install": "git clone https://github.com/5h4d0wn1k/mobsek",
+              "url": "https://github.com/5h4d0wn1k/mobsek",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
             }
           ]
         },
@@ -4947,6 +5051,21 @@
                   ]
                 }
               ]
+            }
+          ],
+          "tools": [
+            {
+              "name": "netpwn",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "L2/L3 MITM & network attack suite \u2014 ARP/DHCP/DNS/VLAN spoofing, port-knock, pcap tooling; dry-run default.",
+              "when": "On-path network experiments on isolated segments you own.",
+              "install": "git clone https://github.com/5h4d0wn1k/netpwn",
+              "url": "https://github.com/5h4d0wn1k/netpwn",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
             }
           ]
         },
@@ -6802,6 +6921,21 @@
                 }
               ]
             }
+          ],
+          "tools": [
+            {
+              "name": "sprayshed",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Lockout-aware password-spray / brute-force orchestrator against localhost lab services; dry-run by default so nothing is touched without confirmation.",
+              "when": "Staged, lockout-safe credential testing against services you own (lab only).",
+              "install": "git clone https://github.com/5h4d0wn1k/sprayshed",
+              "url": "https://github.com/5h4d0wn1k/sprayshed",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
           ]
         },
         {
@@ -7198,6 +7332,19 @@
                 "gophish",
                 "king phisher"
               ]
+            },
+            {
+              "name": "socialforge",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Hard-gated social-engineering & OSINT awareness lab \u2014 campaign planning, pretext/vishing drills; consent-gated, no network-send.",
+              "when": "Running consent-gated awareness exercises for training teams.",
+              "install": "git clone https://github.com/5h4d0wn1k/socialforge",
+              "url": "https://github.com/5h4d0wn1k/socialforge",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
             }
           ],
           "subcategories": [
@@ -8458,6 +8605,21 @@
                 }
               ]
             }
+          ],
+          "tools": [
+            {
+              "name": "grainrecon",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Automated recon / attack-surface mapper \u2014 subdomains, DNS, port/service, tech-detect, CIDR inventory, OSINT, dir fuzzing.",
+              "when": "Building a full attack-surface map of assets you are authorized to test.",
+              "install": "git clone https://github.com/5h4d0wn1k/grainrecon",
+              "url": "https://github.com/5h4d0wn1k/grainrecon",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
           ]
         },
         {
@@ -9501,6 +9663,38 @@
                       ]
                     }
                   ]
+                }
+              ]
+            },
+            {
+              "id": "ai-llm-offense",
+              "name": "AI & LLM Offense",
+              "tools": [
+                {
+                  "name": "mythicforge",
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "Adversarial LLM prompt-injection & jailbreak testing framework \u2014 37 techniques benchmarked against OWASP/NIST/MITRE ATLAS, cost-aware, SARIF reports.",
+                  "when": "Testing your own LLM apps/pipelines for prompt-injection and jailbreak exposure.",
+                  "install": "git clone https://github.com/5h4d0wn1k/mythicforge",
+                  "url": "https://github.com/5h4d0wn1k/mythicforge",
+                  "alt": [
+                    "Own tool \u2014 lab/authorized use only"
+                  ],
+                  "by": "5h4d0wn1k"
+                },
+                {
+                  "name": "aiarsenal",
+                  "rating": 5,
+                  "effort": "advanced",
+                  "desc": "Adversarial AI/ML security studio \u2014 data poisoning, model backdoors, extraction, evasion, prompt injection and agentic red-team; offline-first.",
+                  "when": "Offensive exercises against AI systems you operate.",
+                  "install": "git clone https://github.com/5h4d0wn1k/aiarsenal",
+                  "url": "https://github.com/5h4d0wn1k/aiarsenal",
+                  "alt": [
+                    "Own tool \u2014 lab/authorized use only"
+                  ],
+                  "by": "5h4d0wn1k"
                 }
               ]
             }
@@ -11192,6 +11386,21 @@
                 }
               ]
             }
+          ],
+          "tools": [
+            {
+              "name": "webbreach",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "OWASP Top-10 attack engine with built-in localhost vulnerable targets and an AI-guided scan queue \u2014 safe web exploitation practice.",
+              "when": "Practicing web app attacks without touching the internet.",
+              "install": "git clone https://github.com/5h4d0wn1k/webbreach",
+              "url": "https://github.com/5h4d0wn1k/webbreach",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
           ]
         },
         {
@@ -11799,6 +12008,25 @@
                   ]
                 }
               ]
+            },
+            {
+              "id": "wids-wireless-defense",
+              "name": "WIDS & Wireless Defense",
+              "tools": [
+                {
+                  "name": "airguard",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Wireless defense & monitoring suite \u2014 WIDS sensor, deauth/evil-twin/rogue-AP detection, beacon anomaly scan, WPA3 survey.",
+                  "when": "Detecting rogue APs and deauth floods in your own wireless perimeter.",
+                  "install": "git clone https://github.com/5h4d0wn1k/airguard",
+                  "url": "https://github.com/5h4d0wn1k/airguard",
+                  "alt": [
+                    "Own tool \u2014 lab/authorized use only"
+                  ],
+                  "by": "5h4d0wn1k"
+                }
+              ]
             }
           ]
         },
@@ -11832,6 +12060,19 @@
                 "airodump-ng",
                 "kismet"
               ]
+            },
+            {
+              "name": "wiair",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Byte-exact 802.11/BLE frame crafting & parsing framework; offline-only and safety-gated.",
+              "when": "Building raw wireless frames for protocol research and WIDS/emitter lab work.",
+              "install": "git clone https://github.com/5h4d0wn1k/wiair",
+              "url": "https://github.com/5h4d0wn1k/wiair",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
             }
           ],
           "subcategories": [
@@ -12647,6 +12888,21 @@
                 }
               ]
             }
+          ],
+          "tools": [
+            {
+              "name": "viperstrike",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "MCP (Model Context Protocol) server vulnerability auditor \u2014 AST/whitebox SAST for agentic AI tool handlers, SARIF-capable, optional oracle runtime mode.",
+              "when": "Auditing MCP servers and AI tool endpoints for handler-level vulnerabilities.",
+              "install": "git clone https://github.com/5h4d0wn1k/viperstrike",
+              "url": "https://github.com/5h4d0wn1k/viperstrike",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
           ]
         },
         {
@@ -13098,6 +13354,21 @@
                 }
               ]
             }
+          ],
+          "tools": [
+            {
+              "name": "toxindb",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "RAG retrieval-time poisoning detector \u2014 demand-recency discrimination, canary injection, provenance attestation; fully offline, SARIF+MD reports.",
+              "when": "Checking your own RAG/vector knowledge bases for poisoned or injected content.",
+              "install": "git clone https://github.com/5h4d0wn1k/toxindb",
+              "url": "https://github.com/5h4d0wn1k/toxindb",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
           ]
         },
         {
@@ -13520,6 +13791,34 @@
                 }
               ]
             }
+          ],
+          "tools": [
+            {
+              "name": "sentinelwall",
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Autonomous AI network threat detection & correlation engine \u2014 MITRE ATT&CK mapping, ML anomaly detection, rule DSL, STIX/Navigator/HTML exports, dashboard.",
+              "when": "Continuous network telemetry review and correlation in your own SOC lab.",
+              "install": "git clone https://github.com/5h4d0wn1k/sentinelwall",
+              "url": "https://github.com/5h4d0wn1k/sentinelwall",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            },
+            {
+              "name": "netsentinel",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Detection engine suite \u2014 signature NIDS, ML flow-anomaly, kernel-watch, MITM detectors, SIEM-lite correlation, JSON alert API.",
+              "when": "Building detection coverage and testing alert quality on controlled traffic.",
+              "install": "git clone https://github.com/5h4d0wn1k/netsentinel",
+              "url": "https://github.com/5h4d0wn1k/netsentinel",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
           ]
         },
         {
@@ -13699,6 +13998,21 @@
                   ]
                 }
               ]
+            }
+          ],
+          "tools": [
+            {
+              "name": "sentinai",
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Agentic AI SOC copilot \u2014 autonomous detect/triage/correlate/respond plus incident narrative on own-lab environments; rule playbook offline.",
+              "when": "Automating triage and initial response for lab-derived incidents.",
+              "install": "git clone https://github.com/5h4d0wn1k/sentinai",
+              "url": "https://github.com/5h4d0wn1k/sentinai",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
             }
           ]
         },
@@ -13993,6 +14307,34 @@
                 }
               ]
             }
+          ],
+          "tools": [
+            {
+              "name": "cloudpwn",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Cloud & container penetration suite \u2014 AWS/GCP/Azure enumeration, S3, docker leaks, k8s secrets, terraform audit, vault, CSPM.",
+              "when": "Posture-testing your own cloud tenants and IaC repos.",
+              "install": "git clone https://github.com/5h4d0wn1k/cloudpwn",
+              "url": "https://github.com/5h4d0wn1k/cloudpwn",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            },
+            {
+              "name": "crownjewel",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Cross-cloud identity federation auditor \u2014 Golden/Silver SAML, OAuth client-ID spoofing, OIDC validation, cross-cloud token replay; offline fixtures.",
+              "when": "Auditing federated identity trust boundaries across your clouds.",
+              "install": "git clone https://github.com/5h4d0wn1k/crownjewel",
+              "url": "https://github.com/5h4d0wn1k/crownjewel",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
           ]
         },
         {
@@ -14130,7 +14472,7 @@
                   "desc": "NCC Group's small Go tool checks S3 bucket permissions via the public ListObjects/GetObject/Acl APIs against a given bucket or custom wordlist.",
                   "when": "Single-target bucket permission triage and wordlist-driven scan of buckets you own, without standing up a full scanner.",
                   "install": "go install github.com/nccgroup/s3audit@latest",
-                  "url": "https://github.com/nccgroup/s3audit",
+                  "url": "https://github.com/sa7mon/S3Scanner",
                   "alt": [
                     "S3Scanner",
                     "AWS CLI & Batch Scripts"
@@ -14735,6 +15077,21 @@
                   ]
                 }
               ]
+            }
+          ],
+          "tools": [
+            {
+              "name": "supplysec",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Supply-chain security gate \u2014 dependency manifest parsing, SBOM (CycloneDX/SPDX), offline advisory matching, policy gates, post-quantum scanning.",
+              "when": "Gating CI builds on dependency/supply-chain posture before merge.",
+              "install": "git clone https://github.com/5h4d0wn1k/supplysec",
+              "url": "https://github.com/5h4d0wn1k/supplysec",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
             }
           ]
         },
@@ -15354,7 +15711,7 @@
                   "desc": "Exterro's free, widely-used acquisition and preview tool: images drives/memory to raw, E01, and AFF formats, computes hashes, and mounts images for instant browsing.",
                   "when": "Click-driven imaging with E01 support (or compressed raw) straight to a case folder; it also does live RAM acquisition when needed.",
                   "install": "Download the free installer from exterro.com and run FTK Imager",
-                  "url": "https://www.exterro.com/ftk-imager",
+                  "url": "https://www.exterro.com/digital-forensics-software/ftk-imager",
                   "alt": [
                     "guymager"
                   ]
@@ -15380,7 +15737,21 @@
         {
           "id": "carving-analysis",
           "name": "Collection, Carving & Data Recovery",
-          "tools": [],
+          "tools": [
+            {
+              "name": "forensicsiso",
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Full DFIR workstation \u2014 disk/memory/log/pcap/registry/browser/email parsing, super-timelining, cross-artifact correlation, chain-of-custody.",
+              "when": "Running end-to-end incident-response analysis on acquired evidence.",
+              "install": "git clone https://github.com/5h4d0wn1k/forensicsiso",
+              "url": "https://github.com/5h4d0wn1k/forensicsiso",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
+          ],
           "subcategories": [
             {
               "id": "acquisition",
@@ -16088,7 +16459,7 @@
                   "desc": "Free CIS configuration benchmark for Windows Server and client editions with scored and unscored hardening entries.",
                   "when": "Know exactly which GPO/registry settings an auditor will check, and harden by hand when scanner licensing is unavailable.",
                   "install": "preinstalled (web docs)",
-                  "url": "https://www.cisecurity.org/benchmark/microsoft_windows",
+                  "url": "https://www.cisecurity.org/benchmark/microsoft_windows_desktop",
                   "alt": [
                     "microsoft-security-baselines",
                     "hardeningkitty"
@@ -16101,7 +16472,7 @@
                   "desc": "Microsoft's recommended security configuration settings curated from the Windows Security Configuration Framework, shipped as GPO backups ready for LGPO import.",
                   "when": "Start from Microsoft's own baseline rather than writing group policy from scratch; the SCT download includes the LGPO import tooling.",
                   "install": "preinstalled (web docs)",
-                  "url": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework",
+                  "url": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/windows-security-baselines",
                   "alt": [
                     "cis-microsoft-windows-benchmark",
                     "lgpo"
@@ -16139,7 +16510,7 @@
                   "desc": "RouterOS documentation covering access hardening, service lockdown, firewall filter rules, brute-force protection, and secure defaults for MikroTik devices.",
                   "when": "Locking down MikroTik routers/switches you manage: follow the guide, restrict winbox/API, and add the recommended filter rules.",
                   "install": "preinstalled (web docs)",
-                  "url": "https://help.mikrotik.com/docs/spaces/ROS/pages/148778796/Security",
+                  "url": "https://help.mikrotik.com/docs/spaces/ROS/pages/328353/Securing+your+router",
                   "alt": [
                     "cis-cisco-benchmark",
                     "batfish"
@@ -16351,7 +16722,7 @@
                   "desc": "Free CIS benchmark sets for AWS, Azure, and GCP covering IAM, storage, networking, logging, and monitoring controls in each provider's console-accessible language.",
                   "when": "Know which cloud console/service settings an auditor checks, provider by provider.",
                   "install": "preinstalled (web docs)",
-                  "url": "https://www.cisecurity.org/benchmark/amazon_aws",
+                  "url": "https://www.cisecurity.org/benchmark/amazon_web_services",
                   "alt": [
                     "prowler",
                     "scoutsuite"
@@ -16476,6 +16847,21 @@
                 }
               ]
             }
+          ],
+          "tools": [
+            {
+              "name": "zerotrustmirror",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Zero-trust readiness engine \u2014 ZTA pillar scoring with evidence and multichannel correlation across your environment.",
+              "when": "Measuring progress against NIST/CISA zero-trust pillars before rolling out changes.",
+              "install": "git clone https://github.com/5h4d0wn1k/zerotrustmirror",
+              "url": "https://github.com/5h4d0wn1k/zerotrustmirror",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
           ]
         },
         {
@@ -16504,6 +16890,19 @@
                 "ansible-hardening",
                 "lynis"
               ]
+            },
+            {
+              "name": "endpointaegis",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "EDR-lite host-hardening auditor \u2014 0-100 score, persistence/service/patch/socket audits, drift baselines, HTML+JSON reports.",
+              "when": "Scoring and tracking host hardening across windows hosts/endpoints you manage.",
+              "install": "git clone https://github.com/5h4d0wn1k/endpointaegis",
+              "url": "https://github.com/5h4d0wn1k/endpointaegis",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
             }
           ]
         }
@@ -16597,6 +16996,21 @@
                   ]
                 }
               ]
+            }
+          ],
+          "tools": [
+            {
+              "name": "honeynet",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Honeypot farm + deception grid \u2014 multi-protocol honeypots, attacker fingerprinting, dwell/risk scoring, quarantine.",
+              "when": "Deploying decoys on ranges you own to observe attacker behavior.",
+              "install": "git clone https://github.com/5h4d0wn1k/honeynet",
+              "url": "https://github.com/5h4d0wn1k/honeynet",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
             }
           ]
         },
@@ -17225,7 +17639,21 @@
         {
           "id": "static-analysis",
           "name": "Static Analysis & Signature Detection",
-          "tools": [],
+          "tools": [
+            {
+              "name": "malforge",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Malware analysis & RE workstation \u2014 offline ELF/PE/Mach-O parsing, PTRACE sandbox, deobfuscation, YARA-gen, binary diff, shellcode encoding.",
+              "when": "Reverse-engineering samples in an offline lab.",
+              "install": "git clone https://github.com/5h4d0wn1k/malforge",
+              "url": "https://github.com/5h4d0wn1k/malforge",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
+          ],
           "subcategories": [
             {
               "id": "signature-detection",
@@ -17525,7 +17953,7 @@
                   "desc": "Mandiant FLARE's lightweight cross-platform network simulation tool capturing and responding to HTTP, DNS, TLS, and other protocols with a simple config and easy logging.",
                   "when": "Quick per-host fake networking in a Windows analysis VM without standing up a full INetSim deployment.",
                   "install": "pip install fakenet-ng && python -m fakenet",
-                  "url": "https://github.com/mandiant/flare-fakenet",
+                  "url": "https://github.com/mandiant/flare-fakenet-ng",
                   "alt": [
                     "inetsim"
                   ]
@@ -17750,6 +18178,21 @@
                 }
               ]
             }
+          ],
+          "tools": [
+            {
+              "name": "rogueai",
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "Agentic AI red-team \u2014 autonomous decide->execute->observe->reflect loops against own-lab targets with human-in-the-loop safety gates.",
+              "when": "Automated adversarial emulation in a sandbox you control.",
+              "install": "git clone https://github.com/5h4d0wn1k/rogueai",
+              "url": "https://github.com/5h4d0wn1k/rogueai",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
+            }
           ]
         },
         {
@@ -17866,7 +18309,7 @@
                   "desc": "The official DetectionLab documentation/introduction: architecture, deployment guides for VirtualBox, AWS, Azure, and Hyper-V, and walkthroughs of each pre-installed tool.",
                   "when": "Read before first build so you pick the right provider and understand what logging you are getting.",
                   "install": "preinstalled (web docs)",
-                  "url": "https://detectionlab.network/introduction/",
+                  "url": "https://github.com/clong/DetectionLab",
                   "alt": [
                     "detectionlab"
                   ]
@@ -18336,7 +18779,7 @@
                   "desc": "Open-source incident-response platform with modern case management, timeline pivoting, IOC enumeration, malware-hash handling, and third-party CTI enrichment via resolvers.",
                   "when": "Prefer a lighter, actively-developed OSS case manager that still publishes to MISP and pulls enrichment, without TheHive's legacy-or-commercial story.",
                   "install": "docker compose -f docker/default/docker-compose.yml up -d (from github.com/dfir-iris/dfir-iris)",
-                  "url": "https://github.com/dfir-iris/dfir-iris",
+                  "url": "https://github.com/dfir-iris/iris-web",
                   "alt": [
                     "TheHive",
                     "MISP"
@@ -18405,7 +18848,7 @@
                       "desc": "Free threat-intelligence portal and API aggregating passive DNS, WHOIS, hashes, SSL certs, URIs, and APT report tags for a single-indicator research view.",
                       "when": "Pivot an IOC across WHOIS, passive DNS, and sample relationships in one free lookup with a documented v2 API for scripts.",
                       "install": "preinstalled (web/API)",
-                      "url": "https://www.threatminer.org",
+                      "url": "https://intelx.io",
                       "alt": [
                         "AlienVault OTX",
                         "Pulsedive"
@@ -19108,6 +19551,12 @@
         "activedirectory/blueview/health"
       ]
     ],
+    "viperstrike": [
+      [
+        "appsec",
+        "appsec/sast"
+      ]
+    ],
     "semgrep": [
       [
         "appsec",
@@ -19314,6 +19763,12 @@
       [
         "appsec",
         "appsec/secrets-detection/secrets-pipelines"
+      ]
+    ],
+    "toxindb": [
+      [
+        "appsec",
+        "appsec/fuzzing"
       ]
     ],
     "afl++": [
@@ -19674,6 +20129,18 @@
         "blueteam/log-packet/network-sensors/protocol-metadata"
       ]
     ],
+    "sentinelwall": [
+      [
+        "blueteam",
+        "blueteam/log-packet"
+      ]
+    ],
+    "netsentinel": [
+      [
+        "blueteam",
+        "blueteam/log-packet"
+      ]
+    ],
     "suricata": [
       [
         "blueteam",
@@ -19772,6 +20239,12 @@
       [
         "threatintel",
         "threatintel/detection/rule-engines"
+      ]
+    ],
+    "sentinai": [
+      [
+        "blueteam",
+        "blueteam/response-automation"
       ]
     ],
     "shuffle": [
@@ -19904,6 +20377,12 @@
         "blueteam/edge-protection/waf"
       ]
     ],
+    "hermesc2": [
+      [
+        "c2",
+        "c2/full-frameworks"
+      ]
+    ],
     "sliver": [
       [
         "c2",
@@ -19980,6 +20459,12 @@
       [
         "c2",
         "c2/full-frameworks/operator-uis"
+      ]
+    ],
+    "postpwn": [
+      [
+        "c2",
+        "c2/full-frameworks/post-exploitation-dwell-lab"
       ]
     ],
     "c2concealer": [
@@ -20154,6 +20639,18 @@
       [
         "purpleteam",
         "purpleteam/detection-harnesses/lab-environments"
+      ]
+    ],
+    "cloudpwn": [
+      [
+        "cloud",
+        "cloud/cross-cloud-posture"
+      ]
+    ],
+    "crownjewel": [
+      [
+        "cloud",
+        "cloud/cross-cloud-posture"
       ]
     ],
     "prowler": [
@@ -20480,6 +20977,12 @@
         "container/image-scanning/dockerfile-lint"
       ]
     ],
+    "supplysec": [
+      [
+        "container",
+        "container/sbom-supply-chain"
+      ]
+    ],
     "syft": [
       [
         "container",
@@ -20722,6 +21225,12 @@
         "crypto/encoding-identification/format-identification"
       ]
     ],
+    "cryptocrack": [
+      [
+        "crypto",
+        "crypto/cipher-analysis"
+      ]
+    ],
     "dcode": [
       [
         "crypto",
@@ -20874,6 +21383,18 @@
       [
         "crypto",
         "crypto/key-toolkit"
+      ]
+    ],
+    "shadowvault": [
+      [
+        "crypto",
+        "crypto/key-toolkit"
+      ]
+    ],
+    "exploitcraft": [
+      [
+        "exploit",
+        "exploit/custom-pocs"
       ]
     ],
     "searchsploit": [
@@ -21074,6 +21595,12 @@
       [
         "forensics",
         "forensics/disk-imaging/gui-imagers"
+      ]
+    ],
+    "forensicsiso": [
+      [
+        "forensics",
+        "forensics/carving-analysis"
       ]
     ],
     "kape": [
@@ -21370,6 +21897,12 @@
         "hardening/cloud-hardening/cloud-benchmarks"
       ]
     ],
+    "zerotrustmirror": [
+      [
+        "hardening",
+        "hardening/compliance-content"
+      ]
+    ],
     "scap-security-guide": [
       [
         "hardening",
@@ -21410,6 +21943,18 @@
       [
         "hardening",
         "hardening/config-automation"
+      ]
+    ],
+    "endpointaegis": [
+      [
+        "hardening",
+        "hardening/config-automation"
+      ]
+    ],
+    "honeynet": [
+      [
+        "honeypots",
+        "honeypots/platforms"
       ]
     ],
     "t-pot": [
@@ -21730,6 +22275,12 @@
         "iot/hardware-serial/fault-injection"
       ]
     ],
+    "iotbreach": [
+      [
+        "iot",
+        "iot/protocol-analysis"
+      ]
+    ],
     "z-wave js ui": [
       [
         "iot",
@@ -21944,6 +22495,12 @@
         "malware/sandboxes/remote-cloud/managed-sandboxes"
       ]
     ],
+    "malforge": [
+      [
+        "malware",
+        "malware/static-analysis"
+      ]
+    ],
     "loki": [
       [
         "malware",
@@ -22036,6 +22593,12 @@
       [
         "malware",
         "malware/unpacking/packer-dissection"
+      ]
+    ],
+    "mobsek": [
+      [
+        "mobile",
+        "mobile/android-static"
       ]
     ],
     "jadx-gui": [
@@ -22372,6 +22935,12 @@
       [
         "redteam",
         "redteam/pivoting-tunnels"
+      ]
+    ],
+    "netpwn": [
+      [
+        "network",
+        "network/traffic-capture"
       ]
     ],
     "wireshark": [
@@ -22998,6 +23567,12 @@
         "passwords/wordlists-rules/online-lookups"
       ]
     ],
+    "sprayshed": [
+      [
+        "passwords",
+        "passwords/password-spraying"
+      ]
+    ],
     "spray": [
       [
         "passwords",
@@ -23119,6 +23694,12 @@
       ]
     ],
     "phishspark": [
+      [
+        "phishing-social",
+        "phishing-social/campaign-simulation"
+      ]
+    ],
+    "socialforge": [
       [
         "phishing-social",
         "phishing-social/campaign-simulation"
@@ -23484,6 +24065,12 @@
         "privesc/ad-kerberos-crossref/kerberoast-delegation"
       ]
     ],
+    "rogueai": [
+      [
+        "purpleteam",
+        "purpleteam/adversary-emulation"
+      ]
+    ],
     "mitre caldera": [
       [
         "purpleteam",
@@ -23668,6 +24255,12 @@
       [
         "redteam",
         "redteam/emulation-replays"
+      ]
+    ],
+    "grainrecon": [
+      [
+        "recon",
+        "recon/subdomains"
       ]
     ],
     "cert spotter": [
@@ -23954,6 +24547,18 @@
       [
         "redteam",
         "redteam/toolkits/knowledge-bases/field-notes"
+      ]
+    ],
+    "mythicforge": [
+      [
+        "redteam",
+        "redteam/toolkits/ai-llm-offense"
+      ]
+    ],
+    "aiarsenal": [
+      [
+        "redteam",
+        "redteam/toolkits/ai-llm-offense"
       ]
     ],
     "redeye": [
@@ -24298,6 +24903,12 @@
         "web/content-discovery/wordlists/curated-scopes"
       ]
     ],
+    "webbreach": [
+      [
+        "web",
+        "web/injection-testing"
+      ]
+    ],
     "jsql injection": [
       [
         "web",
@@ -24484,6 +25095,12 @@
         "wireless/monitor-setup"
       ]
     ],
+    "airguard": [
+      [
+        "wireless",
+        "wireless/monitor-setup/wids-wireless-defense"
+      ]
+    ],
     "airodump-ng": [
       [
         "wireless",
@@ -24491,6 +25108,12 @@
       ]
     ],
     "horst": [
+      [
+        "wireless",
+        "wireless/wifi-discovery"
+      ]
+    ],
+    "wiair": [
       [
         "wireless",
         "wireless/wifi-discovery"
@@ -24661,7 +25284,7 @@
   },
   "stats": {
     "domains": 27,
-    "categories": 773,
-    "tools": 1038
+    "categories": 776,
+    "tools": 1068
   }
 }

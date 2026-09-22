@@ -7,6 +7,21 @@ Deception for defenders: fake services, canaries, honeynets, and tripwires place
 
 
 
+#### honeynet ◆ by 5h4d0wn1k
+
+Honeypot farm + deception grid — multi-protocol honeypots, attacker fingerprinting, dwell/risk scoring, quarantine.
+
+**When:** Deploying decoys on ranges you own to observe attacker behavior.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/honeynet`
+
+**URL:** https://github.com/5h4d0wn1k/honeynet
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 #### All-in-One Platforms
 
 

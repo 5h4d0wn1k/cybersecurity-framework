@@ -59,7 +59,8 @@ def md_node(node, depth):
     has = node.get("name", node.get("id", ""))
     for t in node.get("tools", []):
         star = " ⭐" if t.get("best") else ""
-        lines += [f"{'#' * min(depth + 2, 6)} {t['name']}{star}", ""]
+        by = " ◆ by " + t["by"] if t.get("by") else ""
+        lines += [f"{'#' * min(depth + 2, 6)} {t['name']}{star}{by}", ""]
         lines += [t.get("desc", ""), ""]
         lines += [f"**When:** {t.get('when', '')}", ""]
         lines += [f"**Effort:** {t.get('effort', '')}  ·  **Rating:** {t.get('rating', '')}/5", ""]

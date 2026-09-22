@@ -162,6 +162,40 @@ The community wiki of pentesting techniques across web, Windows, Linux, AD, and 
 **Alternatives:** ired-team, poc-in-github
 
 
+#### AI & LLM Offense
+
+
+
+##### mythicforge ◆ by 5h4d0wn1k
+
+Adversarial LLM prompt-injection & jailbreak testing framework — 37 techniques benchmarked against OWASP/NIST/MITRE ATLAS, cost-aware, SARIF reports.
+
+**When:** Testing your own LLM apps/pipelines for prompt-injection and jailbreak exposure.
+
+**Effort:** medium  ·  **Rating:** 5/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/mythicforge`
+
+**URL:** https://github.com/5h4d0wn1k/mythicforge
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
+##### aiarsenal ◆ by 5h4d0wn1k
+
+Adversarial AI/ML security studio — data poisoning, model backdoors, extraction, evasion, prompt injection and agentic red-team; offline-first.
+
+**When:** Offensive exercises against AI systems you operate.
+
+**Effort:** advanced  ·  **Rating:** 5/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/aiarsenal`
+
+**URL:** https://github.com/5h4d0wn1k/aiarsenal
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 
 
 

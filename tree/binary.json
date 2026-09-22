@@ -1,8 +1,8 @@
 {
   "id": "binary",
   "name": "Binary Exploitation & Reverse Engineering",
-  "emoji": "🔬",
-  "tagline": "Debug, disassemble, decompile, and understand binaries — your own code, lab targets, and CTF challenges.",
+  "emoji": "\ud83d\udd2c",
+  "tagline": "Debug, disassemble, decompile, and understand binaries \u2014 your own code, lab targets, and CTF challenges.",
   "class": "offense",
   "categories": [
     {
@@ -20,10 +20,14 @@
               "rating": 5,
               "effort": "medium",
               "desc": "Free software reverse-engineering suite with a GUI and a real decompiler that emits C-like pseudocode, plus a scriptable Python/Java API.",
-              "when": "Full static analysis of binaries you own or CTF challenges — the decompiler output reads far closer to source than raw disassembly.",
+              "when": "Full static analysis of binaries you own or CTF challenges \u2014 the decompiler output reads far closer to source than raw disassembly.",
               "install": "Download the release zip from the Ghidra releases page, unzip, and run ./ghidraRun",
               "url": "https://github.com/NationalSecurityAgency/ghidra",
-              "alt": ["IDA Free", "Binary Ninja", "radare2"]
+              "alt": [
+                "IDA Free",
+                "Binary Ninja",
+                "radare2"
+              ]
             },
             {
               "name": "IDA Free",
@@ -33,7 +37,10 @@
               "when": "A free, officially supported disassembler when you prefer IDA's workflow for x86/x64 binaries over the Ghidra GUI.",
               "install": "preinstalled (download the installer from hex-rays.com)",
               "url": "https://hex-rays.com/ida-free/",
-              "alt": ["Ghidra", "radare2"]
+              "alt": [
+                "Ghidra",
+                "radare2"
+              ]
             },
             {
               "name": "Binary Ninja",
@@ -43,7 +50,10 @@
               "when": "Scriptable binary analysis with an expressive API, or when team licensing matches your lab workflow.",
               "install": "preinstalled (desktop download from binary.ninja)",
               "url": "https://binary.ninja/",
-              "alt": ["Ghidra", "Cutter"]
+              "alt": [
+                "Ghidra",
+                "Cutter"
+              ]
             }
           ]
         },
@@ -65,7 +75,10 @@
                   "when": "Headless or scripted analysis, quick on-box triage, and when the whole analysis pipeline should live in one terminal tool.",
                   "install": "git clone https://github.com/radareorg/radare2 && cd radare2 && ./sys/install.sh",
                   "url": "https://github.com/radareorg/radare2",
-                  "alt": ["rizin", "Cutter"]
+                  "alt": [
+                    "rizin",
+                    "Cutter"
+                  ]
                 },
                 {
                   "name": "rizin",
@@ -75,7 +88,10 @@
                   "when": "Same CLI workflow as radare2 when you prefer the fork under active development for its language bindings and released packages.",
                   "install": "brew install rizin",
                   "url": "https://github.com/rizinorg/rizin",
-                  "alt": ["radare2", "Cutter"]
+                  "alt": [
+                    "radare2",
+                    "Cutter"
+                  ]
                 }
               ]
             },
@@ -92,7 +108,11 @@
                   "when": "Visual exploration and annotation of binaries without a terminal-heavy workflow.",
                   "install": "brew install --cask cutter",
                   "url": "https://github.com/rizinorg/cutter",
-                  "alt": ["radare2", "rizin", "Ghidra"]
+                  "alt": [
+                    "radare2",
+                    "rizin",
+                    "Ghidra"
+                  ]
                 }
               ]
             }
@@ -111,7 +131,10 @@
               "when": "Steal working, tested Ghidra script patterns instead of re-deriving the API for each new analysis task.",
               "install": "git clone https://github.com/HackOvert/GhidraSnippets",
               "url": "https://github.com/HackOvert/GhidraSnippets",
-              "alt": ["ghidra-scripts", "r2ghidra"]
+              "alt": [
+                "ghidra-scripts",
+                "r2ghidra"
+              ]
             },
             {
               "name": "ghidra-scripts",
@@ -121,7 +144,9 @@
               "when": "Drop-in automation scripts for reversing binaries or firmware in an iterative lab analysis session.",
               "install": "git clone https://github.com/0xdea/ghidra-scripts",
               "url": "https://github.com/0xdea/ghidra-scripts",
-              "alt": ["GhidraSnippets"]
+              "alt": [
+                "GhidraSnippets"
+              ]
             },
             {
               "name": "r2ghidra",
@@ -131,7 +156,10 @@
               "when": "Bring a decompiler view into your radare2/rizin session without switching to the Ghidra GUI.",
               "install": "r2pm -ci r2ghidra",
               "url": "https://github.com/radareorg/r2ghidra",
-              "alt": ["Ghidra", "radare2"]
+              "alt": [
+                "Ghidra",
+                "radare2"
+              ]
             }
           ]
         }
@@ -155,7 +183,11 @@
               "when": "The backbone of all dynamic work; run it plain for minimalism or host pwndbg/GEF on top of it.",
               "install": "sudo apt install gdb",
               "url": "https://www.gnu.org/software/gdb/",
-              "alt": ["pwndbg", "GEF", "LLDB"]
+              "alt": [
+                "pwndbg",
+                "GEF",
+                "LLDB"
+              ]
             },
             {
               "name": "pwndbg",
@@ -165,7 +197,10 @@
               "when": "CTF pwn challenges or reversing binaries you own when plain GDB layout gets too noisy.",
               "install": "git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh",
               "url": "https://github.com/pwndbg/pwndbg",
-              "alt": ["GEF", "GDB"]
+              "alt": [
+                "GEF",
+                "GDB"
+              ]
             },
             {
               "name": "GEF",
@@ -175,7 +210,10 @@
               "when": "A pwndbg-style workflow with almost zero setup beyond one curl command, on any GDB build.",
               "install": "wget -q -O- https://github.com/hugsy/gef/raw/main/scripts/gef.sh | sh",
               "url": "https://github.com/hugsy/gef",
-              "alt": ["pwndbg", "GDB"]
+              "alt": [
+                "pwndbg",
+                "GDB"
+              ]
             },
             {
               "name": "LLDB",
@@ -185,7 +223,9 @@
               "when": "Analyzing Apple-platform binaries or anything built with the LLVM toolchain where GDB support lags.",
               "install": "sudo apt install lldb",
               "url": "https://lldb.llvm.org/",
-              "alt": ["GDB"]
+              "alt": [
+                "GDB"
+              ]
             }
           ]
         },
@@ -199,10 +239,13 @@
               "rating": 4,
               "effort": "medium",
               "desc": "Dynamic instrumentation toolkit that injects JavaScript into a running process to hook functions and read live memory without recompiling.",
-              "when": "Trace calls, intercept functions, or inspect a live process — especially on targets where a traditional debugger struggles.",
+              "when": "Trace calls, intercept functions, or inspect a live process \u2014 especially on targets where a traditional debugger struggles.",
               "install": "pip install frida-tools",
               "url": "https://frida.re/",
-              "alt": ["GDB", "strace / ltrace"]
+              "alt": [
+                "GDB",
+                "strace / ltrace"
+              ]
             },
             {
               "name": "strace / ltrace",
@@ -212,7 +255,10 @@
               "when": "Map a binary's runtime behavior by watching the syscalls it issues during a controlled run on your host.",
               "install": "sudo apt install strace ltrace",
               "url": "https://github.com/strace/strace",
-              "alt": ["GDB", "Frida"]
+              "alt": [
+                "GDB",
+                "Frida"
+              ]
             }
           ]
         },
@@ -229,7 +275,10 @@
               "when": "Execute and debug cross-architecture ELF (ARM, MIPS, PPC) from firmware or CTFs when no native hardware exists.",
               "install": "sudo apt install qemu-user",
               "url": "https://www.qemu.org",
-              "alt": ["Qiling", "Unicorn"]
+              "alt": [
+                "Qiling",
+                "Unicorn"
+              ]
             },
             {
               "name": "Qiling",
@@ -239,7 +288,10 @@
               "when": "Automated, scripted emulation of cross-platform binaries with hooks, memory inspection, and reproducible lab runs.",
               "install": "pip install qiling",
               "url": "https://github.com/qilingframework/qiling",
-              "alt": ["QEMU", "Unicorn"]
+              "alt": [
+                "QEMU",
+                "Unicorn"
+              ]
             },
             {
               "name": "Unicorn",
@@ -249,7 +301,10 @@
               "when": "Embed instruction-level emulation into your own analysis or fuzzing scripts for lab targets.",
               "install": "pip install unicorn",
               "url": "https://github.com/unicorn-engine/unicorn",
-              "alt": ["QEMU", "Qiling"]
+              "alt": [
+                "QEMU",
+                "Qiling"
+              ]
             }
           ]
         }
@@ -270,20 +325,27 @@
               "rating": 5,
               "effort": "medium",
               "desc": "CTF pwn toolkit providing packing (p64/u64), ELF parsing, cyclic patterns, ROP-chain builders, and managed local/remote I/O.",
-              "when": "Prototype and test exploit behavior against binaries in a lab or CTF — the standard glue for the whole workflow.",
+              "when": "Prototype and test exploit behavior against binaries in a lab or CTF \u2014 the standard glue for the whole workflow.",
               "install": "pip install pwntools",
               "url": "https://github.com/Gallopsled/pwntools",
-              "alt": ["angr", "ROPgadget", "one_gadget"]
+              "alt": [
+                "angr",
+                "ROPgadget",
+                "one_gadget"
+              ]
             },
             {
               "name": "angr",
               "rating": 5,
               "effort": "advanced",
               "desc": "Python binary analysis framework using symbolic/concolic execution to explore paths and solve constraints against a binary you control.",
-              "when": "Automated pathfinding — such as deriving inputs that satisfy checks — when manual reversing is too slow.",
+              "when": "Automated pathfinding \u2014 such as deriving inputs that satisfy checks \u2014 when manual reversing is too slow.",
               "install": "pip install angr",
               "url": "https://github.com/angr/angr",
-              "alt": ["pwntools", "Z3"]
+              "alt": [
+                "pwntools",
+                "Z3"
+              ]
             }
           ]
         },
@@ -300,7 +362,11 @@
               "when": "Collect usable ROP gadgets from a stripped binary you own before assembling a chain.",
               "install": "pip install ropgadget",
               "url": "https://github.com/JonathanSalwan/ROPgadget",
-              "alt": ["Ropper", "one_gadget", "pwntools"]
+              "alt": [
+                "Ropper",
+                "one_gadget",
+                "pwntools"
+              ]
             },
             {
               "name": "Ropper",
@@ -310,7 +376,10 @@
               "when": "Quick gadget inventory across multiple binary formats in a lab when auditing which sequences are constructible.",
               "install": "pip install ropper",
               "url": "https://github.com/sashs/Ropper",
-              "alt": ["ROPgadget", "one_gadget"]
+              "alt": [
+                "ROPgadget",
+                "one_gadget"
+              ]
             },
             {
               "name": "one_gadget",
@@ -320,7 +389,10 @@
               "when": "You have a libc build in a lab or CTF and want short candidate gadget addresses before scripting the constraints.",
               "install": "gem install one_gadget",
               "url": "https://github.com/david942j/one_gadget",
-              "alt": ["ROPgadget", "Ropper"]
+              "alt": [
+                "ROPgadget",
+                "Ropper"
+              ]
             }
           ]
         },
@@ -337,7 +409,9 @@
               "when": "Solve the arithmetic and bitvector equations that symbolic execution or manual analysis hands you.",
               "install": "pip install z3-solver",
               "url": "https://github.com/Z3Prover/z3",
-              "alt": ["angr"]
+              "alt": [
+                "angr"
+              ]
             }
           ]
         },
@@ -354,7 +428,9 @@
               "when": "Academic-lab study of ret2spec-family microarchitectural attacks and how current mitigations cover them.",
               "install": "git clone https://github.com/ibm-research/speculator",
               "url": "https://github.com/ibm-research/speculator",
-              "alt": ["Retbleed PoC"]
+              "alt": [
+                "Retbleed PoC"
+              ]
             },
             {
               "name": "Retbleed PoC",
@@ -364,7 +440,9 @@
               "when": "Reproduce published speculative-execution research artifacts in a lab to measure the impact of mitigations.",
               "install": "git clone https://github.com/comsec-group/retbleed",
               "url": "https://github.com/comsec-group/retbleed",
-              "alt": ["Speculator"]
+              "alt": [
+                "Speculator"
+              ]
             }
           ]
         }
@@ -388,7 +466,10 @@
               "when": "Programmatically decode instruction streams inside your own scripts, emulators, or plugin code.",
               "install": "pip install capstone",
               "url": "https://github.com/capstone-engine/capstone",
-              "alt": ["Keystone", "radare2"]
+              "alt": [
+                "Keystone",
+                "radare2"
+              ]
             },
             {
               "name": "Keystone",
@@ -398,7 +479,10 @@
               "when": "Assemble shellcode or encoding routines on the fly inside your own lab scripts and tooling.",
               "install": "pip install keystone-engine",
               "url": "https://github.com/keystone-engine/keystone",
-              "alt": ["Capstone", "pwntools"]
+              "alt": [
+                "Capstone",
+                "pwntools"
+              ]
             }
           ]
         },
@@ -412,10 +496,14 @@
               "rating": 5,
               "effort": "easy",
               "desc": "Bash/Python script that reads ELF headers and reports active mitigations: PIE, NX, canaries, RELRO, Fortify, and more.",
-              "when": "First move on any binary in a lab or CTF — establish the mitigation baseline before choosing deeper tooling.",
+              "when": "First move on any binary in a lab or CTF \u2014 establish the mitigation baseline before choosing deeper tooling.",
               "install": "git clone https://github.com/slimm609/checksec.sh",
               "url": "https://github.com/slimm609/checksec.sh",
-              "alt": ["file", "objdump / readelf", "strings"]
+              "alt": [
+                "file",
+                "objdump / readelf",
+                "strings"
+              ]
             },
             {
               "name": "file",
@@ -425,27 +513,36 @@
               "when": "Instant triage of any unknown artifact to confirm what you are looking at before deeper analysis.",
               "install": "sudo apt install file",
               "url": "https://www.darwinsys.com/file/",
-              "alt": ["strings", "objdump / readelf"]
+              "alt": [
+                "strings",
+                "objdump / readelf"
+              ]
             },
             {
               "name": "strings",
               "rating": 4,
               "effort": "easy",
               "desc": "Prints printable character sequences from a binary, exposing embedded literals, format strings, and library references without executing it.",
-              "when": "Grab a quick inventory of interesting strings — prompts, /bin/sh, format specifiers — before disassembling.",
+              "when": "Grab a quick inventory of interesting strings \u2014 prompts, /bin/sh, format specifiers \u2014 before disassembling.",
               "install": "sudo apt install binutils",
               "url": "https://www.gnu.org/software/binutils/",
-              "alt": ["file", "objdump / readelf"]
+              "alt": [
+                "file",
+                "objdump / readelf"
+              ]
             },
             {
               "name": "objdump / readelf",
               "rating": 4,
               "effort": "easy",
               "desc": "binutils disassembler and ELF reader providing symbol tables, sections, headers, dynamic imports, and per-arch disassembly.",
-              "when": "Zero-dependency static lookups — grep symbols, inspect section layout, or dump disassembly without a full RE suite.",
+              "when": "Zero-dependency static lookups \u2014 grep symbols, inspect section layout, or dump disassembly without a full RE suite.",
               "install": "sudo apt install binutils",
               "url": "https://www.gnu.org/software/binutils/",
-              "alt": ["file", "strings"]
+              "alt": [
+                "file",
+                "strings"
+              ]
             }
           ]
         },
@@ -462,7 +559,10 @@
               "when": "Compare patched vs unpatched firmware or file versions to spot the instruction-level changes behind a fix.",
               "install": "git clone https://github.com/joxeankoret/diaphora",
               "url": "https://github.com/joxeankoret/diaphora",
-              "alt": ["Ghidra", "Binary Ninja"]
+              "alt": [
+                "Ghidra",
+                "Binary Ninja"
+              ]
             }
           ]
         }

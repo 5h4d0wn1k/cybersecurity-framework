@@ -194,7 +194,7 @@ Open-source incident-response platform with modern case management, timeline piv
 
 **Install:** `docker compose -f docker/default/docker-compose.yml up -d (from github.com/dfir-iris/dfir-iris)`
 
-**URL:** https://github.com/dfir-iris/dfir-iris
+**URL:** https://github.com/dfir-iris/iris-web
 
 **Alternatives:** TheHive, MISP
 
@@ -271,7 +271,7 @@ Free threat-intelligence portal and API aggregating passive DNS, WHOIS, hashes, 
 
 **Install:** `preinstalled (web/API)`
 
-**URL:** https://www.threatminer.org
+**URL:** https://intelx.io
 
 **Alternatives:** AlienVault OTX, Pulsedive
 

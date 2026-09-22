@@ -1,7 +1,7 @@
 {
   "id": "network",
   "name": "Network Attacks & Analysis",
-  "emoji": "📡",
+  "emoji": "\ud83d\udce1",
   "tagline": "Host discovery, port scanning, pivoting, packet capture, on-path interception, and network service auditing for understanding and testing traffic on networks you operate.",
   "class": "offense",
   "categories": [
@@ -23,20 +23,28 @@
                   "rating": 5,
                   "effort": "medium",
                   "desc": "The reference network mapper: full- and half-open TCP/UDP scans, service/version detection, OS fingerprinting with -O, and a 600+ script engine (NSE) for targeted checks.",
-                  "when": "Every assessment starts here — run a -sV service audit on hosts you own after a broad port sweep, then drill into specific services with scripts.",
+                  "when": "Every assessment starts here \u2014 run a -sV service audit on hosts you own after a broad port sweep, then drill into specific services with scripts.",
                   "install": "sudo apt install nmap",
                   "url": "https://nmap.org",
-                  "alt": ["naabu", "masscan", "RustScan"]
+                  "alt": [
+                    "naabu",
+                    "masscan",
+                    "RustScan"
+                  ]
                 },
                 {
                   "name": "masscan",
                   "rating": 5,
                   "effort": "medium",
                   "desc": "Asynchronous TCP port scanner that sweeps entire CIDRs at line rate; its results pipe directly into Nmap or naabu for follow-up.",
-                  "when": "Scan very large ranges fast — your whole lab estate or an entire /8 you operate — before focused Nmap work.",
+                  "when": "Scan very large ranges fast \u2014 your whole lab estate or an entire /8 you operate \u2014 before focused Nmap work.",
                   "install": "sudo apt install masscan",
                   "url": "https://github.com/robertdavidgraham/masscan",
-                  "alt": ["Nmap", "naabu", "RustScan"]
+                  "alt": [
+                    "Nmap",
+                    "naabu",
+                    "RustScan"
+                  ]
                 },
                 {
                   "name": "RustScan",
@@ -46,7 +54,11 @@
                   "when": "Fast all-ports sweeps where speed beats verbosity; pair with -- -sV to keep Nmap's service-detection depth.",
                   "install": "cargo install rustscan",
                   "url": "https://github.com/RustScan/RustScan",
-                  "alt": ["naabu", "masscan", "Nmap"]
+                  "alt": [
+                    "naabu",
+                    "masscan",
+                    "Nmap"
+                  ]
                 },
                 {
                   "name": "naabu",
@@ -56,7 +68,11 @@
                   "when": "Quick broad discovery feeding a recon pipeline: naabu --top-ports 1000 then export JSON to httpx.",
                   "install": "go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest",
                   "url": "https://github.com/projectdiscovery/naabu",
-                  "alt": ["RustScan", "masscan", "Nmap"]
+                  "alt": [
+                    "RustScan",
+                    "masscan",
+                    "Nmap"
+                  ]
                 }
               ]
             },
@@ -70,10 +86,12 @@
                   "rating": 4,
                   "effort": "medium",
                   "desc": "Passive OS fingerprinting via TCP/IP stack quirks (TTL, window size, DF) and HTTP signatures; needs no packets of its own, only observed traffic.",
-                  "when": "Identify OSes on a network you operate without direct scans — feed it a capture or live traffic mirrored from your switch.",
+                  "when": "Identify OSes on a network you operate without direct scans \u2014 feed it a capture or live traffic mirrored from your switch.",
                   "install": "sudo apt install p0f",
                   "url": "https://github.com/p0f/p0f",
-                  "alt": ["nbtscan"]
+                  "alt": [
+                    "nbtscan"
+                  ]
                 },
                 {
                   "name": "nbtscan",
@@ -83,7 +101,10 @@
                   "when": "On an authorized Windows segment, census machine names and shares quickly when ICMP and ARP answers are filtered.",
                   "install": "sudo apt install nbtscan",
                   "url": "http://www.unixwiz.net/tools/nbtscan.html",
-                  "alt": ["p0f", "enumerate shares with smbclient"]
+                  "alt": [
+                    "p0f",
+                    "enumerate shares with smbclient"
+                  ]
                 }
               ]
             },
@@ -100,7 +121,9 @@
                   "when": "After port discovery, run safe script categories (--script default,safe) or a specific script like smb-enum-shares against hosts you own.",
                   "install": "sudo apt install nmap",
                   "url": "https://nmap.org/nsedoc/",
-                  "alt": ["nmap-vulners"]
+                  "alt": [
+                    "nmap-vulners"
+                  ]
                 },
                 {
                   "name": "nmap-vulners",
@@ -110,7 +133,9 @@
                   "when": "Fast triage of version-fatigued service lists: run -sV --script vulners on your own hosts to surface known-CVE matches to patch.",
                   "install": "git clone https://github.com/vulnersCom/nmap-vulners && sudo cp nmap-vulners/*.nse /usr/share/nmap/scripts/",
                   "url": "https://github.com/vulnersCom/nmap-vulners",
-                  "alt": ["Nmap NSE"]
+                  "alt": [
+                    "Nmap NSE"
+                  ]
                 }
               ]
             }
@@ -129,11 +154,14 @@
                   "best": true,
                   "rating": 5,
                   "effort": "easy",
-                  "desc": "ARPs whole subnets and lists live hosts with MAC/OUI vendor — the most reliable L2 census, answered even where ICMP is filtered.",
+                  "desc": "ARPs whole subnets and lists live hosts with MAC/OUI vendor \u2014 the most reliable L2 census, answered even where ICMP is filtered.",
                   "when": "First step on any network you operate: enumerate every physical host on the LAN before scanning services.",
                   "install": "sudo apt install arp-scan",
                   "url": "https://github.com/royhills/arp-scan",
-                  "alt": ["netdiscover", "fping"]
+                  "alt": [
+                    "netdiscover",
+                    "fping"
+                  ]
                 },
                 {
                   "name": "netdiscover",
@@ -143,7 +171,10 @@
                   "when": "A visual live view of your LAN, or passive L2 discovery when you want to stay quiet while monitoring your own segment.",
                   "install": "sudo apt install netdiscover",
                   "url": "https://github.com/netdiscover-scanner/netdiscover",
-                  "alt": ["arp-scan", "fping"]
+                  "alt": [
+                    "arp-scan",
+                    "fping"
+                  ]
                 }
               ]
             },
@@ -160,7 +191,10 @@
                   "when": "Fast liveness check of large or off-subnet ranges where ARP-based tools cannot reach.",
                   "install": "sudo apt install fping",
                   "url": "https://fping.org",
-                  "alt": ["arp-scan", "masscan"]
+                  "alt": [
+                    "arp-scan",
+                    "masscan"
+                  ]
                 }
               ]
             },
@@ -177,7 +211,10 @@
                   "when": "Resolve or brute candidate subdomain lists on your own estate in minutes instead of hours of single-threaded dig.",
                   "install": "git clone https://github.com/blechschmidt/massdns && cd massdns && make",
                   "url": "https://github.com/blechschmidt/massdns",
-                  "alt": ["dnsx", "dig"]
+                  "alt": [
+                    "dnsx",
+                    "dig"
+                  ]
                 }
               ]
             }
@@ -206,7 +243,10 @@
                   "when": "Run a chisel client on a host you own and forward ports back through an HTTP egress that filters plain SOCKS.",
                   "install": "go install github.com/jpillora/chisel@latest",
                   "url": "https://github.com/jpillora/chisel",
-                  "alt": ["frp", "ligolo-ng"]
+                  "alt": [
+                    "frp",
+                    "ligolo-ng"
+                  ]
                 },
                 {
                   "name": "frp",
@@ -216,7 +256,10 @@
                   "when": "Stable exposure of lab services or a pivot point behind restrictive NAT you control.",
                   "install": "wget https://github.com/fatedier/frp/releases/latest/download/frp_linux_amd64.tar.gz && tar xzf frp_linux_amd64.tar.gz",
                   "url": "https://github.com/fatedier/frp",
-                  "alt": ["chisel", "stowaway"]
+                  "alt": [
+                    "chisel",
+                    "stowaway"
+                  ]
                 },
                 {
                   "name": "stowaway",
@@ -226,7 +269,11 @@
                   "when": "Build long multi-hop chains across several hosts you control when a single tunnel is insufficient.",
                   "install": "git clone https://github.com/ph4ntonn/Stowaway && cd Stowaway/Client && go build",
                   "url": "https://github.com/ph4ntonn/Stowaway",
-                  "alt": ["chisel", "frp", "ligolo-ng"]
+                  "alt": [
+                    "chisel",
+                    "frp",
+                    "ligolo-ng"
+                  ]
                 },
                 {
                   "name": "rpivot",
@@ -236,7 +283,10 @@
                   "when": "When the internal host can egress only toward your server; lightweight Python, no agent install beyond the script.",
                   "install": "git clone https://github.com/klsecservices/rpivot",
                   "url": "https://github.com/klsecservices/rpivot",
-                  "alt": ["chisel", "ligolo-ng"]
+                  "alt": [
+                    "chisel",
+                    "ligolo-ng"
+                  ]
                 }
               ]
             },
@@ -250,10 +300,13 @@
                   "rating": 5,
                   "effort": "medium",
                   "desc": "TUN-based tunneling: the agent builds an encrypted tunnel to your proxy, which routes full IP traffic into the agent's network as if you had a real VPN.",
-                  "when": "Full network pivoting across a host you own — route arbitrary hosts/subnets without per-port forwarding.",
+                  "when": "Full network pivoting across a host you own \u2014 route arbitrary hosts/subnets without per-port forwarding.",
                   "install": "go install github.com/nicocha30/ligolo-ng/cmd/proxy@latest && go install github.com/nicocha30/ligolo-ng/cmd/agent@latest",
                   "url": "https://github.com/nicocha30/ligolo-ng",
-                  "alt": ["chisel", "sshuttle"]
+                  "alt": [
+                    "chisel",
+                    "sshuttle"
+                  ]
                 }
               ]
             }
@@ -273,10 +326,13 @@
                   "rating": 4,
                   "effort": "medium",
                   "desc": "Forces any TCP client through a chain of HTTP/SOCKS proxies by shimming its socket calls via LD_PRELOAD.",
-                  "when": "Route existing CLIs through your tunnel(s) without rewriting them — proxychains nmap <target>.",
+                  "when": "Route existing CLIs through your tunnel(s) without rewriting them \u2014 proxychains nmap <target>.",
                   "install": "sudo apt install proxychains4",
                   "url": "https://github.com/haad/proxychains",
-                  "alt": ["sshuttle", "socat"]
+                  "alt": [
+                    "sshuttle",
+                    "socat"
+                  ]
                 },
                 {
                   "name": "sshuttle",
@@ -286,7 +342,10 @@
                   "when": "Pivot your whole routing table through a jump host you administer using just an SSH key.",
                   "install": "sudo apt install sshuttle",
                   "url": "https://github.com/sshuttle/sshuttle",
-                  "alt": ["ligolo-ng", "proxychains"]
+                  "alt": [
+                    "ligolo-ng",
+                    "proxychains"
+                  ]
                 }
               ]
             },
@@ -299,11 +358,14 @@
                   "best": true,
                   "rating": 5,
                   "effort": "medium",
-                  "desc": "Bidirectional relay between TCP, UDP, UNIX sockets, and files, with SSL and FORK support — the byte-plumbing workhorse.",
+                  "desc": "Bidirectional relay between TCP, UDP, UNIX sockets, and files, with SSL and FORK support \u2014 the byte-plumbing workhorse.",
                   "when": "Expose or forward services between hosts, wrap TLS around a plaintext target, or daemonize a listener in controlled lab setups.",
                   "install": "sudo apt install socat",
                   "url": "http://www.dest-unreach.org/socat/",
-                  "alt": ["ncat", "proxychains"]
+                  "alt": [
+                    "ncat",
+                    "proxychains"
+                  ]
                 },
                 {
                   "name": "Ncat",
@@ -313,7 +375,9 @@
                   "when": "Read/write test a service, grab a banner, or relay a plaintext session without extra tooling.",
                   "install": "sudo apt install ncat",
                   "url": "https://nmap.org/ncat/",
-                  "alt": ["socat"]
+                  "alt": [
+                    "socat"
+                  ]
                 }
               ]
             }
@@ -339,10 +403,13 @@
                   "rating": 5,
                   "effort": "medium",
                   "desc": "Graphical packet analyzer decoding hundreds of protocols with stream following, session reassembly, and deep dissection.",
-                  "when": "Investigate a specific conversation or replay a .pcap from your network — the closest thing to seeing the bytes yourself.",
+                  "when": "Investigate a specific conversation or replay a .pcap from your network \u2014 the closest thing to seeing the bytes yourself.",
                   "install": "sudo apt install wireshark",
                   "url": "https://www.wireshark.org",
-                  "alt": ["tshark", "tcpdump"]
+                  "alt": [
+                    "tshark",
+                    "tcpdump"
+                  ]
                 },
                 {
                   "name": "tshark",
@@ -352,17 +419,23 @@
                   "when": "Capture or parse on a headless host and pipe structured output into scripts.",
                   "install": "sudo apt install tshark",
                   "url": "https://www.wireshark.org/docs/man-pages/tshark.html",
-                  "alt": ["tcpdump", "Wireshark"]
+                  "alt": [
+                    "tcpdump",
+                    "Wireshark"
+                  ]
                 },
                 {
                   "name": "tcpdump",
                   "rating": 5,
                   "effort": "medium",
                   "desc": "Command-line packet capture with Berkeley Packet Filter expressions; the standard for headless and rolling capture.",
-                  "when": "Capture on a server you administer or dump to files with -w for later analysis — trivially scriptable.",
+                  "when": "Capture on a server you administer or dump to files with -w for later analysis \u2014 trivially scriptable.",
                   "install": "sudo apt install tcpdump",
                   "url": "https://www.tcpdump.org",
-                  "alt": ["tshark", "Wireshark"]
+                  "alt": [
+                    "tshark",
+                    "Wireshark"
+                  ]
                 }
               ]
             },
@@ -379,7 +452,10 @@
                   "when": "Pull actual payloads (files, HTTP bodies, plaintext credentials) out of a .pcap you own.",
                   "install": "sudo apt install tcpflow",
                   "url": "https://github.com/simsong/tcpflow",
-                  "alt": ["Wireshark", "tshark"]
+                  "alt": [
+                    "Wireshark",
+                    "tshark"
+                  ]
                 }
               ]
             }
@@ -398,11 +474,15 @@
                   "best": true,
                   "rating": 5,
                   "effort": "advanced",
-                  "desc": "Modular MITM framework — ARP/DNS/DHCP spoofing, sniffing, HTTP proxies — with an interactive shell, caplets, and a REST API.",
+                  "desc": "Modular MITM framework \u2014 ARP/DNS/DHCP spoofing, sniffing, HTTP proxies \u2014 with an interactive shell, caplets, and a REST API.",
                   "when": "Full-featured on-path testing on a network you operate: spoof, sniff, and log plaintext from clients you control.",
                   "install": "sudo apt install bettercap",
                   "url": "https://www.bettercap.org",
-                  "alt": ["ettercap", "Responder", "mitmproxy"]
+                  "alt": [
+                    "ettercap",
+                    "Responder",
+                    "mitmproxy"
+                  ]
                 },
                 {
                   "name": "ettercap",
@@ -412,7 +492,10 @@
                   "when": "Traditional LAN MITM lab work when you want the legacy plugin and filter ecosystem.",
                   "install": "sudo apt install ettercap-text-only",
                   "url": "https://www.ettercap-project.org",
-                  "alt": ["bettercap", "Responder"]
+                  "alt": [
+                    "bettercap",
+                    "Responder"
+                  ]
                 }
               ]
             },
@@ -429,7 +512,10 @@
                   "when": "Inspect or rewrite HTTP(S) from an app or device you control, with mitmproxy's CA explicitly trusted on that device.",
                   "install": "pipx install mitmproxy",
                   "url": "https://mitmproxy.org",
-                  "alt": ["bettercap", "Responder"]
+                  "alt": [
+                    "bettercap",
+                    "Responder"
+                  ]
                 }
               ]
             },
@@ -443,10 +529,13 @@
                   "rating": 4,
                   "effort": "advanced",
                   "desc": "LLMNR/NBT-NS/mDNS poisoner that answers resolution queries on a segment you operate and logs the Net-NTLMv1/v2 hashes clients send to it.",
-                  "when": "Validate whether your own Windows clients leak credentials when their resolver goes quiet — to justify disabling LLMNR/NBT-NS.",
+                  "when": "Validate whether your own Windows clients leak credentials when their resolver goes quiet \u2014 to justify disabling LLMNR/NBT-NS.",
                   "install": "sudo apt install responder",
                   "url": "https://github.com/lgandx/Responder",
-                  "alt": ["mitm6", "bettercap"]
+                  "alt": [
+                    "mitm6",
+                    "bettercap"
+                  ]
                 },
                 {
                   "name": "mitm6",
@@ -456,7 +545,9 @@
                   "when": "Test IPv6 spoofing of your own dual-stack Windows clients to confirm mitigations (WPAD removal, RA filtering) are in place.",
                   "install": "pipx install mitm6",
                   "url": "https://github.com/dirkjanm/mitm6",
-                  "alt": ["Responder"]
+                  "alt": [
+                    "Responder"
+                  ]
                 }
               ]
             }
@@ -479,7 +570,10 @@
                   "when": "Probe how your own firewalls treat malformed or flagged packets, or test a service on non-standard ports.",
                   "install": "sudo apt install hping3",
                   "url": "http://www.hping.org/",
-                  "alt": ["Scapy", "nmap"]
+                  "alt": [
+                    "Scapy",
+                    "nmap"
+                  ]
                 },
                 {
                   "name": "Scapy",
@@ -489,11 +583,29 @@
                   "when": "Build bespoke probes or protocol fuzzers for your own services when off-the-shelf tools cannot express the exact packet.",
                   "install": "sudo apt install python3-scapy",
                   "url": "https://scapy.net",
-                  "alt": ["hping3", "nmap"]
+                  "alt": [
+                    "hping3",
+                    "nmap"
+                  ]
                 }
               ]
             }
           ]
+        }
+      ],
+      "tools": [
+        {
+          "name": "netpwn",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "L2/L3 MITM & network attack suite \u2014 ARP/DHCP/DNS/VLAN spoofing, port-knock, pcap tooling; dry-run default.",
+          "when": "On-path network experiments on isolated segments you own.",
+          "install": "git clone https://github.com/5h4d0wn1k/netpwn",
+          "url": "https://github.com/5h4d0wn1k/netpwn",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
         }
       ]
     },
@@ -518,17 +630,23 @@
                   "when": "Dump as much SNMP-visible detail as possible from one of your managed devices using the read community after discovery.",
                   "install": "sudo apt install snmp",
                   "url": "https://github.com/net-snmp/net-snmp",
-                  "alt": ["snmp-check", "onesixtyone"]
+                  "alt": [
+                    "snmp-check",
+                    "onesixtyone"
+                  ]
                 },
                 {
                   "name": "snmp-check",
                   "rating": 4,
                   "effort": "easy",
-                  "desc": "Perl enumerator that turns SNMP walks into human-readable reports — system, network, routing, and listening ports in one shot.",
+                  "desc": "Perl enumerator that turns SNMP walks into human-readable reports \u2014 system, network, routing, and listening ports in one shot.",
                   "when": "Quick presentation-ready SNMP summary of a device you manage without memorizing OIDs.",
                   "install": "sudo apt install snmpcheck",
                   "url": "http://www.nothink.org/codes/snmpcheck/index.php",
-                  "alt": ["snmpwalk", "onesixtyone"]
+                  "alt": [
+                    "snmpwalk",
+                    "onesixtyone"
+                  ]
                 },
                 {
                   "name": "onesixtyone",
@@ -538,7 +656,10 @@
                   "when": "Discover which of your own network devices run SNMP with default or weak read communities across a whole estate.",
                   "install": "sudo apt install onesixtyone",
                   "url": "https://github.com/trailofbits/onesixtyone",
-                  "alt": ["snmpwalk", "snmp-check"]
+                  "alt": [
+                    "snmpwalk",
+                    "snmp-check"
+                  ]
                 }
               ]
             },
@@ -555,7 +676,9 @@
                   "when": "Query directory objects (users, groups, OUs, attributes) on a directory you administer or are authorized to audit.",
                   "install": "sudo apt install ldap-utils",
                   "url": "https://github.com/openldap/openldap",
-                  "alt": ["ldapdomaindump"]
+                  "alt": [
+                    "ldapdomaindump"
+                  ]
                 },
                 {
                   "name": "ldapdomaindump",
@@ -565,7 +688,9 @@
                   "when": "One-shot AD network object dump for analysis and reporting during an authorized directory audit.",
                   "install": "pipx install ldapdomaindump",
                   "url": "https://github.com/dirkjanm/ldapdomaindump",
-                  "alt": ["ldapsearch"]
+                  "alt": [
+                    "ldapsearch"
+                  ]
                 }
               ]
             }
@@ -592,7 +717,11 @@
                       "when": "Test share access and anonymous or null listings on hosts you operate before deeper tooling.",
                       "install": "sudo apt install smbclient",
                       "url": "https://www.samba.org/samba/",
-                      "alt": ["enum4linux-ng", "NetExec", "rpcclient"]
+                      "alt": [
+                        "enum4linux-ng",
+                        "NetExec",
+                        "rpcclient"
+                      ]
                     },
                     {
                       "name": "enum4linux-ng",
@@ -602,7 +731,11 @@
                       "when": "Complete legacy SMB enumeration (users, shares, policy) in one command against an assessed host.",
                       "install": "pipx install git+https://github.com/cddmp/enum4linux-ng",
                       "url": "https://github.com/cddmp/enum4linux-ng",
-                      "alt": ["smbclient", "NetExec", "rpcclient"]
+                      "alt": [
+                        "smbclient",
+                        "NetExec",
+                        "rpcclient"
+                      ]
                     }
                   ]
                 },
@@ -616,20 +749,27 @@
                       "rating": 5,
                       "effort": "medium",
                       "desc": "Successor to CrackMapExec: multi-protocol (SMB, LDAP, MSSQL, WinRM, RDP) credential-validated enumeration of shares, users, sessions, and policy across fleets.",
-                      "when": "Credentialed health-check across many Windows hosts at once during an authorized assessment — who is admin where, which shares are open.",
+                      "when": "Credentialed health-check across many Windows hosts at once during an authorized assessment \u2014 who is admin where, which shares are open.",
                       "install": "pipx install git+https://github.com/Pennyw0rth/NetExec",
                       "url": "https://github.com/Pennyw0rth/NetExec",
-                      "alt": ["Impacket", "smbclient", "CrackMapExec (predecessor)"]
+                      "alt": [
+                        "Impacket",
+                        "smbclient",
+                        "CrackMapExec (predecessor)"
+                      ]
                     },
                     {
                       "name": "Impacket",
                       "rating": 5,
                       "effort": "medium",
-                      "desc": "Fortra's Python implementations of Windows network protocols with ~100 example scripts — smbclient, secretsdump, psexec, wmiexec, getTGT, and more.",
+                      "desc": "Fortra's Python implementations of Windows network protocols with ~100 example scripts \u2014 smbclient, secretsdump, psexec, wmiexec, getTGT, and more.",
                       "when": "Protocol-level SMB/RPC/directory work from Linux when you need scriptable, low-level control over the wire.",
                       "install": "pipx install impacket",
                       "url": "https://github.com/fortra/impacket",
-                      "alt": ["NetExec", "smbclient"]
+                      "alt": [
+                        "NetExec",
+                        "smbclient"
+                      ]
                     }
                   ]
                 }
@@ -645,20 +785,25 @@
                   "rating": 3,
                   "effort": "easy",
                   "desc": "Queries the NFS mount daemon for exported filesystems (showmount -e) on NFS servers, listing paths and export flags.",
-                  "when": "Enumerate which NFS exports a host you operate offers, and with what flags — first step before any mount testing.",
+                  "when": "Enumerate which NFS exports a host you operate offers, and with what flags \u2014 first step before any mount testing.",
                   "install": "sudo apt install nfs-common",
                   "url": "http://www.linux-nfs.org/",
-                  "alt": ["rpcclient"]
+                  "alt": [
+                    "rpcclient"
+                  ]
                 },
                 {
                   "name": "rpcclient",
                   "rating": 3,
                   "effort": "medium",
-                  "desc": "Samba's RPC client that interrogates MS-RPC endpoints — user, domain, SID, and session lookups, often over null sessions.",
+                  "desc": "Samba's RPC client that interrogates MS-RPC endpoints \u2014 user, domain, SID, and session lookups, often over null sessions.",
                   "when": "Legacy SMB/RPC enumeration (SID and user queries) when standard SMB clients are blocked on a network you're authorized to test.",
                   "install": "sudo apt install samba-client",
                   "url": "https://www.samba.org/samba/",
-                  "alt": ["smbclient", "enum4linux-ng"]
+                  "alt": [
+                    "smbclient",
+                    "enum4linux-ng"
+                  ]
                 }
               ]
             }
@@ -681,7 +826,9 @@
                   "when": "Access a Windows RDP host you manage for GUI testing, session capture, or share-mount tests.",
                   "install": "sudo apt install freerdp2-x11",
                   "url": "https://github.com/FreeRDP/FreeRDP",
-                  "alt": ["rdesktop"]
+                  "alt": [
+                    "rdesktop"
+                  ]
                 },
                 {
                   "name": "rdesktop",
@@ -691,7 +838,9 @@
                   "when": "Lightweight RDP client for older Windows services where FreeRDP is overkill.",
                   "install": "sudo apt install rdesktop",
                   "url": "https://github.com/rdesktop/rdesktop",
-                  "alt": ["xfreerdp"]
+                  "alt": [
+                    "xfreerdp"
+                  ]
                 }
               ]
             },
@@ -704,11 +853,13 @@
                   "best": true,
                   "rating": 5,
                   "effort": "medium",
-                  "desc": "Actively probes an SSH server and scores its configuration — kex, ciphers, MACs, key types — against known weaknesses and current advisories.",
+                  "desc": "Actively probes an SSH server and scores its configuration \u2014 kex, ciphers, MACs, key types \u2014 against known weaknesses and current advisories.",
                   "when": "Audit the SSH policy of your own hosts; ships CI-friendly JSON and HTML report output.",
                   "install": "pipx install ssh-audit",
                   "url": "https://github.com/jtesta/ssh-audit",
-                  "alt": ["nmap (ssh2-enum-algos)"]
+                  "alt": [
+                    "nmap (ssh2-enum-algos)"
+                  ]
                 }
               ]
             },
@@ -725,7 +876,9 @@
                   "when": "Poke an FTP service you run: anonymous-login checks, recursive listing, and large recursive mirrors.",
                   "install": "sudo apt install lftp",
                   "url": "https://lftp.yar.ru",
-                  "alt": ["curl"]
+                  "alt": [
+                    "curl"
+                  ]
                 }
               ]
             }

@@ -64,6 +64,7 @@ contain:
 | `install` | one real install line (apt/pip/go/brew/exe, or "preinstalled (web)") |
 | `url` | official repo/site URL |
 | `alt` | 1-4 genuine alternatives already listed nearby where possible |
+| `by` | *optional* — GitHub username authoring this tool (own/first-party tools, e.g. `"by": "5h4d0wn1k"`). Tools with `by` render a violet ◆ badge in the tree, a "by <user>" chip in the details panel, and a GitHub link. `url` must point at that owner's repo. |
 
 ## Category node fields
 

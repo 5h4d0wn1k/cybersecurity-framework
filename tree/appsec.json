@@ -1,8 +1,8 @@
 {
   "id": "appsec",
   "name": "Application Security (SAST, DAST, Secrets & SCA)",
-  "emoji": "🧪",
-  "tagline": "Product-security gates for the code and recipes you ship: SAST, DAST, secrets detection, dependency (SCA), fuzzing, and threat modeling — nested by technique for dev and DevProd teams.",
+  "emoji": "\ud83e\uddea",
+  "tagline": "Product-security gates for the code and recipes you ship: SAST, DAST, secrets detection, dependency (SCA), fuzzing, and threat modeling \u2014 nested by technique for dev and DevProd teams.",
   "class": "defense",
   "categories": [
     {
@@ -22,7 +22,11 @@
               "when": "The default SAST layer for any dev team: run it per-PR in CI or in the editor to catch injection, dangerous-API misuse, and hardcoded secrets before merge.",
               "install": "pipx install semgrep",
               "url": "https://github.com/semgrep/semgrep",
-              "alt": ["codeql", "bandit", "gosec"]
+              "alt": [
+                "codeql",
+                "bandit",
+                "gosec"
+              ]
             },
             {
               "name": "CodeQL",
@@ -32,7 +36,10 @@
               "when": "High-signal coverage on GitHub-hosted repos: enable code scanning on schedules and PRs, then drop into the CodeQL CLI to run or author bespoke queries on a local database.",
               "install": "Download the CodeQL CLI bundle from github.com/github/codeql-action/releases",
               "url": "https://github.com/github/codeql",
-              "alt": ["semgrep", "sonarqube"]
+              "alt": [
+                "semgrep",
+                "sonarqube"
+              ]
             },
             {
               "name": "SonarQube",
@@ -42,7 +49,10 @@
               "when": "When an org needs a shared, dashboard-visible quality gate and SAST history instead of per-commit CLI output.",
               "install": "docker run -d --name sonarqube -p 9000:9000 sonarqube:lts-community",
               "url": "https://github.com/SonarSource/sonarqube",
-              "alt": ["semgrep", "codeql"]
+              "alt": [
+                "semgrep",
+                "codeql"
+              ]
             }
           ]
         },
@@ -59,11 +69,14 @@
                   "best": true,
                   "rating": 4,
                   "effort": "easy",
-                  "desc": "PyCQA's AST-based Python analyzer flags common first-party mistakes — SQLi, shell injection, pickles, eval, weak crypto, and path permissions — with a low-noise report you can tune.",
+                  "desc": "PyCQA's AST-based Python analyzer flags common first-party mistakes \u2014 SQLi, shell injection, pickles, eval, weak crypto, and path permissions \u2014 with a low-noise report you can tune.",
                   "when": "A no-config SAST pass for Python services: pip-install, point it at the package directory, and wire into CI.",
                   "install": "pip3 install bandit",
                   "url": "https://github.com/PyCQA/bandit",
-                  "alt": ["semgrep", "ruff"]
+                  "alt": [
+                    "semgrep",
+                    "ruff"
+                  ]
                 }
               ]
             },
@@ -80,7 +93,10 @@
                   "when": "The quick Go-specific SAST gate in CI, alongside or before a language-agnostic scanner like Semgrep.",
                   "install": "go install github.com/securego/gosec/v2/cmd/gosec@latest",
                   "url": "https://github.com/securego/gosec",
-                  "alt": ["semgrep", "govulncheck"]
+                  "alt": [
+                    "semgrep",
+                    "govulncheck"
+                  ]
                 }
               ]
             },
@@ -97,7 +113,10 @@
                   "when": "Any Rails/Ruby codebase in CI: one command and the framework-aware findings are worth more than generic engines.",
                   "install": "gem install brakeman",
                   "url": "https://github.com/presidentbeef/brakeman",
-                  "alt": ["semgrep", "codeql"]
+                  "alt": [
+                    "semgrep",
+                    "codeql"
+                  ]
                 }
               ]
             },
@@ -111,10 +130,13 @@
                   "rating": 4,
                   "effort": "medium",
                   "desc": "SpotBugs is the Java bytecode static analyzer; the FindSecBugs plugin adds 120+ security patterns (path traversal, XXE, weak crypto, injection sinks) to its findings.",
-                  "when": "Java/JVM builds that need bytecode-level findings beyond a pattern scanner — wire the Maven/Gradle plugin into the build.",
+                  "when": "Java/JVM builds that need bytecode-level findings beyond a pattern scanner \u2014 wire the Maven/Gradle plugin into the build.",
                   "install": "brew install spotbugs",
                   "url": "https://github.com/spotbugs/spotbugs",
-                  "alt": ["semgrep", "codeql"]
+                  "alt": [
+                    "semgrep",
+                    "codeql"
+                  ]
                 },
                 {
                   "name": "Security Code Scan (.NET)",
@@ -124,7 +146,9 @@
                   "when": ".NET solutions in CI: install the NuGet analyzer and let it run inline with the build for zero extra infra.",
                   "install": "dotnet add package SecurityCodeScan.VS2019",
                   "url": "https://github.com/security-code-scan/security-code-scan",
-                  "alt": ["semgrep"]
+                  "alt": [
+                    "semgrep"
+                  ]
                 }
               ]
             },
@@ -141,7 +165,10 @@
                   "when": "Node/JS repos already on ESLint: enable the security ruleset for the fastest in-editor security feedback.",
                   "install": "npm install --save-dev eslint-plugin-security",
                   "url": "https://github.com/nodesecurity/eslint-plugin-security",
-                  "alt": ["semgrep", "codeql"]
+                  "alt": [
+                    "semgrep",
+                    "codeql"
+                  ]
                 },
                 {
                   "name": "Psalm",
@@ -151,11 +178,28 @@
                   "when": "PHP projects wanting first-party vulnerability detection in CI without a managed SaaS.",
                   "install": "composer require --dev vimeo/psalm",
                   "url": "https://github.com/vimeo/psalm",
-                  "alt": ["semgrep"]
+                  "alt": [
+                    "semgrep"
+                  ]
                 }
               ]
             }
           ]
+        }
+      ],
+      "tools": [
+        {
+          "name": "viperstrike",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "MCP (Model Context Protocol) server vulnerability auditor \u2014 AST/whitebox SAST for agentic AI tool handlers, SARIF-capable, optional oracle runtime mode.",
+          "when": "Auditing MCP servers and AI tool endpoints for handler-level vulnerabilities.",
+          "install": "git clone https://github.com/5h4d0wn1k/viperstrike",
+          "url": "https://github.com/5h4d0wn1k/viperstrike",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
         }
       ]
     },
@@ -176,17 +220,23 @@
               "when": "Stand up per-app DAST: run the baseline scan against a staging build nightly or per-PR, then use the proxy for manual testing of tricky auth flows.",
               "install": "docker run -t ghcr.io/zaproxy/zaproxy zap-baseline.py -t https://staging.example.com",
               "url": "https://github.com/zaproxy/zaproxy",
-              "alt": ["nuclei", "wapiti"]
+              "alt": [
+                "nuclei",
+                "wapiti"
+              ]
             },
             {
               "name": "Nuclei",
               "rating": 4,
               "effort": "easy",
               "desc": "ProjectDiscovery's template-driven vulnerability scanner with 8,000+ community YAML templates (CVEs, exposures, misconfigs) and fast protocol-level scanning.",
-              "when": "Broad templated coverage across an app inventory — feed it URLs/HTTP inputs in CI and get CVE-check results without bespoke rules.",
+              "when": "Broad templated coverage across an app inventory \u2014 feed it URLs/HTTP inputs in CI and get CVE-check results without bespoke rules.",
               "install": "go install github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest",
               "url": "https://github.com/projectdiscovery/nuclei",
-              "alt": ["OWASP ZAP", "wapiti"]
+              "alt": [
+                "OWASP ZAP",
+                "wapiti"
+              ]
             },
             {
               "name": "Wapiti",
@@ -196,7 +246,10 @@
               "when": "Scriptable scan of internal apps where you want a ZAP alternative with no Docker dependency and easy output automation.",
               "install": "pip3 install wapiti3",
               "url": "https://github.com/wapiti-scanner/wapiti",
-              "alt": ["OWASP ZAP", "nuclei"]
+              "alt": [
+                "OWASP ZAP",
+                "nuclei"
+              ]
             }
           ]
         },
@@ -213,17 +266,23 @@
               "when": "Manual pentest-style review of your own apps: drive the app through the proxy, then replay, tamper, and fuzz individual requests by hand.",
               "install": "sudo apt install burpsuite",
               "url": "https://portswigger.net/burp",
-              "alt": ["OWASP ZAP", "Caido"]
+              "alt": [
+                "OWASP ZAP",
+                "Caido"
+              ]
             },
             {
               "name": "Arachni",
               "rating": 3,
               "effort": "advanced",
               "desc": "Ruby-based web scanner with a rich modular architecture and REST/WebSocket APIs; unmaintained for several years but deployable standalone or embedded.",
-              "when": "Legacy stacks that ship its browser-based grid, or when you want its fingerprinting modules self-hosted — otherwise prefer ZAP or Nuclei.",
+              "when": "Legacy stacks that ship its browser-based grid, or when you want its fingerprinting modules self-hosted \u2014 otherwise prefer ZAP or Nuclei.",
               "install": "docker run -td --name arachni -p 9292:9292 aharbor/arachni",
               "url": "https://github.com/Arachni/arachni",
-              "alt": ["OWASP ZAP", "wapiti"]
+              "alt": [
+                "OWASP ZAP",
+                "wapiti"
+              ]
             }
           ]
         },
@@ -240,7 +299,9 @@
               "when": "API-only DAST beyond the HTML UI: after a ZAP baseline, point RESTler at the schema to grind through every endpoint and parameter combination.",
               "install": "Download the RESTler release archive from github.com/microsoft/restler-fuzzer/releases",
               "url": "https://github.com/microsoft/restler-fuzzer",
-              "alt": ["schemathesis"]
+              "alt": [
+                "schemathesis"
+              ]
             },
             {
               "name": "Schemathesis",
@@ -250,7 +311,10 @@
               "when": "Shift-left API testing in CI where you want schema-driven request generation plus explicit security assertions, with a GiHub Action.",
               "install": "pipx install schemathesis",
               "url": "https://github.com/schemathesis/schemathesis",
-              "alt": ["RESTler", "OWASP ZAP"]
+              "alt": [
+                "RESTler",
+                "OWASP ZAP"
+              ]
             }
           ]
         }
@@ -273,17 +337,23 @@
               "when": "The reference dependency gate for build output: run on release builds to block known-vulnerable libraries before they ship; the first run downloads the full NVD feed.",
               "install": "docker run --rm -v \"$PWD\":/src owasp/dependency-check --scan /src --out /report",
               "url": "https://github.com/dependency-check/DependencyCheck",
-              "alt": ["osv-scanner", "trivy"]
+              "alt": [
+                "osv-scanner",
+                "trivy"
+              ]
             },
             {
               "name": "OSV-Scanner",
               "rating": 4,
               "effort": "easy",
-              "desc": "Google's open-source vulnerability scanner (the engine behind GitHub Dependabot) that matches lockfiles and SBOMs against the OSV.dev database — fast, quiet, and free of NVD feed friction.",
+              "desc": "Google's open-source vulnerability scanner (the engine behind GitHub Dependabot) that matches lockfiles and SBOMs against the OSV.dev database \u2014 fast, quiet, and free of NVD feed friction.",
               "when": "Snappy per-lockfile check in CI (package-lock.json, go.sum, requirements, poetry, etc.) when you want OSV-only coverage without a heavyweight feed.",
               "install": "go install github.com/google/osv-scanner/cmd/osv-scanner@latest",
               "url": "https://github.com/google/osv-scanner",
-              "alt": ["OWASP Dependency-Check", "pip-audit"]
+              "alt": [
+                "OWASP Dependency-Check",
+                "pip-audit"
+              ]
             }
           ]
         },
@@ -304,7 +374,10 @@
                   "when": "Python-only repos: the smallest honest way to keep requirements.txt/pyproject dependency lists clean as part of pre-commit or CI.",
                   "install": "pipx install pip-audit",
                   "url": "https://github.com/pypa/pip-audit",
-                  "alt": ["osv-scanner", "OWASP Dependency-Check"]
+                  "alt": [
+                    "osv-scanner",
+                    "OWASP Dependency-Check"
+                  ]
                 }
               ]
             },
@@ -319,9 +392,12 @@
                   "effort": "easy",
                   "desc": "Bundled npm command that checks the installed dependency tree against the npm advisory database and can auto-downgrade (`npm audit fix`) where a patched version exists.",
                   "when": "Zero-setup Node dependency gate: run in CI after install and block on high/critical findings.",
-                  "install": "Bundled with npm — no install needed",
+                  "install": "Bundled with npm \u2014 no install needed",
                   "url": "https://docs.npmjs.com/cli/v10/commands/npm-audit",
-                  "alt": ["osv-scanner", "OWASP Dependency-Check"]
+                  "alt": [
+                    "osv-scanner",
+                    "OWASP Dependency-Check"
+                  ]
                 }
               ]
             },
@@ -338,7 +414,10 @@
                   "when": "Go modules in CI: `govulncheck ./...` gives call-reachable CVEs with far less noise than generic SCA.",
                   "install": "go install golang.org/x/vuln/cmd/govulncheck@latest",
                   "url": "https://github.com/golang/vuln",
-                  "alt": ["osv-scanner", "gosec"]
+                  "alt": [
+                    "osv-scanner",
+                    "gosec"
+                  ]
                 }
               ]
             },
@@ -355,7 +434,9 @@
                   "when": "Rust projects in CI: run against the committed Cargo.lock every PR.",
                   "install": "cargo install cargo-audit",
                   "url": "https://github.com/rustsec/cargo-audit",
-                  "alt": ["osv-scanner"]
+                  "alt": [
+                    "osv-scanner"
+                  ]
                 }
               ]
             }
@@ -374,7 +455,10 @@
               "when": "Container-first SCA inside the build: generate the SBOM, scan it with Grype, and attach it as a build attestation.",
               "install": "brew install anchore/grype/grype anchore/syft/syft",
               "url": "https://github.com/anchore/grype",
-              "alt": ["trivy", "OWASP Dependency-Check"]
+              "alt": [
+                "trivy",
+                "OWASP Dependency-Check"
+              ]
             }
           ]
         }
@@ -397,7 +481,10 @@
               "when": "Gate every repo and pipeline: full-history sweep when onboarding, then pre-commit/PR scans from then on; the default before anything heavier.",
               "install": "go install github.com/gitleaks/gitleaks/v8@latest",
               "url": "https://github.com/gitleaks/gitleaks",
-              "alt": ["TruffleHog", "detect-secrets"]
+              "alt": [
+                "TruffleHog",
+                "detect-secrets"
+              ]
             },
             {
               "name": "TruffleHog",
@@ -407,7 +494,10 @@
               "when": "Org-wide sweeps where knowing which leaked credentials still work matters more than raw match counts.",
               "install": "curl -sSfL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b /usr/local/bin",
               "url": "https://github.com/trufflesecurity/trufflehog",
-              "alt": ["gitleaks", "detect-secrets"]
+              "alt": [
+                "gitleaks",
+                "detect-secrets"
+              ]
             }
           ]
         },
@@ -424,7 +514,10 @@
               "when": "Teams worn out by re-flagged false positives: do the one-time audit + baseline review, then let it police new commits.",
               "install": "pip3 install detect-secrets",
               "url": "https://github.com/Yelp/detect-secrets",
-              "alt": ["gitleaks", "git-secrets"]
+              "alt": [
+                "gitleaks",
+                "git-secrets"
+              ]
             }
           ]
         },
@@ -441,7 +534,10 @@
               "when": "Pre-commit + CI hook coverage when you already use GitGuardian's engine conventions and want its detectors locally.",
               "install": "pipx install ggshield",
               "url": "https://github.com/GitGuardian/ggshield",
-              "alt": ["gitleaks", "TruffleHog"]
+              "alt": [
+                "gitleaks",
+                "TruffleHog"
+              ]
             }
           ]
         }
@@ -464,7 +560,10 @@
               "when": "Fuzz any C/C++ parser or binary you own: compile with afl-clang-fast, seed a corpus, and let parallel instances grind for crashes and hangs.",
               "install": "sudo apt install afl++",
               "url": "https://github.com/AFLplusplus/AFLplusplus",
-              "alt": ["honggfuzz", "libFuzzer"]
+              "alt": [
+                "honggfuzz",
+                "libFuzzer"
+              ]
             },
             {
               "name": "libFuzzer",
@@ -472,9 +571,12 @@
               "effort": "advanced",
               "desc": "Clang's in-process, coverage-guided fuzzing library: link a fuzz target function, enable -fsanitize=fuzzer,address, and get corpus minimization plus sanitizer-detected crashes for free.",
               "when": "C/C++ libraries in LLVM builds where in-process fuzzing with ASan/UBSan finds more per second than fork-based engines.",
-              "install": "Built into clang — compile with -fsanitize=fuzzer,address",
+              "install": "Built into clang \u2014 compile with -fsanitize=fuzzer,address",
               "url": "https://llvm.org/docs/LibFuzzer.html",
-              "alt": ["AFL++", "honggfuzz"]
+              "alt": [
+                "AFL++",
+                "honggfuzz"
+              ]
             },
             {
               "name": "Honggfuzz",
@@ -484,7 +586,10 @@
               "when": "When you want hardware-assisted coverage on Linux or a fast standalone alternative to AFL++ for your parsers.",
               "install": "git clone https://github.com/google/honggfuzz.git && cd honggfuzz && make",
               "url": "https://github.com/google/honggfuzz",
-              "alt": ["AFL++", "libFuzzer"]
+              "alt": [
+                "AFL++",
+                "libFuzzer"
+              ]
             }
           ]
         },
@@ -501,7 +606,10 @@
               "when": "Grab your @FuzzTest hooks and parse untrusted Java input (JSON, XML, protobuf) to find exceptions, hangs, and memory issues.",
               "install": "Download the Jazzer release archive from github.com/CodeIntelligenceTesting/jazzer/releases",
               "url": "https://github.com/CodeIntelligenceTesting/jazzer",
-              "alt": ["AFL++", "libFuzzer"]
+              "alt": [
+                "AFL++",
+                "libFuzzer"
+              ]
             }
           ]
         },
@@ -516,9 +624,12 @@
               "effort": "advanced",
               "desc": "Google's open-source continuous fuzzing service for critical OSS: builds your project with sanitizers, runs libFuzzer/AFL++/Honggfuzz at scale, and files issues when new bugs are found.",
               "when": "You maintain a widely-used open-source library with a C/C++/Golang/Rust surface and want Google-scale fuzzing with zero infra of your own.",
-              "install": "Follow google/oss-fuzz quickstart (Docker + build.sh) — no direct install",
+              "install": "Follow google/oss-fuzz quickstart (Docker + build.sh) \u2014 no direct install",
               "url": "https://github.com/google/oss-fuzz",
-              "alt": ["libFuzzer", "AFL++"]
+              "alt": [
+                "libFuzzer",
+                "AFL++"
+              ]
             }
           ]
         },
@@ -535,9 +646,26 @@
               "when": "Evaluate or compare protocol fuzzers, or learn stateful fuzzing against realistic targets before applying it to your own servers.",
               "install": "git clone https://github.com/profuzzbench/profuzzbench.git",
               "url": "https://github.com/profuzzbench/profuzzbench",
-              "alt": ["OSS-Fuzz"]
+              "alt": [
+                "OSS-Fuzz"
+              ]
             }
           ]
+        }
+      ],
+      "tools": [
+        {
+          "name": "toxindb",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "RAG retrieval-time poisoning detector \u2014 demand-recency discrimination, canary injection, provenance attestation; fully offline, SARIF+MD reports.",
+          "when": "Checking your own RAG/vector knowledge bases for poisoned or injected content.",
+          "install": "git clone https://github.com/5h4d0wn1k/toxindb",
+          "url": "https://github.com/5h4d0wn1k/toxindb",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
         }
       ]
     },
@@ -558,7 +686,10 @@
               "when": "Teams that want a shared, reviewable threat model per service without forcing every engineer to learn a coding DSL.",
               "install": "docker run -d -p 3000:3000 owasp/threat-dragon",
               "url": "https://github.com/OWASP/threat-dragon",
-              "alt": ["pytm", "Threagile"]
+              "alt": [
+                "pytm",
+                "Threagile"
+              ]
             }
           ]
         },
@@ -571,11 +702,14 @@
               "best": true,
               "rating": 4,
               "effort": "medium",
-              "desc": "OWASP's Pythonic framework: define your system as Python objects and generate data-flow diagrams, STRIDE threat lists, and mitigations — diffs cleanly in git and runs in CI.",
+              "desc": "OWASP's Pythonic framework: define your system as Python objects and generate data-flow diagrams, STRIDE threat lists, and mitigations \u2014 diffs cleanly in git and runs in CI.",
               "when": "When the threat model must live in the repo and be code-reviewed like any other artifact, or is derived from your IaC definitions.",
               "install": "pip3 install pytm",
               "url": "https://github.com/OWASP/pytm",
-              "alt": ["Threat Dragon", "Threagile"]
+              "alt": [
+                "Threat Dragon",
+                "Threagile"
+              ]
             },
             {
               "name": "Threagile",
@@ -585,7 +719,10 @@
               "when": "Organizations that standardize on YAML-first threat modeling and want automated risk catalogs from the same source of truth.",
               "install": "docker run --rm -v \"$PWD\":/app threagile/threagile",
               "url": "https://github.com/threagile/threagile",
-              "alt": ["pytm", "Threat Dragon"]
+              "alt": [
+                "pytm",
+                "Threat Dragon"
+              ]
             }
           ]
         }

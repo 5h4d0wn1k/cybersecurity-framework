@@ -1,8 +1,8 @@
 {
   "id": "osint",
-  "name": "OSINT — People, Infrastructure & Metadata",
-  "emoji": "🕸️",
-  "tagline": "Passive intelligence on people, exposed infrastructure, and document metadata — for authorized recon and for auditing your own digital footprint.",
+  "name": "OSINT \u2014 People, Infrastructure & Metadata",
+  "emoji": "\ud83d\udd78\ufe0f",
+  "tagline": "Passive intelligence on people, exposed infrastructure, and document metadata \u2014 for authorized recon and for auditing your own digital footprint.",
   "class": "offense",
   "categories": [
     {
@@ -22,7 +22,11 @@
               "when": "Confirm which sites a username you own is registered on so you can harden or clean up your own footprint.",
               "install": "pipx install sherlock-project",
               "url": "https://github.com/sherlock-project/sherlock",
-              "alt": ["maigret", "blackbird", "whatsmyname"]
+              "alt": [
+                "maigret",
+                "blackbird",
+                "whatsmyname"
+              ]
             },
             {
               "name": "Maigret",
@@ -32,7 +36,11 @@
               "when": "When Sherlock's pass/fail list is not enough and you want an exportable report of everywhere a handle you control appears.",
               "install": "pipx install maigret",
               "url": "https://github.com/soxoj/maigret",
-              "alt": ["sherlock", "blackbird", "whatsmyname"]
+              "alt": [
+                "sherlock",
+                "blackbird",
+                "whatsmyname"
+              ]
             },
             {
               "name": "Blackbird",
@@ -42,7 +50,11 @@
               "when": "Bulk-check many candidate usernames over a short window, limited to handles and accounts you are authorized to investigate.",
               "install": "go install github.com/p1ngul1n0/blackbird@latest",
               "url": "https://github.com/p1ngul1n0/blackbird",
-              "alt": ["sherlock", "maigret", "whatsmyname"]
+              "alt": [
+                "sherlock",
+                "maigret",
+                "whatsmyname"
+              ]
             },
             {
               "name": "WhatsMyName",
@@ -52,7 +64,11 @@
               "when": "Audit a checker result or drive your own authorized username sweep against a curated, up-to-date site list.",
               "install": "git clone https://github.com/WebBreacher/WhatsMyName.git",
               "url": "https://github.com/WebBreacher/WhatsMyName",
-              "alt": ["sherlock", "maigret", "blackbird"]
+              "alt": [
+                "sherlock",
+                "maigret",
+                "blackbird"
+              ]
             }
           ]
         },
@@ -73,7 +89,10 @@
                   "when": "Check whether addresses or domains you control appeared in known breaches, and enforce password-exposure checks on your own estate.",
                   "install": "preinstalled (web + API)",
                   "url": "https://haveibeenpwned.com",
-                  "alt": ["intelligencex", "leakcheck"]
+                  "alt": [
+                    "intelligencex",
+                    "leakcheck"
+                  ]
                 },
                 {
                   "name": "IntelligenceX",
@@ -83,7 +102,11 @@
                   "when": "Check if your emails, domains, or phone numbers surface in dark-web and paste archives you are authorized to monitor.",
                   "install": "preinstalled (web - API key)",
                   "url": "https://intelx.io",
-                  "alt": ["haveibeenpwned", "leakcheck", "dehashed"]
+                  "alt": [
+                    "haveibeenpwned",
+                    "leakcheck",
+                    "dehashed"
+                  ]
                 },
                 {
                   "name": "LeakCheck",
@@ -93,7 +116,10 @@
                   "when": "Correlate breach hits across emails and passwords, but only on credentials you hold or are authorized to test.",
                   "install": "preinstalled (web - paid)",
                   "url": "https://leakcheck.io",
-                  "alt": ["intelligencex", "haveibeenpwned"]
+                  "alt": [
+                    "intelligencex",
+                    "haveibeenpwned"
+                  ]
                 }
               ]
             },
@@ -110,7 +136,10 @@
                   "when": "Find which platforms a breached or owned email is tied to, so stale accounts you control can be closed or secured.",
                   "install": "pipx install holehe",
                   "url": "https://github.com/megadose/holehe",
-                  "alt": ["emailrep.io", "theharvester"]
+                  "alt": [
+                    "emailrep.io",
+                    "theharvester"
+                  ]
                 },
                 {
                   "name": "emailrep.io",
@@ -120,7 +149,10 @@
                   "when": "Triage a suspicious inbound sender or audit your own addresses as part of a defensive OSINT review.",
                   "install": "preinstalled (web - API key optional)",
                   "url": "https://emailrep.io",
-                  "alt": ["holehe", "haveibeenpwned"]
+                  "alt": [
+                    "holehe",
+                    "haveibeenpwned"
+                  ]
                 }
               ]
             },
@@ -137,7 +169,10 @@
                   "when": "Map every email and subdomain publicly linked to a domain you own before hardening mail and DNS.",
                   "install": "sudo apt install theharvester",
                   "url": "https://github.com/laramies/theHarvester",
-                  "alt": ["holehe", "intelligencex"]
+                  "alt": [
+                    "holehe",
+                    "intelligencex"
+                  ]
                 }
               ]
             }
@@ -156,7 +191,9 @@
               "when": "Resolve a number you own or are authorized to analyze into provider facts before deeper carrier-level checks.",
               "install": "brew install phoneinfoga",
               "url": "https://github.com/sundowndev/phoneinfoga",
-              "alt": ["holehe"]
+              "alt": [
+                "holehe"
+              ]
             }
           ]
         },
@@ -177,17 +214,22 @@
                   "when": "Archive a public profile you own, or collect hashtag and post metadata for evidence preservation.",
                   "install": "pip3 install instaloader",
                   "url": "https://github.com/instaloader/instaloader",
-                  "alt": ["osintgram", "snscrape"]
+                  "alt": [
+                    "osintgram",
+                    "snscrape"
+                  ]
                 },
                 {
                   "name": "Osintgram",
                   "rating": 4,
                   "effort": "medium",
                   "desc": "Interactive shell that pulls public Instagram profile info, captions, followers, tag lists, and bio-contact strings using a scratch session or a free Hiker API token (educational-use disclaimer included).",
-                  "when": "Relationship analysis on a public profile you operate — who tags, who comments, what contact strings appear in bios.",
+                  "when": "Relationship analysis on a public profile you operate \u2014 who tags, who comments, what contact strings appear in bios.",
                   "install": "git clone https://github.com/Datalux/Osintgram && pip3 install -r requirements.txt",
                   "url": "https://github.com/Datalux/Osintgram",
-                  "alt": ["instaloader"]
+                  "alt": [
+                    "instaloader"
+                  ]
                 }
               ]
             },
@@ -204,7 +246,10 @@
                   "when": "Programmatic retrieval and archiving of public posts on platforms snscrape still supports, e.g. Telegram channels you monitor.",
                   "install": "pip3 install snscrape",
                   "url": "https://github.com/JustAnotherArchivist/snscrape",
-                  "alt": ["instaloader", "osintgram"]
+                  "alt": [
+                    "instaloader",
+                    "osintgram"
+                  ]
                 }
               ]
             }
@@ -226,10 +271,13 @@
               "rating": 5,
               "effort": "easy",
               "desc": "Reads, writes, and edits EXIF/GPS/IPTC/XMP metadata across images, PDFs, and Office files; the metadata workhorse behind most document-forensics pipelines.",
-              "when": "Forensic-grade tag extraction from local files — geolocation, author, generator, timestamps — before release or after acquisition.",
+              "when": "Forensic-grade tag extraction from local files \u2014 geolocation, author, generator, timestamps \u2014 before release or after acquisition.",
               "install": "sudo apt install libimage-exiftool-perl",
               "url": "https://exiftool.org",
-              "alt": ["fotoforensics", "metagoofil"]
+              "alt": [
+                "fotoforensics",
+                "metagoofil"
+              ]
             },
             {
               "name": "FotoForensics",
@@ -239,7 +287,9 @@
               "when": "Check whether an image you own or are authorized to examine was edited, and inspect residual metadata block by block.",
               "install": "preinstalled (web)",
               "url": "https://fotoforensics.com",
-              "alt": ["exiftool"]
+              "alt": [
+                "exiftool"
+              ]
             }
           ]
         },
@@ -256,7 +306,10 @@
               "when": "Collect every publicly indexed document on a domain you own so metadata and hidden information can be scrubbed.",
               "install": "git clone https://github.com/opsdisk/metagoofil && pip3 install -r requirements.txt",
               "url": "https://github.com/opsdisk/metagoofil",
-              "alt": ["exiftool", "foca"]
+              "alt": [
+                "exiftool",
+                "foca"
+              ]
             },
             {
               "name": "FOCA",
@@ -266,7 +319,10 @@
               "when": "When you have a Windows workstation and want a point-and-click metadata project view for documents you control.",
               "install": "installer from GitHub Releases (Windows GUI)",
               "url": "https://github.com/ElevenPaths/FOCA",
-              "alt": ["metagoofil", "exiftool"]
+              "alt": [
+                "metagoofil",
+                "exiftool"
+              ]
             }
           ]
         },
@@ -283,7 +339,9 @@
               "when": "Check a file hash, URL, or IP you are investigating against years of crowdsourced detections during authorized analysis.",
               "install": "preinstalled (web - API key optional)",
               "url": "https://www.virustotal.com",
-              "alt": ["spiderfoot"]
+              "alt": [
+                "spiderfoot"
+              ]
             }
           ]
         }
@@ -306,7 +364,10 @@
               "when": "Resolve an IP address you are investigating into location, provider, and ASN context.",
               "install": "pip3 install ipinfo",
               "url": "https://ipinfo.io",
-              "alt": ["ipapi.co", "shodan"]
+              "alt": [
+                "ipapi.co",
+                "shodan"
+              ]
             },
             {
               "name": "ipapi.co",
@@ -316,7 +377,9 @@
               "when": "Script location lookups for lists of IPs appearing in your own logs.",
               "install": "preinstalled (web - API)",
               "url": "https://ipapi.co",
-              "alt": ["ipinfo.io"]
+              "alt": [
+                "ipinfo.io"
+              ]
             }
           ]
         },
@@ -333,7 +396,9 @@
               "when": "Correlate landmarks, signage, or geotagged imagery against the physical world during authorized investigations.",
               "install": "preinstalled (web)",
               "url": "https://www.google.com/maps",
-              "alt": ["yandex maps"]
+              "alt": [
+                "yandex maps"
+              ]
             },
             {
               "name": "Yandex Maps",
@@ -343,7 +408,9 @@
               "when": "Cross-check locations and side-by-side imagery with Google Maps when coverage hints at CIS or Eurasian regions.",
               "install": "preinstalled (web)",
               "url": "https://yandex.com/maps",
-              "alt": ["google maps"]
+              "alt": [
+                "google maps"
+              ]
             }
           ]
         }
@@ -363,20 +430,26 @@
               "rating": 5,
               "effort": "easy",
               "desc": "The reference internet device and service search engine indexing banners, ports, vulnerabilities, and exposure history for any IP or domain; also exposes free InternetDB lookups.",
-              "when": "See exactly which ports and services your public IP ranges expose right now — and how long that exposure has existed — before closing them.",
+              "when": "See exactly which ports and services your public IP ranges expose right now \u2014 and how long that exposure has existed \u2014 before closing them.",
               "install": "pip3 install shodan",
               "url": "https://www.shodan.io",
-              "alt": ["censys", "netlas"]
+              "alt": [
+                "censys",
+                "netlas"
+              ]
             },
             {
               "name": "Censys",
               "rating": 4,
               "effort": "easy",
               "desc": "Internet-wide scan platform over hosts, services, and certificates with structured query language and host/cert/web-property APIs; free tier includes search and lookups.",
-              "when": "Certificate-centric inventory and pivots — find every host presenting a given cert — or query structured service data beyond free Shodan limits.",
+              "when": "Certificate-centric inventory and pivots \u2014 find every host presenting a given cert \u2014 or query structured service data beyond free Shodan limits.",
               "install": "pip3 install censys",
               "url": "https://search.censys.io",
-              "alt": ["shodan", "netlas"]
+              "alt": [
+                "shodan",
+                "netlas"
+              ]
             },
             {
               "name": "Netlas",
@@ -386,7 +459,10 @@
               "when": "Lucene/regex search across full HTTP response bodies when Shodan banners are too shallow for your authorized query.",
               "install": "pip3 install netlas",
               "url": "https://netlas.io",
-              "alt": ["shodan", "censys"]
+              "alt": [
+                "shodan",
+                "censys"
+              ]
             }
           ]
         },
@@ -403,7 +479,10 @@
               "when": "Fast visual pass over the subdomain and mail infrastructure of a domain you own before deeper enumeration.",
               "install": "preinstalled (web)",
               "url": "https://dnsdumpster.com",
-              "alt": ["securitytrails", "crt.sh"]
+              "alt": [
+                "securitytrails",
+                "crt.sh"
+              ]
             },
             {
               "name": "SecurityTrails",
@@ -413,7 +492,10 @@
               "when": "Retrieve DNS history and subdomain changes over time for a domain you operate, straight into scripts.",
               "install": "preinstalled (web - API key)",
               "url": "https://securitytrails.com",
-              "alt": ["dnsdumpster", "crt.sh"]
+              "alt": [
+                "dnsdumpster",
+                "crt.sh"
+              ]
             }
           ]
         },
@@ -426,11 +508,14 @@
               "best": true,
               "rating": 4,
               "effort": "easy",
-              "desc": "Open certificate-transparency log search; returns every issued certificate — and therefore every hostname — for a domain, sorted by issue date.",
+              "desc": "Open certificate-transparency log search; returns every issued certificate \u2014 and therefore every hostname \u2014 for a domain, sorted by issue date.",
               "when": "Enumerate all hostnames that ever had a public certificate for domains you own, including retired staging hosts.",
               "install": "preinstalled (web)",
               "url": "https://crt.sh",
-              "alt": ["securitytrails", "censys"]
+              "alt": [
+                "securitytrails",
+                "censys"
+              ]
             }
           ]
         },
@@ -447,7 +532,9 @@
               "when": "Attribute an IP or prefix to its ASN and understand routing relationships for infrastructure you analyze.",
               "install": "preinstalled (web)",
               "url": "https://bgp.he.net",
-              "alt": ["ripestat"]
+              "alt": [
+                "ripestat"
+              ]
             },
             {
               "name": "RIPEstat",
@@ -457,7 +544,9 @@
               "when": "Programmatic WHOIS/ASN and routing lookups for lists of IPs or prefixes you are researching.",
               "install": "preinstalled (web - API)",
               "url": "https://stat.ripe.net",
-              "alt": ["hurricane electric bgp"]
+              "alt": [
+                "hurricane electric bgp"
+              ]
             }
           ]
         },
@@ -474,7 +563,9 @@
               "when": "Full WHOIS history and reverse-ownership pivots on domains involved in authorized investigations.",
               "install": "preinstalled (web - paid)",
               "url": "https://www.domaintools.com",
-              "alt": ["securitytrails"]
+              "alt": [
+                "securitytrails"
+              ]
             }
           ]
         }
@@ -497,7 +588,10 @@
               "when": "Discover corporate structure, officers, and cross-jurisdiction registrations behind a company you are authorized to research.",
               "install": "preinstalled (web - API key)",
               "url": "https://opencorporates.com",
-              "alt": ["companies house (uk)", "sec edgar"]
+              "alt": [
+                "companies house (uk)",
+                "sec edgar"
+              ]
             },
             {
               "name": "Companies House (UK)",
@@ -507,7 +601,9 @@
               "when": "Company, director, and beneficial-owner lookups for UK-registered entities.",
               "install": "preinstalled (web - free API key)",
               "url": "https://find-and-update.company-information.service.gov.uk",
-              "alt": ["opencorporates"]
+              "alt": [
+                "opencorporates"
+              ]
             },
             {
               "name": "SEC EDGAR",
@@ -517,7 +613,9 @@
               "when": "Pull US-listed company filings for financial and personnel intelligence.",
               "install": "preinstalled (web - API)",
               "url": "https://www.sec.gov/edgar",
-              "alt": ["opencorporates"]
+              "alt": [
+                "opencorporates"
+              ]
             }
           ]
         },
@@ -534,7 +632,9 @@
               "when": "Sketch the funding trajectory, investors, and key people of a private company you analyze.",
               "install": "preinstalled (web - API key)",
               "url": "https://www.crunchbase.com",
-              "alt": ["opencorporates"]
+              "alt": [
+                "opencorporates"
+              ]
             }
           ]
         }
@@ -557,7 +657,10 @@
               "when": "Find public code, configs, and secrets that mention an identifier you own, and review your own repositories' exposure.",
               "install": "preinstalled (web)",
               "url": "https://github.com/search",
-              "alt": ["sourcegraph", "gitdorker"]
+              "alt": [
+                "sourcegraph",
+                "gitdorker"
+              ]
             },
             {
               "name": "Sourcegraph",
@@ -567,7 +670,10 @@
               "when": "Regex-wide sweep of public code for a credential prefix, domain, or package name you are attributing.",
               "install": "preinstalled (web)",
               "url": "https://sourcegraph.com",
-              "alt": ["github code search", "gitdorker"]
+              "alt": [
+                "github code search",
+                "gitdorker"
+              ]
             }
           ]
         },
@@ -584,7 +690,10 @@
               "when": "Glob for suspicious files and secrets across public repos related to your own organization or authorized targets.",
               "install": "git clone https://github.com/obheda12/GitDorker && pip3 install -r requirements.txt",
               "url": "https://github.com/obheda12/GitDorker",
-              "alt": ["github code search", "nosey parker"]
+              "alt": [
+                "github code search",
+                "nosey parker"
+              ]
             },
             {
               "name": "Nosey Parker",
@@ -594,7 +703,9 @@
               "when": "Scan cloned public repositories (e.g., ones you own) for historic secrets before they are abused.",
               "install": "git clone https://github.com/praetorian-inc/noseyparker && cargo build --release",
               "url": "https://github.com/praetorian-inc/noseyparker",
-              "alt": ["gitdorker"]
+              "alt": [
+                "gitdorker"
+              ]
             }
           ]
         }
@@ -617,7 +728,10 @@
               "when": "Trace bitcoin addresses and transaction flows connected to a case you are authorized to investigate.",
               "install": "preinstalled (web)",
               "url": "https://www.blockchain.com/explorer",
-              "alt": ["etherscan", "walletexplorer"]
+              "alt": [
+                "etherscan",
+                "walletexplorer"
+              ]
             },
             {
               "name": "Etherscan",
@@ -627,7 +741,9 @@
               "when": "Analyze EVM addresses, token transfers, and smart-contract interactions you are investigating.",
               "install": "preinstalled (web - API key)",
               "url": "https://etherscan.io",
-              "alt": ["blockchain.com explorer"]
+              "alt": [
+                "blockchain.com explorer"
+              ]
             }
           ]
         },
@@ -640,11 +756,14 @@
               "best": true,
               "rating": 4,
               "effort": "easy",
-              "desc": "Clusters bitcoin addresses into services where possible, letting you see a wallet's whole activity — including market aggregation endpoints.",
+              "desc": "Clusters bitcoin addresses into services where possible, letting you see a wallet's whole activity \u2014 including market aggregation endpoints.",
               "when": "View a bitcoin address in service context and reveal associated addresses during authorized tracing work.",
               "install": "preinstalled (web)",
               "url": "https://www.walletexplorer.com",
-              "alt": ["blockchain.com explorer", "bitcoinabuse"]
+              "alt": [
+                "blockchain.com explorer",
+                "bitcoinabuse"
+              ]
             },
             {
               "name": "BitcoinAbuse",
@@ -654,7 +773,9 @@
               "when": "Check whether an address you are investigating carries attached abuse reports.",
               "install": "preinstalled (web - API)",
               "url": "https://www.bitcoinabuse.com",
-              "alt": ["walletexplorer"]
+              "alt": [
+                "walletexplorer"
+              ]
             }
           ]
         }
@@ -677,7 +798,11 @@
               "when": "Recover removed pages, track historical site changes, and capture evidence before content disappears.",
               "install": "preinstalled (web)",
               "url": "https://web.archive.org",
-              "alt": ["waybackpy", "archive.today", "common crawl"]
+              "alt": [
+                "waybackpy",
+                "archive.today",
+                "common crawl"
+              ]
             },
             {
               "name": "waybackpy",
@@ -687,7 +812,9 @@
               "when": "Scripted archival and CDX queries to build change-history timelines for URLs you monitor.",
               "install": "pipx install waybackpy",
               "url": "https://github.com/akamhy/waybackpy",
-              "alt": ["wayback machine"]
+              "alt": [
+                "wayback machine"
+              ]
             },
             {
               "name": "Archive.today",
@@ -697,7 +824,9 @@
               "when": "Save a live page as evidence through an independent archive when you want redundancy across capture providers.",
               "install": "preinstalled (web)",
               "url": "https://archive.ph",
-              "alt": ["wayback machine"]
+              "alt": [
+                "wayback machine"
+              ]
             }
           ]
         },
@@ -714,7 +843,9 @@
               "when": "Pull historical page versions or URL-level index data for content you have permission to analyze.",
               "install": "preinstalled (web - S3/CLI)",
               "url": "https://commoncrawl.org",
-              "alt": ["wayback machine"]
+              "alt": [
+                "wayback machine"
+              ]
             }
           ]
         }
@@ -737,7 +868,9 @@
               "when": "Index and discover .onion pages relevant to a monitoring program you are authorized to run.",
               "install": "preinstalled (web)",
               "url": "https://ahmia.fi",
-              "alt": ["dark.fail"]
+              "alt": [
+                "dark.fail"
+              ]
             },
             {
               "name": "Dark.fail",
@@ -747,7 +880,9 @@
               "when": "Locate legitimate .onion services and verify their current uptime during authorized dark-web research.",
               "install": "preinstalled (web)",
               "url": "https://dark.fail",
-              "alt": ["ahmia"]
+              "alt": [
+                "ahmia"
+              ]
             }
           ]
         },
@@ -761,10 +896,13 @@
               "rating": 4,
               "effort": "medium",
               "desc": "Commercial breach database covering email, username, phone, IP, and password hashes with fuzzy search and cross-referencing across billions of records; subscription required for full records.",
-              "when": "Correlate leaked credentials and keys across datasets — only for accounts you own or are contracted to test.",
+              "when": "Correlate leaked credentials and keys across datasets \u2014 only for accounts you own or are contracted to test.",
               "install": "preinstalled (web - paid)",
               "url": "https://dehashed.com",
-              "alt": ["intelligencex", "leakcheck"]
+              "alt": [
+                "intelligencex",
+                "leakcheck"
+              ]
             }
           ]
         },
@@ -781,7 +919,9 @@
               "when": "Monitor public paste dumps that mention an organization or domain you are authorized to defend.",
               "install": "preinstalled (web)",
               "url": "https://www.pastebin.com",
-              "alt": ["intelligencex"]
+              "alt": [
+                "intelligencex"
+              ]
             }
           ]
         }
@@ -804,7 +944,9 @@
               "when": "A broad sweep of a domain, IP, or email you own to correlate entities across many free data sources in a single scan.",
               "install": "git clone https://github.com/smicallef/spiderfoot && pip3 install -r requirements.txt",
               "url": "https://github.com/smicallef/spiderfoot",
-              "alt": ["maltego"]
+              "alt": [
+                "maltego"
+              ]
             },
             {
               "name": "Maltego",
@@ -814,7 +956,9 @@
               "when": "Investigative link analysis where a visual graph of who connects to whom beats raw JSON output.",
               "install": "preinstalled (web/desktop - free CE)",
               "url": "https://www.maltego.com",
-              "alt": ["spiderfoot"]
+              "alt": [
+                "spiderfoot"
+              ]
             }
           ]
         },
@@ -831,7 +975,9 @@
               "when": "Compose and reuse proven dorks to audit what public indexes expose about domains you own.",
               "install": "preinstalled (web)",
               "url": "https://www.exploit-db.com/google-hacking-database",
-              "alt": ["gitdorker"]
+              "alt": [
+                "gitdorker"
+              ]
             }
           ]
         }

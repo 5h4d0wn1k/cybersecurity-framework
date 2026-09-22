@@ -7,6 +7,21 @@ Product-security gates for the code and recipes you ship: SAST, DAST, secrets de
 
 
 
+#### viperstrike ◆ by 5h4d0wn1k
+
+MCP (Model Context Protocol) server vulnerability auditor — AST/whitebox SAST for agentic AI tool handlers, SARIF-capable, optional oracle runtime mode.
+
+**When:** Auditing MCP servers and AI tool endpoints for handler-level vulnerabilities.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/viperstrike`
+
+**URL:** https://github.com/5h4d0wn1k/viperstrike
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 #### Multi-Language Engines
 
 
@@ -541,6 +556,21 @@ GitGuardian's open-source CLI that scans commits, PRs, and CI output for secrets
 ## Coverage-Guided Fuzzing
 
 
+
+
+#### toxindb ◆ by 5h4d0wn1k
+
+RAG retrieval-time poisoning detector — demand-recency discrimination, canary injection, provenance attestation; fully offline, SARIF+MD reports.
+
+**When:** Checking your own RAG/vector knowledge bases for poisoned or injected content.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/toxindb`
+
+**URL:** https://github.com/5h4d0wn1k/toxindb
+
+**Alternatives:** Own tool — lab/authorized use only
 
 
 #### Native / Binary Fuzzing

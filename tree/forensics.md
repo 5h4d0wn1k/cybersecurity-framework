@@ -70,7 +70,7 @@ Exterro's free, widely-used acquisition and preview tool: images drives/memory t
 
 **Install:** `Download the free installer from exterro.com and run FTK Imager`
 
-**URL:** https://www.exterro.com/ftk-imager
+**URL:** https://www.exterro.com/digital-forensics-software/ftk-imager
 
 **Alternatives:** guymager
 
@@ -97,6 +97,21 @@ Linux GUI forensic imager producing flat (dd), EWF (E01), and AFF images with mu
 ## Collection, Carving & Data Recovery
 
 
+
+
+#### forensicsiso ◆ by 5h4d0wn1k
+
+Full DFIR workstation — disk/memory/log/pcap/registry/browser/email parsing, super-timelining, cross-artifact correlation, chain-of-custody.
+
+**When:** Running end-to-end incident-response analysis on acquired evidence.
+
+**Effort:** medium  ·  **Rating:** 5/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/forensicsiso`
+
+**URL:** https://github.com/5h4d0wn1k/forensicsiso
+
+**Alternatives:** Own tool — lab/authorized use only
 
 
 #### Fast Collection & RAM Capture

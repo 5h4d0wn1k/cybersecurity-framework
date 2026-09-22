@@ -1,7 +1,7 @@
 {
   "id": "iot",
   "name": "IoT, Embedded & Firmware Security",
-  "emoji": "🔌",
+  "emoji": "\ud83d\udd0c",
   "tagline": "Reverse, emulate, and attack embedded devices in your lab: firmware extraction and boot-level emulation, UART/JTAG probing and flash dumping, side-channel and glitching rigs, RF protocol analysis (BLE/Zigbee/Z-Wave/MQTT), companion-app taping, and device databases.",
   "class": "offense",
   "categories": [
@@ -23,7 +23,9 @@
               "when": "Every firmware image starts here: carve the filesystem out of the blob before anything else can be analyzed.",
               "install": "pip install binwalk",
               "url": "https://github.com/ReFirmLabs/binwalk",
-              "alt": ["firmware-mod-kit"]
+              "alt": [
+                "firmware-mod-kit"
+              ]
             },
             {
               "name": "firmware-mod-kit (FMK)",
@@ -33,7 +35,9 @@
               "when": "When you actually need to modify and re-flash a vendor image (e.g. inject a telnetd) rather than merely read it.",
               "install": "git clone https://github.com/rampageX/firmware-mod-kit",
               "url": "https://github.com/rampageX/firmware-mod-kit",
-              "alt": ["binwalk"]
+              "alt": [
+                "binwalk"
+              ]
             },
             {
               "name": "U-Boot Tools",
@@ -43,7 +47,9 @@
               "when": "Unpacking U-Boot FIT images, decoding kernel/dtb parts, or reading a target's boot environment from a flash dump.",
               "install": "sudo apt install u-boot-tools",
               "url": "https://u-boot.readthedocs.io/en/latest/usage/index.html",
-              "alt": ["binwalk"]
+              "alt": [
+                "binwalk"
+              ]
             }
           ],
           "subcategories": []
@@ -60,8 +66,10 @@
               "desc": "Bash script that greps an extracted or mounted filesystem for secrets: shadow/passwd, SSL keys and certs, config files, admin/password keywords, dropbear/ssh artifacts, and URLs.",
               "when": "Ten seconds after extraction, to surface default creds, key material, and backdoors before you read anything by hand.",
               "install": "git clone https://github.com/craigz28/firmwalker",
-              "url": "https://github.com/craigz28/firmwalker",
-              "alt": ["binwalk"]
+              "url": "https://github.com/scriptingxss/firmwalker",
+              "alt": [
+                "binwalk"
+              ]
             },
             {
               "name": "fwanalyzer",
@@ -71,7 +79,9 @@
               "when": "A structured, repeatable triage pass over an extracted filesystem instead of ad-hoc grep hunting.",
               "install": "git clone https://github.com/cruise-automation/fwanalyzer && cd fwanalyzer && make",
               "url": "https://github.com/cruise-automation/fwanalyzer",
-              "alt": ["Firmwalker"]
+              "alt": [
+                "Firmwalker"
+              ]
             },
             {
               "name": "fwupd",
@@ -81,7 +91,9 @@
               "when": "Exercising a Linux target's firmware update path and enumerating what firmware components it reports.",
               "install": "sudo apt install fwupd",
               "url": "https://github.com/fwupd/fwupd",
-              "alt": ["flashrom"]
+              "alt": [
+                "flashrom"
+              ]
             }
           ],
           "subcategories": []
@@ -104,7 +116,10 @@
                   "when": "Batch full-system dynamic analysis of Linux-based IoT firmware, on images Firmadyne-style boot failures block.",
                   "install": "git clone --recursive https://github.com/pr0v3rbs/FirmAE && ./setup.sh",
                   "url": "https://github.com/pr0v3rbs/FirmAE",
-                  "alt": ["FAT", "QEMU"]
+                  "alt": [
+                    "FAT",
+                    "QEMU"
+                  ]
                 },
                 {
                   "name": "Firmware Analysis Toolkit (FAT)",
@@ -114,7 +129,10 @@
                   "when": "Quick, scripted boot of a single firmware image to poke its web UI and userland by hand.",
                   "install": "git clone --recursive https://github.com/attify/firmware-analysis-toolkit && ./setup.sh",
                   "url": "https://github.com/attify/firmware-analysis-toolkit",
-                  "alt": ["FirmAE", "QEMU"]
+                  "alt": [
+                    "FirmAE",
+                    "QEMU"
+                  ]
                 }
               ],
               "subcategories": []
@@ -132,7 +150,10 @@
                   "when": "The foundation of the whole emulation stack: boot a rootfs, or dynamically trace one bare-metalstripped binary before standing up full-stack tooling.",
                   "install": "sudo apt install qemu-system-arm qemu-system-mips qemu-user-static",
                   "url": "https://www.qemu.org",
-                  "alt": ["FirmAE", "FAT"]
+                  "alt": [
+                    "FirmAE",
+                    "FAT"
+                  ]
                 }
               ],
               "subcategories": []
@@ -164,7 +185,9 @@
                   "when": "Identifying unknown serial pads, decoding an unknown baud rate, and sniffing chip-to-chip buses on a target board you own.",
                   "install": "sudo apt install pulseview sigrok-cli",
                   "url": "https://sigrok.org/wiki/PulseView",
-                  "alt": ["Saleae Logic 2"]
+                  "alt": [
+                    "Saleae Logic 2"
+                  ]
                 },
                 {
                   "name": "Saleae Logic 2",
@@ -174,7 +197,9 @@
                   "when": "Fast, friendly decoding and decode-while-capturing when you have the hardware on the bench.",
                   "install": "download from https://www.saleae.com/downloads/",
                   "url": "https://www.saleae.com/downloads/",
-                  "alt": ["PulseView"]
+                  "alt": [
+                    "PulseView"
+                  ]
                 },
                 {
                   "name": "Bus Pirate",
@@ -183,8 +208,11 @@
                   "desc": "Open-source serial multi-tool (current Bus Pirate 5): drives SPI/I2C/UART/1-Wire, reads SPI flash and EEPROMs, sniffs buses, and doubles as a low-speed logic analyzer and host adapter from any serial terminal.",
                   "when": "Talking directly to a chip over SPI/I2C, reading EEPROMs, or probing a bus before you break out a dedicated analyzer.",
                   "install": "hardware (dangerousprototypes.com) + sudo apt install picocom",
-                  "url": "https://github.com/DangerousPrototypes/BusPirate",
-                  "alt": ["PulseView", "OpenOCD"]
+                  "url": "https://github.com/DangerousPrototypes/Bus_Pirate",
+                  "alt": [
+                    "PulseView",
+                    "OpenOCD"
+                  ]
                 }
               ],
               "subcategories": []
@@ -202,7 +230,10 @@
                   "when": "UART pads or test points are exposed, and you want bootloader or shell access immediately.",
                   "install": "sudo apt install minicom",
                   "url": "https://salsa.debian.org/minicom-team/minicom",
-                  "alt": ["picocom", "screen"]
+                  "alt": [
+                    "picocom",
+                    "screen"
+                  ]
                 },
                 {
                   "name": "picocom",
@@ -212,7 +243,10 @@
                   "when": "Headless or scripted UART sessions where minicom's interactive menus get in the way.",
                   "install": "sudo apt install picocom",
                   "url": "https://github.com/npat-efault/picocom",
-                  "alt": ["minicom", "screen"]
+                  "alt": [
+                    "minicom",
+                    "screen"
+                  ]
                 }
               ],
               "subcategories": []
@@ -232,7 +266,10 @@
               "when": "Reading an on-board SPI flash out of circuit (or via clip) to obtain a full firmware image, or restoring one.",
               "install": "sudo apt install flashrom",
               "url": "https://www.flashrom.org/",
-              "alt": ["OpenOCD", "CH341A"]
+              "alt": [
+                "OpenOCD",
+                "CH341A"
+              ]
             },
             {
               "name": "CH341A SPI Programmer",
@@ -241,8 +278,10 @@
               "desc": "Five-dollar USB SPI/I2C/parallel programmer (and its clones) that flashrom drives directly; the budget way to dump 25-series SPI flash with a SOIC-8 clip without desoldering.",
               "when": "Cheap, disposable SPI reads on consumer hardware where you don't want to risk a J-Link or full probe.",
               "install": "sudo apt install flashrom && use with ch341a_spi programmer",
-              "url": "https://wiki.flashrom.org/CH341A",
-              "alt": ["flashrom"]
+              "url": "https://flashrom.org/supported_hw/supported_prog/ch341ab.html",
+              "alt": [
+                "flashrom"
+              ]
             }
           ],
           "subcategories": []
@@ -260,7 +299,11 @@
               "when": "You found a JTAG/SWD header (or expose a testpad): OpenOCD plus a cheap probe gives you a debugger, and its flash readback doubles as a dump path for lockdown-immune devices.",
               "install": "sudo apt install openocd",
               "url": "https://openocd.org",
-              "alt": ["J-Link", "urJTAG", "Bus Pirate"]
+              "alt": [
+                "J-Link",
+                "urJTAG",
+                "Bus Pirate"
+              ]
             },
             {
               "name": "J-Link (SEGGER)",
@@ -270,7 +313,10 @@
               "when": "A board already exposes a J-Link/SWD header, or you want a trouble-free flash-and-debug flow instead of fighting adapter quirks.",
               "install": "commercial hardware + download J-Link Software pack from segger.com",
               "url": "https://www.segger.com/products/debug-probes/j-link/",
-              "alt": ["OpenOCD", "urJTAG"]
+              "alt": [
+                "OpenOCD",
+                "urJTAG"
+              ]
             }
           ],
           "subcategories": []
@@ -288,7 +334,10 @@
               "when": "Practical lab work: soldering header pins, hooking UART/SPI flywires, and reattaching damaged pads before probing.",
               "install": "hardware: order from pine64.com and power over 20V USB-C",
               "url": "https://pine64.com/product/pinecil-smart-mini-portable-soldering-iron/",
-              "alt": ["TS100", "Hot-air rework"]
+              "alt": [
+                "TS100",
+                "Hot-air rework"
+              ]
             },
             {
               "name": "Hakko FR-301",
@@ -298,7 +347,9 @@
               "when": "Removing a flash chip, connector, or BGA-adjacent through-hole part from a curious board without killing the board.",
               "install": "hardware: FR-301 unit plus replacement nozzles",
               "url": "https://hakkousa.com/products/fr-301-df-portable-desoldering-tool.html",
-              "alt": ["Pinecil"]
+              "alt": [
+                "Pinecil"
+              ]
             }
           ],
           "subcategories": []
@@ -316,7 +367,9 @@
               "when": "Assessing a secure MCU's resistance to key extraction or fault injection on hardware you own, where the chip is the oracle.",
               "install": "pip install chipwhisperer",
               "url": "https://github.com/newaetech/chipwhisperer",
-              "alt": ["TrueRandom Debounce"]
+              "alt": [
+                "TrueRandom Debounce"
+              ]
             },
             {
               "name": "TrueRandom Debounce Adapter",
@@ -326,7 +379,9 @@
               "when": "On small IoT modules whose debug adapters break off, or to insert a glitch/analog probe cleanly between connector and target.",
               "install": "hardware: order the Debounce adapter set and clip onto the tag-connect header",
               "url": "https://github.com/TrueRandom",
-              "alt": ["ChipWhisperer"]
+              "alt": [
+                "ChipWhisperer"
+              ]
             }
           ],
           "subcategories": []
@@ -336,7 +391,21 @@
     {
       "id": "protocol-analysis",
       "name": "RF Protocol & Application Analysis",
-      "tools": [],
+      "tools": [
+        {
+          "name": "iotbreach",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "IoT/SCADA/embedded offensive framework \u2014 MQTT/CoAP/UPnP/Modbus/CAN/BLE/Zigbee/433MHz, firmware extraction, ICS kill-chain simulation.",
+          "when": "Testing embedded/IoT targets in your own lab.",
+          "install": "git clone https://github.com/5h4d0wn1k/iotbreach",
+          "url": "https://github.com/5h4d0wn1k/iotbreach",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
+        }
+      ],
       "subcategories": [
         {
           "id": "link-layer-protocols",
@@ -361,7 +430,10 @@
                       "when": "Lab controller to inspect what a Z-Wave device advertises and to script device interactions while researching its behavior.",
                       "install": "docker run -d -p 8091:8091 --device /dev/ttyUSB0 ghcr.io/zwave-js/zwave-js-ui:latest",
                       "url": "https://github.com/zwave-js/zwave-js-ui",
-                      "alt": ["Z-Wave JS", "Home Assistant"]
+                      "alt": [
+                        "Z-Wave JS",
+                        "Home Assistant"
+                      ]
                     }
                   ],
                   "subcategories": []
@@ -379,7 +451,9 @@
                       "when": "Driving Z-Wave from code for fuzzing or deep protocol interrogation, or extending Home Assistant-based research setups.",
                       "install": "npm install zwave-js",
                       "url": "https://github.com/zwave-js/node-zwave-js",
-                      "alt": ["Z-Wave JS UI"]
+                      "alt": [
+                        "Z-Wave JS UI"
+                      ]
                     }
                   ],
                   "subcategories": []
@@ -404,7 +478,9 @@
                       "when": "Live ZigBee interception and frame injection against Personal Area Networks in your own test environment.",
                       "install": "pip install killerbee",
                       "url": "https://github.com/riverloopsec/killerbee",
-                      "alt": ["ZigDiggity"]
+                      "alt": [
+                        "ZigDiggity"
+                      ]
                     },
                     {
                       "name": "ZigDiggity",
@@ -414,7 +490,9 @@
                       "when": "Structured attack playbooks (beacon, scan, unlock, insecure-rejoin) beyond ad-hoc Killerbee usage.",
                       "install": "git clone https://github.com/bishopfox/zigdiggity && pip3 install -r requirements.txt",
                       "url": "https://github.com/bishopfox/zigdiggity",
-                      "alt": ["Killerbee"]
+                      "alt": [
+                        "Killerbee"
+                      ]
                     }
                   ],
                   "subcategories": []
@@ -432,7 +510,9 @@
                       "when": "Local lab network to enroll consumer Zigbee devices and drive them from MQTT while you capture and study their traffic.",
                       "install": "docker run -it --rm --network host koenkk/zigbee2mqtt:latest",
                       "url": "https://github.com/Koenkk/zigbee2mqtt",
-                      "alt": ["ZigDiggity"]
+                      "alt": [
+                        "ZigDiggity"
+                      ]
                     }
                   ],
                   "subcategories": []
@@ -457,7 +537,9 @@
                       "when": "Rapid BLE recon, characteristic enumeration, and interactive testing of a wearable or smart device's GATT service.",
                       "install": "sudo apt install bettercap",
                       "url": "https://github.com/bettercap/bettercap",
-                      "alt": ["nRF Connect"]
+                      "alt": [
+                        "nRF Connect"
+                      ]
                     },
                     {
                       "name": "nRF Connect",
@@ -467,7 +549,9 @@
                       "when": "First look at a BLE device's services and charactistics before you script anything with a full toolchain.",
                       "install": "download nRF Connect for Desktop from nordicsemi.com (deb/AppImage)",
                       "url": "https://www.nordicsemi.com/Products/Development-tools/nrf-connect-for-desktop",
-                      "alt": ["BetterCap"]
+                      "alt": [
+                        "BetterCap"
+                      ]
                     }
                   ],
                   "subcategories": []
@@ -485,7 +569,10 @@
                       "when": "Capture-level BLE analysis (advertising, pairing, connection events) without modifying the target in any way.",
                       "install": "download nRF Sniffer for Bluetooth LE from nordicsemi.com and load .pcap into Wireshark",
                       "url": "https://www.nordicsemi.com/Products/Development-tools/nrf-sniffer-for-bluetooth-le",
-                      "alt": ["BetterCap", "Ubertooth One"]
+                      "alt": [
+                        "BetterCap",
+                        "Ubertooth One"
+                      ]
                     }
                   ],
                   "subcategories": []
@@ -511,8 +598,11 @@
                   "desc": "Akamai's Python toolchain (mqttez, mqtts-tv, mqttgama) that scans MQTT brokers, recovers credentials from device images, and lets you interact with topics (subscribe/inject) against smart devices running MQTT.",
                   "when": "Assessing an MQTT-enabled IoT fleet on a lab broker: credential hunting and topic-level injection.",
                   "install": "git clone https://github.com/akamai/mqtt-pwn && pip install -r requirements.txt",
-                  "url": "https://github.com/akamai/mqtt-pwn",
-                  "alt": ["mosquitto_pub", "MQTT Explorer"]
+                  "url": "https://github.com/akamai-threat-research/mqtt-pwn",
+                  "alt": [
+                    "mosquitto_pub",
+                    "MQTT Explorer"
+                  ]
                 },
                 {
                   "name": "MQTT Explorer",
@@ -522,7 +612,9 @@
                   "when": "Grabbing a visual, real-time map of topics and retained payloads when investigating a live broker in the lab.",
                   "install": "download AppImage from GitHub releases",
                   "url": "https://github.com/thomasnordquist/MQTT-Explorer",
-                  "alt": ["MQTTX"]
+                  "alt": [
+                    "MQTTX"
+                  ]
                 },
                 {
                   "name": "MQTTX",
@@ -532,7 +624,9 @@
                   "when": "Scripted by-hand publishing/subscribing to MQTT topics during protocol testing of smart devices.",
                   "install": "brew install --cask mqttx",
                   "url": "https://github.com/emqx/MQTTX",
-                  "alt": ["MQTT Explorer"]
+                  "alt": [
+                    "MQTT Explorer"
+                  ]
                 }
               ],
               "subcategories": []
@@ -550,7 +644,9 @@
                   "when": "Liberating a Tuya-based device from vendor cloud services so you can flash, control, and analyze it locally.",
                   "install": "git clone https://github.com/ct-Open-Source/tuya-convert && ./start_flash.sh",
                   "url": "https://github.com/ct-Open-Source/tuya-convert",
-                  "alt": ["Tasmota"]
+                  "alt": [
+                    "Tasmota"
+                  ]
                 },
                 {
                   "name": "Tasmota",
@@ -560,7 +656,9 @@
                   "when": "Running a stable, instrumented firmware on a device you control, with full console and MQTT logging for traffic observation.",
                   "install": "flash release .bin with esptool or tuya-convert",
                   "url": "https://github.com/arendst/Tasmota",
-                  "alt": ["tuya-convert"]
+                  "alt": [
+                    "tuya-convert"
+                  ]
                 }
               ],
               "subcategories": []
@@ -578,7 +676,9 @@
                   "when": "Tapping the device's companion app to observe cloud interactions, API calls, and key handling in real time.",
                   "install": "pip install frida-tools",
                   "url": "https://frida.re",
-                  "alt": ["objection"]
+                  "alt": [
+                    "objection"
+                  ]
                 },
                 {
                   "name": "objection",
@@ -588,7 +688,9 @@
                   "when": "Fast-win companion-app poking: unpin, dump keystore, and inspect the app's live memory before writing custom Frida scripts.",
                   "install": "pip install objection",
                   "url": "https://github.com/sensepost/objection",
-                  "alt": ["Frida"]
+                  "alt": [
+                    "Frida"
+                  ]
                 },
                 {
                   "name": "jadx",
@@ -598,7 +700,9 @@
                   "when": "Static pass over a companion app: find API keys, vendor-cloud endpoints, and logging before you attack the running app.",
                   "install": "snap install jadx",
                   "url": "https://github.com/skylot/jadx",
-                  "alt": ["apktool"]
+                  "alt": [
+                    "apktool"
+                  ]
                 }
               ],
               "subcategories": []
@@ -625,7 +729,9 @@
               "when": "Mapping exposure of a device model or product family (support/account required) before any lab testing against your own instances.",
               "install": "pip install shodan",
               "url": "https://www.shodan.io/",
-              "alt": ["Censys"]
+              "alt": [
+                "Censys"
+              ]
             },
             {
               "name": "Censys",
@@ -635,7 +741,9 @@
               "when": "Banner/certificate-level device fingerprinting at scale, especially where Shodan's vantage set differs.",
               "install": "pip install censys",
               "url": "https://search.censys.io/",
-              "alt": ["Shodan"]
+              "alt": [
+                "Shodan"
+              ]
             }
           ],
           "subcategories": []
@@ -660,7 +768,9 @@
               "when": "Correlating a firmware version or chipset CPE against published CVEs during lab triage.",
               "install": "git clone https://github.com/cve-search/cve-search && cd cve-search && make",
               "url": "https://github.com/cve-search/cve-search",
-              "alt": ["NVD API"]
+              "alt": [
+                "NVD API"
+              ]
             },
             {
               "name": "NVD API",
@@ -670,7 +780,9 @@
               "when": "Direct, no-infra CVE lookups scoped to a product/CPE during a device assessment.",
               "install": "curl 'https://services.nvd.nist.gov/rest/json/cves/2.0?virtualMatchString=cpe:2.3:o:lynx:...'",
               "url": "https://nvd.nist.gov/developers/vulnerabilities",
-              "alt": ["cve-search"]
+              "alt": [
+                "cve-search"
+              ]
             }
           ],
           "subcategories": []
@@ -688,7 +800,9 @@
               "when": "Looking up an existing method or exploit note for a specific router/device model during lab research.",
               "install": "browse: https://www.exploitee.rs/",
               "url": "https://www.exploitee.rs/",
-              "alt": ["cve-search"]
+              "alt": [
+                "cve-search"
+              ]
             }
           ],
           "subcategories": []
@@ -708,7 +822,9 @@
           "when": "Reading, sniffing, or cloning badges, keyfobs, and access-control cards you legitimately test, plus auditing a site's RFID exposure.",
           "install": "git clone https://github.com/RfidResearchGroup/proxmark3 && cd proxmark3 && make",
           "url": "https://github.com/RfidResearchGroup/proxmark3",
-          "alt": ["libnfc"]
+          "alt": [
+            "libnfc"
+          ]
         },
         {
           "name": "libnfc",
@@ -718,7 +834,9 @@
           "when": "Quick reads (UID, Mifare classic blocks) with a plain USB NFC reader before reaching for a full Proxmark3.",
           "install": "sudo apt install libnfc-bin",
           "url": "https://github.com/nfc-tools/libnfc",
-          "alt": ["Proxmark3"]
+          "alt": [
+            "Proxmark3"
+          ]
         }
       ],
       "subcategories": []

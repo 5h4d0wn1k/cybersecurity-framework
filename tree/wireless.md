@@ -71,6 +71,25 @@ Classic packet capture tool; on a monitor interface it proves the card actually 
 **Alternatives:** wireshark, kismet
 
 
+#### WIDS & Wireless Defense
+
+
+
+##### airguard ◆ by 5h4d0wn1k
+
+Wireless defense & monitoring suite — WIDS sensor, deauth/evil-twin/rogue-AP detection, beacon anomaly scan, WPA3 survey.
+
+**When:** Detecting rogue APs and deauth floods in your own wireless perimeter.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/airguard`
+
+**URL:** https://github.com/5h4d0wn1k/airguard
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 
 
 
@@ -108,6 +127,21 @@ Lightweight ncurses 802.11 monitor with channel scanning, signal histograms, and
 **URL:** https://github.com/br101/horst
 
 **Alternatives:** airodump-ng, kismet
+
+
+#### wiair ◆ by 5h4d0wn1k
+
+Byte-exact 802.11/BLE frame crafting & parsing framework; offline-only and safety-gated.
+
+**When:** Building raw wireless frames for protocol research and WIDS/emitter lab work.
+
+**Effort:** advanced  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/wiair`
+
+**URL:** https://github.com/5h4d0wn1k/wiair
+
+**Alternatives:** Own tool — lab/authorized use only
 
 
 #### Passive Surveys & Packet Dissection

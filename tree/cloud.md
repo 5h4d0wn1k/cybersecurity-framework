@@ -7,6 +7,36 @@ Posture audits, scoped offense, and public-bucket checks across AWS, Azure, and 
 
 
 
+#### cloudpwn ◆ by 5h4d0wn1k
+
+Cloud & container penetration suite — AWS/GCP/Azure enumeration, S3, docker leaks, k8s secrets, terraform audit, vault, CSPM.
+
+**When:** Posture-testing your own cloud tenants and IaC repos.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/cloudpwn`
+
+**URL:** https://github.com/5h4d0wn1k/cloudpwn
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
+#### crownjewel ◆ by 5h4d0wn1k
+
+Cross-cloud identity federation auditor — Golden/Silver SAML, OAuth client-ID spoofing, OIDC validation, cross-cloud token replay; offline fixtures.
+
+**When:** Auditing federated identity trust boundaries across your clouds.
+
+**Effort:** advanced  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/crownjewel`
+
+**URL:** https://github.com/5h4d0wn1k/crownjewel
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 #### Config & Compliance Auditors
 
 
@@ -260,7 +290,7 @@ NCC Group's small Go tool checks S3 bucket permissions via the public ListObject
 
 **Install:** `go install github.com/nccgroup/s3audit@latest`
 
-**URL:** https://github.com/nccgroup/s3audit
+**URL:** https://github.com/sa7mon/S3Scanner
 
 **Alternatives:** S3Scanner, AWS CLI & Batch Scripts
 

@@ -1,8 +1,8 @@
 {
   "id": "wireless",
   "name": "Wireless & Bluetooth Security",
-  "emoji": "📡",
-  "tagline": "WiFi capture and cracking, PMKID and precomputed tables, RF spectrum analysis, WPS auditing, and Bluetooth — all framed for labs and gear you own or are authorized to audit.",
+  "emoji": "\ud83d\udce1",
+  "tagline": "WiFi capture and cracking, PMKID and precomputed tables, RF spectrum analysis, WPS auditing, and Bluetooth \u2014 all framed for labs and gear you own or are authorized to audit.",
   "class": "offense",
   "categories": [
     {
@@ -18,7 +18,10 @@
           "when": "First step of any authorized Wi-Fi test: enable monitor mode on the adapter you own and confirm chipset/driver support before capture or injection.",
           "install": "sudo apt install aircrack-ng",
           "url": "https://github.com/aircrack-ng/aircrack-ng",
-          "alt": ["iw", "macchanger"]
+          "alt": [
+            "iw",
+            "macchanger"
+          ]
         },
         {
           "name": "iw",
@@ -28,7 +31,9 @@
           "when": "When airmon-ng's heuristics stall, set mode=monitor by hand on an interface you control and verify the phy supports injection.",
           "install": "sudo apt install iw",
           "url": "https://wireless.wiki.kernel.org/en/users/documentation/iw",
-          "alt": ["airmon-ng"]
+          "alt": [
+            "airmon-ng"
+          ]
         },
         {
           "name": "macchanger",
@@ -38,7 +43,9 @@
           "when": "Before a capture or wifite run in your lab when you want a clean identity that is trivially reset between tests.",
           "install": "sudo apt install macchanger",
           "url": "https://github.com/alobbs/macchanger",
-          "alt": ["airmon-ng"]
+          "alt": [
+            "airmon-ng"
+          ]
         }
       ],
       "subcategories": [
@@ -55,7 +62,29 @@
               "when": "Smoke-test the adapter: run tcpdump on mon0 and confirm frames before starting a long airodump or Kismet session on your own hardware.",
               "install": "sudo apt install tcpdump",
               "url": "https://www.tcpdump.org",
-              "alt": ["wireshark", "kismet"]
+              "alt": [
+                "wireshark",
+                "kismet"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "wids-wireless-defense",
+          "name": "WIDS & Wireless Defense",
+          "tools": [
+            {
+              "name": "airguard",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Wireless defense & monitoring suite \u2014 WIDS sensor, deauth/evil-twin/rogue-AP detection, beacon anomaly scan, WPA3 survey.",
+              "when": "Detecting rogue APs and deauth floods in your own wireless perimeter.",
+              "install": "git clone https://github.com/5h4d0wn1k/airguard",
+              "url": "https://github.com/5h4d0wn1k/airguard",
+              "alt": [
+                "Own tool \u2014 lab/authorized use only"
+              ],
+              "by": "5h4d0wn1k"
             }
           ]
         }
@@ -74,7 +103,10 @@
           "when": "Start discovery here on hardware you control: target channels, capture beacon/probe data, and note handshake material for later offline work.",
           "install": "sudo apt install aircrack-ng",
           "url": "https://github.com/aircrack-ng/aircrack-ng",
-          "alt": ["kismet", "horst"]
+          "alt": [
+            "kismet",
+            "horst"
+          ]
         },
         {
           "name": "horst",
@@ -84,7 +116,23 @@
           "when": "A minimal TUI for quick signal and channel-noise checks mid-test in your lab when Kismet is overkill.",
           "install": "git clone https://github.com/br101/horst && cd horst && make && sudo make install",
           "url": "https://github.com/br101/horst",
-          "alt": ["airodump-ng", "kismet"]
+          "alt": [
+            "airodump-ng",
+            "kismet"
+          ]
+        },
+        {
+          "name": "wiair",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Byte-exact 802.11/BLE frame crafting & parsing framework; offline-only and safety-gated.",
+          "when": "Building raw wireless frames for protocol research and WIDS/emitter lab work.",
+          "install": "git clone https://github.com/5h4d0wn1k/wiair",
+          "url": "https://github.com/5h4d0wn1k/wiair",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
         }
       ],
       "subcategories": [
@@ -101,7 +149,10 @@
               "when": "Long-running passive mapping of your authorized airspace, or intrusion-detection-style monitoring over your own test environment.",
               "install": "sudo apt install kismet",
               "url": "https://www.kismetwireless.net",
-              "alt": ["airodump-ng", "horst"]
+              "alt": [
+                "airodump-ng",
+                "horst"
+              ]
             },
             {
               "name": "Wireshark",
@@ -111,7 +162,10 @@
               "when": "Post-capture dissection of handshakes, probe requests, and Bluetooth frames from gear you own.",
               "install": "sudo apt install wireshark",
               "url": "https://www.wireshark.org",
-              "alt": ["tcpdump", "kismet"]
+              "alt": [
+                "tcpdump",
+                "kismet"
+              ]
             }
           ]
         }
@@ -134,7 +188,11 @@
               "when": "Repeatable capture-to-crack runs against your own APs where one command replaces a long manual chain.",
               "install": "git clone https://github.com/derv82/wifite2.git && cd wifite2 && sudo python3 setup.py install",
               "url": "https://github.com/derv82/wifite2",
-              "alt": ["airodump-ng", "hcxdumptool", "aircrack-ng"]
+              "alt": [
+                "airodump-ng",
+                "hcxdumptool",
+                "aircrack-ng"
+              ]
             }
           ],
           "subcategories": [
@@ -151,7 +209,10 @@
                   "when": "In your lab, deauth a stationary test client to accelerate handshake capture and PSK policy validation on APs you manage.",
                   "install": "sudo apt install aircrack-ng",
                   "url": "https://github.com/aircrack-ng/aircrack-ng",
-                  "alt": ["mdk4", "wifite2"]
+                  "alt": [
+                    "mdk4",
+                    "wifite2"
+                  ]
                 },
                 {
                   "name": "mdk4",
@@ -161,7 +222,9 @@
                   "when": "Stress the deauth resistance of APs you own and verify clients reconnect cleanly and re-associate after interference.",
                   "install": "git clone https://github.com/aircrack-ng/mdk4 && cd mdk4 && make && sudo make install",
                   "url": "https://github.com/aircrack-ng/mdk4",
-                  "alt": ["aireplay-ng"]
+                  "alt": [
+                    "aireplay-ng"
+                  ]
                 }
               ]
             },
@@ -178,7 +241,10 @@
                   "when": "On APs you own that expose PMKID, grab the token passively and skip the whole deauth-and-reassociate dance.",
                   "install": "git clone https://github.com/ZerBea/hcxdumptool.git && cd hcxdumptool && make && sudo make install",
                   "url": "https://github.com/ZerBea/hcxdumptool",
-                  "alt": ["aircrack-ng", "airodump-ng"]
+                  "alt": [
+                    "aircrack-ng",
+                    "airodump-ng"
+                  ]
                 },
                 {
                   "name": "hcxtools",
@@ -188,7 +254,10 @@
                   "when": "After capture, normalize EAPOL/PMKID material into 22000 format so GPU testing can start on your own hashes.",
                   "install": "git clone https://github.com/ZerBea/hcxtools.git && cd hcxtools && make && sudo make install",
                   "url": "https://github.com/ZerBea/hcxtools",
-                  "alt": ["hashcat", "aircrack-ng"]
+                  "alt": [
+                    "hashcat",
+                    "aircrack-ng"
+                  ]
                 }
               ]
             }
@@ -207,7 +276,10 @@
               "when": "Offline verification of PSK strength from captures taken against your own access points.",
               "install": "sudo apt install aircrack-ng",
               "url": "https://github.com/aircrack-ng/aircrack-ng",
-              "alt": ["hashcat", "cowpatty"]
+              "alt": [
+                "hashcat",
+                "cowpatty"
+              ]
             }
           ],
           "subcategories": [
@@ -224,7 +296,10 @@
                   "when": "When masks/rules outgrow aircrack-ng and you have a GPU available for faster PMK derivation in your lab.",
                   "install": "sudo apt install hashcat",
                   "url": "https://github.com/hashcat/hashcat",
-                  "alt": ["aircrack-ng", "cowpatty"]
+                  "alt": [
+                    "aircrack-ng",
+                    "cowpatty"
+                  ]
                 },
                 {
                   "name": "cowpatty",
@@ -234,7 +309,9 @@
                   "when": "Clean no-frills confirmation that a candidate passphrase matches your capture before moving on.",
                   "install": "sudo apt install cowpatty",
                   "url": "https://github.com/joswr1ght/cowpatty",
-                  "alt": ["aircrack-ng"]
+                  "alt": [
+                    "aircrack-ng"
+                  ]
                 }
               ]
             },
@@ -251,7 +328,9 @@
                   "when": "Repeatedly audit the same ESSID: precompute its PMK table once, then crack many captured handshakes instantly in your lab.",
                   "install": "sudo apt install aircrack-ng",
                   "url": "https://github.com/aircrack-ng/aircrack-ng",
-                  "alt": ["genpmk"]
+                  "alt": [
+                    "genpmk"
+                  ]
                 },
                 {
                   "name": "genpmk",
@@ -261,7 +340,9 @@
                   "when": "One-off ESSID precompute when you do not want the full airolib database machinery.",
                   "install": "sudo apt install cowpatty",
                   "url": "https://github.com/joswr1ght/cowpatty",
-                  "alt": ["airolib-ng"]
+                  "alt": [
+                    "airolib-ng"
+                  ]
                 }
               ]
             }
@@ -281,7 +362,9 @@
           "when": "Recon your own estate for WPS-enabled APs before deciding a PIN audit is even worthwhile.",
           "install": "sudo apt install reaver",
           "url": "https://gitlab.com/kalilinux/packages/reaver",
-          "alt": ["reaver"]
+          "alt": [
+            "reaver"
+          ]
         }
       ],
       "subcategories": [
@@ -295,10 +378,13 @@
               "rating": 4,
               "effort": "advanced",
               "desc": "The reference WPS registrar brute-forcer: probes PIN transaction logic and, on vulnerable lab routers, recovers the WPS PIN and derived WPA-PSK.",
-              "when": "Confirm your lab AP's WPS lockout and PIN policy — most modern routers lock out after failures, which is the outcome you want to verify.",
+              "when": "Confirm your lab AP's WPS lockout and PIN policy \u2014 most modern routers lock out after failures, which is the outcome you want to verify.",
               "install": "git clone https://gitlab.com/kalilinux/packages/reaver && cd reaver && ./configure && make",
               "url": "https://gitlab.com/kalilinux/packages/reaver",
-              "alt": ["bully", "wash"]
+              "alt": [
+                "bully",
+                "wash"
+              ]
             },
             {
               "name": "Bully",
@@ -308,7 +394,10 @@
               "when": "When reaver stalls against your own AP, bully's retry logic often completes the audit where reaver cannot.",
               "install": "sudo apt install bully",
               "url": "https://github.com/aanarchyy/bully",
-              "alt": ["reaver", "wash"]
+              "alt": [
+                "reaver",
+                "wash"
+              ]
             }
           ]
         },
@@ -325,7 +414,10 @@
               "when": "On older WPS APs you own with predictable RNG, run pixiewps over a reaver capture to recover the PIN in seconds instead of hours.",
               "install": "git clone https://github.com/wiire/pixiewps && cd pixiewps && make && sudo make install",
               "url": "https://github.com/wiire/pixiewps",
-              "alt": ["reaver", "bully"]
+              "alt": [
+                "reaver",
+                "bully"
+              ]
             }
           ]
         }
@@ -343,7 +435,9 @@
           "when": "Stand up a disposable simulated AP in your own lab for behavior tests and client-device compatibility checks.",
           "install": "sudo apt install aircrack-ng",
           "url": "https://github.com/aircrack-ng/aircrack-ng",
-          "alt": ["hostapd-wpe"]
+          "alt": [
+            "hostapd-wpe"
+          ]
         }
       ],
       "subcategories": [
@@ -360,7 +454,10 @@
               "when": "Building an enterprise authentication test rig against client configs you control, capturing challenge/response pairs for offline review.",
               "install": "git clone https://gitlab.com/kalilinux/packages/hostapd-wpe && cd hostapd-wpe && sudo make -C hostapd install",
               "url": "https://gitlab.com/kalilinux/packages/hostapd-wpe",
-              "alt": ["airbase-ng", "eaphammer"]
+              "alt": [
+                "airbase-ng",
+                "eaphammer"
+              ]
             }
           ]
         },
@@ -377,7 +474,10 @@
               "when": "Demo rogue-AP and social-engineering tradecraft only against APs and clients you own or explicitly control in the lab.",
               "install": "git clone https://github.com/wifiphisher/wifiphisher && cd wifiphisher && sudo python3 setup.py install",
               "url": "https://github.com/wifiphisher/wifiphisher",
-              "alt": ["fluxion", "eaphammer"]
+              "alt": [
+                "fluxion",
+                "eaphammer"
+              ]
             },
             {
               "name": "fluxion",
@@ -387,7 +487,10 @@
               "when": "Scripted WPA2 capture plus captive-portal phishing against your own APs and test accounts.",
               "install": "git clone https://github.com/FluxionNetwork/fluxion && cd fluxion && sudo ./fluxion.sh",
               "url": "https://github.com/FluxionNetwork/fluxion",
-              "alt": ["wifiphisher", "hostapd-wpe"]
+              "alt": [
+                "wifiphisher",
+                "hostapd-wpe"
+              ]
             },
             {
               "name": "eaphammer",
@@ -397,7 +500,10 @@
               "when": "Enterprise (802.1X) test scenarios against your own lab RADIUS and client fleets before touching production gear.",
               "install": "git clone https://gitlab.com/kalilinux/packages/eaphammer && cd eaphammer && ./kali-setup",
               "url": "https://gitlab.com/kalilinux/packages/eaphammer",
-              "alt": ["hostapd-wpe", "wifiphisher"]
+              "alt": [
+                "hostapd-wpe",
+                "wifiphisher"
+              ]
             }
           ]
         }
@@ -415,7 +521,10 @@
           "when": "Scriptable, host-based BLE enumeration and proxy testing of your own peripherals without dedicated sniffing hardware.",
           "install": "sudo apt install bettercap",
           "url": "https://github.com/bettercap/bettercap",
-          "alt": ["bluez", "btlejack"]
+          "alt": [
+            "bluez",
+            "btlejack"
+          ]
         }
       ],
       "subcategories": [
@@ -432,17 +541,22 @@
               "when": "Hardware-level analysis of hop patterns, advertising data, and pairing behavior of peripherals you own.",
               "install": "git clone https://github.com/greatscottgadgets/ubertooth && cd ubertooth/host && mkdir build && cd build && cmake .. && make && sudo make install",
               "url": "https://github.com/greatscottgadgets/ubertooth",
-              "alt": ["btlejack", "bettercap"]
+              "alt": [
+                "btlejack",
+                "bettercap"
+              ]
             },
             {
               "name": "btlejack",
               "rating": 4,
               "effort": "advanced",
               "desc": "Sniffs and interacts with BLE connections via nRF24-family USB dongles; supports jamming and session recovery from previously captured keys.",
-              "when": "Low-cost BLE session auditing of your own accessories — map advertising channels and check for key reuse across connections.",
+              "when": "Low-cost BLE session auditing of your own accessories \u2014 map advertising channels and check for key reuse across connections.",
               "install": "git clone https://github.com/virtualabs/btlejack && cd btlejack && make && sudo make install",
               "url": "https://github.com/virtualabs/btlejack",
-              "alt": ["ubertooth"]
+              "alt": [
+                "ubertooth"
+              ]
             }
           ]
         },
@@ -459,7 +573,9 @@
               "when": "Free host-side visibility before reaching for RF hardware; btmon gives clean pairing and connection traces for your own adapters.",
               "install": "sudo apt install bluez bluez-hcidump",
               "url": "https://github.com/bluez/bluez",
-              "alt": ["bettercap"]
+              "alt": [
+                "bettercap"
+              ]
             }
           ]
         },
@@ -476,7 +592,10 @@
               "when": "A quick authorized inventory of services your own BT peripherals expose before deeper hardware testing.",
               "install": "Download bt_audit-0.1.1.tar.gz from betaversion.net, extract, and run make in the src directory",
               "url": "http://www.betaversion.net/btdsd/download/",
-              "alt": ["bluez", "bettercap"]
+              "alt": [
+                "bluez",
+                "bettercap"
+              ]
             }
           ]
         }
@@ -492,10 +611,13 @@
           "rating": 5,
           "effort": "advanced",
           "desc": "Proxmark3 hardware plus the Iceman project firmware: read, clone, and analyze low- and high-frequency tags including MIFARE, ISO14443, and iCLASS.",
-          "when": "Physical badge and tag auditing of assets you own — sniff reader/tag sessions and validate card copy resistance.",
+          "when": "Physical badge and tag auditing of assets you own \u2014 sniff reader/tag sessions and validate card copy resistance.",
           "install": "git clone https://github.com/RfidResearchGroup/proxmark3 && cd proxmark3 && make",
           "url": "https://github.com/RfidResearchGroup/proxmark3",
-          "alt": ["libnfc", "mfoc"]
+          "alt": [
+            "libnfc",
+            "mfoc"
+          ]
         }
       ],
       "subcategories": [
@@ -512,7 +634,10 @@
               "when": "With an ACR122U-class reader, enumerate and read blocks on cards you own without dedicated hardware.",
               "install": "sudo apt install libnfc-bin",
               "url": "https://github.com/nfc-tools/libnfc",
-              "alt": ["proxmark3", "mfoc"]
+              "alt": [
+                "proxmark3",
+                "mfoc"
+              ]
             }
           ]
         },
@@ -529,7 +654,10 @@
               "when": "Recover all sectors of a weak-key MIFARE Classic card in your lab for badge cloning and access-control red-team tests.",
               "install": "git clone https://github.com/nfc-tools/mfoc && cd mfoc && ./autogen.sh && ./configure && make && sudo make install",
               "url": "https://github.com/nfc-tools/mfoc",
-              "alt": ["mfcuk", "libnfc"]
+              "alt": [
+                "mfcuk",
+                "libnfc"
+              ]
             },
             {
               "name": "mfcuk",
@@ -539,7 +667,10 @@
               "when": "When mfoc's hardnested path fails against a card you own, mfcuk's dark-side vector is the fallback.",
               "install": "git clone https://github.com/nfc-tools/mfcuk && cd mfcuk && ./autogen.sh && ./configure && make && sudo make install",
               "url": "https://github.com/nfc-tools/mfcuk",
-              "alt": ["mfoc", "proxmark3"]
+              "alt": [
+                "mfoc",
+                "proxmark3"
+              ]
             }
           ]
         }
@@ -558,7 +689,10 @@
           "when": "The base RF capture hardware and tooling: stream IQ captures into gqrx or inspectrum for analysis of signals in your own environment.",
           "install": "sudo apt install rtl-sdr",
           "url": "https://github.com/osmocom/rtl-sdr",
-          "alt": ["gqrx", "inspectrum"]
+          "alt": [
+            "gqrx",
+            "inspectrum"
+          ]
         }
       ],
       "subcategories": [
@@ -575,7 +709,10 @@
               "when": "Interactively scan ISM bands and identify transmitters or interference sources before blaming your own Wi-Fi gear.",
               "install": "sudo apt install gqrx-sdr",
               "url": "https://gqrx.dk",
-              "alt": ["rtl-sdr", "inspectrum"]
+              "alt": [
+                "rtl-sdr",
+                "inspectrum"
+              ]
             }
           ]
         },
@@ -592,7 +729,10 @@
               "when": "After recording bursts with rtl_sdr, step through symbols to identify the modulation type before deeper decoding.",
               "install": "sudo apt install inspectrum",
               "url": "https://github.com/miek/inspectrum",
-              "alt": ["gqrx", "rtl-sdr"]
+              "alt": [
+                "gqrx",
+                "rtl-sdr"
+              ]
             }
           ]
         },
@@ -609,7 +749,10 @@
               "when": "When you must decode a custom protocol from captured samples of signals you are authorized to receive.",
               "install": "sudo apt install gnuradio",
               "url": "https://github.com/gnuradio/gnuradio",
-              "alt": ["gqrx", "inspectrum"]
+              "alt": [
+                "gqrx",
+                "inspectrum"
+              ]
             }
           ]
         }

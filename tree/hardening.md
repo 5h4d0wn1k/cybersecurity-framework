@@ -264,7 +264,7 @@ Free CIS configuration benchmark for Windows Server and client editions with sco
 
 **Install:** `preinstalled (web docs)`
 
-**URL:** https://www.cisecurity.org/benchmark/microsoft_windows
+**URL:** https://www.cisecurity.org/benchmark/microsoft_windows_desktop
 
 **Alternatives:** microsoft-security-baselines, hardeningkitty
 
@@ -279,7 +279,7 @@ Microsoft's recommended security configuration settings curated from the Windows
 
 **Install:** `preinstalled (web docs)`
 
-**URL:** https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework
+**URL:** https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework/windows-security-baselines
 
 **Alternatives:** cis-microsoft-windows-benchmark, lgpo
 
@@ -322,7 +322,7 @@ RouterOS documentation covering access hardening, service lockdown, firewall fil
 
 **Install:** `preinstalled (web docs)`
 
-**URL:** https://help.mikrotik.com/docs/spaces/ROS/pages/148778796/Security
+**URL:** https://help.mikrotik.com/docs/spaces/ROS/pages/328353/Securing+your+router
 
 **Alternatives:** cis-cisco-benchmark, batfish
 
@@ -548,7 +548,7 @@ Free CIS benchmark sets for AWS, Azure, and GCP covering IAM, storage, networkin
 
 **Install:** `preinstalled (web docs)`
 
-**URL:** https://www.cisecurity.org/benchmark/amazon_aws
+**URL:** https://www.cisecurity.org/benchmark/amazon_web_services
 
 **Alternatives:** prowler, scoutsuite
 
@@ -594,6 +594,21 @@ NCC Group's multi-cloud auditor pulls configuration from provider APIs and rende
 ## Compliance Benchmarks & Baseline Content
 
 
+
+
+#### zerotrustmirror ◆ by 5h4d0wn1k
+
+Zero-trust readiness engine — ZTA pillar scoring with evidence and multichannel correlation across your environment.
+
+**When:** Measuring progress against NIST/CISA zero-trust pillars before rolling out changes.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/zerotrustmirror`
+
+**URL:** https://github.com/5h4d0wn1k/zerotrustmirror
+
+**Alternatives:** Own tool — lab/authorized use only
 
 
 #### Benchmark & Baseline Content
@@ -714,6 +729,21 @@ Built-in systemd command that scores each service unit 0-10 on exposure (Private
 **URL:** https://www.freedesktop.org/software/systemd/man/latest/systemd-analyze.html
 
 **Alternatives:** ansible-hardening, lynis
+
+
+#### endpointaegis ◆ by 5h4d0wn1k
+
+EDR-lite host-hardening auditor — 0-100 score, persistence/service/patch/socket audits, drift baselines, HTML+JSON reports.
+
+**When:** Scoring and tracking host hardening across windows hosts/endpoints you manage.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/endpointaegis`
+
+**URL:** https://github.com/5h4d0wn1k/endpointaegis
+
+**Alternatives:** Own tool — lab/authorized use only
 
 
 

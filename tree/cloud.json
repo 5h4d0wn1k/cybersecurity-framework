@@ -107,6 +107,34 @@
             }
           ]
         }
+      ],
+      "tools": [
+        {
+          "name": "cloudpwn",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Cloud & container penetration suite \u2014 AWS/GCP/Azure enumeration, S3, docker leaks, k8s secrets, terraform audit, vault, CSPM.",
+          "when": "Posture-testing your own cloud tenants and IaC repos.",
+          "install": "git clone https://github.com/5h4d0wn1k/cloudpwn",
+          "url": "https://github.com/5h4d0wn1k/cloudpwn",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
+        },
+        {
+          "name": "crownjewel",
+          "rating": 4,
+          "effort": "advanced",
+          "desc": "Cross-cloud identity federation auditor \u2014 Golden/Silver SAML, OAuth client-ID spoofing, OIDC validation, cross-cloud token replay; offline fixtures.",
+          "when": "Auditing federated identity trust boundaries across your clouds.",
+          "install": "git clone https://github.com/5h4d0wn1k/crownjewel",
+          "url": "https://github.com/5h4d0wn1k/crownjewel",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
+        }
       ]
     },
     {
@@ -244,7 +272,7 @@
               "desc": "NCC Group's small Go tool checks S3 bucket permissions via the public ListObjects/GetObject/Acl APIs against a given bucket or custom wordlist.",
               "when": "Single-target bucket permission triage and wordlist-driven scan of buckets you own, without standing up a full scanner.",
               "install": "go install github.com/nccgroup/s3audit@latest",
-              "url": "https://github.com/nccgroup/s3audit",
+              "url": "https://github.com/sa7mon/S3Scanner",
               "alt": [
                 "S3Scanner",
                 "AWS CLI & Batch Scripts"

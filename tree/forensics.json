@@ -1,7 +1,7 @@
 {
   "id": "forensics",
   "name": "Digital Forensics & Incident Response",
-  "emoji": "🔬",
+  "emoji": "\ud83d\udd2c",
   "tagline": "Analyze memory, disk, carved files, artifacts, and timelines from your own systems, lab evidence, and incident-response cases you legally possess.",
   "class": "defense",
   "categories": [
@@ -19,31 +19,39 @@
               "best": true,
               "rating": 4,
               "effort": "easy",
-              "desc": "GNU coreutils bit-copy utility that creates a byte-for-byte image of any block device — the universal imaging baseline every forensics distro ships.",
+              "desc": "GNU coreutils bit-copy utility that creates a byte-for-byte image of any block device \u2014 the universal imaging baseline every forensics distro ships.",
               "when": "Quick raw image of your own drive, USB stick, or SD card when you just need a faithful copy and will hash it yourself.",
               "install": "sudo apt install coreutils",
               "url": "https://www.gnu.org/software/coreutils/",
-              "alt": ["dc3dd", "ddrescue"]
+              "alt": [
+                "dc3dd",
+                "ddrescue"
+              ]
             },
             {
               "name": "ddrescue",
               "rating": 4,
               "effort": "medium",
-              "desc": "GNU data-recovery imager that resists read errors, logs bad blocks, and retries them after the rest of the media is copied — built to salvage failing or damaged storage.",
+              "desc": "GNU data-recovery imager that resists read errors, logs bad blocks, and retries them after the rest of the media is copied \u2014 built to salvage failing or damaged storage.",
               "when": "The drive clicks or returns I/O errors: let ddrescue build a mostly-complete image first, then analyze the rescued copy instead of the failing disk.",
               "install": "sudo apt install gddrescue",
               "url": "https://www.gnu.org/software/ddrescue/",
-              "alt": ["dc3dd"]
+              "alt": [
+                "dc3dd"
+              ]
             },
             {
               "name": "dc3dd",
               "rating": 5,
               "effort": "easy",
-              "desc": "Forensic fork of GNU dd that adds on-the-fly hashing, split output, pattern wiping, and a detailed acquisition log — evidence-grade imaging in one pass.",
+              "desc": "Forensic fork of GNU dd that adds on-the-fly hashing, split output, pattern wiping, and a detailed acquisition log \u2014 evidence-grade imaging in one pass.",
               "when": "Capture a definitive, hash-verified image of a source drive before analysis so you examine the copy, not the live evidence.",
               "install": "sudo apt install dc3dd",
               "url": "https://sourceforge.net/projects/dc3dd/",
-              "alt": ["dd", "guymager"]
+              "alt": [
+                "dd",
+                "guymager"
+              ]
             }
           ],
           "subcategories": []
@@ -60,8 +68,10 @@
               "desc": "Exterro's free, widely-used acquisition and preview tool: images drives/memory to raw, E01, and AFF formats, computes hashes, and mounts images for instant browsing.",
               "when": "Click-driven imaging with E01 support (or compressed raw) straight to a case folder; it also does live RAM acquisition when needed.",
               "install": "Download the free installer from exterro.com and run FTK Imager",
-              "url": "https://www.exterro.com/ftk-imager",
-              "alt": ["guymager"]
+              "url": "https://www.exterro.com/digital-forensics-software/ftk-imager",
+              "alt": [
+                "guymager"
+              ]
             },
             {
               "name": "Guymager",
@@ -71,7 +81,10 @@
               "when": "Window-based imaging with progress bars and check-verification on a Linux analysis box when you prefer a GUI over dc3dd's command line.",
               "install": "sudo apt install guymager",
               "url": "https://guymager.sourceforge.io",
-              "alt": ["dc3dd", "ftk-imager"]
+              "alt": [
+                "dc3dd",
+                "ftk-imager"
+              ]
             }
           ],
           "subcategories": []
@@ -81,7 +94,21 @@
     {
       "id": "carving-analysis",
       "name": "Collection, Carving & Data Recovery",
-      "tools": [],
+      "tools": [
+        {
+          "name": "forensicsiso",
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Full DFIR workstation \u2014 disk/memory/log/pcap/registry/browser/email parsing, super-timelining, cross-artifact correlation, chain-of-custody.",
+          "when": "Running end-to-end incident-response analysis on acquired evidence.",
+          "install": "git clone https://github.com/5h4d0wn1k/forensicsiso",
+          "url": "https://github.com/5h4d0wn1k/forensicsiso",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
+        }
+      ],
       "subcategories": [
         {
           "id": "acquisition",
@@ -96,17 +123,21 @@
               "when": "Speed triage in your own incident response or lab: point it at a live Windows box or mounted image and get parsed artifacts quickly; extend with community KapeFiles targets.",
               "install": "Download KAPE from Kroll's site (or GitHub releases) and run kape.exe",
               "url": "https://www.kroll.com/en/services/cyber-risk/incident-response-litigation-support/kape",
-              "alt": ["ericzimmerman-tools"]
+              "alt": [
+                "ericzimmerman-tools"
+              ]
             },
             {
               "name": "Magnet RAM Capture",
               "rating": 4,
               "effort": "easy",
-              "desc": "Free Windows memory acquisition tool that dumps physical RAM to raw .DMP files with a small footprint and optional command-line mode — ideal for preserving volatile evidence before it disappears.",
-              "when": "Grab the memory of a live lab or incident host before anything else — the .DMP output feeds straight into Volatility.",
+              "desc": "Free Windows memory acquisition tool that dumps physical RAM to raw .DMP files with a small footprint and optional command-line mode \u2014 ideal for preserving volatile evidence before it disappears.",
+              "when": "Grab the memory of a live lab or incident host before anything else \u2014 the .DMP output feeds straight into Volatility.",
               "install": "Fill the download form at magnetforensics.com and run the standalone capture utility",
               "url": "https://www.magnetforensics.com/resources/magnet-ram-capture/",
-              "alt": ["volatility-3"]
+              "alt": [
+                "volatility-3"
+              ]
             }
           ],
           "subcategories": []
@@ -120,21 +151,25 @@
               "best": true,
               "rating": 5,
               "effort": "medium",
-              "desc": "Command-line suite for raw/EWF images: mmls for partition layout, fls/icat to list and extract inodes, istat for metadata, and tsk_recover for recovery — the engine underneath Autopsy.",
+              "desc": "Command-line suite for raw/EWF images: mmls for partition layout, fls/icat to list and extract inodes, istat for metadata, and tsk_recover for recovery \u2014 the engine underneath Autopsy.",
               "when": "Scripted or headless analysis, or when you need precise inode-level answers Autopsy hides behind its GUI.",
               "install": "sudo apt install sleuthkit",
               "url": "https://sleuthkit.org/sleuthkit/",
-              "alt": ["autopsy"]
+              "alt": [
+                "autopsy"
+              ]
             },
             {
               "name": "Autopsy",
               "rating": 4,
               "effort": "medium",
               "desc": "GUI platform built on The Sleuth Kit: opens images and live drives, recovers deleted files, and runs ingest modules for web history, keyword search, and carving inside a case workflow.",
-              "when": "First-pass interactive examination of a drive or memory-card image from your own casework or lab — ingest everything, then drill into findings.",
+              "when": "First-pass interactive examination of a drive or memory-card image from your own casework or lab \u2014 ingest everything, then drill into findings.",
               "install": "Download the installer from sleuthkit.org/autopsy and run it",
               "url": "https://www.sleuthkit.org/autopsy/",
-              "alt": ["sleuth-kit"]
+              "alt": [
+                "sleuth-kit"
+              ]
             }
           ],
           "subcategories": []
@@ -152,17 +187,23 @@
               "when": "Unallocated-space fishing: run it on an image or free-space carve to recover deleted files the live filesystem no longer lists.",
               "install": "sudo apt install foremost",
               "url": "https://foremost.sourceforge.net/",
-              "alt": ["scalpel", "testdisk"]
+              "alt": [
+                "scalpel",
+                "testdisk"
+              ]
             },
             {
               "name": "scalpel",
               "rating": 3,
               "effort": "easy",
-              "desc": "Filesystem-independent carver using a header/footer definition database — a rewrite of foremost's engine with per-type carve-size tuning; the original repo is stale, machn1k/scalpel-2.0 carries it on.",
+              "desc": "Filesystem-independent carver using a header/footer definition database \u2014 a rewrite of foremost's engine with per-type carve-size tuning; the original repo is stale, machn1k/scalpel-2.0 carries it on.",
               "when": "Stubborn image carries where you need tuned per-type size limits or a second carving engine beyond foremost defaults.",
               "install": "sudo apt install scalpel",
               "url": "https://github.com/machn1k/scalpel-2.0",
-              "alt": ["foremost", "testdisk"]
+              "alt": [
+                "foremost",
+                "testdisk"
+              ]
             },
             {
               "name": "TestDisk / PhotoRec",
@@ -172,7 +213,10 @@
               "when": "Last-ditch recovery from a reformatted or damaged partition or thumb drive in your own hardware lab.",
               "install": "sudo apt install testdisk",
               "url": "https://www.cgsecurity.org",
-              "alt": ["foremost", "scalpel"]
+              "alt": [
+                "foremost",
+                "scalpel"
+              ]
             }
           ],
           "subcategories": []
@@ -186,11 +230,13 @@
               "best": true,
               "rating": 4,
               "effort": "easy",
-              "desc": "Scans any input byte-by-byte and extracts emails, URLs, credit-card numbers, JPEGs, and JSON to feature files — recursively decoding compressed or encoded blocks without parsing the filesystem.",
+              "desc": "Scans any input byte-by-byte and extracts emails, URLs, credit-card numbers, JPEGs, and JSON to feature files \u2014 recursively decoding compressed or encoded blocks without parsing the filesystem.",
               "when": "Rapid 'what is in this blob' extraction over images or wiped drives before deep filesystem analysis.",
               "install": "sudo apt install bulk-extractor",
               "url": "https://github.com/simsong/bulk_extractor",
-              "alt": ["foremost"]
+              "alt": [
+                "foremost"
+              ]
             }
           ],
           "subcategories": []
@@ -216,11 +262,14 @@
                   "best": true,
                   "rating": 5,
                   "effort": "medium",
-                  "desc": "The de-facto memory forensics framework: plugin-based analysis of RAM dumps (raw, EWF, crash/hibernation) across Windows, Linux, macOS, and Android — processes, network artifacts, injected code, and more.",
+                  "desc": "The de-facto memory forensics framework: plugin-based analysis of RAM dumps (raw, EWF, crash/hibernation) across Windows, Linux, macOS, and Android \u2014 processes, network artifacts, injected code, and more.",
                   "when": "Start here with any memory dump from a lab box or captured incident host; run pslist/pscan, netscan, and malfind to build the runtime picture.",
                   "install": "python3 -m pip install volatility3",
                   "url": "https://github.com/volatilityfoundation/volatility3",
-                  "alt": ["volatility-2", "memprocfs"]
+                  "alt": [
+                    "volatility-2",
+                    "memprocfs"
+                  ]
                 },
                 {
                   "name": "Volatility 2",
@@ -230,17 +279,21 @@
                   "when": "Reach for it when a legacy or niche image lacks a Volatility 3 symbol table, or a plugin you need only exists in the classic tree.",
                   "install": "git clone https://github.com/volatilityfoundation/volatility",
                   "url": "https://github.com/volatilityfoundation/volatility",
-                  "alt": ["volatility-3"]
+                  "alt": [
+                    "volatility-3"
+                  ]
                 },
                 {
                   "name": "Rekall",
                   "rating": 3,
                   "effort": "medium",
-                  "desc": "Google-origin memory forensics framework born from Volatility during the 2.x era — effectively dormant since ~2020 with legacy artifacts in gray matter for older Windows/Linux images.",
+                  "desc": "Google-origin memory forensics framework born from Volatility during the 2.x era \u2014 effectively dormant since ~2020 with legacy artifacts in gray matter for older Windows/Linux images.",
                   "when": "Reading old IR research or cross-checking a niche plugin result on a vintage dump; expect to maintain it yourself.",
                   "install": "pip install rekall",
                   "url": "https://github.com/google/rekall",
-                  "alt": ["volatility-3"]
+                  "alt": [
+                    "volatility-3"
+                  ]
                 }
               ],
               "subcategories": []
@@ -258,17 +311,22 @@
                   "when": "Fast interactive triage of a Windows dump without plugin CLI gymnastics, or live acquisition during your own incident response.",
                   "install": "git clone https://github.com/ufrisk/MemProcFS",
                   "url": "https://github.com/ufrisk/MemProcFS",
-                  "alt": ["volatility-3"]
+                  "alt": [
+                    "volatility-3"
+                  ]
                 },
                 {
                   "name": "Redline",
                   "rating": 4,
                   "effort": "easy",
-                  "desc": "Mandiant's free endpoint and memory investigation GUI: collects a volatile data set (processes, network, services, registry) from a live host or a memory dump and flags suspicious items with ATT&CK mapping — slower-moving now but still used in FTK/IR workflows.",
+                  "desc": "Mandiant's free endpoint and memory investigation GUI: collects a volatile data set (processes, network, services, registry) from a live host or a memory dump and flags suspicious items with ATT&CK mapping \u2014 slower-moving now but still used in FTK/IR workflows.",
                   "when": "Point-and-click triage of a live Windows endpoint or captured memory when the CLI frameworks feel heavy for your own casework.",
                   "install": "Download Redline from Mandiant's free-tools page and let the wizard collect or open a memory image",
                   "url": "https://www.mandiant.com/resources/redline",
-                  "alt": ["memprocfs", "volatility-3"]
+                  "alt": [
+                    "memprocfs",
+                    "volatility-3"
+                  ]
                 }
               ],
               "subcategories": []
@@ -284,11 +342,13 @@
               "best": true,
               "rating": 3,
               "effort": "easy",
-              "desc": "GNU binutils classic that extracts printable ASCII/Unicode sequences from a raw memory dump — still the fastest way to spot C2 URLs, commands, and keys before the framework work.",
+              "desc": "GNU binutils classic that extracts printable ASCII/Unicode sequences from a raw memory dump \u2014 still the fastest way to spot C2 URLs, commands, and keys before the framework work.",
               "when": "Instant grep-ish pass over a dump for notable indicators, or targeted hunting using the output piped into a socket/crypto-constant search.",
               "install": "sudo apt install binutils && strings <dump> | grep -E '[0-9]+\\.'",
               "url": "https://www.gnu.org/software/binutils/",
-              "alt": ["bulk-extractor"]
+              "alt": [
+                "bulk-extractor"
+              ]
             }
           ],
           "subcategories": []
@@ -309,11 +369,14 @@
               "best": true,
               "rating": 5,
               "effort": "easy",
-              "desc": "Suite of focused parsers — RECmd/Registry Explorer, PECmd (Prefetch), LECmd (LNK), JLECmd (JumpLists), ShellBags, Amcache, MFTECmd — answering execution-timeline questions from individual artifacts.",
+              "desc": "Suite of focused parsers \u2014 RECmd/Registry Explorer, PECmd (Prefetch), LECmd (LNK), JLECmd (JumpLists), ShellBags, Amcache, MFTECmd \u2014 answering execution-timeline questions from individual artifacts.",
               "when": "Deep-dive a targeted artifact set: ask 'what executed, when, by whom' via Prefetch, LNK/JumpList, Amcache, and registry traces.",
               "install": "Get-ZimmermanTools.ps1 (PowerShell)",
               "url": "https://ericzimmerman.github.io/",
-              "alt": ["kape", "evtxecmd"]
+              "alt": [
+                "kape",
+                "evtxecmd"
+              ]
             },
             {
               "name": "EvtxECmd",
@@ -323,7 +386,10 @@
               "when": "Convert raw Windows event logs from a mounted image or collection set into a queryable CSV before building your timeline.",
               "install": "Download from EricZimmerman GitHub releases (part of Get-ZimmermanTools)",
               "url": "https://github.com/EricZimmerman/evtx",
-              "alt": ["ericzimmerman-tools", "hayabusa"]
+              "alt": [
+                "ericzimmerman-tools",
+                "hayabusa"
+              ]
             }
           ],
           "subcategories": []
@@ -346,7 +412,10 @@
                   "when": "Hunt lateral movement, logon anomalies, and persistence across a full C:\\Windows\\System32\\winevt\\Logs collection or exported .evtx set.",
                   "install": "Download the release binary for your OS and run hayabusa csv-timeline -d <evtx_dir>",
                   "url": "https://github.com/Yamato-Security/hayabusa",
-                  "alt": ["evtxecmd", "apt-hunter"]
+                  "alt": [
+                    "evtxecmd",
+                    "apt-hunter"
+                  ]
                 },
                 {
                   "name": "APT-Hunter",
@@ -356,7 +425,9 @@
                   "when": "Point it at your exported .evtx logs for a quick attacker-TTP posture check before going deep with sigma/hunting frameworks.",
                   "install": "git clone https://github.com/ahmedkhlief/APT-Hunter && python3 APT-Hunter.py --evtx <evtx_folder>",
                   "url": "https://github.com/ahmedkhlief/APT-Hunter",
-                  "alt": ["hayabusa"]
+                  "alt": [
+                    "hayabusa"
+                  ]
                 }
               ],
               "subcategories": []
@@ -376,17 +447,22 @@
               "when": "Build the master super-timeline of an image: collect once with log2timeline, then slice and filter per question with psort.",
               "install": "python3 -m pip install plaso",
               "url": "https://github.com/log2timeline/plaso",
-              "alt": ["timeline-explorer", "timesketch"]
+              "alt": [
+                "timeline-explorer",
+                "timesketch"
+              ]
             },
             {
               "name": "Timeline Explorer",
               "rating": 4,
               "effort": "easy",
-              "desc": "Eric Zimmerman's high-performance CSV timeline viewer with filters, bookmarks, and quick histogramning — the companion screen for Plaso/EvtxECmd CSV output.",
+              "desc": "Eric Zimmerman's high-performance CSV timeline viewer with filters, bookmarks, and quick histogramning \u2014 the companion screen for Plaso/EvtxECmd CSV output.",
               "when": "Load a super-timeline or artifact CSV and filter/hide columns interactively to answer 'what happened when' without SQL.",
               "install": "Download from ericzimmerman.github.io (Chocolatey: choco install timelineexplorer)",
               "url": "https://ericzimmerman.github.io/",
-              "alt": ["plaso"]
+              "alt": [
+                "plaso"
+              ]
             }
           ],
           "subcategories": []
@@ -411,17 +487,21 @@
               "when": "Extract reconstructable browser activity from the Chrome/Edge profile directory of a mounted image or live host in your own case.",
               "install": "pip install hindsight",
               "url": "https://github.com/obsidianforensics/hindsight",
-              "alt": ["browserhistoryviewer"]
+              "alt": [
+                "browserhistoryviewer"
+              ]
             },
             {
               "name": "DB Browser for SQLite",
               "rating": 4,
               "effort": "easy",
-              "desc": "Full-featured GUI for reading and querying SQLite databases — the manual backstop when you need to poke raw browser History/places.sqlite rows yourself.",
+              "desc": "Full-featured GUI for reading and querying SQLite databases \u2014 the manual backstop when you need to poke raw browser History/places.sqlite rows yourself.",
               "when": "Directly inspect a browser database (history, cookies, bookmarks, cache index) when a parser misses a field or you want ad-hoc SQL.",
               "install": "sudo apt install sqlitebrowser",
               "url": "https://sqlitebrowser.org",
-              "alt": ["hindsight"]
+              "alt": [
+                "hindsight"
+              ]
             }
           ],
           "subcategories": []
@@ -439,7 +519,10 @@
               "when": "Quick, clean table of browsing history with proper timestamp conversion for a report or super-timeline merge.",
               "install": "Download the free installer from foxtonforensics.com",
               "url": "https://www.foxtonforensics.com/browser-history-viewer",
-              "alt": ["browsinghistoryview", "hindsight"]
+              "alt": [
+                "browsinghistoryview",
+                "hindsight"
+              ]
             },
             {
               "name": "BrowsingHistoryView",
@@ -449,7 +532,9 @@
               "when": "One-pass aggregation of every browser profile's history on a live system or mounted image into a single viewable export.",
               "install": "Download BrowsingHistoryView.zip from nirsoft.net and run the executable",
               "url": "https://www.nirsoft.net/utils/browsing_history_view.html",
-              "alt": ["browserhistoryviewer"]
+              "alt": [
+                "browserhistoryviewer"
+              ]
             },
             {
               "name": "ChromeHistoryView",
@@ -459,7 +544,9 @@
               "when": "Chrome-only deep dive when you want granular control and export options Eclipse the general aggregators.",
               "install": "Download ChromeHistoryView.zip from nirsoft.net",
               "url": "https://www.nirsoft.net/utils/chrome_history_view.html",
-              "alt": ["browsinghistoryview"]
+              "alt": [
+                "browsinghistoryview"
+              ]
             },
             {
               "name": "ChromeCacheView",
@@ -469,7 +556,9 @@
               "when": "Recover cached images/videos being staged by a live chrome user, or enumerate what content was browsed even after history deletion.",
               "install": "Download ChromeCacheView.zip from nirsoft.net",
               "url": "https://www.nirsoft.net/utils/chrome_cache_view.html",
-              "alt": ["browsinghistoryview"]
+              "alt": [
+                "browsinghistoryview"
+              ]
             }
           ],
           "subcategories": []

@@ -1,8 +1,8 @@
 {
   "id": "web",
   "name": "Web Application Security",
-  "emoji": "🕸️",
-  "tagline": "The full web assessment stack: intercepting proxies, deep content discovery, injection testing, XSS & clickjacking, API security, and OWASP-class bypass tooling — nested by technique.",
+  "emoji": "\ud83d\udd78\ufe0f",
+  "tagline": "The full web assessment stack: intercepting proxies, deep content discovery, injection testing, XSS & clickjacking, API security, and OWASP-class bypass tooling \u2014 nested by technique.",
   "class": "offense",
   "categories": [
     {
@@ -22,7 +22,10 @@
               "when": "Every authorized manual web engagement; the default scratchpad for inspecting and shaping requests to an app in scope.",
               "install": "brew install --cask burp-suite",
               "url": "https://portswigger.net/burp",
-              "alt": ["OWASP ZAP", "Caido"]
+              "alt": [
+                "OWASP ZAP",
+                "Caido"
+              ]
             },
             {
               "name": "OWASP ZAP",
@@ -32,7 +35,10 @@
               "when": "When you need a fully open, scriptable proxy with built-in automation you can drive from a pipeline against a staging app you own.",
               "install": "sudo snap install zaproxy --classic",
               "url": "https://github.com/zaproxy/zaproxy",
-              "alt": ["Burp Suite", "Caido"]
+              "alt": [
+                "Burp Suite",
+                "Caido"
+              ]
             },
             {
               "name": "Caido",
@@ -42,7 +48,10 @@
               "when": "When you want a slim, single-binary proxy for interception and replay without a heavyweight install footprint.",
               "install": "brew tap caido/caido && brew install caido",
               "url": "https://github.com/caido/caido",
-              "alt": ["Burp Suite", "OWASP ZAP"]
+              "alt": [
+                "Burp Suite",
+                "OWASP ZAP"
+              ]
             }
           ]
         },
@@ -59,7 +68,10 @@
               "when": "When you want a polished GUI focus on mobile app and local HTTPS traffic you are authorized to inspect.",
               "install": "brew install --cask charles",
               "url": "https://www.charlesproxy.com",
-              "alt": ["Proxyman", "OWASP ZAP"]
+              "alt": [
+                "Proxyman",
+                "OWASP ZAP"
+              ]
             },
             {
               "name": "Proxyman",
@@ -69,7 +81,10 @@
               "when": "When you work primarily on macOS and want a fast proxy with iOS/Android companion apps for your own traffic.",
               "install": "brew install --cask proxyman",
               "url": "https://proxyman.io",
-              "alt": ["Charles Proxy", "mitmproxy"]
+              "alt": [
+                "Charles Proxy",
+                "mitmproxy"
+              ]
             }
           ]
         }
@@ -96,7 +111,10 @@
                   "when": "Anytime you need fast brute-force discovery of paths or parameters against a target you are authorized to test.",
                   "install": "go install github.com/ffuf/ffuf/v2@latest",
                   "url": "https://github.com/ffuf/ffuf",
-                  "alt": ["gobuster", "feroxbuster"]
+                  "alt": [
+                    "gobuster",
+                    "feroxbuster"
+                  ]
                 },
                 {
                   "name": "gobuster",
@@ -106,7 +124,10 @@
                   "when": "When you want a lightweight, easy-to-script brute forcer for your scoped discovery phase.",
                   "install": "go install github.com/OJ/gobuster/v3@latest",
                   "url": "https://github.com/OJ/gobuster",
-                  "alt": ["ffuf", "feroxbuster"]
+                  "alt": [
+                    "ffuf",
+                    "feroxbuster"
+                  ]
                 },
                 {
                   "name": "feroxbuster",
@@ -116,7 +137,10 @@
                   "when": "When you want recursion plus auto-rescanning of discovered directories out of the box.",
                   "install": "cargo install feroxbuster",
                   "url": "https://github.com/epi052/feroxbuster",
-                  "alt": ["ffuf", "gobuster"]
+                  "alt": [
+                    "ffuf",
+                    "gobuster"
+                  ]
                 }
               ]
             },
@@ -133,7 +157,10 @@
                   "when": "When a straightforward, cross-platform Python scanner with many wordlist and output options is all you need.",
                   "install": "pipx install dirsearch",
                   "url": "https://github.com/maurosoria/dirsearch",
-                  "alt": ["wfuzz", "feroxbuster"]
+                  "alt": [
+                    "wfuzz",
+                    "feroxbuster"
+                  ]
                 },
                 {
                   "name": "wfuzz",
@@ -143,7 +170,10 @@
                   "when": "When you need fine-grained iteration over multiple payload positions and encoding filters in your tests.",
                   "install": "sudo apt install wfuzz",
                   "url": "https://github.com/xmendez/wfuzz",
-                  "alt": ["ffuf", "dirsearch"]
+                  "alt": [
+                    "ffuf",
+                    "dirsearch"
+                  ]
                 }
               ]
             }
@@ -166,7 +196,10 @@
                   "when": "When you want to discover undocumented parameters an API or page accepts on a target in scope.",
                   "install": "pipx install arjun",
                   "url": "https://github.com/s0md3v/Arjun",
-                  "alt": ["x8", "Param Miner"]
+                  "alt": [
+                    "x8",
+                    "Param Miner"
+                  ]
                 },
                 {
                   "name": "x8",
@@ -176,7 +209,10 @@
                   "when": "When you need a fast single-binary parameter miner that integrates into shell pipelines.",
                   "install": "go install github.com/Sh1Yo/x8@latest",
                   "url": "https://github.com/Sh1Yo/x8",
-                  "alt": ["Arjun", "Param Minner"]
+                  "alt": [
+                    "Arjun",
+                    "Param Minner"
+                  ]
                 },
                 {
                   "name": "Param Miner",
@@ -186,7 +222,10 @@
                   "when": "When you are already in Burp and want passive parameter guessing while you manually explore in scope.",
                   "install": "Install 'Param Miner' from the Burp BApp Store",
                   "url": "https://github.com/portswigger/param-miner",
-                  "alt": ["Arjun", "x8"]
+                  "alt": [
+                    "Arjun",
+                    "x8"
+                  ]
                 }
               ]
             },
@@ -203,7 +242,9 @@
                   "when": "When you want to bulk-collect parameter-bearing URLs from archives to feed subsequent testing.",
                   "install": "pipx install paramspider",
                   "url": "https://github.com/devanshbatham/ParamSpider",
-                  "alt": ["Arjun"]
+                  "alt": [
+                    "Arjun"
+                  ]
                 }
               ]
             }
@@ -226,7 +267,9 @@
                   "when": "When you want to enumerate in-scope virtual hosts behind a shared IP or reverse proxy.",
                   "install": "go install github.com/ffuf/ffuf/v2@latest",
                   "url": "https://github.com/ffuf/ffuf",
-                  "alt": ["gobuster"]
+                  "alt": [
+                    "gobuster"
+                  ]
                 },
                 {
                   "name": "gobuster",
@@ -236,7 +279,9 @@
                   "when": "When you prefer a single simple binary for a quick virtual-host sweep on authorized targets.",
                   "install": "go install github.com/OJ/gobuster/v3@latest",
                   "url": "https://github.com/OJ/gobuster",
-                  "alt": ["ffuf"]
+                  "alt": [
+                    "ffuf"
+                  ]
                 }
               ]
             }
@@ -259,7 +304,10 @@
                   "when": "When you need a broad, trustworthy baseline wordlist for any scoped fuzzing activity.",
                   "install": "git clone https://github.com/danielmiessler/SecLists",
                   "url": "https://github.com/danielmiessler/SecLists",
-                  "alt": ["Assetnote Wordlists", "PayloadsAllTheThings"]
+                  "alt": [
+                    "Assetnote Wordlists",
+                    "PayloadsAllTheThings"
+                  ]
                 },
                 {
                   "name": "PayloadsAllTheThings",
@@ -269,7 +317,9 @@
                   "when": "When you need a quick, in-context payload reference while crafting manual tests.",
                   "install": "git clone https://github.com/swisskyrepo/PayloadsAllTheThings",
                   "url": "https://github.com/swisskyrepo/PayloadsAllTheThings",
-                  "alt": ["SecLists"]
+                  "alt": [
+                    "SecLists"
+                  ]
                 }
               ]
             },
@@ -286,7 +336,10 @@
                   "when": "When baseline wordlists miss and you need high-quality lists for API and content discovery.",
                   "install": "git clone https://github.com/assetnote/wordlists",
                   "url": "https://wordlists.assetnote.io",
-                  "alt": ["SecLists", "raft"]
+                  "alt": [
+                    "SecLists",
+                    "raft"
+                  ]
                 },
                 {
                   "name": "raft (Rapid Fire Threads)",
@@ -296,7 +349,10 @@
                   "when": "When you want quick, proven-size wordlists tuned to file and directory names without noise.",
                   "install": "curl -O https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/raft-large-files.txt",
                   "url": "https://github.com/danielmiessler/SecLists/tree/master/Discovery/Web-Content",
-                  "alt": ["SecLists", "Assetnote Wordlists"]
+                  "alt": [
+                    "SecLists",
+                    "Assetnote Wordlists"
+                  ]
                 }
               ]
             }
@@ -325,7 +381,9 @@
                   "when": "When a parameter looks injectable and you want thorough detection, DB fingerprinting, safe limits, and batch modes.",
                   "install": "sudo apt install sqlmap",
                   "url": "https://github.com/sqlmapproject/sqlmap",
-                  "alt": ["jSQL Injection"]
+                  "alt": [
+                    "jSQL Injection"
+                  ]
                 },
                 {
                   "name": "jSQL Injection",
@@ -335,7 +393,9 @@
                   "when": "When you want a desktop GUI over automated SQLi rather than a CLI-only flow on your scoped targets.",
                   "install": "git clone https://github.com/ron190/jsql-injection",
                   "url": "https://github.com/ron190/jsql-injection",
-                  "alt": ["sqlmap"]
+                  "alt": [
+                    "sqlmap"
+                  ]
                 }
               ]
             },
@@ -352,7 +412,9 @@
                   "when": "When the backend is NoSQL and you need injection-point discovery against an app in scope.",
                   "install": "git clone https://github.com/codingo/NoSQLMap && pip install -r NoSQLMap/requirements.txt",
                   "url": "https://github.com/codingo/NoSQLMap",
-                  "alt": ["sqlmap"]
+                  "alt": [
+                    "sqlmap"
+                  ]
                 }
               ]
             }
@@ -375,7 +437,9 @@
                   "when": "When you suspect command injection in a parameter or header and want an automated detector on authorized targets.",
                   "install": "git clone https://github.com/commixproject/commix && python3 commix.py -h",
                   "url": "https://github.com/commixproject/commix",
-                  "alt": ["sqlmap (secondary use of shell filters)"]
+                  "alt": [
+                    "sqlmap (secondary use of shell filters)"
+                  ]
                 }
               ]
             },
@@ -392,7 +456,9 @@
                   "when": "When an app renders user input inside templates and you need to confirm SSTI on a scope-authorized target.",
                   "install": "git clone https://github.com/epinna/tplmap && pip install -r tplmap/requirements.txt",
                   "url": "https://github.com/epinna/tplmap",
-                  "alt": ["SSTImap"]
+                  "alt": [
+                    "SSTImap"
+                  ]
                 },
                 {
                   "name": "SSTImap",
@@ -402,11 +468,28 @@
                   "when": "When tplmap is unmaintained and you want current engine payload support for your authorized tests.",
                   "install": "git clone https://github.com/vladko312/SSTImap && python3 sstimap.py -h",
                   "url": "https://github.com/vladko312/SSTImap",
-                  "alt": ["tplmap"]
+                  "alt": [
+                    "tplmap"
+                  ]
                 }
               ]
             }
           ]
+        }
+      ],
+      "tools": [
+        {
+          "name": "webbreach",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "OWASP Top-10 attack engine with built-in localhost vulnerable targets and an AI-guided scan queue \u2014 safe web exploitation practice.",
+          "when": "Practicing web app attacks without touching the internet.",
+          "install": "git clone https://github.com/5h4d0wn1k/webbreach",
+          "url": "https://github.com/5h4d0wn1k/webbreach",
+          "alt": [
+            "Own tool \u2014 lab/authorized use only"
+          ],
+          "by": "5h4d0wn1k"
         }
       ]
     },
@@ -431,7 +514,10 @@
                   "when": "When you want to automate XSS discovery against endpoint lists on authorized targets and pipeline results.",
                   "install": "go install github.com/hahwul/dalfox/v2@latest",
                   "url": "https://github.com/hahwul/dalfox",
-                  "alt": ["XSStrike", "xsser"]
+                  "alt": [
+                    "XSStrike",
+                    "xsser"
+                  ]
                 },
                 {
                   "name": "XSStrike",
@@ -441,7 +527,9 @@
                   "when": "When you need sophisticated payload crafting and WAF detection for manual XSS validation in your tests.",
                   "install": "git clone https://github.com/s0md3v/XSStrike && pip install -r XSStrike/requirements.txt",
                   "url": "https://github.com/s0md3v/XSStrike",
-                  "alt": ["Dalfox"]
+                  "alt": [
+                    "Dalfox"
+                  ]
                 },
                 {
                   "name": "xsser",
@@ -451,7 +539,10 @@
                   "when": "When you want a classic CLI scanner with many encoding bypass options against in-scope pages.",
                   "install": "sudo apt install xsser",
                   "url": "https://github.com/epsylon/xsser",
-                  "alt": ["Dalfox", "XSStrike"]
+                  "alt": [
+                    "Dalfox",
+                    "XSStrike"
+                  ]
                 }
               ]
             },
@@ -468,7 +559,10 @@
                   "when": "When you need persistent, hosted OOB XSS payloads that report callbacks during a longer engagement.",
                   "install": "git clone https://github.com/mandatoryprogrammer/xsshunter-express && docker compose up --build",
                   "url": "https://github.com/mandatoryprogrammer/xsshunter-express",
-                  "alt": ["interactsh", "Burp Collaborator"]
+                  "alt": [
+                    "interactsh",
+                    "Burp Collaborator"
+                  ]
                 }
               ]
             }
@@ -487,7 +581,9 @@
               "when": "When you found a frameable page without X-Frame-Options/CSP frame-ancestors and need a PoC to demonstrate it.",
               "install": "Open the hosted generator at https://samy.pl/quickjack/quickjack.html",
               "url": "https://github.com/samyk/quickjack",
-              "alt": ["ClickjackPoc"]
+              "alt": [
+                "ClickjackPoc"
+              ]
             },
             {
               "name": "ClickjackPoc",
@@ -497,7 +593,9 @@
               "when": "When you want a fast, scriptable way to produce clickjacking PoC HTML for reports.",
               "install": "git clone https://github.com/Raiders0786/ClickjackPoc",
               "url": "https://github.com/Raiders0786/ClickjackPoc",
-              "alt": ["quickjack"]
+              "alt": [
+                "quickjack"
+              ]
             }
           ]
         }
@@ -524,7 +622,10 @@
                   "when": "When you need organized collections, environments, and simple automation to reason about an API's behavior.",
                   "install": "brew install --cask postman",
                   "url": "https://www.postman.com",
-                  "alt": ["Bruno", "HTTPie"]
+                  "alt": [
+                    "Bruno",
+                    "HTTPie"
+                  ]
                 },
                 {
                   "name": "Bruno",
@@ -534,7 +635,10 @@
                   "when": "When you want API collections stored as data you can review and diff in code review.",
                   "install": "brew install --cask bruno",
                   "url": "https://github.com/usebruno/bruno",
-                  "alt": ["Postman", "HTTPie"]
+                  "alt": [
+                    "Postman",
+                    "HTTPie"
+                  ]
                 },
                 {
                   "name": "HTTPie",
@@ -544,7 +648,10 @@
                   "when": "For fast ad-hoc requests in a terminal during investigation without a heavyweight GUI.",
                   "install": "brew install httpie",
                   "url": "https://httpie.io",
-                  "alt": ["Postman", "Bruno"]
+                  "alt": [
+                    "Postman",
+                    "Bruno"
+                  ]
                 }
               ]
             },
@@ -561,7 +668,9 @@
                   "when": "When you need programmatic control over intercepted API and app traffic (rewrite, capture, fuzz) in your tests.",
                   "install": "brew install mitmproxy",
                   "url": "https://mitmproxy.org",
-                  "alt": ["HTTP Toolkit"]
+                  "alt": [
+                    "HTTP Toolkit"
+                  ]
                 },
                 {
                   "name": "HTTP Toolkit",
@@ -571,7 +680,9 @@
                   "when": "When you want zero-config TLS interception and a friendly UI for debugging your own or in-scope traffic.",
                   "install": "brew install --cask http-toolkit",
                   "url": "https://github.com/httptoolkit/httptoolkit",
-                  "alt": ["mitmproxy"]
+                  "alt": [
+                    "mitmproxy"
+                  ]
                 }
               ]
             }
@@ -594,7 +705,9 @@
                   "when": "When an API publishes an OpenAPI spec and you want automated schema-driven testing in CI.",
                   "install": "pipx install schemathesis",
                   "url": "https://github.com/schemathesis/schemathesis",
-                  "alt": ["kiterunner"]
+                  "alt": [
+                    "kiterunner"
+                  ]
                 }
               ]
             },
@@ -611,7 +724,10 @@
                   "when": "When you want to expose undocumented API routes and endpoints a spec won't tell you about.",
                   "install": "git clone https://github.com/assetnote/kiterunner && make build",
                   "url": "https://github.com/assetnote/kiterunner",
-                  "alt": ["ffuf", "schemathesis"]
+                  "alt": [
+                    "ffuf",
+                    "schemathesis"
+                  ]
                 }
               ]
             },
@@ -628,7 +744,9 @@
                   "when": "When an API path returns 403 solely due to WAF/path rules and you want to test authorized bypass vectors.",
                   "install": "git clone https://github.com/lobuhi/byp4xx && bash byp4xx.sh",
                   "url": "https://github.com/lobuhi/byp4xx",
-                  "alt": ["nomore403"]
+                  "alt": [
+                    "nomore403"
+                  ]
                 },
                 {
                   "name": "nomore403",
@@ -638,7 +756,9 @@
                   "when": "When you have many blocked URLs from crawling and want an automated sweep across bypass techniques.",
                   "install": "git clone https://github.com/devploit/nomore403 && sudo python3 nomore403.py -u https://target/",
                   "url": "https://github.com/devploit/nomore403",
-                  "alt": ["byp4xx"]
+                  "alt": [
+                    "byp4xx"
+                  ]
                 }
               ]
             }
@@ -667,7 +787,10 @@
                   "when": "When an app uses JWTs and you need to inspect claims, check alg:none/confusion, and validate signing secrets.",
                   "install": "git clone https://github.com/ticarpi/jwt_tool && cd jwt_tool && pip install -r requirements.txt",
                   "url": "https://github.com/ticarpi/jwt_tool",
-                  "alt": ["JWT Editor", "JWT4B"]
+                  "alt": [
+                    "JWT Editor",
+                    "JWT4B"
+                  ]
                 },
                 {
                   "name": "JWT Editor",
@@ -677,7 +800,10 @@
                   "when": "When you are already inside Burp and want intercept-time JWT tampering on requests in scope.",
                   "install": "Install 'JWT Editor' from the Burp BApp Store",
                   "url": "https://github.com/PortSwigger/jwt-editor",
-                  "alt": ["jwt_tool", "JWT4B"]
+                  "alt": [
+                    "jwt_tool",
+                    "JWT4B"
+                  ]
                 },
                 {
                   "name": "JWT4B",
@@ -687,7 +813,10 @@
                   "when": "When you prefer a dedicated Burp tab for JWT analysis and signature brute-forcing during a test.",
                   "install": "git clone https://github.com/ozzi-/JWT4B",
                   "url": "https://github.com/ozzi-/JWT4B",
-                  "alt": ["jwt_tool", "JWT Editor"]
+                  "alt": [
+                    "jwt_tool",
+                    "JWT Editor"
+                  ]
                 }
               ]
             }
@@ -709,7 +838,9 @@
                   "when": "When a URL/parameter fetches remote content and you want to confirm and demo SSRF impact in scope.",
                   "install": "git clone https://github.com/swisskyrepo/SSRFmap && pip install -r SSRFmap/requirements.txt",
                   "url": "https://github.com/swisskyrepo/SSRFmap",
-                  "alt": ["Gopherus"]
+                  "alt": [
+                    "Gopherus"
+                  ]
                 },
                 {
                   "name": "Gopherus",
@@ -720,7 +851,9 @@
                   "when": "When you have an SSRF that reaches internal services and need gopher payload generation for exploitation.",
                   "install": "git clone https://github.com/tarunkant/Gopherus && python3 Gopherus/gopherus.py --help",
                   "url": "https://github.com/tarunkant/Gopherus",
-                  "alt": ["SSRFmap"]
+                  "alt": [
+                    "SSRFmap"
+                  ]
                 }
               ]
             },
@@ -737,7 +870,10 @@
                   "when": "When you want self-hosted or public OOB callbacks to confirm blind SSRF, XSS, or injection in authorized tests.",
                   "install": "go install -v github.com/projectdiscovery/interactsh/cmd/interactsh-client@latest",
                   "url": "https://github.com/projectdiscovery/interactsh",
-                  "alt": ["XSS Hunter Express", "Burp Collaborator"]
+                  "alt": [
+                    "XSS Hunter Express",
+                    "Burp Collaborator"
+                  ]
                 }
               ]
             }
@@ -760,7 +896,9 @@
                   "when": "When a stack splits differently between proxies and back-ends and you want to test smuggling scenarios in scope.",
                   "install": "git clone https://github.com/defparam/smuggler && python3 smuggler.py regex.txt urls.txt",
                   "url": "https://github.com/defparam/smuggler",
-                  "alt": ["HTTP Request Smuggler"]
+                  "alt": [
+                    "HTTP Request Smuggler"
+                  ]
                 },
                 {
                   "name": "HTTP Request Smuggler",
@@ -770,7 +908,9 @@
                   "when": "When you are inside Burp and want integrated smuggling detection with guided payload confirmation.",
                   "install": "Install 'HTTP Request Smuggler' from the Burp BApp Store",
                   "url": "https://github.com/PortSwigger/http-request-smuggler",
-                  "alt": ["smuggler"]
+                  "alt": [
+                    "smuggler"
+                  ]
                 }
               ]
             }
@@ -793,7 +933,9 @@
                   "when": "When you need a thorough, fork-friendly TLS configuration audit of an endpoint you are authorized to test.",
                   "install": "git clone --depth 1 https://github.com/testssl/testssl.sh && ./testssl.sh example.com",
                   "url": "https://github.com/testssl/testssl.sh",
-                  "alt": ["sslyze"]
+                  "alt": [
+                    "sslyze"
+                  ]
                 },
                 {
                   "name": "sslyze",
@@ -803,7 +945,9 @@
                   "when": "When you need structured, machine-readable TLS scan output across many hosts in your own infrastructure.",
                   "install": "pipx install sslyze",
                   "url": "https://github.com/nabla-c0d3/sslyze",
-                  "alt": ["testssl.sh"]
+                  "alt": [
+                    "testssl.sh"
+                  ]
                 }
               ]
             }
@@ -826,7 +970,9 @@
                   "when": "When the target sends a CSP and you want to quickly grade its effectiveness and find bypassable directives.",
                   "install": "Open the hosted checker at https://csp-evaluator.withgoogle.com",
                   "url": "https://github.com/google/csp-evaluator",
-                  "alt": ["SecurityHeaders.com"]
+                  "alt": [
+                    "SecurityHeaders.com"
+                  ]
                 }
               ]
             },
@@ -843,7 +989,10 @@
                   "when": "When you want an instant, shareable header hardening report for a site you own or administer.",
                   "install": "curl -s 'https://securityheaders.com/?q=https://example.com&followRedirects=on'",
                   "url": "https://securityheaders.com",
-                  "alt": ["headers.dev", "httpx"]
+                  "alt": [
+                    "headers.dev",
+                    "httpx"
+                  ]
                 },
                 {
                   "name": "headers.dev",
@@ -853,7 +1002,10 @@
                   "when": "When you want a fast, no-install way to pull and eyeball a target's response headers.",
                   "install": "curl -s https://headers.dev/example.com",
                   "url": "https://headers.dev",
-                  "alt": ["SecurityHeaders.com", "httpx"]
+                  "alt": [
+                    "SecurityHeaders.com",
+                    "httpx"
+                  ]
                 },
                 {
                   "name": "httpx",
@@ -863,7 +1015,10 @@
                   "when": "When you need to bulk-collect status codes, headers, and tech fingerprints across hundreds of in-scope hosts.",
                   "install": "go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest",
                   "url": "https://github.com/projectdiscovery/httpx",
-                  "alt": ["headers.dev", "SecurityHeaders.com"]
+                  "alt": [
+                    "headers.dev",
+                    "SecurityHeaders.com"
+                  ]
                 }
               ]
             }

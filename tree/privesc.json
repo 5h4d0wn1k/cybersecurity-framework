@@ -1,8 +1,8 @@
 {
   "id": "privesc",
   "name": "Privilege Escalation (Linux & Windows)",
-  "emoji": "⬆️",
-  "tagline": "Local audit of Linux & Windows privilege boundaries: lax permissions, exposed SUID/sudo surface, scheduler jobs, and unpatched escalations — on systems you own.",
+  "emoji": "\u2b06\ufe0f",
+  "tagline": "Local audit of Linux & Windows privilege boundaries: lax permissions, exposed SUID/sudo surface, scheduler jobs, and unpatched escalations \u2014 on systems you own.",
   "class": "offense",
   "categories": [
     {
@@ -18,11 +18,15 @@
               "best": true,
               "rating": 5,
               "effort": "easy",
-              "desc": "Runs hundreds of privilege-boundary checks — SUID/GUID binaries, writable PATHs, cron entries, capabilities, credentials in files, known-vuln hints — on Linux/Unix/MacOS and color-codes findings by severity.",
+              "desc": "Runs hundreds of privilege-boundary checks \u2014 SUID/GUID binaries, writable PATHs, cron entries, capabilities, credentials in files, known-vuln hints \u2014 on Linux/Unix/MacOS and color-codes findings by severity.",
               "when": "First pass on any Linux host you are authorized to assess; `-s` for a faster/stealthier run, `-e` to enable extra checks before you dig into anything manually.",
               "install": "curl -L https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh | sh",
               "url": "https://github.com/peass-ng/PEASS-ng",
-              "alt": ["LinEnum", "linux-smart-enumeration", "linuxprivchecker"]
+              "alt": [
+                "LinEnum",
+                "linux-smart-enumeration",
+                "linuxprivchecker"
+              ]
             },
             {
               "name": "LinEnum",
@@ -32,7 +36,11 @@
               "when": "A quick, dependency-free sweep when you want a portable .sh you can drop on a box and read results calmly offline.",
               "install": "wget https://raw.githubusercontent.com/rebootuser/LinEnum/master/LinEnum.sh && chmod +x LinEnum.sh && ./LinEnum.sh -t",
               "url": "https://github.com/rebootuser/LinEnum",
-              "alt": ["LinPEAS", "linux-smart-enumeration", "linuxprivchecker"]
+              "alt": [
+                "LinPEAS",
+                "linux-smart-enumeration",
+                "linuxprivchecker"
+              ]
             },
             {
               "name": "linux-smart-enumeration (lse)",
@@ -42,7 +50,11 @@
               "when": "When you want signal-first output instead of a full dump; escalate verbosity only if the default level comes up empty.",
               "install": "curl \"https://github.com/diego-treitos/linux-smart-enumeration/releases/latest/download/lse.sh\" -Lo lse.sh && chmod 700 lse.sh && ./lse.sh -l1",
               "url": "https://github.com/diego-treitos/linux-smart-enumeration",
-              "alt": ["LinPEAS", "LinEnum", "linuxprivchecker"]
+              "alt": [
+                "LinPEAS",
+                "LinEnum",
+                "linuxprivchecker"
+              ]
             }
           ]
         },
@@ -59,7 +71,11 @@
               "when": "After LinPEAS flags SUID binaries: use it to distinguish vanilla OS binaries from operator-installed ones and jump straight to the GTFOBins-relevant entries.",
               "install": "curl -k -O https://raw.githubusercontent.com/Anon-Exploiter/SUID3NUM/master/suid3num.py && chmod +x suid3num.py && python3 suid3num.py",
               "url": "https://github.com/Anon-Exploiter/SUID3NUM",
-              "alt": ["SudoKiller", "GTFOBins", "GTFOBLookup"]
+              "alt": [
+                "SudoKiller",
+                "GTFOBins",
+                "GTFOBLookup"
+              ]
             },
             {
               "name": "SudoKiller",
@@ -69,7 +85,11 @@
               "when": "A host where `sudo -l` reveals a non-trivial rule set and you want a catalog of candidate commands plus CVE-flagged sudo versions to try manually.",
               "install": "git clone https://github.com/TH3xACE/SUDO_KILLER && cd SUDO_KILLER && ./SUDO_KILLERv3.sh -c -a -e -r report.txt -p /tmp",
               "url": "https://github.com/TH3xACE/SUDO_KILLER",
-              "alt": ["SUID3NUM", "GTFOBins", "LinPEAS"]
+              "alt": [
+                "SUID3NUM",
+                "GTFOBins",
+                "LinPEAS"
+              ]
             }
           ],
           "subcategories": [
@@ -82,11 +102,15 @@
                   "best": true,
                   "rating": 4,
                   "effort": "easy",
-                  "desc": "Reference site (not a tool): documents how standard Unix binaries — when sudo, SUID, or capability-misconfigured — can escape restricted contexts, read/write files, or escalate.",
+                  "desc": "Reference site (not a tool): documents how standard Unix binaries \u2014 when sudo, SUID, or capability-misconfigured \u2014 can escape restricted contexts, read/write files, or escalate.",
                   "when": "Look up every SUID binary and sudo rule your enumeration surfaced; if the binary is listed, the page shows the exact boundary you wrongly granted.",
                   "install": "preinstalled (web)",
                   "url": "https://gtfobins.org",
-                  "alt": ["GTFOBLookup", "SudoKiller", "LOLBAS"]
+                  "alt": [
+                    "GTFOBLookup",
+                    "SudoKiller",
+                    "LOLBAS"
+                  ]
                 },
                 {
                   "name": "GTFOBLookup",
@@ -96,7 +120,10 @@
                   "when": "Air-gapped hosts or terminal-only workflows where you need to query GTFOBins/LOLBAS by executable name and category from the CLI.",
                   "install": "pipx install git+https://github.com/nccgroup/GTFOBLookup.git && gtfoblookup.py update",
                   "url": "https://github.com/nccgroup/GTFOBLookup",
-                  "alt": ["GTFOBins", "LOLBAS"]
+                  "alt": [
+                    "GTFOBins",
+                    "LOLBAS"
+                  ]
                 }
               ]
             }
@@ -115,7 +142,11 @@
               "when": "An OSCP-friendly second opinion after LinPEAS when you want a leaner, Python-based cross-check on the same host.",
               "install": "wget https://raw.githubusercontent.com/sleventyeleven/linuxprivchecker/master/linuxprivchecker.py && python3 linuxprivchecker.py -w",
               "url": "https://github.com/sleventyeleven/linuxprivchecker",
-              "alt": ["unix-privesc-check", "LinPEAS", "LinEnum"]
+              "alt": [
+                "unix-privesc-check",
+                "LinPEAS",
+                "LinEnum"
+              ]
             },
             {
               "name": "unix-privesc-check",
@@ -125,7 +156,11 @@
               "when": "A conservative, read-only check on aged Unix boxes (also Solaris/AIX/HP-UX) where you want a second, low-noise opinion on file-permission drift.",
               "install": "sudo apt install unix-privesc-check && unix-privesc-check standard",
               "url": "https://github.com/pentestmonkey/unix-privesc-check",
-              "alt": ["linuxprivchecker", "LinPEAS", "linux-smart-enumeration"]
+              "alt": [
+                "linuxprivchecker",
+                "LinPEAS",
+                "linux-smart-enumeration"
+              ]
             }
           ]
         },
@@ -142,7 +177,11 @@
               "when": "Park it for a couple of minutes after enumeration on a Linux host; timing-dependent scheduler jobs that static scans miss appear as they fire.",
               "install": "curl -L -o pspy64 https://github.com/DominicBreuker/pspy/releases/latest/download/pspy64 && chmod +x pspy64 && ./pspy64",
               "url": "https://github.com/DominicBreuker/pspy",
-              "alt": ["inotifywait", "fatrace", "linux-smart-enumeration"]
+              "alt": [
+                "inotifywait",
+                "fatrace",
+                "linux-smart-enumeration"
+              ]
             },
             {
               "name": "inotifywait",
@@ -152,17 +191,23 @@
               "when": "Point it at a specific writable directory or config file (e.g. a scheduler-owned path) and see exactly when and which files change on boxes you own.",
               "install": "sudo apt install inotify-tools && inotifywait -m -r /tmp/watchme",
               "url": "https://github.com/inotify-tools/inotify-tools",
-              "alt": ["fatrace", "pspy"]
+              "alt": [
+                "fatrace",
+                "pspy"
+              ]
             },
             {
               "name": "fatrace",
               "rating": 3,
               "effort": "medium",
-              "desc": "fanotify-based system-wide file-access reporter (read/write/open/close per PID and path) — useful when a scheduled job touches files too briefly for process listing to catch.",
+              "desc": "fanotify-based system-wide file-access reporter (read/write/open/close per PID and path) \u2014 useful when a scheduled job touches files too briefly for process listing to catch.",
               "when": "Wide-surface file watching on your own host where inotify recursion gets unwieldy; narrow it with `--dir` to a single directory of interest.",
               "install": "sudo apt install fatrace && sudo fatrace --dir /var/spool",
               "url": "https://github.com/martinpitt/fatrace",
-              "alt": ["inotifywait", "pspy"]
+              "alt": [
+                "inotifywait",
+                "pspy"
+              ]
             }
           ]
         }
@@ -185,7 +230,11 @@
               "when": "First pass on any Windows host you are authorized to assess; run as a low-integrity user, then re-run elevated to compare the privilege surface.",
               "install": "curl -L -o winPEASx64.exe https://github.com/peass-ng/PEASS-ng/releases/latest/download/winPEASx64.exe && ./winPEASx64.exe",
               "url": "https://github.com/peass-ng/PEASS-ng",
-              "alt": ["Seatbelt", "PrivescCheck", "WES-NG"]
+              "alt": [
+                "Seatbelt",
+                "PrivescCheck",
+                "WES-NG"
+              ]
             },
             {
               "name": "Seatbelt",
@@ -195,7 +244,11 @@
               "when": "Focused follow-up enumeration when you need a specific answer (e.g. only TokenPrivileges, Services, or the LOLBAS module); supports clean txt/json output.",
               "install": "git clone https://github.com/GhostPack/Seatbelt && cd Seatbelt && dotnet build -c Release",
               "url": "https://github.com/GhostPack/Seatbelt",
-              "alt": ["WinPEAS", "PrivescCheck", "windows-privesc-check"]
+              "alt": [
+                "WinPEAS",
+                "PrivescCheck",
+                "windows-privesc-check"
+              ]
             },
             {
               "name": "PrivescCheck",
@@ -205,7 +258,10 @@
               "when": "A single PowerShell script where you want consolidated, report-ready output without artifacts touching disk; use `-Extended` when the base run comes up empty.",
               "install": "curl -LO https://raw.githubusercontent.com/itm4n/PrivescCheck/master/dist/PrivescCheck.ps1 && powershell -ep bypass -c \". .\\PrivescCheck.ps1; Invoke-PrivescCheck -Report TXT,HTML\"",
               "url": "https://github.com/itm4n/PrivescCheck",
-              "alt": ["WinPEAS", "Seatbelt"]
+              "alt": [
+                "WinPEAS",
+                "Seatbelt"
+              ]
             }
           ]
         },
@@ -222,7 +278,11 @@
               "when": "Older/legacy Windows images where you want a misconfig-focused audit (not a patch check) runnable as a single portable .exe, ideally as Administrator.",
               "install": "wget https://raw.githubusercontent.com/pentestmonkey/windows-privesc-check/master/windows-privesc-check2.exe && ./windows-privesc-check2.exe --dump -T report.txt",
               "url": "https://github.com/pentestmonkey/windows-privesc-check",
-              "alt": ["PrivescCheck", "WinPEAS", "Seatbelt"]
+              "alt": [
+                "PrivescCheck",
+                "WinPEAS",
+                "Seatbelt"
+              ]
             }
           ]
         },
@@ -236,10 +296,14 @@
               "rating": 4,
               "effort": "easy",
               "desc": "Windows sibling of GTFOBins: catalogs living-off-the-land binaries, scripts, and libraries that legitimate shipped Windows components can be coerced into doing beyond their intended job.",
-              "when": "Cross-check any signed binary or allowlisted script your enumeration surfaces on a Windows host — each entry lists the exact abuse command and MITRE mapping.",
+              "when": "Cross-check any signed binary or allowlisted script your enumeration surfaces on a Windows host \u2014 each entry lists the exact abuse command and MITRE mapping.",
               "install": "preinstalled (web)",
               "url": "https://lolbas-project.github.io",
-              "alt": ["GTFOBLookup", "GTFOBins", "WinPEAS"]
+              "alt": [
+                "GTFOBLookup",
+                "GTFOBins",
+                "WinPEAS"
+              ]
             }
           ]
         }
@@ -262,7 +326,10 @@
               "when": "After enumeration, when you want a ranked, CVE-linked shortlist of which kernel-era exploits are plausibly worth testing on your own lab or CTF hosts.",
               "install": "wget -O les.sh https://raw.githubusercontent.com/The-Z-Labs/linux-exploit-suggester/master/linux-exploit-suggester.sh && bash les.sh --check-all",
               "url": "https://github.com/The-Z-Labs/linux-exploit-suggester",
-              "alt": ["linux-exploit-suggester-2", "GTFOBins"]
+              "alt": [
+                "linux-exploit-suggester-2",
+                "GTFOBins"
+              ]
             },
             {
               "name": "linux-exploit-suggester-2",
@@ -272,7 +339,9 @@
               "when": "A second candidate shortlist when LES disagrees, or old-style searching where you want the actual exploit source downloaded into your lab to read first.",
               "install": "git clone https://github.com/jondonas/linux-exploit-suggester-2 && cd linux-exploit-suggester-2 && ./linux-exploit-suggester-2.pl -k",
               "url": "https://github.com/jondonas/linux-exploit-suggester-2",
-              "alt": ["linux-exploit-suggester"]
+              "alt": [
+                "linux-exploit-suggester"
+              ]
             }
           ]
         },
@@ -286,10 +355,14 @@
               "rating": 4,
               "effort": "medium",
               "desc": ".NET tool that enumerates missing KBs on a Windows host and suggests exploits for applicable local privilege-escalation CVEs, with exploit links per finding.",
-              "when": "On lab Windows 10 (1507–2004) / Server 2016–2019 builds to map a CVE-to-exploit table fast; superseded for newer builds by WES-NG, which tracks the live MSRC feed.",
+              "when": "On lab Windows 10 (1507\u20132004) / Server 2016\u20132019 builds to map a CVE-to-exploit table fast; superseded for newer builds by WES-NG, which tracks the live MSRC feed.",
               "install": "git clone https://github.com/rasta-mouse/Watson && cd Watson && dotnet build -c Release",
               "url": "https://github.com/rasta-mouse/Watson",
-              "alt": ["WES-NG", "Windows-Exploit-Suggester (legacy)", "WinPEAS"]
+              "alt": [
+                "WES-NG",
+                "Windows-Exploit-Suggester (legacy)",
+                "WinPEAS"
+              ]
             },
             {
               "name": "WES-NG (wesng)",
@@ -299,17 +372,24 @@
               "when": "Grab `systeminfo` from your Windows lab host, run wes.py on your workstation, and correlate patches offline for any supported OS from XP to Windows 11.",
               "install": "pip install wesng && wes.py --update && wes.py systeminfo.txt",
               "url": "https://github.com/bitsadmin/wesng",
-              "alt": ["Watson", "Windows-Exploit-Suggester (legacy)", "linux-exploit-suggester"]
+              "alt": [
+                "Watson",
+                "Windows-Exploit-Suggester (legacy)",
+                "linux-exploit-suggester"
+              ]
             },
             {
               "name": "Windows-Exploit-Suggester (legacy)",
               "rating": 2,
               "effort": "easy",
-              "desc": "The 2014 original that coined the term; now archived because it depends on Microsoft's Security Bulletin Excel dump, which has been frozen since Q1 2017 — it can only address XP/Vista-era systems.",
+              "desc": "The 2014 original that coined the term; now archived because it depends on Microsoft's Security Bulletin Excel dump, which has been frozen since Q1 2017 \u2014 it can only address XP/Vista-era systems.",
               "when": "Only retro lab images from before 2017; for any current Windows host use WES-NG, which reads the live MSRC feed instead.",
               "install": "git clone https://github.com/GDSSecurity/Windows-Exploit-Suggester && cd Windows-Exploit-Suggester && python windows-exploit-suggester.py --update",
               "url": "https://github.com/GDSSecurity/Windows-Exploit-Suggester",
-              "alt": ["WES-NG", "WinPEAS"]
+              "alt": [
+                "WES-NG",
+                "WinPEAS"
+              ]
             }
           ]
         }
@@ -324,31 +404,42 @@
           "best": true,
           "rating": 4,
           "effort": "medium",
-          "desc": "Root POC for CVE-2022-0847 (Linux 5.8–5.16.x): abuses an uninitialized pipe_buffer flag to overwrite read-only page-cache data; this build overwrites /etc/passwd and restores it after popping a shell.",
+          "desc": "Root POC for CVE-2022-0847 (Linux 5.8\u20135.16.x): abuses an uninitialized pipe_buffer flag to overwrite read-only page-cache data; this build overwrites /etc/passwd and restores it after popping a shell.",
           "when": "On lab or CTF kernels inside the affected range when no misconfiguration path exists; expect it to fail cleanly on 5.16.11+ or backported-fix kernels.",
           "install": "git clone https://github.com/Arinerron/CVE-2022-0847-DirtyPipe-Exploit && cd CVE-2022-0847-DirtyPipe-Exploit && gcc -o exploit exploit.c && ./exploit",
           "url": "https://github.com/Arinerron/CVE-2022-0847-DirtyPipe-Exploit",
-          "alt": ["dirtycow (CVE-2016-5195)", "PwnKit (CVE-2021-4034)", "linux-exploit-suggester"]
+          "alt": [
+            "dirtycow (CVE-2016-5195)",
+            "PwnKit (CVE-2021-4034)",
+            "linux-exploit-suggester"
+          ]
         },
         {
           "name": "PwnKit (CVE-2021-4034)",
           "rating": 4,
           "effort": "medium",
           "desc": "Qualys-reported pkexec (polkit) memory-corruption exploit giving a one-command root shell on unpatched systems; technically a setuid userspace flaw, not the kernel, but near-unrivaled in reliability when present.",
-          "when": "Applies to many distros of 2009–2022 vintage; `make dry-run` tests whether your own host is vulnerable without popping a shell.",
+          "when": "Applies to many distros of 2009\u20132022 vintage; `make dry-run` tests whether your own host is vulnerable without popping a shell.",
           "install": "git clone https://github.com/berdav/CVE-2021-4034 && cd CVE-2021-4034 && make && ./cve-2021-4034",
           "url": "https://github.com/berdav/CVE-2021-4034",
-          "alt": ["Dirty Pipe (CVE-2022-0847)", "dirtycow (CVE-2016-5195)", "linux-exploit-suggester"]
+          "alt": [
+            "Dirty Pipe (CVE-2022-0847)",
+            "dirtycow (CVE-2016-5195)",
+            "linux-exploit-suggester"
+          ]
         },
         {
           "name": "dirtycow (CVE-2016-5195)",
           "rating": 3,
           "effort": "advanced",
           "desc": "The archived Dirty COW race-condition family (CVE-2016-5195) for kernels roughly up to 4.8.3: PoCs write into read-only mappings, e.g. splicing a new root account into /etc/passwd.",
-          "when": "Only legacy or sandboxed images that still run pre-2016-fix kernels; treat it as a historical exercise — modern distros are not exposed.",
+          "when": "Only legacy or sandboxed images that still run pre-2016-fix kernels; treat it as a historical exercise \u2014 modern distros are not exposed.",
           "install": "git clone https://github.com/firefart/dirtycow && cd dirtycow && gcc -pthread dirty.c -o dirty -lcrypt && ./dirty",
           "url": "https://github.com/firefart/dirtycow",
-          "alt": ["Dirty Pipe (CVE-2022-0847)", "PwnKit (CVE-2021-4034)"]
+          "alt": [
+            "Dirty Pipe (CVE-2022-0847)",
+            "PwnKit (CVE-2021-4034)"
+          ]
         }
       ]
     },
@@ -369,7 +460,10 @@
               "when": "Escalation inside Active Directory when you own an SPN-bearing or delegation-active account: request service tickets for offline cracking or impersonate users through s4u.",
               "install": "git clone https://github.com/GhostPack/Rubeus && cd Rubeus && dotnet build -c Release",
               "url": "https://github.com/GhostPack/Rubeus",
-              "alt": ["Impacket (GetUserSPNs.py)", "Mimikatz"]
+              "alt": [
+                "Impacket (GetUserSPNs.py)",
+                "Mimikatz"
+              ]
             },
             {
               "name": "Impacket (GetUserSPNs.py)",
@@ -379,7 +473,10 @@
               "when": "Roasting from a Linux attack box (or WSL) where you have valid domain credentials but no Windows shell; also handles delegation-related ticket replay.",
               "install": "python3 -m pipx install impacket && GetUserSPNs.py -request -dc-ip 10.0.0.1 corp.local/user",
               "url": "https://github.com/fortra/impacket",
-              "alt": ["Rubeus", "Kekeo"]
+              "alt": [
+                "Rubeus",
+                "Kekeo"
+              ]
             }
           ]
         }

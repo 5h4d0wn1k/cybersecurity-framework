@@ -84,6 +84,21 @@ The standard `file` command built on libmagic: identifies thousands of file type
 
 
 
+#### cryptocrack ◆ by 5h4d0wn1k
+
+Crypto attacks + credential cracking — hash identify/crack with rules, RSA/AES/DH attacks, cipher auto-decode, XTS-CPA.
+
+**When:** Cracking/solving crypto-lab challenges and authorized recovery.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/cryptocrack`
+
+**URL:** https://github.com/5h4d0wn1k/cryptocrack
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 #### Classical & Historical Ciphers
 
 
@@ -473,6 +488,21 @@ CLI from the GnuTLS project for X.509 certificate/key generation, PKCS#12 bundle
 **URL:** https://www.gnutls.org
 
 **Alternatives:** OpenSSL, GnuPG
+
+
+#### shadowvault ◆ by 5h4d0wn1k
+
+AES-256-GCM cryptographic secrets lifecycle manager for offensive ops — vaulted keys/creds, OPSEC zeroize on demand, team RBAC, migration tooling.
+
+**When:** When you need to hold many tool creds/keys safely during an engagement and wipe them fast at the end.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/shadowvault`
+
+**URL:** https://github.com/5h4d0wn1k/shadowvault
+
+**Alternatives:** Own tool — lab/authorized use only
 
 
 

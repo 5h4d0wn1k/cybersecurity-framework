@@ -7,6 +7,21 @@ Validate your detections by emulating real adversaries, running atomic TTPs, and
 
 
 
+#### rogueai ◆ by 5h4d0wn1k
+
+Agentic AI red-team — autonomous decide->execute->observe->reflect loops against own-lab targets with human-in-the-loop safety gates.
+
+**When:** Automated adversarial emulation in a sandbox you control.
+
+**Effort:** advanced  ·  **Rating:** 5/5
+
+**Install:** `git clone https://github.com/5h4d0wn1k/rogueai`
+
+**URL:** https://github.com/5h4d0wn1k/rogueai
+
+**Alternatives:** Own tool — lab/authorized use only
+
+
 #### Emulation Platforms & Playbooks
 
 
@@ -288,7 +303,7 @@ The official DetectionLab documentation/introduction: architecture, deployment g
 
 **Install:** `preinstalled (web docs)`
 
-**URL:** https://detectionlab.network/introduction/
+**URL:** https://github.com/clong/DetectionLab
 
 **Alternatives:** detectionlab
 
