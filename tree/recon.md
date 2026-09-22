@@ -6,7 +6,6 @@ Passive + active discovery: subdomains, DNS, historical data, people, leaks, and
 
 
 
-
 #### grainrecon ◆ by 5h4d0wn1k
 
 Automated recon / attack-surface mapper — subdomains, DNS, port/service, tech-detect, CIDR inventory, OSINT, dir fuzzing.
@@ -25,9 +24,7 @@ Automated recon / attack-surface mapper — subdomains, DNS, port/service, tech-
 #### Passive Sources
 
 
-
 ##### Certificate Transparency
-
 
 
 ###### crt.sh ⭐
@@ -61,7 +58,6 @@ SSLMate's certificate-transparency monitor with a JSON API; returns certificate-
 
 
 ##### Data Provider APIs
-
 
 
 ###### Subfinder ⭐
@@ -112,13 +108,10 @@ Huge passive-DNS and resolution graph; the domain 'Relations' tab exposes relate
 #### Active Enumeration
 
 
-
 ##### Dictionary Brute Force
 
 
-
 ###### Resolver-verified Candidates
-
 
 
 ###### Puredns ⭐
@@ -154,7 +147,6 @@ Multi-mode brute-forcer whose DNS mode guesses subdomains from a wordlist and re
 ##### Permutation & Alteration
 
 
-
 ###### altdns ⭐
 
 Generates wordlist-based permutations of known subdomains (prefixes, suffixes, number swaps) to rediscover forgotten hosts.
@@ -188,7 +180,6 @@ Pipes known domains through smart permutation rules (word insertion, affixing, n
 ##### Graph & API Aggregation
 
 
-
 ###### Amass ⭐
 
 OWASP's one-stop subdomain engine: passive source scraping plus active brute forcing woven into an asset relationship graph.
@@ -207,9 +198,7 @@ OWASP's one-stop subdomain engine: passive source scraping plus active brute for
 #### Resolution & Verification
 
 
-
 ##### Bulk Resolving
-
 
 
 ###### dnsx ⭐
@@ -243,20 +232,14 @@ Extremely fast bulk resolver built to validate millions of candidates over UDP a
 
 
 
-
-
-
 ## DNS & WHOIS Interrogation
-
 
 
 
 #### Active DNS Queries
 
 
-
 ##### Core Utilities
-
 
 
 ###### dig ⭐
@@ -275,7 +258,6 @@ BIND's universal DNS interrogation client: any record type, AXFR/IXFR zone trans
 
 
 ##### Recon-focused Tools
-
 
 
 ###### DNSRecon ⭐
@@ -311,9 +293,7 @@ Permutation engine for typo-squatting and homograph lookalikes of a domain; reso
 #### WHOIS & RDAP
 
 
-
 ##### Protocol Clients
-
 
 
 ###### WHOIS ⭐
@@ -349,7 +329,6 @@ openrdap's Go client for the modern RDAP protocol: structured JSON instead of lo
 ##### Web Aggregators
 
 
-
 ###### ViewDNS.info ⭐
 
 Free web aggregator for historical DNS, reverse IP, IP history, ASN/netblock maps, and WHOIS, with no API key.
@@ -366,20 +345,14 @@ Free web aggregator for historical DNS, reverse IP, IP history, ASN/netblock map
 
 
 
-
-
-
 ## Passive DNS & Historical Data
-
 
 
 
 #### Passive DNS Databases
 
 
-
 ##### Record History
-
 
 
 ###### SecurityTrails ⭐
@@ -430,9 +403,7 @@ Massive historical forward-DNS, reverse-DNS, and SSL scan datasets published as 
 #### Web History
 
 
-
 ##### Page & Site Archives
-
 
 
 ###### Wayback Machine ⭐
@@ -466,20 +437,14 @@ Renders and archives pages with full DOM, request log, and IP metadata; searchab
 
 
 
-
-
-
 ## Port Discovery
-
 
 
 
 #### Broad Discovery
 
 
-
 ##### High-speed Sweeps
-
 
 
 ###### naabu ⭐
@@ -530,9 +495,7 @@ Sweeps all 65,535 ports in seconds and auto-pipes open ports into nmap service d
 #### Service & OS Analysis
 
 
-
 ##### Scriptable Detection
-
 
 
 ###### Nmap ⭐
@@ -551,20 +514,14 @@ The canonical suite: stealth/connect scans, OS and service fingerprinting, versi
 
 
 
-
-
-
 ## HTTP Probing & Fingerprinting
-
 
 
 
 #### Live Host Probing
 
 
-
 ##### HTTP/S Availability
-
 
 
 ###### httpx ⭐
@@ -585,9 +542,7 @@ Probes host lists for live web services, returning status, title, tech, CDN, and
 #### Technology Fingerprinting
 
 
-
 ##### Signature Detection
-
 
 
 ###### WhatWeb ⭐
@@ -623,9 +578,7 @@ Scans page JavaScript for known-vulnerable library versions using DOM signatures
 #### WAF Detection
 
 
-
 ##### WAF Identification
-
 
 
 ###### wafw00f ⭐
@@ -644,20 +597,14 @@ Sends harmless, identifiable probes to classify which WAF (if any) fronts a site
 
 
 
-
-
-
 ## Web Content Discovery
-
 
 
 
 #### Directory & Path Brute Force
 
 
-
 ##### Directory & Path Discovery
-
 
 
 ###### Feroxbuster ⭐
@@ -693,9 +640,7 @@ Python content scanner with a large bundled dictionary, recursion, and multiple 
 #### Parameter & Payload Fuzzing
 
 
-
 ##### Parameter Fuzzing
-
 
 
 ###### ffuf ⭐
@@ -714,20 +659,14 @@ Blazing-fast Go fuzzer for directories, virtual hosts, parameters, and headers v
 
 
 
-
-
-
 ## Crawling & JS Analysis
-
 
 
 
 #### Crawlers
 
 
-
 ##### In-scope Crawling
-
 
 
 ###### Katana ⭐
@@ -778,9 +717,7 @@ Simple, fast link-crawler emitting unique URLs, forms, and script references fro
 #### JavaScript Recon
 
 
-
 ##### Endpoint Extraction
-
 
 
 ###### LinkFinder ⭐
@@ -814,20 +751,14 @@ Scans JS files for hardcoded keys, tokens, and credentials using cloud/API-speci
 
 
 
-
-
-
 ## Internet Search Engines
-
 
 
 
 #### Internet-wide Scanners
 
 
-
 ##### Host & Service Indexes
-
 
 
 ###### Shodan ⭐
@@ -878,9 +809,7 @@ Cyberspace search engine indexing services, assets, and applications with powerf
 #### Web Research
 
 
-
 ##### Site & Source Search
-
 
 
 ###### BuiltWith ⭐
@@ -914,20 +843,14 @@ Source-code search engine matching any snippet (analytics IDs, tracking pixels, 
 
 
 
-
-
-
 ## People & Identity OSINT
-
 
 
 
 #### Username Enumeration
 
 
-
 ##### Multi-platform Checkers
-
 
 
 ###### Sherlock ⭐
@@ -963,9 +886,7 @@ Open-source username-presence database with auditable per-service detection patt
 #### Email Discovery
 
 
-
 ##### Address Discovery
-
 
 
 ###### theHarvester ⭐
@@ -1014,20 +935,14 @@ Checks whether an email address is registered on hundreds of online services wit
 
 
 
-
-
-
 ## Leaks & Breach Data
-
 
 
 
 #### Breach Lookup
 
 
-
 ##### Account Exposure
-
 
 
 ###### Have I Been Pwned ⭐
@@ -1063,9 +978,7 @@ Searchable breach database with rich filtering by username, email, IP, and passw
 #### Searchable Archives
 
 
-
 ##### Data Indexes
-
 
 
 ###### Intelligence X ⭐
@@ -1084,20 +997,14 @@ Search engine for documents, leaks, dark-web content, PGP keys, and historical w
 
 
 
-
-
-
 ## Network & ASN Context
-
 
 
 
 #### ASN & BGP
 
 
-
 ##### ASN Mapping
-
 
 
 ###### asnmap ⭐
@@ -1133,9 +1040,7 @@ Hurricane Electric's BGP board showing ASN graphs, prefix announcements, and pee
 #### IP Geolocation
 
 
-
 ##### IP Metadata
-
 
 
 ###### ipinfo.io ⭐
@@ -1151,8 +1056,6 @@ IP metadata API providing geolocation, ASN, organization, hosting/cloud detectio
 **URL:** https://ipinfo.io
 
 **Alternatives:** ip-api.com
-
-
 
 
 

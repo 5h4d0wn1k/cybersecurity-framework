@@ -6,9 +6,7 @@ Enrich your own defenses: ingest STIX/TAXII feeds, aggregate and pivot on IOCs, 
 
 
 
-
 #### STIX/TAXII-native Platforms
-
 
 
 ##### OpenCTI ⭐
@@ -119,7 +117,6 @@ Self-hosted aggregation engine that runs a file, IP, domain, or hash through 100
 #### Open-Source Intel Frameworks
 
 
-
 ##### MISP ⭐
 
 The foundational open threat-intelligence and sharing framework: event-driven IOC correlation, feed syncing, taxonomies, and TLP/org governance across trusted communities.
@@ -151,7 +148,6 @@ Graph-based intel framework that treats actors, campaigns, malware, and infrastr
 
 
 #### Case Management & Analyzer Orchestration
-
 
 
 ##### TheHive ⭐
@@ -200,20 +196,14 @@ Open-source incident-response platform with modern case management, timeline piv
 
 
 
-
-
-
 ## IOC Aggregation & Feeds
-
 
 
 
 #### IOC Aggregation & Enrichment
 
 
-
 ##### Reputation & Enrichment APIs
-
 
 
 ###### AlienVault OTX ⭐
@@ -294,7 +284,6 @@ Classifies internet-scan and background-noise traffic so analysts can tell routi
 ##### Malware & URL Feeds (abuse.ch)
 
 
-
 ###### URLhaus ⭐
 
 abuse.ch's malicious-URL feed: a plain-text URL list plus RPZ, hostfile, and Suricata/Snort rule packs for proxy, firewall, and log matching.
@@ -343,7 +332,6 @@ abuse.ch's malware-IOC feed: query and submit IPs, domains, URLs, and hashes tag
 ##### Multi-vendor Aggregators
 
 
-
 ###### IntelOwl ⭐
 
 Self-hosted analyzer aggregation: one request runs a file, IP, domain, or hash through 100+ free and commercial analyzers (OTX, ThreatFox, MalwareBazaar, VirusTotal, GreyNoise, YARA) and chains pivots.
@@ -375,16 +363,11 @@ Free IOC portal combining passive and active scans, risk scores, ATT&CK tags, an
 
 
 
-
-
-
 ## Pivoting & Passive DNS
 
 
 
-
 #### Passive DNS & Historical Infrastructure
-
 
 
 ##### SecurityTrails ⭐
@@ -448,7 +431,6 @@ Free one-click DNS mapping service: resolves a domain to its subdomains, A/NS/MX
 
 
 #### Internet-wide Search & Service Pivoting
-
 
 
 ##### Censys ⭐
@@ -544,7 +526,6 @@ IP-intel and attack-surface search engine with malware, Geopolitics, and interne
 #### Graph & Campaign Correlation
 
 
-
 ##### MISP ⭐
 
 MISP's correlation engine links identical and high-fidelity-cluster attributes across every event in your instance and its federated communities.
@@ -576,16 +557,11 @@ Uses its STIX knowledge graph to pivot from an indicator to the attack patterns,
 
 
 
-
-
-
 ## Detection Engineering
 
 
 
-
 #### Portable Rule Engines
-
 
 
 ##### Sigma ⭐
@@ -619,7 +595,6 @@ Binary pattern-matching rule engine for malware families and byte-level IOCs; co
 
 
 #### Validation & Adversary Emulation
-
 
 
 ##### Atomic Red Team ⭐
@@ -665,8 +640,6 @@ Web-based matrix viewer for layering technique coverage across your detections, 
 **URL:** https://github.com/mitre-attack/attack-navigator
 
 **Alternatives:** MITRE ATT&CK, Atomic Red Team
-
-
 
 
 

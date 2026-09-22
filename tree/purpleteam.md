@@ -6,7 +6,6 @@ Validate your detections by emulating real adversaries, running atomic TTPs, and
 
 
 
-
 #### rogueai ◆ by 5h4d0wn1k
 
 Agentic AI red-team — autonomous decide->execute->observe->reflect loops against own-lab targets with human-in-the-loop safety gates.
@@ -23,7 +22,6 @@ Agentic AI red-team — autonomous decide->execute->observe->reflect loops again
 
 
 #### Emulation Platforms & Playbooks
-
 
 
 ##### MITRE Caldera ⭐
@@ -74,7 +72,6 @@ C# adversary simulation tool that executes ATT&CK-mapped TTPs purely from Window
 #### Atomic TTP Tests
 
 
-
 ##### Atomic Red Team ⭐
 
 MITRE-aligned library of small, portable detection tests; each atomic test documents a technique's exact procedure plus the logs and telemetry a defender should see if the detection works.
@@ -106,7 +103,6 @@ Red Canary's PowerShell module (Python for macOS/Linux) that executes many varia
 
 
 #### Cloud Adversary Emulation
-
 
 
 ##### Stratus Red Team ⭐
@@ -142,7 +138,6 @@ Rhino Security Labs' 'Vulnerable by Design' AWS/Azure deployment tool that build
 #### ATT&CK Reference for Emulation
 
 
-
 ##### MITRE ATT&CK Navigator ⭐
 
 Web app for annotating and exploring ATT&CK matrices via shareable layer files; load emulation-plan technique lists to plan what you are about to run.
@@ -174,16 +169,11 @@ The authoritative knowledge base: adversary tactics, techniques, sub-techniques,
 
 
 
-
-
-
 ## Breach & Attack Simulation
 
 
 
-
 #### Open-source BAS
-
 
 
 ##### Infection Monkey ⭐
@@ -217,7 +207,6 @@ Filigran's open-source breach-and-attack simulation platform (now evolving into 
 
 
 #### Commercial BAS
-
 
 
 ##### SafeBreach Validate ⭐
@@ -266,16 +255,11 @@ BAS platform that deploys lightweight agents to simulate the full kill chain plu
 
 
 
-
-
-
 ## Detection Test Harnesses & Labs
 
 
 
-
 #### Detection Lab Environments
-
 
 
 ##### DetectionLab ⭐
@@ -326,7 +310,6 @@ Splunk Threat Research Team's Terraform/Ansible range that deploys instrumented 
 #### Purple Team Exercise Frameworks
 
 
-
 ##### Purple Team Exercise Framework (PTEF) ⭐
 
 SCYTHE's industry-standard methodology (v4) for designing purple-team exercises: planning templates, TTP mapping spreadsheets, emulation-plan formats, and a maturity model.
@@ -358,16 +341,11 @@ OWASP's open purpleteam tooling: an orchestrator with TLS and application scanni
 
 
 
-
-
-
 ## Detection Coverage Mapping
 
 
 
-
 #### ATT&CK Coverage Scoring
-
 
 
 ##### DeTT&CT ⭐
@@ -401,7 +379,6 @@ Web app for annotating and exploring ATT&CK matrices via shareable layer files; 
 
 
 #### MITRE Analytic & Defense Ontologies
-
 
 
 ##### MITRE CAR ⭐
@@ -452,9 +429,7 @@ Active defense knowledge base of techniques defenders can use to engage adversar
 #### Detection Content Testing
 
 
-
 ##### YARA Rule Testers
-
 
 
 ###### yara-x ⭐
@@ -520,7 +495,6 @@ Free web validator that compiles rules against current YARA and YARA-X versions 
 ##### Sigma Detection Rule Pipeline
 
 
-
 ###### Sigma ⭐
 
 Vendor-agnostic detection rule format with a converter ecosystem that turns portable Sigma rules into Splunk, Elastic, QRadar, Sentinel, and dozens of other query languages.
@@ -567,16 +541,11 @@ Elastic's production rule repository with prebuilt and custom Sigma-style rules,
 
 
 
-
-
-
 ## Exercise Tracking & Metrics
 
 
 
-
 #### Result & Campaign Tracking
-
 
 
 ##### VECTR ⭐
@@ -607,8 +576,6 @@ Center for Threat-Informed Defense's STIX-based format and tooling for modeling 
 **URL:** https://github.com/center-for-threat-informed-defense/attack-flow
 
 **Alternatives:** vectr, dettect
-
-
 
 
 

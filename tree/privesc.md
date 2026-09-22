@@ -6,9 +6,7 @@ Local audit of Linux & Windows privilege boundaries: lax permissions, exposed SU
 
 
 
-
 #### Host Enumeration
-
 
 
 ##### LinPEAS ⭐
@@ -59,7 +57,6 @@ Ranked Linux enumerator that reveals findings progressively by importance level 
 #### Sudo & SUID Boundaries
 
 
-
 ##### SUID3NUM ⭐
 
 Standalone Python SUID enumerator that separates default binaries from custom ones, cross-matches custom binaries against GTFOBins, and can auto-exploit non-destructive cases.
@@ -91,7 +88,6 @@ Sudo-focused escalation auditor that checks for misconfigured sudo rules, sudo-v
 
 
 ##### Reference: GTFOBins lookups
-
 
 
 ###### GTFOBins ⭐
@@ -127,7 +123,6 @@ Offline command-line lookup utility that mirrors GTFOBins, LOLBAS, WADComs, and 
 #### Misconfiguration Scanners
 
 
-
 ##### linuxprivchecker ⭐
 
 Python script that enumerates base system info and hunts world-writable files, misconfigurations, and cleartext passwords; written to suggest investigation targets rather than run exploits.
@@ -159,7 +154,6 @@ PentestMonkey's classic shell script for weak file permissions and simple escala
 
 
 #### Process & File Watching
-
 
 
 ##### pspy ⭐
@@ -208,16 +202,11 @@ fanotify-based system-wide file-access reporter (read/write/open/close per PID a
 
 
 
-
-
-
 ## Windows Local Escalation
 
 
 
-
 #### Host Enumeration
-
 
 
 ##### WinPEAS ⭐
@@ -268,7 +257,6 @@ itm4n's PowerShell-only enumeration script covering Windows privesc vulnerabilit
 #### Misconfiguration Scanners
 
 
-
 ##### windows-privesc-check ⭐
 
 PentestMonkey's standalone executable (Python via PyInstaller) that audits securable objects for weak ACLs: services, service executables, %ProgramFiles% DLLs, %PATH%, registry RunOnce, and FAT installs.
@@ -287,7 +275,6 @@ PentestMonkey's standalone executable (Python via PyInstaller) that audits secur
 #### Living-Off-the-Land Abuse
 
 
-
 ##### LOLBAS ⭐
 
 Windows sibling of GTFOBins: catalogs living-off-the-land binaries, scripts, and libraries that legitimate shipped Windows components can be coerced into doing beyond their intended job.
@@ -304,16 +291,11 @@ Windows sibling of GTFOBins: catalogs living-off-the-land binaries, scripts, and
 
 
 
-
-
-
 ## Kernel Exploit Checkers
 
 
 
-
 #### Linux
-
 
 
 ##### linux-exploit-suggester ⭐
@@ -347,7 +329,6 @@ Perl-based next-gen suggester that matches kernel/package versions against an ex
 
 
 #### Windows
-
 
 
 ##### Watson ⭐
@@ -396,13 +377,9 @@ The 2014 original that coined the term; now archived because it depends on Micro
 
 
 
-
-
-
 ## Kernel & Userspace Exploit POCs
 
 Dirty Pipe (CVE-2022-0847) ⭐
-
 
 #### Dirty Pipe (CVE-2022-0847) ⭐
 
@@ -450,16 +427,11 @@ The archived Dirty COW race-condition family (CVE-2016-5195) for kernels roughly
 
 
 
-
-
-
 ## Active Directory & Kerberos Cross-ref
 
 
 
-
 #### Kerberoasting & Delegation
-
 
 
 ##### Rubeus ⭐
@@ -490,8 +462,6 @@ Python Kerberos suite whose GetUserSPNs.py requests TGS tickets for services run
 **URL:** https://github.com/fortra/impacket
 
 **Alternatives:** Rubeus, Kekeo
-
-
 
 
 

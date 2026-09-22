@@ -6,17 +6,13 @@ Map, audit, and score Active Directory attack paths — graph enumeration, LDAP/
 
 
 
-
 #### BloodHound Pipeline
-
 
 
 ##### Collectors & Ingestors
 
 
-
 ###### Windows-native collection
-
 
 
 ###### SharpHound ⭐
@@ -37,7 +33,6 @@ C# collector for BloodHound CE that runs on a domain-joined Windows host and exp
 ###### Linux-native collection
 
 
-
 ###### BloodHound.py ⭐
 
 Python/Impacket ingestor that collects users, groups, trusts, ACLs, sessions, and local admins from Linux using only credentials — no Windows host or SharpHound binary required.
@@ -54,7 +49,6 @@ Python/Impacket ingestor that collects users, groups, trusts, ACLs, sessions, an
 
 
 ##### Graph Analysis & Reporting
-
 
 
 ###### BloodHound CE ⭐
@@ -90,7 +84,6 @@ Wraps BloodHound's Neo4j Cypher backend into repeatable HTML reports and task li
 ##### Alternate visualizers
 
 
-
 ###### Adalanche ⭐
 
 Standalone attack-graph visualizer from lkarlslund that collects and graph-explores who is *really* Domain Admin, rebuilding the effective reachability without a Neo4j stack.
@@ -109,9 +102,7 @@ Standalone attack-graph visualizer from lkarlslund that collects and graph-explo
 #### Domain-Wide Enumeration & Scoring
 
 
-
 ##### Privilege-escalation sweeps
-
 
 
 ###### adPEAS ⭐
@@ -132,7 +123,6 @@ Active-Directory-flavored PEAS: a PowerShell sweep that checklists misconfigurat
 ##### Assessment scorecards
 
 
-
 ###### Purple Knight ⭐
 
 Free commercial scoring (Semperis) that rates hybrid AD, Entra ID, and Okta estates against 150+ indicators of exposure and compromise, with MITRE ATT&CK mapping and prioritized guidance.
@@ -149,16 +139,11 @@ Free commercial scoring (Semperis) that rates hybrid AD, Entra ID, and Okta esta
 
 
 
-
-
-
 ## LDAP & ADSI Directory Queries
 
 
 
-
 #### Raw query clients
-
 
 
 ##### ldapsearch ⭐
@@ -209,7 +194,6 @@ Python LDAP enumerator tuned for penetration workflow: dumps domain users with t
 #### Bulk enumerators & GUI explorers
 
 
-
 ##### ldapdomaindump ⭐
 
 Dumps the entire domain object surface — groups, users, computers, GPOs, DNS zones, trusts, and shares — to browesable grep-friendly files using just domain credentials.
@@ -258,7 +242,6 @@ Microsoft's built-in snap-in for direct read/write access to every AD object and
 #### Fleet-wide LDAP & credential validation
 
 
-
 ##### NetExec ⭐
 
 The maintained successor to CrackMapExec: multi-protocol (SMB, LDAP, MSSQL, SSH, WinRM, RDP) credential validation that rapidly tests which identities work where, sprays passwords, and enumerates shares, users, sessions, domains, and password policy across a fleet.
@@ -275,20 +258,14 @@ The maintained successor to CrackMapExec: multi-protocol (SMB, LDAP, MSSQL, SSH,
 
 
 
-
-
-
 ## Kerberos Attacks & Ticket Abuse
-
 
 
 
 #### Roasting
 
 
-
 ##### Kerberoasting
-
 
 
 ###### Rubeus ⭐
@@ -324,7 +301,6 @@ Impacket example script that requests TGS tickets for every registered SPN accou
 ##### AS-REP Roasting
 
 
-
 ###### Impacket GetNPUsers ⭐
 
 Impacket example script that requests pre-authentication-free AS-REPs for accounts with 'Do not require Kerberos pre-authentication' and exports crackable hash segments.
@@ -356,7 +332,6 @@ HarmJ0y's PowerShell toolkit that retrieves crackable hashes from KRB5 AS-REP re
 
 
 #### Ticket requests & delegation
-
 
 
 ##### Impacket getTGT / getST ⭐
@@ -392,7 +367,6 @@ Gentilkiwi's Kerberos suite for ticket generation, renewal, and fabrication (inc
 #### Username enumeration & password spraying
 
 
-
 ##### Kerbrute ⭐
 
 Go tool that validates AD usernames and tests passwords through Kerberos AS-REQ/AS-REP exchanges; its userenum mode never triggers account lockout, while passwordspray/bruteforce do and are meant for policy-aware testing.
@@ -424,16 +398,11 @@ Dafthack's PowerShell sprayer that gathers the user list from AD, checks the dom
 
 
 
-
-
-
 ## NTLM Relaying & Protocol Poisoning
 
 
 
-
 #### Name-resolution poisoning (LLMNR / NBT-NS / mDNS)
-
 
 
 ##### Responder ⭐
@@ -484,7 +453,6 @@ Kevin-Robertson's Windows PowerShell/C# LLMNR/NBT-NS/mDNS/SMBv1 responder and NT
 #### Relay chains
 
 
-
 ##### Impacket ntlmrelayx ⭐
 
 Impacket's NTLM relay server that forwards captured NetNTLM challenges to SMB, LDAP(S), HTTP(S), and MSSQL targets, with built-in modules for dumping SAM, creating users, and targeting printers (CVE-2019-1040 MIC-removal support).
@@ -501,7 +469,6 @@ Impacket's NTLM relay server that forwards captured NetNTLM challenges to SMB, L
 
 
 #### Auth coercion (printer-bug family)
-
 
 
 ##### printerbug.py ⭐
@@ -535,16 +502,11 @@ The original MS-RPRN spoolsv.exe abuse PoC that forces a target to authenticate 
 
 
 
-
-
-
 ## Legacy Attack Labs (PoC repos — lab only)
 
 
 
-
 #### Critical CVE PoCs
-
 
 
 ##### Zerologon PoC (CVE-2020-1472) ⭐
@@ -580,7 +542,6 @@ EFS-prone authentication coercion PoC (CVE-2021-36942) that forces a Windows hos
 #### NTLMv1 downgrade & legacy protocol testing
 
 
-
 ##### smbclient (NTLMv1 dialect) ⭐
 
 Samba's authenticated SMB client whose `-m NT1` mode forces the legacy NTLMv1/RC4 dialect, making it a quick probe for whether a host still accepts NTLMv1.
@@ -597,16 +558,11 @@ Samba's authenticated SMB client whose `-m NT1` mode forces the legacy NTLMv1/RC
 
 
 
-
-
-
 ## GPO & ACL Exploitation Tooling
 
 
 
-
 #### ACL analysis & abuse
-
 
 
 ##### ADACLScanner ⭐
@@ -642,7 +598,6 @@ Impacket example script that leverages a control-established object ace (WriteDA
 #### Group Policy abuse
 
 
-
 ##### SharpGPOAbuse ⭐
 
 C# tool that edits GPO DACLs you already control to add immediate scheduled tasks, services, or registry changes — the standard Writeable-GPO machine-takeover primitive (kept alive by the ReversecLabs mirror).
@@ -674,16 +629,11 @@ Hackndo's Python port that adds an immediate scheduled task to a writable GPO fr
 
 
 
-
-
-
 ## Credential-Access Testing
 
 
 
-
 #### LSASS & memory credential access
-
 
 
 ##### Mimikatz ⭐
@@ -734,7 +684,6 @@ Python tool that remotely dumps LSASS (comsvcs, Procdump, nanodump, and more met
 #### Remote domain-credential extraction
 
 
-
 ##### Impacket secretsdump ⭐
 
 Impacket's flagship script that remotely extracts SAM/LSA/DRSUAPI/NTDS passwords and hashes in mimikatz-compatible format over DCOM, registry, and hypothetical replication.
@@ -751,16 +700,11 @@ Impacket's flagship script that remotely extracts SAM/LSA/DRSUAPI/NTDS passwords
 
 
 
-
-
-
 ## PowerShell Scripted Enumeration
 
 
 
-
 #### AD recon cmdlets
-
 
 
 ##### PowerView ⭐
@@ -781,7 +725,6 @@ Pure-PowerShell AD enumerator (PowerSploit) turning LDAP into one-liner cmdlets 
 #### Local privilege-escalation auditing
 
 
-
 ##### PowerUp ⭐
 
 PowerSploit module that audits a Windows host for common local privesc misconfigurations — unquoted service paths, writable service binaries, modifiable services, AlwaysInstallElevated — with abuse-ready detail.
@@ -798,16 +741,11 @@ PowerSploit module that audits a Windows host for common local privesc misconfig
 
 
 
-
-
-
 ## Blue-Team Visibility & Lab Hardening
 
 
 
-
 #### Local admin password (LAPS) hygiene
-
 
 
 ##### LAPSToolkit ⭐
@@ -826,7 +764,6 @@ Leoloobeek's PowerShell suite that audits LAPS-deployed estates — enumerating 
 
 
 #### AD health & risk scoring
-
 
 
 ##### PingCastle ⭐
@@ -857,8 +794,6 @@ PowerShell tool that extracts a wide slice of AD state — users, groups, OUs, G
 **URL:** https://github.com/adrecon/ADRecon
 
 **Alternatives:** PingCastle, ADACLScanner
-
-
 
 
 

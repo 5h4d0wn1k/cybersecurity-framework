@@ -6,9 +6,7 @@ Debug, disassemble, decompile, and understand binaries — your own code, lab ta
 
 
 
-
 #### Decompilers
-
 
 
 ##### Ghidra ⭐
@@ -59,9 +57,7 @@ Commercial reverse-engineering platform with a modern Python API, cross-platform
 #### Disassembler frameworks
 
 
-
 ##### CLI engines
-
 
 
 ###### radare2 ⭐
@@ -97,7 +93,6 @@ Actively maintained fork of radare2 aiming for a cleaner, better-tested codebase
 ##### Graphical front-ends
 
 
-
 ###### Cutter ⭐
 
 Qt GUI built on the Rizin engine giving point-and-click disassembly, patching, control-flow graphs, and a decompiler view.
@@ -114,7 +109,6 @@ Qt GUI built on the Rizin engine giving point-and-click disassembly, patching, c
 
 
 #### Scripting & automation ecosystems
-
 
 
 ##### GhidraSnippets ⭐
@@ -163,16 +157,11 @@ Plugin that embeds the Ghidra decompiler into radare2/rizin so terminal workflow
 
 
 
-
-
-
 ## Dynamic Analysis
 
 
 
-
 #### Debuggers
-
 
 
 ##### GDB ⭐
@@ -238,7 +227,6 @@ LLVM's debugger, well integrated with clang-generated debug info and Mach-O, Swi
 #### Instrumentation & tracing
 
 
-
 ##### Frida ⭐
 
 Dynamic instrumentation toolkit that injects JavaScript into a running process to hook functions and read live memory without recompiling.
@@ -270,7 +258,6 @@ Syscall and library-call tracers that log every system call (or libc call) a pro
 
 
 #### Emulation & sandboxing
-
 
 
 ##### QEMU ⭐
@@ -319,16 +306,11 @@ Lightweight CPU emulator framework exposing per-instruction hooks so you can emu
 
 
 
-
-
-
 ## Exploit-Dev Toolchains
 
 
 
-
 #### Python exploit frameworks
-
 
 
 ##### pwntools ⭐
@@ -362,7 +344,6 @@ Python binary analysis framework using symbolic/concolic execution to explore pa
 
 
 #### ROP & gadget tooling
-
 
 
 ##### ROPgadget ⭐
@@ -413,7 +394,6 @@ Matches libc builds to single-address execve('/bin/sh') gadgets whose register c
 #### Constraint solving
 
 
-
 ##### Z3 ⭐
 
 Microsoft's SMT solver used to solve constraints over bitvectors, powering automated deobfuscation and input recovery.
@@ -430,7 +410,6 @@ Microsoft's SMT solver used to solve constraints over bitvectors, powering autom
 
 
 #### Speculative-execution research kits
-
 
 
 ##### Speculator ⭐
@@ -464,16 +443,11 @@ Research proof-of-concept from the ret2spec lineage demonstrating arbitrary spec
 
 
 
-
-
-
 ## Binary Navigation
 
 
 
-
 #### Instruction engines
-
 
 
 ##### Capstone ⭐
@@ -507,7 +481,6 @@ Assembly engine that turns mnemonics into machine code at runtime, complementing
 
 
 #### Header & string inspection
-
 
 
 ##### checksec ⭐
@@ -573,7 +546,6 @@ binutils disassembler and ELF reader providing symbol tables, sections, headers,
 #### Binary diffing
 
 
-
 ##### Diaphora ⭐
 
 Binary diffing tool matching functions across two binaries and importing names and symbols, working with Ghidra, IDA, and Binary Ninja.
@@ -587,8 +559,6 @@ Binary diffing tool matching functions across two binaries and importing names a
 **URL:** https://github.com/joxeankoret/diaphora
 
 **Alternatives:** Ghidra, Binary Ninja
-
-
 
 
 

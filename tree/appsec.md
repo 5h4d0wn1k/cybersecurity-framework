@@ -6,7 +6,6 @@ Product-security gates for the code and recipes you ship: SAST, DAST, secrets de
 
 
 
-
 #### viperstrike ◆ by 5h4d0wn1k
 
 MCP (Model Context Protocol) server vulnerability auditor — AST/whitebox SAST for agentic AI tool handlers, SARIF-capable, optional oracle runtime mode.
@@ -23,7 +22,6 @@ MCP (Model Context Protocol) server vulnerability auditor — AST/whitebox SAST 
 
 
 #### Multi-Language Engines
-
 
 
 ##### Semgrep ⭐
@@ -74,9 +72,7 @@ Self-hosted code-quality and security platform: the Community Edition runs hundr
 #### Language-Specific Scanners
 
 
-
 ##### Python
-
 
 
 ###### Bandit ⭐
@@ -97,7 +93,6 @@ PyCQA's AST-based Python analyzer flags common first-party mistakes — SQLi, sh
 ##### Go
 
 
-
 ###### gosec ⭐
 
 SecureGo's Go static analyzer walking ASTs and data flow to find hardcoded creds, weak TLS configs, unsafe sql/exec sinks, and integer-overflow risk in first-party Go code.
@@ -116,7 +111,6 @@ SecureGo's Go static analyzer walking ASTs and data flow to find hardcoded creds
 ##### Ruby
 
 
-
 ###### Brakeman ⭐
 
 The reference Ruby on Rails scanner: static analysis tuned to Rails patterns (SQL injection, XSS, mass assignment, unsafe deserialization) with actionable remediation notes.
@@ -133,7 +127,6 @@ The reference Ruby on Rails scanner: static analysis tuned to Rails patterns (SQ
 
 
 ##### Java & .NET
-
 
 
 ###### SpotBugs + FindSecBugs ⭐
@@ -169,7 +162,6 @@ An open-source Roslyn analyzer that adds taint-tracking security rules for C#: S
 ##### JavaScript & PHP
 
 
-
 ###### eslint-plugin-security ⭐
 
 Node.js Security's ESLint plugin that flags hardcoded credentials, unsafe regex, non-literal require/child_process, and other JS security smells directly in lint output.
@@ -201,16 +193,11 @@ PHP static analysis with a taint-check mode (`--taint-analysis`) that traces unt
 
 
 
-
-
-
 ## Dynamic Analysis (DAST)
 
 
 
-
 #### CI & Pipeline Scanning
-
 
 
 ##### OWASP ZAP ⭐
@@ -261,7 +248,6 @@ Python black-box web scanner performing GET/POST parameter fuzzing for OWASP cla
 #### Manual Testing Suites
 
 
-
 ##### Burp Suite ⭐
 
 PortSwigger's leading web application testing platform: Community gives the intercepting proxy, history, and Repeater/Decoder manual tools free; the automated scanner is paid.
@@ -295,7 +281,6 @@ Ruby-based web scanner with a rich modular architecture and REST/WebSocket APIs;
 #### API-Specific DAST
 
 
-
 ##### RESTler ⭐
 
 Microsoft's stateful REST API fuzzer: ingests your OpenAPI spec, infers producer-consumer request dependencies, then fuzzes request sequences to surface 5xx crashes, resource leaks, and security-checker violations.
@@ -327,16 +312,11 @@ Property-based API testing against OpenAPI/GraphQL schemas: generates edge-case 
 
 
 
-
-
-
 ## Dependency Scanning (SCA)
 
 
 
-
 #### Multi-Language Engines
-
 
 
 ##### OWASP Dependency-Check ⭐
@@ -372,9 +352,7 @@ Google's open-source vulnerability scanner (the engine behind GitHub Dependabot)
 #### Per-Ecosystem Lockfile Scanners
 
 
-
 ##### Python
-
 
 
 ###### pip-audit ⭐
@@ -395,7 +373,6 @@ Python Packaging Authority's scanner audits direct and transitive PyPI requireme
 ##### Node.js
 
 
-
 ###### npm audit ⭐
 
 Bundled npm command that checks the installed dependency tree against the npm advisory database and can auto-downgrade (`npm audit fix`) where a patched version exists.
@@ -412,7 +389,6 @@ Bundled npm command that checks the installed dependency tree against the npm ad
 
 
 ##### Go
-
 
 
 ###### govulncheck ⭐
@@ -433,7 +409,6 @@ The Go team's vulnerability scanner: uses static analysis of function call graph
 ##### Rust
 
 
-
 ###### cargo-audit ⭐
 
 RustSec's lockfile auditor (cargo.lock) reporting known vulnerabilities from the RustSec Advisory Database, with `cargo audit fix` for auto-updates.
@@ -452,7 +427,6 @@ RustSec's lockfile auditor (cargo.lock) reporting known vulnerabilities from the
 #### Container Images & SBOMs
 
 
-
 ##### Grype + Syft ⭐
 
 Anchore's pair: Syft generates SPDX/CycloneDX SBOMs from images and filesystems, Grype matches them against multiple vulnerability feeds with reachability-aware reporting in some modes.
@@ -469,16 +443,11 @@ Anchore's pair: Syft generates SPDX/CycloneDX SBOMs from images and filesystems,
 
 
 
-
-
-
 ## Secrets Detection
 
 
 
-
 #### Git History & Repo Sweeps
-
 
 
 ##### Gitleaks ⭐
@@ -514,7 +483,6 @@ Secret scanner with 600+ credential detectors that actively verify matches again
 #### Baseline & Diff-Based
 
 
-
 ##### detect-secrets ⭐
 
 Yelp's Python scanner that audits a repo once into a .secrets.baseline then diffs only new lines in pre-commit/CI, so only genuinely new secrets get flagged instead of the same approved ones on every run.
@@ -533,7 +501,6 @@ Yelp's Python scanner that audits a repo once into a .secrets.baseline then diff
 #### Pipeline & Simple Mode
 
 
-
 ##### ggshield ⭐
 
 GitGuardian's open-source CLI that scans commits, PRs, and CI output for secrets with pre-commit hooks and does live-verification checks; the hosted dashboard beyond it is commercial.
@@ -550,11 +517,7 @@ GitGuardian's open-source CLI that scans commits, PRs, and CI output for secrets
 
 
 
-
-
-
 ## Coverage-Guided Fuzzing
-
 
 
 
@@ -574,7 +537,6 @@ RAG retrieval-time poisoning detector — demand-recency discrimination, canary 
 
 
 #### Native / Binary Fuzzing
-
 
 
 ##### AFL++ ⭐
@@ -625,7 +587,6 @@ Google's coverage-guided fuzzer with hardware-based performance counters (Intel 
 #### Managed Runtimes (JVM)
 
 
-
 ##### Jazzer ⭐
 
 CodeIntelligence's JVM coverage-guided fuzzer built on libFuzzer: fuzzes Java/Kotlin through a JNI agent with sanitizer-like detection of OOM, stack overflow, and exception-based failures.
@@ -642,7 +603,6 @@ CodeIntelligence's JVM coverage-guided fuzzer built on libFuzzer: fuzzes Java/Ko
 
 
 #### Fuzzing Infrastructure
-
 
 
 ##### OSS-Fuzz ⭐
@@ -663,7 +623,6 @@ Google's open-source continuous fuzzing service for critical OSS: builds your pr
 #### Research & Benchmarks
 
 
-
 ##### ProFuzzBench ⭐
 
 TU Delft's highly-configurable benchmark for stateful protocol fuzzing: 8 real network protocols with reproducible AFLNet/AFL++/libFuzzer harnesses and Docker-based campaigns.
@@ -680,16 +639,11 @@ TU Delft's highly-configurable benchmark for stateful protocol fuzzing: 8 real n
 
 
 
-
-
-
 ## Threat Modeling
 
 
 
-
 #### Visual & Diagram-First
-
 
 
 ##### OWASP Threat Dragon ⭐
@@ -708,7 +662,6 @@ OWASP's open-source threat-model tooling for STRIDE/LINDDUN workflows with a bro
 
 
 #### Threat Models as Code
-
 
 
 ##### pytm ⭐
@@ -739,8 +692,6 @@ Agile threat-modeling toolkit driven by a YAML architecture description: auto-ge
 **URL:** https://github.com/threagile/threagile
 
 **Alternatives:** pytm, Threat Dragon
-
-
 
 
 

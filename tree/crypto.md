@@ -6,9 +6,7 @@ Decode/encode data, identify encodings, and break weak ciphers and RSA on materi
 
 
 
-
 #### Decode & Encode
-
 
 
 ##### CyberChef ⭐
@@ -44,7 +42,6 @@ The same GCHQ app run from the official pre-built Docker image (or a downloadabl
 #### Hash & File Format Identification
 
 
-
 ##### hashID ⭐
 
 Python 3 tool identifying 220+ hash types by regex and reporting the matching hashcat mode (-m) and John format (-j) for each candidate, replacing the outdated hash-identifier.
@@ -76,11 +73,7 @@ The standard `file` command built on libmagic: identifies thousands of file type
 
 
 
-
-
-
 ## Cipher Attack & Cryptanalysis
-
 
 
 
@@ -100,7 +93,6 @@ Crypto attacks + credential cracking — hash identify/crack with rules, RSA/AES
 
 
 #### Classical & Historical Ciphers
-
 
 
 ##### dCode ⭐
@@ -136,7 +128,6 @@ Legacy university/open-source cryptology suite (CrypTool 2.1 + JCrypTool) for ex
 #### XOR & Stream Ciphers
 
 
-
 ##### xortool ⭐
 
 Python tool for multi-byte XOR cipher analysis: guesses key length via equality-based scoring, recovers key bytes from the most frequent plaintext character, with charset filtering and known-plaintext (-p) options to confirm candidates.
@@ -170,7 +161,6 @@ Interactive crib-dragging script for stream-cipher keystream reuse: XOR two ciph
 #### Block Cipher Padding Attacks
 
 
-
 ##### PadBuster ⭐
 
 Perl script automating padding-oracle attacks: decrypts arbitrary CBC ciphertext, encrypts arbitrary plaintext, and probes an endpoint to fingerprint the oracle that leaks padding validity.
@@ -187,16 +177,11 @@ Perl script automating padding-oracle attacks: decrypts arbitrary CBC ciphertext
 
 
 
-
-
-
 ## Hash Cracking Context & Attacks
 
 
 
-
 #### Hash Length Extension
-
 
 
 ##### hash_extender ⭐
@@ -215,7 +200,6 @@ Ron Bowes' C tool for the hash length-extension attack on MD4/MD5/RIPEMD-160/SHA
 
 
 #### Crackers (cross-ref to passwords)
-
 
 
 ##### Hashcat ⭐
@@ -249,16 +233,11 @@ CPU-first cracker (jumbo build) covering hundreds of hash formats including magi
 
 
 
-
-
-
 ## RSA Attacks & Factorization
 
 
 
-
 #### Multi-Attack Solvers
-
 
 
 ##### RsaCtfTool ⭐
@@ -279,7 +258,6 @@ Python RSA multi-attack harness (60+ attacks): weak-key factorization (Fermat, P
 ##### Manual Math Toolkit
 
 
-
 ###### SageMath ⭐
 
 Open-source mathematics system with built-in number theory used for RSA cryptanalysis: lattice basis reduction (LLL), Pollard p-1/p-ρ, discrete log, small-roots (Coppersmith), and private-key reconstruction from recovered parameters.
@@ -296,7 +274,6 @@ Open-source mathematics system with built-in number theory used for RSA cryptana
 
 
 #### Integer Factorization Engines
-
 
 
 ##### FactorDB ⭐
@@ -347,7 +324,6 @@ Quadratic-sieve and number-field-sieve library/demo for factoring integers up to
 #### Key Reconstruction
 
 
-
 ##### rsatool ⭐
 
 Small Python tool that reconstructs the full RSA key set (n, e, d, p, q, CRT params) and writes an OpenSSL-compatible PEM/DER private key from just (p, q) or (n, d), including n+dp-based factoring.
@@ -364,16 +340,11 @@ Small Python tool that reconstructs the full RSA key set (n, e, d, p, q, CRT par
 
 
 
-
-
-
 ## SSL/TLS Configuration Analysis
 
 
 
-
 #### TLS / Cipher Auditors
-
 
 
 ##### testssl.sh ⭐
@@ -422,13 +393,9 @@ Python TLS scanning library/CLI: cert, cipher suite, and elliptic-curve analysis
 
 
 
-
-
-
 ## Key & Certificate Toolkit
 
 OpenSSL ⭐
-
 
 #### OpenSSL ⭐
 
@@ -503,8 +470,6 @@ AES-256-GCM cryptographic secrets lifecycle manager for offensive ops — vaulte
 **URL:** https://github.com/5h4d0wn1k/shadowvault
 
 **Alternatives:** Own tool — lab/authorized use only
-
-
 
 
 

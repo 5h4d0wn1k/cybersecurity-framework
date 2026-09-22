@@ -6,13 +6,10 @@ Recover and test credentials you are authorized to attack: offline GPU/CPU hash 
 
 
 
-
 #### CPU & GPU Engines
 
 
-
 ##### GPU-accelerated engines
-
 
 
 ###### Hashcat ⭐
@@ -48,7 +45,6 @@ MIT-licensed stdin/stdout pipeline utilities (cap2hccapx, combipow, len, cutb, r
 ##### CPU & classic engines
 
 
-
 ###### John the Ripper ⭐
 
 The classic Unix password cracker with dictionary, incremental (Markov), and rule modes; runs on CPU out of the box, and on OpenCL/hosted hardware in jumbo builds.
@@ -82,9 +78,7 @@ Community 'bleeding-jumbo' branch adding hundreds of extra hash/cipher formats (
 #### Cloud & Distributed Cracking
 
 
-
 ##### Orchestration & queue servers
-
 
 
 ###### Hashtopolis ⭐
@@ -120,9 +114,7 @@ FireEye's manager/worker framework written in Go for managing password-cracking 
 #### Wi-Fi / WPA-PSK Cracking (cross-ref)
 
 
-
 ##### Capture → crackable hash
-
 
 
 ###### hcxtools ⭐
@@ -143,7 +135,6 @@ Converts Wi-Fi captures (pcapng) and probe/eapol frames into the PMKID and PBKDF
 ##### WPA/WPA2 attack engines
 
 
-
 ###### aircrack-ng ⭐
 
 The de-facto Wi-Fi suite: airodump-ng for capture, aireplay-ng for handshake injection, and aircrack-ng for dictionary/PTW attacks against WEP and WPA/WPA2 across your own networks.
@@ -160,16 +151,11 @@ The de-facto Wi-Fi suite: airodump-ng for capture, aireplay-ng for handshake inj
 
 
 
-
-
-
 ## Hash Identification & Formatting
 
 
 
-
 #### Quick hash-type identification
-
 
 
 ##### hashid ⭐
@@ -205,7 +191,6 @@ Friendly command-line and web-identifying hash analyst that recognizes her way t
 #### Curated sample-hash lists
 
 
-
 ##### hashes.com sample hashes ⭐
 
 Online database documenting sample hashes and lookup methods for a wide range of algorithms (MD5, NTLM, bcrypt, Argon2, Joomla, …) useful for confirming a suspect format.
@@ -224,7 +209,6 @@ Online database documenting sample hashes and lookup methods for a wide range of
 #### Engine example-hash references
 
 
-
 ##### Hashcat example hashes ⭐
 
 Official table with one valid sample hash per hashcat mode (password is always 'hashcat'), including VPN PSK (5300/5400/2500) and firewall (7000) formats; also embedded via hashcat --example-hashes.
@@ -241,16 +225,11 @@ Official table with one valid sample hash per hashcat mode (password is always '
 
 
 
-
-
-
 ## Wordlists, Rules & Candidate Generation
 
 
 
-
 #### Bundled & leaked-list dictionaries
-
 
 
 ##### SecLists ⭐
@@ -286,9 +265,7 @@ The 2009 RockYou leak (~14M real-world passwords) that remains the standard base
 #### Rule engines & curated rules
 
 
-
 ##### Hashcat rule-based attacks
-
 
 
 ###### OneRuleToRuleThemAll ⭐
@@ -324,7 +301,6 @@ The stock best64.rule ships in the hashcat repo and applies 64 high-yield mangle
 ##### John the Ripper rules
 
 
-
 ###### Openwall John rules ⭐
 
 John's rule engine and wiki-documented preset rules (dumb, wordlist, KoreLogic, single) mutate base words with case, suffix, prefix and substitution pipelines.
@@ -341,7 +317,6 @@ John's rule engine and wiki-documented preset rules (dumb, wordlist, KoreLogic, 
 
 
 #### Frequency & password-statistics analysis
-
 
 
 ##### Pipal ⭐
@@ -375,7 +350,6 @@ Hashcat's position-based password generator that derives per-position character 
 
 
 #### Candidate & mangle generators
-
 
 
 ##### Mentalist ⭐
@@ -441,7 +415,6 @@ Ruby spider that crawls a site to a depth and emits the unique words (plus autho
 #### Online hash & password services
 
 
-
 ##### CrackStation ⭐
 
 Free online hash cracker (MD5, SHA1, NTLM, and 220+ other algorithms) that matches your hashcat modes against massive precomputed tables.
@@ -458,11 +431,7 @@ Free online hash cracker (MD5, SHA1, NTLM, and 220+ other algorithms) that match
 
 
 
-
-
-
 ## Password Spraying & Low-Rate Login Testing
-
 
 
 
@@ -482,7 +451,6 @@ Lockout-aware password-spray / brute-force orchestrator against localhost lab se
 
 
 #### Kerberos & domain endpoints
-
 
 
 ##### Kerbrute ⭐
@@ -518,9 +486,7 @@ The fork-lifted successor to CrackMapExec; its kerberos module performs password
 #### On-premises targeted sprayers
 
 
-
 ##### Unix / cross-platform sprayers
-
 
 
 ###### Spray ⭐
@@ -556,7 +522,6 @@ Python sprayer against Microsoft 365/Azure AD and AD with strong anti-lockout co
 ##### PowerShell domain sprayers
 
 
-
 ###### DomainPasswordSpray ⭐
 
 The canonical community PowerShell sprayer: enumerates domain users from AD, tests one password across them, detects lockdown policies and can pass an existing password.
@@ -573,7 +538,6 @@ The canonical community PowerShell sprayer: enumerates domain users from AD, tes
 
 
 #### Cloud identity providers
-
 
 
 ##### MSOLSpray
@@ -607,20 +571,14 @@ Username enumeration and password spraying against Microsoft 365 / Azure AD with
 
 
 
-
-
-
 ## NTLM Relay, Pass-the-Hash & Harvesting (Lab)
-
 
 
 
 #### NTLM capture, spoof & relay
 
 
-
 ##### Responder + mitm6 poisoning
-
 
 
 ###### Responder ⭐
@@ -656,7 +614,6 @@ IPv6 abuser for labs: advertises a rogue DHCPv6 server so Windows clients regist
 ##### SMB/LDAP relay servers
 
 
-
 ###### impacket ntlmrelayx ⭐
 
 The relay half of the chain: accepts captured NTLM authentications and replays them to SMB/LDAP on targets you control, enabling hash history recording or relayed logins without knowing the plaintext password.
@@ -673,7 +630,6 @@ The relay half of the chain: accepts captured NTLM authentications and replays t
 
 
 #### Pass-the-hash & remote shell
-
 
 
 ##### impacket psexec / wmiexec ⭐
@@ -724,7 +680,6 @@ WinRM shell client that authenticates with a password or NTLM hash and gives an 
 #### LSASS secret extraction (lab)
 
 
-
 ##### Mimikatz ⭐
 
 The lab-standard post-exploitation credential extractor: reads LSASS memory to dump plaintext passwords, NTLM hashes, Kerberos tickets and DPAPI keys on systems you administer.
@@ -771,20 +726,14 @@ DPAPI-centric credential dumper that walks LSASS and protected-store databases p
 
 
 
-
-
-
 ## Credential Extraction & Decryption (Authorized)
-
 
 
 
 #### Browser & web-credential vaults
 
 
-
 ##### Firefox / Thunderbird login stores
-
 
 
 ###### firepwd ⭐
@@ -803,7 +752,6 @@ Pure-Python decryptor for Mozilla Firefox/Thunderbird logins.json driven by the 
 
 
 ##### Windows browser DPAPI stores
-
 
 
 ###### SharpDPAPI ⭐
@@ -839,9 +787,7 @@ Python credential-store dumper that walks browsers, WiFi profiles, mail clients,
 #### VPN pre-shared keys & encrypted configs
 
 
-
 ##### IKE/Cisco IPSEC PSK recovery
-
 
 
 ###### hashcat VPN PSK modes (IKE-PSK 5300/5400, Cisco-IPSEC 2500) ⭐
@@ -875,16 +821,11 @@ IKE discovery and testing tool that sends phase-1 negotiation to a VPN gateway a
 
 
 
-
-
-
 ## Encrypted File & Document Recovery
 
 
 
-
 #### Archive & container formats
-
 
 
 ##### John *2john archive converters ⭐
@@ -918,7 +859,6 @@ Fast zip password cracker with dictionary and brute-force modes (libzip-based fo
 
 
 #### Documents & credential vaults
-
 
 
 ##### pdf2john ⭐
@@ -964,8 +904,6 @@ Dedicated GPL tool recovering owner/user passwords from PDFs using the classic s
 **URL:** https://www.kali.org/tools/pdfcrack/
 
 **Alternatives:** pdf2john, John the Ripper jumbo
-
-
 
 
 

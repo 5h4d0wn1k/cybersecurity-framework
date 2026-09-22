@@ -6,9 +6,7 @@ Defending your own clusters: image scanning, SBOM, runtime detection, CIS postur
 
 
 
-
 #### Standalone CVE scanners
-
 
 
 ##### Trivy ⭐
@@ -74,7 +72,6 @@ Commercial policy-and-compliance platform built on the Grype/Syft engine with ad
 #### Vendor & SaaS scanning
 
 
-
 ##### Docker Scout ⭐
 
 Docker's image analyzer for CVEs, provenance, and supply-chain compliance; highlights CISA KEV reachability and suggests base-image/model upgrades, integrated into Docker Desktop and CI.
@@ -108,7 +105,6 @@ Snyk's container scanning CLI ('snyk container test') covering images plus Kuber
 #### Dockerfile & image best-practice lint
 
 
-
 ##### hadolint ⭐
 
 Haskell Dockerfile linter that parses the Dockerfile AST and applies best-practice rules, delegating inline shell checks to ShellCheck (DL- and SC-prefixed findings).
@@ -140,11 +136,7 @@ Container image linter that audits the built image against CIS Docker image chec
 
 
 
-
-
-
 ## SBOM Generation & Management
-
 
 
 
@@ -166,7 +158,6 @@ Supply-chain security gate — dependency manifest parsing, SBOM (CycloneDX/SPDX
 #### Generators
 
 
-
 ##### Syft ⭐
 
 Generates SBOMs for container images, filesystems, and archives in CycloneDX, SPDX, and Syft JSON; feeds Grype directly and supports signed in-toto attestations.
@@ -183,7 +174,6 @@ Generates SBOMs for container images, filesystems, and archives in CycloneDX, SP
 
 
 #### Validation & quality scoring
-
 
 
 ##### CycloneDX CLI ⭐
@@ -217,20 +207,14 @@ Interlynk's SBOM quality & compliance scorer: grades SPDX/CycloneDX BOMs on comp
 
 
 
-
-
-
 ## Signing, Provenance & Base-Image Policy
-
 
 
 
 #### Image signing (Sigstore / Notary)
 
 
-
 ##### Signing CLIs
-
 
 
 ###### Cosign ⭐
@@ -266,7 +250,6 @@ CNCF Notary Project CLI (OCI 1.1 signatures) for signing and verifying artifacts
 ##### Verification & transparency infrastructure
 
 
-
 ###### Sigstore Policy Controller ⭐
 
 Sigstore's admission controller that verifies signatures and attestations on every pod creation, mutating the request to enforce trust policies cluster-wide.
@@ -300,7 +283,6 @@ Query and verify entries in the Rekor transparency log (DSSE/tekton/blob/cosign 
 #### Distroless base images
 
 
-
 ##### Distroless ⭐
 
 Google's minimal base images with no shell, package managers, or runtimes — static, cc, and Debian variants with nonroot tags that slash attack surface and image size.
@@ -332,16 +314,11 @@ Chainguard's apk-based, no-glibc-bloat OS purpose-built for containers — the u
 
 
 
-
-
-
 ## Kubernetes Cluster Security
 
 
 
-
 #### CIS benchmark & compliance
-
 
 
 ##### kube-bench ⭐
@@ -377,7 +354,6 @@ Docker's CIS Docker Benchmark script auditing the Docker/containerd host, daemon
 #### Continuous posture & drift
 
 
-
 ##### Kubescape ⭐
 
 CNCF-incubating Kubernetes security platform scanning clusters, manifests, Helm charts, git repos, and images against CIS, NSA-CISA, and MITRE ATT&CK; operator mode adds continuous posture and eBPF runtime.
@@ -409,7 +385,6 @@ Read-only live-cluster sanitizer that lints deployed workloads for misconfigurat
 
 
 #### Manifest & YAML lint
-
 
 
 ##### kube-linter ⭐
@@ -445,9 +420,7 @@ Audits manifests and live clusters against security controls (privileged, hostNe
 #### Admission control & policy-as-code
 
 
-
 ##### Policy engines
-
 
 
 ###### OPA Gatekeeper ⭐
@@ -498,7 +471,6 @@ Fairwinds policy-as-code with 30+ built-in checks across security, networking, r
 ##### Local policy testing & OPA tooling
 
 
-
 ###### Conftest ⭐
 
 Tests Kubernetes manifests, Helm values, Terraform, and CUE against Rego policies from the CLI; CI-friendly and shares the same policy language as OPA Gatekeeper.
@@ -515,7 +487,6 @@ Tests Kubernetes manifests, Helm values, Terraform, and CUE against Rego policie
 
 
 #### Network policy enforcement
-
 
 
 ##### Cilium ⭐
@@ -551,7 +522,6 @@ Project Calico/Tigera CNI delivering the Kubernetes NetworkPolicy API plus Globa
 #### Adversarial assessment (self-check)
 
 
-
 ##### kube-hunter ⭐
 
 Legacy Aqua pen-test tool that finds cluster weaknesses from an attacker's perspective (exposed dashboards, leaked secrets, weak RBAC); officially no longer under active development.
@@ -568,16 +538,11 @@ Legacy Aqua pen-test tool that finds cluster weaknesses from an attacker's persp
 
 
 
-
-
-
 ## Runtime Threat Detection & RBAC
 
 
 
-
 #### eBPF kernel detection
-
 
 
 ##### Falco ⭐
@@ -613,7 +578,6 @@ Cilium's eBPF-based runtime security and observability with no userspace for tra
 #### RBAC review & least privilege
 
 
-
 ##### rbac-lookup ⭐
 
 Fairwinds CLI that reverses RBAC: give it a user, service account, or group and it prints every Role/ClusterRole bound to that identity, resolving the bindings for you.
@@ -645,16 +609,11 @@ Built-in kubectl authorization self-check; 'kubectl auth can-i --list -A' dumps 
 
 
 
-
-
-
 ## CI/CD Pipeline Security Gates
 
 
 
-
 #### GitHub Actions for scan & SBOM
-
 
 
 ##### Trivy Action ⭐
@@ -705,7 +664,6 @@ anchore/sbom-action generates Syft SBOMs in CI, publishing them as release artif
 #### Policy libraries for pipelines & clusters
 
 
-
 ##### Kyverno Policies ⭐
 
 Kyverno's community policy library: 130+ tested YAML policies covering Pod Security Standards, image signatures, network policy checks, and compliance presets.
@@ -722,16 +680,11 @@ Kyverno's community policy library: 130+ tested YAML policies covering Pod Secur
 
 
 
-
-
-
 ## Attack Paths & Container Escapes (Lab / Offense)
 
 
 
-
 #### Kubernetes attack-graph analysis
-
 
 
 ##### KubeHound ⭐
@@ -767,7 +720,6 @@ CyberArk's RBAC attack-path scanner: lists risky roles, subjects, and clusterrol
 #### Container escape & post-exploitation
 
 
-
 ##### deepce ⭐
 
 DEEPCE (Docker Enumeration, Escalation of Privileges and Container Escapes) is a single bash script that enumerates capabilities, mounts, sockets, env, and metadata, then suggests and attempts escapes.
@@ -796,8 +748,6 @@ Zero-dependency Go container/Kubernetes penetration toolkit: capability evaluati
 **URL:** https://github.com/cdk-team/CDK
 
 **Alternatives:** deepce
-
-
 
 
 

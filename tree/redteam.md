@@ -6,9 +6,7 @@ Authorized red team tooling: offensive toolkits, operations & reporting, emulati
 
 
 
-
 #### Protocol & Network Toolkits
-
 
 
 ##### Impacket ⭐
@@ -59,7 +57,6 @@ lgandx's LLMNR/NBT-NS/mDNS responder that answers name-resolution queries on a t
 #### Post-Exploitation Libraries
 
 
-
 ##### PowerSploit ⭐
 
 PowerShellMafia's PowerShell post-exploitation framework (CodeExecution, Recon, Exfiltration, Persistence, Privesc modules). Archived since 2021, yet it remains the canonical documented corpus of PowerShell tradecraft and a rich set of well-known signatures to exercise.
@@ -108,9 +105,7 @@ samratashok's collection of PowerShell scripts (reverse shells, keylogging, pers
 #### Knowledge Bases
 
 
-
 ##### PoC Feeds
-
 
 
 ###### PoC-in-GitHub ⭐
@@ -129,7 +124,6 @@ nomi-sec's curated index tracking the latest public proof-of-concept exploits by
 
 
 ##### Field Notes
-
 
 
 ###### ired.team ⭐
@@ -165,7 +159,6 @@ The community wiki of pentesting techniques across web, Windows, Linux, AD, and 
 #### AI & LLM Offense
 
 
-
 ##### mythicforge ◆ by 5h4d0wn1k
 
 Adversarial LLM prompt-injection & jailbreak testing framework — 37 techniques benchmarked against OWASP/NIST/MITRE ATLAS, cost-aware, SARIF reports.
@@ -197,13 +190,9 @@ Adversarial AI/ML security studio — data poisoning, model backdoors, extractio
 
 
 
-
-
-
 ## Operations & Reporting Platforms
 
 RedEye ⭐
-
 
 #### RedEye ⭐
 
@@ -266,13 +255,9 @@ Black Lantern Security's full-stack Python pentest reporting server with a Djang
 
 
 
-
-
-
 ## Emulation & Replay Engines
 
 MITRE Caldera ⭐
-
 
 #### MITRE Caldera ⭐
 
@@ -305,13 +290,9 @@ Center for Threat-Informed Defense's STIX-based model and toolchain for linking 
 
 
 
-
-
-
 ## Objectives & Planning
 
 VECTR ⭐
-
 
 #### VECTR ⭐
 
@@ -359,16 +340,11 @@ The authoritative knowledge base of adversary tactics, techniques, and data sour
 
 
 
-
-
-
 ## Practice Labs
 
 
 
-
 #### Active Directory Labs
-
 
 
 ##### GOAD ⭐
@@ -404,7 +380,6 @@ Secframe's PowerShell script that fills a lab AD domain with thousands of random
 #### Training Ranges & VMs
 
 
-
 ##### Metasploitable 3 ⭐
 
 Rapid7's intentionally vulnerable Windows VM (Vagrant/Packer) packed with unpatched services, weak creds, and web/SMB flaws — a standard target for rehearsing toolkits and C2 staging.
@@ -436,13 +411,9 @@ Library of intentionally vulnerable virtual machines and walkthroughs for practi
 
 
 
-
-
-
 ## Pivoting & Tunnels
 
 sshuttle ⭐
-
 
 #### sshuttle ⭐
 
@@ -487,8 +458,6 @@ Force any TCP application through a chain of proxies for controlled routing in a
 **URL:** https://github.com/rofl0r/proxychains-ng
 
 **Alternatives:** sshuttle
-
-
 
 
 

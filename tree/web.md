@@ -6,9 +6,7 @@ The full web assessment stack: intercepting proxies, deep content discovery, inj
 
 
 
-
 #### Full-Feature Suites
-
 
 
 ##### Burp Suite ⭐
@@ -59,7 +57,6 @@ Lightweight, modern intercepting proxy with a clean UI, fast request replay, and
 #### Standalone Desktop Proxies
 
 
-
 ##### Charles Proxy ⭐
 
 Commercial desktop proxy with SSL browsing, bandwidth throttling, and rewrite tools for debugging web traffic.
@@ -91,20 +88,14 @@ Native macOS proxy with elegant UI, SSL pinning bypass for testing, and script-d
 
 
 
-
-
-
 ## Content Discovery & Fuzzing
-
 
 
 
 #### Directory & File Discovery
 
 
-
 ##### Fast Fuzzers
-
 
 
 ###### ffuf ⭐
@@ -155,7 +146,6 @@ Fast recursive content discovery fuzzer in Rust that automatically scans directo
 ##### Scriptable Python Scanners
 
 
-
 ###### dirsearch ⭐
 
 Mature Python path scanner with threading, proxy support, and rich status-code filters.
@@ -189,9 +179,7 @@ Flexible Python fuzzer for web content and parameters with rich payload/encoding
 #### Parameter Discovery
 
 
-
 ##### Hidden Parameter Miners
-
 
 
 ###### Arjun ⭐
@@ -242,7 +230,6 @@ Burp Suite extension that guesses hidden parameters, headers, and cookies on bot
 ##### Parameter Source Scrapers
 
 
-
 ###### ParamSpider ⭐
 
 Scrapes parameters from Wayback, Common Crawl, and more to compile endpoint lists for later fuzzing.
@@ -261,9 +248,7 @@ Scrapes parameters from Wayback, Common Crawl, and more to compile endpoint list
 #### Virtual Host Discovery
 
 
-
 ##### VHost Fuzzers
-
 
 
 ###### ffuf ⭐
@@ -299,9 +284,7 @@ Supports a dedicated vhost mode that fuzzes the Host header against a known targ
 #### Wordlists
 
 
-
 ##### General-Purpose Lists
-
 
 
 ###### SecLists ⭐
@@ -337,7 +320,6 @@ Categorized payloads and cheat sheets for every injection class, from RCE to SST
 ##### Curated & Scoped Lists
 
 
-
 ###### Assetnote Wordlists ⭐
 
 Industry-derived wordlists built from massive real-world indexed datasets, including API parameter lists.
@@ -369,11 +351,7 @@ Classic raft wordlists (small/medium/large) for directories and files, maintaine
 
 
 
-
-
-
 ## Injection & Data-Plane Testing
-
 
 
 
@@ -395,9 +373,7 @@ OWASP Top-10 attack engine with built-in localhost vulnerable targets and an AI-
 #### Database Injection
 
 
-
 ##### SQL Injection
-
 
 
 ###### sqlmap ⭐
@@ -433,7 +409,6 @@ Java GUI tool for automated SQLi detection and exploitation with SQLi and NoSQL/
 ##### NoSQL Injection
 
 
-
 ###### NoSQLMap ⭐
 
 Automated testing tool for NoSQL databases (MongoDB, CouchDB) injection and misconfiguration.
@@ -452,9 +427,7 @@ Automated testing tool for NoSQL databases (MongoDB, CouchDB) injection and misc
 #### Code Injection
 
 
-
 ##### Command Injection
-
 
 
 ###### Commix ⭐
@@ -473,7 +446,6 @@ Automated OS command injection detection and exploitation with support for many 
 
 
 ##### Server-Side Template Injection (SSTI)
-
 
 
 ###### tplmap ⭐
@@ -507,20 +479,14 @@ Actively maintained fork/rewrite of tplmap for SSTI detection and exploitation a
 
 
 
-
-
-
 ## Cross-Site Scripting & Clickjacking
-
 
 
 
 #### XSS Scanning
 
 
-
 ##### Automated Scanners
-
 
 
 ###### Dalfox ⭐
@@ -571,7 +537,6 @@ Long-standing XSS scanner with encoding/obfuscation bypasses, DORCE, and crawler
 ##### Out-of-Band Callback Platforms
 
 
-
 ###### XSS Hunter Express ⭐
 
 Self-hostable platform that proves XSS via injected payload probes sending interactive callback notifications.
@@ -588,7 +553,6 @@ Self-hostable platform that proves XSS via injected payload probes sending inter
 
 
 #### Clickjacking / UI Redressing
-
 
 
 ##### quickjack ⭐
@@ -622,20 +586,14 @@ Minimal browser-extension/POC helper for generating HTML clickjacking proofs qui
 
 
 
-
-
-
 ## API Security & Traffic Shaping
-
 
 
 
 #### API Traffic Tooling
 
 
-
 ##### API Clients
-
 
 
 ###### Postman ⭐
@@ -686,7 +644,6 @@ User-friendly command-line HTTP client with readable, colorful output for quick 
 ##### Scriptable Proxies
 
 
-
 ###### mitmproxy ⭐
 
 Interactive man-in-the-middle proxy with a powerful scriptable (Python) add-on API for request shaping and inspection.
@@ -720,9 +677,7 @@ GUI proxy for intercepting, inspecting, and mocking HTTP(S) traffic from browser
 #### API Endpoint Fuzzing
 
 
-
 ##### Schema-Based Fuzzers
-
 
 
 ###### schemathesis ⭐
@@ -743,7 +698,6 @@ Property-based testing for OpenAPI/GraphQL schemas that generates edge-case requ
 ##### Hidden Route Discovery
 
 
-
 ###### kiterunner ⭐
 
 Assetnote's fast API endpoint and route discovery scanner optimized against massive route wordlists.
@@ -760,7 +714,6 @@ Assetnote's fast API endpoint and route discovery scanner optimized against mass
 
 
 ##### 403 / 40x Response Bypass
-
 
 
 ###### byp4xx ⭐
@@ -794,20 +747,14 @@ Go tool that scans a list of 403 URLs and tries common bypass techniques to reve
 
 
 
-
-
-
 ## Bypass, Auth & Misconfiguration
-
 
 
 
 #### Authentication & Sessions
 
 
-
 ##### JWT Testing
-
 
 
 ###### jwt_tool ⭐
@@ -858,9 +805,7 @@ Burp Suite tab extension that decodes, validates, and brute-forces JWT signature
 #### Server-Side Request Forgery (SSRF)
 
 
-
 ##### SSRF Exploitation
-
 
 
 ###### SSRFmap
@@ -896,7 +841,6 @@ Generates Gopher payloads to attack MySQL, Redis, SMTP, and more from SSRF-capab
 ##### OAST Callback Platforms
 
 
-
 ###### interactsh ⭐
 
 Open-source Out-of-Band interaction server with client that catches DNS/HTTP/SMTP callbacks for SSRF and OAST.
@@ -915,9 +859,7 @@ Open-source Out-of-Band interaction server with client that catches DNS/HTTP/SMT
 #### Desync & Request Smuggling
 
 
-
 ##### HTTP Request Smuggling
-
 
 
 ###### smuggler ⭐
@@ -953,9 +895,7 @@ Official PortSwigger extension automating CL.TE / TE.CL / TE.TE smuggling detect
 #### Transport & mTLS Security
 
 
-
 ##### TLS / Certificate Auditing
-
 
 
 ###### testssl.sh ⭐
@@ -991,9 +931,7 @@ Fast Python TLS scanner analyzing SSL configs, supported ciphers, and certificat
 #### Security Headers & CSP
 
 
-
 ##### CSP Analysis
-
 
 
 ###### CSP Evaluator ⭐
@@ -1012,7 +950,6 @@ Google's hosted query engine that flags weak Content-Security-Policy directives 
 
 
 ##### Response Header Auditing
-
 
 
 ###### SecurityHeaders.com ⭐
@@ -1058,8 +995,6 @@ ProjectDiscovery's fast HTTP toolkit that fingerprints hosts, technologies, stat
 **URL:** https://github.com/projectdiscovery/httpx
 
 **Alternatives:** headers.dev, SecurityHeaders.com
-
-
 
 
 

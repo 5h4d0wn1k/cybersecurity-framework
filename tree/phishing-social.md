@@ -6,7 +6,6 @@ Simulating the human factor: phishing campaigns, cloned logins, credential harve
 
 GoPhish ⭐
 
-
 #### GoPhish ⭐
 
 Open-source, self-hosted campaign engine: compose email templates, landing pages, target groups, and SMTP profiles, then track opens, clicks, and submitted credentials per recipient via web UI and REST API.
@@ -70,7 +69,6 @@ Hard-gated social-engineering & OSINT awareness lab — campaign planning, prete
 #### Adversary-in-the-Middle Simulation
 
 
-
 ##### Evilginx2 ⭐
 
 Go-based reverse-proxy that fronts a real site over a domain you control, captures post-login session cookies, and demonstrates why legacy 2FA alone does not protect a session. The reference tool for authorized MFA-phishing and passkey-migration exercises.
@@ -117,7 +115,6 @@ Combines the Gophish campaign engine with an evilginx2-class reverse proxy in on
 
 
 #### Social Engineering Toolkits
-
 
 
 ##### Social-Engineer Toolkit (SET) ⭐
@@ -168,7 +165,6 @@ Rogue-access-point toolkit that drives nearby clients to a captive-portal page t
 ##### Credential-Harvesting Labs (Authorized Only)
 
 
-
 ###### zphisher ⭐
 
 Automated login-page cloning kit with 30+ ready templates, served over localhost/cloudflared/ngrok links with submissions logged locally. Widely used for building credential-phishing awareness demos — strictly in authorized labs or against your own organization.
@@ -202,7 +198,6 @@ Flask/Jinja2 framework serving cloned multi-step login pages (username → passw
 #### Campaign Content & Email Generation
 
 
-
 ##### PhishMailer ⭐
 
 Generates realistic HTML and plain-text email messages with attachments for in-house phishing simulations, including per-recipient personalization and SMTP sending. Fills the content-creation step of authorized awareness campaigns.
@@ -219,13 +214,9 @@ Generates realistic HTML and plain-text email messages with attachments for in-h
 
 
 
-
-
-
 ## Email Spoofing & DMARC Testing
 
 MXToolbox ⭐
-
 
 #### MXToolbox ⭐
 
@@ -273,7 +264,6 @@ Generates a test address and scores an actual emailed message against SPF, DKIM,
 
 
 #### SPF/DKIM/DMARC Deployment Checkers
-
 
 
 ##### dmarcian ⭐
@@ -324,7 +314,6 @@ Free web validator that checks a public DKIM record for a given domain and selec
 #### Header Analysis & Spoofed-Sender Behavior
 
 
-
 ##### Google Message Header Analyzer ⭐
 
 Google's free raw-header decoder that maps each Received hop, SPF/DKIM/DMARC verdict, and authentication results into a consumable timeline — great for teaching how spoofed look-alikes get flagged (or slip through).
@@ -356,13 +345,9 @@ Free Microsoft header decoder that parses authentication results (SPF/DKIM/DMARC
 
 
 
-
-
-
 ## Click Tracking & Phishing Forensics
 
 Canarytokens ⭐
-
 
 #### Canarytokens ⭐
 
@@ -395,7 +380,6 @@ Web-based phishing analysis workspace (with a Chrome extension) that decodes ema
 
 
 #### URL & Reputation Scanners
-
 
 
 ##### urlscan.io ⭐
@@ -446,7 +430,6 @@ Bolster's AI URL scanner that renders pages in isolation and classifies phishing
 #### Phishing Domain Detectors
 
 
-
 ##### PhishTank ⭐
 
 Community-run phishing URL database (operated by Cisco Talos) you can query to see whether a domain/URL is already classified as phishing, and where defenders and vendors submit new sightings.
@@ -495,7 +478,6 @@ Open-source service (client + self-hosted node) that clusters phishing pages by 
 ##### Blocklists & Indicator Feeds
 
 
-
 ###### URLhaus ⭐
 
 abuse.ch's malware-URL sharing platform that tracks URLs used for phishing, drive-by downloads, and C2, with free API and hourly CSV/JSON feeds for defensive enrichment.
@@ -542,13 +524,9 @@ Google's Safe Browsing status checker that reveals whether a given web property 
 
 
 
-
-
-
 ## Awareness Training & User Reporting
 
 KnowBe4 ⭐
-
 
 #### KnowBe4 ⭐
 
@@ -598,7 +576,6 @@ Commercial phishing-defense platform that mixes simulated phishing, template man
 #### Employee Reporting Channels
 
 
-
 ##### Microsoft 365 Report Message Add-in ⭐
 
 Free Microsoft add-in for Outlook/OWA that gives users a 'Report' button to flag phishing, junk, or not-junk straight to Microsoft and (with a user-reporting policy) to your security team's mailbox.
@@ -632,7 +609,6 @@ Outlook/heb browser reporting add-in that forwards a reported email, with attach
 #### Training Content & Tabletop Aids
 
 
-
 ##### SANS OUCH! Newsletter ⭐
 
 Free monthly, non-technical security awareness newsletter from SANS covering phishing, social engineering, and reporting habits; can be licensed for redistribution to staff and reused as tabletop discussion material.
@@ -661,8 +637,6 @@ Free interactive quiz from Jigsaw by Google that walks participants through tric
 **URL:** https://phishingquiz.withgoogle.com/
 
 **Alternatives:** sans ouch
-
-
 
 
 

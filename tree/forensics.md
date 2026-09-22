@@ -6,9 +6,7 @@ Analyze memory, disk, carved files, artifacts, and timelines from your own syste
 
 
 
-
 #### Command-Line Imagers
-
 
 
 ##### dd ⭐
@@ -59,7 +57,6 @@ Forensic fork of GNU dd that adds on-the-fly hashing, split output, pattern wipi
 #### GUI Imagers
 
 
-
 ##### FTK Imager ⭐
 
 Exterro's free, widely-used acquisition and preview tool: images drives/memory to raw, E01, and AFF formats, computes hashes, and mounts images for instant browsing.
@@ -91,11 +88,7 @@ Linux GUI forensic imager producing flat (dd), EWF (E01), and AFF images with mu
 
 
 
-
-
-
 ## Collection, Carving & Data Recovery
-
 
 
 
@@ -115,7 +108,6 @@ Full DFIR workstation — disk/memory/log/pcap/registry/browser/email parsing, s
 
 
 #### Fast Collection & RAM Capture
-
 
 
 ##### KAPE ⭐
@@ -151,7 +143,6 @@ Free Windows memory acquisition tool that dumps physical RAM to raw .DMP files w
 #### Filesystem Analysis Engines
 
 
-
 ##### The Sleuth Kit ⭐
 
 Command-line suite for raw/EWF images: mmls for partition layout, fls/icat to list and extract inodes, istat for metadata, and tsk_recover for recovery — the engine underneath Autopsy.
@@ -183,7 +174,6 @@ GUI platform built on The Sleuth Kit: opens images and live drives, recovers del
 
 
 #### File Carving & Recovery
-
 
 
 ##### foremost ⭐
@@ -234,7 +224,6 @@ Signature-based recovery of 440+ file formats plus TestDisk for partition-table 
 #### Feature & Digital-Object Extraction
 
 
-
 ##### bulk_extractor ⭐
 
 Scans any input byte-by-byte and extracts emails, URLs, credit-card numbers, JPEGs, and JSON to feature files — recursively decoding compressed or encoded blocks without parsing the filesystem.
@@ -251,20 +240,14 @@ Scans any input byte-by-byte and extracts emails, URLs, credit-card numbers, JPE
 
 
 
-
-
-
 ## Memory Forensics
-
 
 
 
 #### Analysis Frameworks
 
 
-
 ##### Standard CLI Frameworks
-
 
 
 ###### Volatility 3 ⭐
@@ -315,7 +298,6 @@ Google-origin memory forensics framework born from Volatility during the 2.x era
 ##### Live Mount & GUI Alternatives
 
 
-
 ###### MemProcFS ⭐
 
 Mounts a memory dump or live target (PCILeech FPGA/LeechAgent) as a virtual filesystem of processes, registry, and artifacts, with a batch forensic mode and YARA scanning.
@@ -349,7 +331,6 @@ Mandiant's free endpoint and memory investigation GUI: collects a volatile data 
 #### Quick String Hunts
 
 
-
 ##### strings ⭐
 
 GNU binutils classic that extracts printable ASCII/Unicode sequences from a raw memory dump — still the fastest way to spot C2 URLs, commands, and keys before the framework work.
@@ -366,16 +347,11 @@ GNU binutils classic that extracts printable ASCII/Unicode sequences from a raw 
 
 
 
-
-
-
 ## Log, Timeline & Windows Artifact Analysis
 
 
 
-
 #### Windows Artifact Parsers
-
 
 
 ##### Eric Zimmerman's Tools ⭐
@@ -411,9 +387,7 @@ Eric Zimmerman's direct EVTX event-log parser turning .evtx databases into CSV/J
 #### Event-Log Hunting
 
 
-
 ##### Fast EVTX Detection Engines
-
 
 
 ###### Hayabusa ⭐
@@ -449,7 +423,6 @@ Python-based EVTX analysis tool feeding exported Windows event logs through thre
 #### Timeline & Super-Timelines
 
 
-
 ##### plaso / log2timeline ⭐
 
 log2timeline extracts timestamped events (filesystem, registry, EVTX, browser, application logs) from an image or mount point into a Plaso storage file; psort turns it into a filtered super-timeline.
@@ -481,16 +454,11 @@ Eric Zimmerman's high-performance CSV timeline viewer with filters, bookmarks, a
 
 
 
-
-
-
 ## Browser & Internet Artifacts
 
 
 
-
 #### History Database Decoders
-
 
 
 ##### Hindsight ⭐
@@ -524,7 +492,6 @@ Full-featured GUI for reading and querying SQLite databases — the manual backs
 
 
 #### History & Cache Viewers
-
 
 
 ##### BrowserHistoryViewer ⭐
@@ -585,8 +552,6 @@ NirSoft Chrome cache reader that lists files stored in the Cache/Cache_Data fold
 **URL:** https://www.nirsoft.net/utils/chrome_cache_view.html
 
 **Alternatives:** browsinghistoryview
-
-
 
 
 

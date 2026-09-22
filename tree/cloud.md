@@ -6,7 +6,6 @@ Posture audits, scoped offense, and public-bucket checks across AWS, Azure, and 
 
 
 
-
 #### cloudpwn ◆ by 5h4d0wn1k
 
 Cloud & container penetration suite — AWS/GCP/Azure enumeration, S3, docker leaks, k8s secrets, terraform audit, vault, CSPM.
@@ -38,7 +37,6 @@ Cross-cloud identity federation auditor — Golden/Silver SAML, OAuth client-ID 
 
 
 #### Config & Compliance Auditors
-
 
 
 ##### Prowler ⭐
@@ -104,9 +102,7 @@ Run SQL queries over live AWS, Azure, GCP, and 200+ other APIs, then reuse the s
 #### Offensive Validation (Scoped Labs)
 
 
-
 ##### Exploitation Frameworks
-
 
 
 ###### Pacu ⭐
@@ -140,16 +136,11 @@ Bishop Fox's situational-awareness enumerator maps exploitable attack paths acro
 
 
 
-
-
-
 ## Amazon Web Services
 
 
 
-
 #### Audit & Compliance Posture
-
 
 
 ##### Prowler (AWS) ⭐
@@ -215,7 +206,6 @@ The built-in `aws` CLI plus shell one-liners and jq pipelines for service invent
 #### IAM & Permission Mapping
 
 
-
 ##### PMapper ⭐
 
 NCC Group's Principal Mapper builds a graph of IAM users/groups/roles and their effective permissions, then computes shortest privilege-escalation and takeover paths.
@@ -264,7 +254,6 @@ Collects and queries AWS IAM policy statements to surface users and roles holdin
 #### Object Storage Misconfiguration
 
 
-
 ##### S3Scanner ⭐
 
 Scans lists of bucket names across AWS and S3-compatible stores (GCP, DigitalOcean, Linode, Scaleway) for existence, tests every permission path for misconfigurations, and can enumerate or dump objects.
@@ -281,16 +270,11 @@ Scans lists of bucket names across AWS and S3-compatible stores (GCP, DigitalOce
 
 
 
-
-
-
 ## Microsoft Azure
 
 
 
-
 #### Benchmarks & Threat Research
-
 
 
 ##### Microsoft Cloud Security Benchmark (docs) ⭐
@@ -326,7 +310,6 @@ MSTIC's community threat matrix documenting Azure/AWS/GCP attack vectors (reconn
 #### Audit & Compliance Posture
 
 
-
 ##### Prowler (Azure) ⭐
 
 Prowler pinned to Azure (`-p azure --az-cli-auth`): 100+ read-only checks over Entra ID, subscriptions, storage, key vault, and network config against CIS Microsoft Azure 1.x/2.x.
@@ -358,7 +341,6 @@ Scout Suite's Azure provider: one-command dump of subscription posture (ARM reso
 
 
 #### Recon & Post-Exploitation
-
 
 
 ##### MicroBurst ⭐
@@ -407,16 +389,11 @@ NetSPI's unauthenticated reconnaissance tool probes name permutations across App
 
 
 
-
-
-
 ## Google Cloud Platform
 
 
 
-
 #### Audit & Compliance Posture
-
 
 
 ##### Scout Suite (GCP) ⭐
@@ -482,7 +459,6 @@ The `gcloud` CLI plus `gcloud asset`, IAM recommender, and `gcloud projects get-
 #### Recon & Privilege Escalation
 
 
-
 ##### gcp-scanner ⭐
 
 Google's scanner determines what a compromised credential can reach across GCE, GCS, GKE, Cloud SQL, BigQuery, KMS, and more, pulling from VM metadata, SA keys, or OAuth tokens.
@@ -531,7 +507,6 @@ Rhino's documented GCP IAM privesc methods plus a scanner (enumerate_member_perm
 #### Public Storage & Bucket Scan
 
 
-
 ##### GCPBucketBrute ⭐
 
 Enumerates Google Storage buckets from keyword permutations and reports per-bucket access, flagging public, writable, and privilege-escalation-prone (storage.buckets.setIamPolicy) buckets.
@@ -548,16 +523,11 @@ Enumerates Google Storage buckets from keyword permutations and reports per-buck
 
 
 
-
-
-
 ## IaC & Container Misconfiguration
 
 
 
-
 #### Terraform & IaC Scanners
-
 
 
 ##### Checkov ⭐
@@ -608,7 +578,6 @@ Tenable's Rego-policy IaC scanner for Terraform, CloudFormation, ARM, K8s, Helm,
 #### CloudFormation Policy
 
 
-
 ##### cfn-guard ⭐
 
 AWS's official CloudFormation policy-as-code tool: validates templates and yes, live stacks, against declarative rules written in a purpose-built Guard DSL; ships AWS managed rule collections.
@@ -640,7 +609,6 @@ Stelligent's rule-based CloudFormation linter that flags over-permissive IAM wil
 
 
 #### Kubernetes & Helm
-
 
 
 ##### kube-bench ⭐
@@ -691,7 +659,6 @@ Checkmarx's open-source IaC scanner (Keeping Infrastructure as Code Secure) runn
 #### Container Images & Registries
 
 
-
 ##### Trivy ⭐
 
 Aqua's all-in-one scanner: OS/library package CVEs in images and filesystems, SBOM generation, IaC misconfigs (absorbed tfsec), Kubernetes scanning, and registry CI — one binary, zero daemon.
@@ -705,8 +672,6 @@ Aqua's all-in-one scanner: OS/library package CVEs in images and filesystems, SB
 **URL:** https://github.com/aquasecurity/trivy
 
 **Alternatives:** Grype + Syft, Checkov
-
-
 
 
 

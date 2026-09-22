@@ -18,6 +18,17 @@ You will receive an acknowledgement within 72 hours and an update as the issue
 is triaged. We follow **responsible disclosure**: a fix is published before or
 together with the public announcement.
 
+## Disclosure timeline
+
+| Step | Target |
+|------|--------|
+| Acknowledgement | within 72 hours of the report |
+| Triage (reproduction + severity) | report status updated within 5 business days |
+| Fix + coordinated release | before or together with a public advisory |
+
+If you reported a reproducible issue and it reaches 90 days unremediated, you are
+free to disclose publicly after that point with acknowledgement of this project.
+
 ## Scope
 
 In scope: `docs/index.html`, `scripts/build.py`, `docs/data/*`, workflows, docs.

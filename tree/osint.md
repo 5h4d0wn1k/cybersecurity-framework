@@ -6,9 +6,7 @@ Passive intelligence on people, exposed infrastructure, and document metadata �
 
 
 
-
 #### Username Lookup
-
 
 
 ##### Sherlock ⭐
@@ -74,9 +72,7 @@ A community-maintained dataset of 700+ sites with exact fingerprints (URI patter
 #### Email Addresses
 
 
-
 ##### Breach Checkers
-
 
 
 ###### HaveIBeenPwned ⭐
@@ -127,7 +123,6 @@ Commercial breach aggregator with billions of entries supporting email, username
 ##### Registration Checkers
 
 
-
 ###### Holehe ⭐
 
 Checks which 120+ sites an email is registered on by replaying password-recovery flows without mailing the target, so the address is never alerted.
@@ -161,7 +156,6 @@ Hosted API that scores email reputation, flags breach exposure and disposable pr
 ##### Domain Harvesting
 
 
-
 ###### theHarvester ⭐
 
 Passive harvester of emails, employee names, subdomains, and reported API keys for a domain across many open sources; the reference domain reconnaissance CLI.
@@ -178,7 +172,6 @@ Passive harvester of emails, employee names, subdomains, and reported API keys f
 
 
 #### Phone Numbers
-
 
 
 ##### PhoneInfoga ⭐
@@ -199,9 +192,7 @@ Phone-number OSINT framework that attributes country, area, carrier, and line ty
 #### Social Media Profiles
 
 
-
 ##### Instagram
-
 
 
 ###### Instaloader ⭐
@@ -237,7 +228,6 @@ Interactive shell that pulls public Instagram profile info, captions, followers,
 ##### Multi-Platform
 
 
-
 ###### snscrape ⭐
 
 Python library/CLI that scrapes public posts and profiles to JSONL from several platforms; X/Twitter and Reddit backends are dead behind logins, but Telegram, Weibo, and some Mastodon instances still work.
@@ -254,16 +244,11 @@ Python library/CLI that scrapes public posts and profiles to JSONL from several 
 
 
 
-
-
-
 ## Metadata & File Forensics
 
 
 
-
 #### Image & EXIF
-
 
 
 ##### ExifTool ⭐
@@ -299,7 +284,6 @@ Web tool that runs Error Level Analysis (ELA), panel scans, EXIF review, and JPE
 #### Document Metadata
 
 
-
 ##### Metagoofil ⭐
 
 Dork-driven harvester that finds indexed documents (.pdf, .docx, .xlsx) for a domain and downloads them for metadata stripping; the maintained opsdisk fork ships on Kali.
@@ -333,7 +317,6 @@ Windows GUI (C# with SQL Server backend) that fingerprints documents across sear
 #### File Reputation
 
 
-
 ##### VirusTotal ⭐
 
 Industry-standard crowdsourced engine for hashes, samples, URLs, and IP/domain reputation with 90+ AV engines, plus passive DNS and threat-signal context.
@@ -350,16 +333,11 @@ Industry-standard crowdsourced engine for hashes, samples, URLs, and IP/domain r
 
 
 
-
-
-
 ## Geolocation & Mapping
 
 
 
-
 #### IP Location
-
 
 
 ##### ipinfo.io ⭐
@@ -395,7 +373,6 @@ Free IP geolocation API returning country, city, ISP, timezone, and currency for
 #### Map & Geo Search
 
 
-
 ##### Google Maps ⭐
 
 Global mapping, Street View, and satellite imagery search; the core visual geolocation and place-lookup surface for OSINT.
@@ -427,16 +404,11 @@ Alternative globe with strong coverage of Eastern Europe, Russia, and CIS region
 
 
 
-
-
-
 ## Domain & IP Infrastructure
 
 
 
-
 #### IP & Attack Surface
-
 
 
 ##### Shodan ⭐
@@ -487,7 +459,6 @@ Scanning platform over billions of indexed hosts supporting IPv4/IPv6, full resp
 #### DNS & Subdomains
 
 
-
 ##### DNSDumpster ⭐
 
 One-page passive DNS mapping tool that enumerates subdomains, MX/TXT/SPF records, and hosts onto an interactive network map for a domain.
@@ -521,7 +492,6 @@ Commercial passive DNS and subdomain intelligence with historical DNS records, c
 #### Certificate Transparency
 
 
-
 ##### crt.sh ⭐
 
 Open certificate-transparency log search; returns every issued certificate — and therefore every hostname — for a domain, sorted by issue date.
@@ -538,7 +508,6 @@ Open certificate-transparency log search; returns every issued certificate — a
 
 
 #### WHOIS & Routing
-
 
 
 ##### Hurricane Electric BGP ⭐
@@ -574,7 +543,6 @@ RIPE NCC's data API for IP/ASN attribution, route history, geolocation, and abus
 #### Domain History
 
 
-
 ##### DomainTools ⭐
 
 Commercial WHOIS and domain-intel suite (WhoIs, reverse whois, registration history, DNSHistory, Iris) maintained for 20+ years; priced via API/subscription tiers.
@@ -591,16 +559,11 @@ Commercial WHOIS and domain-intel suite (WhoIs, reverse whois, registration hist
 
 
 
-
-
-
 ## Business & Corporate OSINT
 
 
 
-
 #### Company Registries
-
 
 
 ##### OpenCorporates ⭐
@@ -651,7 +614,6 @@ US SEC's full-text filings database (10-K, 8-K, S-1, proxies) exposing financial
 #### Company Profiles
 
 
-
 ##### Crunchbase ⭐
 
 Venture and funding profile database with financing rounds, acquisitions, growth-stage signals, and key-people digests for startups and private companies.
@@ -668,16 +630,11 @@ Venture and funding profile database with financing rounds, acquisitions, growth
 
 
 
-
-
-
 ## Code & Developer OSINT
 
 
 
-
 #### Code Search Engines
-
 
 
 ##### GitHub Code Search ⭐
@@ -713,7 +670,6 @@ Public-code search engine with regex, literal, and symbol-aware queries across o
 #### Secret & Dork Hunting
 
 
-
 ##### GitDorker ⭐
 
 Automates GitHub 'dork' queries from a 3000+-entry dork list through the search APIs to surface exposed files, keys, and configs in public repositories.
@@ -745,16 +701,11 @@ Fast secret-scanner that extracts API tokens and credentials from git histories 
 
 
 
-
-
-
 ## Crypto & Blockchain
 
 
 
-
 #### Block Explorers
-
 
 
 ##### Blockchain.com Explorer ⭐
@@ -790,7 +741,6 @@ Reference Ethereum block explorer with address, token, contract-code, and event-
 #### Wallet & Abuse Databases
 
 
-
 ##### WalletExplorer ⭐
 
 Clusters bitcoin addresses into services where possible, letting you see a wallet's whole activity — including market aggregation endpoints.
@@ -822,16 +772,11 @@ Public API and searchable database of bitcoin addresses reported for scams and f
 
 
 
-
-
-
 ## Historical & Archived Content
 
 
 
-
 #### Web Archives
-
 
 
 ##### Wayback Machine ⭐
@@ -882,7 +827,6 @@ Independent web snapshot service that mirrors pages on demand and blocks most cr
 #### Web Corpora
 
 
-
 ##### Common Crawl ⭐
 
 Petabyte-scale open crawl corpus refreshed monthly (WARC/WAT/WET files) with a URL index API; reconstruct what a site published even without per-page snapshots.
@@ -899,16 +843,11 @@ Petabyte-scale open crawl corpus refreshed monthly (WARC/WAT/WET files) with a U
 
 
 
-
-
-
 ## Dark Web & Breach Intelligence
 
 
 
-
 #### Onion Search & Directories
-
 
 
 ##### Ahmia ⭐
@@ -944,7 +883,6 @@ Trusted, hand-verified directory of live .onion marketplaces and services with u
 #### Breach Data Aggregators
 
 
-
 ##### DeHashed ⭐
 
 Commercial breach database covering email, username, phone, IP, and password hashes with fuzzy search and cross-referencing across billions of records; subscription required for full records.
@@ -963,7 +901,6 @@ Commercial breach database covering email, username, phone, IP, and password has
 #### Paste Search & Monitoring
 
 
-
 ##### Pastebin Search ⭐
 
 Pastebin's own search across public pastes, combinable with search engines via site: dorks; useful for monitoring dropped credentials and dumps.
@@ -980,16 +917,11 @@ Pastebin's own search across public pastes, combinable with search engines via s
 
 
 
-
-
-
 ## Automation & Platforms
 
 
 
-
 #### Correlation & Automation
-
 
 
 ##### SpiderFoot ⭐
@@ -1025,7 +957,6 @@ Commercial graph-based link-analysis platform (desktop and browser) whose transf
 #### Search Dork Reference
 
 
-
 ##### Google Hacking Database (GHDB) ⭐
 
 Canonical reference catalog of search-engine operators and example queries that surface exposed files, login panels, and misconfigurations in public indexes.
@@ -1039,8 +970,6 @@ Canonical reference catalog of search-engine operators and example queries that 
 **URL:** https://www.exploit-db.com/google-hacking-database
 
 **Alternatives:** gitdorker
-
-
 
 
 

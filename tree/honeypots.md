@@ -6,7 +6,6 @@ Deception for defenders: fake services, canaries, honeynets, and tripwires place
 
 
 
-
 #### honeynet ◆ by 5h4d0wn1k
 
 Honeypot farm + deception grid — multi-protocol honeypots, attacker fingerprinting, dwell/risk scoring, quarantine.
@@ -23,7 +22,6 @@ Honeypot farm + deception grid — multi-protocol honeypots, attacker fingerprin
 
 
 #### All-in-One Platforms
-
 
 
 ##### T-Pot ⭐
@@ -74,7 +72,6 @@ Centralized server and web UI that deploys sensors (Cowrie, Dionaea, Conpot, Gla
 #### Sensor Orchestration & Event Transport
 
 
-
 ##### HPFeeds ⭐
 
 Honeynet Project's authenticated publish-subscribe protocol that ships JSON and binary honeypot events (dionaea.capture, cowrie.sessions, conpot.events) from sensors to collectors, MISP, ELK, and SIEMs.
@@ -106,20 +103,14 @@ Honeynet Project's custom Filebeat image for shipping T-Pot and honeypot JSON lo
 
 
 
-
-
-
 ## Network Service Honeypots
-
 
 
 
 #### SSH & Telnet
 
 
-
 ##### Medium-interaction Fake-shell emulators
-
 
 
 ###### Cowrie ⭐
@@ -170,7 +161,6 @@ Low-code Go deception runtime (a T-Pot 24.04 component) that serves YAML-defined
 ##### Lightweight telemetry decoys
 
 
-
 ###### sshesame ⭐
 
 Go-based fake SSH server that lets any login through, never executes anything, and logs channels, requests, commands, and port-forward activity as JSON.
@@ -202,7 +192,6 @@ C-based fake sshd (droberson) that accepts connections and logs IP, username, an
 
 
 #### SMB, FTP & File Services
-
 
 
 ##### Dionaea ⭐
@@ -238,7 +227,6 @@ Python low-to-medium interaction honeypot (fooSpider/Twisted) with plugins for S
 #### Web Application
 
 
-
 ##### Snare + TANNER ⭐
 
 Glastopf's successor: SNARE clones real web pages into sensor traps and forwards every request to TANNER, a central classification service that evaluates the attack and decides the reply.
@@ -270,7 +258,6 @@ Honeynet Project's original web-application honeypot emulating vulnerability typ
 
 
 #### Multi-protocol & Lightweight Sensors
-
 
 
 ##### glutton ⭐
@@ -319,7 +306,6 @@ Classic low-interaction daemon (Niels Provos) that fabricates thousands of virtu
 
 
 #### ICS, OT & Device Deception
-
 
 
 ##### Conpot ⭐
@@ -383,16 +369,11 @@ Honeynet Project's IP-camera honeypot: lures attackers with a fake webcam admin 
 
 
 
-
-
-
 ## Email, DNS & Communication Decoys
 
 
 
-
 #### SMTP & Email
-
 
 
 ##### Mailoney ⭐
@@ -443,7 +424,6 @@ Avast's SMTP honeypot built on the Salmon mail server with SMTP AUTH support, ex
 #### DNS Decoys
 
 
-
 ##### dns-honeypot ⭐
 
 Simple low-interaction DNS honeypot in Python/Twisted that answers queries on 53/5353 and logs every lookup, surfacing scan and exfil-style DNS traffic.
@@ -475,13 +455,9 @@ Regular-expression based Python DNS server that resolves against a config or pro
 
 
 
-
-
-
 ## Tokens, Canaries & Tripwires
 
 Canarytokens ⭐
-
 
 #### Canarytokens ⭐
 
@@ -514,16 +490,11 @@ Thinkst's open-source multi-protocol honeypot daemon (SSH, telnet, HTTP, FTP, SN
 
 
 
-
-
-
 ## Monitoring, Logging & Analysis
 
 
 
-
 #### Attack Analysis & Visualization
-
 
 
 ##### ochi ⭐
@@ -559,7 +530,6 @@ Threat-intel platform for T-Pot deployments that ingests honeypot events via Ela
 #### Vulnerability-decoy Sinks
 
 
-
 ##### Log4Pot ⭐
 
 Low-interaction honeypot for the Log4Shell (CVE-2021-44228) family: detects exploitation in request lines and headers, deobfuscates JNDI payloads, and recursively downloads exploit payloads.
@@ -593,7 +563,6 @@ Go honeypot that runs a fake Minecraft server waiting to be hit by Log4Shell exp
 #### Honeypot Scouting & QA
 
 
-
 ##### honeyscanner ⭐
 
 Honeynet Project's vulnerability analyzer that automatically attacks a given honeypot to determine whether it is vulnerable to specific attack families (DDoS, sploit, fuzz, ssh).
@@ -622,8 +591,6 @@ Honeynet Project's Honeypot Checker (GSoC 2018): validates honeypot containers a
 **URL:** https://github.com/honeynet/checkpot
 
 **Alternatives:** honeyscanner
-
-
 
 
 

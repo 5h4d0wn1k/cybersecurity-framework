@@ -1,0 +1,22 @@
+{
+  "name": "CyberOps Framework",
+  "short_name": "CyberOps",
+  "description": "Interactive tree-map of the entire cybersecurity landscape: 27 domains, 776 categories, 1067 curated offensive and defensive security tools.",
+  "id": "https://5h4d0wn1k.github.io/cybersecurity-framework/",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#070b13",
+  "theme_color": "#070b13",
+  "categories": ["education", "security", "productivity"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "og.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

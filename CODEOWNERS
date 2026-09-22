@@ -1,0 +1,5 @@
+# Default code owners — all changes reviewed by the maintainer
+* @5h4d0wn1k
+
+# Data files have a dedicated owner scope
+tree/*.json @5h4d0wn1k

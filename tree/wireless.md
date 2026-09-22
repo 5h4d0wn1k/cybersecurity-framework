@@ -6,7 +6,6 @@ WiFi capture and cracking, PMKID and precomputed tables, RF spectrum analysis, W
 
 airmon-ng ⭐
 
-
 #### airmon-ng ⭐
 
 Script from the aircrack-ng suite that flips a supported chipset into monitor mode (and back), kills interfering processes, and reports adapter capabilities.
@@ -55,7 +54,6 @@ Spoofs a wireless interface's MAC address so lab captures originate from an anon
 #### Capture Verification
 
 
-
 ##### tcpdump ⭐
 
 Classic packet capture tool; on a monitor interface it proves the card actually sees 802.11 beacons, probe requests, and management frames.
@@ -74,7 +72,6 @@ Classic packet capture tool; on a monitor interface it proves the card actually 
 #### WIDS & Wireless Defense
 
 
-
 ##### airguard ◆ by 5h4d0wn1k
 
 Wireless defense & monitoring suite — WIDS sensor, deauth/evil-twin/rogue-AP detection, beacon anomaly scan, WPA3 survey.
@@ -91,13 +88,9 @@ Wireless defense & monitoring suite — WIDS sensor, deauth/evil-twin/rogue-AP d
 
 
 
-
-
-
 ## Probe & Access-Point Discovery
 
 airodump-ng ⭐
-
 
 #### airodump-ng ⭐
 
@@ -147,7 +140,6 @@ Byte-exact 802.11/BLE frame crafting & parsing framework; offline-only and safet
 #### Passive Surveys & Packet Dissection
 
 
-
 ##### Kismet ⭐
 
 Multi-protocol passive detector with server + web UI; tracks 802.11, Bluetooth, and SDR sources and logs probe traffic for long-running surveys.
@@ -179,16 +171,11 @@ Universal dissector with deep 802.11 and EAPOL support; supply the PMK to decryp
 
 
 
-
-
-
 ## WPA2 Handshake & PSK Testing
 
 
 
-
 #### Forcing & Capturing Handshakes
-
 
 
 ##### wifite2 ⭐
@@ -207,7 +194,6 @@ Automated lab auditor: scans, lets you pick a target you own, then drives deauth
 
 
 ##### Deauthentication & Frame Injection
-
 
 
 ###### aireplay-ng ⭐
@@ -243,7 +229,6 @@ Multi-purpose 802.11 tool with aggressive deauthentication, probe-testing, and f
 ##### PMKID Capture
 
 
-
 ###### hcxdumptool ⭐
 
 Raw PCAPNG capture of PMKID and EAPOL material using a single adapter; PMKID needs no connected client and no deauthentication.
@@ -277,7 +262,6 @@ Converts hcxdumptool PCAPNG captures into hashcat/john-ready hash formats (mode 
 #### Offline PSK Cracking
 
 
-
 ##### aircrack-ng ⭐
 
 The suite's cracking core validates WPA/WPA2 handshakes against wordlists (and PTW for WEP), verifying recovered keys against the captured material.
@@ -294,7 +278,6 @@ The suite's cracking core validates WPA/WPA2 handshakes against wordlists (and P
 
 
 ##### Wordlist & GPU Cracking
-
 
 
 ###### hashcat ⭐
@@ -330,7 +313,6 @@ Wordlist PSK verifier that confirms candidate passphrases against captured hands
 ##### PMK Precomputation
 
 
-
 ###### airolib-ng ⭐
 
 Builds precomputed PMK tables keyed by (ESSID, password) from wordlists and serves hashes to aircrack-ng for instant reuse.
@@ -362,11 +344,7 @@ cowpatty's companion that precomputes the per-ESSID PMK seed file from a wordlis
 
 
 
-
-
-
 ## WPS Auditing
-
 
 
 
@@ -386,7 +364,6 @@ Passive scanner for WPS-enabled access points: reports WPS state and lockout sta
 
 
 #### WPS PIN Bruteforce
-
 
 
 ##### Reaver ⭐
@@ -422,7 +399,6 @@ C reimplementation of the WPS PIN attack with more forgiving association handlin
 #### Pixie-Dust (Offline PIN Recovery)
 
 
-
 ##### pixiewps ⭐
 
 Offline WPS computation tool (R1/R2/RB) that takes the e-S1/e-S2 nonces captured by reaver/bully and recovers the PIN without brute force.
@@ -439,11 +415,7 @@ Offline WPS computation tool (R1/R2/RB) that takes the e-S1/e-S2 nonces captured
 
 
 
-
-
-
 ## Evil Twin & Rogue AP (Lab Only)
-
 
 
 
@@ -465,7 +437,6 @@ Creates 802.11 software access points from a monitor-mode card; the primitive be
 #### Rogue AP & Enterprise Credential Capture
 
 
-
 ##### hostapd-wpe ⭐
 
 Patched hostapd that adds WPA enterprise (PEAP/MSCHAPv2) credential capture for controlled authentication tests in your lab.
@@ -482,7 +453,6 @@ Patched hostapd that adds WPA enterprise (PEAP/MSCHAPv2) credential capture for 
 
 
 #### Automated Twins & Phishing Pages
-
 
 
 ##### wifiphisher ⭐
@@ -531,11 +501,7 @@ Targeted evil-twin and enterprise attack tool with WPA/WPA2 enterprise automatio
 
 
 
-
-
-
 ## Bluetooth & Bluetooth LE
-
 
 
 
@@ -555,7 +521,6 @@ Host-side network and monitoring framework whose BLE module runs recon, sniffs, 
 
 
 #### Sniffing, Capture & Injection
-
 
 
 ##### Ubertooth ⭐
@@ -591,7 +556,6 @@ Sniffs and interacts with BLE connections via nRF24-family USB dongles; supports
 #### Host Stack & GATT
 
 
-
 ##### BlueZ ⭐
 
 Linux's Bluetooth stack: bluetoothctl, btmon, hcitool, and gatttool expose controller state, HCI packets, and GATT services.
@@ -610,7 +574,6 @@ Linux's Bluetooth stack: bluetoothctl, btmon, hcitool, and gatttool expose contr
 #### Active Service Audit
 
 
-
 ##### bt_audit (BTSD) ⭐
 
 The BTSD Bluetooth audit suite: psm_scan maps L2CAP PSM services and rfcomm_scan enumerates RFCOMM channels on local or paired devices.
@@ -627,13 +590,9 @@ The BTSD Bluetooth audit suite: psm_scan maps L2CAP PSM services and rfcomm_scan
 
 
 
-
-
-
 ## RFID & NFC Testing
 
 Proxmark3 (Iceman) ⭐
-
 
 #### Proxmark3 (Iceman) ⭐
 
@@ -653,7 +612,6 @@ Proxmark3 hardware plus the Iceman project firmware: read, clone, and analyze lo
 #### NFC Tooling
 
 
-
 ##### libnfc ⭐
 
 Portable NFC library with CLI tools (nfc-list, nfc-read, nfc-mfclassic) for enumerating and reading tags through USB readers.
@@ -670,7 +628,6 @@ Portable NFC library with CLI tools (nfc-list, nfc-read, nfc-mfclassic) for enum
 
 
 #### MIFARE Classic Cracking
-
 
 
 ##### mfoc ⭐
@@ -704,13 +661,9 @@ MIFARE Classic dark-side attack tool that recovers keys on cards whose PRNG hand
 
 
 
-
-
-
 ## Software-Defined Radio
 
 RTL-SDR ⭐
-
 
 #### RTL-SDR ⭐
 
@@ -728,7 +681,6 @@ Cheap USB software-defined radio receiver: drivers plus rtl_test, rtl_fm, and rt
 
 
 #### Receivers & Tuning
-
 
 
 ##### gqrx ⭐
@@ -749,7 +701,6 @@ GNU Radio-based desktop receiver that demodulates and displays spectrum and wate
 #### Signal Analysis & Protocol Reverse
 
 
-
 ##### inspectrum ⭐
 
 Offline analysis of recorded IQ or audio: renders interactive water-falls to identify modulation, timing, and packet structure.
@@ -768,7 +719,6 @@ Offline analysis of recorded IQ or audio: renders interactive water-falls to ide
 #### Processing & Flowgraph Frameworks
 
 
-
 ##### GNU Radio ⭐
 
 Flow-graph framework for designing and running custom demodulators and decoders; the engine underneath gqrx and many SDR toolchains.
@@ -782,8 +732,6 @@ Flow-graph framework for designing and running custom demodulators and decoders;
 **URL:** https://github.com/gnuradio/gnuradio
 
 **Alternatives:** gqrx, inspectrum
-
-
 
 
 

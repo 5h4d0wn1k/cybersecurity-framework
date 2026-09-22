@@ -6,9 +6,7 @@ Audit, harden, and prove it: system security scans, compliance benchmarks, confi
 
 
 
-
 #### System Auditing & Compliance Scans
-
 
 
 ##### Lynis ⭐
@@ -74,7 +72,6 @@ Free CIS configuration guide for Ubuntu with scored and unscored hardening entri
 #### SELinux Policy & MAC Management
 
 
-
 ##### audit2allow ⭐
 
 Core utility from policycoreutils that converts SELinux AVC denials from the audit log into targeted allow or dontaudit policy modules.
@@ -123,9 +120,7 @@ The community-maintained reference policy source tree that generated distributio
 #### Network Services Configuration
 
 
-
 ##### Host Firewalls
-
 
 
 ###### ufw ⭐
@@ -176,7 +171,6 @@ Netfilter's modern packet-filtering framework with a single, scriptable ruleset 
 ##### SSH Hardening
 
 
-
 ###### ssh-audit ⭐
 
 Audits SSH server and client configuration end-to-end: grades every KEX, cipher, MAC, and host-key algorithm, flags weak or vulnerable combos, and ships per-distro hardening guides.
@@ -208,16 +202,11 @@ Reference hardening guide for sshd_config with Modern/Intermediate/MFA profiles 
 
 
 
-
-
-
 ## Windows Hardening
 
 
 
-
 #### Hardening Tools & Local Policy
-
 
 
 ##### HardeningKitty ⭐
@@ -253,7 +242,6 @@ Microsoft's local group-policy utility (shipped in the Security Compliance Toolk
 #### Windows Baseline Guidance
 
 
-
 ##### CIS Microsoft Windows Benchmark ⭐
 
 Free CIS configuration benchmark for Windows Server and client editions with scored and unscored hardening entries.
@@ -285,16 +273,11 @@ Microsoft's recommended security configuration settings curated from the Windows
 
 
 
-
-
-
 ## Network Infrastructure Hardening
 
 
 
-
 #### Vendor Device Hardening Guides
-
 
 
 ##### CIS Cisco IOS/XE Benchmark ⭐
@@ -330,7 +313,6 @@ RouterOS documentation covering access hardening, service lockdown, firewall fil
 #### Device Config Validation
 
 
-
 ##### Batfish ⭐
 
 Network configuration analyzer that parses real device configs and answers questions about reachability, ACLs, and announced routes without touching the network.
@@ -347,7 +329,6 @@ Network configuration analyzer that parses real device configs and answers quest
 
 
 #### TLS & Service Configuration Audit
-
 
 
 ##### testssl.sh ⭐
@@ -381,16 +362,11 @@ Lightweight TLS/SSL scanner that enumerates supported ciphers, protocols, and ce
 
 
 
-
-
-
 ## Containers & Kubernetes Hardening
 
 
 
-
 #### Image & Container Scanning
-
 
 
 ##### Trivy ⭐
@@ -409,7 +385,6 @@ Aqua's all-in-one scanner for OS packages, SBOMs, IaC misconfigs, and Kubernetes
 
 
 #### Manifest & Policy Linting
-
 
 
 ##### kube-linter ⭐
@@ -460,7 +435,6 @@ Risk analysis tool that scores Kubernetes resources on 10+ security criteria (pr
 #### Kubernetes CIS Benchmarking
 
 
-
 ##### kube-bench ⭐
 
 Aqua's CIS Kubernetes Benchmark checker: audits control plane, etcd, worker nodes, and RBAC against the official benchmark, runnable as a DaemonSet or binary.
@@ -494,7 +468,6 @@ ARMO's Kubernetes posture scanner covering NSA/CISA hardening guidance, MITRE AT
 #### Service Mesh & Network Policy
 
 
-
 ##### Istio ⭐
 
 Service mesh providing mTLS between workloads, authorization policies (peer/request authentication), and encrypted east-west traffic for zero-trust workload identity.
@@ -526,16 +499,11 @@ eBPF-based CNI that enforces identity-aware L3-L7 NetworkPolicies without sideca
 
 
 
-
-
-
 ## Cloud Configuration & Compliance
 
 
 
-
 #### Cloud CIS Benchmarks
-
 
 
 ##### CIS Cloud Benchmarks ⭐
@@ -554,7 +522,6 @@ Free CIS benchmark sets for AWS, Azure, and GCP covering IAM, storage, networkin
 
 
 #### Cloud Posture Scanning
-
 
 
 ##### Prowler ⭐
@@ -588,11 +555,7 @@ NCC Group's multi-cloud auditor pulls configuration from provider APIs and rende
 
 
 
-
-
-
 ## Compliance Benchmarks & Baseline Content
-
 
 
 
@@ -612,7 +575,6 @@ Zero-trust readiness engine — ZTA pillar scoring with evidence and multichanne
 
 
 #### Benchmark & Baseline Content
-
 
 
 ##### scap-security-guide ⭐
@@ -663,7 +625,6 @@ Browser database of the entire DISA Security Technical Implementation Guide set 
 #### Policy-as-Code Assessment
 
 
-
 ##### InSpec ⭐
 
 Chef's open-source compliance language that turns CIS/STIG baselines into executable profile code (many public profiles exist) and runs them over local and remote systems.
@@ -695,13 +656,9 @@ Commercial CIS scanner (SecureSuite membership) that turns CIS Benchmarks into a
 
 
 
-
-
-
 ## Automated Hardening & Configuration
 
 ansible-hardening ⭐
-
 
 #### ansible-hardening ⭐
 
@@ -744,8 +701,6 @@ EDR-lite host-hardening auditor — 0-100 score, persistence/service/patch/socke
 **URL:** https://github.com/5h4d0wn1k/endpointaegis
 
 **Alternatives:** Own tool — lab/authorized use only
-
-
 
 
 

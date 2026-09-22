@@ -6,9 +6,7 @@ Reverse, emulate, and attack embedded devices in your lab: firmware extraction a
 
 
 
-
 #### Extraction & Carving
-
 
 
 ##### binwalk ⭐
@@ -59,7 +57,6 @@ Bootloader utilities (mkimage, dumpimage, fw_printenv, fw_setenv, mkenvimage) th
 #### Root Filesystem Review
 
 
-
 ##### Firmwalker ⭐
 
 Bash script that greps an extracted or mounted filesystem for secrets: shadow/passwd, SSL keys and certs, config files, admin/password keywords, dropbear/ssh artifacts, and URLs.
@@ -108,9 +105,7 @@ Linux firmware-update framework (fwupdmgr/fwupdtool) that enumerates devices and
 #### Firmware Emulation & Dynamic Analysis
 
 
-
 ##### Automated Full-System Boot
-
 
 
 ###### FirmAE ⭐
@@ -146,7 +141,6 @@ Attify's one-command wrapper around Firmadyne that boots Linux router firmware i
 ##### QEMU Emulation Backends
 
 
-
 ###### QEMU ⭐
 
 Full-system and user-mode emulator covering ARM, MIPS, RISC-V, and more; boots extracted root filesystems end-to-end, and qemu-user builds run single cross-arch binaries, which every emulation framework sits on top of.
@@ -163,20 +157,14 @@ Full-system and user-mode emulator covering ARM, MIPS, RISC-V, and more; boots e
 
 
 
-
-
-
 ## Hardware Debug Ports, Flash & Fault Injection
-
 
 
 
 #### UART Console & Bus Sniffing
 
 
-
 ##### Logic Analyzers
-
 
 
 ###### PulseView / sigrok ⭐
@@ -227,7 +215,6 @@ Open-source serial multi-tool (current Bus Pirate 5): drives SPI/I2C/UART/1-Wire
 ##### Serial Terminals
 
 
-
 ###### minicom ⭐
 
 The classic serial terminal for UART consoles at arbitrary baud rates; the everyday tool for reaching a bootloader, root shell, or firmware-upgrade prompt over the debug UART.
@@ -259,7 +246,6 @@ Lightweight, scriptable serial terminal with freshline handling and a minimal co
 
 
 #### Flash Dumping & Imaging
-
 
 
 ##### flashrom ⭐
@@ -295,7 +281,6 @@ Five-dollar USB SPI/I2C/parallel programmer (and its clones) that flashrom drive
 #### JTAG / SWD Debug Interfaces
 
 
-
 ##### OpenOCD ⭐
 
 On-chip debugger for JTAG/SWD with a large catalog of CPU and flash targets, dozens of adapter drivers, and TCL scripting; halts CPUs, sets breakpoints, and reads back flash via the debug port.
@@ -327,7 +312,6 @@ Commercial debug-probe family with polished SWD/JTAG software, flash loaders acr
 
 
 #### Soldering & Rework
-
 
 
 ##### Pinecil ⭐
@@ -363,7 +347,6 @@ Self-contained desoldering gun that cleanly removes through-hole components and 
 #### Side-Channel & Fault Injection
 
 
-
 ##### ChipWhisperer ⭐
 
 Open-source, open-hardware lab for power/EM side-channel analysis and voltage/clock glitching: capture power traces, run correlation power analysis to recover keys, and glitch to skip checks (CW-Lite, CW-Husky).
@@ -395,11 +378,7 @@ Solder-free tag-connect breakout kit from TrueRandom that reroutes narrow-pitch 
 
 
 
-
-
-
 ## RF Protocol & Application Analysis
-
 
 
 
@@ -421,13 +400,10 @@ IoT/SCADA/embedded offensive framework — MQTT/CoAP/UPnP/Modbus/CAN/BLE/Zigbee/
 #### Link-Layer Radios (Z-Wave / Zigbee / BLE)
 
 
-
 ##### Z-Wave
 
 
-
 ###### Controller & Inspector
-
 
 
 ###### Z-Wave JS UI ⭐
@@ -448,7 +424,6 @@ Standalone web front-end (formerly Home Assistant's add-on) over node-zwave-js t
 ###### Protocol Stack Library
 
 
-
 ###### Z-Wave JS ⭐
 
 The core Node.js Z-Wave protocol stack powering Home Assistant and Z-Wave JS UI; parses command classes at a protocol level and is directly scriptable to send raw, non-standard frames to a device.
@@ -467,9 +442,7 @@ The core Node.js Z-Wave protocol stack powering Home Assistant and Z-Wave JS UI;
 ##### Zigbee / 802.15.4
 
 
-
 ###### Packet Injection & Replay
-
 
 
 ###### Killerbee ⭐
@@ -505,7 +478,6 @@ Bishop Fox's Zigbee pentest toolkit with a hardware setup around the RaspBee/Atm
 ###### Device Control & Emulation
 
 
-
 ###### zigbee2mqtt ⭐
 
 Bridges off-the-shelf Zigbee adapters instead of vendor hubs so devices are attached and controlled over plain MQTT; exposes the individual clusters/eps of devices, ideal for observing how 'dumb' devices really communicate.
@@ -524,9 +496,7 @@ Bridges off-the-shelf Zigbee adapters instead of vendor hubs so devices are atta
 ##### Bluetooth Low Energy
 
 
-
 ###### Scan & GATT Interaction
-
 
 
 ###### BetterCap (BLE modules) ⭐
@@ -562,7 +532,6 @@ Nordic's desktop/mobile app that scans BLE devices and browses GATT services, ch
 ###### Packet Sniffing
 
 
-
 ###### nRF Sniffer for Bluetooth LE ⭐
 
 Wireshark plug-in plus nRF52840 dongle firmware that decodes BLE advertising and data channels, with RSSI trackers; the de facto way to observe full BLE link-layer traffic, including encrypted sessions for offline analysis.
@@ -581,9 +550,7 @@ Wireshark plug-in plus nRF52840 dongle firmware that decodes BLE advertising and
 #### Application Layer (MQTT, Cloud & Companion Apps)
 
 
-
 ##### MQTT Broker Probing
-
 
 
 ###### mqtt-pwn ⭐
@@ -634,7 +601,6 @@ Cross-platform MQTT client with scripting and a clean multi-connection UI; handy
 ##### Consumer Cloud & Vendor Backend
 
 
-
 ###### tuya-convert ⭐
 
 Jailbreaks firmware-locked Tuya IoT devices (wall switches, bulbs) by MITM-ing their provisioning phase and flashing an open firmware over the air, removing vendor-cloud dependency for lab control and re-flashing.
@@ -666,7 +632,6 @@ Open-source firmware for ESP8266/ESP32 smart-home hardware that replaces vendor 
 
 
 ##### Mobile Companion App Analysis
-
 
 
 ###### Frida ⭐
@@ -715,16 +680,11 @@ Dex-to-Java decompiler with a GUI and CLI that turns a companion APK into readab
 
 
 
-
-
-
 ## Internet-Scale Device Discovery
 
 
 
-
 #### IoT & Service Search Engines
-
 
 
 ##### Shodan ⭐
@@ -758,16 +718,11 @@ Internet-wide scan and certificate transparency search (sweeping TLS/SSH/HTTP ba
 
 
 
-
-
-
 ## Exploit & Device Databases
 
 
 
-
 #### CVE & Vulnerability Lookup
-
 
 
 ##### cve-search (CIRCL) ⭐
@@ -803,7 +758,6 @@ NIST's public REST API for the National Vulnerability Database; keyword-searchab
 #### IoT Vulnerability Wikis
 
 
-
 ##### Exploitee.rs ⭐
 
 Wiki aggregating router/IoT hardware exploits, firmware analysis write-ups, and device-specific notes maintained by the community; excellent starting reference before you re-derive anything yourself.
@@ -820,13 +774,9 @@ Wiki aggregating router/IoT hardware exploits, firmware analysis write-ups, and 
 
 
 
-
-
-
 ## RFID & NFC (Physical Access Tokens)
 
 Proxmark3 ⭐
-
 
 #### Proxmark3 ⭐
 
@@ -856,8 +806,6 @@ Low-level NFC library with CLI tools (nfc-list, nfc-mfclassic) that read, write,
 **URL:** https://github.com/nfc-tools/libnfc
 
 **Alternatives:** Proxmark3
-
-
 
 
 

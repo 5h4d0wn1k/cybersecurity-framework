@@ -6,13 +6,10 @@ Host discovery, port scanning, pivoting, packet capture, on-path interception, a
 
 
 
-
 #### Scanning Engines
 
 
-
 ##### Port & Service Scanning
-
 
 
 ###### Nmap ⭐
@@ -78,7 +75,6 @@ ProjectDiscovery's fast SYN scanner focused on top-N port lists with parallel ho
 ##### OS & Service Fingerprinting
 
 
-
 ###### p0f ⭐
 
 Passive OS fingerprinting via TCP/IP stack quirks (TTL, window size, DF) and HTTP signatures; needs no packets of its own, only observed traffic.
@@ -110,7 +106,6 @@ Scans NetBIOS name services for hostnames, logged-in users, MAC addresses, and s
 
 
 ##### NSE & Scripted Probes
-
 
 
 ###### Nmap NSE ⭐
@@ -146,9 +141,7 @@ NSE script set that queries the Vulners API with detected CPE/service versions a
 #### Live Host & Range Discovery
 
 
-
 ##### ARP & Layer-2 Discovery
-
 
 
 ###### arp-scan ⭐
@@ -184,7 +177,6 @@ Active and passive ARP discovery with a live table of IP, MAC, and vendor; passi
 ##### ICMP & Range Sweeps
 
 
-
 ###### fping ⭐
 
 Parallel ICMP pinger that sweeps ranges and prints alive/dead hosts in script-friendly output.
@@ -203,7 +195,6 @@ Parallel ICMP pinger that sweeps ranges and prints alive/dead hosts in script-fr
 ##### Bulk DNS Resolution
 
 
-
 ###### massdns ⭐
 
 High-performance DNS resolver that resolves and brute-forces huge name lists at tens of thousands of queries per second, emitting A/AAAA/CNAME results.
@@ -220,20 +211,14 @@ High-performance DNS resolver that resolves and brute-forces huge name lists at 
 
 
 
-
-
-
 ## Pivoting & Tunneling
-
 
 
 
 #### Tunneling Frameworks
 
 
-
 ##### Reverse & Forward Tunnels
-
 
 
 ###### chisel ⭐
@@ -299,7 +284,6 @@ SOCKS4 reverse proxy: a client on an internal host you own connects out through 
 ##### VPN-style / TUN Pivots
 
 
-
 ###### ligolo-ng ⭐
 
 TUN-based tunneling: the agent builds an encrypted tunnel to your proxy, which routes full IP traffic into the agent's network as if you had a real VPN.
@@ -318,9 +302,7 @@ TUN-based tunneling: the agent builds an encrypted tunnel to your proxy, which r
 #### Traffic Routing & Proxy Chains
 
 
-
 ##### Process & System Routing
-
 
 
 ###### proxychains ⭐
@@ -356,7 +338,6 @@ Transparent VPN over SSH that forwards arbitrary TCP/UDP/DNS for whole subnets t
 ##### Raw Socket Relays & Plumbing
 
 
-
 ###### socat ⭐
 
 Bidirectional relay between TCP, UDP, UNIX sockets, and files, with SSL and FORK support — the byte-plumbing workhorse.
@@ -388,11 +369,7 @@ Nmap's netcat with TLS, proxy chaining, IPv6, and connection brokering built int
 
 
 
-
-
-
 ## Traffic Capture & On-Path Testing
-
 
 
 
@@ -414,9 +391,7 @@ L2/L3 MITM & network attack suite — ARP/DHCP/DNS/VLAN spoofing, port-knock, pc
 #### Capture & Analysis
 
 
-
 ##### Live Capture
-
 
 
 ###### Wireshark ⭐
@@ -467,7 +442,6 @@ Command-line packet capture with Berkeley Packet Filter expressions; the standar
 ##### Session & Stream Reassembly
 
 
-
 ###### tcpflow ⭐
 
 Reassembles TCP sessions from captures into per-connection files, reconstructing transferred content instead of packet fragments.
@@ -486,9 +460,7 @@ Reassembles TCP sessions from captures into per-connection files, reconstructing
 #### On-Path & MITM Frameworks
 
 
-
 ##### LAN / ARP Interception
-
 
 
 ###### bettercap ⭐
@@ -524,7 +496,6 @@ Classic MITM suite with ARP poisoning, sniffing, filters, and plugin-based inter
 ##### Application Proxy Interception
 
 
-
 ###### mitmproxy ⭐
 
 Interactive HTTPS interception proxy with a terminal UI and Python addons for rewriting and scripting flows.
@@ -541,7 +512,6 @@ Interactive HTTPS interception proxy with a terminal UI and Python addons for re
 
 
 ##### Name-Resolution Poisoning
-
 
 
 ###### Responder ⭐
@@ -577,9 +547,7 @@ Poisons DNS via IPv6 router advertisements so Windows clients look up WPAD and o
 #### Packet Crafting & Raw Probes
 
 
-
 ##### Raw Packet Crafting
-
 
 
 ###### hping3 ⭐
@@ -613,20 +581,14 @@ Python packet library for crafting, forging, and dissecting virtually any protoc
 
 
 
-
-
-
 ## Network Service Clients & Auditing
-
 
 
 
 #### Directory & Management Protocols
 
 
-
 ##### SNMP Auditing
-
 
 
 ###### snmpwalk ⭐
@@ -677,7 +639,6 @@ Fast SNMP scanner that blasts sysDescr requests across a range with multiple com
 ##### LDAP & Directory Auditing
 
 
-
 ###### ldapsearch ⭐
 
 OpenLDAP's query client: filters, attribute selection, base DN control, and search limits for directory interrogation.
@@ -711,13 +672,10 @@ Dumps Active Directory users, computers, groups, nested memberships, GPOs, and m
 #### File Share & Storage Protocols
 
 
-
 ##### SMB / NetBIOS
 
 
-
 ###### Clients & Share Enumeration
-
 
 
 ###### smbclient ⭐
@@ -753,7 +711,6 @@ Maintained Python successor to enum4linux; automates SMB/RPC null-session enumer
 ###### Fleet & Protocol Audits
 
 
-
 ###### NetExec ⭐
 
 Successor to CrackMapExec: multi-protocol (SMB, LDAP, MSSQL, WinRM, RDP) credential-validated enumeration of shares, users, sessions, and policy across fleets.
@@ -785,7 +742,6 @@ Fortra's Python implementations of Windows network protocols with ~100 example s
 
 
 ##### NFS & RPC
-
 
 
 ###### showmount ⭐
@@ -821,9 +777,7 @@ Samba's RPC client that interrogates MS-RPC endpoints — user, domain, SID, and
 #### Remote Access Protocols
 
 
-
 ##### RDP Clients
-
 
 
 ###### xfreerdp ⭐
@@ -859,7 +813,6 @@ Veteran open-source RDP client with single-session support and configurable code
 ##### SSH Configuration Audits
 
 
-
 ###### ssh-audit ⭐
 
 Actively probes an SSH server and scores its configuration — kex, ciphers, MACs, key types — against known weaknesses and current advisories.
@@ -878,7 +831,6 @@ Actively probes an SSH server and scores its configuration — kex, ciphers, MAC
 ##### FTP & File Transfer
 
 
-
 ###### lftp ⭐
 
 Feature-rich FTP/FTPS/SFTP/HTTP client with mirroring, resuming, scripting, and batch transfers.
@@ -892,8 +844,6 @@ Feature-rich FTP/FTPS/SFTP/HTTP client with mirroring, resuming, scripting, and 
 **URL:** https://lftp.yar.ru
 
 **Alternatives:** curl
-
-
 
 
 

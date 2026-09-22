@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="color-scheme" content="dark light" />
 <title>CyberOps Framework — Interactive Map of Every Cybersecurity Tool</title>
 <meta name="description" content="An open-source interactive tree-map of the entire cybersecurity landscape: 27 domains, 776 categories, 1067 curated offensive and defensive security tools with effort ratings, install commands, when-to-use guidance, and best-in-class picks (★)." />
 <meta name="keywords" content="cybersecurity framework, security tools map, offensive security, defensive security, penetration testing, red team, blue team, OSINT, vulnerability scanning, web app security, network security, digital forensics, malware analysis, DFIR, cloud security, cybersecurity education" />
@@ -25,6 +26,7 @@
 <meta name="twitter:description" content="27 domains, 776 categories, 1067 curated offensive & defensive security tools — the open-source map of everything in cybersecurity." />
 <meta name="twitter:image" content="https://5h4d0wn1k.github.io/cybersecurity-framework/og.png" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%230b1220'/%3E%3Cpath d='M8 2l5 1.8v3.4c0 3.4-2.2 5.9-5 6.8-2.8-.9-5-3.4-5-6.8V3.8z' fill='none' stroke='%236f8bff' stroke-width='1.3'/%3E%3Ccircle cx='8' cy='8' r='1.7' fill='%2334d399'/%3E%3C/svg%3E" />
+<link rel="manifest" href="manifest.webmanifest" />
 <script>try{if(localStorage.getItem("theme")==="light")document.documentElement.classList.add("light")}catch(e){}</script>
 <script type="application/ld+json">
 {
@@ -90,6 +92,8 @@
     --grn:#34d399; --warn:#fbbf24; --red:#f87171; --own:#a78bfa; --best:#ffb84d;
     --vign:rgba(2,5,12,.62);
     --shadow:0 18px 50px rgba(0,0,0,.5);
+    --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+    --sal:env(safe-area-inset-left,0px); --sar:env(safe-area-inset-right,0px);
     --ease:cubic-bezier(.16,1,.3,1);
     --mono:ui-monospace,'JetBrains Mono',SFMono-Regular,Menlo,Consolas,monospace;
     --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
@@ -121,7 +125,8 @@
 
   header{
     position:fixed;inset:0 0 auto 0;height:58px;z-index:50;
-    display:flex;align-items:center;gap:16px;padding:0 18px;
+    display:flex;align-items:center;gap:16px;
+    padding:0 calc(18px + var(--sar)) 0 calc(18px + var(--sal));
     background:var(--glass);backdrop-filter:blur(16px) saturate(1.3);-webkit-backdrop-filter:blur(16px) saturate(1.3);
     border-bottom:1px solid var(--line);
   }
@@ -184,7 +189,7 @@
   .skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--card);color:var(--acc2);padding:10px 16px;border-radius:0 0 10px 0;font:12px var(--sans);text-decoration:none}
   .skip:focus{left:0;color:var(--txt)}
   #crd{
-    position:fixed;top:66px;left:50%;transform:translateX(-50%);z-index:90;
+    position:fixed;top:calc(var(--hdr) + 8px);left:50%;transform:translateX(-50%);z-index:90;
     pointer-events:none;opacity:0;transition:opacity .18s,transform .25s var(--ease);
     font:10.5px var(--mono);color:var(--muted);background:var(--glass);
     border:1px solid var(--line2);border-radius:10px;padding:5px 13px;
@@ -193,7 +198,7 @@
   #crd.show{opacity:1;transform:translateX(-50%) translateY(3px)}
 
   .legend{
-    position:fixed;left:16px;bottom:14px;z-index:40;display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+    position:fixed;left:calc(16px + var(--sal));bottom:calc(14px + var(--sab));z-index:40;display:flex;flex-wrap:wrap;gap:10px;align-items:center;
     background:var(--glass);backdrop-filter:blur(12px);border:1px solid var(--line);border-radius:14px;padding:9px 16px;
   }
   .chip{display:flex;align-items:center;gap:6px;font:10.5px var(--sans);color:var(--muted);white-space:nowrap}
@@ -202,7 +207,25 @@
   .chip i.d{width:11px;height:11px;border:2px solid var(--def);background:transparent}
   .ch-best{background:var(--best)} .ch-own{background:var(--own)}
   .ch-off{background:var(--off)} .ch-def{background:var(--def)}
-  .hint{position:fixed;right:16px;bottom:14px;z-index:40;font:10px var(--mono);color:var(--dim);text-align:right;line-height:1.7}
+  .hint{position:fixed;right:calc(16px + var(--sar));bottom:calc(14px + var(--sab));z-index:40;font:10px var(--mono);color:var(--dim);text-align:right;line-height:1.7}
+
+  #jumpB{display:none}
+  #jumpSheet{
+    position:fixed;left:0;right:0;bottom:0;z-index:80;display:none;max-height:min(58vh,480px);
+    background:var(--glass);backdrop-filter:blur(22px) saturate(1.25);-webkit-backdrop-filter:blur(22px) saturate(1.25);
+    border-top:1px solid var(--line2);border-radius:18px 18px 0 0;box-shadow:var(--shadow);
+    transform:translateY(105%);transition:transform .3s var(--ease);
+    flex-direction:column;overflow:auto;padding:10px 12px calc(16px + var(--sab));
+  }
+  #jumpSheet.open{display:flex;transform:none}
+  #jumpSheet::before{content:"";align-self:center;width:40px;height:4px;border-radius:3px;flex:none;
+    background:var(--line2);margin:4px 0 10px}
+  .js-list{display:flex;flex-direction:column;gap:2px}
+  .js-item{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;
+    font:13px var(--sans);color:var(--txt);background:transparent;border:none;border-radius:11px;padding:11px 12px;
+    transition:background .15s}
+  .js-item:hover,.js-item:focus-visible{background:var(--card2)}
+  .js-item .n{font:10px var(--mono);color:var(--dim);flex:none}
 
   #stage{position:fixed;inset:var(--hdr) 0 0 0;overflow:hidden;
     background:radial-gradient(115% 115% at 50% 32%, transparent 52%, var(--vign) 100%);}
@@ -316,7 +339,7 @@
     .hint{display:none}
   }
   @media (max-width:640px){
-    header{flex-wrap:wrap;height:auto;padding:8px 12px 6px;gap:8px;align-items:center}
+    header{flex-wrap:wrap;height:auto;padding:calc(8px + var(--sat)) calc(12px + var(--sar)) 6px calc(12px + var(--sal));gap:8px;align-items:center}
     .brand .name{font-size:14px}
     .mark{width:28px;height:28px}
     .search{order:2;flex:1 1 100%;max-width:none;margin:2px 0 2px}
@@ -325,8 +348,9 @@
     .tools .ibtn{width:38px;height:38px;padding:0;justify-content:center;font-size:15px}
     .tools .ibtn .lbl{display:none}
     .tools select{display:none}
+    #jumpB{display:flex}
     #panel{width:100vw}
-    .legend{padding:7px 12px;gap:8px;bottom:10px;left:12px}
+    .legend{padding:7px 12px;gap:8px;bottom:calc(10px + var(--sab));left:calc(12px + var(--sal))}
     .chip{font-size:9.5px}
     #crd{top:calc(var(--hdr) + 10px);max-width:86vw}
   }
@@ -366,12 +390,15 @@
 
   <div class="tools">
     <select id="jumpBox" title="Jump to a domain" aria-label="Jump to a domain"><option value="">⛭ all domains</option></select>
+    <button class="ibtn" id="jumpB" title="Jump to a domain" aria-haspopup="listbox" aria-label="Jump to a domain">⛭</button>
     <button class="ibtn" id="fitB" title="Fit tree to screen">⛶<span class="lbl">&nbsp;fit</span></button>
     <button class="ibtn" id="coB" title="Collapse everything back to the top">⊟<span class="lbl">&nbsp;reset</span></button>
     <button class="ibtn" id="exB" title="Expand the whole tree">⊞<span class="lbl">&nbsp;all</span></button>
     <button class="ibtn" id="themeB" title="Toggle theme" aria-label="Toggle theme" aria-pressed="false">◐</button>
   </div>
 </header>
+
+<div id="jumpSheet" role="listbox" aria-label="Jump to a domain" aria-hidden="true"></div>
 
 <div id="crd"></div>
 
@@ -429,6 +456,7 @@
   const $ = s => document.querySelector(s);
   const NS = "http://www.w3.org/2000/svg";
   const esc = s => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  const safeURL = u => (typeof u === "string" && /^https?:\/\//i.test(u.trim())) ? u : null;
   const ROW = 30, COL = 236;
   const svg = $("#svg"), linksG = $("#links"), nodesG = $("#nodes");
 
@@ -441,9 +469,9 @@
     function mk(data, parent, type) {
       const n = {
         path: "", label: labelOf(data), type: type, cls: data.cls || data.class || "",
-        id: data.id, url: data.url, by: data.by || "", best: !!data.best,
+        id: data.id, url: safeURL(data.url), by: data.by || "", best: !!data.best,
         rating: data.rating, effort: data.effort, desc: data.desc, when: data.when,
-        install: data.install, alt: data.alt, data: data, parent: parent,
+        install: data.install, alt: Array.isArray(data.alt) ? data.alt : [], data: data, parent: parent,
         depth: parent ? parent.depth + 1 : 0, open: false, children: [], tools: 0
       };
       n.path = (parent && parent.path !== "all" ? parent.path + "/" : "") + (data.seg || n.label);
@@ -577,6 +605,7 @@
     return Math.max(48, txt * CHARW + 22 + cnt * 5.6 + 18);
   }
   function nodeInner(n) {
+    if (n._inner) return n._inner;
     let inner = "";
     if (n.type === "all") {
       const txt = dispLabel(n);
@@ -602,7 +631,8 @@
     }
     n._W = (n.type === "all") ? 0 : pillW(n);
     if (n.desc || n.label !== dispLabel(n)) inner += `<title>${esc(n.desc || n.label)}</title>`;
-    return `<g class="skin">${inner}</g>`;
+    n._inner = `<g class="skin">${inner}</g>`;
+    return n._inner;
   }
   function elClass(n) {
     const c = ["node", n.type, "d" + Math.min(n.depth, 6)];
@@ -664,14 +694,15 @@
         const el = document.createElementNS(NS, "g");
         el.setAttribute("class", elClass(n));
         el.setAttribute("data-path", n.path);
-        el.innerHTML = nodeInner(n);
+        el.innerHTML = n._inner = nodeInner(n);
+        el.__inner = n._inner;
         bindNode(el, n);
         nodesG.appendChild(el);
         nodeEls.set(n.path, el);
       } else {
         g.setAttribute("class", elClass(n));
         g.setAttribute("aria-expanded", (n.type !== "tool" && n.type !== "all" && n.children.length) ? (n.open ? "true" : "false") : "");
-        g.innerHTML = nodeInner(n);
+        if (g.__inner !== n._inner) { g.innerHTML = n._inner; g.__inner = n._inner; }
       }
     }
 
@@ -780,13 +811,15 @@
     const lbl = n.path + (n.tools ? ` (${n.tools} tools)` : "");
     g.setAttribute("aria-label", lbl);
     const isBranch = n.type !== "tool" && n.type !== "all" && n.children.length > 0;
-    if (isBranch) g.setAttribute("role", "button");
+    if (isBranch || n.type === "all") g.setAttribute("role", "button");
+    const onTouch = () => isNarrow() && (navigator.maxTouchPoints || 0) > 0;
+    const kbActivate = () => { kbFocus = true; g.dispatchEvent(new MouseEvent("click", { bubbles: true, detail: 1 })); kbFocus = false; };
     const lastTap = { t: 0, id: null };
     g.addEventListener("click", e => {
       e.stopPropagation();
       if (e.detail > 1) return;
       const now = Date.now();
-      const dbl = lastTap.id === n.path && now - lastTap.t < 550;
+      const dbl = onTouch() && lastTap.id === n.path && now - lastTap.t < 550;
       lastTap.t = now; lastTap.id = n.path;
       if (dbl && isBranch) { openPanel(n); return; }
       if (n.type === "tool") openPanel(n);
@@ -794,22 +827,21 @@
       else {
         n.open = !n.open;
         if (isBranch) g.setAttribute("aria-expanded", n.open ? "true" : "false");
+        render();
         const el = nodeEls.get(n.path);
         if (el) { el.classList.add("pulse"); setTimeout(() => el.classList.remove("pulse"), 650); }
-        render();
       }
     });
     g.addEventListener("keydown", e => {
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
-        if (!e.repeat) g.dispatchEvent(new MouseEvent("click", { bubbles: true, detail: 1 }));
+        if (!e.repeat) kbActivate();
         return;
       }
       if (e.key === "ArrowRight") {
         e.preventDefault();
-        if (!n.open) g.dispatchEvent(new MouseEvent("click", { bubbles: true, detail: 1 }));
-        else if (isBranch) focusNode(n.children[0]);
-        else if (n.type !== "tool") focusNode(n.children[0]);
+        if (!n.open) { kbActivate(); return; }
+        if (n.children && n.children.length) focusNode(n.children[0]);
         return;
       }
       if (e.key === "ArrowLeft") {
@@ -845,6 +877,7 @@
   /* ============ fit / pan / zoom ============ */
   const isNarrow = () => (svg.clientWidth || 0) < 640;
   function focusNode(n) {
+    if (!n) return;
     const g = nodeEls.get(n.path);
     if (g) { g.focus(); }
     else if (n.parent && n.parent.path !== "all") { n.parent.open = true; render(); focusNode(n); }
@@ -1039,7 +1072,7 @@
     if (e.key === "Enter" && res.classList.contains("open") && res.__idx >= 0) {
       e.preventDefault();
       const t = res.__hits[res.__idx];
-      if (t) { reveal(t); res.classList.remove("open"); res.__hits = []; q.value = ""; q.setAttribute("aria-expanded", "false"); }
+      if (t) { kbFocus = true; reveal(t); kbFocus = false; res.classList.remove("open"); res.__hits = []; q.value = ""; q.setAttribute("aria-expanded", "false"); }
     }
   });
   res.addEventListener("click", e => {
@@ -1052,11 +1085,12 @@
     q.setAttribute("aria-expanded", "false");
     q.blur();
   });
-  document.addEventListener("click", e => { if (!e.target.closest(".search")) { res.classList.remove("open"); q.setAttribute("aria-expanded", "false"); } });
+  document.addEventListener("click", e => { if (!e.target || !e.target.closest || !e.target.closest(".search")) { res.classList.remove("open"); q.setAttribute("aria-expanded", "false"); } });
 
   /* ============ panel ============ */
   const panel = $("#panel");
   let panelPrevFocus = null;
+  let kbFocus = false;
   function openPanel(t) {
     const pt = $("#ptitle");
     pt.innerHTML = (t.best ? "★ " : "") + esc(t.label) + (t.by ? `<span class="bychip">by ${esc(t.by)}</span>` : "");
@@ -1082,13 +1116,21 @@
       ${t.url ? `<a class="plink${t.by ? " auth" : ""}" href="${esc(t.url)}" target="_blank" rel="noopener">${t.by ? "open on GitHub ↗" : "open tool ↗"}</a>` : ""}`;
     panel.classList.add("open");
     if (!panelPrevFocus) { try { panelPrevFocus = document.activeElement; } catch (err) {} }
-    try { $("#pclose").focus(); } catch (err) {}
+    if (kbFocus) { try { $("#pclose").focus(); } catch (err) {} kbFocus = false; }
   }
-  $("#pclose").addEventListener("click", () => { panel.classList.remove("open"); if (panelPrevFocus && panelPrevFocus.focus) { try { panelPrevFocus.focus(); } catch (err) {} panelPrevFocus = null; } });
+  function closePanel() {
+    panel.classList.remove("open");
+    const p = panelPrevFocus;
+    panelPrevFocus = null;
+    if (p && p.focus) { try { p.focus(); } catch (err) {} }
+    if (panel.contains(document.activeElement)) { try { svg.setAttribute("tabindex", "-1"); svg.focus(); } catch (err) {} }
+  }
+  $("#pclose").addEventListener("click", closePanel);
   document.addEventListener("mousedown", e => {
     if (!panel.classList.contains("open")) return;
+    if (!e.target || !e.target.closest) return;
     if (e.target.closest(".node") || e.target.closest(".search") || e.target.closest("#panel")) return;
-    panel.classList.remove("open");
+    closePanel();
   });
   panel.addEventListener("keydown", e => {
     if (e.key !== "Tab") return;
@@ -1113,7 +1155,11 @@
 
   /* ============ theme / keys ============ */
   const themeBtn = $("#themeB");
-  const syncTheme = () => themeBtn.setAttribute("aria-pressed", document.documentElement.classList.contains("light") ? "true" : "false");
+  const syncTheme = () => {
+    themeBtn.setAttribute("aria-pressed", document.documentElement.classList.contains("light") ? "true" : "false");
+    const tc = document.querySelector('meta[name="theme-color"]');
+    if (tc) tc.content = document.documentElement.classList.contains("light") ? "#eef1f8" : "#070b13";
+  };
   themeBtn.addEventListener("click", () => {
     document.documentElement.classList.toggle("light");
     syncTheme();
@@ -1124,11 +1170,7 @@
   document.addEventListener("keydown", e => {
     if (e.key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey && document.activeElement !== q) { e.preventDefault(); q.focus(); }
     if (e.key === "Escape") {
-      if (panel.classList.contains("open")) {
-        panel.classList.remove("open");
-        if (panelPrevFocus && panelPrevFocus.focus) { try { panelPrevFocus.focus(); } catch (err) {} panelPrevFocus = null; }
-        return;
-      }
+      if (panel.classList.contains("open")) { closePanel(); return; }
       res.classList.remove("open");
       q.setAttribute("aria-expanded", "false");
     }
@@ -1146,7 +1188,36 @@
       o.textContent = d.label;
       jumpBox.appendChild(o);
     }
-    jumpBox.addEventListener("change", () => { if (jumpBox.value) { const t = findByPath(jumpBox.value); if (t) reveal(t); } });
+    jumpBox.addEventListener("change", () => { if (jumpBox.value) { const t = findByPath(jumpBox.value); if (t) { reveal(t); jumpBox.value = ""; } } });
+
+    /* mobile jump sheet (mirrors jumpBox, big touch targets) */
+    const jumpB = $("#jumpB"), jumpSheet = $("#jumpSheet");
+    const openJump = () => { jumpSheet.classList.add("open"); jumpSheet.setAttribute("aria-hidden", "false"); };
+    const closeJump = () => { jumpSheet.classList.remove("open"); jumpSheet.setAttribute("aria-hidden", "true"); };
+    jumpB.addEventListener("click", () => (jumpSheet.classList.contains("open") ? closeJump() : openJump()));
+    const dlist = document.createElement("div");
+    dlist.className = "js-list";
+    const allItem = document.createElement("button");
+    allItem.type = "button"; allItem.className = "js-item";
+    allItem.textContent = "⛭ all domains";
+    allItem.addEventListener("click", () => {
+      resetTop(); render(); isNarrow() ? phoneBoot() : autoFit(); closeJump();
+    });
+    dlist.appendChild(allItem);
+    for (const d of opts) {
+      const b = document.createElement("button");
+      b.type = "button"; b.className = "js-item";
+      const s = document.createElement("span"); s.textContent = d.label;
+      const ct = document.createElement("span"); ct.className = "n"; ct.textContent = `${d.tools || 0} tools`;
+      b.append(s, ct);
+      b.addEventListener("click", () => { const t = findByPath(d.path); if (t) reveal(t); closeJump(); });
+      dlist.appendChild(b);
+    }
+    jumpSheet.appendChild(dlist);
+    document.addEventListener("mousedown", e => {
+      if (jumpSheet.classList.contains("open") && !e.target.closest("#jumpSheet,#jumpB")) closeJump();
+    });
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && jumpSheet.classList.contains("open")) closeJump(); });
   }
 
   /* ============ boot ============ */
@@ -1157,8 +1228,12 @@
       document.body.innerHTML = '<div style="padding:40px;font-family:monospace">Could not load data/tree.json — run <b>python3 scripts/build.py</b></div>';
       return;
     }
-    DATA = data.pillars || [];
-    stats = data.stats;
+    if (!data || !Array.isArray(data.pillars)) {
+      document.body.innerHTML = '<div style="padding:40px;font-family:monospace">data/tree.json is malformed — run <b>python3 scripts/build.py</b></div>';
+      return;
+    }
+    DATA = data.pillars;
+    stats = data.stats || { domains: 0, categories: 0, tools: 0 };
     $("#stline").textContent = `${stats.domains} domains · ${stats.categories} categories · ${stats.tools} tools`;
     q.placeholder = `Search ${stats.tools} tools…`;
     buildNodes();

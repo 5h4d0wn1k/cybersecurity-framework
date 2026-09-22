@@ -6,13 +6,10 @@ Automated detection of known CVEs and misconfigurations at scale, plus manual tr
 
 
 
-
 #### Port & Service Scanning
 
 
-
 ##### Nmap & Friends
-
 
 
 ###### Nmap ⭐
@@ -48,7 +45,6 @@ An Nmap script pair (vulners.nse / vulscan.nse) that queries the Vulners API wit
 ##### High-Speed Port Scanners
 
 
-
 ###### Masscan ⭐
 
 Robert Graham's asynchronous parallel scanner that can sweep all 65k ports of an address range in minutes using raw SYN packets.
@@ -82,9 +78,7 @@ Rust-based port scanner that finds open ports in seconds, then pipes them straig
 #### Host Discovery
 
 
-
 ##### Layer-2/LAN Discovery
-
 
 
 ###### arp-scan ⭐
@@ -120,7 +114,6 @@ Active (ARP request) and passive (sniff-and-log) network discovery with a lightw
 ##### Internet-Scale Discovery
 
 
-
 ###### ZMap ⭐
 
 High-performance network scanner built for internet-wide research on services you own; the engine behind the ZMap project ('there are no secrets on the internet').
@@ -139,9 +132,7 @@ High-performance network scanner built for internet-wide research on services yo
 #### Automated Recon Pipelines
 
 
-
 ##### Multi-phase Recon & Correlation
-
 
 
 ###### AutoRecon ⭐
@@ -175,20 +166,14 @@ OWASP scanner framework that scans layers of your network (ports, services, subd
 
 
 
-
-
-
 ## Web Application Scanning
-
 
 
 
 #### Server & Edge Fingerprinting
 
 
-
 ##### Server Fingerprinting
-
 
 
 ###### WhatWeb ⭐
@@ -224,7 +209,6 @@ Perl web server scanner running 7,000+ checks for known files, outdated software
 ##### WAF & Edge Detection
 
 
-
 ###### wafw00f ⭐
 
 Identifies whether and which WAF (Cloudflare, ModSecurity, AWS WAF, etc.) fronts a web property, and fingerprints its version where detectable.
@@ -243,9 +227,7 @@ Identifies whether and which WAF (Cloudflare, ModSecurity, AWS WAF, etc.) fronts
 #### Application-layer DAST
 
 
-
 ##### General-purpose DAST
-
 
 
 ###### OWASP ZAP ⭐
@@ -281,7 +263,6 @@ Command-line web fuzzer performing black-box scans for SQLi, XSS, file inclusion
 ##### Template-driven Scanning
 
 
-
 ###### Nuclei ⭐
 
 ProjectDiscovery's template engine running thousands of YAML checks against web, network, and infrastructure targets to confirm known CVEs and misconfigurations.
@@ -300,9 +281,7 @@ ProjectDiscovery's template engine running thousands of YAML checks against web,
 #### Injection & XSS Testing
 
 
-
 ##### SQL Injection
-
 
 
 ###### sqlmap ⭐
@@ -323,7 +302,6 @@ Long-standing automated SQL injection detector with database fingerprinting; val
 ##### Cross-Site Scripting
 
 
-
 ###### dalfox ⭐
 
 Fast Go-based XSS scanner that fuzzes parameters, builds payloads, and verifies reflected and stored vectors against the pages you maintain.
@@ -342,9 +320,7 @@ Fast Go-based XSS scanner that fuzzes parameters, builds payloads, and verifies 
 #### CMS-Specific Scanners
 
 
-
 ##### WordPress
-
 
 
 ###### WPScan ⭐
@@ -363,7 +339,6 @@ WordPress scanner that fingerprints core, theme, and plugin versions against the
 
 
 ##### Multi-CMS (Joomla / Drupal)
-
 
 
 ###### CMSmap ⭐
@@ -397,20 +372,14 @@ Lightweight Perl scanner focused on Drupal, with partial WordPress and Bolt cove
 
 
 
-
-
-
 ## Vulnerability Management Platforms
-
 
 
 
 #### Full VM Platforms
 
 
-
 ##### Commercial VM
-
 
 
 ###### Nessus ⭐
@@ -431,7 +400,6 @@ Tenable's market-standard commercial scanner with credentialed and remote checks
 ##### Open-Source VM
 
 
-
 ###### OpenVAS (GVM) ⭐
 
 Greenbone's open-source stack forked from the old Nessus; schedules scans of thousands of network vulnerability tests (NVTs) with a web dashboard.
@@ -450,7 +418,6 @@ Greenbone's open-source stack forked from the old Nessus; schedules scans of tho
 ##### Agentless Fleet Scanning
 
 
-
 ###### Vuls ⭐
 
 Agentless Go scanner that runs from one control host over SSH to inventory OS packages, middleware, and containers, then maps each server to applicable CVEs.
@@ -467,20 +434,14 @@ Agentless Go scanner that runs from one control host over SSH to inventory OS pa
 
 
 
-
-
-
 ## Infrastructure & Compliance Audit
-
 
 
 
 #### Host Hardening Audit
 
 
-
 ##### Linux Security Audit
-
 
 
 ###### Lynis ⭐
@@ -501,7 +462,6 @@ Security auditing tool that runs 300+ tests on Unix systems to score hardening p
 ##### SCAP/STIG Baselines
 
 
-
 ###### OpenSCAP ⭐
 
 NIST-certified scanner applying security-policy content (CIS, STIG) and OVAL CVE definitions to your Linux hosts for compliance and vulnerability posture.
@@ -520,9 +480,7 @@ NIST-certified scanner applying security-policy content (CIS, STIG) and OVAL CVE
 #### Cloud Posture Assessments
 
 
-
 ##### AWS Attack & Posture
-
 
 
 ###### Pacu ⭐
@@ -558,7 +516,6 @@ Cloud security tooling applying 200+ AWS (and Azure/GCP) checks aligned to CIS, 
 ##### AWS / Azure / GCP
 
 
-
 ###### ScoutSuite ⭐
 
 Security audit tool from NCC Group that uses cloud APIs to enumerate resources and generate an HTML report of weaknesses across AWS, Azure, and GCP.
@@ -575,20 +532,14 @@ Security audit tool from NCC Group that uses cloud APIs to enumerate resources a
 
 
 
-
-
-
 ## Container & Image Scanning
-
 
 
 
 #### Image & Filesystem Scanning
 
 
-
 ##### CLI & CI Scanners
-
 
 
 ###### Trivy ⭐
@@ -624,7 +575,6 @@ Anchore's fast scanner pairing with Syft to map dependency CVEs across the conta
 ##### SBOM Generation
 
 
-
 ###### Syft ⭐
 
 Generates an inventory/SBOM of the packages, libraries, and metadata inside container images and directory trees, feeding downstream scanners.
@@ -643,9 +593,7 @@ Generates an inventory/SBOM of the packages, libraries, and metadata inside cont
 #### Registry & Fleet Scanning
 
 
-
 ##### Registry Scanning
-
 
 
 ###### Clair ⭐
@@ -664,20 +612,14 @@ Quay's open-source static analyzer that watches container registries and reports
 
 
 
-
-
-
 ## Dependency & SCA Scanning
-
 
 
 
 #### Lockfile & Package Scanners
 
 
-
 ##### Multi-language
-
 
 
 ###### Snyk ⭐
@@ -713,7 +655,6 @@ Google's scanner that matches your project lockfiles and SBOMs against the open-
 ##### Python
 
 
-
 ###### pip-audit ⭐
 
 PyPA's scanner that audits installed Python packages and lockfiles against the OSV and PyPI advisory feeds, with a fix action.
@@ -730,7 +671,6 @@ PyPA's scanner that audits installed Python packages and lockfiles against the O
 
 
 ##### JavaScript / Node.js
-
 
 
 ###### npm audit ⭐
@@ -751,9 +691,7 @@ Built-in npm command that checks package-lock.json against the npm advisory data
 #### Binary Component Scan
 
 
-
 ##### Compiled Artifacts
-
 
 
 ###### cve-bin-tool ⭐
@@ -772,20 +710,14 @@ Scans binary files and their strings to identify which known-vulnerable library 
 
 
 
-
-
-
 ## Vulnerability Databases & Lookup
-
 
 
 
 #### CVE & NVD Sources
 
 
-
 ##### NIST NVD
-
 
 
 ###### NVD ⭐
@@ -806,7 +738,6 @@ Official NIST vulnerability feed and web UI; the reference source for CVE metada
 ##### CVE Authority (MITRE)
 
 
-
 ###### CVE.org ⭐
 
 The CVE Program's own record search and API maintained by MITRE, giving canonical descriptions, references, and reservation workflows.
@@ -823,7 +754,6 @@ The CVE Program's own record search and API maintained by MITRE, giving canonica
 
 
 ##### Aggregators & Local Feeds
-
 
 
 ###### Vulners ⭐
@@ -859,9 +789,7 @@ Local MongoDB-backed engine that ingests NVD, CISA, and Exploit-DB feeds for fas
 #### OSV & Open-Source Feeds
 
 
-
 ##### OSV.dev
-
 
 
 ###### OSV.dev ⭐
@@ -882,9 +810,7 @@ Google's open-source-oriented vulnerability database with a query API keyed on a
 #### Exploit Intelligence
 
 
-
 ##### Exploit-DB & searchsploit
-
 
 
 ###### Exploit-DB / searchsploit ⭐
@@ -905,7 +831,6 @@ Offline grep over the ~40,000-entry Exploit-DB archive bundled with Kali, showin
 ##### Metasploit & Modules
 
 
-
 ###### Metasploit Framework ⭐
 
 Rapid7's exploit framework whose auxiliary and exploit modules double as scanners, with searchsploit-backed proof-of-concept modules for verified CVEs.
@@ -919,8 +844,6 @@ Rapid7's exploit framework whose auxiliary and exploit modules double as scanner
 **URL:** https://github.com/rapid7/metasploit-framework
 
 **Alternatives:** exploit-db / searchsploit, cve-search
-
-
 
 
 

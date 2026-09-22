@@ -10,6 +10,18 @@
 📚 **Read the vision first:** [VISION.md](VISION.md) — how this becomes a full end-to-end
 cybersecurity education platform.
 
+<p>
+  <img alt="License" src="https://img.shields.io/badge/license-MIT-blue.svg" />
+  <img alt="CI" src="https://github.com/5h4d0wn1k/cybersecurity-framework/actions/workflows/pages.yml/badge.svg" />
+  <img alt="Coverage" src="https://img.shields.io/badge/tools-1067-6f8bff" />
+  <img alt="Stack" src="https://img.shields.io/badge/stack-vanilla%20JS%20%2F%20no%20build%20step-34d399" />
+</p>
+
+**Contents:** [What this is](#what-this-is) · [Coverage](#current-coverage) ·
+[Roadmap](#-the-vision--from-tool-tree-to-full-education-platform) · [Quickstart](#quickstart) ·
+[Repo structure](#repository-structure) · [Ethics & scope](#-ethics-legal--scope--read-before-using) ·
+[Contributing](#contributing) · [Changelog](CHANGELOG.md)
+
 ---
 
 ## What this is
@@ -107,13 +119,14 @@ pushed to GitHub Pages.
 ```
 tree/                  domain JSON (source of truth) + auto-generated .md mirrors
 tree/_structure.json   pillar → main-category → domain grouping
-docs/                  the GitHub Pages site (index.html + data/tree.json + robots + sitemap)
-scripts/build.py       merges tree/*.json into the site data + markdown mirrors
+docs/                  the GitHub Pages site (index.html + data/tree.json + robots + sitemap + 404 + manifest)
+scripts/build.py       merges tree/*.json into the site data + markdown mirrors (--ci validates + checks determinism)
 SCHEMA.md              the tool-tree data format (v2, recursive)
 ETHICS.md              intent & scope foundation — read first
 SCOPE.md               the authorized-testing checklist
 VISION.md              the education-platform roadmap
 CONTRIBUTING.md        how to add tools / categories / fixes
+CHANGELOG.md           release history
 ```
 
 ---
@@ -143,6 +156,9 @@ dead URL, or refine a `when-to-use`.
 ## License
 
 **MIT** — free to use, remix, and redistribute with attribution. See [LICENSE](LICENSE).
+
+Tool names, logos, and brands referenced or linked from this map are the property of their
+respective owners; this project is not affiliated with or endorsed by any of them.
 
 ---
 

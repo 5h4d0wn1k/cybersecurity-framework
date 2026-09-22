@@ -6,7 +6,6 @@ Testing your own or authorized Android & iOS apps: static analysis, decompilatio
 
 
 
-
 #### mobsek ◆ by 5h4d0wn1k
 
 Offline mobile app security suite — APK/AXML/DEX, Mach-O, X.509 analysis, Frida hooks, deterministic threat score.
@@ -23,7 +22,6 @@ Offline mobile app security suite — APK/AXML/DEX, Mach-O, X.509 analysis, Frid
 
 
 #### Decompilers
-
 
 
 ##### jadx ⭐
@@ -59,7 +57,6 @@ The graphical frontend bundled with jadx for interactive cross-referencing, rena
 #### APK & Bytecode Tooling
 
 
-
 ##### apktool ⭐
 
 Decodes resources and AndroidManifest.xml into editable form and exposes smali/baksmali bytecode, then rebuilds the APK for repackaging tests.
@@ -93,7 +90,6 @@ Swing viewer that combines dex2jar, CFR, and Procyon so one window shows decompi
 ##### Packed Code Recovery
 
 
-
 ###### frida-dexdump ⭐
 
 Dumps in-memory DEX files from a running app through Frida, defeating packers and protectors that only materialize code at runtime.
@@ -110,7 +106,6 @@ Dumps in-memory DEX files from a running app through Frida, defeating packers an
 
 
 #### Analysis Engines
-
 
 
 ##### androguard ⭐
@@ -131,7 +126,6 @@ Python library plus CLI to parse DEX/APK graphs, list permissions and exported c
 ##### Behavior Scoring
 
 
-
 ###### Quark-Engine ⭐
 
 Obfuscation-aware APK scoring engine that matches the app's call graph against suspicious-behavior rules (crypto misuse, dynamic dex loading, C2 calls) with confidence scores.
@@ -150,7 +144,6 @@ Obfuscation-aware APK scoring engine that matches the app's call graph against s
 ##### Packer & Obfuscator Detection
 
 
-
 ###### APKiD ⭐
 
 YARA-based detector of packers, protectors, and obfuscators (DexProtector, Bangcle, qihoo) inside an APK or DEX before any reversing effort.
@@ -167,16 +160,11 @@ YARA-based detector of packers, protectors, and obfuscators (DexProtector, Bangc
 
 
 
-
-
-
 ## Android Dynamic & Runtime Testing
 
 
 
-
 #### Instrumentation & Hooking
-
 
 
 ##### Frida (Android) ⭐
@@ -212,7 +200,6 @@ Frida-powered runtime exploration toolkit: one-liners to disable SSL pinning and
 #### IPC & Component Attack Surface
 
 
-
 ##### drozer ⭐
 
 On-device agent that assumes another app's identity to enumerate and test exported activities, content providers, services, and broadcast receivers from a console.
@@ -229,7 +216,6 @@ On-device agent that assumes another app's identity to enumerate and test export
 
 
 #### Practice Apps to Battle
-
 
 
 ##### DIVA (Damn Insecure Vulnerable App) ⭐
@@ -263,16 +249,11 @@ Purposefully vulnerable banking app exposing auth bypass, SQL injection, and exp
 
 
 
-
-
-
 ## Traffic Interception & API Testing
 
 
 
-
 #### Intercepting Proxies
-
 
 
 ##### mitmproxy ⭐
@@ -308,7 +289,6 @@ Commercial GUI HTTPS proxy with click-through SSL proxying, breakpoints, and a r
 #### Automated Analysis & Scanning
 
 
-
 ##### MobSF (Mobile Security Framework) ⭐
 
 All-in-one analyzer for APK and IPA: permissions, exported components, insecure crypto and network config, hardcoded secrets, all surfaced in a web UI with a REST API; its dynamic module also captures app HTTP traffic.
@@ -325,13 +305,9 @@ All-in-one analyzer for APK and IPA: permissions, exported components, insecure 
 
 
 
-
-
-
 ## Emulators & Test Devices
 
 Genymotion ⭐
-
 
 #### Genymotion ⭐
 
@@ -366,7 +342,6 @@ Container-based Android that boots a full Android userspace directly on Linux wi
 #### Device Bridge & Rooting
 
 
-
 ##### adb (Android Debug Bridge) ⭐
 
 Google's core device bridge from Android platform-tools: install apps, push/pull files, shell in, install CA certificates, capture logcat, and port-forward.
@@ -398,16 +373,11 @@ Systemless root with module support for dedicated test devices; gives Frida, adb
 
 
 
-
-
-
 ## Android Platform-Specific
 
 
 
-
 #### Custom ROMs & Controlled Builds
-
 
 
 ##### LineageOS ⭐
@@ -428,7 +398,6 @@ The most widely used custom ROM: build or flash a controlled test image on your 
 #### System & Framework App Dissection
 
 
-
 ##### smali/baksmali ⭐
 
 Assembler and disassembler for DEX bytecode: decode framework and system app code, patch small runtime checks, and reassemble for re-signing tests.
@@ -445,16 +414,11 @@ Assembler and disassembler for DEX bytecode: decode framework and system app cod
 
 
 
-
-
-
 ## iOS Static Analysis
 
 
 
-
 #### Exported Binaries & Headers
-
 
 
 ##### class-dump ⭐
@@ -473,7 +437,6 @@ Dumps Objective-C class interfaces from a Mach-O binary, exposing the app's obje
 
 
 #### IPA Acquisition & Decryption
-
 
 
 ##### frida-ios-dump ⭐
@@ -507,16 +470,11 @@ Downloads IPAs directly from the App Store using your own Apple ID, enabling ana
 
 
 
-
-
-
 ## iOS Dynamic Analysis
 
 
 
-
 #### Instrumentation on Jailbroken Devices
-
 
 
 ##### Frida (iOS) ⭐
@@ -552,7 +510,6 @@ objection on iOS: disable SSL pinning, browse Keychain and UserDefaults, and exp
 #### REPLs & Runtime Scripting
 
 
-
 ##### cycript ⭐
 
 Runtime REPL mixing Objective-C and JavaScript to poke live processes and objects on jailbroken devices.
@@ -571,7 +528,6 @@ Runtime REPL mixing Objective-C and JavaScript to poke live processes and object
 #### Tweak & Package Management
 
 
-
 ##### Sileo ⭐
 
 Modern package manager for jailbroken devices and the clean way to install frida-server, debuggers, and testing tweaks on your test device.
@@ -588,13 +544,9 @@ Modern package manager for jailbroken devices and the clean way to install frida
 
 
 
-
-
-
 ## CTF Classics & Practice Grounds
 
 OWASP MASTG & UnCrackable Apps ⭐
-
 
 #### OWASP MASTG & UnCrackable Apps ⭐
 
@@ -639,8 +591,6 @@ Community hub of reusable Frida scripts (pinning bypasses, trace templates, dexd
 **URL:** https://codeshare.frida.re
 
 **Alternatives:** frida (android), objection
-
-
 
 
 

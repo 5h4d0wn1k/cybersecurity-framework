@@ -6,9 +6,7 @@ Tools defenders run to detect, hunt, and respond on their own estate: SIEM, endp
 
 
 
-
 #### Open-Source SOC Stacks
-
 
 
 ##### Elastic Stack (ELK) ⭐
@@ -74,7 +72,6 @@ Open-source log management and SIEM on Elasticsearch/OpenSearch storage, with fl
 #### Endpoint-Native Hunt & Response
 
 
-
 ##### Velociraptor ⭐
 
 Open-source DFIR + endpoint-monitoring framework (Rapid7): fleet-wide hunts over VQL, live evidence collection across thousands of hosts, and a monitoring engine running Sigma detections against ETW/eBPF events in real time.
@@ -93,7 +90,6 @@ Open-source DFIR + endpoint-monitoring framework (Rapid7): fleet-wide hunts over
 #### Commercial SIEM — Free Tier
 
 
-
 ##### Splunk Free ⭐
 
 Free perpetual tier of the commercial SIEM incumbent: SPL search over indexed events and mature dashboards/alerts, capped at 500 MB/day ingest; a full license scales past the cap.
@@ -110,20 +106,14 @@ Free perpetual tier of the commercial SIEM incumbent: SPL search over indexed ev
 
 
 
-
-
-
 ## Endpoint Detection & XDR Hunting
-
 
 
 
 #### Endpoint Agents
 
 
-
 ##### Self-Hosted Fleet Agents
-
 
 
 ###### Velociraptor ⭐
@@ -174,7 +164,6 @@ Windows Sysinternals driver that logs high-fidelity process creation, network co
 ##### Cloud-Native EDR
 
 
-
 ###### LimaCharlie ⭐
 
 Cloud-native SecOps platform: an EDR sensor streams verbose endpoint telemetry over TLS in real time, and a YAML-based Detection & Response engine runs the full open Sigma ruleset with automated response actions.
@@ -191,7 +180,6 @@ Cloud-native SecOps platform: an EDR sensor streams verbose endpoint telemetry o
 
 
 #### Zeek-Log Threat Hunting
-
 
 
 ##### RITA ⭐
@@ -225,11 +213,7 @@ Passive network-analysis framework (formerly Bro) feeding rich protocol metadata
 
 
 
-
-
-
 ## Log, Packet & Network Detection
-
 
 
 
@@ -266,9 +250,7 @@ Detection engine suite — signature NIDS, ML flow-anomaly, kernel-watch, MITM d
 #### Network Sensors
 
 
-
 ##### Signature IDS/IPS Engines
-
 
 
 ###### Suricata ⭐
@@ -304,7 +286,6 @@ Cisco's next-generation open-source NIDS/IPS: multi-threaded, Lua-based policy l
 ##### Protocol Metadata Engines
 
 
-
 ###### Zeek ⭐
 
 Passive network-analysis framework (formerly Bro) that logs rich protocol metadata, file hashes, and events across 70+ log types for later forensics instead of blocking in real time.
@@ -321,7 +302,6 @@ Passive network-analysis framework (formerly Bro) that logs rich protocol metada
 
 
 #### Packet Capture & Decoding
-
 
 
 ##### tshark ⭐
@@ -357,7 +337,6 @@ Command-line packet capture using Berkeley Packet Filter (BPF) expressions; the 
 #### Host Audit Logging
 
 
-
 ##### Auditd ⭐
 
 Linux Audit framework userspace (auditd, auditctl, ausearch) recording privileged actions, file access, and security-relevant events to an immutable log across reboots.
@@ -376,7 +355,6 @@ Linux Audit framework userspace (auditd, auditctl, ausearch) recording privilege
 #### Ingest Parsing & Routing
 
 
-
 ##### Logstash ⭐
 
 Data-shaping pipeline (the 'L' in ELK) that pulls logs and metrics, parses, enriches, filters, and routes them to Elasticsearch or any other output.
@@ -393,20 +371,14 @@ Data-shaping pipeline (the 'L' in ELK) that pulls logs and metrics, parses, enri
 
 
 
-
-
-
 ## Detection Engineering & Playbook Tuning
-
 
 
 
 #### Rule Authoring & Content
 
 
-
 ##### Cross-SIEM Rule Formats
-
 
 
 ###### Sigma ⭐
@@ -442,7 +414,6 @@ MITRE's Cyber Analytics Repository: a knowledge base of validated analytics that
 ##### Detection Validation & Malware Rules
 
 
-
 ###### Atomic Red Team
 
 Red Canary's adversary-simulation library mapping hundreds of ATT&CK techniques to executable test definitions; each atomic documents the exact procedure and the telemetry a detection should fire on.
@@ -474,11 +445,7 @@ Binary pattern-matching rule engine for malware families and byte-level IOCs; co
 
 
 
-
-
-
 ## Response Automation, SOAR & Playbooks
-
 
 
 
@@ -498,7 +465,6 @@ Agentic AI SOC copilot — autonomous detect/triage/correlate/respond plus incid
 
 
 #### SOAR / Workflow Automation
-
 
 
 ##### Shuffle ⭐
@@ -534,7 +500,6 @@ Fair-code workflow automation platform with 400+ integrations and a visual edito
 #### Case Management & Enrichment
 
 
-
 ##### TheHive ⭐
 
 Open-source security incident-response platform (TheHive 5) for collecting, sharing, and analyzing alerts as collaborative cases with tasks, observables, and full audit history.
@@ -568,7 +533,6 @@ Open-source analyzer engine (TheHive companion): responders and analyzers run on
 #### Guidance & Incident Playbooks
 
 
-
 ##### CISA Incident Response Playbooks ⭐
 
 CISA's Federal Government Cybersecurity Incident and Vulnerability Response Playbooks: role-by-role, phase-by-phase response guidance with ready-to-copy templates for incident handling.
@@ -600,16 +564,11 @@ NIST Special Publication 800-61 revision 3: incident-response recommendations an
 
 
 
-
-
-
 ## Deception & Tripwires
 
 
 
-
 #### Tripwires & Canaries
-
 
 
 ##### Canarytokens ⭐
@@ -643,16 +602,11 @@ Thinkst's open-source multi-protocol honeypot daemon (SSH, telnet, HTTP, FTP, SN
 
 
 
-
-
-
 ## Mail, Edge & Web Hardening
 
 
 
-
 #### Mail Authentication & Filtering
-
 
 
 ##### rspamd ⭐
@@ -703,7 +657,6 @@ Swiss Army Knife for SMTP: crafts arbitrary test messages with full control over
 #### Host & Edge Intrusion Prevention
 
 
-
 ##### CrowdSec ⭐
 
 Open-source crowd-sourced IPS (Suricata-aware): watches logs and events locally, bans offending IPs via bouncers at the firewall/nginx/cloud level, and shares signals through the community blocklist.
@@ -735,7 +688,6 @@ Classic log-scrape intrusion-prevention daemon that watches services (ssh, nginx
 
 
 #### Web Application Firewalls
-
 
 
 ##### ModSecurity ⭐
@@ -796,8 +748,6 @@ Commercial managed edge WAF (SaaS) filtering traffic on Cloudflare's CDN with ma
 **URL:** https://developers.cloudflare.com/waf/
 
 **Alternatives:** modsecurity, coraza
-
-
 
 
 
