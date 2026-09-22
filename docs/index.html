@@ -315,11 +315,29 @@
     .hint{display:none}
   }
   @media (max-width:640px){
-    .tools .ibtn{padding:6px 8px;font-size:11px}
-    .tools select{max-width:120px}
-    header{flex-wrap:wrap;height:auto;padding:10px 12px;gap:10px}
-    .search{order:3;flex:1 1 100%;max-width:none}
+    header{flex-wrap:wrap;height:auto;padding:8px 12px 6px;gap:8px;align-items:center}
+    .brand .name{font-size:14px}
+    .mark{width:28px;height:28px}
+    .search{order:2;flex:1 1 100%;max-width:none;margin:2px 0 2px}
+    #q{padding:11px 12px 11px 36px;font-size:15px;border-radius:12px}
+    .tools{flex:1 1 auto;justify-content:flex-end;gap:6px}
+    .tools .ibtn{width:38px;height:38px;padding:0;justify-content:center;font-size:15px}
+    .tools .ibtn .lbl{display:none}
+    .tools select{display:none}
     #panel{width:100vw}
+    .legend{padding:7px 12px;gap:8px;bottom:10px;left:12px}
+    .chip{font-size:9.5px}
+    #crd{top:calc(var(--hdr) + 10px);max-width:86vw}
+  }
+  @media (max-width:380px){
+    .brand .name{font-size:12px;letter-spacing:-.2px}
+    .brand{gap:8px}
+    .tools .ibtn{width:34px;height:34px;font-size:14px;gap:3px}
+    .mark{width:24px;height:24px}
+  }
+  @media (max-width:340px){
+    .tools .ibtn{width:29px;height:34px;font-size:13px;gap:2px}
+    .tools{gap:4px}
   }
 </style>
 </head>
@@ -343,9 +361,9 @@
 
   <div class="tools">
     <select id="jumpBox" title="Jump to a domain" aria-label="Jump to a domain"><option value="">⛭ all domains</option></select>
-    <button class="ibtn" id="fitB" title="Fit tree to screen">⛶&nbsp;fit</button>
-    <button class="ibtn" id="coB" title="Collapse everything back to the top">⊟&nbsp;reset</button>
-    <button class="ibtn" id="exB" title="Expand the whole tree">⊞&nbsp;all</button>
+    <button class="ibtn" id="fitB" title="Fit tree to screen">⛶<span class="lbl">&nbsp;fit</span></button>
+    <button class="ibtn" id="coB" title="Collapse everything back to the top">⊟<span class="lbl">&nbsp;reset</span></button>
+    <button class="ibtn" id="exB" title="Expand the whole tree">⊞<span class="lbl">&nbsp;all</span></button>
     <button class="ibtn" id="themeB" title="Toggle theme" aria-label="Toggle theme">◐</button>
   </div>
 </header>
@@ -749,9 +767,14 @@
     g.setAttribute("aria-label", lbl);
     const isBranch = n.type !== "tool" && n.type !== "all" && n.children.length > 0;
     if (isBranch) g.setAttribute("role", "button");
+    const lastTap = { t: 0, id: null };
     g.addEventListener("click", e => {
       e.stopPropagation();
       if (e.detail > 1) return;
+      const now = Date.now();
+      const dbl = lastTap.id === n.path && now - lastTap.t < 550;
+      lastTap.t = now; lastTap.id = n.path;
+      if (dbl && isBranch) { openPanel(n); return; }
       if (n.type === "tool") openPanel(n);
       else if (n.type === "all") { resetTop(); render(); autoFit(); }
       else {
@@ -782,6 +805,7 @@
   }
 
   /* ============ fit / pan / zoom ============ */
+  const isNarrow = () => (svg.clientWidth || 0) < 640;
   function autoFit() {
     if (!visState.length) return;
     let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
@@ -798,26 +822,54 @@
     transform = { x: vw / 2 - cx * k, y: vh / 2 - cy * k, k };
     apply();
   }
+  function phoneBoot() {
+    if (!visState.length) return;
+    const focus = visState.filter(n => n.depth <= 1);
+    const used = focus.length ? focus : visState;
+    let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+    for (const n of used) {
+      const ex = extent(n);
+      minX = Math.min(minX, n.y - ex.l); maxX = Math.max(maxX, n.y + ex.r);
+      minY = Math.min(minY, n.x - 12); maxY = Math.max(maxY, n.x + 12);
+    }
+    const vw = svg.clientWidth || 360, vh = svg.clientHeight || 760, pad = 24;
+    const bw = (maxX - minX) || 1, bh = (maxY - minY) || 1;
+    let k = Math.min((vw - pad * 2) / bw, (vh - pad * 2) / bh);
+    k = Math.max(Math.min(Math.max(k, 0.55), 1.25), 0.4);
+    const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
+    transform = { x: vw / 2 - cx * k, y: vh / 2 - cy * k, k };
+    apply();
+  }
   $("#fitB").addEventListener("click", autoFit);
 
-  let dragging = false, sx = 0, sy = 0, pts = new Map(), pdist = 0, pstart = null;
+  let dragging = false, sx = 0, sy = 0, pts = new Map(), pdist = 0, pstart = null, downXY = null;
   function ptrXY(e) { const r = svg.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
   svg.addEventListener("pointerdown", e => {
     const onNode = e.target.closest(".node") || e.target.closest(".link");
-    if (e.pointerType === "mouse" && onNode) return;
+    if (e.pointerType === "mouse" && onNode) { downXY = null; return; }
     pts.set(e.pointerId, ptrXY(e));
-    if (pts.size === 1) { dragging = true; sx = e.clientX - transform.x; sy = e.clientY - transform.y; svg.classList.add("drag"); svg.setPointerCapture(e.pointerId); }
+    if (pts.size === 1) {
+      downXY = { x: e.clientX, y: e.clientY };
+      dragging = false;
+      svg.classList.add("drag");
+    }
     else if (pts.size === 2) {
       const [a, b] = [...pts.values()];
       pdist = Math.hypot(a.x - b.x, a.y - b.y);
       pstart = { k: transform.k, mid: { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 } };
-      dragging = false;
+      dragging = false; downXY = null;
+      for (const id of pts.keys()) { try { svg.setPointerCapture(id); } catch (err) {} }
     }
   });
   svg.addEventListener("pointermove", e => {
     if (!pts.has(e.pointerId)) return;
     if (pts.size === 1) {
-      if (!dragging) return;
+      if (!dragging) {
+        if (!downXY) return;
+        if (Math.abs(e.clientX - downXY.x) < 8 && Math.abs(e.clientY - downXY.y) < 8) return;
+        dragging = true; sx = e.clientX - transform.x; sy = e.clientY - transform.y;
+        try { svg.setPointerCapture(e.pointerId); } catch (err) {}
+      }
       transform.x = e.clientX - sx; transform.y = e.clientY - sy; apply();
       pts.set(e.pointerId, ptrXY(e));
     } else if (pts.size === 2 && pdist && pstart) {
@@ -833,7 +885,7 @@
   function endPtr(e) {
     pts.delete(e.pointerId);
     if (pts.size < 2) { pdist = 0; pstart = null; }
-    if (pts.size === 0) { dragging = false; svg.classList.remove("drag"); }
+    if (pts.size === 0) { dragging = false; downXY = null; svg.classList.remove("drag"); }
   }
   svg.addEventListener("pointerup", endPtr);
   svg.addEventListener("pointercancel", endPtr);
@@ -854,7 +906,7 @@
 
   /* re-fit on resize / device rotation */
   let rzT = 0;
-  window.addEventListener("resize", () => { clearTimeout(rzT); rzT = setTimeout(() => { autoFit(); setTimeout(autoFit, 160); }, 120); });
+  window.addEventListener("resize", () => { clearTimeout(rzT); rzT = setTimeout(() => { (isNarrow() ? phoneBoot() : autoFit()); setTimeout(() => isNarrow() ? phoneBoot() : autoFit(), 160); }, 120); });
 
   /* ============ expand / collapse / reset ============ */
   function closeDeep(n) { n.open = false; for (const c of n.children) if (c.children.length) closeDeep(c); }
@@ -868,7 +920,7 @@
     for (const c of n.children) if (c.children.length) expandAll(c);
   }
   $("#exB").addEventListener("click", () => { if (!allRoot) return; expandAll(allRoot); render(); autoFit(); });
-  $("#coB").addEventListener("click", () => { if (!allRoot) return; resetTop(); render(); autoFit(); });
+  $("#coB").addEventListener("click", () => { if (!allRoot) return; resetTop(); render(); isNarrow() ? phoneBoot() : autoFit(); });
 
   /* ============ search ============ */
   const q = $("#q"), res = $("#res");
@@ -1046,8 +1098,8 @@
     buildIndex();
     fillJump();
     render();
-    autoFit();
-    setTimeout(autoFit, 120);
+    (isNarrow() ? phoneBoot() : autoFit());
+    setTimeout(() => isNarrow() ? phoneBoot() : autoFit(), 120);
 
     /* keep --hdr in sync with the real header height (header wraps on narrow viewports) */
     const hdrEl = document.querySelector("header");
