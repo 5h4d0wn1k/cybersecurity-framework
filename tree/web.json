@@ -2,100 +2,305 @@
   "id": "web",
   "name": "Web Application Security",
   "emoji": "🕸️",
-  "tagline": "The full web assessment stack: intercepting proxies, discovery, injection testing, API tooling, and OWASP-class vulnerability testing — nested by technique.",
+  "tagline": "The full web assessment stack: intercepting proxies, deep content discovery, injection testing, XSS & clickjacking, API security, and OWASP-class bypass tooling — nested by technique.",
   "class": "offense",
   "categories": [
     {
       "id": "intercepting-proxies",
       "name": "Intercepting Proxies",
-      "tools": [
+      "subcategories": [
         {
-          "name": "Burp Suite",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "The de-facto intercepting proxy for manual testing: intercept/edit requests, inspect responses, map the app, and extend via a large BApp marketplace.",
-          "when": "Every manual web engagement; the default scratchpad for inspecting and shaping requests to an app you are authorized to test.",
-          "install": "brew install --cask burp-suite",
-          "url": "https://portswigger.net/burp",
-          "alt": ["OWASP ZAP", "Caido"]
+          "id": "full-feature-suites",
+          "name": "Full-Feature Suites",
+          "tools": [
+            {
+              "name": "Burp Suite",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "The de-facto intercepting proxy for manual testing: intercept/edit requests, inspect responses, map the app, and extend via a huge BApp marketplace.",
+              "when": "Every authorized manual web engagement; the default scratchpad for inspecting and shaping requests to an app in scope.",
+              "install": "brew install --cask burp-suite",
+              "url": "https://portswigger.net/burp",
+              "alt": ["OWASP ZAP", "Caido"]
+            },
+            {
+              "name": "OWASP ZAP",
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Free and open-source OWASP proxy with automated scanning, fuzzing, DOM spelunking, and a REST API for CI-driven baseline scans.",
+              "when": "When you need a fully open, scriptable proxy with built-in automation you can drive from a pipeline against a staging app you own.",
+              "install": "sudo snap install zaproxy --classic",
+              "url": "https://github.com/zaproxy/zaproxy",
+              "alt": ["Burp Suite", "Caido"]
+            },
+            {
+              "name": "Caido",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Lightweight, modern intercepting proxy with a clean UI, fast request replay, and a built-in graph of your target's flow.",
+              "when": "When you want a slim, single-binary proxy for interception and replay without a heavyweight install footprint.",
+              "install": "brew tap caido/caido && brew install caido",
+              "url": "https://github.com/caido/caido",
+              "alt": ["Burp Suite", "OWASP ZAP"]
+            }
+          ]
         },
         {
-          "name": "OWASP ZAP",
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Free and open-source OWASP proxy with automated scanning, fuzzing, and a REST API for CI-driven baseline scanning.",
-          "when": "When you need a fully open, scriptable proxy with automated scanning you can drive from a pipeline against a staging app you own.",
-          "install": "sudo snap install zaproxy --classic",
-          "url": "https://github.com/zaproxy/zaproxy",
-          "alt": ["Burp Suite", "Caido"]
-        },
-        {
-          "name": "Caido",
-          "rating": 3,
-          "effort": "easy",
-          "desc": "Lightweight, modern intercepting proxy with a clean UI and fast request replay, built as a slim alternative to the heavyweight suites.",
-          "when": "When you want a quick, single-file proxy for interception and replay without a large install footprint.",
-          "install": "brew tap caido/caido && brew install caido",
-          "url": "https://github.com/caido/caido",
-          "alt": ["Burp Suite", "OWASP ZAP"]
+          "id": "standalone-proxies",
+          "name": "Standalone Desktop Proxies",
+          "tools": [
+            {
+              "name": "Charles Proxy",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Commercial desktop proxy with SSL browsing, bandwidth throttling, and rewrite tools for debugging web traffic.",
+              "when": "When you want a polished GUI focus on mobile app and local HTTPS traffic you are authorized to inspect.",
+              "install": "brew install --cask charles",
+              "url": "https://www.charlesproxy.com",
+              "alt": ["Proxyman", "OWASP ZAP"]
+            },
+            {
+              "name": "Proxyman",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Native macOS proxy with elegant UI, SSL pinning bypass for testing, and script-driven scenarios.",
+              "when": "When you work primarily on macOS and want a fast proxy with iOS/Android companion apps for your own traffic.",
+              "install": "brew install --cask proxyman",
+              "url": "https://proxyman.io",
+              "alt": ["Charles Proxy", "mitmproxy"]
+            }
+          ]
         }
       ]
     },
     {
       "id": "content-discovery",
       "name": "Content Discovery & Fuzzing",
-      "tools": [
+      "subcategories": [
         {
-          "name": "ffuf",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Extremely fast web fuzzer written in Go for directories, files, parameters, vhosts, and more; supports filters, recursion, and matchers.",
-          "when": "Anytime you need fast brute-force discovery of paths or parameters against a target you are authorized to test.",
-          "install": "go install github.com/ffuf/ffuf/v2@latest",
-          "url": "https://github.com/ffuf/ffuf",
-          "alt": ["gobuster", "feroxbuster", "dirsearch"]
+          "id": "directory-and-file-discovery",
+          "name": "Directory & File Discovery",
+          "subcategories": [
+            {
+              "id": "fast-fuzzers",
+              "name": "Fast Fuzzers",
+              "tools": [
+                {
+                  "name": "ffuf",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "Extremely fast Go web fuzzer for directories, files, parameters, and vhosts with matchers, filters, and recursion.",
+                  "when": "Anytime you need fast brute-force discovery of paths or parameters against a target you are authorized to test.",
+                  "install": "go install github.com/ffuf/ffuf/v2@latest",
+                  "url": "https://github.com/ffuf/ffuf",
+                  "alt": ["gobuster", "feroxbuster"]
+                },
+                {
+                  "name": "gobuster",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Simple multi-purpose fuzzer for directories, DNS subdomains, and virtual hosts using wordlists.",
+                  "when": "When you want a lightweight, easy-to-script brute forcer for your scoped discovery phase.",
+                  "install": "go install github.com/OJ/gobuster/v3@latest",
+                  "url": "https://github.com/OJ/gobuster",
+                  "alt": ["ffuf", "feroxbuster"]
+                },
+                {
+                  "name": "feroxbuster",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Fast recursive content discovery fuzzer in Rust that automatically scans directories it finds.",
+                  "when": "When you want recursion plus auto-rescanning of discovered directories out of the box.",
+                  "install": "cargo install feroxbuster",
+                  "url": "https://github.com/epi052/feroxbuster",
+                  "alt": ["ffuf", "gobuster"]
+                }
+              ]
+            },
+            {
+              "id": "python-scanners",
+              "name": "Scriptable Python Scanners",
+              "tools": [
+                {
+                  "name": "dirsearch",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Mature Python path scanner with threading, proxy support, and rich status-code filters.",
+                  "when": "When a straightforward, cross-platform Python scanner with many wordlist and output options is all you need.",
+                  "install": "pipx install dirsearch",
+                  "url": "https://github.com/maurosoria/dirsearch",
+                  "alt": ["wfuzz", "feroxbuster"]
+                },
+                {
+                  "name": "wfuzz",
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "Flexible Python fuzzer for web content and parameters with rich payload/encoding options and multi-position iteration.",
+                  "when": "When you need fine-grained iteration over multiple payload positions and encoding filters in your tests.",
+                  "install": "sudo apt install wfuzz",
+                  "url": "https://github.com/xmendez/wfuzz",
+                  "alt": ["ffuf", "dirsearch"]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "gobuster",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Simple multi-purpose fuzzer for directories, DNS subdomains, and virtual hosts using wordlists.",
-          "when": "When you want a lightweight, easy-to-script brute forcer without a big learning curve.",
-          "install": "go install github.com/OJ/gobuster/v3@latest",
-          "url": "https://github.com/OJ/gobuster",
-          "alt": ["ffuf", "feroxbuster"]
+          "id": "parameter-discovery",
+          "name": "Parameter Discovery",
+          "subcategories": [
+            {
+              "id": "hidden-parameter-miners",
+              "name": "Hidden Parameter Miners",
+              "tools": [
+                {
+                  "name": "Arjun",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Finds hidden HTTP parameters in URLs and header values using a large wordlist and heuristics.",
+                  "when": "When you want to discover undocumented parameters an API or page accepts on a target in scope.",
+                  "install": "pipx install arjun",
+                  "url": "https://github.com/s0md3v/Arjun",
+                  "alt": ["x8", "Param Miner"]
+                },
+                {
+                  "name": "x8",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Fast Go-based hidden parameter fuzzer with configurable detection heuristics and concurrency.",
+                  "when": "When you need a fast single-binary parameter miner that integrates into shell pipelines.",
+                  "install": "go install github.com/Sh1Yo/x8@latest",
+                  "url": "https://github.com/Sh1Yo/x8",
+                  "alt": ["Arjun", "Param Minner"]
+                },
+                {
+                  "name": "Param Miner",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Burp Suite extension that guesses hidden parameters, headers, and cookies on both base requests and reflected points.",
+                  "when": "When you are already in Burp and want passive parameter guessing while you manually explore in scope.",
+                  "install": "Install 'Param Miner' from the Burp BApp Store",
+                  "url": "https://github.com/portswigger/param-miner",
+                  "alt": ["Arjun", "x8"]
+                }
+              ]
+            },
+            {
+              "id": "source-scrapers",
+              "name": "Parameter Source Scrapers",
+              "tools": [
+                {
+                  "name": "ParamSpider",
+                  "best": true,
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Scrapes parameters from Wayback, Common Crawl, and more to compile endpoint lists for later fuzzing.",
+                  "when": "When you want to bulk-collect parameter-bearing URLs from archives to feed subsequent testing.",
+                  "install": "pipx install paramspider",
+                  "url": "https://github.com/devanshbatham/ParamSpider",
+                  "alt": ["Arjun"]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "feroxbuster",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Fast, recursive content discovery fuzzer built in Rust that automatically scans discovered directories.",
-          "when": "When you want recursion and auto-re-scanning of found directories out of the box.",
-          "install": "cargo install feroxbuster",
-          "url": "https://github.com/epi052/feroxbuster",
-          "alt": ["ffuf", "gobuster", "dirsearch"]
+          "id": "virtual-host-discovery",
+          "name": "Virtual Host Discovery",
+          "subcategories": [
+            {
+              "id": "vhost-fuzzers",
+              "name": "VHost Fuzzers",
+              "tools": [
+                {
+                  "name": "ffuf",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Can brute-force virtual hosts by fuzzing the Host header and matching on distinct response sizes.",
+                  "when": "When you want to enumerate in-scope virtual hosts behind a shared IP or reverse proxy.",
+                  "install": "go install github.com/ffuf/ffuf/v2@latest",
+                  "url": "https://github.com/ffuf/ffuf",
+                  "alt": ["gobuster"]
+                },
+                {
+                  "name": "gobuster",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Supports a dedicated vhost mode that fuzzes the Host header against a known target.",
+                  "when": "When you prefer a single simple binary for a quick virtual-host sweep on authorized targets.",
+                  "install": "go install github.com/OJ/gobuster/v3@latest",
+                  "url": "https://github.com/OJ/gobuster",
+                  "alt": ["ffuf"]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "dirsearch",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Mature Python path scanner with threading, proxy support, and extensive filter/ignored-status options.",
-          "when": "When a simple, cross-platform Python scanner with many wordlist and output options is all you need.",
-          "install": "pipx install dirsearch",
-          "url": "https://github.com/maurosoria/dirsearch",
-          "alt": ["ffuf", "feroxbuster", "gobuster"]
-        },
-        {
-          "name": "wfuzz",
-          "rating": 3,
-          "effort": "medium",
-          "desc": "Flexible Python fuzzer for web content and parameter brute-forcing with rich payload/encoding options.",
-          "when": "When you need fine-grained iteration over multiple payload positions and encoding filters.",
-          "install": "sudo apt install wfuzz",
-          "url": "https://github.com/xmendez/wfuzz",
-          "alt": ["ffuf", "ffuf"]
+          "id": "wordlists",
+          "name": "Wordlists",
+          "subcategories": [
+            {
+              "id": "general-purpose",
+              "name": "General-Purpose Lists",
+              "tools": [
+                {
+                  "name": "SecLists",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "The community standard collection of wordlists for discovery, fuzzing, injection, usernames, passwords, and more.",
+                  "when": "When you need a broad, trustworthy baseline wordlist for any scoped fuzzing activity.",
+                  "install": "git clone https://github.com/danielmiessler/SecLists",
+                  "url": "https://github.com/danielmiessler/SecLists",
+                  "alt": ["Assetnote Wordlists", "PayloadsAllTheThings"]
+                },
+                {
+                  "name": "PayloadsAllTheThings",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Categorized payloads and cheat sheets for every injection class, from RCE to SSTI to SSRF.",
+                  "when": "When you need a quick, in-context payload reference while crafting manual tests.",
+                  "install": "git clone https://github.com/swisskyrepo/PayloadsAllTheThings",
+                  "url": "https://github.com/swisskyrepo/PayloadsAllTheThings",
+                  "alt": ["SecLists"]
+                }
+              ]
+            },
+            {
+              "id": "curated-scopes",
+              "name": "Curated & Scoped Lists",
+              "tools": [
+                {
+                  "name": "Assetnote Wordlists",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Industry-derived wordlists built from massive real-world indexed datasets, including API parameter lists.",
+                  "when": "When baseline wordlists miss and you need high-quality lists for API and content discovery.",
+                  "install": "git clone https://github.com/assetnote/wordlists",
+                  "url": "https://wordlists.assetnote.io",
+                  "alt": ["SecLists", "raft"]
+                },
+                {
+                  "name": "raft (Rapid Fire Threads)",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Classic raft wordlists (small/medium/large) for directories and files, maintained inside SecLists.",
+                  "when": "When you want quick, proven-size wordlists tuned to file and directory names without noise.",
+                  "install": "curl -O https://raw.githubusercontent.com/danielmiessler/SecLists/master/Discovery/Web-Content/raft-large-files.txt",
+                  "url": "https://github.com/danielmiessler/SecLists/tree/master/Discovery/Web-Content",
+                  "alt": ["SecLists", "Assetnote Wordlists"]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -104,167 +309,563 @@
       "name": "Injection & Data-Plane Testing",
       "subcategories": [
         {
-          "id": "sql-injection",
-          "name": "SQL Injection",
-          "tools": [
+          "id": "database-injection",
+          "name": "Database Injection",
+          "subcategories": [
             {
-              "name": "sqlmap",
-              "best": true,
-              "rating": 5,
-              "effort": "medium",
-              "desc": "The reference automated SQLi tool: detects and exploits injection in GET/POST/headers, enumerates DBMSes, and dumps data on targets you are authorized to test.",
-              "when": "When a parameter looks injectable and you want thorough detection plus DB fingerprinting, safe limits, and batch modes.",
-              "install": "sudo apt install sqlmap",
-              "url": "https://github.com/sqlmapproject/sqlmap",
-              "alt": ["NoSQLMap"]
+              "id": "sql-injection",
+              "name": "SQL Injection",
+              "tools": [
+                {
+                  "name": "sqlmap",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "The reference automated SQLi tool: detects and exploits injection in GET/POST/headers, enumerates DBMSes, and dumps data on authorized targets.",
+                  "when": "When a parameter looks injectable and you want thorough detection, DB fingerprinting, safe limits, and batch modes.",
+                  "install": "sudo apt install sqlmap",
+                  "url": "https://github.com/sqlmapproject/sqlmap",
+                  "alt": ["jSQL Injection"]
+                },
+                {
+                  "name": "jSQL Injection",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Java GUI tool for automated SQLi detection and exploitation with SQLi and NoSQL/path-style payloads.",
+                  "when": "When you want a desktop GUI over automated SQLi rather than a CLI-only flow on your scoped targets.",
+                  "install": "git clone https://github.com/ron190/jsql-injection",
+                  "url": "https://github.com/ron190/jsql-injection",
+                  "alt": ["sqlmap"]
+                }
+              ]
             },
             {
-              "name": "NoSQLMap",
-              "rating": 3,
-              "effort": "medium",
-              "desc": "Automated pentesting tool for NoSQL databases (MongoDB, CouchDB) injection and misconfiguration.",
-              "when": "When the backend is NoSQL and you need injection-point discovery against an app you own or have scope for.",
-              "install": "git clone https://github.com/codingo/NoSQLMap && pip3 install -r NoSQLMap/requirements.txt",
-              "url": "https://github.com/codingo/NoSQLMap",
-              "alt": ["sqlmap"]
+              "id": "nosql-injection",
+              "name": "NoSQL Injection",
+              "tools": [
+                {
+                  "name": "NoSQLMap",
+                  "best": true,
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "Automated testing tool for NoSQL databases (MongoDB, CouchDB) injection and misconfiguration.",
+                  "when": "When the backend is NoSQL and you need injection-point discovery against an app in scope.",
+                  "install": "git clone https://github.com/codingo/NoSQLMap && pip install -r NoSQLMap/requirements.txt",
+                  "url": "https://github.com/codingo/NoSQLMap",
+                  "alt": ["sqlmap"]
+                }
+              ]
             }
           ]
         },
         {
-          "id": "command-injection",
-          "name": "Command Injection",
-          "tools": [
+          "id": "code-injection",
+          "name": "Code Injection",
+          "subcategories": [
             {
-              "name": "Commix",
-              "best": true,
-              "rating": 4,
-              "effort": "medium",
-              "desc": "Automated OS command injection detection and exploitation with support for many injection techniques and filter bypasses.",
-              "when": "When you suspect command injection in a parameter or header and want an automated detector on authorized targets.",
-              "install": "git clone https://github.com/commixproject/commix && cd commix && python3 commix.py -h",
-              "url": "https://github.com/commixproject/commix",
-              "alt": ["sqlmap (secondary)"]
-            }
-          ]
-        },
-        {
-          "id": "template-injection",
-          "name": "Server-Side Template Injection (SSTI)",
-          "tools": [
+              "id": "command-injection",
+              "name": "Command Injection",
+              "tools": [
+                {
+                  "name": "Commix",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Automated OS command injection detection and exploitation with support for many injection techniques and filter bypasses.",
+                  "when": "When you suspect command injection in a parameter or header and want an automated detector on authorized targets.",
+                  "install": "git clone https://github.com/commixproject/commix && python3 commix.py -h",
+                  "url": "https://github.com/commixproject/commix",
+                  "alt": ["sqlmap (secondary use of shell filters)"]
+                }
+              ]
+            },
             {
-              "name": "tplmap",
-              "best": true,
-              "rating": 3,
-              "effort": "medium",
-              "desc": "Detects and exploits server-side template injection across engines (Jinja2, Twig, Freemarker, etc.).",
-              "when": "When an app renders user input inside templates and you need to confirm SSTI on a scope-authorized target.",
-              "install": "git clone https://github.com/epinna/tplmap && pip3 install -r tplmap/requirements.txt",
-              "url": "https://github.com/epinna/tplmap",
-              "alt": []
+              "id": "template-injection",
+              "name": "Server-Side Template Injection (SSTI)",
+              "tools": [
+                {
+                  "name": "tplmap",
+                  "best": true,
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "Detects and exploits server-side template injection across engines (Jinja2, Twig, Freemarker, etc.).",
+                  "when": "When an app renders user input inside templates and you need to confirm SSTI on a scope-authorized target.",
+                  "install": "git clone https://github.com/epinna/tplmap && pip install -r tplmap/requirements.txt",
+                  "url": "https://github.com/epinna/tplmap",
+                  "alt": ["SSTImap"]
+                },
+                {
+                  "name": "SSTImap",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Actively maintained fork/rewrite of tplmap for SSTI detection and exploitation across web template engines.",
+                  "when": "When tplmap is unmaintained and you want current engine payload support for your authorized tests.",
+                  "install": "git clone https://github.com/vladko312/SSTImap && python3 sstimap.py -h",
+                  "url": "https://github.com/vladko312/SSTImap",
+                  "alt": ["tplmap"]
+                }
+              ]
             }
           ]
         }
       ]
     },
     {
-      "id": "xss",
-      "name": "Cross-Site Scripting (XSS) Testing",
-      "tools": [
-        {
-          "name": "Dalfox",
-          "best": true,
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Fast, parameter-analysis XSS scanner written in Go with payload generation and Telegram/Discord notification support.",
-          "when": "When you want to automate XSS discovery against a list of endpoints on authorized targets and pipeline results.",
-          "install": "go install github.com/hahwul/dalfox/v2@latest",
-          "url": "https://github.com/hahwul/dalfox",
-          "alt": ["XSStrike"]
-        },
-        {
-          "name": "XSStrike",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "XSS detection suite with payload crafting, bruteforce, and WAF/filter-detection heuristics.",
-          "when": "When you need sophisticated payload crafting and WAF detection for manual XSS validation in your tests.",
-          "install": "git clone https://github.com/s0md3v/XSStrike && pip3 install -r XSStrike/requirements.txt",
-          "url": "https://github.com/s0md3v/XSStrike",
-          "alt": ["Dalfox"]
-        }
-      ]
-    },
-    {
-      "id": "api-testing",
-      "name": "API Testing & Traffic Shaping",
-      "tools": [
-        {
-          "name": "mitmproxy",
-          "best": true,
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Interactive man-in-the-middle proxy with a powerful scriptable (Python) add-on API for request shaping and inspection.",
-          "when": "When you need programmatic control over intercepted API traffic (rewrite, capture, fuzz) in your tests.",
-          "install": "brew install mitmproxy",
-          "url": "https://mitmproxy.org",
-          "alt": ["Postman", "httpie"]
-        },
-        {
-          "name": "Postman",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "API client and collection runner for crafting, saving, and automating HTTP requests against services under test.",
-          "when": "When you need organized collections, environments, and simple automation to reason about an API's behavior.",
-          "install": "brew install --cask postman",
-          "url": "https://www.postman.com",
-          "alt": ["httpie", "mitmproxy"]
-        },
-        {
-          "name": "HTTPie",
-          "rating": 3,
-          "effort": "easy",
-          "desc": "User-friendly command-line HTTP client with readable, colorful output for quick manual requests.",
-          "when": "For fast ad-hoc requests in a terminal during investigation without a heavyweight GUI.",
-          "install": "brew install httpie",
-          "url": "https://httpie.io",
-          "alt": ["Postman", "mitmproxy"]
-        }
-      ]
-    },
-    {
-      "id": "web-vulns",
-      "name": "Class & Variable-Specific Testing",
+      "id": "xss-and-clickjacking",
+      "name": "Cross-Site Scripting & Clickjacking",
       "subcategories": [
         {
-          "id": "jwt-security",
-          "name": "JWT / Token Security",
+          "id": "xss-scanning",
+          "name": "XSS Scanning",
+          "subcategories": [
+            {
+              "id": "automated-scanners",
+              "name": "Automated Scanners",
+              "tools": [
+                {
+                  "name": "Dalfox",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Fast XSS scanner with parameter analysis, payload generation, detection of reflection points, and CI-friendly output.",
+                  "when": "When you want to automate XSS discovery against endpoint lists on authorized targets and pipeline results.",
+                  "install": "go install github.com/hahwul/dalfox/v2@latest",
+                  "url": "https://github.com/hahwul/dalfox",
+                  "alt": ["XSStrike", "xsser"]
+                },
+                {
+                  "name": "XSStrike",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "XSS detection suite with payload crafting, bruteforce, and WAF/filter-detection heuristics.",
+                  "when": "When you need sophisticated payload crafting and WAF detection for manual XSS validation in your tests.",
+                  "install": "git clone https://github.com/s0md3v/XSStrike && pip install -r XSStrike/requirements.txt",
+                  "url": "https://github.com/s0md3v/XSStrike",
+                  "alt": ["Dalfox"]
+                },
+                {
+                  "name": "xsser",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Long-standing XSS scanner with encoding/obfuscation bypasses, DORCE, and crawler support.",
+                  "when": "When you want a classic CLI scanner with many encoding bypass options against in-scope pages.",
+                  "install": "sudo apt install xsser",
+                  "url": "https://github.com/epsylon/xsser",
+                  "alt": ["Dalfox", "XSStrike"]
+                }
+              ]
+            },
+            {
+              "id": "oob-callback-platforms",
+              "name": "Out-of-Band Callback Platforms",
+              "tools": [
+                {
+                  "name": "XSS Hunter Express",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Self-hostable platform that proves XSS via injected payload probes sending interactive callback notifications.",
+                  "when": "When you need persistent, hosted OOB XSS payloads that report callbacks during a longer engagement.",
+                  "install": "git clone https://github.com/mandatoryprogrammer/xsshunter-express && docker compose up --build",
+                  "url": "https://github.com/mandatoryprogrammer/xsshunter-express",
+                  "alt": ["interactsh", "Burp Collaborator"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "clickjacking",
+          "name": "Clickjacking / UI Redressing",
           "tools": [
             {
-              "name": "jwt_tool",
+              "name": "quickjack",
               "best": true,
               "rating": 4,
               "effort": "easy",
-              "desc": "Audits JSON Web Tokens: signature verification, algorithm confusion, and known CVE checks against tokens issued by apps you test.",
-              "when": "When an application uses JWTs and you need to inspect claims, check alg:none/confusion, and validate signing secrets.",
-              "install": "git clone https://github.com/ticarpi/jwt_tool && cd jwt_tool && python3 jwt_tool.py -h",
-              "url": "https://github.com/ticarpi/jwt_tool",
-              "alt": []
+              "desc": "Point-and-click PoC generator for advanced clickjacking and frame slicing attacks with generated HTML snippets.",
+              "when": "When you found a frameable page without X-Frame-Options/CSP frame-ancestors and need a PoC to demonstrate it.",
+              "install": "Open the hosted generator at https://samy.pl/quickjack/quickjack.html",
+              "url": "https://github.com/samyk/quickjack",
+              "alt": ["ClickjackPoc"]
+            },
+            {
+              "name": "ClickjackPoc",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Minimal browser-extension/POC helper for generating HTML clickjacking proofs quickly.",
+              "when": "When you want a fast, scriptable way to produce clickjacking PoC HTML for reports.",
+              "install": "git clone https://github.com/Raiders0786/ClickjackPoc",
+              "url": "https://github.com/Raiders0786/ClickjackPoc",
+              "alt": ["quickjack"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "api-security",
+      "name": "API Security & Traffic Shaping",
+      "subcategories": [
+        {
+          "id": "api-traffic-tooling",
+          "name": "API Traffic Tooling",
+          "subcategories": [
+            {
+              "id": "api-clients",
+              "name": "API Clients",
+              "tools": [
+                {
+                  "name": "Postman",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "API client and collection runner for crafting, saving, and automating HTTP requests against services under test.",
+                  "when": "When you need organized collections, environments, and simple automation to reason about an API's behavior.",
+                  "install": "brew install --cask postman",
+                  "url": "https://www.postman.com",
+                  "alt": ["Bruno", "HTTPie"]
+                },
+                {
+                  "name": "Bruno",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Open-source, offline-first API client using plain-text collections you can version in git.",
+                  "when": "When you want API collections stored as data you can review and diff in code review.",
+                  "install": "brew install --cask bruno",
+                  "url": "https://github.com/usebruno/bruno",
+                  "alt": ["Postman", "HTTPie"]
+                },
+                {
+                  "name": "HTTPie",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "User-friendly command-line HTTP client with readable, colorful output for quick manual requests.",
+                  "when": "For fast ad-hoc requests in a terminal during investigation without a heavyweight GUI.",
+                  "install": "brew install httpie",
+                  "url": "https://httpie.io",
+                  "alt": ["Postman", "Bruno"]
+                }
+              ]
+            },
+            {
+              "id": "scriptable-proxies",
+              "name": "Scriptable Proxies",
+              "tools": [
+                {
+                  "name": "mitmproxy",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Interactive man-in-the-middle proxy with a powerful scriptable (Python) add-on API for request shaping and inspection.",
+                  "when": "When you need programmatic control over intercepted API and app traffic (rewrite, capture, fuzz) in your tests.",
+                  "install": "brew install mitmproxy",
+                  "url": "https://mitmproxy.org",
+                  "alt": ["HTTP Toolkit"]
+                },
+                {
+                  "name": "HTTP Toolkit",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "GUI proxy for intercepting, inspecting, and mocking HTTP(S) traffic from browsers, Android, and server processes.",
+                  "when": "When you want zero-config TLS interception and a friendly UI for debugging your own or in-scope traffic.",
+                  "install": "brew install --cask http-toolkit",
+                  "url": "https://github.com/httptoolkit/httptoolkit",
+                  "alt": ["mitmproxy"]
+                }
+              ]
             }
           ]
         },
         {
-          "id": "http-smuggling",
-          "name": "HTTP Request Smuggling",
-          "tools": [
+          "id": "api-endpoint-fuzzing",
+          "name": "API Endpoint Fuzzing",
+          "subcategories": [
             {
-              "name": "smuggler",
-              "best": true,
-              "rating": 4,
-              "effort": "medium",
-              "desc": "Detects HTTP request smuggling variants (CL.TE, TE.CL, TE.TE obfuscation) against backend parsing mismatches.",
-              "when": "When a stack splits differently between proxies/back-ends and you want to test smuggling scenarios on authorized targets.",
-              "install": "git clone https://github.com/defparam/smuggler && python3 smuggler.py regex.txt urls.txt",
-              "url": "https://github.com/defparam/smuggler",
-              "alt": []
+              "id": "schema-fuzzers",
+              "name": "Schema-Based Fuzzers",
+              "tools": [
+                {
+                  "name": "schemathesis",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Property-based testing for OpenAPI/GraphQL schemas that generates edge-case requests to uncover 5xx and contract violations.",
+                  "when": "When an API publishes an OpenAPI spec and you want automated schema-driven testing in CI.",
+                  "install": "pipx install schemathesis",
+                  "url": "https://github.com/schemathesis/schemathesis",
+                  "alt": ["kiterunner"]
+                }
+              ]
+            },
+            {
+              "id": "route-discovery",
+              "name": "Hidden Route Discovery",
+              "tools": [
+                {
+                  "name": "kiterunner",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Assetnote's fast API endpoint and route discovery scanner optimized against massive route wordlists.",
+                  "when": "When you want to expose undocumented API routes and endpoints a spec won't tell you about.",
+                  "install": "git clone https://github.com/assetnote/kiterunner && make build",
+                  "url": "https://github.com/assetnote/kiterunner",
+                  "alt": ["ffuf", "schemathesis"]
+                }
+              ]
+            },
+            {
+              "id": "forbidden-response-bypass",
+              "name": "403 / 40x Response Bypass",
+              "tools": [
+                {
+                  "name": "byp4xx",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Rapid 403/40x bypasser that tries path normalization, header tricks, and encoding variations against protected endpoints.",
+                  "when": "When an API path returns 403 solely due to WAF/path rules and you want to test authorized bypass vectors.",
+                  "install": "git clone https://github.com/lobuhi/byp4xx && bash byp4xx.sh",
+                  "url": "https://github.com/lobuhi/byp4xx",
+                  "alt": ["nomore403"]
+                },
+                {
+                  "name": "nomore403",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Go tool that scans a list of 403 URLs and tries common bypass techniques to reveal hidden content.",
+                  "when": "When you have many blocked URLs from crawling and want an automated sweep across bypass techniques.",
+                  "install": "git clone https://github.com/devploit/nomore403 && sudo python3 nomore403.py -u https://target/",
+                  "url": "https://github.com/devploit/nomore403",
+                  "alt": ["byp4xx"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bypass-and-misconfiguration",
+      "name": "Bypass, Auth & Misconfiguration",
+      "subcategories": [
+        {
+          "id": "authentication",
+          "name": "Authentication & Sessions",
+          "subcategories": [
+            {
+              "id": "jwt-testing",
+              "name": "JWT Testing",
+              "tools": [
+                {
+                  "name": "jwt_tool",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Audits JSON Web Tokens: signature verification, algorithm confusion, known CVE checks, and secret brute-forcing.",
+                  "when": "When an app uses JWTs and you need to inspect claims, check alg:none/confusion, and validate signing secrets.",
+                  "install": "git clone https://github.com/ticarpi/jwt_tool && cd jwt_tool && pip install -r requirements.txt",
+                  "url": "https://github.com/ticarpi/jwt_tool",
+                  "alt": ["JWT Editor", "JWT4B"]
+                },
+                {
+                  "name": "JWT Editor",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Official Burp extension to encode, decode, forge, and tamper with JWTs including alg confusion and kid injection.",
+                  "when": "When you are already inside Burp and want intercept-time JWT tampering on requests in scope.",
+                  "install": "Install 'JWT Editor' from the Burp BApp Store",
+                  "url": "https://github.com/PortSwigger/jwt-editor",
+                  "alt": ["jwt_tool", "JWT4B"]
+                },
+                {
+                  "name": "JWT4B",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Burp Suite tab extension that decodes, validates, and brute-forces JWT signatures with attack templates.",
+                  "when": "When you prefer a dedicated Burp tab for JWT analysis and signature brute-forcing during a test.",
+                  "install": "git clone https://github.com/ozzi-/JWT4B",
+                  "url": "https://github.com/ozzi-/JWT4B",
+                  "alt": ["jwt_tool", "JWT Editor"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "server-side-request-forgery",
+          "name": "Server-Side Request Forgery (SSRF)",
+          "subcategories": [
+            {
+              "id": "ssrf-exploitation",
+              "name": "SSRF Exploitation",
+              "tools": [
+                {
+                  "name": "SSRFmap",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Automates SSRF discovery and exploitation including file reads, port scans, and protocol-based attacks.",
+                  "when": "When a URL/parameter fetches remote content and you want to confirm and demo SSRF impact in scope.",
+                  "install": "git clone https://github.com/swisskyrepo/SSRFmap && pip install -r SSRFmap/requirements.txt",
+                  "url": "https://github.com/swisskyrepo/SSRFmap",
+                  "alt": ["Gopherus"]
+                },
+                {
+                  "name": "Gopherus",
+                  "best": true,
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "Generates Gopher payloads to attack MySQL, Redis, SMTP, and more from SSRF-capable endpoints.",
+                  "when": "When you have an SSRF that reaches internal services and need gopher payload generation for exploitation.",
+                  "install": "git clone https://github.com/tarunkant/Gopherus && python3 Gopherus/gopherus.py --help",
+                  "url": "https://github.com/tarunkant/Gopherus",
+                  "alt": ["SSRFmap"]
+                }
+              ]
+            },
+            {
+              "id": "oast-callback-platforms",
+              "name": "OAST Callback Platforms",
+              "tools": [
+                {
+                  "name": "interactsh",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Open-source Out-of-Band interaction server with client that catches DNS/HTTP/SMTP callbacks for SSRF and OAST.",
+                  "when": "When you want self-hosted or public OOB callbacks to confirm blind SSRF, XSS, or injection in authorized tests.",
+                  "install": "go install -v github.com/projectdiscovery/interactsh/cmd/interactsh-client@latest",
+                  "url": "https://github.com/projectdiscovery/interactsh",
+                  "alt": ["XSS Hunter Express", "Burp Collaborator"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "desync-and-smuggling",
+          "name": "Desync & Request Smuggling",
+          "subcategories": [
+            {
+              "id": "request-smuggling",
+              "name": "HTTP Request Smuggling",
+              "tools": [
+                {
+                  "name": "smuggler",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Detects HTTP request smuggling variants (CL.TE, TE.CL, TE.TE obfuscation) against proxy/backend parsing mismatches.",
+                  "when": "When a stack splits differently between proxies and back-ends and you want to test smuggling scenarios in scope.",
+                  "install": "git clone https://github.com/defparam/smuggler && python3 smuggler.py regex.txt urls.txt",
+                  "url": "https://github.com/defparam/smuggler",
+                  "alt": ["HTTP Request Smuggler"]
+                },
+                {
+                  "name": "HTTP Request Smuggler",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Official PortSwigger extension automating CL.TE / TE.CL / TE.TE smuggling detection and exploit generation.",
+                  "when": "When you are inside Burp and want integrated smuggling detection with guided payload confirmation.",
+                  "install": "Install 'HTTP Request Smuggler' from the Burp BApp Store",
+                  "url": "https://github.com/PortSwigger/http-request-smuggler",
+                  "alt": ["smuggler"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "transport-security",
+          "name": "Transport & mTLS Security",
+          "subcategories": [
+            {
+              "id": "tls-auditing",
+              "name": "TLS / Certificate Auditing",
+              "tools": [
+                {
+                  "name": "testssl.sh",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "Free TLS/SSL audit CLI that checks ciphers, protocols, certificate chains, BEAST/POODLE/Heartbleed-family issues, and client-auth (mTLS) settings.",
+                  "when": "When you need a thorough, fork-friendly TLS configuration audit of an endpoint you are authorized to test.",
+                  "install": "git clone --depth 1 https://github.com/testssl/testssl.sh && ./testssl.sh example.com",
+                  "url": "https://github.com/testssl/testssl.sh",
+                  "alt": ["sslyze"]
+                },
+                {
+                  "name": "sslyze",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Fast Python TLS scanner analyzing SSL configs, supported ciphers, and certificate details, scriptable for CI.",
+                  "when": "When you need structured, machine-readable TLS scan output across many hosts in your own infrastructure.",
+                  "install": "pipx install sslyze",
+                  "url": "https://github.com/nabla-c0d3/sslyze",
+                  "alt": ["testssl.sh"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "headers-and-csp",
+          "name": "Security Headers & CSP",
+          "subcategories": [
+            {
+              "id": "csp-analysis",
+              "name": "CSP Analysis",
+              "tools": [
+                {
+                  "name": "CSP Evaluator",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Google's hosted query engine that flags weak Content-Security-Policy directives that allow XSS to slip through.",
+                  "when": "When the target sends a CSP and you want to quickly grade its effectiveness and find bypassable directives.",
+                  "install": "Open the hosted checker at https://csp-evaluator.withgoogle.com",
+                  "url": "https://github.com/google/csp-evaluator",
+                  "alt": ["SecurityHeaders.com"]
+                }
+              ]
+            },
+            {
+              "id": "header-auditing",
+              "name": "Response Header Auditing",
+              "tools": [
+                {
+                  "name": "SecurityHeaders.com",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Scans a URL's response headers against the OWASP Secure Headers Project and scores the hardening state.",
+                  "when": "When you want an instant, shareable header hardening report for a site you own or administer.",
+                  "install": "curl -s 'https://securityheaders.com/?q=https://example.com&followRedirects=on'",
+                  "url": "https://securityheaders.com",
+                  "alt": ["headers.dev", "httpx"]
+                },
+                {
+                  "name": "headers.dev",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Simple API/website that returns all response headers of a URL for quick inspection from the terminal.",
+                  "when": "When you want a fast, no-install way to pull and eyeball a target's response headers.",
+                  "install": "curl -s https://headers.dev/example.com",
+                  "url": "https://headers.dev",
+                  "alt": ["SecurityHeaders.com", "httpx"]
+                },
+                {
+                  "name": "httpx",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "ProjectDiscovery's fast HTTP toolkit that fingerprints hosts, technologies, status codes, and response headers at scale.",
+                  "when": "When you need to bulk-collect status codes, headers, and tech fingerprints across hundreds of in-scope hosts.",
+                  "install": "go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest",
+                  "url": "https://github.com/projectdiscovery/httpx",
+                  "alt": ["headers.dev", "SecurityHeaders.com"]
+                }
+              ]
             }
           ]
         }

@@ -7,270 +7,833 @@
   "categories": [
     {
       "id": "people-search",
-      "name": "Username & People Discovery",
-      "tools": [
+      "name": "People & Social Intelligence",
+      "subcategories": [
         {
-          "name": "Sherlock",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Checks a username across 400+ social networks using HTTP status/pattern heuristics; the most widely maintained CLI for username existence.",
-          "when": "Find every public profile tied to a username you own, or verify a handle before cleaning up your own exposure.",
-          "install": "pipx install sherlock-project",
-          "url": "https://github.com/sherlock-project/sherlock",
-          "alt": ["maigret", "whatsmyname", "namechk (web)"]
+          "id": "username-lookup",
+          "name": "Username Lookup",
+          "tools": [
+            {
+              "name": "Sherlock",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Checks a username across 400+ platforms using HTTP status/pattern heuristics and returns every profile that exists; the reference CLI for username enumeration, actively maintained.",
+              "when": "Confirm which sites a username you own is registered on so you can harden or clean up your own footprint.",
+              "install": "pipx install sherlock-project",
+              "url": "https://github.com/sherlock-project/sherlock",
+              "alt": ["maigret", "blackbird", "whatsmyname"]
+            },
+            {
+              "name": "Maigret",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Collects a username dossier across 3000+ sites with account-type tags (social, dating, code) and exports HTML/PDF/JSON reports; picks up a fresh site list on each run.",
+              "when": "When Sherlock's pass/fail list is not enough and you want an exportable report of everywhere a handle you control appears.",
+              "install": "pipx install maigret",
+              "url": "https://github.com/soxoj/maigret",
+              "alt": ["sherlock", "blackbird", "whatsmyname"]
+            },
+            {
+              "name": "Blackbird",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Blazing-fast username enumerator that checks 500+ services with thread pools and color-coded existence results; built as a speed-focused companion to Sherlock and Maigret.",
+              "when": "Bulk-check many candidate usernames over a short window, limited to handles and accounts you are authorized to investigate.",
+              "install": "go install github.com/p1ngul1n0/blackbird@latest",
+              "url": "https://github.com/p1ngul1n0/blackbird",
+              "alt": ["sherlock", "maigret", "whatsmyname"]
+            },
+            {
+              "name": "WhatsMyName",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "A community-maintained dataset of 700+ sites with exact fingerprints (URI patterns and success/not-found heuristics); the data engine underlying most username checkers.",
+              "when": "Audit a checker result or drive your own authorized username sweep against a curated, up-to-date site list.",
+              "install": "git clone https://github.com/WebBreacher/WhatsMyName.git",
+              "url": "https://github.com/WebBreacher/WhatsMyName",
+              "alt": ["sherlock", "maigret", "blackbird"]
+            }
+          ]
         },
         {
-          "name": "Maigret",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Collects a username dossier across 3000+ sites, tagging each account by type (social, dating, code) and generating HTML/PDF/JSON reports; actively maintained with a frequently refreshed site database.",
-          "when": "When Sherlock's pass/fail list is not enough and you want account tags, graph export, and a readable report of where a username appears.",
-          "install": "pipx install maigret",
-          "url": "https://github.com/soxoj/maigret",
-          "alt": ["sherlock", "whatsmyname"]
+          "id": "email-osint",
+          "name": "Email Addresses",
+          "subcategories": [
+            {
+              "id": "breach-check",
+              "name": "Breach Checkers",
+              "tools": [
+                {
+                  "name": "HaveIBeenPwned",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "Definitive breach and password-exposure checker: search any email or domain across a huge corpus of leaked datasets; free web search plus a documented API, with Pwned Passwords openly downloadable.",
+                  "when": "Check whether addresses or domains you control appeared in known breaches, and enforce password-exposure checks on your own estate.",
+                  "install": "preinstalled (web + API)",
+                  "url": "https://haveibeenpwned.com",
+                  "alt": ["intelligencex", "leakcheck"]
+                },
+                {
+                  "name": "IntelligenceX",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Dark-web and public-data search engine indexing leaks, paste sites, forums, and code over a 10-year retention window; free tier with API and Telegram bots.",
+                  "when": "Check if your emails, domains, or phone numbers surface in dark-web and paste archives you are authorized to monitor.",
+                  "install": "preinstalled (web - API key)",
+                  "url": "https://intelx.io",
+                  "alt": ["haveibeenpwned", "leakcheck", "dehashed"]
+                },
+                {
+                  "name": "LeakCheck",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Commercial breach aggregator with billions of entries supporting email, username, phone, and live-keyword search; paid tiers unlock full records.",
+                  "when": "Correlate breach hits across emails and passwords, but only on credentials you hold or are authorized to test.",
+                  "install": "preinstalled (web - paid)",
+                  "url": "https://leakcheck.io",
+                  "alt": ["intelligencex", "haveibeenpwned"]
+                }
+              ]
+            },
+            {
+              "id": "registration-check",
+              "name": "Registration Checkers",
+              "tools": [
+                {
+                  "name": "Holehe",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Checks which 120+ sites an email is registered on by replaying password-recovery flows without mailing the target, so the address is never alerted.",
+                  "when": "Find which platforms a breached or owned email is tied to, so stale accounts you control can be closed or secured.",
+                  "install": "pipx install holehe",
+                  "url": "https://github.com/megadose/holehe",
+                  "alt": ["emailrep.io", "theharvester"]
+                },
+                {
+                  "name": "emailrep.io",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Hosted API that scores email reputation, flags breach exposure and disposable providers, and lists the mainstream profiles tied to an address; free tier needs no key.",
+                  "when": "Triage a suspicious inbound sender or audit your own addresses as part of a defensive OSINT review.",
+                  "install": "preinstalled (web - API key optional)",
+                  "url": "https://emailrep.io",
+                  "alt": ["holehe", "haveibeenpwned"]
+                }
+              ]
+            },
+            {
+              "id": "domain-harvesting",
+              "name": "Domain Harvesting",
+              "tools": [
+                {
+                  "name": "theHarvester",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "Passive harvester of emails, employee names, subdomains, and reported API keys for a domain across many open sources; the reference domain reconnaissance CLI.",
+                  "when": "Map every email and subdomain publicly linked to a domain you own before hardening mail and DNS.",
+                  "install": "sudo apt install theharvester",
+                  "url": "https://github.com/laramies/theHarvester",
+                  "alt": ["holehe", "intelligencex"]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "WhatsMyName",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "A community-maintained JSON dataset covering 700+ sites with exact success/not-found detections; the data layer behind many username checkers and the whatsmyname.app web UI since the bundled checker scripts were removed in 2023.",
-          "when": "When you want the raw detection data to audit a check result or drive your own checker against a curated site list.",
-          "install": "git clone https://github.com/WebBreacher/WhatsMyName.git",
-          "url": "https://github.com/WebBreacher/WhatsMyName",
-          "alt": ["sherlock", "maigret", "namechk (web)"]
+          "id": "phone-numbers",
+          "name": "Phone Numbers",
+          "tools": [
+            {
+              "name": "PhoneInfoga",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Phone-number OSINT framework that attributes country, area, carrier, and line type and gathers scattered footprint data via configurable scanners; stable but slowly maintained.",
+              "when": "Resolve a number you own or are authorized to analyze into provider facts before deeper carrier-level checks.",
+              "install": "brew install phoneinfoga",
+              "url": "https://github.com/sundowndev/phoneinfoga",
+              "alt": ["holehe"]
+            }
+          ]
         },
         {
-          "name": "namechk",
-          "rating": 3,
-          "effort": "easy",
-          "desc": "Free web service that checks a name across 100+ social platforms and 36 domain extensions in one view; a hosted service, not a self-hosted tool — no API and no bulk mode.",
-          "when": "A quick browser-only triage of where a name is already taken before you invest in CLI pipelines.",
-          "install": "preinstalled (web)",
-          "url": "https://namechk.com",
-          "alt": ["whatsmyname", "sherlock", "maigret"]
+          "id": "social-profiles",
+          "name": "Social Media Profiles",
+          "subcategories": [
+            {
+              "id": "instagram",
+              "name": "Instagram",
+              "tools": [
+                {
+                  "name": "Instaloader",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "Downloads Instagram profiles, posts, hashtags, highlight stories, and their metadata (captions, likes, comments) without an API key; scriptable and actively maintained.",
+                  "when": "Archive a public profile you own, or collect hashtag and post metadata for evidence preservation.",
+                  "install": "pip3 install instaloader",
+                  "url": "https://github.com/instaloader/instaloader",
+                  "alt": ["osintgram", "snscrape"]
+                },
+                {
+                  "name": "Osintgram",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Interactive shell that pulls public Instagram profile info, captions, followers, tag lists, and bio-contact strings using a scratch session or a free Hiker API token (educational-use disclaimer included).",
+                  "when": "Relationship analysis on a public profile you operate — who tags, who comments, what contact strings appear in bios.",
+                  "install": "git clone https://github.com/Datalux/Osintgram && pip3 install -r requirements.txt",
+                  "url": "https://github.com/Datalux/Osintgram",
+                  "alt": ["instaloader"]
+                }
+              ]
+            },
+            {
+              "id": "cross-platform",
+              "name": "Multi-Platform",
+              "tools": [
+                {
+                  "name": "snscrape",
+                  "best": true,
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "Python library/CLI that scrapes public posts and profiles to JSONL from several platforms; X/Twitter and Reddit backends are dead behind logins, but Telegram, Weibo, and some Mastodon instances still work.",
+                  "when": "Programmatic retrieval and archiving of public posts on platforms snscrape still supports, e.g. Telegram channels you monitor.",
+                  "install": "pip3 install snscrape",
+                  "url": "https://github.com/JustAnotherArchivist/snscrape",
+                  "alt": ["instaloader", "osintgram"]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "email-phone",
-      "name": "Email & Phone OSINT",
-      "tools": [
+      "id": "metadata-forensics",
+      "name": "Metadata & File Forensics",
+      "subcategories": [
         {
-          "name": "theHarvester",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Passively harvests emails, employee names, subdomains, hosts, and API leaks for a domain from open sources; the reference OSINT email/subdomain harvester, actively maintained.",
-          "when": "Map every email address and subdomain publicly linked to a domain you own before hardening mail and DNS.",
-          "install": "sudo apt install theharvester",
-          "url": "https://github.com/laramies/theHarvester",
-          "alt": ["holehe", "emailrep.io (web)"]
+          "id": "image-exif",
+          "name": "Image & EXIF",
+          "tools": [
+            {
+              "name": "ExifTool",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Reads, writes, and edits EXIF/GPS/IPTC/XMP metadata across images, PDFs, and Office files; the metadata workhorse behind most document-forensics pipelines.",
+              "when": "Forensic-grade tag extraction from local files — geolocation, author, generator, timestamps — before release or after acquisition.",
+              "install": "sudo apt install libimage-exiftool-perl",
+              "url": "https://exiftool.org",
+              "alt": ["fotoforensics", "metagoofil"]
+            },
+            {
+              "name": "FotoForensics",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Web tool that runs Error Level Analysis (ELA), panel scans, EXIF review, and JPEG quantization analysis to spot digital tampering in an uploaded image.",
+              "when": "Check whether an image you own or are authorized to examine was edited, and inspect residual metadata block by block.",
+              "install": "preinstalled (web)",
+              "url": "https://fotoforensics.com",
+              "alt": ["exiftool"]
+            }
+          ]
         },
         {
-          "name": "Holehe",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Checks whether an email is registered on 120+ sites by replaying their password-recovery flows without sending anything to the mailbox, so the target address is not alerted.",
-          "when": "Find which platforms a leaked or owned email is tied to so you can spot stale accounts you control that still need securing.",
-          "install": "pipx install holehe",
-          "url": "https://github.com/megadose/holehe",
-          "alt": ["theharvester", "emailrep.io (web)"]
+          "id": "document-metadata",
+          "name": "Document Metadata",
+          "tools": [
+            {
+              "name": "Metagoofil",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Dork-driven harvester that finds indexed documents (.pdf, .docx, .xlsx) for a domain and downloads them for metadata stripping; the maintained opsdisk fork ships on Kali.",
+              "when": "Collect every publicly indexed document on a domain you own so metadata and hidden information can be scrubbed.",
+              "install": "git clone https://github.com/opsdisk/metagoofil && pip3 install -r requirements.txt",
+              "url": "https://github.com/opsdisk/metagoofil",
+              "alt": ["exiftool", "foca"]
+            },
+            {
+              "name": "FOCA",
+              "rating": 3,
+              "effort": "medium",
+              "desc": "Windows GUI (C# with SQL Server backend) that fingerprints documents across search engines and extracts users, folders, and software into a browsable metadata project.",
+              "when": "When you have a Windows workstation and want a point-and-click metadata project view for documents you control.",
+              "install": "installer from GitHub Releases (Windows GUI)",
+              "url": "https://github.com/ElevenPaths/FOCA",
+              "alt": ["metagoofil", "exiftool"]
+            }
+          ]
         },
         {
-          "name": "PhoneInfoga",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Framework for phone OSINT: country, area, carrier, line type, and footprint lookups via configurable scanners; stable but no longer actively maintained, so expect scanners to drift over time.",
-          "when": "Resolve a phone number you own or are authorized to analyze into provider/line-type facts before deeper carrier-level checks.",
-          "install": "brew install phoneinfoga",
-          "url": "https://github.com/sundowndev/phoneinfoga",
-          "alt": ["holehe"]
-        },
-        {
-          "name": "emailrep.io",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Hosted API/service that scores an email's reputation, flags breach exposure and disposable/spammy providers, and lists the online profiles tied to it; a service, not a tool — the free tier needs no key, higher limits need one.",
-          "when": "Triage a suspicious inbound email or audit your own addresses for exposure as part of defensive OSINT.",
-          "install": "preinstalled (web–API key)",
-          "url": "https://emailrep.io",
-          "alt": ["holehe", "theharvester"]
+          "id": "file-reputation",
+          "name": "File Reputation",
+          "tools": [
+            {
+              "name": "VirusTotal",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Industry-standard crowdsourced engine for hashes, samples, URLs, and IP/domain reputation with 90+ AV engines, plus passive DNS and threat-signal context.",
+              "when": "Check a file hash, URL, or IP you are investigating against years of crowdsourced detections during authorized analysis.",
+              "install": "preinstalled (web - API key optional)",
+              "url": "https://www.virustotal.com",
+              "alt": ["spiderfoot"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "social-scrape",
-      "name": "Social Media Scraping",
-      "tools": [
+      "id": "geolocation",
+      "name": "Geolocation & Mapping",
+      "subcategories": [
         {
-          "name": "Instaloader",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Downloads Instagram profiles, posts, hashtags, highlight stories, and companion metadata (captions, likes, comments) via its own private API without an official key; actively maintained and scriptable.",
-          "when": "Pull an archive of a public profile you own for media/evidence preservation, or collect hashtag and post metadata on your own accounts.",
-          "install": "pip3 install instaloader",
-          "url": "https://github.com/instaloader/instaloader",
-          "alt": ["osintgram", "snscrape"]
+          "id": "ip-location",
+          "name": "IP Location",
+          "tools": [
+            {
+              "name": "ipinfo.io",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "IP address datasets and API for location, ISP, ASN, company, and privacy-risk signals; free lookup tier covers geolocation and network attribution.",
+              "when": "Resolve an IP address you are investigating into location, provider, and ASN context.",
+              "install": "pip3 install ipinfo",
+              "url": "https://ipinfo.io",
+              "alt": ["ipapi.co", "shodan"]
+            },
+            {
+              "name": "ipapi.co",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Free IP geolocation API returning country, city, ISP, timezone, and currency for any address; also offers bulk and commercial JSON/CSV plans.",
+              "when": "Script location lookups for lists of IPs appearing in your own logs.",
+              "install": "preinstalled (web - API)",
+              "url": "https://ipapi.co",
+              "alt": ["ipinfo.io"]
+            }
+          ]
         },
         {
-          "name": "snscrape",
-          "rating": 3,
-          "effort": "medium",
-          "desc": "Python CLI/library that scrapes public posts and profiles from several platforms with JSONL output; Twitter/X scrapers are dead behind the login wall and Reddit needs the closed Pushshift, but Telegram, Weibo, and some Mastodon instances still work.",
-          "when": "Programmatic bulk retrieval and archiving of public posts from the platforms snscrape still supports, e.g. Telegram channels.",
-          "install": "pip3 install snscrape",
-          "url": "https://github.com/JustAnotherArchivist/snscrape",
-          "alt": ["instaloader", "osintgram", "twscrape (github)", "twint (archived 2023)"]
-        },
-        {
-          "name": "OSINTgram",
-          "rating": 3,
-          "effort": "medium",
-          "desc": "Interactive shell that collects public Instagram data — profile info, captions, followers, tagged users, comments, and bio contact strings — using a scratch-account session or a free HikerAPI token; the project's own disclaimer limits use to educational/authorized targets.",
-          "when": "Relationship analysis of a public profile you own (who comments, who is tagged, contact strings in bios).",
-          "install": "git clone https://github.com/Datalux/Osintgram && pip3 install -r requirements.txt",
-          "url": "https://github.com/Datalux/Osintgram",
-          "alt": ["instaloader", "snscrape"]
+          "id": "map-search",
+          "name": "Map & Geo Search",
+          "tools": [
+            {
+              "name": "Google Maps",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Global mapping, Street View, and satellite imagery search; the core visual geolocation and place-lookup surface for OSINT.",
+              "when": "Correlate landmarks, signage, or geotagged imagery against the physical world during authorized investigations.",
+              "install": "preinstalled (web)",
+              "url": "https://www.google.com/maps",
+              "alt": ["yandex maps"]
+            },
+            {
+              "name": "Yandex Maps",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Alternative globe with strong coverage of Eastern Europe, Russia, and CIS regions plus street-level panoramas; a useful cross-check for place and imagery comparison.",
+              "when": "Cross-check locations and side-by-side imagery with Google Maps when coverage hints at CIS or Eurasian regions.",
+              "install": "preinstalled (web)",
+              "url": "https://yandex.com/maps",
+              "alt": ["google maps"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "infra-engine",
-      "name": "Internet Infrastructure Search",
-      "tools": [
+      "id": "infrastructure",
+      "name": "Domain & IP Infrastructure",
+      "subcategories": [
         {
-          "name": "Shodan",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "The reference internet device/port search engine indexing exposed services, banners, vulnerabilities, and history for any IP or domain; a commercial service with a lasting free tier and a separate no-key InternetDB lookup endpoint.",
-          "when": "See every port and service your public IP ranges expose right now, exactly as an attacker would, before closing them.",
-          "install": "pip3 install shodan",
-          "url": "https://www.shodan.io",
-          "alt": ["censys", "zoomeye", "netlas"]
+          "id": "ip-assets",
+          "name": "IP & Attack Surface",
+          "tools": [
+            {
+              "name": "Shodan",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "The reference internet device and service search engine indexing banners, ports, vulnerabilities, and exposure history for any IP or domain; also exposes free InternetDB lookups.",
+              "when": "See exactly which ports and services your public IP ranges expose right now — and how long that exposure has existed — before closing them.",
+              "install": "pip3 install shodan",
+              "url": "https://www.shodan.io",
+              "alt": ["censys", "netlas"]
+            },
+            {
+              "name": "Censys",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Internet-wide scan platform over hosts, services, and certificates with structured query language and host/cert/web-property APIs; free tier includes search and lookups.",
+              "when": "Certificate-centric inventory and pivots — find every host presenting a given cert — or query structured service data beyond free Shodan limits.",
+              "install": "pip3 install censys",
+              "url": "https://search.censys.io",
+              "alt": ["shodan", "netlas"]
+            },
+            {
+              "name": "Netlas",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Scanning platform over billions of indexed hosts supporting IPv4/IPv6, full response-body regex, DNS, WHOIS, and certificate search with a REST API; free tier capped near 50 requests/day.",
+              "when": "Lucene/regex search across full HTTP response bodies when Shodan banners are too shallow for your authorized query.",
+              "install": "pip3 install netlas",
+              "url": "https://netlas.io",
+              "alt": ["shodan", "censys"]
+            }
+          ]
         },
         {
-          "name": "Censys",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Internet-wide scan platform covering hosts, services, certificates, and web properties with structured query language; the free tier includes search plus host/cert/web-property lookup APIs.",
-          "when": "Certificate-centric inventory and pivots — find every host presenting a given cert — or structured queries beyond Shodan's free tier.",
-          "install": "pip3 install censys",
-          "url": "https://search.censys.io",
-          "alt": ["shodan", "netlas"]
+          "id": "dns-subdomains",
+          "name": "DNS & Subdomains",
+          "tools": [
+            {
+              "name": "DNSDumpster",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "One-page passive DNS mapping tool that enumerates subdomains, MX/TXT/SPF records, and hosts onto an interactive network map for a domain.",
+              "when": "Fast visual pass over the subdomain and mail infrastructure of a domain you own before deeper enumeration.",
+              "install": "preinstalled (web)",
+              "url": "https://dnsdumpster.com",
+              "alt": ["securitytrails", "crt.sh"]
+            },
+            {
+              "name": "SecurityTrails",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Commercial passive DNS and subdomain intelligence with historical DNS records, certificate timelines, and connected-domain data via REST API.",
+              "when": "Retrieve DNS history and subdomain changes over time for a domain you operate, straight into scripts.",
+              "install": "preinstalled (web - API key)",
+              "url": "https://securitytrails.com",
+              "alt": ["dnsdumpster", "crt.sh"]
+            }
+          ]
         },
         {
-          "name": "ZoomEye",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Cyber-space search engine by KnownSec scanning IPv4/IPv6, services, and web layers via Xmap/Wmap; strongest on IoT/OT devices and Asian-region asset coverage, with roughly 10k free API queries/month.",
-          "when": "Coverage of less-Shodanized regions or internet-of-things/embedded device hunting on ranges you own.",
-          "install": "pip3 install zoomeye",
-          "url": "https://www.zoomeye.ai",
-          "alt": ["shodan", "censys", "netlas"]
+          "id": "certificates",
+          "name": "Certificate Transparency",
+          "tools": [
+            {
+              "name": "crt.sh",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Open certificate-transparency log search; returns every issued certificate — and therefore every hostname — for a domain, sorted by issue date.",
+              "when": "Enumerate all hostnames that ever had a public certificate for domains you own, including retired staging hosts.",
+              "install": "preinstalled (web)",
+              "url": "https://crt.sh",
+              "alt": ["securitytrails", "censys"]
+            }
+          ]
         },
         {
-          "name": "Netlas",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Internet scanning platform over 8B+ indexed hosts with response-body, DNS, WHOIS, and certificate search plus a full REST API and Python SDK; the free tier is key-limited at about 50 requests/day.",
-          "when": "Regular-expression/Lucene search across full HTTP response bodies when Shodan's banners are too shallow.",
-          "install": "pip3 install netlas",
-          "url": "https://netlas.io",
-          "alt": ["shodan", "censys", "zoomeye"]
+          "id": "whois-asn",
+          "name": "WHOIS & Routing",
+          "tools": [
+            {
+              "name": "Hurricane Electric BGP",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Global BGP, IPv6, and routing intelligence: AS numbers, prefixes, IXP membership, route announcements, and peer relationships in a browsable web database.",
+              "when": "Attribute an IP or prefix to its ASN and understand routing relationships for infrastructure you analyze.",
+              "install": "preinstalled (web)",
+              "url": "https://bgp.he.net",
+              "alt": ["ripestat"]
+            },
+            {
+              "name": "RIPEstat",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "RIPE NCC's data API for IP/ASN attribution, route history, geolocation, and abuse contacts; queryable over REST with ready-made widgets.",
+              "when": "Programmatic WHOIS/ASN and routing lookups for lists of IPs or prefixes you are researching.",
+              "install": "preinstalled (web - API)",
+              "url": "https://stat.ripe.net",
+              "alt": ["hurricane electric bgp"]
+            }
+          ]
+        },
+        {
+          "id": "domain-history",
+          "name": "Domain History",
+          "tools": [
+            {
+              "name": "DomainTools",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Commercial WHOIS and domain-intel suite (WhoIs, reverse whois, registration history, DNSHistory, Iris) maintained for 20+ years; priced via API/subscription tiers.",
+              "when": "Full WHOIS history and reverse-ownership pivots on domains involved in authorized investigations.",
+              "install": "preinstalled (web - paid)",
+              "url": "https://www.domaintools.com",
+              "alt": ["securitytrails"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "metadata-docs",
-      "name": "Document Metadata & Forensics",
-      "tools": [
+      "id": "business",
+      "name": "Business & Corporate OSINT",
+      "subcategories": [
         {
-          "name": "exiftool",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Reads, writes, and edits EXIF/GPS/IPTC/XMP and hundreds of tag formats across images, PDFs, Office files, and more; the metadata workhorse behind most doc-forensics pipelines.",
-          "when": "Forensic-grade tag extraction from any local file — geolocation, author, generator, timestamps — before release or after acquisition.",
-          "install": "sudo apt install libimage-exiftool-perl",
-          "url": "https://exiftool.org",
-          "alt": ["metagoofil", "foca"]
+          "id": "registries",
+          "name": "Company Registries",
+          "tools": [
+            {
+              "name": "OpenCorporates",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Open database of millions of companies worldwide extracted from public registries; unique API for entities, officers, and filings across many jurisdictions.",
+              "when": "Discover corporate structure, officers, and cross-jurisdiction registrations behind a company you are authorized to research.",
+              "install": "preinstalled (web - API key)",
+              "url": "https://opencorporates.com",
+              "alt": ["companies house (uk)", "sec edgar"]
+            },
+            {
+              "name": "Companies House (UK)",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "UK government registry of companies, officers, people with significant control (PSC), and filings, exposed through a free public API.",
+              "when": "Company, director, and beneficial-owner lookups for UK-registered entities.",
+              "install": "preinstalled (web - free API key)",
+              "url": "https://find-and-update.company-information.service.gov.uk",
+              "alt": ["opencorporates"]
+            },
+            {
+              "name": "SEC EDGAR",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "US SEC's full-text filings database (10-K, 8-K, S-1, proxies) exposing financials, executives, and subsidiaries; free API with fair-use limits.",
+              "when": "Pull US-listed company filings for financial and personnel intelligence.",
+              "install": "preinstalled (web - API)",
+              "url": "https://www.sec.gov/edgar",
+              "alt": ["opencorporates"]
+            }
+          ]
         },
         {
-          "name": "Metagoofil",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Dork-driven document harvesting: finds indexed files (.pdf, .docx, .xlsx) on a domain and downloads them for stripping; the maintained opsdisk fork ships on Kali and deliberately defers metadata analysis to exiftool.",
-          "when": "Collect every publicly indexed document on a domain you own so you can scrub metadata and accidental information leaks.",
-          "install": "git clone https://github.com/opsdisk/metagoofil && pip3 install -r requirements.txt",
-          "url": "https://github.com/opsdisk/metagoofil",
-          "alt": ["exiftool", "foca"]
-        },
-        {
-          "name": "FOCA",
-          "rating": 3,
-          "effort": "medium",
-          "desc": "Windows GUI (C# with a SQL Server back end) that searches a domain via Google/Bing/DuckDuckGo, fingerprints documents, and extracts metadata — users, folders, software — into a browsable project; a Windows GUI, not a POSIX tool, with slow updates.",
-          "when": "When you have a Windows box and want a point-and-click metadata project view instead of CLI pipelines.",
-          "install": "installer from GitHub Releases (Windows GUI)",
-          "url": "https://github.com/ElevenPaths/FOCA",
-          "alt": ["metagoofil", "exiftool"]
+          "id": "profiles",
+          "name": "Company Profiles",
+          "tools": [
+            {
+              "name": "Crunchbase",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Venture and funding profile database with financing rounds, acquisitions, growth-stage signals, and key-people digests for startups and private companies.",
+              "when": "Sketch the funding trajectory, investors, and key people of a private company you analyze.",
+              "install": "preinstalled (web - API key)",
+              "url": "https://www.crunchbase.com",
+              "alt": ["opencorporates"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "automation-platforms",
-      "name": "OSINT Automation Platforms",
-      "tools": [
+      "id": "code",
+      "name": "Code & Developer OSINT",
+      "subcategories": [
         {
-          "name": "SpiderFoot",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "Automated OSINT correlation engine with 200+ modules and a YAML correlation engine, surfaced through a web UI and CLI; built to map an attack surface and connect entities automatically.",
-          "when": "A broad sweep of a domain/IP/email you own to correlate entities across many free data sources in a single scan.",
-          "install": "git clone https://github.com/smicallef/spiderfoot && pip3 install -r requirements.txt",
-          "url": "https://github.com/smicallef/spiderfoot",
-          "alt": ["maltego", "recon-ng"]
+          "id": "code-search",
+          "name": "Code Search Engines",
+          "tools": [
+            {
+              "name": "GitHub Code Search",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "GitHub's built-in search over the public code index with operators for language, path, and extension; also surfaces users, commits, and leaked-token suspects.",
+              "when": "Find public code, configs, and secrets that mention an identifier you own, and review your own repositories' exposure.",
+              "install": "preinstalled (web)",
+              "url": "https://github.com/search",
+              "alt": ["sourcegraph", "gitdorker"]
+            },
+            {
+              "name": "Sourcegraph",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Public-code search engine with regex, literal, and symbol-aware queries across open repositories; good for finding leaked patterns and re-used infrastructure.",
+              "when": "Regex-wide sweep of public code for a credential prefix, domain, or package name you are attributing.",
+              "install": "preinstalled (web)",
+              "url": "https://sourcegraph.com",
+              "alt": ["github code search", "gitdorker"]
+            }
+          ]
         },
         {
-          "name": "Maltego",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Commercial graph-based link-analysis and OSINT platform (desktop and browser) with transforms into 1B+ identities, breach data, and infrastructure datasets; a free Community Edition (Basic plan) exists but is result-limited. A commercial service, not open source.",
-          "when": "Investigative link analysis where a visual graph of who/what connects to whom beats JSON output.",
-          "install": "preinstalled (web/desktop — free CE with Maltego ID)",
-          "url": "https://www.maltego.com",
-          "alt": ["spiderfoot", "recon-ng"]
-        },
-        {
-          "name": "recon-ng",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Metasploit-style modular reconnaissance framework for web OSINT, with a marketplace of modules, workspace isolation, and database-backed reporting; stable but leisurely maintained.",
-          "when": "Scripted, repeatable recon workflows with structured output and API keys for your own estate.",
-          "install": "sudo apt install recon-ng",
-          "url": "https://github.com/lanmaster53/recon-ng",
-          "alt": ["spiderfoot", "maltego"]
+          "id": "secret-dorks",
+          "name": "Secret & Dork Hunting",
+          "tools": [
+            {
+              "name": "GitDorker",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Automates GitHub 'dork' queries from a 3000+-entry dork list through the search APIs to surface exposed files, keys, and configs in public repositories.",
+              "when": "Glob for suspicious files and secrets across public repos related to your own organization or authorized targets.",
+              "install": "git clone https://github.com/obheda12/GitDorker && pip3 install -r requirements.txt",
+              "url": "https://github.com/obheda12/GitDorker",
+              "alt": ["github code search", "nosey parker"]
+            },
+            {
+              "name": "Nosey Parker",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Fast secret-scanner that extracts API tokens and credentials from git histories with high-precision regex and entropy rules; written in Rust for large corpora.",
+              "when": "Scan cloned public repositories (e.g., ones you own) for historic secrets before they are abused.",
+              "install": "git clone https://github.com/praetorian-inc/noseyparker && cargo build --release",
+              "url": "https://github.com/praetorian-inc/noseyparker",
+              "alt": ["gitdorker"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "dorks",
-      "name": "Search Dorks Reference",
-      "tools": [
+      "id": "crypto",
+      "name": "Crypto & Blockchain",
+      "subcategories": [
         {
-          "name": "Google Hacking Database (GHDB)",
-          "best": true,
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Reference catalog of search-engine operators ('dorks') and example queries that surface exposed files, login panels, admin pages, and misconfigurations in public indexes. A reference page, not a tool.",
-          "when": "Compose and reuse proven search-engine queries to audit what public indexes expose about your own domains.",
-          "install": "preinstalled (web)",
-          "url": "https://www.exploit-db.com/google-hacking-database",
-          "alt": ["netlas dorks (github)"]
+          "id": "explorers",
+          "name": "Block Explorers",
+          "tools": [
+            {
+              "name": "Blockchain.com Explorer",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Bitcoin block explorer with address, transaction, and pending-mempool views plus webhooks and an authenticated explorer API.",
+              "when": "Trace bitcoin addresses and transaction flows connected to a case you are authorized to investigate.",
+              "install": "preinstalled (web)",
+              "url": "https://www.blockchain.com/explorer",
+              "alt": ["etherscan", "walletexplorer"]
+            },
+            {
+              "name": "Etherscan",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Reference Ethereum block explorer with address, token, contract-code, and event-log analysis and a free API; covers other EVM chains via sibling explorers.",
+              "when": "Analyze EVM addresses, token transfers, and smart-contract interactions you are investigating.",
+              "install": "preinstalled (web - API key)",
+              "url": "https://etherscan.io",
+              "alt": ["blockchain.com explorer"]
+            }
+          ]
+        },
+        {
+          "id": "wallet-analysis",
+          "name": "Wallet & Abuse Databases",
+          "tools": [
+            {
+              "name": "WalletExplorer",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Clusters bitcoin addresses into services where possible, letting you see a wallet's whole activity — including market aggregation endpoints.",
+              "when": "View a bitcoin address in service context and reveal associated addresses during authorized tracing work.",
+              "install": "preinstalled (web)",
+              "url": "https://www.walletexplorer.com",
+              "alt": ["blockchain.com explorer", "bitcoinabuse"]
+            },
+            {
+              "name": "BitcoinAbuse",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Public API and searchable database of bitcoin addresses reported for scams and fraud, with user-submitted evidence and descriptions.",
+              "when": "Check whether an address you are investigating carries attached abuse reports.",
+              "install": "preinstalled (web - API)",
+              "url": "https://www.bitcoinabuse.com",
+              "alt": ["walletexplorer"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "historical",
+      "name": "Historical & Archived Content",
+      "subcategories": [
+        {
+          "id": "web-archives",
+          "name": "Web Archives",
+          "tools": [
+            {
+              "name": "Wayback Machine",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "The Internet Archive's store of hundreds of billions of web snapshots; view any URL as it existed historically, with CDX listings and full-text site search.",
+              "when": "Recover removed pages, track historical site changes, and capture evidence before content disappears.",
+              "install": "preinstalled (web)",
+              "url": "https://web.archive.org",
+              "alt": ["waybackpy", "archive.today", "common crawl"]
+            },
+            {
+              "name": "waybackpy",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Python client for the Wayback and CDX APIs: save snapshots, query availability, and stream archive listings programmatically.",
+              "when": "Scripted archival and CDX queries to build change-history timelines for URLs you monitor.",
+              "install": "pipx install waybackpy",
+              "url": "https://github.com/akamhy/waybackpy",
+              "alt": ["wayback machine"]
+            },
+            {
+              "name": "Archive.today",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Independent web snapshot service that mirrors pages on demand and blocks most crawlers; a useful second capture layer parallel to the Wayback Machine.",
+              "when": "Save a live page as evidence through an independent archive when you want redundancy across capture providers.",
+              "install": "preinstalled (web)",
+              "url": "https://archive.ph",
+              "alt": ["wayback machine"]
+            }
+          ]
+        },
+        {
+          "id": "corpora",
+          "name": "Web Corpora",
+          "tools": [
+            {
+              "name": "Common Crawl",
+              "best": true,
+              "rating": 3,
+              "effort": "medium",
+              "desc": "Petabyte-scale open crawl corpus refreshed monthly (WARC/WAT/WET files) with a URL index API; reconstruct what a site published even without per-page snapshots.",
+              "when": "Pull historical page versions or URL-level index data for content you have permission to analyze.",
+              "install": "preinstalled (web - S3/CLI)",
+              "url": "https://commoncrawl.org",
+              "alt": ["wayback machine"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dark-web",
+      "name": "Dark Web & Breach Intelligence",
+      "subcategories": [
+        {
+          "id": "onion-search",
+          "name": "Onion Search & Directories",
+          "tools": [
+            {
+              "name": "Ahmia",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Ethical search engine for the Tor network with support for .onion and I2P; continuously indexes dark-web pages and filters illegal content.",
+              "when": "Index and discover .onion pages relevant to a monitoring program you are authorized to run.",
+              "install": "preinstalled (web)",
+              "url": "https://ahmia.fi",
+              "alt": ["dark.fail"]
+            },
+            {
+              "name": "Dark.fail",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Trusted, hand-verified directory of live .onion marketplaces and services with uptime status; a safe entry index rather than an in-depth search engine.",
+              "when": "Locate legitimate .onion services and verify their current uptime during authorized dark-web research.",
+              "install": "preinstalled (web)",
+              "url": "https://dark.fail",
+              "alt": ["ahmia"]
+            }
+          ]
+        },
+        {
+          "id": "breach-data",
+          "name": "Breach Data Aggregators",
+          "tools": [
+            {
+              "name": "DeHashed",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Commercial breach database covering email, username, phone, IP, and password hashes with fuzzy search and cross-referencing across billions of records; subscription required for full records.",
+              "when": "Correlate leaked credentials and keys across datasets — only for accounts you own or are contracted to test.",
+              "install": "preinstalled (web - paid)",
+              "url": "https://dehashed.com",
+              "alt": ["intelligencex", "leakcheck"]
+            }
+          ]
+        },
+        {
+          "id": "paste-monitoring",
+          "name": "Paste Search & Monitoring",
+          "tools": [
+            {
+              "name": "Pastebin Search",
+              "best": true,
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Pastebin's own search across public pastes, combinable with search engines via site: dorks; useful for monitoring dropped credentials and dumps.",
+              "when": "Monitor public paste dumps that mention an organization or domain you are authorized to defend.",
+              "install": "preinstalled (web)",
+              "url": "https://www.pastebin.com",
+              "alt": ["intelligencex"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "automation",
+      "name": "Automation & Platforms",
+      "subcategories": [
+        {
+          "id": "correlation",
+          "name": "Correlation & Automation",
+          "tools": [
+            {
+              "name": "SpiderFoot",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Automated OSINT correlation engine with 200+ modules and a YAML correlation engine, surfaced through a web UI, CLI, and API; built to map an attack surface and connect entities.",
+              "when": "A broad sweep of a domain, IP, or email you own to correlate entities across many free data sources in a single scan.",
+              "install": "git clone https://github.com/smicallef/spiderfoot && pip3 install -r requirements.txt",
+              "url": "https://github.com/smicallef/spiderfoot",
+              "alt": ["maltego"]
+            },
+            {
+              "name": "Maltego",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Commercial graph-based link-analysis platform (desktop and browser) whose transforms reach identity, breach, and infrastructure datasets; free Community Edition exists with result limits.",
+              "when": "Investigative link analysis where a visual graph of who connects to whom beats raw JSON output.",
+              "install": "preinstalled (web/desktop - free CE)",
+              "url": "https://www.maltego.com",
+              "alt": ["spiderfoot"]
+            }
+          ]
+        },
+        {
+          "id": "dorks-reference",
+          "name": "Search Dork Reference",
+          "tools": [
+            {
+              "name": "Google Hacking Database (GHDB)",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Canonical reference catalog of search-engine operators and example queries that surface exposed files, login panels, and misconfigurations in public indexes.",
+              "when": "Compose and reuse proven dorks to audit what public indexes expose about domains you own.",
+              "install": "preinstalled (web)",
+              "url": "https://www.exploit-db.com/google-hacking-database",
+              "alt": ["gitdorker"]
+            }
+          ]
         }
       ]
     }

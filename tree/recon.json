@@ -1,44 +1,61 @@
 {
   "id": "recon",
   "name": "Reconnaissance & OSINT",
-  "emoji": "\ud83d\udd75\ufe0f",
+  "emoji": "🕵️",
   "tagline": "Passive + active discovery: subdomains, DNS, historical data, people, leaks, and exposed assets.",
   "class": "offense",
   "categories": [
     {
       "id": "subdomains",
       "name": "Subdomain Enumeration",
-      "tools": [],
       "subcategories": [
         {
-          "id": "brute-methods",
-          "name": "Brute & dictionary methods",
+          "id": "passive-sources",
+          "name": "Passive Sources",
           "subcategories": [
             {
-              "id": "resolver-level",
-              "name": "Resolver-level (verify candidates)",
+              "id": "certificate-transparency",
+              "name": "Certificate Transparency",
               "tools": [
                 {
-                  "name": "Amass",
-                  "best": true,
+                  "name": "crt.sh",
                   "rating": 5,
-                  "effort": "medium",
-                  "desc": "OWASP-recommended, querying dozens of sources for active/passive subdomains; builds graph and flagship-level relationships between discovered assets.",
-                  "when": "Full-scope startup: let it run long against a big target while you work other recon.",
-                  "install": "go install -v github.com/owasp-amass/amass/v4/...@master",
-                  "url": "https://github.com/owasp-amass/amass",
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Search engine over public Certificate Transparency logs; finds every subdomain that ever appeared in an issued TLS certificate.",
+                  "when": "Zero-setup first pass: instant historical subdomain list from issued certificates, no API keys required.",
+                  "install": "preinstalled (web)",
+                  "url": "https://crt.sh",
                   "alt": [
                     "subfinder",
-                    "crt.sh",
-                    "dnsx"
+                    "certspotter"
                   ]
                 },
+                {
+                  "name": "Cert Spotter",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "SSLMate's certificate-transparency monitor with a JSON API; returns certificate-linked subdomains plus issuance history.",
+                  "when": "Watch a domain for newly issued certificates over time and script the subdomain results.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://github.com/sslmate/certspotter",
+                  "alt": [
+                    "crt.sh"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "data-apis",
+              "name": "Data Provider APIs",
+              "tools": [
                 {
                   "name": "Subfinder",
                   "rating": 5,
                   "effort": "easy",
-                  "desc": "Fast passive-only subdomain discovery from 30+ sources (APIs optional, works well without them).",
-                  "when": "The daily driver when you want speed over depth, or when API keys are scarce.",
+                  "best": true,
+                  "desc": "Fast passive subdomain discovery from 25+ sources (certificates, DNS, archives, APIs); runs well keyless and better with free API keys.",
+                  "when": "The daily driver for breadth: batch-enumerate subdomains from many passive sources in seconds.",
                   "install": "go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest",
                   "url": "https://github.com/projectdiscovery/subfinder",
                   "alt": [
@@ -47,28 +64,28 @@
                   ]
                 },
                 {
-                  "name": "crt.sh",
+                  "name": "Chaos",
                   "rating": 4,
                   "effort": "easy",
-                  "desc": "Transparency-log search over issued TLS certificates; zero-install, browser or curl.",
-                  "when": "Instant no-setup check; great for history not visible via simple DNS queries.",
-                  "install": "preinstalled (web)",
-                  "url": "https://crt.sh",
+                  "desc": "ProjectDiscovery's continuously updated subdomain dataset fed by bug-bounty programs, queried through the chaos-client CLI.",
+                  "when": "Pull an up-to-date subdomain dataset for a listed asset instead of brute-forcing from scratch.",
+                  "install": "go install -v github.com/projectdiscovery/chaos-client/cmd/chaos@latest",
+                  "url": "https://github.com/projectdiscovery/chaos-client",
                   "alt": [
-                    "subfinder",
-                    "certsh"
+                    "subfinder"
                   ]
                 },
                 {
-                  "name": "dnsx",
+                  "name": "VirusTotal",
                   "rating": 4,
                   "effort": "easy",
-                  "desc": "Fast multi-threaded DNS resolver built to verify a big list of candidate subdomains (A/AAAA/CNAME/TXT).",
-                  "when": "After enumeration: confirm which hosts resolve and grab their records in one pass.",
-                  "install": "go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest",
-                  "url": "https://github.com/projectdiscovery/dnsx",
+                  "desc": "Huge passive-DNS and resolution graph; the domain 'Relations' tab exposes related hosts, resolutions, and SSL-cert domains.",
+                  "when": "Correlate a domain's infrastructure graph and pull historical resolutions when an API key is at hand.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://www.virustotal.com",
                   "alt": [
-                    "massdns"
+                    "crt.sh",
+                    "chaos"
                   ]
                 }
               ]
@@ -76,60 +93,351 @@
           ]
         },
         {
-          "id": "api-sources",
-          "name": "API / transparency-log sources",
-          "tools": []
-        }
-      ]
-    },
-    {
-      "id": "httpx",
-      "name": "HTTP Probing & Titles",
-      "tools": [
-        {
-          "name": "httpx",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Probes a list of hosts and returns live status codes, technologies, titles, and fingerprints.",
-          "when": "Convert hundreds of DNS names into a live-but-quiet target list before tooling takes over.",
-          "install": "go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest",
-          "url": "https://github.com/projectdiscovery/httpx",
-          "alt": [
-            "naabu (port scan)",
-            "masscan"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "passive-dns",
-      "name": "Passive DNS & History",
-      "tools": [
-        {
-          "name": "SecurityTrails",
-          "best": true,
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Passive DNS history and subdomain API; free tier without keys.",
-          "when": "See records that no longer resolve but reveal old infrastructure (staging, dev).",
-          "install": "preinstalled (web)",
-          "url": "https://securitytrails.com",
-          "alt": [
-            "crt.sh",
-            "dnsdumpster"
+          "id": "active-enumeration",
+          "name": "Active Enumeration",
+          "subcategories": [
+            {
+              "id": "dictionary-bruteforce",
+              "name": "Dictionary Brute Force",
+              "subcategories": [
+                {
+                  "id": "resolver-verified",
+                  "name": "Resolver-verified Candidates",
+                  "tools": [
+                    {
+                      "name": "Puredns",
+                      "rating": 4,
+                      "effort": "medium",
+                      "best": true,
+                      "desc": "Pipeline-focused brute-forcer that mass-resolves candidates through validated public resolvers and filters wildcard responses automatically.",
+                      "when": "Run a strong wordlist through trusted resolvers when you only want real, wildcard-free hits as pipeline output.",
+                      "install": "go install -v github.com/d3mondev/puredns/v2@latest",
+                      "url": "https://github.com/d3mondev/puredns",
+                      "alt": [
+                        "gobuster",
+                        "massdns"
+                      ]
+                    },
+                    {
+                      "name": "Gobuster",
+                      "rating": 4,
+                      "effort": "medium",
+                      "desc": "Multi-mode brute-forcer whose DNS mode guesses subdomains from a wordlist and resolves each candidate.",
+                      "when": "Quick DNS wordlist run when full resolver management is overkill for the scope.",
+                      "install": "go install -v github.com/OJ/gobuster/v3@latest",
+                      "url": "https://github.com/OJ/gobuster",
+                      "alt": [
+                        "puredns"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "permutation-generation",
+              "name": "Permutation & Alteration",
+              "tools": [
+                {
+                  "name": "altdns",
+                  "rating": 4,
+                  "effort": "medium",
+                  "best": true,
+                  "desc": "Generates wordlist-based permutations of known subdomains (prefixes, suffixes, number swaps) to rediscover forgotten hosts.",
+                  "when": "Expand an existing host list into thousands of plausible neighbor names before resolving.",
+                  "install": "git clone https://github.com/infosec-au/altdns && cd altdns && pip3 install -r requirements.txt",
+                  "url": "https://github.com/infosec-au/altdns",
+                  "alt": [
+                    "dnsgen",
+                    "dnstwist"
+                  ]
+                },
+                {
+                  "name": "dnsgen",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Pipes known domains through smart permutation rules (word insertion, affixing, number manipulation) to produce candidate subdomains.",
+                  "when": "Compose with massdns (cat list | dnsgen - | massdns) for a fast generate-then-resolve enumerator.",
+                  "install": "pip3 install dnsgen",
+                  "url": "https://github.com/AlephNullSK/dnsgen",
+                  "alt": [
+                    "altdns"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "graph-based",
+              "name": "Graph & API Aggregation",
+              "tools": [
+                {
+                  "name": "Amass",
+                  "rating": 5,
+                  "effort": "medium",
+                  "best": true,
+                  "desc": "OWASP's one-stop subdomain engine: passive source scraping plus active brute forcing woven into an asset relationship graph.",
+                  "when": "Long-running, full-scope enumeration where breadth and cross-asset correlation matter most.",
+                  "install": "go install -v github.com/owasp-amass/amass/v4/...@master",
+                  "url": "https://github.com/owasp-amass/amass",
+                  "alt": [
+                    "subfinder",
+                    "chaos"
+                  ]
+                }
+              ]
+            }
           ]
         },
         {
-          "name": "VirusTotal DNS",
-          "rating": 3,
-          "effort": "easy",
-          "desc": "Relations/passive-dns endpoints to map infrastructure and finding subdomains via historical resolution.",
-          "when": "Correlate IP\u2192domains and flag anomalies when you already have an API key.",
-          "install": "preinstalled (web/API)",
-          "url": "https://www.virustotal.com",
-          "alt": [
-            "crt.sh"
+          "id": "resolution",
+          "name": "Resolution & Verification",
+          "subcategories": [
+            {
+              "id": "bulk-resolving",
+              "name": "Bulk Resolving",
+              "tools": [
+                {
+                  "name": "dnsx",
+                  "rating": 5,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "High-performance DNS toolkit that resolves thousands of candidates and returns A/AAAA/CNAME/TXT with wildcard filtering.",
+                  "when": "Filter a huge candidate list down to live hosts and fetch their records in a single pass.",
+                  "install": "go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest",
+                  "url": "https://github.com/projectdiscovery/dnsx",
+                  "alt": [
+                    "massdns"
+                  ]
+                },
+                {
+                  "name": "massdns",
+                  "rating": 4,
+                  "effort": "advanced",
+                  "desc": "Extremely fast bulk resolver built to validate millions of candidates over UDP against a list of public resolvers.",
+                  "when": "Feed permutation output at internet scale when normal resolver throughput rate-limits you.",
+                  "install": "git clone https://github.com/blechschmidt/massdns && cd massdns && make",
+                  "url": "https://github.com/blechschmidt/massdns",
+                  "alt": [
+                    "dnsx"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dns-whois",
+      "name": "DNS & WHOIS Interrogation",
+      "subcategories": [
+        {
+          "id": "dns-queries",
+          "name": "Active DNS Queries",
+          "subcategories": [
+            {
+              "id": "core-utilities",
+              "name": "Core Utilities",
+              "tools": [
+                {
+                  "name": "dig",
+                  "rating": 5,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "BIND's universal DNS interrogation client: any record type, AXFR/IXFR zone transfer attempts, and scripting-friendly output.",
+                  "when": "Verify individual records and try authorized zone transfers on targets you are cleared to test.",
+                  "install": "sudo apt install dnsutils",
+                  "url": "https://bind.isc.org",
+                  "alt": [
+                    "nslookup",
+                    "host"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "recon-focused",
+              "name": "Recon-focused Tools",
+              "tools": [
+                {
+                  "name": "DNSRecon",
+                  "rating": 4,
+                  "effort": "medium",
+                  "best": true,
+                  "desc": "Python DNS recon kit: standard records, cache snooping, wildcard testing, brute force, and AXFR checks in one pass.",
+                  "when": "Automate the full DNS interrogation checklist on a scope where hand-rolled dig commands get tedious.",
+                  "install": "pip3 install dnsrecon",
+                  "url": "https://github.com/darkoperator/dnsrecon",
+                  "alt": [
+                    "dnsx",
+                    "dnstwist"
+                  ]
+                },
+                {
+                  "name": "dnstwist",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Permutation engine for typo-squatting and homograph lookalikes of a domain; resolves each variant to flag impersonation risk.",
+                  "when": "Authorized brand-protection reviews: find lookalike domains that could phish or impersonate your organization.",
+                  "install": "git clone https://github.com/elceef/dnstwist && cd dnstwist && make all",
+                  "url": "https://github.com/elceef/dnstwist",
+                  "alt": [
+                    "dnsgen"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "whois-rdap",
+          "name": "WHOIS & RDAP",
+          "subcategories": [
+            {
+              "id": "clients",
+              "name": "Protocol Clients",
+              "tools": [
+                {
+                  "name": "WHOIS",
+                  "rating": 5,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Standard registrar/registry client returning registration, owner, and nameserver records for domains and IP blocks.",
+                  "when": "Pull registration dates and registrant metadata for a domain or range during authorized investigations.",
+                  "install": "sudo apt install whois",
+                  "url": "https://www.iana.org/whois",
+                  "alt": [
+                    "rdap"
+                  ]
+                },
+                {
+                  "name": "RDAP",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "openrdap's Go client for the modern RDAP protocol: structured JSON instead of loose text, with paging and entity linking.",
+                  "when": "Script structured WHOIS-like lookups and follow registrant/registrar entities programmatically.",
+                  "install": "go install github.com/openrdap/rdap/cmd/rdap@latest",
+                  "url": "https://github.com/openrdap/rdap",
+                  "alt": [
+                    "whois"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "aggregators",
+              "name": "Web Aggregators",
+              "tools": [
+                {
+                  "name": "ViewDNS.info",
+                  "rating": 4,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Free web aggregator for historical DNS, reverse IP, IP history, ASN/netblock maps, and WHOIS, with no API key.",
+                  "when": "Cross-check old IPs, nameservers, or reverse lookups without pulling out heavy tooling.",
+                  "install": "preinstalled (web)",
+                  "url": "https://viewdns.info",
+                  "alt": [
+                    "whois",
+                    "dig"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "historical-data",
+      "name": "Passive DNS & Historical Data",
+      "subcategories": [
+        {
+          "id": "passive-dns-databases",
+          "name": "Passive DNS Databases",
+          "subcategories": [
+            {
+              "id": "record-history",
+              "name": "Record History",
+              "tools": [
+                {
+                  "name": "SecurityTrails",
+                  "rating": 4,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Full passive-DNS history plus subdomain and associated-domain APIs; the free tier works without keys.",
+                  "when": "Reconstruct a domain's historical IP infrastructure to find withdrawn dev or staging servers.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://securitytrails.com",
+                  "alt": [
+                    "virustotal",
+                    "rapid7"
+                  ]
+                },
+                {
+                  "name": "DNSDumpster",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Visual subdomain, MX, and hostname map with optional on-page screenshots of discovered hosts.",
+                  "when": "A graphical first look at a domain's DNS layout without signing up for anything.",
+                  "install": "preinstalled (web)",
+                  "url": "https://dnsdumpster.com",
+                  "alt": [
+                    "securitytrails",
+                    "crt.sh"
+                  ]
+                },
+                {
+                  "name": "Rapid7 Open Data",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Massive historical forward-DNS, reverse-DNS, and SSL scan datasets published as downloadable snapshots.",
+                  "when": "Power offline historical enumeration across full internet snapshots with your own tooling.",
+                  "install": "free account + dataset download",
+                  "url": "https://opendata.rapid7.com",
+                  "alt": [
+                    "securitytrails"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "web-history",
+          "name": "Web History",
+          "subcategories": [
+            {
+              "id": "page-archives",
+              "name": "Page & Site Archives",
+              "tools": [
+                {
+                  "name": "Wayback Machine",
+                  "rating": 5,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Internet Archive's snapshot library exposing old pages, removed endpoints, and historical response bodies for any URL.",
+                  "when": "Recover deleted pages or inspect the evolution of login/config URLs during authorized historical research.",
+                  "install": "preinstalled (web); CLI: pip3 install waybackpy",
+                  "url": "https://web.archive.org",
+                  "alt": [
+                    "urlscan.io"
+                  ]
+                },
+                {
+                  "name": "urlscan.io",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Renders and archives pages with full DOM, request log, and IP metadata; searchable by domain across every scan.",
+                  "when": "See what a page actually loaded (networks, frameworks, subresources) without touching the target yourself.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://urlscan.io",
+                  "alt": [
+                    "web.archive.org"
+                  ]
+                }
+              ]
+            }
           ]
         }
       ]
@@ -137,60 +445,664 @@
     {
       "id": "port-scan",
       "name": "Port Discovery",
-      "tools": [
+      "subcategories": [
         {
-          "name": "naabu",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Fast SYN port scanner (projectdiscovery) focused on top 100/1000 ports; integrates cleanly with httpx/nuclei.",
-          "when": "Quick-but-broad port discovery feeding the rest of the pipeline.",
-          "install": "go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest",
-          "url": "https://github.com/projectdiscovery/naabu",
-          "alt": [
-            "masscan",
-            "nmap",
-            "rustscan"
+          "id": "broad-discovery",
+          "name": "Broad Discovery",
+          "subcategories": [
+            {
+              "id": "high-speed-sweeps",
+              "name": "High-speed Sweeps",
+              "tools": [
+                {
+                  "name": "naabu",
+                  "rating": 5,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "ProjectDiscovery's fast SYN scanner sweeping the top-N ports and handing live hosts to httpx/nuclei.",
+                  "when": "Broad-but-quick port sweep across a large host list as pipeline input.",
+                  "install": "go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest",
+                  "url": "https://github.com/projectdiscovery/naabu",
+                  "alt": [
+                    "rustscan",
+                    "nmap"
+                  ]
+                },
+                {
+                  "name": "masscan",
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "Internet-scale SYN scanner (millions of packets/sec) that emits results in a format nmap can consume.",
+                  "when": "Full-CIDR or internet-range sweeps when naabu's port sets are too small.",
+                  "install": "sudo apt install masscan",
+                  "url": "https://github.com/robertdavidgraham/masscan",
+                  "alt": [
+                    "nmap"
+                  ]
+                },
+                {
+                  "name": "RustScan",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Sweeps all 65,535 ports in seconds and auto-pipes open ports into nmap service detection.",
+                  "when": "Complete all-port coverage with minimal effort, letting nmap take over the fine details.",
+                  "install": "cargo install rustscan",
+                  "url": "https://github.com/bee-san/RustScan",
+                  "alt": [
+                    "naabu",
+                    "masscan"
+                  ]
+                }
+              ]
+            }
           ]
         },
         {
-          "name": "Masscan",
-          "rating": 5,
-          "effort": "medium",
-          "desc": "Most-port-fastest scanner; emits results in a format easily piped into nmap or naabu.",
-          "when": "Scan the entire internet range of your target (or very large CIDRs) quickly.",
-          "install": "sudo apt install masscan",
-          "url": "https://github.com/robertdavidgraham/masscan",
-          "alt": [
-            "naabu",
-            "nmap"
+          "id": "service-analysis",
+          "name": "Service & OS Analysis",
+          "subcategories": [
+            {
+              "id": "scriptable-detection",
+              "name": "Scriptable Detection",
+              "tools": [
+                {
+                  "name": "Nmap",
+                  "rating": 5,
+                  "effort": "medium",
+                  "best": true,
+                  "desc": "The canonical suite: stealth/connect scans, OS and service fingerprinting, version detection, and the NSE scripting engine.",
+                  "when": "Deep service identification and low-rate version scans on a focused host set.",
+                  "install": "sudo apt install nmap",
+                  "url": "https://nmap.org",
+                  "alt": [
+                    "naabu",
+                    "masscan"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "http-probing",
+      "name": "HTTP Probing & Fingerprinting",
+      "subcategories": [
+        {
+          "id": "probing",
+          "name": "Live Host Probing",
+          "subcategories": [
+            {
+              "id": "http-availability",
+              "name": "HTTP/S Availability",
+              "tools": [
+                {
+                  "name": "httpx",
+                  "rating": 5,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Probes host lists for live web services, returning status, title, tech, CDN, and TLS fingerprints in one pass.",
+                  "when": "Turn DNS/noise results into a clean inventory of live, web-facing hosts.",
+                  "install": "go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest",
+                  "url": "https://github.com/projectdiscovery/httpx",
+                  "alt": [
+                    "httprobe"
+                  ]
+                }
+              ]
+            }
           ]
         },
         {
-          "name": "nmap",
-          "rating": 5,
-          "effort": "medium",
-          "desc": "The classic suite: port scan, OS/service detection, and scripting engine (NSE).",
-          "when": "Deep service identification and vulnerability scripts on a small, targeted set of hosts.",
-          "install": "sudo apt install nmap",
-          "url": "https://nmap.org",
-          "alt": [
-            "naabu",
-            "masscan",
-            "rustscan"
+          "id": "fingerprinting",
+          "name": "Technology Fingerprinting",
+          "subcategories": [
+            {
+              "id": "signature-detection",
+              "name": "Signature Detection",
+              "tools": [
+                {
+                  "name": "WhatWeb",
+                  "rating": 4,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Signature-based fingerprint scanner matching headers, cookies, and HTML against 1,800+ technology definitions.",
+                  "when": "Per-URL technology attribution across a moderately sized authorized target list.",
+                  "install": "sudo apt install whatweb",
+                  "url": "https://github.com/urbanadventurer/WhatWeb",
+                  "alt": [
+                    "builtwith"
+                  ]
+                },
+                {
+                  "name": "Retire.js",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Scans page JavaScript for known-vulnerable library versions using DOM signatures.",
+                  "when": "Fingerprint front-end dependencies and their exact versions on pages you are authorized to review.",
+                  "install": "npm install --global retire",
+                  "url": "https://github.com/retirejs/retire.js",
+                  "alt": [
+                    "whatweb"
+                  ]
+                }
+              ]
+            }
           ]
         },
         {
-          "name": "RustScan",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Rust-based scanner that sweeps all ports in seconds then hands specifics to nmap.",
-          "when": "When you want all-ports coverage faster than nmap's default and the pipeline output into nmap.",
-          "install": "cargo install rustscan",
-          "url": "https://github.com/RustScan/RustScan",
-          "alt": [
-            "naabu",
-            "masscan"
+          "id": "waf-detection",
+          "name": "WAF Detection",
+          "subcategories": [
+            {
+              "id": "waf-identification",
+              "name": "WAF Identification",
+              "tools": [
+                {
+                  "name": "wafw00f",
+                  "rating": 4,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Sends harmless, identifiable probes to classify which WAF (if any) fronts a site, with vendor-specific signatures.",
+                  "when": "Understand a target's defensive layer before deeper authorized testing.",
+                  "install": "pip3 install wafw00f",
+                  "url": "https://github.com/EnableSecurity/wafw00f",
+                  "alt": [
+                    "whatweb"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "content-discovery",
+      "name": "Web Content Discovery",
+      "subcategories": [
+        {
+          "id": "dir-bruteforce",
+          "name": "Directory & Path Brute Force",
+          "subcategories": [
+            {
+              "id": "directory-path-discovery",
+              "name": "Directory & Path Discovery",
+              "tools": [
+                {
+                  "name": "Feroxbuster",
+                  "rating": 5,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Rust-based recursive content discovery with smart filtering, auto-tuning, and server-config thesaurus support.",
+                  "when": "Recursive directory/file brute force that stays fast on large authorized targets.",
+                  "install": "cargo install feroxbuster",
+                  "url": "https://github.com/epi052/feroxbuster",
+                  "alt": [
+                    "dirsearch",
+                    "gobuster"
+                  ]
+                },
+                {
+                  "name": "dirsearch",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Python content scanner with a large bundled dictionary, recursion, and multiple filter options.",
+                  "when": "Quick wordlist-driven directory hunting with minimal setup.",
+                  "install": "git clone https://github.com/maurosoria/dirsearch && cd dirsearch && python3 dirsearch.py",
+                  "url": "https://github.com/maurosoria/dirsearch",
+                  "alt": [
+                    "feroxbuster",
+                    "ffuf"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "fuzzing",
+          "name": "Parameter & Payload Fuzzing",
+          "subcategories": [
+            {
+              "id": "parameter-fuzzing",
+              "name": "Parameter Fuzzing",
+              "tools": [
+                {
+                  "name": "ffuf",
+                  "rating": 5,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Blazing-fast Go fuzzer for directories, virtual hosts, parameters, and headers via FUZZ placeholders.",
+                  "when": "Flexible content, vhost, or parameter fuzzing where wordlists and matcher filters need fine control.",
+                  "install": "go install -v github.com/ffuf/ffuf/v2@latest",
+                  "url": "https://github.com/ffuf/ffuf",
+                  "alt": [
+                    "feroxbuster",
+                    "wfuzz"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "crawling",
+      "name": "Crawling & JS Analysis",
+      "subcategories": [
+        {
+          "id": "crawlers",
+          "name": "Crawlers",
+          "subcategories": [
+            {
+              "id": "in-scope-crawling",
+              "name": "In-scope Crawling",
+              "tools": [
+                {
+                  "name": "Katana",
+                  "rating": 5,
+                  "effort": "medium",
+                  "best": true,
+                  "desc": "ProjectDiscovery's crawler with headless and standard modes, strict scope control, and JS-rendered page crawling.",
+                  "when": "Deep crawl restricted to in-scope hosts while capturing files, parameters, and tech hints.",
+                  "install": "go install -v github.com/projectdiscovery/katana/cmd/katana@latest",
+                  "url": "https://github.com/projectdiscovery/katana",
+                  "alt": [
+                    "gospider",
+                    "hakrawler"
+                  ]
+                },
+                {
+                  "name": "gospider",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Crawler focused on discovering subdomains, paths, buckets, and endpoints across seed URLs, with optional JS scraping.",
+                  "when": "Link newly found subdomains to their content and gather link graphs across many seeds.",
+                  "install": "go install -v github.com/jaeles-project/gospider@latest",
+                  "url": "https://github.com/jaeles-project/gospider",
+                  "alt": [
+                    "katana"
+                  ]
+                },
+                {
+                  "name": "hakrawler",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Simple, fast link-crawler emitting unique URLs, forms, and script references from the pages it visits.",
+                  "when": "A lightweight URL harvest with zero configuration before heavier crawling kicks in.",
+                  "install": "go install -v github.com/hakluke/hakrawler@latest",
+                  "url": "https://github.com/hakluke/hakrawler",
+                  "alt": [
+                    "katana",
+                    "gospider"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "js-recon",
+          "name": "JavaScript Recon",
+          "subcategories": [
+            {
+              "id": "endpoint-extraction",
+              "name": "Endpoint Extraction",
+              "tools": [
+                {
+                  "name": "LinkFinder",
+                  "rating": 4,
+                  "effort": "medium",
+                  "best": true,
+                  "desc": "Regex and JS-parser-based endpoint miner that extracts URLs and hidden API paths from JavaScript bundles.",
+                  "when": "Map the API surface hidden inside a site's JavaScript bundles.",
+                  "install": "git clone https://github.com/GerbenJavado/LinkFinder && cd LinkFinder && pip3 install -r requirements.txt",
+                  "url": "https://github.com/GerbenJavado/LinkFinder",
+                  "alt": [
+                    "secretfinder"
+                  ]
+                },
+                {
+                  "name": "SecretFinder",
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "Scans JS files for hardcoded keys, tokens, and credentials using cloud/API-specific signature patterns.",
+                  "when": "Authorized audits: surface API keys or credentials accidentally shipped in client-side bundles.",
+                  "install": "git clone https://github.com/m4ll0k/SecretFinder && cd SecretFinder && pip3 install -r requirements.txt",
+                  "url": "https://github.com/m4ll0k/SecretFinder",
+                  "alt": [
+                    "linkfinder"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "search-engines",
+      "name": "Internet Search Engines",
+      "subcategories": [
+        {
+          "id": "internet-scanners",
+          "name": "Internet-wide Scanners",
+          "subcategories": [
+            {
+              "id": "host-service-indexes",
+              "name": "Host & Service Indexes",
+              "tools": [
+                {
+                  "name": "Shodan",
+                  "rating": 5,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "The canonical search engine for exposed services: banners, ports, TLS certs, and device fingerprints across the internet.",
+                  "when": "Find every internet-facing service an organization exposes, by banner, org, or certificate query.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://www.shodan.io",
+                  "alt": [
+                    "censys",
+                    "fofa"
+                  ]
+                },
+                {
+                  "name": "Censys",
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "Continuous internet-scan dataset with faceted search over hosts, certificates, and services, plus ASN/hosting attribution.",
+                  "when": "Correlate exposed services with certificates and hosting metadata at scale.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://censys.io",
+                  "alt": [
+                    "shodan"
+                  ]
+                },
+                {
+                  "name": "FOFA",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Cyberspace search engine indexing services, assets, and applications with powerful expression-based queries.",
+                  "when": "Get an overlapping, independent view of your exposed asset surface from different data sources.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://fofa.info",
+                  "alt": [
+                    "shodan",
+                    "censys"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "web-research",
+          "name": "Web Research",
+          "subcategories": [
+            {
+              "id": "site-source-search",
+              "name": "Site & Source Search",
+              "tools": [
+                {
+                  "name": "BuiltWith",
+                  "rating": 4,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Maps the technology stack of any site and can reverse-search for other sites sharing the same tech footprint.",
+                  "when": "Per-URL tech attribution and finding related deployments through shared vendor footprints.",
+                  "install": "preinstalled (web)",
+                  "url": "https://builtwith.com",
+                  "alt": [
+                    "whatweb"
+                  ]
+                },
+                {
+                  "name": "PublicWWW",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Source-code search engine matching any snippet (analytics IDs, tracking pixels, specific JS) across indexed sites.",
+                  "when": "Find other properties sharing the same tracking or CDN code to expand the authorized asset footprint.",
+                  "install": "preinstalled (web)",
+                  "url": "https://publicwww.com",
+                  "alt": [
+                    "builtwith"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "people",
+      "name": "People & Identity OSINT",
+      "subcategories": [
+        {
+          "id": "usernames",
+          "name": "Username Enumeration",
+          "subcategories": [
+            {
+              "id": "multi-platform-checkers",
+              "name": "Multi-platform Checkers",
+              "tools": [
+                {
+                  "name": "Sherlock",
+                  "rating": 4,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Checks 400+ sites for a username in seconds and maps social/forum presences back to one identity.",
+                  "when": "Correlate an individual's handle across platforms during authorized persona research.",
+                  "install": "pip3 install sherlock-project",
+                  "url": "https://github.com/sherlock-project/sherlock",
+                  "alt": [
+                    "whatsmyname"
+                  ]
+                },
+                {
+                  "name": "WhatsMyName",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Open-source username-presence database with auditable per-service detection patterns.",
+                  "when": "When you need a maintained, inspectable detection database you can extend for niche platforms.",
+                  "install": "git clone https://github.com/WebBreacher/WhatsMyName",
+                  "url": "https://github.com/WebBreacher/WhatsMyName",
+                  "alt": [
+                    "sherlock"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "emails",
+          "name": "Email Discovery",
+          "subcategories": [
+            {
+              "id": "address-discovery",
+              "name": "Address Discovery",
+              "tools": [
+                {
+                  "name": "theHarvester",
+                  "rating": 5,
+                  "effort": "medium",
+                  "best": true,
+                  "desc": "Multipurpose passive gatherer of emails, subdomains, hosts, and employee names from search engines, PGP, and GitHub.",
+                  "when": "First-pass sweep that combines the human and asset surface in a single command.",
+                  "install": "git clone https://github.com/laramies/theHarvester && cd theHarvester && pip3 install -r requirements.txt",
+                  "url": "https://github.com/laramies/theHarvester",
+                  "alt": [
+                    "hunter",
+                    "subfinder"
+                  ]
+                },
+                {
+                  "name": "Hunter.io",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Web and API domain email finder with address patterns, verification, and per-domain counts (rate-limited free tier).",
+                  "when": "Discover and verify an organization's email address pattern during authorized intel gathering.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://hunter.io",
+                  "alt": [
+                    "theharvester"
+                  ]
+                },
+                {
+                  "name": "holehe",
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "Checks whether an email address is registered on hundreds of online services without sending any mail.",
+                  "when": "Map which platforms an address is active on during an authorized investigation, minding service rate limits.",
+                  "install": "pip3 install holehe",
+                  "url": "https://github.com/megadose/holehe",
+                  "alt": [
+                    "sherlock"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "leaks",
+      "name": "Leaks & Breach Data",
+      "subcategories": [
+        {
+          "id": "breach-lookup",
+          "name": "Breach Lookup",
+          "subcategories": [
+            {
+              "id": "account-exposure",
+              "name": "Account Exposure",
+              "tools": [
+                {
+                  "name": "Have I Been Pwned",
+                  "rating": 5,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Canonical breach-correlation service checking emails and password ranges against aggregated breached datasets.",
+                  "when": "Identify which breaches an address appears in via the authenticated API during incident response.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://haveibeenpwned.com",
+                  "alt": [
+                    "dehashed",
+                    "intelx"
+                  ]
+                },
+                {
+                  "name": "DeHashed",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Searchable breach database with rich filtering by username, email, IP, and password hash.",
+                  "when": "Structured correlation across breaches with exportable results for authorized investigations.",
+                  "install": "preinstalled (web/API; paid)",
+                  "url": "https://www.dehashed.com",
+                  "alt": [
+                    "have i been pwned"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "archives",
+          "name": "Searchable Archives",
+          "subcategories": [
+            {
+              "id": "data-indexes",
+              "name": "Data Indexes",
+              "tools": [
+                {
+                  "name": "Intelligence X",
+                  "rating": 4,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "Search engine for documents, leaks, dark-web content, PGP keys, and historical web data, with a public API.",
+                  "when": "Broadly triangulate a domain, email, or identity across leaks and scraped datasets.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://intelx.io",
+                  "alt": [
+                    "dehashed"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "network-context",
+      "name": "Network & ASN Context",
+      "subcategories": [
+        {
+          "id": "asn-bgp",
+          "name": "ASN & BGP",
+          "subcategories": [
+            {
+              "id": "asn-mapping",
+              "name": "ASN Mapping",
+              "tools": [
+                {
+                  "name": "asnmap",
+                  "rating": 4,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "ProjectDiscovery CLI mapping domains/IPs to ASNs and returning organization plus CIDR blocks from multiple sources.",
+                  "when": "Expand scope correctly by pulling every org-owned netblock for a target.",
+                  "install": "go install -v github.com/projectdiscovery/asnmap/cmd/asnmap@latest",
+                  "url": "https://github.com/projectdiscovery/asnmap",
+                  "alt": [
+                    "bgp.he.net"
+                  ]
+                },
+                {
+                  "name": "bgp.he.net",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Hurricane Electric's BGP board showing ASN graphs, prefix announcements, and peering for any network.",
+                  "when": "Visualize an organization's routing footprint, upstreams, and IPv4/IPv6 prefixes.",
+                  "install": "preinstalled (web)",
+                  "url": "https://bgp.he.net",
+                  "alt": [
+                    "asnmap"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "geolocation",
+          "name": "IP Geolocation",
+          "subcategories": [
+            {
+              "id": "ip-metadata",
+              "name": "IP Metadata",
+              "tools": [
+                {
+                  "name": "ipinfo.io",
+                  "rating": 4,
+                  "effort": "easy",
+                  "best": true,
+                  "desc": "IP metadata API providing geolocation, ASN, organization, hosting/cloud detection, and per-range domain lists.",
+                  "when": "Attach location and hosting context to discovered IPs and enrich bulk results from the CLI.",
+                  "install": "curl https://ipinfo.io/8.8.8.8",
+                  "url": "https://ipinfo.io",
+                  "alt": [
+                    "ip-api.com"
+                  ]
+                }
+              ]
+            }
           ]
         }
       ]

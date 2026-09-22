@@ -6,109 +6,334 @@
   "class": "offense",
   "categories": [
     {
-      "id": "encoding-decoders",
-      "name": "Encoding & Decoding",
-      "tools": [
+      "id": "encoding-identification",
+      "name": "Encoding & Format Identification",
+      "subcategories": [
         {
-          "name": "CyberChef",
-          "best": true,
-          "rating": 5,
-          "effort": "beginner",
-          "desc": "GCHQ's browser 'Cyber Swiss Army Knife': 480+ chainable operations for decoding/encoding (Base64, hex, URL, Rot13), hashing, XOR and compression, plus the Magic operation that auto-detects and unwraps multi-layer encodings. Entirely client-side, zero install.",
-          "when": "First stop for any blob, hex dump or encoded string: click the Magic icon to auto-decode, then drag operations to peel off the layers you identify.",
-          "install": "preinstalled (web — https://gchq.github.io/CyberChef/)",
-          "url": "https://github.com/gchq/CyberChef",
-          "alt": ["CyberChef (self-hosted)"]
+          "id": "decode-encode",
+          "name": "Decode & Encode",
+          "tools": [
+            {
+              "name": "CyberChef",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "GCHQ's browser 'Cyber Swiss Army Knife': 480+ chainable operations for decoding/encoding (Base64, hex, URL, Rot13), hashing, XOR and compression, plus the Magic operation that auto-detects and unwraps multi-layer encodings. Entirely client-side, zero install.",
+              "when": "First stop for any blob, hex dump or encoded string: click the Magic icon to auto-decode, then drag operations to peel off the layers you identify.",
+              "install": "preinstalled (web — https://gchq.github.io/CyberChef/)",
+              "url": "https://github.com/gchq/CyberChef",
+              "alt": ["CyberChef (self-hosted)", "dCode"]
+            },
+            {
+              "name": "CyberChef (self-hosted)",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "The same GCHQ app run from the official pre-built Docker image (or a downloadable static build) so every operation executes inside your own network with no outbound traffic.",
+              "when": "Offline, air-gapped or VM work where the input must never leave your machine - identical recipes and Magic, no internet dependency after the image pull.",
+              "install": "docker run -it -p 8080:8080 ghcr.io/gchq/cyberchef:latest",
+              "url": "https://gchq.github.io/CyberChef/",
+              "alt": ["CyberChef"]
+            }
+          ]
         },
         {
-          "name": "CyberChef (self-hosted)",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "The same GCHQ app run from the official pre-built Docker image (or a downloadable static build) so every operation executes inside your own network with no outbound traffic.",
-          "when": "Offline, air-gapped or VM work where the input must never leave your machine - identical recipes and Magic, no internet dependency after the image pull.",
-          "install": "docker run -it -p 8080:8080 ghcr.io/gchq/cyberchef:latest",
-          "url": "https://gchq.github.io/CyberChef/",
-          "alt": ["CyberChef"]
+          "id": "format-identification",
+          "name": "Hash & File Format Identification",
+          "tools": [
+            {
+              "name": "hashID",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Python 3 tool identifying 220+ hash types by regex and reporting the matching hashcat mode (-m) and John format (-j) for each candidate, replacing the outdated hash-identifier.",
+              "when": "Any recovered hash before cracking: feed it the value, note the top algorithm plus its hashcat/John mode, then jump to the passwords domain.",
+              "install": "pip install hashid && hashid '$P$8ohUJ.1sdFw09/bMaAQPTGDNi2BIUt1' -mj",
+              "url": "https://github.com/psypanda/hashID",
+              "alt": ["file (libmagic)", "dCode", "RsaCtfTool"]
+            },
+            {
+              "name": "file (libmagic)",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "The standard `file` command built on libmagic: identifies thousands of file types from magic bytes, from PEM/DER keys and PKCS#12 bundles to plaintext/uncompressed containers.",
+              "when": "Determine what a raw blob actually is before decoding — distinguish a DER key, a zlib stream, a base64 text, or a random-looking ciphertext file.",
+              "install": "sudo apt install file && file suspect.bin",
+              "url": "https://darwinsys.com/file/",
+              "alt": ["hashID", "CyberChef"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "cipher-cracking",
+      "id": "cipher-analysis",
       "name": "Cipher Attack & Cryptanalysis",
-      "tools": [
+      "subcategories": [
         {
-          "name": "xortool",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Python tool for multi-byte XOR cipher analysis: guesses key length via equality-based scoring, recovers key bytes from the most frequent plaintext character, with charset filtering and known-plaintext (-p) options to confirm candidates.",
-          "when": "Ciphertext is XOR-encoded with an unknown repeating key - feed the raw bytes, let it rank key lengths, then solve for the right length and character.",
-          "install": "pip3 install xortool",
-          "url": "https://github.com/hellman/xortool",
-          "alt": ["hash_extender", "CrypTool"]
+          "id": "classical-ciphers",
+          "name": "Classical & Historical Ciphers",
+          "tools": [
+            {
+              "name": "dCode",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Web reference hosting hundreds of small solvers for classical schemes (Caesar, Vigenère, Enigma, ADFGVX, Playfair...) plus a Cipher Identifier that scores which of 300+ ciphers a message fits via n-gram and index-of-coincidence analysis.",
+              "when": "CTF or challenge text in a historical cipher: paste it into the Cipher Identifier for a ranked guess, then open the matching solver for the plaintext.",
+              "install": "preinstalled (web)",
+              "url": "https://www.dcode.fr",
+              "alt": ["CrypTool", "CyberChef", "xortool"]
+            },
+            {
+              "name": "CrypTool",
+              "rating": 3,
+              "effort": "medium",
+              "desc": "Legacy university/open-source cryptology suite (CrypTool 2.1 + JCrypTool) for experimenting with classical ciphers (Caesar, Vigenère, Enigma, ADFGVX) and their built-in automated cryptanalysis on paste-in text.",
+              "when": "Interactive analysis of historical substitution/transposition ciphers or learning the attack against a classical scheme on your own text, where a GUI beats hand-rolled scripts.",
+              "install": "download CrypTool 2.1 installer from https://www.cryptool.org/en/ct2/download",
+              "url": "https://www.cryptool.org",
+              "alt": ["dCode", "xortool"]
+            }
+          ]
         },
         {
-          "name": "hash_extender",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Ron Bowes' C tool for the hash length-extension attack on MD4/MD5/RIPEMD-160/SHA-0/SHA-1/SHA-256/SHA-512/Whirlpool: given a secret-prefix hash, forges a valid hash for appended data without knowing the secret, iterating guessed secret lengths.",
-          "when": "A service signs 'secret || message' with a Merkle-Damgård hash (CTF or your own app) and you can control appended data - produce the new payload+signature pair the server accepts.",
-          "install": "git clone https://github.com/iagox86/hash_extender && make",
-          "url": "https://github.com/iagox86/hash_extender",
-          "alt": ["xortool", "CrypTool"]
+          "id": "xor-stream-ciphers",
+          "name": "XOR & Stream Ciphers",
+          "tools": [
+            {
+              "name": "xortool",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Python tool for multi-byte XOR cipher analysis: guesses key length via equality-based scoring, recovers key bytes from the most frequent plaintext character, with charset filtering and known-plaintext (-p) options to confirm candidates.",
+              "when": "Ciphertext is XOR-encoded with an unknown repeating key - feed the raw bytes, let it rank key lengths, then solve for the right length and character.",
+              "install": "pip3 install xortool",
+              "url": "https://github.com/hellman/xortool",
+              "alt": ["cribdrag", "CyberChef", "dCode"]
+            },
+            {
+              "name": "cribdrag",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Interactive crib-dragging script for stream-cipher keystream reuse: XOR two ciphertexts (or against a guessed crib) and step through candidate plaintext substrings interactively.",
+              "when": "Two ciphertexts share a one-time pad key, or a stream cipher reuses its keystream — drag a known plaintext word to recover the keystream and decrypt the rest by hand.",
+              "install": "git clone https://github.com/SpiderLabs/cribdrag && python2 cribdrag.py encrypted.hex",
+              "url": "https://github.com/SpiderLabs/cribdrag",
+              "alt": ["xortool", "CyberChef"]
+            }
+          ]
         },
         {
-          "name": "CrypTool",
-          "rating": 3,
-          "effort": "medium",
-          "desc": "Legacy university/open-source cryptology suite (CrypTool 2.1 + JCrypTool) for experimenting with classical ciphers (Caesar, Vigenère, Enigma, ADFGVX) and their built-in automated cryptanalysis on paste-in text.",
-          "when": "Interactive analysis of historical substitution/transposition ciphers or learning the attack against a classical scheme on your own text, where a GUI beats hand-rolled scripts.",
-          "install": "download CrypTool 2.1 installer from https://www.cryptool.org/en/ct2/download",
-          "url": "https://www.cryptool.org",
-          "alt": ["xortool", "hash_extender"]
+          "id": "block-padding-attacks",
+          "name": "Block Cipher Padding Attacks",
+          "tools": [
+            {
+              "name": "PadBuster",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Perl script automating padding-oracle attacks: decrypts arbitrary CBC ciphertext, encrypts arbitrary plaintext, and probes an endpoint to fingerprint the oracle that leaks padding validity.",
+              "when": "A web app returns distinguishable error codes on bad PKCS#7 padding and the app is yours to test — recover and forge CBC messages without the key.",
+              "install": "git clone https://github.com/GDSSecurity/PadBuster && cd PadBuster && perl padBuster.pl https://app.example/decrypt -encoding 0",
+              "url": "https://github.com/GDSSecurity/PadBuster",
+              "alt": ["CyberChef", "xortool"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hash-attacks",
+      "name": "Hash Cracking Context & Attacks",
+      "subcategories": [
+        {
+          "id": "length-extension",
+          "name": "Hash Length Extension",
+          "tools": [
+            {
+              "name": "hash_extender",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Ron Bowes' C tool for the hash length-extension attack on MD4/MD5/RIPEMD-160/SHA-0/SHA-1/SHA-256/SHA-512/Whirlpool: given a secret-prefix hash, forges a valid hash for appended data without knowing the secret, iterating guessed secret lengths.",
+              "when": "A service signs 'secret || message' with a Merkle-Damgård hash (CTF or your own app) and you can control appended data - produce the new payload+signature pair the server accepts.",
+              "install": "git clone https://github.com/iagox86/hash_extender && make",
+              "url": "https://github.com/iagox86/hash_extender",
+              "alt": ["Hashcat", "RsaCtfTool"]
+            }
+          ]
+        },
+        {
+          "id": "crackers-crossref",
+          "name": "Crackers (cross-ref to passwords)",
+          "tools": [
+            {
+              "name": "Hashcat",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "GPU/CPU password cracker with 300+ attack modes and thousands of hash types; the full profile and masking/rule tooling live in the passwords domain. Linked here so crypto-work can confirm hash formats and modes.",
+              "when": "A recovered hash or extracted TGS ticket needs cracking; pair the hashcat mode from hashID with a rule/mask attack after confirming the target algorithm.",
+              "install": "sudo apt install hashcat && hashcat -m 1000 ntlm.hash rockyou.txt",
+              "url": "https://hashcat.net/hashcat/",
+              "alt": ["John the Ripper", "hashID"]
+            },
+            {
+              "name": "John the Ripper",
+              "rating": 5,
+              "effort": "medium",
+              "desc": "CPU-first cracker (jumbo build) covering hundreds of hash formats including magic formats like Kerberoast/AS-REP tickets and encrypted OpenSSL/archive containers; full profile lives in the passwords domain.",
+              "when": "Cracking on CPU with the jumbo format set, or when a target format (gpg, ssh, rakefile) is only handled by John rather than Hashcat.",
+              "install": "sudo apt install john && john --wordlist=rockyou.txt hashes.txt",
+              "url": "https://www.openwall.com/john/",
+              "alt": ["Hashcat"]
+            }
+          ]
         }
       ]
     },
     {
       "id": "rsa",
       "name": "RSA Attacks & Factorization",
-      "tools": [
+      "subcategories": [
         {
-          "name": "RsaCtfTool",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "Python RSA multi-attack harness (60+ attacks): weak-key factorization (Fermat, Pollard rho, ECM, SIQS), lattice attacks on small d (Wiener, Boneh-Durfee), Hastad broadcast, shared-factor pools, ROCA, past-CTF/gimmick primes and Factordb integration; recovers the private key and/or decrypts files.",
-          "when": "Given a weak RSA public key and ciphertext (CTF, lab, keys you own) without knowing the weakness - run the default attack set, then target the specific winning attack.",
-          "install": "git clone https://github.com/RsaCtfTool/RsaCtfTool && cd RsaCtfTool && pip3 install -r requirements.txt",
-          "url": "https://github.com/RsaCtfTool/RsaCtfTool",
-          "alt": ["Factordb", "rsatool"]
+          "id": "attack-suites",
+          "name": "Multi-Attack Solvers",
+          "tools": [
+            {
+              "name": "RsaCtfTool",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Python RSA multi-attack harness (60+ attacks): weak-key factorization (Fermat, Pollard rho, ECM, SIQS), lattice attacks on small d (Wiener, Boneh-Durfee), Hastad broadcast, shared-factor pools, ROCA, past-CTF/gimmick primes and Factordb integration; recovers the private key and/or decrypts files.",
+              "when": "Given a weak RSA public key and ciphertext (CTF, lab, keys you own) without knowing the weakness - run the default attack set, then target the specific winning attack.",
+              "install": "git clone https://github.com/RsaCtfTool/RsaCtfTool && cd RsaCtfTool && pip3 install -r requirements.txt",
+              "url": "https://github.com/RsaCtfTool/RsaCtfTool",
+              "alt": ["factorDB", "rsatool", "SageMath"]
+            }
+          ],
+          "subcategories": [
+            {
+              "id": "math-toolkit",
+              "name": "Manual Math Toolkit",
+              "tools": [
+                {
+                  "name": "SageMath",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "advanced",
+                  "desc": "Open-source mathematics system with built-in number theory used for RSA cryptanalysis: lattice basis reduction (LLL), Pollard p-1/p-ρ, discrete log, small-roots (Coppersmith), and private-key reconstruction from recovered parameters.",
+                  "when": "When no one-shot tool covers the attack — hand-build a lattice basis, solve a modular equation, or derive d from partial parameters with a few lines of Sage.",
+                  "install": "sudo apt install sagemath",
+                  "url": "https://www.sagemath.org",
+                  "alt": ["RsaCtfTool", "rsatool", "yafu"]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "Factordb",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Online database of integer factorizations with a plain API (https://factordb.com/api?query=N) that returns a number's status (FF/C/PRP) and known factors, including factorized prime records.",
-          "when": "A modulus (or any big integer) may already be factored in the public corpus - script the API from curl; RsaCtfTool queries it automatically via --attack factordb.",
-          "install": "preinstalled (web/API)",
-          "url": "https://factordb.com",
-          "alt": ["RsaCtfTool", "rsatool"]
+          "id": "factorization-engines",
+          "name": "Integer Factorization Engines",
+          "tools": [
+            {
+              "name": "FactorDB",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Online database of integer factorizations with a plain API (https://factordb.com/api?query=N) that returns a number's status (FF/C/PRP) and known factors, including factorized prime records.",
+              "when": "A modulus (or any big integer) may already be factored in the public corpus - script the API from curl; RsaCtfTool queries it automatically via --attack factordb.",
+              "install": "preinstalled (web/API)",
+              "url": "https://factordb.com",
+              "alt": ["RsaCtfTool", "yafu", "msieve"]
+            },
+            {
+              "name": "yafu",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Automated integer-factoring command-line utility chaining trial division, Pollard, ECM, SIQS, and GNFS on numbers up to ~200 digits, with prebuilt Windows binaries and clean `factor(n)` syntax.",
+              "when": "A 256–1024-bit modulus you own that defeats online lookup — run `yafu 'factor(n)'` and let it auto-select the fastest factoring stage.",
+              "install": "git clone https://github.com/bbuhrow/yafu && cd yafu && make yafu",
+              "url": "https://github.com/bbuhrow/yafu",
+              "alt": ["FactorDB", "msieve", "SageMath"]
+            },
+            {
+              "name": "msieve",
+              "rating": 3,
+              "effort": "advanced",
+              "desc": "Quadratic-sieve and number-field-sieve library/demo for factoring integers up to ~120 digits (QS) and larger via GNFS, the classic engine behind CTF modulus-factorization writeups.",
+              "when": "Factoring tasks where yafu stalls or where you want the standalone QS/NFS engine; typically invoked from a script that feeds candidates one at a time.",
+              "install": "git clone https://github.com/radii/msieve && cd msieve && make",
+              "url": "https://github.com/radii/msieve",
+              "alt": ["yafu", "FactorDB", "RsaCtfTool"]
+            }
+          ]
         },
         {
-          "name": "rsatool",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Small Python tool that reconstructs the full RSA key set (n, e, d, p, q, CRT params) and writes an OpenSSL-compatible PEM/DER private key from just (p, q) or (n, d), including n+dp-based factoring.",
-          "when": "After any attack yields p and q (or n+d): turn recovered parameters into a real private key file you can decrypt with, instead of rolling the CRT math by hand.",
-          "install": "wget -O rsatool.py https://raw.githubusercontent.com/ius/rsatool/master/rsatool.py && pip3 install gmpy2 pyasn1",
-          "url": "https://github.com/ius/rsatool",
-          "alt": ["Factordb", "RsaCtfTool"]
+          "id": "key-reconstruction",
+          "name": "Key Reconstruction",
+          "tools": [
+            {
+              "name": "rsatool",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Small Python tool that reconstructs the full RSA key set (n, e, d, p, q, CRT params) and writes an OpenSSL-compatible PEM/DER private key from just (p, q) or (n, d), including n+dp-based factoring.",
+              "when": "After any attack yields p and q (or n+d): turn recovered parameters into a real private key file you can decrypt with, instead of rolling the CRT math by hand.",
+              "install": "wget -O rsatool.py https://raw.githubusercontent.com/ius/rsatool/master/rsatool.py && pip3 install gmpy2 pyasn1",
+              "url": "https://github.com/ius/rsatool",
+              "alt": ["Factordb", "RsaCtfTool", "SageMath"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "crypto-toolkit",
-      "name": "Crypto Toolkit (Keys & Encrypt/Decrypt)",
+      "id": "ssl-tls-analysis",
+      "name": "SSL/TLS Configuration Analysis",
+      "subcategories": [
+        {
+          "id": "tls-scanners",
+          "name": "TLS / Cipher Auditors",
+          "tools": [
+            {
+              "name": "testssl.sh",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Bash TLS cipher/protocol testing on any port: enumerates protocols and cipher suites, flags weaknesses (BEAST, heartbleed, ROBOT, TLS1.0/1.1, weak DHE), checks client simulation, and emits JSON/CSV/HTML.",
+              "when": "Full TLS configuration audit of an endpoint you own; the default single-line invocation yields findings graded vulnerable/weak/OK you can drop straight into a report.",
+              "install": "git clone --depth 1 https://github.com/testssl/testssl.sh && ./testssl.sh example.com",
+              "url": "https://github.com/testssl/testssl.sh",
+              "alt": ["SSLyze", "sslscan", "OpenSSL"]
+            },
+            {
+              "name": "sslscan",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Fast TLS cipher scanner built on a rewritten backend that detects SSLv2/SSLv3 and TLSv1.3 regardless of linked OpenSSL, flags CBC (POODLE), 3DES, RC4, NULL/weak ciphers, and weak DHE keys, with XML output.",
+              "when": "A quick closed-port cipher enumeration or legacy-protocol check where you want one line per cipher and color-coded strength annotations.",
+              "install": "sudo apt install sslscan && sslscan example.com:443",
+              "url": "https://github.com/rbsec/sslscan",
+              "alt": ["testssl.sh", "SSLyze"]
+            },
+            {
+              "name": "SSLyze",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Python TLS scanning library/CLI: cert, cipher suite, and elliptic-curve analysis plus known-attack checks (Heartbleed, ROBOT, CCS injection), with Mozilla-config comparison and JSON output for automation.",
+              "when": "Automated TLS gate in CI/CD or bulk scanning of many hosts; exit code flips on Mozilla 'intermediate' non-compliance, so it doubles as a regression check.",
+              "install": "pip3 install sslyze && python3 -m sslyze example.com",
+              "url": "https://github.com/nabla-c0d3/sslyze",
+              "alt": ["testssl.sh", "sslscan"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "key-toolkit",
+      "name": "Key & Certificate Toolkit",
       "tools": [
         {
           "name": "OpenSSL",
@@ -119,7 +344,7 @@
           "when": "Quick symmetric or asymmetric encrypt/decrypt of your files, dumping or inspecting keys and certificates, and validating algorithm behavior against a standards reference implementation.",
           "install": "sudo apt install openssl",
           "url": "https://www.openssl.org",
-          "alt": ["GnuPG", "GnuTLS certtool"]
+          "alt": ["GnuPG", "GnuTLS certtool", "age"]
         },
         {
           "name": "GnuPG",

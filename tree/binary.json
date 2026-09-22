@@ -6,210 +6,465 @@
   "class": "offense",
   "categories": [
     {
-      "id": "debuggers",
-      "name": "Debuggers & Dynamic Analysis",
-      "tools": [
+      "id": "static-analysis",
+      "name": "Static Analysis",
+      "tools": [],
+      "subcategories": [
         {
-          "name": "GDB",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "The GNU Debugger — breakpoints, watchpoints, register/memory inspection, and scripting for any ELF or Mach-O binary you control.",
-          "when": "The backbone of all dynamic work here; run it plain for a minimal setup or host pwndbg/GEF on top of it.",
-          "install": "sudo apt install gdb",
-          "url": "https://www.gnu.org/software/gdb/",
-          "alt": ["pwndbg", "gef", "lldb"]
+          "id": "decompilers",
+          "name": "Decompilers",
+          "tools": [
+            {
+              "name": "Ghidra",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Free software reverse-engineering suite with a GUI and a real decompiler that emits C-like pseudocode, plus a scriptable Python/Java API.",
+              "when": "Full static analysis of binaries you own or CTF challenges — the decompiler output reads far closer to source than raw disassembly.",
+              "install": "Download the release zip from the Ghidra releases page, unzip, and run ./ghidraRun",
+              "url": "https://github.com/NationalSecurityAgency/ghidra",
+              "alt": ["IDA Free", "Binary Ninja", "radare2"]
+            },
+            {
+              "name": "IDA Free",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Hex-Rays' freeware edition of IDA, a mature interactive disassembler with decompiler support for x86/x64/ARM and a plugin ecosystem.",
+              "when": "A free, officially supported disassembler when you prefer IDA's workflow for x86/x64 binaries over the Ghidra GUI.",
+              "install": "preinstalled (download the installer from hex-rays.com)",
+              "url": "https://hex-rays.com/ida-free/",
+              "alt": ["Ghidra", "radare2"]
+            },
+            {
+              "name": "Binary Ninja",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Commercial reverse-engineering platform with a modern Python API, cross-platform analysis, and both an interactive GUI and headless mode.",
+              "when": "Scriptable binary analysis with an expressive API, or when team licensing matches your lab workflow.",
+              "install": "preinstalled (desktop download from binary.ninja)",
+              "url": "https://binary.ninja/",
+              "alt": ["Ghidra", "Cutter"]
+            }
+          ]
         },
         {
-          "name": "pwndbg",
-          "rating": 5,
-          "effort": "easy",
-          "desc": "GDB plugin adding exploit-focused conveniences: heap/stack/register views, ROP-gadget search, cyclic pattern generation, and prettier disassembly.",
-          "when": "Drop it into GDB for CTF pwn challenges or when reversing a binary you own, to spot useful gadgets and mitigations instantly.",
-          "install": "git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh",
-          "url": "https://github.com/pwndbg/pwndbg",
-          "alt": ["gef"]
+          "id": "disassembler-frameworks",
+          "name": "Disassembler frameworks",
+          "tools": [],
+          "subcategories": [
+            {
+              "id": "cli-engines",
+              "name": "CLI engines",
+              "tools": [
+                {
+                  "name": "radare2",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "Command-line reverse-engineering framework with built-in analyzer, disassembler, ESIL emulation, and scripting via r2pipe.",
+                  "when": "Headless or scripted analysis, quick on-box triage, and when the whole analysis pipeline should live in one terminal tool.",
+                  "install": "git clone https://github.com/radareorg/radare2 && cd radare2 && ./sys/install.sh",
+                  "url": "https://github.com/radareorg/radare2",
+                  "alt": ["rizin", "Cutter"]
+                },
+                {
+                  "name": "rizin",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Actively maintained fork of radare2 aiming for a cleaner, better-tested codebase while staying command-compatible and offering rz-pipe bindings.",
+                  "when": "Same CLI workflow as radare2 when you prefer the fork under active development for its language bindings and released packages.",
+                  "install": "brew install rizin",
+                  "url": "https://github.com/rizinorg/rizin",
+                  "alt": ["radare2", "Cutter"]
+                }
+              ]
+            },
+            {
+              "id": "gui-frontends",
+              "name": "Graphical front-ends",
+              "tools": [
+                {
+                  "name": "Cutter",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Qt GUI built on the Rizin engine giving point-and-click disassembly, patching, control-flow graphs, and a decompiler view.",
+                  "when": "Visual exploration and annotation of binaries without a terminal-heavy workflow.",
+                  "install": "brew install --cask cutter",
+                  "url": "https://github.com/rizinorg/cutter",
+                  "alt": ["radare2", "rizin", "Ghidra"]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "GEF",
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Standalone, dependency-light GDB plugin (a single script) with heap visualizations, format-string helpers, and live memory introspection.",
-          "when": "Want the pwndbg-style workflow with zero setup beyond one curl command, on any GDB build.",
-          "install": "wget -q -O- https://github.com/hugsy/gef/raw/main/scripts/gef.sh | sh",
-          "url": "https://github.com/hugsy/gef",
-          "alt": ["pwndbg"]
-        },
-        {
-          "name": "LLDB",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "LLVM's debugger, well integrated with Mach-O binaries, clang-generated debug info, and Swift/Objective-C symbols.",
-          "when": "Analyzing Apple-platform binaries or anything built with the LLVM toolchain where GDB support lags.",
-          "install": "sudo apt install lldb",
-          "url": "https://lldb.llvm.org/",
-          "alt": ["gdb"]
-        },
-        {
-          "name": "Frida",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Dynamic instrumentation toolkit that injects JavaScript into a running process (yours or a lab/CTF target) to hook functions and read live memory without recompiling.",
-          "when": "Trace calls, intercept functions, or inspect a live process dynamically — especially on targets where GDB struggles.",
-          "install": "pip install frida-tools",
-          "url": "https://frida.re/",
-          "alt": ["lldb", "gdb"]
+          "id": "script-ecosystems",
+          "name": "Scripting & automation ecosystems",
+          "tools": [
+            {
+              "name": "GhidraSnippets",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Curated Python and Java snippets for the Ghidra scripting API covering common auto-analysis, function, and disassembly tasks.",
+              "when": "Steal working, tested Ghidra script patterns instead of re-deriving the API for each new analysis task.",
+              "install": "git clone https://github.com/HackOvert/GhidraSnippets",
+              "url": "https://github.com/HackOvert/GhidraSnippets",
+              "alt": ["ghidra-scripts", "r2ghidra"]
+            },
+            {
+              "name": "ghidra-scripts",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Maintained collection of Ghidra Python scripts for pattern-based analysis, function identification, and decompiler querying.",
+              "when": "Drop-in automation scripts for reversing binaries or firmware in an iterative lab analysis session.",
+              "install": "git clone https://github.com/0xdea/ghidra-scripts",
+              "url": "https://github.com/0xdea/ghidra-scripts",
+              "alt": ["GhidraSnippets"]
+            },
+            {
+              "name": "r2ghidra",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Plugin that embeds the Ghidra decompiler into radare2/rizin so terminal workflows gain C-like pseudocode output.",
+              "when": "Bring a decompiler view into your radare2/rizin session without switching to the Ghidra GUI.",
+              "install": "r2pm -ci r2ghidra",
+              "url": "https://github.com/radareorg/r2ghidra",
+              "alt": ["Ghidra", "radare2"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "disassemblers",
-      "name": "Disassemblers & Decompilers",
-      "tools": [
+      "id": "dynamic-analysis",
+      "name": "Dynamic Analysis",
+      "tools": [],
+      "subcategories": [
         {
-          "name": "Ghidra",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "NSA's free reverse-engineering suite with a GUI and a real decompiler that emits C-like pseudocode from machine code, plus a scriptable API.",
-          "when": "Full static analysis of a binary you own or a CTF challenge — the decompiler output reads far closer to source than raw disassembly.",
-          "install": "Download the current release zip from the GitHub releases page, unzip, and run ./ghidraRun",
-          "url": "https://github.com/NationalSecurityAgency/ghidra",
-          "alt": ["radare2", "cutter", "rizin"]
+          "id": "debuggers",
+          "name": "Debuggers",
+          "tools": [
+            {
+              "name": "GDB",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "GNU debugger supporting breakpoints, watchpoints, register and memory inspection, and scripting for ELF, PE, and Mach-O binaries.",
+              "when": "The backbone of all dynamic work; run it plain for minimalism or host pwndbg/GEF on top of it.",
+              "install": "sudo apt install gdb",
+              "url": "https://www.gnu.org/software/gdb/",
+              "alt": ["pwndbg", "GEF", "LLDB"]
+            },
+            {
+              "name": "pwndbg",
+              "rating": 5,
+              "effort": "easy",
+              "desc": "GDB plugin with exploit-focused conveniences: heap/stack views, ROP-gadget search, cyclic pattern generation, and prettier disassembly.",
+              "when": "CTF pwn challenges or reversing binaries you own when plain GDB layout gets too noisy.",
+              "install": "git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh",
+              "url": "https://github.com/pwndbg/pwndbg",
+              "alt": ["GEF", "GDB"]
+            },
+            {
+              "name": "GEF",
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Dependency-light, single-script GDB plugin with heap visualizations, format-string helpers, and live memory introspection.",
+              "when": "A pwndbg-style workflow with almost zero setup beyond one curl command, on any GDB build.",
+              "install": "wget -q -O- https://github.com/hugsy/gef/raw/main/scripts/gef.sh | sh",
+              "url": "https://github.com/hugsy/gef",
+              "alt": ["pwndbg", "GDB"]
+            },
+            {
+              "name": "LLDB",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "LLVM's debugger, well integrated with clang-generated debug info and Mach-O, Swift, and Objective-C symbols.",
+              "when": "Analyzing Apple-platform binaries or anything built with the LLVM toolchain where GDB support lags.",
+              "install": "sudo apt install lldb",
+              "url": "https://lldb.llvm.org/",
+              "alt": ["GDB"]
+            }
+          ]
         },
         {
-          "name": "radare2",
-          "rating": 5,
-          "effort": "medium",
-          "desc": "Command-line reverse-engineering framework with an analyzer, disassembler, and ESIL emulation, scriptable via r2pipe.",
-          "when": "Headless or scripted analysis, quick on-box triage, and when everything should live in one terminal tool.",
-          "install": "git clone https://github.com/radareorg/radare2 && cd radare2 && ./sys/install.sh",
-          "url": "https://github.com/radareorg/radare2",
-          "alt": ["rizin", "cutter"]
+          "id": "instrumentation",
+          "name": "Instrumentation & tracing",
+          "tools": [
+            {
+              "name": "Frida",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Dynamic instrumentation toolkit that injects JavaScript into a running process to hook functions and read live memory without recompiling.",
+              "when": "Trace calls, intercept functions, or inspect a live process — especially on targets where a traditional debugger struggles.",
+              "install": "pip install frida-tools",
+              "url": "https://frida.re/",
+              "alt": ["GDB", "strace / ltrace"]
+            },
+            {
+              "name": "strace / ltrace",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Syscall and library-call tracers that log every system call (or libc call) a process makes, with arguments and timing.",
+              "when": "Map a binary's runtime behavior by watching the syscalls it issues during a controlled run on your host.",
+              "install": "sudo apt install strace ltrace",
+              "url": "https://github.com/strace/strace",
+              "alt": ["GDB", "Frida"]
+            }
+          ]
         },
         {
-          "name": "rizin",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Community fork of radare2 aiming for a cleaner, better-tested codebase while staying command-compatible and offering rz-pipe scripting and Rust bindings.",
-          "when": "Same CLI workflow as radare2 when you prefer the actively focused fork or need its language bindings.",
-          "install": "brew install rizin",
-          "url": "https://github.com/rizinorg/rizin",
-          "alt": ["radare2", "cutter"]
-        },
-        {
-          "name": "Cutter",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Qt GUI front-end for the Rizin reversing engine giving point-and-click disassembly, patching, and analysis in a visual workspace.",
-          "when": "Visual exploration and annotation of binaries without a terminal-heavy workflow.",
-          "install": "brew install --cask cutter",
-          "url": "https://github.com/rizinorg/cutter",
-          "alt": ["radare2", "rizin", "ghidra"]
+          "id": "emulation-sandboxing",
+          "name": "Emulation & sandboxing",
+          "tools": [
+            {
+              "name": "QEMU",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Full-system and user-mode emulator running and tracing binaries for foreign architectures, with a GDB remote stub.",
+              "when": "Execute and debug cross-architecture ELF (ARM, MIPS, PPC) from firmware or CTFs when no native hardware exists.",
+              "install": "sudo apt install qemu-user",
+              "url": "https://www.qemu.org",
+              "alt": ["Qiling", "Unicorn"]
+            },
+            {
+              "name": "Qiling",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Advanced binary emulation framework that runs and instruments cross-architecture binaries inside a controlled Python sandbox.",
+              "when": "Automated, scripted emulation of cross-platform binaries with hooks, memory inspection, and reproducible lab runs.",
+              "install": "pip install qiling",
+              "url": "https://github.com/qilingframework/qiling",
+              "alt": ["QEMU", "Unicorn"]
+            },
+            {
+              "name": "Unicorn",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Lightweight CPU emulator framework exposing per-instruction hooks so you can emulate only the instruction flow you care about.",
+              "when": "Embed instruction-level emulation into your own analysis or fuzzing scripts for lab targets.",
+              "install": "pip install unicorn",
+              "url": "https://github.com/unicorn-engine/unicorn",
+              "alt": ["QEMU", "Qiling"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "exploit-helpers",
-      "name": "Binary Exploitation Helper Libraries",
-      "tools": [
+      "id": "exploit-dev-toolchains",
+      "name": "Exploit-Dev Toolchains",
+      "tools": [],
+      "subcategories": [
         {
-          "name": "pwntools",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "CTF pwn toolkit providing packing (p64/u64), ELF parsing, cyclic patterns, ROP-chain builders, and managed local/remote I/O for exploit prototyping.",
-          "when": "Prototype and test exploit behavior against binaries in a lab or CTF; the standard glue for the whole workflow.",
-          "install": "pip install pwntools",
-          "url": "https://github.com/Gallopsled/pwntools",
-          "alt": ["angr", "ropper", "one_gadget"]
+          "id": "python-frameworks",
+          "name": "Python exploit frameworks",
+          "tools": [
+            {
+              "name": "pwntools",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "CTF pwn toolkit providing packing (p64/u64), ELF parsing, cyclic patterns, ROP-chain builders, and managed local/remote I/O.",
+              "when": "Prototype and test exploit behavior against binaries in a lab or CTF — the standard glue for the whole workflow.",
+              "install": "pip install pwntools",
+              "url": "https://github.com/Gallopsled/pwntools",
+              "alt": ["angr", "ROPgadget", "one_gadget"]
+            },
+            {
+              "name": "angr",
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "Python binary analysis framework using symbolic/concolic execution to explore paths and solve constraints against a binary you control.",
+              "when": "Automated pathfinding — such as deriving inputs that satisfy checks — when manual reversing is too slow.",
+              "install": "pip install angr",
+              "url": "https://github.com/angr/angr",
+              "alt": ["pwntools", "Z3"]
+            }
+          ]
         },
         {
-          "name": "angr",
-          "rating": 5,
-          "effort": "advanced",
-          "desc": "Python binary analysis framework using symbolic/concolic execution to explore paths and solve constraints against a binary you control.",
-          "when": "Automated pathfinding — such as deriving inputs that satisfy checks — when manual reversing is too slow.",
-          "install": "pip install angr",
-          "url": "https://github.com/angr/angr",
-          "alt": ["pwntools", "ropper"]
+          "id": "rop-gadgets",
+          "name": "ROP & gadget tooling",
+          "tools": [
+            {
+              "name": "ROPgadget",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Scans binaries for return-oriented-programming gadgets and can dump the full gadget set or filter specific instructions.",
+              "when": "Collect usable ROP gadgets from a stripped binary you own before assembling a chain.",
+              "install": "pip install ropgadget",
+              "url": "https://github.com/JonathanSalwan/ROPgadget",
+              "alt": ["Ropper", "one_gadget", "pwntools"]
+            },
+            {
+              "name": "Ropper",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Python tool to inventory ROP gadgets and build chains from ELF, PE, and Mach-O binaries; powers gadget search inside pwndbg.",
+              "when": "Quick gadget inventory across multiple binary formats in a lab when auditing which sequences are constructible.",
+              "install": "pip install ropper",
+              "url": "https://github.com/sashs/Ropper",
+              "alt": ["ROPgadget", "one_gadget"]
+            },
+            {
+              "name": "one_gadget",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Matches libc builds to single-address execve('/bin/sh') gadgets whose register constraints are simple to satisfy.",
+              "when": "You have a libc build in a lab or CTF and want short candidate gadget addresses before scripting the constraints.",
+              "install": "gem install one_gadget",
+              "url": "https://github.com/david942j/one_gadget",
+              "alt": ["ROPgadget", "Ropper"]
+            }
+          ]
         },
         {
-          "name": "Ropper",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Python tool that inventories ROP gadgets and builds chains from ELF, PE, and Mach-O binaries; also powers the ROP search inside pwndbg.",
-          "when": "Quick gadget inventory of a binary in a lab to audit what sequences are constructible.",
-          "install": "pip install ropper",
-          "url": "https://github.com/sashs/Ropper",
-          "alt": ["one_gadget", "pwntools"]
+          "id": "constraint-solving",
+          "name": "Constraint solving",
+          "tools": [
+            {
+              "name": "Z3",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Microsoft's SMT solver used to solve constraints over bitvectors, powering automated deobfuscation and input recovery.",
+              "when": "Solve the arithmetic and bitvector equations that symbolic execution or manual analysis hands you.",
+              "install": "pip install z3-solver",
+              "url": "https://github.com/Z3Prover/z3",
+              "alt": ["angr"]
+            }
+          ]
         },
         {
-          "name": "one_gadget",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Matches libc builds to single-address execve('/bin/sh') gadgets whose register constraints are simple to satisfy.",
-          "when": "You have a libc build in a lab or CTF and want short candidate gadget addresses before scripting the constraints.",
-          "install": "gem install one_gadget",
-          "url": "https://github.com/david942j/one_gadget",
-          "alt": ["ropper", "pwntools"]
+          "id": "speculative-execution-research",
+          "name": "Speculative-execution research kits",
+          "tools": [
+            {
+              "name": "Speculator",
+              "best": true,
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "IBM Research framework to analyze speculative-execution attacks (ret2spec/spectre class) and their mitigations across architectures.",
+              "when": "Academic-lab study of ret2spec-family microarchitectural attacks and how current mitigations cover them.",
+              "install": "git clone https://github.com/ibm-research/speculator",
+              "url": "https://github.com/ibm-research/speculator",
+              "alt": ["Retbleed PoC"]
+            },
+            {
+              "name": "Retbleed PoC",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Research proof-of-concept from the ret2spec lineage demonstrating arbitrary speculative code execution via return instructions.",
+              "when": "Reproduce published speculative-execution research artifacts in a lab to measure the impact of mitigations.",
+              "install": "git clone https://github.com/comsec-group/retbleed",
+              "url": "https://github.com/comsec-group/retbleed",
+              "alt": ["Speculator"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "inspection",
-      "name": "Binary Inspection Utilities",
-      "tools": [
+      "id": "binary-navigation",
+      "name": "Binary Navigation",
+      "tools": [],
+      "subcategories": [
         {
-          "name": "checksec",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Bash/Python script that reads ELF headers and reports the active mitigations: PIE, NX, canaries, RELRO, Fortify, and more.",
-          "when": "First move on any binary in a lab or CTF — establish the mitigation baseline before choosing deeper tooling.",
-          "install": "git clone https://github.com/slimm609/checksec.sh",
-          "url": "https://github.com/slimm609/checksec.sh",
-          "alt": ["objdump/readelf", "file"]
+          "id": "instruction-engines",
+          "name": "Instruction engines",
+          "tools": [
+            {
+              "name": "Capstone",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Disassembly engine that decodes raw bytes into platform-pinned instructions for many architectures, usable from Python, C, and more.",
+              "when": "Programmatically decode instruction streams inside your own scripts, emulators, or plugin code.",
+              "install": "pip install capstone",
+              "url": "https://github.com/capstone-engine/capstone",
+              "alt": ["Keystone", "radare2"]
+            },
+            {
+              "name": "Keystone",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Assembly engine that turns mnemonics into machine code at runtime, complementing Capstone for code generation.",
+              "when": "Assemble shellcode or encoding routines on the fly inside your own lab scripts and tooling.",
+              "install": "pip install keystone-engine",
+              "url": "https://github.com/keystone-engine/keystone",
+              "alt": ["Capstone", "pwntools"]
+            }
+          ]
         },
         {
-          "name": "file",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Identifies a file's type by reading magic bytes and headers, including the format and target architecture (e.g. ELF 64-bit x86-64).",
-          "when": "Instant triage of any unknown artifact to confirm what you are looking at before deeper analysis.",
-          "install": "sudo apt install file",
-          "url": "https://www.darwinsys.com/file/",
-          "alt": ["strings", "objdump/readelf"]
+          "id": "inspection-utilities",
+          "name": "Header & string inspection",
+          "tools": [
+            {
+              "name": "checksec",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Bash/Python script that reads ELF headers and reports active mitigations: PIE, NX, canaries, RELRO, Fortify, and more.",
+              "when": "First move on any binary in a lab or CTF — establish the mitigation baseline before choosing deeper tooling.",
+              "install": "git clone https://github.com/slimm609/checksec.sh",
+              "url": "https://github.com/slimm609/checksec.sh",
+              "alt": ["file", "objdump / readelf", "strings"]
+            },
+            {
+              "name": "file",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Identifies a file's type from magic bytes, including format and target architecture (e.g. ELF 64-bit x86-64).",
+              "when": "Instant triage of any unknown artifact to confirm what you are looking at before deeper analysis.",
+              "install": "sudo apt install file",
+              "url": "https://www.darwinsys.com/file/",
+              "alt": ["strings", "objdump / readelf"]
+            },
+            {
+              "name": "strings",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Prints printable character sequences from a binary, exposing embedded literals, format strings, and library references without executing it.",
+              "when": "Grab a quick inventory of interesting strings — prompts, /bin/sh, format specifiers — before disassembling.",
+              "install": "sudo apt install binutils",
+              "url": "https://www.gnu.org/software/binutils/",
+              "alt": ["file", "objdump / readelf"]
+            },
+            {
+              "name": "objdump / readelf",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "binutils disassembler and ELF reader providing symbol tables, sections, headers, dynamic imports, and per-arch disassembly.",
+              "when": "Zero-dependency static lookups — grep symbols, inspect section layout, or dump disassembly without a full RE suite.",
+              "install": "sudo apt install binutils",
+              "url": "https://www.gnu.org/software/binutils/",
+              "alt": ["file", "strings"]
+            }
+          ]
         },
         {
-          "name": "strings",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Prints printable character sequences from a binary, exposing embedded literals, format strings, and library references without executing it.",
-          "when": "Grab a quick inventory of interesting strings — prompts, /bin/sh, format specifiers — before disassembling.",
-          "install": "sudo apt install binutils",
-          "url": "https://www.gnu.org/software/binutils/",
-          "alt": ["file", "objdump/readelf"]
-        },
-        {
-          "name": "objdump/readelf",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "binutils disassembler and ELF reader: symbol tables, sections, headers, dynamic imports, and per-arch disassembly of your own binaries.",
-          "when": "Zero-dependency static lookups — grep symbols, inspect section layout, or dump disassembly without a full RE suite.",
-          "install": "sudo apt install binutils",
-          "url": "https://www.gnu.org/software/binutils/",
-          "alt": ["file", "strings"]
-        },
-        {
-          "name": "xorsearch",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Finds payloads XORed with single-byte or multi-byte keys by matching against known plaintext strings inside packed or obfuscated binaries.",
-          "when": "Spot obfuscated strings or embedded shellcode in a lab binary — like strings, but for the XOR layer.",
-          "install": "wget -O xorsearch https://raw.githubusercontent.com/DidierStevens/DidierStevensSuite/master/xorsearch.py && chmod +x xorsearch",
-          "url": "https://github.com/DidierStevens/DidierStevensSuite",
-          "alt": ["strings"]
+          "id": "binary-diffing",
+          "name": "Binary diffing",
+          "tools": [
+            {
+              "name": "Diaphora",
+              "best": true,
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Binary diffing tool matching functions across two binaries and importing names and symbols, working with Ghidra, IDA, and Binary Ninja.",
+              "when": "Compare patched vs unpatched firmware or file versions to spot the instruction-level changes behind a fix.",
+              "install": "git clone https://github.com/joxeankoret/diaphora",
+              "url": "https://github.com/joxeankoret/diaphora",
+              "alt": ["Ghidra", "Binary Ninja"]
+            }
+          ]
         }
       ]
     }

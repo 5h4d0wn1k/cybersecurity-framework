@@ -6,92 +6,538 @@
   "class": "defense",
   "categories": [
     {
-      "id": "audit-scanners",
-      "name": "System Security Auditing & Compliance Scans",
-      "tools": [
+      "id": "linux-hardening",
+      "name": "Linux & UNIX Host Hardening",
+      "subcategories": [
         {
-          "name": "Lynis",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Agentless security-auditing tool for Linux, BSD, and macOS that runs 200+ checks across the whole OS, scores everything, and ends with a hardening index, disclosure status, and actionable remediation hints.",
-          "when": "First pass on any UNIX-like host you own — run a baseline audit, apply the hardening suggestions, then run again to watch the hardening index climb.",
-          "install": "sudo apt install lynis",
-          "url": "https://github.com/CISOfy/lynis",
-          "alt": ["openscap", "cis-cat pro assessor"]
+          "id": "system-audit",
+          "name": "System Auditing & Compliance Scans",
+          "tools": [
+            {
+              "name": "Lynis",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Agentless security-auditing tool for Linux, BSD, and macOS that runs 200+ checks across the whole OS, scores everything, and ends with a hardening index, disclosure status, and actionable remediation hints.",
+              "when": "First pass on any UNIX-like host you own — run a baseline audit, apply the suggestions, then re-run to watch the hardening index climb.",
+              "install": "sudo apt install lynis",
+              "url": "https://github.com/CISOfy/lynis",
+              "alt": ["openscap", "auditd"]
+            },
+            {
+              "name": "OpenSCAP",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "NIST-certified SCAP 1.2 toolkit: loads security content (XCCDF/OVAL data streams) and evaluates or remediates a system against specific profiles from the command line.",
+              "when": "Repeatable, scriptable compliance evaluations against scap-security-guide content — the profile kills long manual audit checklists.",
+              "install": "sudo apt install openscap-scanner",
+              "url": "https://github.com/OpenSCAP/openscap",
+              "alt": ["scap-security-guide", "lynis"]
+            },
+            {
+              "name": "auditd (Linux Audit)",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Linux Audit framework userspace (auditd, auditctl, ausearch) recording privileged actions, file access, and security-relevant events to an immutable log across reboots.",
+              "when": "Build the audit trail that CIS/STIG rules require before the auditor arrives; verify live rules with auditctl -l and query with ausearch.",
+              "install": "sudo apt install auditd",
+              "url": "https://github.com/linux-audit/audit-userspace",
+              "alt": ["lynis", "openscap"]
+            },
+            {
+              "name": "CIS Ubuntu Linux Benchmark",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Free CIS configuration guide for Ubuntu with scored and unscored hardening entries that scanners and auditors measure against.",
+              "when": "Hand-harden an Ubuntu/Debian-family host to a known-good baseline when no CIS-CAT scan is available.",
+              "install": "preinstalled (web docs)",
+              "url": "https://www.cisecurity.org/benchmark/ubuntu_linux",
+              "alt": ["lynis", "openscap"]
+            }
+          ]
         },
         {
-          "name": "OpenSCAP",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "NIST-certified SCAP 1.2 toolkit: loads security content (XCCDF/OVAL data streams) and evaluates or remediates a system against specific profiles from the command line.",
-          "when": "Repeatable, scriptable compliance evaluations against scap-security-guide content — the profile kills long manual audit checklists.",
-          "install": "sudo apt install openscap-scanner",
-          "url": "https://github.com/OpenSCAP/openscap",
-          "alt": ["lynis", "cis-cat pro assessor"]
+          "id": "mandatory-access-control",
+          "name": "SELinux Policy & MAC Management",
+          "tools": [
+            {
+              "name": "audit2allow",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Core utility from policycoreutils that converts SELinux AVC denials from the audit log into targeted allow or dontaudit policy modules.",
+              "when": "See denials in journal/AVC logs and turn the desired ones into a proper local policy module instead of disabling SELinux.",
+              "install": "sudo apt install policycoreutils",
+              "url": "https://github.com/SELinuxProject/selinux",
+              "alt": ["setools", "selinux-refpolicy"]
+            },
+            {
+              "name": "SETools",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "SELinux Project's policy analysis suite: seinfo, sesearch, sediff, sedta, seinfoflow, and the apol GUI for querying rules and information-flow in the installed policy.",
+              "when": "Reverse-engineer or audit what your SELinux policy actually allows between domains before writing new modules.",
+              "install": "sudo apt install setools",
+              "url": "https://github.com/SELinuxProject/setools",
+              "alt": ["audit2allow", "selinux-refpolicy"]
+            },
+            {
+              "name": "SELinux Reference Policy",
+              "rating": 3,
+              "effort": "advanced",
+              "desc": "The community-maintained reference policy source tree that generated distributions extend; the base for understanding and building custom SELinux policy.",
+              "when": "Contribute to or build custom policy from source, or learn the module structure behind your distro's policy.",
+              "install": "git clone https://github.com/SELinuxProject/refpolicy.git",
+              "url": "https://github.com/SELinuxProject/refpolicy",
+              "alt": ["setools", "audit2allow"]
+            }
+          ]
         },
         {
-          "name": "CIS-CAT Pro Assessor",
-          "class": "commercial",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Commercial CIS scanner (SecureSuite membership) that turns CIS Benchmarks into automated scans and compliance score/report output; a free CIS-CAT Lite covers a small set of select benchmarks.",
-          "when": "Audits that must document conformance to a specific CIS Benchmark version with vendor-supported mapping and reporting.",
-          "install": "preinstalled (web) — SecureSuite member portal download",
-          "url": "https://www.cisecurity.org/cybersecurity-tools/cis-cat-pro",
-          "alt": ["openscap", "lynis"]
-        },
-        {
-          "name": "auditd",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Linux Audit framework userspace (auditd, auditctl, ausearch) recording privileged actions, file access, and security-relevant events to an immutable log across reboots.",
-          "when": "Build the audit trail that CIS/STIG rules require before the auditor arrives; verify live rules with auditctl -l and query with ausearch.",
-          "install": "sudo apt install auditd",
-          "url": "https://github.com/linux-audit/audit-userspace",
-          "alt": ["lynis"]
+          "id": "network-services",
+          "name": "Network Services Configuration",
+          "subcategories": [
+            {
+              "id": "host-firewall",
+              "name": "Host Firewalls",
+              "tools": [
+                {
+                  "name": "ufw",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Ubuntu's uncomplicated frontend over iptables: allow/deny rules for ports and services in a few commands, with sane IPv6 defaults and a status view.",
+                  "when": "Simple proven host firewall on Debian/Ubuntu; default-deny inbound, allow only what a service genuinely needs.",
+                  "install": "sudo apt install ufw",
+                  "url": "https://launchpad.net/ufw",
+                  "alt": ["firewalld", "nftables"]
+                },
+                {
+                  "name": "firewalld",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Dynamic firewall daemon with zone-based policy, a D-Bus service API, and runtime-vs-permanent config separation; the default firewall manager on RHEL/CentOS/Fedora/SUSE.",
+                  "when": "Host firewalling on RHEL-family systems: open only the services a zone needs and test in runtime before committing permanently.",
+                  "install": "sudo apt install firewalld",
+                  "url": "https://firewalld.org",
+                  "alt": ["ufw", "nftables"]
+                },
+                {
+                  "name": "nftables",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Netfilter's modern packet-filtering framework with a single, scriptable ruleset language that replaces iptables chains; the base engine ufw/firewalld sit on.",
+                  "when": "Write a compact, atomic, version-controllable firewall ruleset for servers that need more control than ufw offers.",
+                  "install": "sudo apt install nftables",
+                  "url": "https://netfilter.org/projects/nftables/",
+                  "alt": ["ufw", "firewalld"]
+                }
+              ]
+            },
+            {
+              "id": "ssh-hardening",
+              "name": "SSH Hardening",
+              "tools": [
+                {
+                  "name": "ssh-audit",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "Audits SSH server and client configuration end-to-end: grades every KEX, cipher, MAC, and host-key algorithm, flags weak or vulnerable combos, and ships per-distro hardening guides.",
+                  "when": "Audit sshd before changing anything, apply the printed hardening guide, then re-scan until all-secure.",
+                  "install": "pip3 install ssh-audit",
+                  "url": "https://github.com/jtesta/ssh-audit",
+                  "alt": ["mozilla-openssh-config"]
+                },
+                {
+                  "name": "Mozilla OpenSSH Configuration",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Reference hardening guide for sshd_config with Modern/Intermediate/MFA profiles and concrete HostKey, KEX, cipher, and MAC lists for each OpenSSH generation.",
+                  "when": "Write a known-good SSH baseline, then confirm the result with ssh-audit.",
+                  "install": "preinstalled (web reference)",
+                  "url": "https://infosec.mozilla.org/guidelines/openssh",
+                  "alt": ["ssh-audit"]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "compliance-frameworks",
+      "id": "windows-hardening",
+      "name": "Windows Hardening",
+      "subcategories": [
+        {
+          "id": "windows-tools",
+          "name": "Hardening Tools & Local Policy",
+          "tools": [
+            {
+              "name": "HardeningKitty",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "PowerShell tool that retrieves the current Windows configuration, assesses it against CIS Benchmarks, Microsoft baselines, STIG, and BSI guides, and can apply settings itself (HailMary mode).",
+              "when": "Automated CIS/Microsoft-baseline audit of Windows endpoints with minimal setup and a CSV scorecard.",
+              "install": "git clone https://github.com/scipag/HardeningKitty.git && Import-Module .\\HardeningKitty.psm1",
+              "url": "https://github.com/scipag/HardeningKitty",
+              "alt": ["lgpo", "cis-microsoft-windows-benchmark"]
+            },
+            {
+              "name": "LGPO.exe",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Microsoft's local group-policy utility (shipped in the Security Compliance Toolkit) that imports/repairs registry.pol files and audits local policy settings.",
+              "when": "Apply a downloaded security baseline GPO backup to standalone or non-domain machines and verify local policy compliance.",
+              "install": "Download from Microsoft Security Compliance Toolkit (55319)",
+              "url": "https://www.microsoft.com/en-us/download/details.aspx?id=55319",
+              "alt": ["hardeningkitty"]
+            }
+          ]
+        },
+        {
+          "id": "windows-baselines",
+          "name": "Windows Baseline Guidance",
+          "tools": [
+            {
+              "name": "CIS Microsoft Windows Benchmark",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Free CIS configuration benchmark for Windows Server and client editions with scored and unscored hardening entries.",
+              "when": "Know exactly which GPO/registry settings an auditor will check, and harden by hand when scanner licensing is unavailable.",
+              "install": "preinstalled (web docs)",
+              "url": "https://www.cisecurity.org/benchmark/microsoft_windows",
+              "alt": ["microsoft-security-baselines", "hardeningkitty"]
+            },
+            {
+              "name": "Microsoft Security Baselines",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Microsoft's recommended security configuration settings curated from the Windows Security Configuration Framework, shipped as GPO backups ready for LGPO import.",
+              "when": "Start from Microsoft's own baseline rather than writing group policy from scratch; the SCT download includes the LGPO import tooling.",
+              "install": "preinstalled (web docs)",
+              "url": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/device-management/windows-security-configuration-framework",
+              "alt": ["cis-microsoft-windows-benchmark", "lgpo"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "network-device-hardening",
+      "name": "Network Infrastructure Hardening",
+      "subcategories": [
+        {
+          "id": "vendor-guides",
+          "name": "Vendor Device Hardening Guides",
+          "tools": [
+            {
+              "name": "CIS Cisco IOS/XE Benchmark",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "CIS configuration benchmark covering Cisco IOS and IOS-XE: AAA, management-plane protection, SNMP, NTP, and platform-specific hardening entries.",
+              "when": "Hardening Cisco routers/switches to a defensible baseline before a compliance scan or external assessment.",
+              "install": "preinstalled (web docs)",
+              "url": "https://www.cisecurity.org/benchmark/cisco",
+              "alt": ["mikrotik-security-guide"]
+            },
+            {
+              "name": "MikroTik RouterOS Security Guide",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "RouterOS documentation covering access hardening, service lockdown, firewall filter rules, brute-force protection, and secure defaults for MikroTik devices.",
+              "when": "Locking down MikroTik routers/switches you manage: follow the guide, restrict winbox/API, and add the recommended filter rules.",
+              "install": "preinstalled (web docs)",
+              "url": "https://help.mikrotik.com/docs/spaces/ROS/pages/148778796/Security",
+              "alt": ["cis-cisco-benchmark", "batfish"]
+            }
+          ]
+        },
+        {
+          "id": "config-validation",
+          "name": "Device Config Validation",
+          "tools": [
+            {
+              "name": "Batfish",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Network configuration analyzer that parses real device configs and answers questions about reachability, ACLs, and announced routes without touching the network.",
+              "when": "Validate that hardening changes (ACLs, filters, BGP policies) don't break intended reachability before pushing them.",
+              "install": "docker run -it batfish/allinone",
+              "url": "https://github.com/batfish/batfish",
+              "alt": ["cis-cisco-benchmark"]
+            }
+          ]
+        },
+        {
+          "id": "service-config-audit",
+          "name": "TLS & Service Configuration Audit",
+          "tools": [
+            {
+              "name": "testssl.sh",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Command-line TLS checker that tests every cipher, protocol, certificate, and vulnerability (Heartbleed, ROBOT, BEAST, and friends) against a live endpoint and grades the config.",
+              "when": "Audit the TLS posture of every service you expose before and after removing weak ciphers and protocols.",
+              "install": "git clone https://github.com/drwetter/testssl.sh.git",
+              "url": "https://github.com/drwetter/testssl.sh",
+              "alt": ["sslscan"]
+            },
+            {
+              "name": "sslscan",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Lightweight TLS/SSL scanner that enumerates supported ciphers, protocols, and certificate details using OpenSSL, ideal for scripting into pipeline checks.",
+              "when": "Quick scriptable cipher/protocol inventory across many hosts when you only need raw output, not a full report.",
+              "install": "sudo apt install sslscan",
+              "url": "https://github.com/rbsec/sslscan",
+              "alt": ["testssl.sh"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "containers-k8s",
+      "name": "Containers & Kubernetes Hardening",
+      "subcategories": [
+        {
+          "id": "image-scanning",
+          "name": "Image & Container Scanning",
+          "tools": [
+            {
+              "name": "Trivy",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Aqua's all-in-one scanner for OS packages, SBOMs, IaC misconfigs, and Kubernetes manifests/contexts; as a k8s subcommand it scans your cluster's deployed workload posture.",
+              "when": "Scan container images in CI and scan the live cluster (trivy k8s) for image and config findings in one tool.",
+              "install": "sudo apt install trivy",
+              "url": "https://github.com/aquasecurity/trivy",
+              "alt": ["kube-bench", "checkov"]
+            }
+          ]
+        },
+        {
+          "id": "manifest-policy",
+          "name": "Manifest & Policy Linting",
+          "tools": [
+            {
+              "name": "kube-linter",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "StackRox's Kubernetes YAML checker with 50+ built-in lint checks for security anti-patterns such as privileged containers, runAsRoot, and host-network exposure.",
+              "when": "Catch obvious YAML security anti-patterns in Git before charts reach the cluster.",
+              "install": "brew install kube-linter",
+              "url": "https://github.com/stackrox/kube-linter",
+              "alt": ["checkov", "kubesec"]
+            },
+            {
+              "name": "checkov",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Bridgecrew/Prisma's policy-as-code scanner for Terraform, CloudFormation, Kubernetes, Helm, Dockerfile, and more, with 1000+ built-in checks including CIS Kubernetes.",
+              "when": "Unified IaC-and-manifest scanning across your whole infrastructure-as-code estate in CI.",
+              "install": "pip3 install checkov",
+              "url": "https://github.com/bridgecrewio/checkov",
+              "alt": ["kube-linter", "trivy"]
+            },
+            {
+              "name": "kubesec",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Risk analysis tool that scores Kubernetes resources on 10+ security criteria (privileges, capabilities, runAsNonRoot) and returns a risk score with pointers.",
+              "when": "Ten-second risk score for a single manifest before deploy or during review.",
+              "install": "docker run -i kubesec/kubesec scan /dev/stdin",
+              "url": "https://github.com/controlplaneio/kubesec",
+              "alt": ["kube-linter", "checkov"]
+            }
+          ]
+        },
+        {
+          "id": "k8s-benchmark",
+          "name": "Kubernetes CIS Benchmarking",
+          "tools": [
+            {
+              "name": "kube-bench",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Aqua's CIS Kubernetes Benchmark checker: audits control plane, etcd, worker nodes, and RBAC against the official benchmark, runnable as a DaemonSet or binary.",
+              "when": "Prove your cluster meets the CIS Kubernetes benchmark and track remediation over time.",
+              "install": "docker run --pid=host -v /etc:/etc:ro aquasec/kube-bench:latest install",
+              "url": "https://github.com/aquasecurity/kube-bench",
+              "alt": ["kubescape", "trivy"]
+            },
+            {
+              "name": "kubescape",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "ARMO's Kubernetes posture scanner covering NSA/CISA hardening guidance, MITRE ATT&CK, and 50+ frameworks, plus admission-controller enforcement of failed controls.",
+              "when": "Full-framework posture scanning of a live cluster that goes beyond the CIS benchmark into runtime control enforcement.",
+              "install": "brew install kubescape",
+              "url": "https://github.com/kubescape/kubescape",
+              "alt": ["kube-bench", "kube-linter"]
+            }
+          ]
+        },
+        {
+          "id": "service-mesh",
+          "name": "Service Mesh & Network Policy",
+          "tools": [
+            {
+              "name": "Istio",
+              "best": true,
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Service mesh providing mTLS between workloads, authorization policies (peer/request authentication), and encrypted east-west traffic for zero-trust workload identity.",
+              "when": "Enforce workload-to-workload mTLS and least-privilege authorization policies in a cluster that already runs a mesh.",
+              "install": "curl -L https://istio.io/downloadIstio | sh -",
+              "url": "https://istio.io/latest/docs/concepts/security/",
+              "alt": ["cilium"]
+            },
+            {
+              "name": "Cilium",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "eBPF-based CNI that enforces identity-aware L3-L7 NetworkPolicies without sidecars, including encrypted traffic and observability at scale.",
+              "when": "Enforce zero-trust network policy at the CNI layer when you don't want to adopt a full sidecar-based mesh.",
+              "install": "helm install cilium cilium/cilium --namespace kube-system",
+              "url": "https://github.com/cilium/cilium",
+              "alt": ["istio"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cloud-hardening",
+      "name": "Cloud Configuration & Compliance",
+      "subcategories": [
+        {
+          "id": "cloud-benchmarks",
+          "name": "Cloud CIS Benchmarks",
+          "tools": [
+            {
+              "name": "CIS Cloud Benchmarks",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Free CIS benchmark sets for AWS, Azure, and GCP covering IAM, storage, networking, logging, and monitoring controls in each provider's console-accessible language.",
+              "when": "Know which cloud console/service settings an auditor checks, provider by provider.",
+              "install": "preinstalled (web docs)",
+              "url": "https://www.cisecurity.org/benchmark/amazon_aws",
+              "alt": ["prowler", "scoutsuite"]
+            }
+          ]
+        },
+        {
+          "id": "cloud-posture",
+          "name": "Cloud Posture Scanning",
+          "tools": [
+            {
+              "name": "Prowler",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Runs 1,000+ read-only checks across AWS, Azure, and GCP against CIS Benchmarks and 70+ compliance frameworks, with remediation guidance per finding.",
+              "when": "Default CIS/NIST posture review of any account you own; the coverage map and remediation pointers make fixing straightforward.",
+              "install": "pip3 install prowler",
+              "url": "https://github.com/prowler-cloud/prowler",
+              "alt": ["scoutsuite", "cis-cloud-benchmarks"]
+            },
+            {
+              "name": "Scout Suite",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "NCC Group's multi-cloud auditor pulls configuration from provider APIs and renders a browsable point-in-time HTML report of risk areas for AWS, Azure, and GCP.",
+              "when": "A clean visual HTML report of config risk in one account as a second opinion alongside Prowler.",
+              "install": "pip3 install scoutsuite",
+              "url": "https://github.com/nccgroup/ScoutSuite",
+              "alt": ["prowler"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "compliance-content",
       "name": "Compliance Benchmarks & Baseline Content",
-      "tools": [
+      "subcategories": [
         {
-          "name": "scap-security-guide",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "OpenSCAP's official security content: prebuilt SCAP data streams with profiles for CIS, DISA STIG, PCI-DSS, and HIPAA, plus bundled bash and Ansible remediation scripts that actually apply the fixes.",
-          "when": "Every compliance scan starts here — grab the data stream for your distro, feed it to openscap, review failures, then remediate with the generated scripts.",
-          "install": "sudo apt install scap-security-guide",
-          "url": "https://github.com/OpenSCAP/scap-security-guide",
-          "alt": ["cis benchmarks", "stig viewer"]
+          "id": "baseline-guides",
+          "name": "Benchmark & Baseline Content",
+          "tools": [
+            {
+              "name": "scap-security-guide",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "OpenSCAP's official security content: prebuilt SCAP data streams with profiles for CIS, DISA STIG, PCI-DSS, and HIPAA, plus bundled bash and Ansible remediation scripts that apply the fixes.",
+              "when": "Every compliance scan starts here — grab the data stream for your distro, feed it to openscap, review failures, then remediate with the generated scripts.",
+              "install": "sudo apt install scap-security-guide",
+              "url": "https://github.com/OpenSCAP/scap-security-guide",
+              "alt": ["cis-benchmarks", "stig-viewer"]
+            },
+            {
+              "name": "CIS Benchmarks",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Free, consensus-built configuration guides (PDF) for hundreds of OS, server, cloud, and application targets — the de-facto hardening standard auditors and scanners measure against.",
+              "when": "Hand-hardening to a known-good baseline with no scanner available; open the benchmark PDF for your platform and apply the entries manually.",
+              "install": "preinstalled (web) — free PDF download after registering a CIS account",
+              "url": "https://www.cisecurity.org/cis-benchmarks",
+              "alt": ["stig-viewer", "scap-security-guide"]
+            },
+            {
+              "name": "STIG Viewer",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Browser database of the entire DISA Security Technical Implementation Guide set — rule-by-rule requirements with severity, CCI/NIST 800-53 mappings, and concrete fix text.",
+              "when": "Federal or DISA-style compliance: look up the exact configuration a STIG rule demands before touching config files.",
+              "install": "preinstalled (web)",
+              "url": "https://www.stigviewer.com",
+              "alt": ["cis-benchmarks", "scap-security-guide"]
+            }
+          ]
         },
         {
-          "name": "CIS Benchmarks",
-          "rating": 4,
-          "effort": "beginner",
-          "desc": "Free, consensus-built configuration guides (PDF) for hundreds of OS, server, cloud, and application targets — the de-facto hardening standard that auditors and scanners measure against.",
-          "when": "Hand-hardening a system to a known-good baseline with no scanner available; open the benchmark PDF for your platform and apply the entries manually.",
-          "install": "preinstalled (web) — free PDF download after registering a CIS account",
-          "url": "https://www.cisecurity.org/cis-benchmarks",
-          "alt": ["stig viewer"]
-        },
-        {
-          "name": "STIG Viewer",
-          "rating": 4,
-          "effort": "beginner",
-          "desc": "Browser database of the entire DISA Security Technical Implementation Guide set — rule-by-rule requirements with severity, CCI/NIST 800-53 mappings, and concrete fix text.",
-          "when": "Federal or DISA-style compliance: look up the exact configuration a STIG rule demands and its severity before touching config files.",
-          "install": "preinstalled (web)",
-          "url": "https://www.stigviewer.com",
-          "alt": ["cis benchmarks"]
+          "id": "automated-assessment",
+          "name": "Policy-as-Code Assessment",
+          "tools": [
+            {
+              "name": "InSpec",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Chef's open-source compliance language that turns CIS/STIG baselines into executable profile code (many public profiles exist) and runs them over local and remote systems.",
+              "when": "Version-controllable, reusable compliance profiles that you run in CI or on-demand without a commercial scanner.",
+              "install": "gem install inspec-bin",
+              "url": "https://github.com/inspec/inspec",
+              "alt": ["cis-cat-pro", "scap-security-guide"]
+            },
+            {
+              "name": "CIS-CAT Pro Assessor",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Commercial CIS scanner (SecureSuite membership) that turns CIS Benchmarks into automated scans and compliance score/report output; a free CIS-CAT Lite covers a small set of select benchmarks.",
+              "when": "Audits that must document conformance to a specific CIS Benchmark version with vendor-supported mapping and reporting.",
+              "install": "preinstalled (web) — SecureSuite member portal download",
+              "url": "https://www.cisecurity.org/cybersecurity-tools/cis-cat-pro",
+              "alt": ["inspec", "openscap"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "config-hardening",
+      "id": "config-automation",
       "name": "Automated Hardening & Configuration",
       "tools": [
         {
@@ -109,57 +555,10 @@
           "rating": 3,
           "effort": "easy",
           "desc": "Built-in systemd command that scores each service unit 0-10 on exposure (PrivateTmp, NoNewPrivileges, ProtectSystem, and more) and lists the exact directives dragging the score down.",
-          "when": "Zero-install per-service hardening review on any systemd host — run it on your long-running units and tighten the worst offenders.",
+          "when": "Zero-install per-service hardening review on any systemd host — tighten the worst offenders on long-running units.",
           "install": "preinstalled (systemd)",
           "url": "https://www.freedesktop.org/software/systemd/man/latest/systemd-analyze.html",
-          "alt": ["ansible-hardening"]
-        }
-      ]
-    },
-    {
-      "id": "network-service-hardening",
-      "name": "Network & Service Hardening",
-      "tools": [
-        {
-          "name": "ssh-audit",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Audits SSH server and client configuration end-to-end: grades every KEX, cipher, MAC, and host-key algorithm, flags weak or vulnerable combos, and ships per-distro hardening guides.",
-          "when": "Audit sshd before changing anything, apply the printed hardening guide, then re-scan until the tool reports all-secure.",
-          "install": "pip3 install ssh-audit",
-          "url": "https://github.com/jtesta/ssh-audit",
-          "alt": ["mozilla openssh config"]
-        },
-        {
-          "name": "firewalld",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Dynamic firewall daemon with zone-based policy, a D-Bus service API, and runtime-vs-permanent config separation; the default firewall manager on RHEL/CentOS/Fedora/SUSE.",
-          "when": "Host firewalling on RHEL-family systems: open only the services a zone needs and test changes in runtime before committing them permanently.",
-          "install": "sudo apt install firewalld",
-          "url": "https://firewalld.org",
-          "alt": ["ufw"]
-        },
-        {
-          "name": "ufw",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Ubuntu's uncomplicated frontend over iptables: allow/deny rules for ports and services in a few commands, with sane IPv6 defaults and a status view.",
-          "when": "Simple proven host firewall on Debian/Ubuntu where firewalld is not the default; same job, less ceremony.",
-          "install": "sudo apt install ufw",
-          "url": "https://launchpad.net/ufw",
-          "alt": ["firewalld"]
-        },
-        {
-          "name": "Mozilla OpenSSH Config",
-          "rating": 3,
-          "effort": "easy",
-          "desc": "Reference hardening guide for sshd_config and moduli with Modern/Intermediate/MFA profiles and concrete HostKey, KEX, cipher, and MAC lists for each OpenSSH generation.",
-          "when": "Write a known-good SSH baseline — put the right profile block into /etc/ssh/sshd_config, then confirm the result with ssh-audit.",
-          "install": "preinstalled (web reference)",
-          "url": "https://infosec.mozilla.org/guidelines/openssh",
-          "alt": ["ssh-audit"]
+          "alt": ["ansible-hardening", "lynis"]
         }
       ]
     }

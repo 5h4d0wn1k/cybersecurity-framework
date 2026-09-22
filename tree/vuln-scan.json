@@ -6,254 +6,949 @@
   "class": "offense",
   "categories": [
     {
-      "id": "general",
-      "name": "General Vulnerability Scanners",
-      "tools": [
+      "id": "net-host-scan",
+      "name": "Network & Host Scanning",
+      "subcategories": [
         {
-          "name": "Nuclei",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Template-driven scanner (projectdiscovery) running thousands of YAML checks against your web, network, and infrastructure targets to confirm known CVEs and misconfigurations.",
-          "when": "First-pass automated sweep across a whole asset list; fast and CI-friendly enough to run on every build.",
-          "install": "go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest",
-          "url": "https://github.com/projectdiscovery/nuclei",
-          "alt": ["nessus", "openvas", "vuls"]
+          "id": "port-scan",
+          "name": "Port & Service Scanning",
+          "subcategories": [
+            {
+              "id": "nmap-family",
+              "name": "Nmap & Friends",
+              "tools": [
+                {
+                  "name": "Nmap",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "The de-facto open-source network scanner: host discovery, port scanning, OS and service fingerprinting, and NSE scripts for scripted vulnerability checks.",
+                  "when": "Baseline port and service enumeration across your own servers before deeper targeted testing.",
+                  "install": "sudo apt install nmap",
+                  "url": "https://github.com/nmap/nmap",
+                  "alt": [
+                    "masscan",
+                    "rustscan"
+                  ]
+                },
+                {
+                  "name": "nmap-vulners NSE",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "An Nmap script pair (vulners.nse / vulscan.nse) that queries the Vulners API with each scanned software version and prints matching CVEs next to the banner.",
+                  "when": "Turning a routine nmap scan of services you operate into an instant CVE snapshot with no extra tooling.",
+                  "install": "git clone https://github.com/vulnersCom/nmap-vulners && sudo cp nmap-vulners/*.nse /usr/share/nmap/scripts/",
+                  "url": "https://github.com/vulnersCom/nmap-vulners",
+                  "alt": [
+                    "vulners",
+                    "nvd"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "high-speed",
+              "name": "High-Speed Port Scanners",
+              "tools": [
+                {
+                  "name": "Masscan",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Robert Graham's asynchronous parallel scanner that can sweep all 65k ports of an address range in minutes using raw SYN packets.",
+                  "when": "Large authorized perimeter sweeps where nmap's serialized timing would take too long, followed by nmap for detail.",
+                  "install": "sudo apt install masscan",
+                  "url": "https://github.com/robertdavidgraham/masscan",
+                  "alt": [
+                    "nmap",
+                    "rustscan"
+                  ]
+                },
+                {
+                  "name": "RustScan",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Rust-based port scanner that finds open ports in seconds, then pipes them straight into nmap for full service discovery.",
+                  "when": "Fast first-pass open-port identification when running a full nmap -p- on your hosts is too slow.",
+                  "install": "cargo install rustscan",
+                  "url": "https://github.com/bee-san/RustScan",
+                  "alt": [
+                    "masscan",
+                    "nmap"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "Nessus",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Tenable's market-standard commercial scanner with credentialed and remote checks across OSes, services, and web; the free Essentials tier covers a small lab.",
-          "when": "Deep credentialed findings and compliance-style reports on the servers you operate.",
-          "install": "sudo dpkg -i Nessus-10.x-ubuntu.deb  (free Essentials .deb from tenable.com)",
-          "url": "https://www.tenable.com/products/nessus",
-          "alt": ["openvas", "nuclei"]
+          "id": "host-discovery",
+          "name": "Host Discovery",
+          "subcategories": [
+            {
+              "id": "lan-discovery",
+              "name": "Layer-2/LAN Discovery",
+              "tools": [
+                {
+                  "name": "arp-scan",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "ARP-based discovery that maps every live host and MAC vendor on the local segment you operate, including those ignoring ping.",
+                  "when": "Inventorying the devices on a LAN you administer before running port scans against them.",
+                  "install": "sudo apt install arp-scan",
+                  "url": "https://github.com/royhills/arp-scan",
+                  "alt": [
+                    "netdiscover",
+                    "nmap"
+                  ]
+                },
+                {
+                  "name": "netdiscover",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Active (ARP request) and passive (sniff-and-log) network discovery with a lightweight interactive frame view of the subnet.",
+                  "when": "Live host discovery on switched networks you manage without agents.",
+                  "install": "sudo apt install netdiscover",
+                  "url": "https://github.com/netdiscover-scanner/netdiscover",
+                  "alt": [
+                    "arp-scan",
+                    "nmap"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "internet-scale",
+              "name": "Internet-Scale Discovery",
+              "tools": [
+                {
+                  "name": "ZMap",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "High-performance network scanner built for internet-wide research on services you own; the engine behind the ZMap project ('there are no secrets on the internet').",
+                  "when": "Measuring the exposed surface of your own public address space in collaboration with your network ops team.",
+                  "install": "sudo apt install zmap",
+                  "url": "https://github.com/zmap/zmap",
+                  "alt": [
+                    "masscan",
+                    "nmap"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "OpenVAS (GVM)",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Greenbone's open-source stack forked from the old Nessus; schedules scans of thousands of network vulnerability tests (NVTs) with a web dashboard.",
-          "when": "Self-hosted, ongoing internal-network scanning without commercial licensing.",
-          "install": "sudo apt install gvm && sudo gvm-setup",
-          "url": "https://github.com/greenbone/openvas-scanner",
-          "alt": ["nessus", "nuclei"]
-        },
-        {
-          "name": "Vuls",
-          "rating": 4,
-          "effort": "advanced",
-          "desc": "Agentless Go scanner that runs from one control host over SSH to inventory OS packages, middleware, and containers, then maps each server to applicable CVEs.",
-          "when": "Fleet-level Linux vulnerability tracking when installing agents on every box is not an option.",
-          "install": "go install github.com/vulsio/vuls@latest",
-          "url": "https://github.com/vulsio/vuls",
-          "alt": ["nuclei", "openvas"]
+          "id": "scan-automation",
+          "name": "Automated Recon Pipelines",
+          "subcategories": [
+            {
+              "id": "multi-phase",
+              "name": "Multi-phase Recon & Correlation",
+              "tools": [
+                {
+                  "name": "AutoRecon",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "Tib3rius's recon orchestrator that runs nmap, service enumeration, web scans, and vulnerability checks in parallel and writes per-host reports you can review.",
+                  "when": "Structured, repeatable external assessment of an IP range you are authorized to test.",
+                  "install": "git clone https://github.com/Tib3rius/AutoRecon && cd AutoRecon && pip3 install -r requirements.txt",
+                  "url": "https://github.com/Tib3rius/AutoRecon",
+                  "alt": [
+                    "nettacker",
+                    "nuclei"
+                  ]
+                },
+                {
+                  "name": "Nettacker",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "OWASP scanner framework that scans layers of your network (ports, services, subdomains), correlates results, then runs follow-up module checks.",
+                  "when": "One-pass automated network discovery plus vulnerability probing across the infrastructure you own.",
+                  "install": "pip3 install nettacker",
+                  "url": "https://github.com/OWASP/Nettacker",
+                  "alt": [
+                    "autorecon",
+                    "nuclei"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "web",
-      "name": "Web Vulnerability Scanners",
-      "tools": [
+      "id": "web-app-scan",
+      "name": "Web Application Scanning",
+      "subcategories": [
         {
-          "name": "Nikto",
-          "best": true,
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Perl web server scanner running 7,000+ checks for known files, outdated software, and misconfigurations on your own sites.",
-          "when": "Fast baseline sweep of a web server's exposed surface before deeper application testing.",
-          "install": "sudo apt install nikto",
-          "url": "https://github.com/sullo/nikto",
-          "alt": ["owasp zap", "wapiti"]
+          "id": "server-enum",
+          "name": "Server & Edge Fingerprinting",
+          "subcategories": [
+            {
+              "id": "server-fingerprint",
+              "name": "Server Fingerprinting",
+              "tools": [
+                {
+                  "name": "WhatWeb",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Ruby web fingerprinting tool identifying the platform, CMS, JavaScript libraries, and headers behind over 1,800 technology signatures.",
+                  "when": "Telling what stack a web property you own runs before picking follow-up scanners.",
+                  "install": "sudo gem install whatweb",
+                  "url": "https://github.com/urbanadventurer/WhatWeb",
+                  "alt": [
+                    "wappalyzer",
+                    "nikto"
+                  ]
+                },
+                {
+                  "name": "Nikto",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Perl web server scanner running 7,000+ checks for known files, outdated software, and misconfigurations on your own sites.",
+                  "when": "Fast baseline sweep of a web server's exposed surface before deeper application testing.",
+                  "install": "sudo apt install nikto",
+                  "url": "https://github.com/sullo/nikto",
+                  "alt": [
+                    "whatweb",
+                    "owasp zap"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "waf-detection",
+              "name": "WAF & Edge Detection",
+              "tools": [
+                {
+                  "name": "wafw00f",
+                  "best": true,
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Identifies whether and which WAF (Cloudflare, ModSecurity, AWS WAF, etc.) fronts a web property, and fingerprints its version where detectable.",
+                  "when": "Checking what edge protection sits in front of your applications before sending scan traffic through it.",
+                  "install": "pip3 install wafw00f",
+                  "url": "https://github.com/EnableSecurity/wafw00f",
+                  "alt": [
+                    "whatweb",
+                    "nmap"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "OWASP ZAP",
-          "rating": 5,
-          "effort": "medium",
-          "desc": "Full-featured open-source web app scanner combining an intercepting proxy, spidering, and automated active and passive scanning behind a REST API.",
-          "when": "DAST runs against the apps you build, or as the intercepting proxy for manual test sessions.",
-          "install": "sudo apt install zaproxy",
-          "url": "https://github.com/zaproxy/zaproxy",
-          "alt": ["nikto", "wapiti", "arachni"]
+          "id": "app-dast",
+          "name": "Application-layer DAST",
+          "subcategories": [
+            {
+              "id": "general-dast",
+              "name": "General-purpose DAST",
+              "tools": [
+                {
+                  "name": "OWASP ZAP",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "Full-featured open-source web app scanner combining an intercepting proxy, spidering, and automated active and passive scanning behind a REST API.",
+                  "when": "DAST runs against the apps you build, or as the intercepting proxy for manual test sessions.",
+                  "install": "sudo apt install zaproxy",
+                  "url": "https://github.com/zaproxy/zaproxy",
+                  "alt": [
+                    "wapiti",
+                    "nikto"
+                  ]
+                },
+                {
+                  "name": "Wapiti",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Command-line web fuzzer performing black-box scans for SQLi, XSS, file inclusion, SSRF, and more, without needing a browser.",
+                  "when": "Scriptable, headless DAST batches over many of your endpoints in CI.",
+                  "install": "pip3 install wapiti3",
+                  "url": "https://github.com/wapiti-scanner/wapiti",
+                  "alt": [
+                    "owasp zap",
+                    "nuclei"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "template-scanning",
+              "name": "Template-driven Scanning",
+              "tools": [
+                {
+                  "name": "Nuclei",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "ProjectDiscovery's template engine running thousands of YAML checks against web, network, and infrastructure targets to confirm known CVEs and misconfigurations.",
+                  "when": "First-pass automated sweep across a whole asset list; fast and CI-friendly enough to run on every build.",
+                  "install": "go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest",
+                  "url": "https://github.com/projectdiscovery/nuclei",
+                  "alt": [
+                    "owasp zap",
+                    "openscap"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "Arachni",
-          "rating": 3,
-          "effort": "medium",
-          "desc": "Feature-rich Ruby web app scanner with modular platform checks, a REST API, and distributed scanning of your own applications.",
-          "when": "Headless or scripted scans that need to scale across many of your endpoints from one controller.",
-          "install": "Download and extract the arachni release archive from GitHub",
-          "url": "https://github.com/Arachni/arachni",
-          "alt": ["owasp zap", "wapiti"]
+          "id": "injection-fuzz",
+          "name": "Injection & XSS Testing",
+          "subcategories": [
+            {
+              "id": "sql-injection",
+              "name": "SQL Injection",
+              "tools": [
+                {
+                  "name": "sqlmap",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "Long-standing automated SQL injection detector with database fingerprinting; validates whether a suspected injection point on your own app is genuinely exploitable.",
+                  "when": "Confirming and triaging reported SQLi findings on applications you own and operate.",
+                  "install": "sudo apt install sqlmap",
+                  "url": "https://github.com/sqlmapproject/sqlmap",
+                  "alt": [
+                    "wapiti",
+                    "owasp zap"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "xss-testing",
+              "name": "Cross-Site Scripting",
+              "tools": [
+                {
+                  "name": "dalfox",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Fast Go-based XSS scanner that fuzzes parameters, builds payloads, and verifies reflected and stored vectors against the pages you maintain.",
+                  "when": "Payload-based validation of XSS candidates found by DAST tools on your own endpoints.",
+                  "install": "go install github.com/hahwul/dalfox/v2@latest",
+                  "url": "https://github.com/hahwul/dalfox",
+                  "alt": [
+                    "owasp zap",
+                    "sqlmap"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "sqlmap",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Long-standing automated SQL injection detector with database fingerprinting; validates whether a suspected injection point on your own app is genuinely exploitable.",
-          "when": "Confirming and triaging reported SQLi findings on applications you own and operate.",
-          "install": "sudo apt install sqlmap",
-          "url": "https://github.com/sqlmapproject/sqlmap",
-          "alt": ["wapiti", "owasp zap"]
+          "id": "cms-scan",
+          "name": "CMS-Specific Scanners",
+          "subcategories": [
+            {
+              "id": "wordpress",
+              "name": "WordPress",
+              "tools": [
+                {
+                  "name": "WPScan",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "WordPress scanner that fingerprints core, theme, and plugin versions against the WPScan vulnerability database and does user and weak-password checks.",
+                  "when": "Regularly auditing the WordPress sites you maintain for outdated plugins and known CVEs.",
+                  "install": "sudo gem install wpscan",
+                  "url": "https://github.com/wpscanteam/wpscan",
+                  "alt": [
+                    "cmsmap",
+                    "whatweb"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "multi-cms",
+              "name": "Multi-CMS (Joomla / Drupal)",
+              "tools": [
+                {
+                  "name": "CMSmap",
+                  "best": true,
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "Python tool that scans WordPress, Joomla, and Drupal sites you own for known vulnerabilities and exposed file paths.",
+                  "when": "A single-command health check across mixed small-CMS estates without installing separate scanners.",
+                  "install": "git clone https://github.com/Dionach/CMSmap && pip3 install -r CMSmap/requirements.txt",
+                  "url": "https://github.com/Dionach/CMSmap",
+                  "alt": [
+                    "wpscan",
+                    "droopescan"
+                  ]
+                },
+                {
+                  "name": "droopescan",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Lightweight Perl scanner focused on Drupal, with partial WordPress and Bolt coverage; strong on plugin and module fingerprinting.",
+                  "when": "Targeted assessments of the Drupal sites in your fleet.",
+                  "install": "pip3 install droopescan",
+                  "url": "https://github.com/droope/droopescan",
+                  "alt": [
+                    "wpscan",
+                    "cmsmap"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "network",
-      "name": "Network & Service Scanners",
-      "tools": [
+      "id": "vuln-management",
+      "name": "Vulnerability Management Platforms",
+      "subcategories": [
         {
-          "name": "Nettacker",
-          "best": true,
-          "rating": 4,
-          "effort": "medium",
-          "desc": "OWASP automation framework that scans your networks in layers (ports, services, subdomains), correlates the results, then runs follow-up module checks.",
-          "when": "Automating broad network discovery plus vulnerability checks against your own infrastructure in one pass.",
-          "install": "pip3 install nettacker",
-          "url": "https://github.com/OWASP/Nettacker",
-          "alt": ["nuclei", "openvas"]
-        },
-        {
-          "name": "Vulners",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Aggregated vulnerability and exploit database offering a free API plus an Nmap script that matches your scanned services against millions of CVEs.",
-          "when": "Enriching plain nmap service banners of your hosts with live CVE matches at no cost.",
-          "install": "Copy vulners.nse into /usr/share/nmap/scripts/ (get it from vulners.com)",
-          "url": "https://vulners.com",
-          "alt": ["nuclei", "nettacker", "openvas"]
-        },
-        {
-          "name": "OpenSCAP",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "NIST-certified scanner applying security-policy content (CIS, STIG) and OVAL CVE definitions to your Linux hosts for compliance and vulnerability posture.",
-          "when": "Auditing your servers against published baselines and tracking CVE coverage across them.",
-          "install": "sudo apt install openscap-scanner",
-          "url": "https://github.com/OpenSCAP/openscap",
-          "alt": ["openvas", "vuls"]
+          "id": "vm-platforms",
+          "name": "Full VM Platforms",
+          "subcategories": [
+            {
+              "id": "commercial",
+              "name": "Commercial VM",
+              "tools": [
+                {
+                  "name": "Nessus",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Tenable's market-standard commercial scanner with credentialed and remote checks across OSes, services, and web; the free Essentials tier covers a small lab.",
+                  "when": "Deep credentialed findings and compliance-style reports on the servers you operate.",
+                  "install": "Download Nessus *.deb from tenable.com and run: sudo dpkg -i Nessus-*.deb",
+                  "url": "https://www.tenable.com/products/nessus",
+                  "alt": [
+                    "openscap",
+                    "nuclei"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "open-source",
+              "name": "Open-Source VM",
+              "tools": [
+                {
+                  "name": "OpenVAS (GVM)",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Greenbone's open-source stack forked from the old Nessus; schedules scans of thousands of network vulnerability tests (NVTs) with a web dashboard.",
+                  "when": "Self-hosted, ongoing internal-network scanning without commercial licensing.",
+                  "install": "sudo apt install gvm && sudo gvm-setup",
+                  "url": "https://github.com/greenbone/openvas-scanner",
+                  "alt": [
+                    "nessus",
+                    "nuclei"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "agentless",
+              "name": "Agentless Fleet Scanning",
+              "tools": [
+                {
+                  "name": "Vuls",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "advanced",
+                  "desc": "Agentless Go scanner that runs from one control host over SSH to inventory OS packages, middleware, and containers, then maps each server to applicable CVEs.",
+                  "when": "Fleet-level Linux vulnerability tracking when installing agents on every box is not an option.",
+                  "install": "go install github.com/future-architect/vuls/cmd/vuls@latest",
+                  "url": "https://github.com/future-architect/vuls",
+                  "alt": [
+                    "openscap",
+                    "openscap"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "cms",
-      "name": "CMS Scanners",
-      "tools": [
+      "id": "infra-compliance",
+      "name": "Infrastructure & Compliance Audit",
+      "subcategories": [
         {
-          "name": "WPScan",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "WordPress scanner that fingerprints core, theme, and plugin versions against the WPScan vulnerability database and does user and weak-password checks.",
-          "when": "Regularly auditing the WordPress sites you maintain for outdated plugins and known CVEs.",
-          "install": "sudo apt install wpscan",
-          "url": "https://github.com/wpscanteam/wpscan",
-          "alt": ["cmsmap", "droopescan"]
+          "id": "host-hardening",
+          "name": "Host Hardening Audit",
+          "subcategories": [
+            {
+              "id": "linux-audit",
+              "name": "Linux Security Audit",
+              "tools": [
+                {
+                  "name": "Lynis",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "Security auditing tool that runs 300+ tests on Unix systems to score hardening posture and flag misconfigurations, missing patches, and weak settings.",
+                  "when": "Whole-box hardening reviews of the Linux servers you run, on demand or scheduled.",
+                  "install": "sudo apt install lynis",
+                  "url": "https://github.com/CISOfy/lynis",
+                  "alt": [
+                    "openscap",
+                    "chkrootkit"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "scap-baselines",
+              "name": "SCAP/STIG Baselines",
+              "tools": [
+                {
+                  "name": "OpenSCAP",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "NIST-certified scanner applying security-policy content (CIS, STIG) and OVAL CVE definitions to your Linux hosts for compliance and vulnerability posture.",
+                  "when": "Auditing your servers against published baselines and tracking CVE coverage across them.",
+                  "install": "sudo apt install openscap-scanner",
+                  "url": "https://github.com/OpenSCAP/openscap",
+                  "alt": [
+                    "lynis",
+                    "openvas"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "CMSmap",
-          "rating": 3,
-          "effort": "medium",
-          "desc": "Python tool that scans WordPress, Joomla, and Drupal sites you own for known vulnerabilities and exposed file paths.",
-          "when": "A single-command health check across mixed small-CMS estates without installing separate scanners.",
-          "install": "git clone https://github.com/Dionach/CMSmap && cd CMSmap && python3 cmsmap.py",
-          "url": "https://github.com/Dionach/CMSmap",
-          "alt": ["wpscan", "droopescan"]
-        },
-        {
-          "name": "droopescan",
-          "rating": 3,
-          "effort": "easy",
-          "desc": "Lightweight Perl scanner focused on Drupal, with partial WordPress and Bolt coverage; strong on plugin and module fingerprinting.",
-          "when": "Targeted assessments of the Drupal sites in your fleet.",
-          "install": "pip install droopescan",
-          "url": "https://github.com/droope/droopescan",
-          "alt": ["wpscan", "cmsmap"]
+          "id": "cloud-posture",
+          "name": "Cloud Posture Assessments",
+          "subcategories": [
+            {
+              "id": "aws-posture",
+              "name": "AWS Attack & Posture",
+              "tools": [
+                {
+                  "name": "Pacu",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "advanced",
+                  "desc": "Rhino Security Labs' AWS exploitation framework with modules for privilege escalation, lateral movement, and misconfiguration chaining against accounts you own.",
+                  "when": "Testing the blast radius of an IAM misconfiguration in your own AWS account during a red-team exercise.",
+                  "install": "git clone https://github.com/RhinoSecurityLabs/pacu && cd pacu && bash install.sh",
+                  "url": "https://github.com/RhinoSecurityLabs/pacu",
+                  "alt": [
+                    "scoutsuite",
+                    "prowler"
+                  ]
+                },
+                {
+                  "name": "Prowler",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Cloud security tooling applying 200+ AWS (and Azure/GCP) checks aligned to CIS, NIST, and ISO to surface misconfigurations in accounts you operate.",
+                  "when": "Automated compliance sweeps of your cloud accounts before audits.",
+                  "install": "pip3 install prowler",
+                  "url": "https://github.com/prowler-cloud/prowler",
+                  "alt": [
+                    "scoutsuite",
+                    "pacu"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "multi-cloud",
+              "name": "AWS / Azure / GCP",
+              "tools": [
+                {
+                  "name": "ScoutSuite",
+                  "best": true,
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "Security audit tool from NCC Group that uses cloud APIs to enumerate resources and generate an HTML report of weaknesses across AWS, Azure, and GCP.",
+                  "when": "Read-only posture reviews of your cloud subscriptions summarized into one report.",
+                  "install": "pip3 install scoutsuite",
+                  "url": "https://github.com/nccgroup/ScoutSuite",
+                  "alt": [
+                    "prowler",
+                    "pacu"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "app-deps",
-      "name": "Application & Dependency Scanners",
-      "tools": [
+      "id": "container-scan",
+      "name": "Container & Image Scanning",
+      "subcategories": [
         {
-          "name": "Trivy",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Aqua's scanner that fingerprints vulnerable packages and CVEs in the container images, filesystems, IaC templates, and SBOMs you run.",
-          "when": "Adding vuln gates to your image builds and scanning local containers for known CVEs before deployment.",
-          "install": "sudo apt install trivy",
-          "url": "https://github.com/aquasecurity/trivy",
-          "alt": ["grype", "osv-scanner"]
+          "id": "image-scan",
+          "name": "Image & Filesystem Scanning",
+          "subcategories": [
+            {
+              "id": "cli-scanners",
+              "name": "CLI & CI Scanners",
+              "tools": [
+                {
+                  "name": "Trivy",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "Aqua's scanner that fingerprints vulnerable packages and CVEs in the container images, filesystems, IaC templates, and SBOMs you run.",
+                  "when": "Adding vuln gates to your image builds and scanning local containers for known CVEs before deployment.",
+                  "install": "sudo apt install trivy",
+                  "url": "https://github.com/aquasecurity/trivy",
+                  "alt": [
+                    "grype",
+                    "syft"
+                  ]
+                },
+                {
+                  "name": "Grype",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Anchore's fast scanner pairing with Syft to map dependency CVEs across the containers and filesystems you build and ship.",
+                  "when": "Container and directory scans where you also want an SBOM generated in the same workflow.",
+                  "install": "curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin",
+                  "url": "https://github.com/anchore/grype",
+                  "alt": [
+                    "trivy",
+                    "clair"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "sbom-scan",
+              "name": "SBOM Generation",
+              "tools": [
+                {
+                  "name": "Syft",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Generates an inventory/SBOM of the packages, libraries, and metadata inside container images and directory trees, feeding downstream scanners.",
+                  "when": "Getting a machine-readable software bill of materials for the images you build, then diffing against CVE feeds.",
+                  "install": "curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sh -s -- -b /usr/local/bin",
+                  "url": "https://github.com/anchore/syft",
+                  "alt": [
+                    "trivy",
+                    "grype"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "Grype",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Anchore's fast scanner pairing with Syft to map dependency CVEs across the containers and filesystems you build and ship.",
-          "when": "Container and directory scans where you also want an SBOM generated in the same workflow.",
-          "install": "curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin",
-          "url": "https://github.com/anchore/grype",
-          "alt": ["trivy", "osv-scanner"]
-        },
-        {
-          "name": "osv-scanner",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Google's scanner that matches your project lockfiles and SBOMs against the open-source-focused OSV.dev vulnerability database.",
-          "when": "Quick CI check of dependency lockfiles in your own repos against a community-maintained vuln feed.",
-          "install": "go install github.com/google/osv-scanner/cmd/osv-scanner@latest",
-          "url": "https://github.com/google/osv-scanner",
-          "alt": ["grype", "trivy"]
-        },
-        {
-          "name": "cve-bin-tool",
-          "rating": 3,
-          "effort": "easy",
-          "desc": "Scans binary files and their strings to identify which known-vulnerable library and product components your software bundles.",
-          "when": "Checking compiled products you distribute for embedded third-party components with published CVEs.",
-          "install": "pip install cve-bin-tool",
-          "url": "https://github.com/intel/cve-bin-tool",
-          "alt": ["osv-scanner", "trivy"]
+          "id": "registry-fleet",
+          "name": "Registry & Fleet Scanning",
+          "subcategories": [
+            {
+              "id": "registry-scan",
+              "name": "Registry Scanning",
+              "tools": [
+                {
+                  "name": "Clair",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "advanced",
+                  "desc": "Quay's open-source static analyzer that watches container registries and reports vulnerabilities in each image's layers via a JSON API.",
+                  "when": "Continuous scanning of the container registry you operate so images are screened before and after push.",
+                  "install": "docker run -d -p 6060:6060 -p 6061:6061 quay.io/projectquay/clair",
+                  "url": "https://github.com/quay/clair",
+                  "alt": [
+                    "trivy",
+                    "grype"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "knowledgebase",
-      "name": "CVE & Exploit Lookup",
-      "tools": [
+      "id": "dep-scan",
+      "name": "Dependency & SCA Scanning",
+      "subcategories": [
         {
-          "name": "searchsploit / Exploit-DB",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Offline grep over the ~40,000-entry Exploit-DB archive bundled with Kali, showing exploit scripts, Metasploit modules, and build instructions for your own lab.",
-          "when": "Looking up local proof-of-concept code to reproduce and verify a CVE on systems you control.",
-          "install": "sudo apt install exploitdb",
-          "url": "https://www.exploit-db.com",
-          "alt": ["cve-search", "nvd"]
+          "id": "lockfile-scan",
+          "name": "Lockfile & Package Scanners",
+          "subcategories": [
+            {
+              "id": "language-agnostic",
+              "name": "Multi-language",
+              "tools": [
+                {
+                  "name": "Snyk",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Developer-focused SCA platform with a free CLI that maps your manifest and lockfiles to known vulnerabilities and suggests upgrades.",
+                  "when": "Fast triage of dependency findings in your repos with remediation hints.",
+                  "install": "npm install -g snyk && snyk auth",
+                  "url": "https://github.com/snyk/cli",
+                  "alt": [
+                    "osv-scanner",
+                    "pip-audit"
+                  ]
+                },
+                {
+                  "name": "osv-scanner",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Google's scanner that matches your project lockfiles and SBOMs against the open-source-focused OSV.dev vulnerability database.",
+                  "when": "Quick CI check of dependency lockfiles in your own repos against a community-maintained vuln feed.",
+                  "install": "go install github.com/google/osv-scanner/cmd/osv-scanner@latest",
+                  "url": "https://github.com/google/osv-scanner",
+                  "alt": [
+                    "snyk",
+                    "osv.dev"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "python-deps",
+              "name": "Python",
+              "tools": [
+                {
+                  "name": "pip-audit",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "PyPA's scanner that audits installed Python packages and lockfiles against the OSV and PyPI advisory feeds, with a fix action.",
+                  "when": "Adding a pip dependency check to your Python projects' CI pipelines.",
+                  "install": "pip3 install pip-audit",
+                  "url": "https://github.com/pypa/pip-audit",
+                  "alt": [
+                    "osv-scanner",
+                    "snyk"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "node-deps",
+              "name": "JavaScript / Node.js",
+              "tools": [
+                {
+                  "name": "npm audit",
+                  "best": true,
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Built-in npm command that checks package-lock.json against the npm advisory database and proposes non-breaking or breaking upgrades.",
+                  "when": "Dependency health checks in JS projects you maintain, straight from your package manager.",
+                  "install": "npm audit",
+                  "url": "https://docs.npmjs.com/cli/v10/commands/npm-audit",
+                  "alt": [
+                    "snyk",
+                    "osv-scanner"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "cve-search",
-          "rating": 4,
-          "effort": "advanced",
-          "desc": "Local MongoDB-backed engine that ingests NVD, CISA, and Exploit-DB feeds for fast bulk lookups across your whole inventory.",
-          "when": "Correlating a large asset list against CVE data offline when you cannot rely on external APIs.",
-          "install": "docker run -d -p 5000:5000 cve-search/cve-search",
-          "url": "https://github.com/cve-search/cve-search",
-          "alt": ["nvd", "searchsploit"]
+          "id": "binary-scan",
+          "name": "Binary Component Scan",
+          "subcategories": [
+            {
+              "id": "binary-artifacts",
+              "name": "Compiled Artifacts",
+              "tools": [
+                {
+                  "name": "cve-bin-tool",
+                  "best": true,
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Scans binary files and their strings to identify which known-vulnerable library and product components your software bundles.",
+                  "when": "Checking compiled products you distribute for embedded third-party components with published CVEs.",
+                  "install": "pip3 install cve-bin-tool",
+                  "url": "https://github.com/intel/cve-bin-tool",
+                  "alt": [
+                    "osv-scanner",
+                    "trivy"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "vuln-databases",
+      "name": "Vulnerability Databases & Lookup",
+      "subcategories": [
+        {
+          "id": "cve-feeds",
+          "name": "CVE & NVD Sources",
+          "subcategories": [
+            {
+              "id": "nvd-source",
+              "name": "NIST NVD",
+              "tools": [
+                {
+                  "name": "NVD",
+                  "best": true,
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Official NIST vulnerability feed and web UI; the reference source for CVE metadata, CPE mappings, and CVSS metrics.",
+                  "when": "Confirming identifiers, severity scores, and affected product lists for a CVE under review.",
+                  "install": "preinstalled (web + free REST API, no install)",
+                  "url": "https://nvd.nist.gov",
+                  "alt": [
+                    "cve.org",
+                    "vulners"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "cve-org",
+              "name": "CVE Authority (MITRE)",
+              "tools": [
+                {
+                  "name": "CVE.org",
+                  "best": true,
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "The CVE Program's own record search and API maintained by MITRE, giving canonical descriptions, references, and reservation workflows.",
+                  "when": "Reading the authoritative record and reference list for a given CVE-ID.",
+                  "install": "preinstalled (web + JSON 5.0 API, no install)",
+                  "url": "https://www.cve.org",
+                  "alt": [
+                    "nvd",
+                    "osv.dev"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "cve-aggregators",
+              "name": "Aggregators & Local Feeds",
+              "tools": [
+                {
+                  "name": "Vulners",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Aggregated vulnerability and exploit database offering a free API plus the vulners.nse Nmap script that matches your scanned services against millions of CVEs.",
+                  "when": "Enriching plain nmap service banners of your hosts with live CVE matches at no cost.",
+                  "install": "pip3 install vulners  (or query the REST API)",
+                  "url": "https://vulners.com",
+                  "alt": [
+                    "nvd",
+                    "nmap-vulners"
+                  ]
+                },
+                {
+                  "name": "cve-search",
+                  "rating": 4,
+                  "effort": "advanced",
+                  "desc": "Local MongoDB-backed engine that ingests NVD, CISA, and Exploit-DB feeds for fast bulk lookups across your whole inventory.",
+                  "when": "Correlating a large asset list against CVE data offline when you cannot rely on external APIs.",
+                  "install": "docker run -d -p 5000:5000 cve-search/cve-search",
+                  "url": "https://github.com/cve-search/cve-search",
+                  "alt": [
+                    "nvd",
+                    "vulners"
+                  ]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "NVD (NIST)",
-          "rating": 3,
-          "effort": "easy",
-          "desc": "Official NIST vulnerability feed and web UI; the reference source for CVE metadata, CPE mappings, and CVSS metrics.",
-          "when": "Confirming identifiers, severity scores, and affected product lists for a CVE under review.",
-          "install": "preinstalled (web/API)",
-          "url": "https://nvd.nist.gov",
-          "alt": ["cve-search", "vulners"]
+          "id": "osv-feed",
+          "name": "OSV & Open-Source Feeds",
+          "subcategories": [
+            {
+              "id": "osv-dev",
+              "name": "OSV.dev",
+              "tools": [
+                {
+                  "name": "OSV.dev",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Google's open-source-oriented vulnerability database with a query API keyed on affected package/ecosystem plus a public, continuous-export data feed.",
+                  "when": "Programmatic lookup of vulnerabilities for the exact package versions in your SBOM or lockfile.",
+                  "install": "preinstalled (web + REST/GraphQL API, no install)",
+                  "url": "https://osv.dev",
+                  "alt": [
+                    "nvd",
+                    "osv-scanner"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "exploit-intel",
+          "name": "Exploit Intelligence",
+          "subcategories": [
+            {
+              "id": "exploit-db",
+              "name": "Exploit-DB & searchsploit",
+              "tools": [
+                {
+                  "name": "Exploit-DB / searchsploit",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "Offline grep over the ~40,000-entry Exploit-DB archive bundled with Kali, showing exploit scripts, Metasploit modules, and build instructions for your own lab.",
+                  "when": "Looking up local proof-of-concept code to reproduce and verify a CVE on systems you control.",
+                  "install": "sudo apt install exploitdb",
+                  "url": "https://github.com/offensive-security/exploitdb",
+                  "alt": [
+                    "metasploit",
+                    "cve-search"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "metasploit-modules",
+              "name": "Metasploit & Modules",
+              "tools": [
+                {
+                  "name": "Metasploit Framework",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "advanced",
+                  "desc": "Rapid7's exploit framework whose auxiliary and exploit modules double as scanners, with searchsploit-backed proof-of-concept modules for verified CVEs.",
+                  "when": "Reproducing a known CVE against your lab systems and deploying the matching exploit module in a controlled environment.",
+                  "install": "curl https://raw.githubusercontent.com/rapid7/metasploit-omnibus/master/config/templates/metasploit-framework-wrappers/msfupdate.erb > msfinstall && chmod +x msfinstall && sudo ./msfinstall",
+                  "url": "https://github.com/rapid7/metasploit-framework",
+                  "alt": [
+                    "exploit-db / searchsploit",
+                    "cve-search"
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     }

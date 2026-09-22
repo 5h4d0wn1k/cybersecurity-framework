@@ -2,122 +2,193 @@
   "id": "cloud",
   "name": "Cloud Security \u2014 AWS, Azure & GCP",
   "emoji": "\u2601\ufe0f",
-  "tagline": "Posture, offense, and public-bucket checks across AWS, Azure, and GCP \u2014 for auditing your own accounts and sanctioned assessments.",
+  "tagline": "Posture audits, scoped offense, and public-bucket checks across AWS, Azure, and GCP \u2014 nested by provider and by function for your own accounts and sanctioned assessments.",
   "class": "defense",
   "categories": [
     {
-      "id": "posture-assessment",
-      "name": "Cloud Posture & Compliance Audit",
-      "tools": [
-        {
-          "name": "Prowler",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "Runs 1,000+ read-only checks across AWS, Azure, and GCP against CIS Benchmarks and 70+ compliance frameworks, with remediation guidance per finding.",
-          "when": "Kick off the posture review of any account you own; it is the default for CIS/NIST alignment across all three clouds and exposes findings via CLI or API.",
-          "install": "pip3 install prowler",
-          "url": "https://github.com/prowler-cloud/prowler",
-          "alt": [
-            "Scout Suite",
-            "CloudSploit"
-          ]
-        },
-        {
-          "name": "Scout Suite",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "NCC Group's multi-cloud auditor pulls configuration from provider APIs and renders a browsable point-in-time HTML report of risk areas for AWS, Azure, and GCP.",
-          "when": "When you want a clean visual report of config risk in one account as a second opinion alongside Prowler; last major release was 2022.",
-          "install": "pip3 install scoutsuite",
-          "url": "https://github.com/nccgroup/ScoutSuite",
-          "alt": [
-            "Prowler",
-            "CloudSploit"
-          ]
-        },
-        {
-          "name": "CloudSploit",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Aqua-maintained Node.js CSPM scanner for AWS, Azure, GCP, OCI, and GitHub misconfigurations with CIS/PCI/HIPAA compliance modes; also sold as the hosted Aqua Wave SaaS.",
-          "when": "Use the self-hosted scanner for broad multi-cloud config checks in CI; know that the actively maintained commercial route is the hosted Aqua Wave platform.",
-          "install": "git clone https://github.com/aquasecurity/cloudsploit.git && cd cloudsploit && npm install",
-          "url": "https://github.com/aquasecurity/cloudsploit",
-          "alt": [
-            "Prowler",
-            "Scout Suite"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "bucket-public-scan",
-      "name": "Public Bucket & Object-Storage Scan",
-      "tools": [
-        {
-          "name": "S3Scanner",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Scans lists of bucket names across AWS and S3-compatible stores (GCP, DigitalOcean, Linode, Scaleway) for existence, tests every permission path for misconfigurations, and can enumerate or dump objects.",
-          "when": "Find your own exposed buckets at scale: feed candidate names, get back which are public, listable, or readable.",
-          "install": "go install -v github.com/sa7mon/s3scanner@latest",
-          "url": "https://github.com/sa7mon/S3Scanner",
-          "alt": [
-            "GCPBucketBrute",
-            "CloudFox (aws-offense)"
-          ]
-        },
-        {
-          "name": "GCPBucketBrute",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Enumerates Google Storage buckets from keyword permutations and reports per-bucket access, flagging public, writable, and privilege-escalation-prone buckets (storage.buckets.setIamPolicy).",
-          "when": "Check which of your GCS buckets are reachable or writable without auth, including permission escalations visible from a service account.",
-          "install": "git clone https://github.com/RhinoSecurityLabs/GCPBucketBrute.git && cd GCPBucketBrute && pip3 install -r requirements.txt",
-          "url": "https://github.com/RhinoSecurityLabs/GCPBucketBrute",
-          "alt": [
-            "S3Scanner"
-          ]
-        }
-      ]
-    },
-    {
-      "id": "cloud-providers",
-      "name": "Provider-specific enumeration",
+      "id": "cross-cloud-posture",
+      "name": "Cross-Cloud Posture & Offense",
       "subcategories": [
         {
-          "id": "aws-tools",
-          "name": "AWS tools",
+          "id": "config-auditors",
+          "name": "Config & Compliance Auditors",
           "tools": [
             {
-              "name": "Pacu",
+              "name": "Prowler",
               "best": true,
               "rating": 5,
               "effort": "medium",
-              "desc": "The AWS exploitation framework: modular post-compromise attacks covering IAM privilege escalation, Lambda backdoors, log tampering, and EC2 RCE, with a session database for clean reporting.",
-              "when": "After you hold valid-but-least-privilege AWS keys and want to demonstrate what an attacker could escalate to; the offensive complement to Prowler on your own account.",
-              "install": "pip3 install -U pacu",
-              "url": "https://github.com/RhinoSecurityLabs/pacu",
+              "desc": "Runs 1,000+ read-only checks across AWS, Azure, and GCP against CIS Benchmarks and 70+ compliance frameworks, with remediation guidance per finding.",
+              "when": "Kick off every posture review with it \u2014 the default for CIS/NIST alignment on any provider, driven via CLI, Docker, or the API.",
+              "install": "pip3 install prowler",
+              "url": "https://github.com/prowler-cloud/prowler",
               "alt": [
-                "CloudFox",
-                "enumerate-iam",
-                "IAMActionHunter"
+                "Scout Suite",
+                "CloudSploit (Trivy Cloud)"
               ]
             },
             {
-              "name": "CloudFox",
-              "rating": 5,
-              "effort": "easy",
-              "desc": "Bishop Fox's situational-awareness enumerator maps exploitable attack paths across AWS (34 commands) plus early Azure/GCP coverage, writing loot files for other tools.",
-              "when": "Run `cloudfox aws --profile X all-checks` first on any fresh AWS scope to learn the estate and spot privesc paths before deeper exploitation with Pacu.",
-              "install": "go install github.com/BishopFox/cloudfox@latest",
-              "url": "https://github.com/BishopFox/cloudfox",
+              "name": "Scout Suite",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "NCC Group's multi-cloud auditor pulls configuration from provider APIs and renders a browsable point-in-time HTML report of risk areas for AWS, Azure, and GCP.",
+              "when": "Grab a clean visual report of config risk as a second opinion alongside Prowler; expect a quiet repo \u2014 last major release was 2022.",
+              "install": "pip3 install scoutsuite",
+              "url": "https://github.com/nccgroup/ScoutSuite",
               "alt": [
-                "Pacu",
-                "enumerate-iam",
-                "IAMActionHunter"
+                "Prowler",
+                "CloudSploit (Trivy Cloud)"
+              ]
+            },
+            {
+              "name": "CloudSploit (Trivy Cloud)",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Aqua's Node.js CSPM scanner covering AWS, Azure, GCP, OCI, and GitHub with CIS/PCI/HIPAA modes; actively developed as the open-source half of the hosted Aqua Trivy Cloud / Wave platform.",
+              "when": "Broad self-hosted multi-cloud config checks in CI; know that the maintained commercial route is Aqua Trivy Cloud.",
+              "install": "git clone https://github.com/aquasecurity/cloudsploit.git && cd cloudsploit && npm install",
+              "url": "https://github.com/aquasecurity/cloudsploit",
+              "alt": [
+                "Prowler",
+                "Scout Suite"
+              ]
+            },
+            {
+              "name": "Steampipe",
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Run SQL queries over live AWS, Azure, GCP, and 200+ other APIs, then reuse the same queries for compliance benchmarks (CIS) and ad-hoc posture checks.",
+              "when": "When you want scriptable, queryable posture evidence: SQL across your accounts beats shell-script loops and feeds reporting directly.",
+              "install": "brew install turbot/tap/steampipe",
+              "url": "https://github.com/turbot/steampipe",
+              "alt": [
+                "Prowler",
+                "AWS CLI & Batch Scripts"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "offense-lab",
+          "name": "Offensive Validation (Scoped Labs)",
+          "subcategories": [
+            {
+              "id": "exploitation-frameworks",
+              "name": "Exploitation Frameworks",
+              "tools": [
+                {
+                  "name": "Pacu",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "The AWS exploitation framework: modular post-compromise attacks covering IAM privilege escalation, Lambda backdoors, log tampering, and EC2 RCE, with a session database for clean reporting.",
+                  "when": "After you hold valid-but-least-privilege AWS keys and want to demonstrate what an attacker could escalate to \u2014 lab/own-account use only.",
+                  "install": "pip3 install -U pacu",
+                  "url": "https://github.com/RhinoSecurityLabs/pacu",
+                  "alt": [
+                    "CloudFox",
+                    "IAMActionHunter"
+                  ]
+                },
+                {
+                  "name": "CloudFox",
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "Bishop Fox's situational-awareness enumerator maps exploitable attack paths across AWS (34 commands) plus early Azure/GCP coverage, writing loot files for other tools.",
+                  "when": "Run `cloudfox aws --profile X all-checks` first on any fresh scope to learn the estate and spot privesc paths before deeper exploitation with Pacu.",
+                  "install": "go install github.com/BishopFox/cloudfox@latest",
+                  "url": "https://github.com/BishopFox/cloudfox",
+                  "alt": [
+                    "Pacu",
+                    "enumerate-iam"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aws",
+      "name": "Amazon Web Services",
+      "subcategories": [
+        {
+          "id": "aws-audit",
+          "name": "Audit & Compliance Posture",
+          "tools": [
+            {
+              "name": "Prowler (AWS)",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Prowler pinned to AWS (`-p aws`): 300+ AWS-specific checks across CIS 1.x/2.x, NIST 800-53, and Well-Architected focus areas, with per-finding remediation and CSV/JSON/SARIF output.",
+              "when": "The primary AWS compliance gate in CI or on a schedule; run alongside GuardDuty-focused triage for config findings.",
+              "install": "pip3 install prowler",
+              "url": "https://github.com/prowler-cloud/prowler",
+              "alt": [
+                "Scout Suite (AWS)",
+                "cloud-inquisitor",
+                "Pacu"
+              ]
+            },
+            {
+              "name": "Scout Suite (AWS)",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Scout Suite run with AWS credentials: point-in-time dumps of IAM, S3, EC2, and Security Group posture into a navigable HTML report annotated with risk rules.",
+              "when": "Fast visual sweep of one AWS account when you want a self-contained report artifact to share, not another CLI table.",
+              "install": "pip3 install scoutsuite && scout aws --profile prod",
+              "url": "https://github.com/nccgroup/ScoutSuite",
+              "alt": [
+                "Prowler (AWS)",
+                "Steampipe"
+              ]
+            },
+            {
+              "name": "cloud-inquisitor",
+              "rating": 3,
+              "effort": "medium",
+              "desc": "Riot Games' config-audit and incident-response platform: scans accounts against custom rules, auto-remediates (e.g., open S3 buckets), and ships a web dashboard; only lightly maintained since 2021.",
+              "when": "When you want rule-driven auto-remediation on legacy AWS estates and accept a quiet project \u2014 otherwise prefer Prowler or Steampipe.",
+              "install": "git clone https://github.com/RiotGames/cloud-inquisitor.git && docker-compose up -d",
+              "url": "https://github.com/RiotGames/cloud-inquisitor",
+              "alt": [
+                "Prowler (AWS)",
+                "Steampipe"
+              ]
+            },
+            {
+              "name": "AWS CLI & Batch Scripts",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "The built-in `aws` CLI plus shell one-liners and jq pipelines for service inventory, bucket ACL listing, unused IAM keys, and cross-account drift \u2014 endless and dependency-free.",
+              "when": "Quick targeted checks while Prowler/Steampipe are overkill: `aws iam list-access-keys --no-user-paginate`, `aws s3api get-bucket-acl`, etc.",
+              "install": "pip3 install awscli",
+              "url": "https://aws.amazon.com/cli/",
+              "alt": [
+                "Steampipe",
+                "CloudSploit (Trivy Cloud)"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "aws-permission-mapping",
+          "name": "IAM & Permission Mapping",
+          "tools": [
+            {
+              "name": "PMapper",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "NCC Group's Principal Mapper builds a graph of IAM users/groups/roles and their effective permissions, then computes shortest privilege-escalation and takeover paths.",
+              "when": "Model least-privilege drift: generate the graph in minutes and query for principals reaching admin via any path.",
+              "install": "pip3 install principalmapper",
+              "url": "https://github.com/nccgroup/PMapper",
+              "alt": [
+                "IAMActionHunter",
+                "CloudFox"
               ]
             },
             {
@@ -143,14 +214,117 @@
               "url": "https://github.com/RhinoSecurityLabs/IAMActionHunter",
               "alt": [
                 "enumerate-iam",
-                "Pacu"
+                "PMapper"
               ]
             }
           ]
         },
         {
-          "id": "azure-tools",
-          "name": "Azure tools",
+          "id": "aws-storage",
+          "name": "Object Storage Misconfiguration",
+          "tools": [
+            {
+              "name": "S3Scanner",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Scans lists of bucket names across AWS and S3-compatible stores (GCP, DigitalOcean, Linode, Scaleway) for existence, tests every permission path for misconfigurations, and can enumerate or dump objects.",
+              "when": "Find your own exposed buckets at scale: feed candidate names, get back which are public, listable, or readable.",
+              "install": "go install -v github.com/sa7mon/s3scanner@latest",
+              "url": "https://github.com/sa7mon/S3Scanner",
+              "alt": [
+                "S3audit",
+                "CloudFox"
+              ]
+            },
+            {
+              "name": "S3audit",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "NCC Group's small Go tool checks S3 bucket permissions via the public ListObjects/GetObject/Acl APIs against a given bucket or custom wordlist.",
+              "when": "Single-target bucket permission triage and wordlist-driven scan of buckets you own, without standing up a full scanner.",
+              "install": "go install github.com/nccgroup/s3audit@latest",
+              "url": "https://github.com/nccgroup/s3audit",
+              "alt": [
+                "S3Scanner",
+                "AWS CLI & Batch Scripts"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "azure",
+      "name": "Microsoft Azure",
+      "subcategories": [
+        {
+          "id": "azure-research",
+          "name": "Benchmarks & Threat Research",
+          "tools": [
+            {
+              "name": "Microsoft Cloud Security Benchmark (docs)",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Microsoft's authoritative Azure security baseline: control families (identity, network, storage, data protection) with CSPM tooling guidance and mapping to NIST/CIS regulatory frameworks.",
+              "when": "Your reference before running scanners \u2014 know which controls the tool checks and which ones Azure Policy/Defender must enforce, since no scanner covers a benchmark alone.",
+              "install": "Reference guide \u2014 no install; mapped controls ship as built-in Azure Policy initiatives",
+              "url": "https://learn.microsoft.com/en-us/security/benchmark/azure/introduction",
+              "alt": [
+                "Azure Threat Research Matrix"
+              ]
+            },
+            {
+              "name": "Azure Threat Research Matrix (ATRM)",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "MSTIC's community threat matrix documenting Azure/AWS/GCP attack vectors (reconnaissance, persistence, privilege escalation) with real examples and KQL hunting queries.",
+              "when": "Understand how attackers actually move in a tenant so your posture checks and MicroBurst-style simulations target the realistic paths.",
+              "install": "git clone https://github.com/MSTIC-Jupyter/Azure-Threat-Research-Matrix.git",
+              "url": "https://github.com/MSTIC-Jupyter/Azure-Threat-Research-Matrix",
+              "alt": [
+                "Microsoft Cloud Security Benchmark (docs)"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "azure-audit",
+          "name": "Audit & Compliance Posture",
+          "tools": [
+            {
+              "name": "Prowler (Azure)",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Prowler pinned to Azure (`-p azure --az-cli-auth`): 100+ read-only checks over Entra ID, subscriptions, storage, key vault, and network config against CIS Microsoft Azure 1.x/2.x.",
+              "when": "The main automated Azure compliance pass in CI or on a schedule; complements but does not replace Azure Policy assignments.",
+              "install": "pip3 install prowler && prowler azure --az-cli-auth",
+              "url": "https://github.com/prowler-cloud/prowler",
+              "alt": [
+                "Scout Suite (Azure)",
+                "MicroBurst"
+              ]
+            },
+            {
+              "name": "Scout Suite (Azure)",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Scout Suite's Azure provider: one-command dump of subscription posture (ARM resources, RBAC, storage, NSGs) into an HTML report with risk annotations.",
+              "when": "A point-in-time visual Azure report that mirrors your AWS workflow and is easy to archive as an evidence artifact.",
+              "install": "pip3 install scoutsuite && scout azure --cli",
+              "url": "https://github.com/nccgroup/ScoutSuite",
+              "alt": [
+                "Prowler (Azure)",
+                "Microsoft Cloud Security Benchmark (docs)"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "azure-offense",
+          "name": "Recon & Post-Exploitation",
           "tools": [
             {
               "name": "MicroBurst",
@@ -158,7 +332,7 @@
               "rating": 4,
               "effort": "medium",
               "desc": "NetSPI's PowerShell toolkit for attacking Azure: service discovery, weak-config auditing, credential dumping (AzPasswords), and post-exploitation on VMs, Key Vault, and Automation accounts.",
-              "when": "The default Azure toolkit in authenticated engagements; Windows-only, so run it from a PowerShell host with the Az modules installed.",
+              "when": "The default Azure toolkit in authenticated engagements on your own tenant; Windows-only, so run it from a PowerShell host with the Az modules installed.",
               "install": "git clone https://github.com/NetSPI/MicroBurst.git && Import-Module .\\MicroBurst.psm1",
               "url": "https://github.com/NetSPI/MicroBurst",
               "alt": [
@@ -171,7 +345,7 @@
               "rating": 4,
               "effort": "medium",
               "desc": "Microsoft Azure Red Team's attack-graph tool: collects subscription and ARM resources into Neo4j and renders the attack surface with pivot opportunities.",
-              "when": "Map a large tenant visually and find cross-resource pivot paths once you hold reader-level access.",
+              "when": "Map a large tenant visually and find cross-resource pivot paths once you hold reader-level access in a sanctioned assessment.",
               "install": "git clone https://github.com/Azure/Stormspotter && docker-compose up",
               "url": "https://github.com/Azure/Stormspotter",
               "alt": [
@@ -183,19 +357,85 @@
               "name": "ATEAM",
               "rating": 4,
               "effort": "easy",
-              "desc": "NetSPI's unaudited reconnaissance tool probes name permutations across App Services, Key Vault, Storage, DevOps, SharePoint, and Databricks to discover Azure resources and attribute their tenant IDs.",
+              "desc": "NetSPI's unauthenticated reconnaissance tool probes name permutations across App Services, Key Vault, Storage, DevOps, SharePoint, and Databricks to discover Azure resources and attribute tenant IDs.",
               "when": "From outside, discover forgotten Azure resources whose names leak a tenant \u2014 ideal for attack-surface checks on your own domains before logging in.",
               "install": "git clone https://github.com/NetSPI/ATEAM.git && cd ATEAM && pip3 install -r requirements.txt",
               "url": "https://github.com/NetSPI/ATEAM",
               "alt": [
-                "MicroBurst"
+                "MicroBurst",
+                "Azure Threat Research Matrix (ATRM)"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gcp",
+      "name": "Google Cloud Platform",
+      "subcategories": [
+        {
+          "id": "gcp-audit",
+          "name": "Audit & Compliance Posture",
+          "tools": [
+            {
+              "name": "Scout Suite (GCP)",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Scout Suite's GCP provider: gathers project posture across IAM, GCE, GCS, GKE, and Cloud SQL into a browsable HTML risk report, including Org-level IAM.",
+              "when": "The quickest visual read of GCP config risk in one project \u2014 pair with Prowler for covered CIS controls.",
+              "install": "pip3 install scoutsuite && scout gcloud --project-id PROJECT",
+              "url": "https://github.com/nccgroup/ScoutSuite",
+              "alt": [
+                "Prowler (GCP)",
+                "gcloud CLI & Scripted Audits"
+              ]
+            },
+            {
+              "name": "Prowler (GCP)",
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Prowler pinned to GCP (`-p gcp`): 100+ read-only checks against the Google Cloud CIS 1.x benchmark covering IAM, logging, networking, and storage.",
+              "when": "The compliance-first GCP pass in CI; best paired with its AWS/Azure siblings for org-wide reporting.",
+              "install": "pip3 install prowler && prowler gcp --organization-id \"...\"",
+              "url": "https://github.com/prowler-cloud/prowler",
+              "alt": [
+                "Scout Suite (GCP)",
+                "Forseti (retired)"
+              ]
+            },
+            {
+              "name": "Forseti (retired)",
+              "rating": 3,
+              "effort": "advanced",
+              "desc": "Google's old inventory-and-policy engine for detecting GCP misconfigurations; officially retired by the Google Cloud team and no longer developed.",
+              "when": "Only revisit for legacy estates already running it \u2014 for new work use Prowler/Scout Suite plus Policy Controller and Assured workloads.",
+              "install": "git clone https://github.com/forseti-security/forseti-security.git",
+              "url": "https://github.com/forseti-security/forseti-security",
+              "alt": [
+                "Prowler (GCP)",
+                "Scout Suite (GCP)"
+              ]
+            },
+            {
+              "name": "gcloud CLI & Scripted Audits",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "The `gcloud` CLI plus `gcloud asset`, IAM recommender, and `gcloud projects get-iam-policy` pipelines for fast targeted checks and drift reporting.",
+              "when": "Quick focused questions \u2014 who can do what in a project, which buckets changed, logging disabled \u2014 without a full scanner run.",
+              "install": "curl https://sdk.cloud.google.com | bash",
+              "url": "https://cloud.google.com/sdk/docs",
+              "alt": [
+                "Steampipe",
+                "Scout Suite (GCP)"
               ]
             }
           ]
         },
         {
-          "id": "gcp-tools",
-          "name": "GCP tools",
+          "id": "gcp-recon",
+          "name": "Recon & Privilege Escalation",
           "tools": [
             {
               "name": "gcp-scanner",
@@ -208,20 +448,7 @@
               "url": "https://github.com/google/gcp_scanner",
               "alt": [
                 "gcpwn",
-                "GCP IAM Privilege Escalation"
-              ]
-            },
-            {
-              "name": "GCP IAM Privilege Escalation",
-              "rating": 4,
-              "effort": "advanced",
-              "desc": "Rhino's documented GCP IAM privesc methods plus a scanner (enumerate_member_permissions.py then check_for_privesc.py) that flags principals able to escalate.",
-              "when": "Audit who in your projects could privilege-escalate to org ownership and validate hardened role design.",
-              "install": "git clone https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation.git",
-              "url": "https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation",
-              "alt": [
-                "gcp-scanner",
-                "gcpwn"
+                "GCP IAM Privilege Escalation Toolkit"
               ]
             },
             {
@@ -233,7 +460,193 @@
               "install": "git clone https://github.com/NetSPI/gcpwn.git",
               "url": "https://github.com/NetSPI/gcpwn",
               "alt": [
-                "gcp-scanner"
+                "gcp-scanner",
+                "CloudFox"
+              ]
+            },
+            {
+              "name": "GCP IAM Privilege Escalation Toolkit",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Rhino's documented GCP IAM privesc methods plus a scanner (enumerate_member_permissions.py then check_for_privesc.py) that flags principals able to escalate.",
+              "when": "Audit who in your projects could privilege-escalate to org ownership and validate hardened role design.",
+              "install": "git clone https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation.git",
+              "url": "https://github.com/RhinoSecurityLabs/GCP-IAM-Privilege-Escalation",
+              "alt": [
+                "gcp-scanner",
+                "PMapper"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "gcp-storage",
+          "name": "Public Storage & Bucket Scan",
+          "tools": [
+            {
+              "name": "GCPBucketBrute",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Enumerates Google Storage buckets from keyword permutations and reports per-bucket access, flagging public, writable, and privilege-escalation-prone (storage.buckets.setIamPolicy) buckets.",
+              "when": "Check which of your GCS buckets are reachable or writable without auth, including escalations visible from a service account.",
+              "install": "git clone https://github.com/RhinoSecurityLabs/GCPBucketBrute.git && cd GCPBucketBrute && pip3 install -r requirements.txt",
+              "url": "https://github.com/RhinoSecurityLabs/GCPBucketBrute",
+              "alt": [
+                "S3Scanner",
+                "gcloud CLI & Scripted Audits"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iac-container-security",
+      "name": "IaC & Container Misconfiguration",
+      "subcategories": [
+        {
+          "id": "iac-terraform",
+          "name": "Terraform & IaC Scanners",
+          "tools": [
+            {
+              "name": "Checkov",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Prisma Cloud-maintained IaC static analyzer with 1,000+ built-in policies for Terraform (incl. plan output), CloudFormation, Kubernetes, Helm, Dockerfile, Bicep, ARM, and Serverless; graph-based and multi-resource aware.",
+              "when": "The default IaC gate: scan Terraform/K8s/Dockerfile in CI and on terraform plan to catch exposed resources and weak IAM before apply.",
+              "install": "pip3 install checkov",
+              "url": "https://github.com/bridgecrewio/checkov",
+              "alt": [
+                "tfsec",
+                "Terrascan (archived)",
+                "Trivy"
+              ]
+            },
+            {
+              "name": "tfsec",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Fast Terraform-specific static scanner with 400+ rules and custom Rego/policy support; development has wound down as scanning moved into Trivy (trivy config).",
+              "when": "Lightweight, human-friendly Terraform warnings in pre-commit; for maintained updates run the same checks via Trivy config.",
+              "install": "brew install tfsec",
+              "url": "https://github.com/aquasecurity/tfsec",
+              "alt": [
+                "Checkov",
+                "Trivy"
+              ]
+            },
+            {
+              "name": "Terrascan (archived)",
+              "rating": 3,
+              "effort": "medium",
+              "desc": "Tenable's Rego-policy IaC scanner for Terraform, CloudFormation, ARM, K8s, Helm, and Docker; the repository was archived November 2025 and is read-only.",
+              "when": "Only for aligning with existing Terrascan policy sets on frozen pipelines \u2014 new IaC work should use Checkov or KICS.",
+              "install": "brew install terrascan",
+              "url": "https://github.com/tenable/terrascan",
+              "alt": [
+                "Checkov",
+                "KICS"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "iac-cloudformation",
+          "name": "CloudFormation Policy",
+          "tools": [
+            {
+              "name": "cfn-guard",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "AWS's official CloudFormation policy-as-code tool: validates templates and yes, live stacks, against declarative rules written in a purpose-built Guard DSL; ships AWS managed rule collections.",
+              "when": "Enforce organizational CloudFormation rules (allowlists, encryption, tag policies) in CI against templates before deploy.",
+              "install": "brew install cloudformation-guard",
+              "url": "https://github.com/aws-cloudformation/cloudformation-guard",
+              "alt": [
+                "cfn-nag",
+                "Checkov"
+              ]
+            },
+            {
+              "name": "cfn-nag",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Stelligent's rule-based CloudFormation linter that flags over-permissive IAM wildcards, plaintext secrets, and open security groups across templates.",
+              "when": "Fast, opinionated CloudFormation warnings with zero configuration; a solid first pass before cfn-guard rules.",
+              "install": "gem install cfn-nag",
+              "url": "https://github.com/stelligent/cfn_nag",
+              "alt": [
+                "cfn-guard",
+                "Checkov"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "iac-kubernetes",
+          "name": "Kubernetes & Helm",
+          "tools": [
+            {
+              "name": "kube-bench",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Aqua's CIS Kubernetes benchmark runner that checks control-plane nodes (kube-apiserver, etcd) and workloads against the CIS K8s Benchmark 1.9+ sections.",
+              "when": "Baseline your clusters against CIS on install and after upgrades; run from the node or via the official image.",
+              "install": "docker run --rm -v /etc/kubernetes:/etc/kubernetes aquasec/kube-bench:latest",
+              "url": "https://github.com/aquasecurity/kube-bench",
+              "alt": [
+                "kube-score",
+                "KICS"
+              ]
+            },
+            {
+              "name": "kube-score",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Opinionated static analysis of Kubernetes object manifests scoring against best practices: resource requests, probes, securityContext, network policies.",
+              "when": "Per-manifest linting in CI for the small, common mistakes \u2014 complements policy-heavy gatekeepers like Kyverno and kube-bench.",
+              "install": "brew install kube-score",
+              "url": "https://github.com/zegl/kube-score",
+              "alt": [
+                "KICS",
+                "Checkov"
+              ]
+            },
+            {
+              "name": "KICS",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Checkmarx's open-source IaC scanner (Keeping Infrastructure as Code Secure) running thousands of queries across 20+ platforms \u2014 Terraform, K8s, Docker, Helm, CloudFormation, Ansible \u2014 with SARIF output and OPA/Rego custom queries.",
+              "when": "A complementary cross-check on IaC after Checkov, or the pick when you want OPA/Rego policy authoring (the slot archived Terrascan used to fill).",
+              "install": "docker run -t -v \"$PWD\":/path checkmarx/kics:latest scan -p /path -o /path",
+              "url": "https://github.com/Checkmarx/kics",
+              "alt": [
+                "Checkov",
+                "kube-score"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "iac-containers",
+          "name": "Container Images & Registries",
+          "tools": [
+            {
+              "name": "Trivy",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Aqua's all-in-one scanner: OS/library package CVEs in images and filesystems, SBOM generation, IaC misconfigs (absorbed tfsec), Kubernetes scanning, and registry CI \u2014 one binary, zero daemon.",
+              "when": "The single tool to add to a container build: `trivy image`, `trivy fs --scanners vuln,secret,misconfig`, and `trivy sbom` cover images to source in one install.",
+              "install": "brew install trivy",
+              "url": "https://github.com/aquasecurity/trivy",
+              "alt": [
+                "Grype + Syft",
+                "Checkov"
               ]
             }
           ]

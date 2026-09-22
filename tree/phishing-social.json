@@ -6,177 +6,499 @@
   "class": "offense",
   "categories": [
     {
-      "id": "phishing-frameworks",
-      "name": "Phishing Campaign Frameworks",
+      "id": "campaign-simulation",
+      "name": "Phishing Simulation Platforms",
       "tools": [
         {
-          "name": "Gophish",
+          "name": "GoPhish",
           "best": true,
           "rating": 5,
           "effort": "medium",
-          "desc": "Go-based open-source phishing campaign platform: composes email templates, landing pages, target groups, and SMTP profiles, then tracks opens, clicks, and submitted credentials per recipient via web UI + REST API.",
-          "when": "The standard engine for organizational awareness campaigns — schedule simulations against your own employees, export per-recipient results, and measure click-rate improvement over time.",
+          "desc": "Open-source, self-hosted campaign engine: compose email templates, landing pages, target groups, and SMTP profiles, then track opens, clicks, and submitted credentials per recipient via web UI and REST API.",
+          "when": "The standard engine for authorized organizational awareness campaigns — schedule simulations against your own employees, export per-recipient results, and measure click-rate improvement over time.",
           "install": "go install -v github.com/gophish/gophish@latest",
           "url": "https://github.com/gophish/gophish",
-          "alt": ["king phisher", "socialfish"]
+          "alt": ["king phisher", "phishspark"]
         },
         {
           "name": "King Phisher",
           "rating": 3,
           "effort": "medium",
-          "desc": "Python client/server toolkit (SecureState) with parallel campaigns, web-page cloning, credential-harvesting landing pages, geo-location, and SPF checks. The project is declared no longer maintained — treat as legacy.",
-          "when": "Legacy environments or when you need a fully self-hosted client-plus-server workflow; otherwise prefer Gophish.",
+          "desc": "Python client/server phishing toolkit (SecureState) with parallel campaigns, page cloning, credential-harvesting landing pages, geo-location of clickers, and SPF checks. Declared no longer maintained — treat as legacy.",
+          "when": "Self-hosted client-plus-server workflows in legacy environments; otherwise prefer Gophish for new authorized programs.",
           "install": "wget -q https://github.com/securestate/king-phisher/raw/master/tools/install.sh && sudo bash ./install.sh",
           "url": "https://github.com/securestate/king-phisher",
           "alt": ["gophish"]
         },
         {
-          "name": "SocialFish",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Active Python toolkit for cloning modern, JavaScript-heavy login pages and reporting clicks and submissions; ships page-candidate templates useful in training demos. It also bundles cookie/OTP hooks — use only in authorized simulations against consenting participants.",
-          "when": "A quick page-only replica of a current login page for a live security-awareness demo without standing up a full campaign framework.",
-          "install": "git clone https://github.com/UndeadSec/SocialFish && cd SocialFish && pip3 install -r requirements.txt",
-          "url": "https://github.com/UndeadSec/SocialFish",
-          "alt": ["gophish", "zphisher"]
-        }
-      ]
-    },
-    {
-      "id": "social-engineering",
-      "name": "Social Engineering Kits",
-      "tools": [
-        {
-          "name": "Social-Engineer Toolkit (SET)",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "TrustedSec's menu-driven Python framework bundling social-engineering vectors — page cloning, credential harvesting, email mass-mailers, SMS, and more — behind one guided interface. Preinstalled on Kali and used by teams to run authorized awareness campaigns.",
-          "when": "Guided multi-vector campaigns on a Kali box, e.g. a quick credential-harvest or mailer exercise in-house where one menu covers everything.",
-          "install": "sudo apt install set",
-          "url": "https://github.com/trustedsec/social-engineer-toolkit",
-          "alt": ["gophish", "beef"]
-        },
-        {
-          "name": "BeEF",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Browser Exploitation Framework: serves a JavaScript hook that, once a consenting user's browser loads it, gives the operator a live inside view of that browser session with modules including fake login prompts and environment probing.",
-          "when": "Training where you show employees the inside of a compromised browser session live, or test whether your org detects browser-hook indicators.",
-          "install": "sudo apt install beef-xss",
-          "url": "https://github.com/beefproject/beef",
-          "alt": ["set"]
-        },
-        {
-          "name": "Wifiphisher",
-          "rating": 4,
-          "effort": "advanced",
-          "desc": "Rogue-access-point framework that drives nearby clients to a captive-portal page to collect Wi-Fi credentials. An authorized physical-testing and awareness tool for demonstrating Wi-Fi credential exposure on scoped, consenting networks.",
-          "when": "On-site assessments where the goal is showing guests/employees how easily a lookalike Wi-Fi portal harvests creds — never on networks you do not own or lack written consent for.",
-          "install": "sudo apt install wifiphisher",
-          "url": "https://github.com/wifiphisher/wifiphisher",
-          "alt": ["set"]
-        }
-      ]
-    },
-    {
-      "id": "reverse-proxy-phish",
-      "name": "Reverse-Proxy & AitM Phishing",
-      "tools": [
-        {
-          "name": "Evilginx2",
-          "best": true,
-          "rating": 5,
-          "effort": "advanced",
-          "desc": "Go-based man-in-the-middle reverse proxy (authorized red-team phishing infrastructure) that fronts a real site and captures post-login session cookies, demonstrating why legacy 2FA alone does not protect a session. Requires a domain you control, TLS, and dedicated infrastructure; the reference tool for authorized MFA-phishing exercises.",
-          "when": "When your authorized red-team scope includes proving session-token exposure or comparing legacy 2FA against phishing-resistant FIDO2/passkeys in your own environment.",
-          "install": "git clone https://github.com/kgretzky/evilginx2 && cd evilginx2 && make",
-          "url": "https://github.com/kgretzky/evilginx2",
-          "alt": ["modlishka", "credsniper", "evilgophish"]
-        },
-        {
-          "name": "Modlishka",
-          "rating": 4,
-          "effort": "advanced",
-          "desc": "Go reverse proxy that transparently proxies a whole multi-domain HTTPS site through a single phishing domain and captures credentials and session tokens (authorized red-team phishing infrastructure). Pioneered the modern Adversary-in-the-Middle technique in research; its author restricts use to authorized testing and defensive awareness.",
-          "when": "Authorized engagements that need whole-domain transparent proxying without client certificate installs, or historical demos of the AitM technique.",
-          "install": "go install github.com/drk1wi/Modlishka@latest",
-          "url": "https://github.com/drk1wi/Modlishka",
-          "alt": ["evilginx2", "credsniper"]
-        },
-        {
-          "name": "CredSniper",
+          "name": "PhishSpark",
           "rating": 3,
-          "effort": "medium",
-          "desc": "Flask/Jinja2 framework serving cloned multi-step login pages (username → password → 2FA token) with Let's Encrypt SSL and an API for collected submissions. Unmaintained since 2020; use only in authorized test campaigns.",
-          "when": "Small scoped engagements that want a page-only credential collector with a results API; prefer Evilginx2/Modlishka for session-level testing.",
-          "install": "git clone https://github.com/ustayready/CredSniper && cd CredSniper && ./install.sh",
-          "url": "https://github.com/ustayready/CredSniper",
-          "alt": ["evilginx2", "modlishka"]
+          "effort": "easy",
+          "desc": "Commercial self-hostable phishing-simulation platform with SPF/DKIM/DMARC setup wizard, HMAC-signed tracking links, prebuilt templates (Microsoft 365, payroll portals), and per-department risk scoring. Sends only to your own users with written approval.",
+          "when": "Teams that want a lighter-weight, guided simulation workflow with built-in authorization guardrails without standing up Gophish infrastructure.",
+          "install": "Sign up at https://phishspark.com (free tier) or follow the Docker quick-start in /docs for self-host.",
+          "url": "https://phishspark.com/",
+          "alt": ["gophish", "king phisher"]
+        }
+      ],
+      "subcategories": [
+        {
+          "id": "aitm-simulation",
+          "name": "Adversary-in-the-Middle Simulation",
+          "tools": [
+            {
+              "name": "Evilginx2",
+              "best": true,
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "Go-based reverse-proxy that fronts a real site over a domain you control, captures post-login session cookies, and demonstrates why legacy 2FA alone does not protect a session. The reference tool for authorized MFA-phishing and passkey-migration exercises.",
+              "when": "When authorized red-team scope includes proving session-token exposure or comparing legacy 2FA against phishing-resistant FIDO2/passkeys in your own environment.",
+              "install": "git clone https://github.com/kgretzky/evilginx2 && cd evilginx2 && make",
+              "url": "https://github.com/kgretzky/evilginx2",
+              "alt": ["modlishka", "evilgophish"]
+            },
+            {
+              "name": "Modlishka",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Go reverse proxy that transparently proxies a whole multi-domain HTTPS site through one phishing domain and captures credentials and session tokens. Pioneered the modern AitM technique in research; author restricts use to authorized testing and defensive awareness.",
+              "when": "Authorized engagements that need whole-domain transparent proxying without client-side certificates, or historical demos of the AitM technique.",
+              "install": "go install github.com/drk1wi/Modlishka@latest",
+              "url": "https://github.com/drk1wi/Modlishka",
+              "alt": ["evilginx2", "evilgophish"]
+            },
+            {
+              "name": "EvilGophish",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Combines the Gophish campaign engine with an evilginx2-class reverse proxy in one toolchain, letting an authorized red team schedule phishing emails and capture session tokens from a single console.",
+              "when": "When you want token capture plus Gophish-style campaign scheduling and reporting in one self-hosted deployment.",
+              "install": "git clone https://github.com/fin3ss3g0d/EvilGophish && cd EvilGophish && sudo bash setup.sh",
+              "url": "https://github.com/fin3ss3g0d/EvilGophish",
+              "alt": ["evilginx2", "modlishka"]
+            }
+          ]
         },
         {
-          "name": "EvilGophish",
-          "rating": 4,
-          "effort": "advanced",
-          "desc": "Combines the Gophish campaign engine with an evilginx2-class reverse proxy in one toolchain so an authorized red team can schedule phishing emails and capture session tokens from a single console.",
-          "when": "When you want Evilginx2-grade token capture plus Gophish-style campaign scheduling and reporting in one deployment.",
-          "install": "git clone https://github.com/fin3ss3g0d/EvilGophish && cd EvilGophish && sudo bash setup.sh",
-          "url": "https://github.com/fin3ss3g0d/EvilGophish",
-          "alt": ["evilginx2", "modlishka"]
+          "id": "social-eng-kits",
+          "name": "Social Engineering Toolkits",
+          "tools": [
+            {
+              "name": "Social-Engineer Toolkit (SET)",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "TrustedSec's menu-driven Python framework bundling page cloning, credential harvesters, email mass-mailers, and SMS vectors behind one guided interface. Preinstalled on Kali; built for running authorized awareness campaigns.",
+              "when": "Guided multi-vector campaigns on a Kali box — a single menu covers credential-harvest, phishing, and SMS exercises entirely inside your own scoped environment.",
+              "install": "sudo apt install set",
+              "url": "https://github.com/trustedsec/social-engineer-toolkit",
+              "alt": ["gophish", "beef"]
+            },
+            {
+              "name": "BeEF",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Browser Exploitation Framework: serves a JavaScript hook that, once a consenting user's browser loads it, gives the operator a live inside view of that browser session with modules including fake login prompts and environment probing.",
+              "when": "Training that shows employees the inside of a compromised browser session live, or to check whether your org notices browser-hook indicators.",
+              "install": "sudo apt install beef-xss",
+              "url": "https://github.com/beefproject/beef",
+              "alt": ["set"]
+            },
+            {
+              "name": "Wifiphisher",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Rogue-access-point toolkit that drives nearby clients to a captive-portal page to collect Wi-Fi credentials — a physical testing and awareness tool for demonstrating lookalike Wi-Fi portals on scoped, consenting networks.",
+              "when": "On-site authorized assessments where the goal is showing how easily a lookalike Wi-Fi portal harvests credentials; never on networks you do not own or lack written consent for.",
+              "install": "sudo apt install wifiphisher",
+              "url": "https://github.com/wifiphisher/wifiphisher",
+              "alt": ["set"]
+            }
+          ],
+          "subcategories": [
+            {
+              "id": "lab-harvest",
+              "name": "Credential-Harvesting Labs (Authorized Only)",
+              "tools": [
+                {
+                  "name": "zphisher",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Automated login-page cloning kit with 30+ ready templates, served over localhost/cloudflared/ngrok links with submissions logged locally. Widely used for building credential-phishing awareness demos — strictly in authorized labs or against your own organization.",
+                  "when": "Entry-level awareness demos or in-house training where a ready-made lookalike login page is enough and no full campaign engine is needed.",
+                  "install": "git clone --depth=1 https://github.com/htr-tech/zphisher && cd zphisher && bash zphisher.sh",
+                  "url": "https://github.com/htr-tech/zphisher",
+                  "alt": ["credsniper"]
+                },
+                {
+                  "name": "CredSniper",
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "Flask/Jinja2 framework serving cloned multi-step login pages (username → password → 2FA token) with Let's Encrypt SSL and a results API. Unmaintained since 2020; use only in authorized test campaigns and labs.",
+                  "when": "Small scoped engagements that want a page-only collector with a results API; prefer the AitM proxes for session-level testing.",
+                  "install": "git clone https://github.com/ustayready/CredSniper && cd CredSniper && ./install.sh",
+                  "url": "https://github.com/ustayready/CredSniper",
+                  "alt": ["zphisher"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "content-generation",
+          "name": "Campaign Content & Email Generation",
+          "tools": [
+            {
+              "name": "PhishMailer",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Generates realistic HTML and plain-text email messages with attachments for in-house phishing simulations, including per-recipient personalization and SMTP sending. Fills the content-creation step of authorized awareness campaigns.",
+              "when": "When you need convincing message and attachment content to feed into Gophish or your own SMTP as part of an approved simulation.",
+              "install": "git clone https://github.com/BiZken/PhishMailer && cd PhishMailer && pip install -r requirements.txt",
+              "url": "https://github.com/BiZken/PhishMailer",
+              "alt": ["gophish"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "email-credentials",
-      "name": "Credential Harvesting Pages",
+      "id": "email-auth-testing",
+      "name": "Email Spoofing & DMARC Testing",
       "tools": [
         {
-          "name": "zphisher",
+          "name": "MXToolbox",
           "best": true,
           "rating": 5,
           "effort": "easy",
-          "desc": "Automated login-page cloning kit with 30+ ready templates for email and social platforms, served over localhost, cloudflared, or ngrok links with submissions logged locally. The most widely used open tool for building credential-phishing awareness demos.",
-          "when": "Entry-level awareness demos or in-house training where a ready-made lookalike login page is enough and no campaign engine is needed.",
-          "install": "git clone --depth=1 https://github.com/htr-tech/zphisher && cd zphisher && bash zphisher.sh",
-          "url": "https://github.com/htr-tech/zphisher",
-          "alt": ["phishx", "credsniper"]
+          "desc": "Suite of free web lookups covering SPF, DKIM, DMARC, BLACKLIST, and email header analysis plus spam-score checks — the de-facto starter kit for validating whether your own domain records are spoof-proof and readable by receivers.",
+          "when": "First stop when you deploy or audit your org's email authentication; also useful pre-/post-campaign to confirm your simulation sender domain isn't bouncing.",
+          "install": "Open https://mxtoolbox.com/ in a browser.",
+          "url": "https://mxtoolbox.com/",
+          "alt": ["dmarcian", "easydmarc"]
         },
         {
-          "name": "PhishX",
-          "rating": 3,
-          "effort": "easy",
-          "desc": "Front-end-driven spear-phishing field kit (maintained fork of the original noobhackers PhishX) with ready login-page templates, tunnel serving, and a web dashboard for collected submissions and visit metadata. Authorized awareness use only.",
-          "when": "Fast, lightweight setup for cloning a social/email logon page and serving it from a tunnel during in-house training.",
-          "install": "git clone https://github.com/rezaaksa/PhishX && cd PhishX && pip3 install -r requirements.txt",
-          "url": "https://github.com/rezaaksa/PhishX",
-          "alt": ["zphisher", "credsniper"]
-        },
-        {
-          "name": "Credential Harvester (SET)",
+          "name": "Google Admin Toolbox Check MX",
           "rating": 4,
-          "effort": "medium",
-          "desc": "SET's website-cloner + credential-harvester module: pulls a live login page, serves a lookalike, and logs POSTed usernames/passwords with a redirect after capture. Ships inside SET; use only against your own organization's employees in scoped campaigns.",
-          "when": "A single-page password-capture exercise without building a full framework — run it from the SET menu when authorized.",
-          "install": "sudo apt install set",
-          "url": "https://github.com/trustedsec/social-engineer-toolkit",
-          "alt": ["zphisher", "phishx"]
+          "effort": "easy",
+          "desc": "Google's lookup service that checks MX, SPF, and DMARC records for a domain and flags common misconfigurations from a Google-managed mail perspective.",
+          "when": "Quick monthly self-checks of your domain's mail authentication plus loopbacks against Gmail's parser behavior.",
+          "install": "Open https://toolbox.googleapps.com/apps/checkmx/ in a browser.",
+          "url": "https://toolbox.googleapps.com/apps/checkmx/",
+          "alt": ["mxtoolbox"]
+        },
+        {
+          "name": "Mail-Tester",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Generates a test address and scores an actual emailed message against SPF, DKIM, DMARC, and content heuristics (0-10), including which records Gmail/Outlook see when your message arrives.",
+          "when": "Verifying that a simulation or real marketing message passes authentication before you trust email-deliverability reports.",
+          "install": "Send a test email to the address shown at https://www.mail-tester.com/.",
+          "url": "https://www.mail-tester.com/",
+          "alt": ["mxtoolbox"]
+        }
+      ],
+      "subcategories": [
+        {
+          "id": "dmarc-deployment",
+          "name": "SPF/DKIM/DMARC Deployment Checkers",
+          "tools": [
+            {
+              "name": "dmarcian",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "DMARC-focused platform with free record inspectors and DMARC aggregate-report parsing that shows which senders are failing authentication against your own domain. A core tool for the defense side of spoofing.",
+              "when": "Parsing DMARC aggregate reports, planning policy progression (none → quarantine → reject), and proving to leadership that typosquatting mail is being rejected.",
+              "install": "Open https://dmarcian.com/ (free DMARC record check).",
+              "url": "https://dmarcian.com/",
+              "alt": ["easydmarc"]
+            },
+            {
+              "name": "EasyDMARC",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Free DNS records lookup for SPF, DKIM, DMARC, and BIMI with visual health reports; also offers continuous monitoring and report parsing on paid tiers.",
+              "when": "Self-service DNS-stack validation and monthly health snapshots across many domains at once.",
+              "install": "Open https://easydmarc.com/ (free lookup).",
+              "url": "https://easydmarc.com/",
+              "alt": ["dmarcian"]
+            },
+            {
+              "name": "DKIMValidator",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Free web validator that checks a public DKIM record for a given domain and selector, verifying RFC 6376 correctness before rollout.",
+              "when": "Confirming a specific DKIM selector publishes correct records during signing deployment.",
+              "install": "Open https://www.dkimvalidator.com/ and enter the domain/selector.",
+              "url": "https://www.dkimvalidator.com/",
+              "alt": ["mxtoolbox"]
+            }
+          ]
+        },
+        {
+          "id": "header-analysis",
+          "name": "Header Analysis & Spoofed-Sender Behavior",
+          "tools": [
+            {
+              "name": "Google Message Header Analyzer",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Google's free raw-header decoder that maps each Received hop, SPF/DKIM/DMARC verdict, and authentication results into a consumable timeline — great for teaching how spoofed look-alikes get flagged (or slip through).",
+              "when": "Post-campaign forensics and training walkthroughs where you show employees exactly which header tells a phish from a real sender.",
+              "install": "Paste raw headers at https://toolbox.googleapps.com/apps/messageheader/.",
+              "url": "https://toolbox.googleapps.com/apps/messageheader/",
+              "alt": ["microsoft message header analyzer"]
+            },
+            {
+              "name": "Microsoft Message Header Analyzer",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Free Microsoft header decoder that parses authentication results (SPF/DKIM/DMARC) and delivery path from raw outlook.com/Exchange messages, including spam-confidence and EOP verdict lines.",
+              "when": "Investigating how a message behaved inside Microsoft 365, or inside table-top exercises where defenders trace a reported phish end to end.",
+              "install": "Paste raw headers at https://mha.azurewebsites.net/.",
+              "url": "https://mha.azurewebsites.net/",
+              "alt": ["google message header analyzer"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "attachment-payloads",
-      "name": "Email & Attachment Payloads",
+      "id": "tracking-forensics",
+      "name": "Click Tracking & Phishing Forensics",
       "tools": [
         {
-          "name": "PhishMailer",
+          "name": "Canarytokens",
           "best": true,
+          "rating": 5,
+          "effort": "easy",
+          "desc": "Thinkst's free drop-in tokens — a unique URL, document, or credential cred that alerts your team the moment it is visited or submitted. Uses any arbitrary token in an email so a single interaction is logged and correlated.",
+          "when": "Defensive phishing-awareness tracking: embed a custom URL token in an awareness email or lure-bearing document and get alerted when anyone (attacker or trainee) interacts with it.",
+          "install": "Generate a token at https://canarytokens.org/generate (self-host via github.com/thinkst/canarytokens).",
+          "url": "https://canarytokens.org/generate",
+          "alt": ["gophish"]
+        },
+        {
+          "name": "PhishTool",
+          "rating": 4,
+          "effort": "easy",
+          "desc": "Web-based phishing analysis workspace (with a Chrome extension) that decodes emails, auto-extracts headers, URLs, and indicators, and routes findings to case-management/email-security tools. Also offers click-through analytics for reporting.",
+          "when": "Turning employee reports into vetted phishing cases, or running analytics on how reported phish relate to your authorized campaign metrics.",
+          "install": "Sign up at https://www.phishtool.com/ (web app + Chrome extension).",
+          "url": "https://www.phishtool.com/",
+          "alt": ["gophish", "microsoft message header analyzer"]
+        }
+      ],
+      "subcategories": [
+        {
+          "id": "url-scanners",
+          "name": "URL & Reputation Scanners",
+          "tools": [
+            {
+              "name": "urlscan.io",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Screenshots and inventories full page loads — every request, redirect, domain, script, and certificate — for a submitted URL. The reference tool for dissecting phishing landing pages and look-alike domains.",
+              "when": "Analyzing a reported phish's full resource pattern, comparing a look-alike against the real login site, and sharing a sandboxed screenshot in incident write-ups.",
+              "install": "Submit a URL at https://urlscan.io/.",
+              "url": "https://urlscan.io/",
+              "alt": ["virustotal", "checkphish"]
+            },
+            {
+              "name": "VirusTotal",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Aggregates dozens of antivirus and URL-blocker verdicts plus domain reputation for a submitted URL or file. Fast triage when deciding whether a link is attacker infrastructure.",
+              "when": "Quick triage of a reported URL against multi-vendor verdicts before escalation to your SOC.",
+              "install": "Submit a URL at https://www.virustotal.com/ (APIs via account).",
+              "url": "https://www.virustotal.com/",
+              "alt": ["urlscan", "checkphish"]
+            },
+            {
+              "name": "CheckPhish",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Bolster's AI URL scanner that renders pages in isolation and classifies phishing/brand-impersonation attempts with a screenshot and intelligence score, exposed as a web dashboard and REST API.",
+              "when": "Automated triage of suspected brand-impersonation and look-alike domains inside awareness campaigns or hunt queues.",
+              "install": "Submit a URL at https://checkphish.ai/ (API key required).",
+              "url": "https://checkphish.ai/",
+              "alt": ["urlscan", "virustotal"]
+            }
+          ]
+        },
+        {
+          "id": "domain-intel",
+          "name": "Phishing Domain Detectors",
+          "tools": [
+            {
+              "name": "PhishTank",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Community-run phishing URL database (operated by Cisco Talos) you can query to see whether a domain/URL is already classified as phishing, and where defenders and vendors submit new sightings.",
+              "when": "Defensive lookup of reported URLs against a maintained community blocklist, and submitting confirmed phish from your campaign analysis.",
+              "install": "Query or submit at https://phishtank.org/.",
+              "url": "https://phishtank.org/",
+              "alt": ["openphish"]
+            },
+            {
+              "name": "OpenPhish",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Automated phishing intelligence engine that curates active phishing URLs and feeds them through API and free/demo endpoints, with per-campaign and per-region details.",
+              "when": "Feeding confirmed phishing URLs from your analysis into this feed to inform downstream detectors, and researching active campaigns your org may have been targeted by.",
+              "install": "Browse or pull feeds at https://openphish.com/.",
+              "url": "https://openphish.com/",
+              "alt": ["phishtank"]
+            },
+            {
+              "name": "PhishDetect",
+              "rating": 3,
+              "effort": "advanced",
+              "desc": "Open-source service (client + self-hosted node) that clusters phishing pages by SHA-1 hash of page content and exposes an API for lookups, letting an org build its own look-alike detector.",
+              "when": "Self-hosted phishing-pattern detection where you want clustering and a private lookup API for your own authorized-scope pages.",
+              "install": "git clone https://github.com/phishdetect/phishdetect && cd phishdetect && docker-compose up -d",
+              "url": "https://github.com/phishdetect/phishdetect",
+              "alt": ["openphish", "urlscan"]
+            }
+          ],
+          "subcategories": [
+            {
+              "id": "blocklists-feeds",
+              "name": "Blocklists & Indicator Feeds",
+              "tools": [
+                {
+                  "name": "URLhaus",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "abuse.ch's malware-URL sharing platform that tracks URLs used for phishing, drive-by downloads, and C2, with free API and hourly CSV/JSON feeds for defensive enrichment.",
+                  "when": "Checking whether a reported URL is already tracked as malicious and pulling machine-readable feeds into your detection stack.",
+                  "install": "Query at https://urlhaus.abuse.ch/ (API: https://urlhaus-api.abuse.ch).",
+                  "url": "https://urlhaus.abuse.ch/",
+                  "alt": ["phishtank"]
+                },
+                {
+                  "name": "PhishStats",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Real-time database of active phishing domains with public dashboards, IP/URL/domain/RDNS queries, and an API — useful for validating whether host indicators are known-phishing infrastructure.",
+                  "when": "Enriching an I/O indicator from a reported phish against a live phishing-activity database.",
+                  "install": "https://phishstats.info/ (web dashboards + API).",
+                  "url": "https://phishstats.info/",
+                  "alt": ["urlhaus"]
+                },
+                {
+                  "name": "Google Safe Browsing Transparency",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Google's Safe Browsing status checker that reveals whether a given web property is being flagged as deceptive or socially engineered, plus the local Lookup API for programmatic checks.",
+                  "when": "Checking whether a reported URL is actively defanged in Chrome/Firefox user bases, and automating dangerous-site checks.",
+                  "install": "https://transparencyreport.google.com/safe-browsing/search or the Safe Browsing Lookup API.",
+                  "url": "https://transparencyreport.google.com/safe-browsing/search",
+                  "alt": ["virustotal"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "awareness-reporting",
+      "name": "Awareness Training & User Reporting",
+      "tools": [
+        {
+          "name": "KnowBe4",
+          "best": true,
+          "rating": 5,
+          "effort": "medium",
+          "desc": "Leading commercial security-awareness platform combining simulated phishing campaigns, template libraries, and training modules with per-user risk scoring, plus reporting that ties click rates to training completion.",
+          "when": "Enterprise-scale awareness programs needing turnkey campaign templates, LMS-style training, and board-ready reports on phishing risk.",
+          "install": "Sign up at https://www.knowbe4.com/ (SaaS).",
+          "url": "https://www.knowbe4.com/",
+          "alt": ["hoxhunt", "cofense phishme"]
+        },
+        {
+          "name": "Hoxhunt",
           "rating": 4,
           "effort": "medium",
-          "desc": "Generates realistic HTML and plain-text email messages with attachments for in-house phishing simulations, including per-recipient personalization and SMTP sending. Fills the content-creation step in authorized awareness campaigns.",
-          "when": "When you need convincing message and attachment content to feed into Gophish or your own SMTP as part of an approved simulation.",
-          "install": "git clone https://github.com/BiZken/PhishMailer && cd PhishMailer && pip install -r requirements.txt",
-          "url": "https://github.com/BiZken/PhishMailer",
-          "alt": ["king phisher", "gophish"]
+          "desc": "Commercial continuous-training platform built around real-world threat reporting: employees report suspicious mail, the service validates it and dispatches micro-learnings while feeding behavioral data to security teams.",
+          "when": "Organizations that want reporting-led training that blends real user reports with simulations and automated follow-up.",
+          "install": "Sign up at https://hoxhunt.com/ (SaaS).",
+          "url": "https://hoxhunt.com/",
+          "alt": ["knowbe4"]
+        },
+        {
+          "name": "Cofense PhishMe",
+          "rating": 4,
+          "effort": "medium",
+          "desc": "Commercial phishing-defense platform that mixes simulated phishing, template management, and automation that ingests the precise phish employees report — with the Cofense Reporter add-in pushing sightings straight to the SOC.",
+          "when": "Teams coupling simulation with a strong 'report the phish' culture and automated triage of what users actually receive.",
+          "install": "Sign up via https://cofense.com/ (SaaS).",
+          "url": "https://cofense.com/",
+          "alt": ["knowbe4", "hoxhunt"]
+        }
+      ],
+      "subcategories": [
+        {
+          "id": "user-reporting",
+          "name": "Employee Reporting Channels",
+          "tools": [
+            {
+              "name": "Microsoft 365 Report Message Add-in",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Free Microsoft add-in for Outlook/OWA that gives users a 'Report' button to flag phishing, junk, or not-junk straight to Microsoft and (with a user-reporting policy) to your security team's mailbox.",
+              "when": "Giving every employee a zero-friction way to report suspected phish, then mining those submissions in table-top exercises and campaign post-mortems.",
+              "install": "Deploy from M365 admin → Settings → Integrated apps; docs at https://learn.microsoft.com/en-us/microsoft-365/security/office-365-security/submissions-users-report-message-add-in-configure",
+              "url": "https://learn.microsoft.com/en-us/microsoft-365/security/office-365-security/submissions-users-report-message-add-in-configure",
+              "alt": ["cofense reporter"]
+            },
+            {
+              "name": "Cofense Reporter",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Outlook/heb browser reporting add-in that forwards a reported email, with attachments and headers intact, to the organization's phishing mailbox and auto-prepends a standardized template for triage.",
+              "when": "Structuring free-form employee reports so analysts receive complete headers/attachments from day one of an awareness program.",
+              "install": "Deploy via https://cofense.com/ (Outlook add-in / browser toolbar).",
+              "url": "https://cofense.com/",
+              "alt": ["microsoft 365 report message add-in"]
+            }
+          ]
+        },
+        {
+          "id": "training-content",
+          "name": "Training Content & Tabletop Aids",
+          "tools": [
+            {
+              "name": "SANS OUCH! Newsletter",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Free monthly, non-technical security awareness newsletter from SANS covering phishing, social engineering, and reporting habits; can be licensed for redistribution to staff and reused as tabletop discussion material.",
+              "when": "A pre-written, vetted security-awareness cadence for employees and a ready-made reading list before table-top exercises.",
+              "install": "Subscribe at https://www.sans.org/ouch/.",
+              "url": "https://www.sans.org/ouch/",
+              "alt": ["jigsaw phishing quiz"]
+            },
+            {
+              "name": "Jigsaw Phishing Quiz",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Free interactive quiz from Jigsaw by Google that walks participants through tricky real-world email screenshots and explains each phishing tell with instant feedback.",
+              "when": "A low-stakes, engaging lter for kickoff of a training meeting or a fresh-start activity right after a failed simulation click.",
+              "install": "Open https://phishingquiz.withgoogle.com/ (no install).",
+              "url": "https://phishingquiz.withgoogle.com/",
+              "alt": ["sans ouch"]
+            }
+          ]
         }
       ]
     }

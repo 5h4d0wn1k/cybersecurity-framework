@@ -2,184 +2,503 @@
   "id": "threatintel",
   "name": "Threat Intelligence, Sharing & Detection Engineering",
   "emoji": "📡",
-  "tagline": "Enrich your own defenses: share and consume intel, pivot on IOCs, and write portable detections against common frameworks.",
+  "tagline": "Enrich your own defenses: ingest STIX/TAXII feeds, aggregate and pivot on IOCs, correlate infrastructure, and write portable detections against standard frameworks.",
   "class": "defense",
   "categories": [
     {
-      "id": "threat-sharing",
-      "name": "Threat Intelligence Sharing & Platforms",
-      "tools": [
+      "id": "platforms",
+      "name": "Intel Platforms & Frameworks",
+      "subcategories": [
         {
-          "name": "MISP",
-          "best": true,
-          "rating": 5,
-          "effort": "advanced",
-          "desc": "The open-source intelligence sharing platform: community-synced events, TLP/orgs, feed syncing, and a REST API for exchanging malware and attack indicators with trusted partners at scale.",
-          "when": "Run or sync a MISP instance when you need structured, governed intel sharing across your team, an ISAC-style community, or your own feed ingestion pipeline.",
-          "install": "sudo bash INSTALL/INSTALL.sh from MISP codebase (Ubuntu/Kali): wget -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh && sudo bash /tmp/INSTALL.sh",
-          "url": "https://github.com/MISP/MISP",
-          "alt": ["OpenCTI", "TAXII 2"]
+          "id": "stix-taxii",
+          "name": "STIX/TAXII-native Platforms",
+          "tools": [
+            {
+              "name": "OpenCTI",
+              "best": true,
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "Open-source threat-intelligence platform built around the STIX 2.x data model: consumes and exports STIX/TAXII 2.0/2.1, correlates entities into a knowledge graph, and ingests from 100+ connectors.",
+              "when": "Stand up a central intel drive when you want automated feed ingestion (MISP, MITRE, abuse.ch, TAXII collections) correlated into entities, reports, and indicators rather than raw IOC lists.",
+              "install": "git clone https://github.com/OpenCTI-Platform/docker.git && cp .env.sample .env && docker compose up -d",
+              "url": "https://github.com/OpenCTI-Platform/OpenCTI",
+              "alt": ["MISP", "TheHive"]
+            },
+            {
+              "name": "MISP",
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "The open-source intelligence sharing platform that stores and exchanges events as STIX/TAXII-compatible objects, syncs with federated communities, and exposes a full REST API for feeding SIEMs and SOARs.",
+              "when": "Run or sync a MISP instance when you need governed, TLP-aware intel sharing across your team, an ISAC-style community, or a feed-ingestion pipeline that speaks STIX/TAXII 2 out of the box.",
+              "install": "wget -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh && sudo bash /tmp/INSTALL.sh",
+              "url": "https://github.com/MISP/MISP",
+              "alt": ["OpenCTI", "IntelOwl"]
+            },
+            {
+              "name": "TAXII 2.0",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "The OASIS STIX/TAXII 2.x protocol that feed providers and ISACs use to push and pull structured intelligence over REST in API- and collection-based patterns.",
+              "when": "Connect your SIEM or intel stack to vendor and community TAXII endpoints, or publish your own vetted indicators to partners without building custom transport.",
+              "install": "preinstalled (protocol spec); pip install stix2 for client ingestion",
+              "url": "https://oasis-open.github.io/cti-documentation/",
+              "alt": ["MISP", "OpenCTI"]
+            },
+            {
+              "name": "stix2-client",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "The official OASIS Python library for creating, querying, and consuming STIX 2 objects and TAXII 2.x collections; pairs with cti-python-taxii2-client for polling remote servers.",
+              "when": "Automate feed pulls in Python: subscribe to a TAXII collection, parse bundles into STIX objects, and hand cleaned indicators to MISP or OpenCTI.",
+              "install": "pip install stix2",
+              "url": "https://github.com/oasis-open/cti-python-stix2",
+              "alt": ["TAXII 2.0", "PyMISP"]
+            },
+            {
+              "name": "TheHive",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Collaborative case-management and incident-response platform that ingests MISP events, runs observables through Cortex analyzers, and can export findings back as STIX/TAXII objects (4.x AGPL archived; current 5.x is StrangeBee commercial).",
+              "when": "Pairs with MISP and Cortex in the classic open-source IR stack when you need a shared investigation workspace with built-in observable workflows.",
+              "install": "git clone https://github.com/StrangeBeeCorp/docker.git && cd docker && docker compose up -d",
+              "url": "https://github.com/TheHive-Project/TheHive",
+              "alt": ["DFIR-IRIS", "MISP"]
+            },
+            {
+              "name": "Cortex",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Observable analysis and active-response engine that runs 100+ analyzers (OTX, VirusTotal, AbuseIPDB, GreyNoise, etc.) against IPs, domains, files, and hashes, returning structured, exportable reports.",
+              "when": "Give TheHive or MISP one shared enrichment backend so every platform calls the same analyzers instead of re-implementing vendor API calls.",
+              "install": "docker run -d -p 9001:9001 --name cortex thehiveproject/cortex:latest",
+              "url": "https://github.com/TheHive-Project/Cortex",
+              "alt": ["IntelOwl", "MISP"]
+            },
+            {
+              "name": "IntelOwl",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Self-hosted aggregation engine that runs a file, IP, domain, or hash through 100+ analyzers and pushes structured results out via connectors to MISP, OpenCTI, and YETI.",
+              "when": "Automate whole-vendor enrichment in one request and sink normalized findings into your STIX-based platforms via its connector layer.",
+              "install": "git clone https://github.com/intelowlproject/IntelOwl && ./initialize.sh && ./start prod up",
+              "url": "https://github.com/intelowlproject/IntelOwl",
+              "alt": ["Cortex", "Pulsedive"]
+            }
+          ]
         },
         {
-          "name": "OpenCTI",
-          "rating": 4,
-          "effort": "advanced",
-          "desc": "Filigran's open cyber-threat-intelligence platform: ingests from 100+ connectors into a STIX-based knowledge graph with worker-managed import, investigations, and STIX/TAXII 2 exchange.",
-          "when": "Stand up a central intel drive when you want automated feed ingestion (MISP, MITRE, abuse.ch) correlated into entities, reports, and indicators rather than raw IOC lists.",
-          "install": "git clone https://github.com/OpenCTI-Platform/docker.git && cp .env.sample .env && docker compose up -d",
-          "url": "https://github.com/OpenCTI-Platform/OpenCTI",
-          "alt": ["MISP", "TAXII 2"]
+          "id": "intel-frameworks",
+          "name": "Open-Source Intel Frameworks",
+          "tools": [
+            {
+              "name": "MISP",
+              "best": true,
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "The foundational open threat-intelligence and sharing framework: event-driven IOC correlation, feed syncing, taxonomies, and TLP/org governance across trusted communities.",
+              "when": "When you need a mature, community-proven place to store, correlate, and share intel with partners — it is the default first platform to stand up.",
+              "install": "wget -O /tmp/INSTALL.sh https://raw.githubusercontent.com/MISP/MISP/2.4/INSTALL/INSTALL.sh && sudo bash /tmp/INSTALL.sh",
+              "url": "https://github.com/MISP/MISP",
+              "alt": ["OpenCTI", "YETI"]
+            },
+            {
+              "name": "OpenCTI",
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "Graph-based intel framework that treats actors, campaigns, malware, and infrastructure as interconnected entities, ingesting from MISP and dozens of connectors into a STIX-native store.",
+              "when": "When your team reasons about campaigns and infrastructure relationships rather than flat IOC lists, so a knowledge-graph backend is worth the heavier deploy.",
+              "install": "git clone https://github.com/OpenCTI-Platform/docker.git && cp .env.sample .env && docker compose up -d",
+              "url": "https://github.com/OpenCTI-Platform/OpenCTI",
+              "alt": ["MISP", "YETI"]
+            }
+          ]
         },
         {
-          "name": "TAXII 2",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "The STIX/TAXII 2.x protocol (OASIS standard) feed providers and ISACs use to push/pull structured intelligence; consume collections or publish your own vetted IOCs to partners.",
-          "when": "Connect your SIEM/intel stack to TAXII feed endpoints, or publish your own vetted indicators to partners without building custom transport.",
-          "install": "preinstalled (protocol); pip install stix2 for client ingestion",
-          "url": "https://oasis-open.github.io/cti-documentation/",
-          "alt": ["MISP", "OpenCTI"]
+          "id": "case-mgmt",
+          "name": "Case Management & Analyzer Orchestration",
+          "tools": [
+            {
+              "name": "TheHive",
+              "best": true,
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "Collaborative incident case management that links alerts, observables, tasks, and Cortex responses in one shared workspace the whole IR team works from.",
+              "when": "When multiple analysts investigate simultaneous incidents and you need tasking, observables, and audit history in a single pane with MISP/Cortex integration.",
+              "install": "git clone https://github.com/StrangeBeeCorp/docker.git && cd docker && docker compose up -d",
+              "url": "https://github.com/TheHive-Project/TheHive",
+              "alt": ["DFIR-IRIS", "MISP"]
+            },
+            {
+              "name": "Cortex",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "The analysis orchestrator behind TheHive: schedules observables through analyzers and responders, caches results, and exposes them via REST to any calling platform.",
+              "when": "Attach a single Cortex to MISP and TheHive so enrichment and active-response is centralized, measured, and repeatable across tools.",
+              "install": "docker run -d -p 9001:9001 --name cortex thehiveproject/cortex:latest",
+              "url": "https://github.com/TheHive-Project/Cortex",
+              "alt": ["IntelOwl", "TheHive"]
+            },
+            {
+              "name": "DFIR-IRIS",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Open-source incident-response platform with modern case management, timeline pivoting, IOC enumeration, malware-hash handling, and third-party CTI enrichment via resolvers.",
+              "when": "Prefer a lighter, actively-developed OSS case manager that still publishes to MISP and pulls enrichment, without TheHive's legacy-or-commercial story.",
+              "install": "docker compose -f docker/default/docker-compose.yml up -d (from github.com/dfir-iris/dfir-iris)",
+              "url": "https://github.com/dfir-iris/dfir-iris",
+              "alt": ["TheHive", "MISP"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "detection-engineering",
+      "id": "ioc-feeds",
+      "name": "IOC Aggregation & Feeds",
+      "subcategories": [
+        {
+          "id": "aggregation",
+          "name": "IOC Aggregation & Enrichment",
+          "subcategories": [
+            {
+              "id": "reputation-lookups",
+              "name": "Reputation & Enrichment APIs",
+              "tools": [
+                {
+                  "name": "AlienVault OTX",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "Free open threat exchange (AT&T/LevelBlue): subscribe to community pulses, enrich indicators, and sync IOCs via the OTXv2 SDK into MISP, Splunk, or your SIEM.",
+                  "when": "Commercial-grade feeds with zero platform setup: register, grab an API key, and start aggregating community pulses within the hour.",
+                  "install": "preinstalled (web/API); pip install OTXv2",
+                  "url": "https://otx.alienvault.com",
+                  "alt": ["Pulsedive", "ThreatFox"]
+                },
+                {
+                  "name": "VirusTotal",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Multivendor malware-scanning and reputation platform: submit files and URLs, query IP/domain/hash reputation, and pivot via its extensive relationships API.",
+                  "when": "Enrich any observable with detection-ratio context and passive-DNS relationships when you already hold an API key.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://www.virustotal.com",
+                  "alt": ["AlienVault OTX", "GreyNoise"]
+                },
+                {
+                  "name": "AbuseIPDB",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Community-sourced IP-reputation database backed by user reports and abuse reports, exposed through a simple REST API and check endpoints.",
+                  "when": "Quickly score a suspicious source or destination IP before blocking, and let your SIEM auto-check IPs against its report feed.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://www.abuseipdb.com",
+                  "alt": ["GreyNoise", "AlienVault OTX"]
+                },
+                {
+                  "name": "ThreatMiner",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Free threat-intelligence portal and API aggregating passive DNS, WHOIS, hashes, SSL certs, URIs, and APT report tags for a single-indicator research view.",
+                  "when": "Pivot an IOC across WHOIS, passive DNS, and sample relationships in one free lookup with a documented v2 API for scripts.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://www.threatminer.org",
+                  "alt": ["AlienVault OTX", "Pulsedive"]
+                },
+                {
+                  "name": "GreyNoise",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Classifies internet-scan and background-noise traffic so analysts can tell routine scanning from targeted activity, with a free community API.",
+                  "when": "Filter out opportunistic scanners from your alerts: ask 'is this IP just noise?' before burning analyst time on it.",
+                  "install": "preinstalled (web/API; free community tier)",
+                  "url": "https://www.greynoise.io",
+                  "alt": ["AbuseIPDB", "AlienVault OTX"]
+                }
+              ]
+            },
+            {
+              "id": "malware-feeds",
+              "name": "Malware & URL Feeds (abuse.ch)",
+              "tools": [
+                {
+                  "name": "URLhaus",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "easy",
+                  "desc": "abuse.ch's malicious-URL feed: a plain-text URL list plus RPZ, hostfile, and Suricata/Snort rule packs for proxy, firewall, and log matching.",
+                  "when": "Block or hunt URLs in proxy and DNS logs — the plain-text daily list catches malware distribution paths with low false positives.",
+                  "install": "preinstalled (web/API)",
+                  "url": "https://urlhaus.abuse.ch",
+                  "alt": ["ThreatFox", "MalwareBazaar"]
+                },
+                {
+                  "name": "MalwareBazaar",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "abuse.ch's sample-sharing database: search by hash, signature, or imphash, download binaries, and pull hourly or daily batch hashes for YARA hunts and sandbox feeds.",
+                  "when": "Grab up-to-date reference samples and hashes by tag or malware family to train detections or validate sandbox coverage.",
+                  "install": "preinstalled (web/API: https://mb-api.abuse.ch/api/v1/)",
+                  "url": "https://bazaar.abuse.ch",
+                  "alt": ["ThreatFox", "URLhaus"]
+                },
+                {
+                  "name": "ThreatFox",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "abuse.ch's malware-IOC feed: query and submit IPs, domains, URLs, and hashes tagged to malware families, with CSV/JSON dumps and MISP event exports.",
+                  "when": "Pull current malware IOCs into your SIEM or pivot a domain/IP to its associated family — the fastest 'what is this IOC attached to' lookup.",
+                  "install": "preinstalled (web/API; free auth key)",
+                  "url": "https://threatfox.abuse.ch",
+                  "alt": ["URLhaus", "MalwareBazaar"]
+                }
+              ]
+            },
+            {
+              "id": "aggregators",
+              "name": "Multi-vendor Aggregators",
+              "tools": [
+                {
+                  "name": "IntelOwl",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "advanced",
+                  "desc": "Self-hosted analyzer aggregation: one request runs a file, IP, domain, or hash through 100+ free and commercial analyzers (OTX, ThreatFox, MalwareBazaar, VirusTotal, GreyNoise, YARA) and chains pivots.",
+                  "when": "Pivot every incoming IOC across your whole vendor stack automatically, or plug it into MISP, OpenCTI, and TheHive for repeatable centralized enrichment.",
+                  "install": "git clone https://github.com/intelowlproject/IntelOwl && ./initialize.sh && ./start prod up",
+                  "url": "https://github.com/intelowlproject/IntelOwl",
+                  "alt": ["Pulsedive", "Cortex"]
+                },
+                {
+                  "name": "Pulsedive",
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Free IOC portal combining passive and active scans, risk scores, ATT&CK tags, and a pivot 'Explore' query language, plus a browser extension for on-page enrichment.",
+                  "when": "Enrich an indicator with risk scores and relationship pivots without standing up a platform — free account, pivot graphs, and exports for fast triage.",
+                  "install": "preinstalled (web/API; free account)",
+                  "url": "https://pulsedive.com",
+                  "alt": ["AlienVault OTX", "ThreatFox"]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pivoting",
+      "name": "Pivoting & Passive DNS",
+      "subcategories": [
+        {
+          "id": "passive-dns",
+          "name": "Passive DNS & Historical Infrastructure",
+          "tools": [
+            {
+              "name": "SecurityTrails",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Passive DNS history and subdomain API with a no-key free tier: see every hostname an IP ever resolved and every IP a domain has used.",
+              "when": "Spot old dev/staging infrastructure or infrastructure churn by replaying DNS history that no longer resolves via live queries.",
+              "install": "preinstalled (web/API)",
+              "url": "https://securitytrails.com",
+              "alt": ["DNSDumpster", "PassiveTotal"]
+            },
+            {
+              "name": "PassiveTotal",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "RiskIQ's passive-DNS and infrastructure-pivoting workbench whose legacy portal is retiring into Microsoft Defender Threat Intelligence (retired 2026); its DNS-history datasets live on in MDTI.",
+              "when": "Only as a historical reference or for old integrations — use Microsoft Defender Threat Intelligence for RiskIQ-class passive-DNS pivot data going forward.",
+              "install": "preinstalled (web) - retired; successor requires M365 Defender TI license",
+              "url": "https://www.riskiq.com/products/passivetotal",
+              "alt": ["Microsoft Defender TI", "SecurityTrails"]
+            },
+            {
+              "name": "Microsoft Defender Threat Intelligence",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Microsoft's defender intel platform (successor to RiskIQ/PassiveTotal): passive DNS, certificate/SOAR artifacts, infrastructure-chaining pivots on IPs, domains, and hosts, with a free community tier.",
+              "when": "When you want RiskIQ-class passive-DNS and infrastructure-chaining datasets and already operate in Defender XDR, Sentinel, or the Microsoft security portal.",
+              "install": "preinstalled (portal/API; premium licensed, community tier available)",
+              "url": "https://www.microsoft.com/en-us/security/business/intelligence",
+              "alt": ["SecurityTrails", "Censys"]
+            },
+            {
+              "name": "DNSDumpster",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Free one-click DNS mapping service: resolves a domain to its subdomains, A/NS/MX records, and IPs with a visual map and TXT records.",
+              "when": "A zero-signup first pass at a domain's DNS surface when you want a quick map before heavier enumeration.",
+              "install": "preinstalled (web)",
+              "url": "https://dnsdumpster.com",
+              "alt": ["SecurityTrails", "crt.sh"]
+            }
+          ]
+        },
+        {
+          "id": "internet-scan",
+          "name": "Internet-wide Search & Service Pivoting",
+          "tools": [
+            {
+              "name": "Censys",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Internet-wide scanning platform searchable by protocol, certificate, banner, and ASN — ideal for TLS-certificate pivoting back to hosts and exposure discovery.",
+              "when": "Pivot a certificate, hostname, or service banner to every public-facing asset that matches, and monitor your own attack surface over time.",
+              "install": "preinstalled (web/API; free account with query quota)",
+              "url": "https://censys.com",
+              "alt": ["Shodan", "Netlas"]
+            },
+            {
+              "name": "Shodan",
+              "rating": 5,
+              "effort": "medium",
+              "desc": "The classic internet-exposure search engine: filters by port, product, vulnerability, ASN, and even CVEs, with API and banner-to-host pivoting.",
+              "when": "Find every internet-facing instance running a vulnerable service, or check whether an observed IP hosts additional exposed ports and software.",
+              "install": "preinstalled (web/API; free tier, paid for API)",
+              "url": "https://www.shodan.io",
+              "alt": ["Censys", "ZoomEye"]
+            },
+            {
+              "name": "ZoomEye",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Chinese internet-wide asset-search engine (Knownsec) covering web applications, devices, and services with components, ports, and country filters.",
+              "when": "Cross-check Censys/Shodan results against an independent fourth scanning corpus, especially for Asia-heavy infrastructure.",
+              "install": "preinstalled (web/API)",
+              "url": "https://www.zoomeye.ai",
+              "alt": ["Shodan", "Censys"]
+            },
+            {
+              "name": "FOFA",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Internet asset-search platform with a rich query DSL (body, header, port, cert, icon hashes) and bulk API search for infrastructure mapping.",
+              "when": "When you need expressive full-body searches and favicon based pivoting that cleanly link otherwise unrelated assets.",
+              "install": "preinstalled (web/API)",
+              "url": "https://fofa.info",
+              "alt": ["Censys", "Shodan"]
+            },
+            {
+              "name": "Netlas",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Internet-OSINT search engine with cert, DNS, IP, and response-body queries plus a Python SDK, letting you hunt by regex across a large scan index.",
+              "when": "When you prefer scripting searches in Python or need regex-level body/header pivoting beyond Shodan's filter grammar.",
+              "install": "preinstalled (web/API; pip install netlas)",
+              "url": "https://netlas.io",
+              "alt": ["Censys", "Shodan"]
+            },
+            {
+              "name": "Criminal IP",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "IP-intel and attack-surface search engine with malware, Geopolitics, and internet-scan pivots, plus free API access tiers for resolver lookups.",
+              "when": "Aggregate IP reputation, exposed-service, and banner intel in one query when reviewing C2 or abuse infra candidates.",
+              "install": "preinstalled (web/API; free tier)",
+              "url": "https://www.criminalip.io",
+              "alt": ["Shodan", "AbuseIPDB"]
+            }
+          ]
+        },
+        {
+          "id": "correlation",
+          "name": "Graph & Campaign Correlation",
+          "tools": [
+            {
+              "name": "MISP",
+              "best": true,
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "MISP's correlation engine links identical and high-fidelity-cluster attributes across every event in your instance and its federated communities.",
+              "when": "Correlate a suspicious attribute against your event history to find linked campaigns, reused C2, or related infrastructure while investigating an alert.",
+              "install": "see stix-taxii category install",
+              "url": "https://github.com/MISP/MISP",
+              "alt": ["OpenCTI", "IntelOwl"]
+            },
+            {
+              "name": "OpenCTI",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Uses its STIX knowledge graph to pivot from an indicator to the attack patterns, intrusion sets, and reports that reference it, revealing campaign context.",
+              "when": "When an IOC is only a starting point and you need the surrounding actor, tooling, and TTP relationships a graph store preserves.",
+              "install": "see stix-taxii category install",
+              "url": "https://github.com/OpenCTI-Platform/OpenCTI",
+              "alt": ["MISP", "ThreatFox"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "detection",
       "name": "Detection Engineering",
-      "tools": [
+      "subcategories": [
         {
-          "name": "Sigma",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "The generic, SIEM-agnostic detection format: YAML rules for log semantics; sigma-cli compiles them to Splunk, Elastic, Loki, QRadar, Sentinel, and dozens of other query languages.",
-          "when": "Author detection once and ship it anywhere: port a SigmaHQ rule, run sigma convert --target <siem>, and validate the query against logs before tuning.",
-          "install": "pipx install sigma-cli && git clone https://github.com/SigmaHQ/sigma",
-          "url": "https://github.com/SigmaHQ/sigma",
-          "alt": ["Atomic Red Team", "YARA"]
+          "id": "rule-engines",
+          "name": "Portable Rule Engines",
+          "tools": [
+            {
+              "name": "Sigma",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "The SIEM-agnostic YAML rule format: sigma-cli compiles one generic rule to Splunk, Elastic, Loki, QRadar, Sentinel, and dozens of other query languages via conversion backends.",
+              "when": "Author detection once and ship it anywhere: port a SigmaHQ rule, run sigma convert --target <siem>, and validate the query against logs before tuning.",
+              "install": "pipx install sigma-cli && git clone https://github.com/SigmaHQ/sigma",
+              "url": "https://github.com/SigmaHQ/sigma",
+              "alt": ["Atomic Red Team", "YARA"]
+            },
+            {
+              "name": "YARA",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Binary pattern-matching rule engine for malware families and byte-level IOCs; complements SIEM rules when the evidence is a file, not a log.",
+              "when": "Match dropped samples or artifacts against signature rules, or encode a family signature your feed team cannot express in a log query.",
+              "install": "sudo apt install yara",
+              "url": "https://github.com/VirusTotal/yara",
+              "alt": ["Sigma"]
+            }
+          ]
         },
         {
-          "name": "Atomic Red Team",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Red Canary's adversary-simulation library mapping 700+ ATT&CK techniques to executable test definitions, used to prove a detection fires — or stays silent.",
-          "when": "Verify Sigma or SIEM rules against real technique behavior: run the matching atom, watch your alert pipeline, and tune the rule before deployment.",
-          "install": "git clone --recurse-submodules https://github.com/redcanaryco/atomic-red-team",
-          "url": "https://github.com/redcanaryco/atomic-red-team",
-          "alt": ["Sigma", "MITRE ATT&CK"]
-        },
-        {
-          "name": "YARA",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Binary pattern-matching rule engine for malware families and byte-level IOCs; complements SIEM rules when the evidence is a file, not a log (fuller coverage in the malware domain).",
-          "when": "Match dropped samples or artifacts against signature rules, or encode a family signature your feed team can't express in a log query.",
-          "install": "sudo apt install yara",
-          "url": "https://github.com/VirusTotal/yara",
-          "alt": ["Sigma"]
-        },
-        {
-          "name": "MITRE ATT&CK",
-          "rating": 5,
-          "effort": "easy",
-          "desc": "The common knowledge base of adversary tactics, techniques, and data sources that Sigma rules, atoms, defenders, and coverage reports all annotate against — a reference framework, not a tool.",
-          "when": "Map and measure detection coverage: tag rules with technique IDs, standardize on its vocabulary for alerts and reports, or browse technique details before writing a rule.",
-          "install": "preinstalled (web reference; API at attack.mitre.org)",
-          "url": "https://attack.mitre.org",
-          "alt": ["Atomic Red Team", "Sigma"]
-        }
-      ]
-    },
-    {
-      "id": "analytics-marketplaces",
-      "name": "Analytics & IOC Marketplaces",
-      "tools": [
-        {
-          "name": "AlienVault OTX",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Free open threat exchange (AT&T/LevelBlue): subscribe to community pulses, query indicator enrichment, and sync IOCs via the OTXv2 SDK or DirectConnect agents.",
-          "when": "Commercial-grade feeds with zero setup: register, grab an API key, and enrich or ingest IOCs within the hour — the broadest free pulse ecosystem.",
-          "install": "preinstalled (web/API); pip install OTXv2",
-          "url": "https://otx.alienvault.com",
-          "alt": ["ThreatFox", "MalwareBazaar", "URLhaus"]
-        },
-        {
-          "name": "ThreatFox",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "abuse.ch's malware-IOC feed: submit and query malpedia-labeled IOCs (IPs, domains, URLs, hashes), with CSV/JSON dumps, Suricata ruleset, and MISP event exports.",
-          "when": "Pull current malware IOCs into your SIEM or blocklist, or pivot a domain/IP to its associated malware family (also covered in ioc-pivoting).",
-          "install": "preinstalled (web/API; free auth key)",
-          "url": "https://threatfox.abuse.ch",
-          "alt": ["MalwareBazaar", "URLhaus"]
-        },
-        {
-          "name": "MalwareBazaar",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "abuse.ch's sample-sharing database: search by hash, signature, or imphash, download malware samples, and pull hourly/daily batch feeds.",
-          "when": "Grab reference samples or up-to-date hashes by tag or signature for your sandbox, YARA hunting, or detection validation.",
-          "install": "preinstalled (web/API: https://mb-api.abuse.ch/api/v1/)",
-          "url": "https://bazaar.abuse.ch",
-          "alt": ["ThreatFox", "URLhaus"]
-        },
-        {
-          "name": "URLhaus",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "abuse.ch's malicious-URL feed complementing ThreatFox: a plain-text URL list plus RPZ, hostfile, and Suricata/Snort rulesets for proxy and log matching.",
-          "when": "Blocklist or hunt URLs in proxy/DNS logs; the plain-text URL list catches malware download paths with low false positives.",
-          "install": "preinstalled (web/API)",
-          "url": "https://urlhaus.abuse.ch",
-          "alt": ["ThreatFox", "MalwareBazaar"]
-        }
-      ]
-    },
-    {
-      "id": "ioc-pivoting",
-      "name": "IOC Pivoting & Correlation",
-      "tools": [
-        {
-          "name": "IntelOwl",
-          "best": true,
-          "rating": 5,
-          "effort": "advanced",
-          "desc": "Self-hosted aggregation and analysis platform: one request runs a file/IP/domain/hash through 100+ analyzers (OTX, ThreatFox, MalwareBazaar, VirusTotal, GreyNoise, YARA) and chains them with pivots.",
-          "when": "Pivot every incoming IOC across your whole free-vendor stack automatically, or plug it into SOAR/MISP/OpenCTI for repeatable, centralized enrichment.",
-          "install": "git clone https://github.com/intelowlproject/IntelOwl && ./initialize.sh && ./start prod up",
-          "url": "https://github.com/intelowlproject/IntelOwl",
-          "alt": ["MISP", "ThreatFox", "Pulsedive"]
-        },
-        {
-          "name": "MISP",
-          "rating": 5,
-          "effort": "advanced",
-          "desc": "(Also in threat-sharing): its correlation engine links identical and high-fidelity-cluster attributes across every event in your instance and its federated communities, surfacing related infrastructure from others' incidents.",
-          "when": "Correlate a suspicious attribute against your event history to find linked campaigns, reused C2, or related infrastructure while investigating an alert.",
-          "install": "see threat-sharing category",
-          "url": "https://github.com/MISP/MISP",
-          "alt": ["IntelOwl", "ThreatFox"]
-        },
-        {
-          "name": "ThreatFox",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "(Also in analytics-marketplaces): excels at pivoting a file hash to the hosts and IPs that served it plus its family label — the fastest 'what is this IOC attached to' lookup.",
-          "when": "Instant pivoting with zero infrastructure: paste a hash, domain, or IP and get malware family, threat type, and related IOCs from the community dataset.",
-          "install": "preinstalled (web/API; free auth key)",
-          "url": "https://threatfox.abuse.ch",
-          "alt": ["Pulsedive", "IntelOwl"]
-        },
-        {
-          "name": "Pulsedive",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Free IOC portal combining passive/active scans, risk scores, ATT&CK tags, and a pivot/Explore query language across its indicator database, with a browser extension for on-page enrichment.",
-          "when": "Enrich an indicator with risk scores and relationship pivots without standing up a platform: free account, pivot graphs, and exports for quick triage.",
-          "install": "preinstalled (web/API; free account)",
-          "url": "https://pulsedive.com",
-          "alt": ["ThreatFox", "MISP"]
+          "id": "emulation",
+          "name": "Validation & Adversary Emulation",
+          "tools": [
+            {
+              "name": "Atomic Red Team",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Red Canary's adversary-simulation library mapping 700+ ATT&CK techniques to executable test definitions used to prove a detection fires or stays silent.",
+              "when": "Verify Sigma or SIEM rules against real technique behavior: run the matching atom, watch your alert pipeline, and tune the rule before deployment.",
+              "install": "git clone --recurse-submodules https://github.com/redcanaryco/atomic-red-team",
+              "url": "https://github.com/redcanaryco/atomic-red-team",
+              "alt": ["MITRE ATT&CK", "Sigma"]
+            },
+            {
+              "name": "MITRE ATT&CK",
+              "rating": 5,
+              "effort": "easy",
+              "desc": "The common knowledge base of adversary tactics, techniques, and data sources that Sigma rules, atoms, defenders, and coverage reports all annotate against.",
+              "when": "Map and measure detection coverage: tag rules with technique IDs, standardize alert vocabulary, or browse technique data sources before writing a rule.",
+              "install": "preinstalled (web reference; API at attack.mitre.org)",
+              "url": "https://attack.mitre.org",
+              "alt": ["Atomic Red Team", "MITRE ATT&CK Navigator"]
+            },
+            {
+              "name": "MITRE ATT&CK Navigator",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Web-based matrix viewer for layering technique coverage across your detections, with layers you can save as JSON and share between teams.",
+              "when": "Visualize and report which techniques your Sigma/atomic coverage addresses and which gaps remain in a browsable, shareable matrix layer.",
+              "install": "preinstalled (web) - self-host: git clone https://github.com/mitre-attack/attack-navigator",
+              "url": "https://github.com/mitre-attack/attack-navigator",
+              "alt": ["MITRE ATT&CK", "Atomic Red Team"]
+            }
+          ]
         }
       ]
     }

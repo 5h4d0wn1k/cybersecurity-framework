@@ -2,16 +2,20 @@
 
 Passive intelligence on people, exposed infrastructure, and document metadata — for authorized recon and for auditing your own digital footprint.
 
-## Username & People Discovery
-
-Sherlock ⭐
+## People & Social Intelligence
 
 
-#### Sherlock ⭐
 
-Checks a username across 400+ social networks using HTTP status/pattern heuristics; the most widely maintained CLI for username existence.
 
-**When:** Find every public profile tied to a username you own, or verify a handle before cleaning up your own exposure.
+#### Username Lookup
+
+
+
+##### Sherlock ⭐
+
+Checks a username across 400+ platforms using HTTP status/pattern heuristics and returns every profile that exists; the reference CLI for username enumeration, actively maintained.
+
+**When:** Confirm which sites a username you own is registered on so you can harden or clean up your own footprint.
 
 **Effort:** easy  ·  **Rating:** 5/5
 
@@ -19,14 +23,14 @@ Checks a username across 400+ social networks using HTTP status/pattern heuristi
 
 **URL:** https://github.com/sherlock-project/sherlock
 
-**Alternatives:** maigret, whatsmyname, namechk (web)
+**Alternatives:** maigret, blackbird, whatsmyname
 
 
-#### Maigret
+##### Maigret
 
-Collects a username dossier across 3000+ sites, tagging each account by type (social, dating, code) and generating HTML/PDF/JSON reports; actively maintained with a frequently refreshed site database.
+Collects a username dossier across 3000+ sites with account-type tags (social, dating, code) and exports HTML/PDF/JSON reports; picks up a fresh site list on each run.
 
-**When:** When Sherlock's pass/fail list is not enough and you want account tags, graph export, and a readable report of where a username appears.
+**When:** When Sherlock's pass/fail list is not enough and you want an exportable report of everywhere a handle you control appears.
 
 **Effort:** easy  ·  **Rating:** 4/5
 
@@ -34,14 +38,29 @@ Collects a username dossier across 3000+ sites, tagging each account by type (so
 
 **URL:** https://github.com/soxoj/maigret
 
-**Alternatives:** sherlock, whatsmyname
+**Alternatives:** sherlock, blackbird, whatsmyname
 
 
-#### WhatsMyName
+##### Blackbird
 
-A community-maintained JSON dataset covering 700+ sites with exact success/not-found detections; the data layer behind many username checkers and the whatsmyname.app web UI since the bundled checker scripts were removed in 2023.
+Blazing-fast username enumerator that checks 500+ services with thread pools and color-coded existence results; built as a speed-focused companion to Sherlock and Maigret.
 
-**When:** When you want the raw detection data to audit a check result or drive your own checker against a curated site list.
+**When:** Bulk-check many candidate usernames over a short window, limited to handles and accounts you are authorized to investigate.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `go install github.com/p1ngul1n0/blackbird@latest`
+
+**URL:** https://github.com/p1ngul1n0/blackbird
+
+**Alternatives:** sherlock, maigret, whatsmyname
+
+
+##### WhatsMyName
+
+A community-maintained dataset of 700+ sites with exact fingerprints (URI patterns and success/not-found heuristics); the data engine underlying most username checkers.
+
+**When:** Audit a checker result or drive your own authorized username sweep against a curated, up-to-date site list.
 
 **Effort:** easy  ·  **Rating:** 4/5
 
@@ -49,53 +68,71 @@ A community-maintained JSON dataset covering 700+ sites with exact success/not-f
 
 **URL:** https://github.com/WebBreacher/WhatsMyName
 
-**Alternatives:** sherlock, maigret, namechk (web)
+**Alternatives:** sherlock, maigret, blackbird
 
 
-#### namechk
-
-Free web service that checks a name across 100+ social platforms and 36 domain extensions in one view; a hosted service, not a self-hosted tool — no API and no bulk mode.
-
-**When:** A quick browser-only triage of where a name is already taken before you invest in CLI pipelines.
-
-**Effort:** easy  ·  **Rating:** 3/5
-
-**Install:** `preinstalled (web)`
-
-**URL:** https://namechk.com
-
-**Alternatives:** whatsmyname, sherlock, maigret
+#### Email Addresses
 
 
 
+##### Breach Checkers
 
 
 
-## Email & Phone OSINT
+###### HaveIBeenPwned ⭐
 
-theHarvester ⭐
+Definitive breach and password-exposure checker: search any email or domain across a huge corpus of leaked datasets; free web search plus a documented API, with Pwned Passwords openly downloadable.
 
-
-#### theHarvester ⭐
-
-Passively harvests emails, employee names, subdomains, hosts, and API leaks for a domain from open sources; the reference OSINT email/subdomain harvester, actively maintained.
-
-**When:** Map every email address and subdomain publicly linked to a domain you own before hardening mail and DNS.
+**When:** Check whether addresses or domains you control appeared in known breaches, and enforce password-exposure checks on your own estate.
 
 **Effort:** easy  ·  **Rating:** 5/5
 
-**Install:** `sudo apt install theharvester`
+**Install:** `preinstalled (web + API)`
 
-**URL:** https://github.com/laramies/theHarvester
+**URL:** https://haveibeenpwned.com
 
-**Alternatives:** holehe, emailrep.io (web)
+**Alternatives:** intelligencex, leakcheck
 
 
-#### Holehe
+###### IntelligenceX
 
-Checks whether an email is registered on 120+ sites by replaying their password-recovery flows without sending anything to the mailbox, so the target address is not alerted.
+Dark-web and public-data search engine indexing leaks, paste sites, forums, and code over a 10-year retention window; free tier with API and Telegram bots.
 
-**When:** Find which platforms a leaked or owned email is tied to so you can spot stale accounts you control that still need securing.
+**When:** Check if your emails, domains, or phone numbers surface in dark-web and paste archives you are authorized to monitor.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - API key)`
+
+**URL:** https://intelx.io
+
+**Alternatives:** haveibeenpwned, leakcheck, dehashed
+
+
+###### LeakCheck
+
+Commercial breach aggregator with billions of entries supporting email, username, phone, and live-keyword search; paid tiers unlock full records.
+
+**When:** Correlate breach hits across emails and passwords, but only on credentials you hold or are authorized to test.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - paid)`
+
+**URL:** https://leakcheck.io
+
+**Alternatives:** intelligencex, haveibeenpwned
+
+
+##### Registration Checkers
+
+
+
+###### Holehe ⭐
+
+Checks which 120+ sites an email is registered on by replaying password-recovery flows without mailing the target, so the address is never alerted.
+
+**When:** Find which platforms a breached or owned email is tied to, so stale accounts you control can be closed or secured.
 
 **Effort:** easy  ·  **Rating:** 4/5
 
@@ -103,14 +140,52 @@ Checks whether an email is registered on 120+ sites by replaying their password-
 
 **URL:** https://github.com/megadose/holehe
 
-**Alternatives:** theharvester, emailrep.io (web)
+**Alternatives:** emailrep.io, theharvester
 
 
-#### PhoneInfoga
+###### emailrep.io
 
-Framework for phone OSINT: country, area, carrier, line type, and footprint lookups via configurable scanners; stable but no longer actively maintained, so expect scanners to drift over time.
+Hosted API that scores email reputation, flags breach exposure and disposable providers, and lists the mainstream profiles tied to an address; free tier needs no key.
 
-**When:** Resolve a phone number you own or are authorized to analyze into provider/line-type facts before deeper carrier-level checks.
+**When:** Triage a suspicious inbound sender or audit your own addresses as part of a defensive OSINT review.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - API key optional)`
+
+**URL:** https://emailrep.io
+
+**Alternatives:** holehe, haveibeenpwned
+
+
+##### Domain Harvesting
+
+
+
+###### theHarvester ⭐
+
+Passive harvester of emails, employee names, subdomains, and reported API keys for a domain across many open sources; the reference domain reconnaissance CLI.
+
+**When:** Map every email and subdomain publicly linked to a domain you own before hardening mail and DNS.
+
+**Effort:** easy  ·  **Rating:** 5/5
+
+**Install:** `sudo apt install theharvester`
+
+**URL:** https://github.com/laramies/theHarvester
+
+**Alternatives:** holehe, intelligencex
+
+
+#### Phone Numbers
+
+
+
+##### PhoneInfoga ⭐
+
+Phone-number OSINT framework that attributes country, area, carrier, and line type and gathers scattered footprint data via configurable scanners; stable but slowly maintained.
+
+**When:** Resolve a number you own or are authorized to analyze into provider facts before deeper carrier-level checks.
 
 **Effort:** medium  ·  **Rating:** 4/5
 
@@ -121,35 +196,19 @@ Framework for phone OSINT: country, area, carrier, line type, and footprint look
 **Alternatives:** holehe
 
 
-#### emailrep.io
-
-Hosted API/service that scores an email's reputation, flags breach exposure and disposable/spammy providers, and lists the online profiles tied to it; a service, not a tool — the free tier needs no key, higher limits need one.
-
-**When:** Triage a suspicious inbound email or audit your own addresses for exposure as part of defensive OSINT.
-
-**Effort:** easy  ·  **Rating:** 4/5
-
-**Install:** `preinstalled (web–API key)`
-
-**URL:** https://emailrep.io
-
-**Alternatives:** holehe, theharvester
+#### Social Media Profiles
 
 
 
+##### Instagram
 
 
 
-## Social Media Scraping
+###### Instaloader ⭐
 
-Instaloader ⭐
+Downloads Instagram profiles, posts, hashtags, highlight stories, and their metadata (captions, likes, comments) without an API key; scriptable and actively maintained.
 
-
-#### Instaloader ⭐
-
-Downloads Instagram profiles, posts, hashtags, highlight stories, and companion metadata (captions, likes, comments) via its own private API without an official key; actively maintained and scriptable.
-
-**When:** Pull an archive of a public profile you own for media/evidence preservation, or collect hashtag and post metadata on your own accounts.
+**When:** Archive a public profile you own, or collect hashtag and post metadata for evidence preservation.
 
 **Effort:** easy  ·  **Rating:** 5/5
 
@@ -160,11 +219,30 @@ Downloads Instagram profiles, posts, hashtags, highlight stories, and companion 
 **Alternatives:** osintgram, snscrape
 
 
-#### snscrape
+###### Osintgram
 
-Python CLI/library that scrapes public posts and profiles from several platforms with JSONL output; Twitter/X scrapers are dead behind the login wall and Reddit needs the closed Pushshift, but Telegram, Weibo, and some Mastodon instances still work.
+Interactive shell that pulls public Instagram profile info, captions, followers, tag lists, and bio-contact strings using a scratch session or a free Hiker API token (educational-use disclaimer included).
 
-**When:** Programmatic bulk retrieval and archiving of public posts from the platforms snscrape still supports, e.g. Telegram channels.
+**When:** Relationship analysis on a public profile you operate — who tags, who comments, what contact strings appear in bios.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/Datalux/Osintgram && pip3 install -r requirements.txt`
+
+**URL:** https://github.com/Datalux/Osintgram
+
+**Alternatives:** instaloader
+
+
+##### Multi-Platform
+
+
+
+###### snscrape ⭐
+
+Python library/CLI that scrapes public posts and profiles to JSONL from several platforms; X/Twitter and Reddit backends are dead behind logins, but Telegram, Weibo, and some Mastodon instances still work.
+
+**When:** Programmatic retrieval and archiving of public posts on platforms snscrape still supports, e.g. Telegram channels you monitor.
 
 **Effort:** medium  ·  **Rating:** 3/5
 
@@ -172,107 +250,27 @@ Python CLI/library that scrapes public posts and profiles from several platforms
 
 **URL:** https://github.com/JustAnotherArchivist/snscrape
 
-**Alternatives:** instaloader, osintgram, twscrape (github), twint (archived 2023)
-
-
-#### OSINTgram
-
-Interactive shell that collects public Instagram data — profile info, captions, followers, tagged users, comments, and bio contact strings — using a scratch-account session or a free HikerAPI token; the project's own disclaimer limits use to educational/authorized targets.
-
-**When:** Relationship analysis of a public profile you own (who comments, who is tagged, contact strings in bios).
-
-**Effort:** medium  ·  **Rating:** 3/5
-
-**Install:** `git clone https://github.com/Datalux/Osintgram && pip3 install -r requirements.txt`
-
-**URL:** https://github.com/Datalux/Osintgram
-
-**Alternatives:** instaloader, snscrape
+**Alternatives:** instaloader, osintgram
 
 
 
 
 
 
-## Internet Infrastructure Search
-
-Shodan ⭐
-
-
-#### Shodan ⭐
-
-The reference internet device/port search engine indexing exposed services, banners, vulnerabilities, and history for any IP or domain; a commercial service with a lasting free tier and a separate no-key InternetDB lookup endpoint.
-
-**When:** See every port and service your public IP ranges expose right now, exactly as an attacker would, before closing them.
-
-**Effort:** easy  ·  **Rating:** 5/5
-
-**Install:** `pip3 install shodan`
-
-**URL:** https://www.shodan.io
-
-**Alternatives:** censys, zoomeye, netlas
-
-
-#### Censys
-
-Internet-wide scan platform covering hosts, services, certificates, and web properties with structured query language; the free tier includes search plus host/cert/web-property lookup APIs.
-
-**When:** Certificate-centric inventory and pivots — find every host presenting a given cert — or structured queries beyond Shodan's free tier.
-
-**Effort:** easy  ·  **Rating:** 4/5
-
-**Install:** `pip3 install censys`
-
-**URL:** https://search.censys.io
-
-**Alternatives:** shodan, netlas
-
-
-#### ZoomEye
-
-Cyber-space search engine by KnownSec scanning IPv4/IPv6, services, and web layers via Xmap/Wmap; strongest on IoT/OT devices and Asian-region asset coverage, with roughly 10k free API queries/month.
-
-**When:** Coverage of less-Shodanized regions or internet-of-things/embedded device hunting on ranges you own.
-
-**Effort:** easy  ·  **Rating:** 4/5
-
-**Install:** `pip3 install zoomeye`
-
-**URL:** https://www.zoomeye.ai
-
-**Alternatives:** shodan, censys, netlas
-
-
-#### Netlas
-
-Internet scanning platform over 8B+ indexed hosts with response-body, DNS, WHOIS, and certificate search plus a full REST API and Python SDK; the free tier is key-limited at about 50 requests/day.
-
-**When:** Regular-expression/Lucene search across full HTTP response bodies when Shodan's banners are too shallow.
-
-**Effort:** easy  ·  **Rating:** 4/5
-
-**Install:** `pip3 install netlas`
-
-**URL:** https://netlas.io
-
-**Alternatives:** shodan, censys, zoomeye
+## Metadata & File Forensics
 
 
 
 
+#### Image & EXIF
 
 
-## Document Metadata & Forensics
 
-exiftool ⭐
+##### ExifTool ⭐
 
+Reads, writes, and edits EXIF/GPS/IPTC/XMP metadata across images, PDFs, and Office files; the metadata workhorse behind most document-forensics pipelines.
 
-#### exiftool ⭐
-
-Reads, writes, and edits EXIF/GPS/IPTC/XMP and hundreds of tag formats across images, PDFs, Office files, and more; the metadata workhorse behind most doc-forensics pipelines.
-
-**When:** Forensic-grade tag extraction from any local file — geolocation, author, generator, timestamps — before release or after acquisition.
+**When:** Forensic-grade tag extraction from local files — geolocation, author, generator, timestamps — before release or after acquisition.
 
 **Effort:** easy  ·  **Rating:** 5/5
 
@@ -280,14 +278,33 @@ Reads, writes, and edits EXIF/GPS/IPTC/XMP and hundreds of tag formats across im
 
 **URL:** https://exiftool.org
 
-**Alternatives:** metagoofil, foca
+**Alternatives:** fotoforensics, metagoofil
 
 
-#### Metagoofil
+##### FotoForensics
 
-Dork-driven document harvesting: finds indexed files (.pdf, .docx, .xlsx) on a domain and downloads them for stripping; the maintained opsdisk fork ships on Kali and deliberately defers metadata analysis to exiftool.
+Web tool that runs Error Level Analysis (ELA), panel scans, EXIF review, and JPEG quantization analysis to spot digital tampering in an uploaded image.
 
-**When:** Collect every publicly indexed document on a domain you own so you can scrub metadata and accidental information leaks.
+**When:** Check whether an image you own or are authorized to examine was edited, and inspect residual metadata block by block.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://fotoforensics.com
+
+**Alternatives:** exiftool
+
+
+#### Document Metadata
+
+
+
+##### Metagoofil ⭐
+
+Dork-driven harvester that finds indexed documents (.pdf, .docx, .xlsx) for a domain and downloads them for metadata stripping; the maintained opsdisk fork ships on Kali.
+
+**When:** Collect every publicly indexed document on a domain you own so metadata and hidden information can be scrubbed.
 
 **Effort:** medium  ·  **Rating:** 4/5
 
@@ -298,11 +315,11 @@ Dork-driven document harvesting: finds indexed files (.pdf, .docx, .xlsx) on a d
 **Alternatives:** exiftool, foca
 
 
-#### FOCA
+##### FOCA
 
-Windows GUI (C# with a SQL Server back end) that searches a domain via Google/Bing/DuckDuckGo, fingerprints documents, and extracts metadata — users, folders, software — into a browsable project; a Windows GUI, not a POSIX tool, with slow updates.
+Windows GUI (C# with SQL Server backend) that fingerprints documents across search engines and extracts users, folders, and software into a browsable metadata project.
 
-**When:** When you have a Windows box and want a point-and-click metadata project view instead of CLI pipelines.
+**When:** When you have a Windows workstation and want a point-and-click metadata project view for documents you control.
 
 **Effort:** medium  ·  **Rating:** 3/5
 
@@ -313,20 +330,673 @@ Windows GUI (C# with a SQL Server back end) that searches a domain via Google/Bi
 **Alternatives:** metagoofil, exiftool
 
 
+#### File Reputation
+
+
+
+##### VirusTotal ⭐
+
+Industry-standard crowdsourced engine for hashes, samples, URLs, and IP/domain reputation with 90+ AV engines, plus passive DNS and threat-signal context.
+
+**When:** Check a file hash, URL, or IP you are investigating against years of crowdsourced detections during authorized analysis.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - API key optional)`
+
+**URL:** https://www.virustotal.com
+
+**Alternatives:** spiderfoot
 
 
 
 
-## OSINT Automation Platforms
-
-SpiderFoot ⭐
 
 
-#### SpiderFoot ⭐
+## Geolocation & Mapping
 
-Automated OSINT correlation engine with 200+ modules and a YAML correlation engine, surfaced through a web UI and CLI; built to map an attack surface and connect entities automatically.
 
-**When:** A broad sweep of a domain/IP/email you own to correlate entities across many free data sources in a single scan.
+
+
+#### IP Location
+
+
+
+##### ipinfo.io ⭐
+
+IP address datasets and API for location, ISP, ASN, company, and privacy-risk signals; free lookup tier covers geolocation and network attribution.
+
+**When:** Resolve an IP address you are investigating into location, provider, and ASN context.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `pip3 install ipinfo`
+
+**URL:** https://ipinfo.io
+
+**Alternatives:** ipapi.co, shodan
+
+
+##### ipapi.co
+
+Free IP geolocation API returning country, city, ISP, timezone, and currency for any address; also offers bulk and commercial JSON/CSV plans.
+
+**When:** Script location lookups for lists of IPs appearing in your own logs.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - API)`
+
+**URL:** https://ipapi.co
+
+**Alternatives:** ipinfo.io
+
+
+#### Map & Geo Search
+
+
+
+##### Google Maps ⭐
+
+Global mapping, Street View, and satellite imagery search; the core visual geolocation and place-lookup surface for OSINT.
+
+**When:** Correlate landmarks, signage, or geotagged imagery against the physical world during authorized investigations.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://www.google.com/maps
+
+**Alternatives:** yandex maps
+
+
+##### Yandex Maps
+
+Alternative globe with strong coverage of Eastern Europe, Russia, and CIS regions plus street-level panoramas; a useful cross-check for place and imagery comparison.
+
+**When:** Cross-check locations and side-by-side imagery with Google Maps when coverage hints at CIS or Eurasian regions.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://yandex.com/maps
+
+**Alternatives:** google maps
+
+
+
+
+
+
+## Domain & IP Infrastructure
+
+
+
+
+#### IP & Attack Surface
+
+
+
+##### Shodan ⭐
+
+The reference internet device and service search engine indexing banners, ports, vulnerabilities, and exposure history for any IP or domain; also exposes free InternetDB lookups.
+
+**When:** See exactly which ports and services your public IP ranges expose right now — and how long that exposure has existed — before closing them.
+
+**Effort:** easy  ·  **Rating:** 5/5
+
+**Install:** `pip3 install shodan`
+
+**URL:** https://www.shodan.io
+
+**Alternatives:** censys, netlas
+
+
+##### Censys
+
+Internet-wide scan platform over hosts, services, and certificates with structured query language and host/cert/web-property APIs; free tier includes search and lookups.
+
+**When:** Certificate-centric inventory and pivots — find every host presenting a given cert — or query structured service data beyond free Shodan limits.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `pip3 install censys`
+
+**URL:** https://search.censys.io
+
+**Alternatives:** shodan, netlas
+
+
+##### Netlas
+
+Scanning platform over billions of indexed hosts supporting IPv4/IPv6, full response-body regex, DNS, WHOIS, and certificate search with a REST API; free tier capped near 50 requests/day.
+
+**When:** Lucene/regex search across full HTTP response bodies when Shodan banners are too shallow for your authorized query.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `pip3 install netlas`
+
+**URL:** https://netlas.io
+
+**Alternatives:** shodan, censys
+
+
+#### DNS & Subdomains
+
+
+
+##### DNSDumpster ⭐
+
+One-page passive DNS mapping tool that enumerates subdomains, MX/TXT/SPF records, and hosts onto an interactive network map for a domain.
+
+**When:** Fast visual pass over the subdomain and mail infrastructure of a domain you own before deeper enumeration.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://dnsdumpster.com
+
+**Alternatives:** securitytrails, crt.sh
+
+
+##### SecurityTrails
+
+Commercial passive DNS and subdomain intelligence with historical DNS records, certificate timelines, and connected-domain data via REST API.
+
+**When:** Retrieve DNS history and subdomain changes over time for a domain you operate, straight into scripts.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - API key)`
+
+**URL:** https://securitytrails.com
+
+**Alternatives:** dnsdumpster, crt.sh
+
+
+#### Certificate Transparency
+
+
+
+##### crt.sh ⭐
+
+Open certificate-transparency log search; returns every issued certificate — and therefore every hostname — for a domain, sorted by issue date.
+
+**When:** Enumerate all hostnames that ever had a public certificate for domains you own, including retired staging hosts.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://crt.sh
+
+**Alternatives:** securitytrails, censys
+
+
+#### WHOIS & Routing
+
+
+
+##### Hurricane Electric BGP ⭐
+
+Global BGP, IPv6, and routing intelligence: AS numbers, prefixes, IXP membership, route announcements, and peer relationships in a browsable web database.
+
+**When:** Attribute an IP or prefix to its ASN and understand routing relationships for infrastructure you analyze.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://bgp.he.net
+
+**Alternatives:** ripestat
+
+
+##### RIPEstat
+
+RIPE NCC's data API for IP/ASN attribution, route history, geolocation, and abuse contacts; queryable over REST with ready-made widgets.
+
+**When:** Programmatic WHOIS/ASN and routing lookups for lists of IPs or prefixes you are researching.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - API)`
+
+**URL:** https://stat.ripe.net
+
+**Alternatives:** hurricane electric bgp
+
+
+#### Domain History
+
+
+
+##### DomainTools ⭐
+
+Commercial WHOIS and domain-intel suite (WhoIs, reverse whois, registration history, DNSHistory, Iris) maintained for 20+ years; priced via API/subscription tiers.
+
+**When:** Full WHOIS history and reverse-ownership pivots on domains involved in authorized investigations.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - paid)`
+
+**URL:** https://www.domaintools.com
+
+**Alternatives:** securitytrails
+
+
+
+
+
+
+## Business & Corporate OSINT
+
+
+
+
+#### Company Registries
+
+
+
+##### OpenCorporates ⭐
+
+Open database of millions of companies worldwide extracted from public registries; unique API for entities, officers, and filings across many jurisdictions.
+
+**When:** Discover corporate structure, officers, and cross-jurisdiction registrations behind a company you are authorized to research.
+
+**Effort:** easy  ·  **Rating:** 5/5
+
+**Install:** `preinstalled (web - API key)`
+
+**URL:** https://opencorporates.com
+
+**Alternatives:** companies house (uk), sec edgar
+
+
+##### Companies House (UK)
+
+UK government registry of companies, officers, people with significant control (PSC), and filings, exposed through a free public API.
+
+**When:** Company, director, and beneficial-owner lookups for UK-registered entities.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - free API key)`
+
+**URL:** https://find-and-update.company-information.service.gov.uk
+
+**Alternatives:** opencorporates
+
+
+##### SEC EDGAR
+
+US SEC's full-text filings database (10-K, 8-K, S-1, proxies) exposing financials, executives, and subsidiaries; free API with fair-use limits.
+
+**When:** Pull US-listed company filings for financial and personnel intelligence.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - API)`
+
+**URL:** https://www.sec.gov/edgar
+
+**Alternatives:** opencorporates
+
+
+#### Company Profiles
+
+
+
+##### Crunchbase ⭐
+
+Venture and funding profile database with financing rounds, acquisitions, growth-stage signals, and key-people digests for startups and private companies.
+
+**When:** Sketch the funding trajectory, investors, and key people of a private company you analyze.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - API key)`
+
+**URL:** https://www.crunchbase.com
+
+**Alternatives:** opencorporates
+
+
+
+
+
+
+## Code & Developer OSINT
+
+
+
+
+#### Code Search Engines
+
+
+
+##### GitHub Code Search ⭐
+
+GitHub's built-in search over the public code index with operators for language, path, and extension; also surfaces users, commits, and leaked-token suspects.
+
+**When:** Find public code, configs, and secrets that mention an identifier you own, and review your own repositories' exposure.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://github.com/search
+
+**Alternatives:** sourcegraph, gitdorker
+
+
+##### Sourcegraph
+
+Public-code search engine with regex, literal, and symbol-aware queries across open repositories; good for finding leaked patterns and re-used infrastructure.
+
+**When:** Regex-wide sweep of public code for a credential prefix, domain, or package name you are attributing.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://sourcegraph.com
+
+**Alternatives:** github code search, gitdorker
+
+
+#### Secret & Dork Hunting
+
+
+
+##### GitDorker ⭐
+
+Automates GitHub 'dork' queries from a 3000+-entry dork list through the search APIs to surface exposed files, keys, and configs in public repositories.
+
+**When:** Glob for suspicious files and secrets across public repos related to your own organization or authorized targets.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/obheda12/GitDorker && pip3 install -r requirements.txt`
+
+**URL:** https://github.com/obheda12/GitDorker
+
+**Alternatives:** github code search, nosey parker
+
+
+##### Nosey Parker
+
+Fast secret-scanner that extracts API tokens and credentials from git histories with high-precision regex and entropy rules; written in Rust for large corpora.
+
+**When:** Scan cloned public repositories (e.g., ones you own) for historic secrets before they are abused.
+
+**Effort:** advanced  ·  **Rating:** 4/5
+
+**Install:** `git clone https://github.com/praetorian-inc/noseyparker && cargo build --release`
+
+**URL:** https://github.com/praetorian-inc/noseyparker
+
+**Alternatives:** gitdorker
+
+
+
+
+
+
+## Crypto & Blockchain
+
+
+
+
+#### Block Explorers
+
+
+
+##### Blockchain.com Explorer ⭐
+
+Bitcoin block explorer with address, transaction, and pending-mempool views plus webhooks and an authenticated explorer API.
+
+**When:** Trace bitcoin addresses and transaction flows connected to a case you are authorized to investigate.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://www.blockchain.com/explorer
+
+**Alternatives:** etherscan, walletexplorer
+
+
+##### Etherscan
+
+Reference Ethereum block explorer with address, token, contract-code, and event-log analysis and a free API; covers other EVM chains via sibling explorers.
+
+**When:** Analyze EVM addresses, token transfers, and smart-contract interactions you are investigating.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - API key)`
+
+**URL:** https://etherscan.io
+
+**Alternatives:** blockchain.com explorer
+
+
+#### Wallet & Abuse Databases
+
+
+
+##### WalletExplorer ⭐
+
+Clusters bitcoin addresses into services where possible, letting you see a wallet's whole activity — including market aggregation endpoints.
+
+**When:** View a bitcoin address in service context and reveal associated addresses during authorized tracing work.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://www.walletexplorer.com
+
+**Alternatives:** blockchain.com explorer, bitcoinabuse
+
+
+##### BitcoinAbuse
+
+Public API and searchable database of bitcoin addresses reported for scams and fraud, with user-submitted evidence and descriptions.
+
+**When:** Check whether an address you are investigating carries attached abuse reports.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - API)`
+
+**URL:** https://www.bitcoinabuse.com
+
+**Alternatives:** walletexplorer
+
+
+
+
+
+
+## Historical & Archived Content
+
+
+
+
+#### Web Archives
+
+
+
+##### Wayback Machine ⭐
+
+The Internet Archive's store of hundreds of billions of web snapshots; view any URL as it existed historically, with CDX listings and full-text site search.
+
+**When:** Recover removed pages, track historical site changes, and capture evidence before content disappears.
+
+**Effort:** easy  ·  **Rating:** 5/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://web.archive.org
+
+**Alternatives:** waybackpy, archive.today, common crawl
+
+
+##### waybackpy
+
+Python client for the Wayback and CDX APIs: save snapshots, query availability, and stream archive listings programmatically.
+
+**When:** Scripted archival and CDX queries to build change-history timelines for URLs you monitor.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `pipx install waybackpy`
+
+**URL:** https://github.com/akamhy/waybackpy
+
+**Alternatives:** wayback machine
+
+
+##### Archive.today
+
+Independent web snapshot service that mirrors pages on demand and blocks most crawlers; a useful second capture layer parallel to the Wayback Machine.
+
+**When:** Save a live page as evidence through an independent archive when you want redundancy across capture providers.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://archive.ph
+
+**Alternatives:** wayback machine
+
+
+#### Web Corpora
+
+
+
+##### Common Crawl ⭐
+
+Petabyte-scale open crawl corpus refreshed monthly (WARC/WAT/WET files) with a URL index API; reconstruct what a site published even without per-page snapshots.
+
+**When:** Pull historical page versions or URL-level index data for content you have permission to analyze.
+
+**Effort:** medium  ·  **Rating:** 3/5
+
+**Install:** `preinstalled (web - S3/CLI)`
+
+**URL:** https://commoncrawl.org
+
+**Alternatives:** wayback machine
+
+
+
+
+
+
+## Dark Web & Breach Intelligence
+
+
+
+
+#### Onion Search & Directories
+
+
+
+##### Ahmia ⭐
+
+Ethical search engine for the Tor network with support for .onion and I2P; continuously indexes dark-web pages and filters illegal content.
+
+**When:** Index and discover .onion pages relevant to a monitoring program you are authorized to run.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://ahmia.fi
+
+**Alternatives:** dark.fail
+
+
+##### Dark.fail
+
+Trusted, hand-verified directory of live .onion marketplaces and services with uptime status; a safe entry index rather than an in-depth search engine.
+
+**When:** Locate legitimate .onion services and verify their current uptime during authorized dark-web research.
+
+**Effort:** easy  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://dark.fail
+
+**Alternatives:** ahmia
+
+
+#### Breach Data Aggregators
+
+
+
+##### DeHashed ⭐
+
+Commercial breach database covering email, username, phone, IP, and password hashes with fuzzy search and cross-referencing across billions of records; subscription required for full records.
+
+**When:** Correlate leaked credentials and keys across datasets — only for accounts you own or are contracted to test.
+
+**Effort:** medium  ·  **Rating:** 4/5
+
+**Install:** `preinstalled (web - paid)`
+
+**URL:** https://dehashed.com
+
+**Alternatives:** intelligencex, leakcheck
+
+
+#### Paste Search & Monitoring
+
+
+
+##### Pastebin Search ⭐
+
+Pastebin's own search across public pastes, combinable with search engines via site: dorks; useful for monitoring dropped credentials and dumps.
+
+**When:** Monitor public paste dumps that mention an organization or domain you are authorized to defend.
+
+**Effort:** easy  ·  **Rating:** 3/5
+
+**Install:** `preinstalled (web)`
+
+**URL:** https://www.pastebin.com
+
+**Alternatives:** intelligencex
+
+
+
+
+
+
+## Automation & Platforms
+
+
+
+
+#### Correlation & Automation
+
+
+
+##### SpiderFoot ⭐
+
+Automated OSINT correlation engine with 200+ modules and a YAML correlation engine, surfaced through a web UI, CLI, and API; built to map an attack surface and connect entities.
+
+**When:** A broad sweep of a domain, IP, or email you own to correlate entities across many free data sources in a single scan.
 
 **Effort:** medium  ·  **Rating:** 5/5
 
@@ -334,53 +1004,33 @@ Automated OSINT correlation engine with 200+ modules and a YAML correlation engi
 
 **URL:** https://github.com/smicallef/spiderfoot
 
-**Alternatives:** maltego, recon-ng
+**Alternatives:** maltego
 
 
-#### Maltego
+##### Maltego
 
-Commercial graph-based link-analysis and OSINT platform (desktop and browser) with transforms into 1B+ identities, breach data, and infrastructure datasets; a free Community Edition (Basic plan) exists but is result-limited. A commercial service, not open source.
+Commercial graph-based link-analysis platform (desktop and browser) whose transforms reach identity, breach, and infrastructure datasets; free Community Edition exists with result limits.
 
-**When:** Investigative link analysis where a visual graph of who/what connects to whom beats JSON output.
+**When:** Investigative link analysis where a visual graph of who connects to whom beats raw JSON output.
 
 **Effort:** easy  ·  **Rating:** 4/5
 
-**Install:** `preinstalled (web/desktop — free CE with Maltego ID)`
+**Install:** `preinstalled (web/desktop - free CE)`
 
 **URL:** https://www.maltego.com
 
-**Alternatives:** spiderfoot, recon-ng
+**Alternatives:** spiderfoot
 
 
-#### recon-ng
-
-Metasploit-style modular reconnaissance framework for web OSINT, with a marketplace of modules, workspace isolation, and database-backed reporting; stable but leisurely maintained.
-
-**When:** Scripted, repeatable recon workflows with structured output and API keys for your own estate.
-
-**Effort:** medium  ·  **Rating:** 4/5
-
-**Install:** `sudo apt install recon-ng`
-
-**URL:** https://github.com/lanmaster53/recon-ng
-
-**Alternatives:** spiderfoot, maltego
+#### Search Dork Reference
 
 
 
+##### Google Hacking Database (GHDB) ⭐
 
+Canonical reference catalog of search-engine operators and example queries that surface exposed files, login panels, and misconfigurations in public indexes.
 
-
-## Search Dorks Reference
-
-Google Hacking Database (GHDB) ⭐
-
-
-#### Google Hacking Database (GHDB) ⭐
-
-Reference catalog of search-engine operators ('dorks') and example queries that surface exposed files, login panels, admin pages, and misconfigurations in public indexes. A reference page, not a tool.
-
-**When:** Compose and reuse proven search-engine queries to audit what public indexes expose about your own domains.
+**When:** Compose and reuse proven dorks to audit what public indexes expose about domains you own.
 
 **Effort:** easy  ·  **Rating:** 4/5
 
@@ -388,7 +1038,7 @@ Reference catalog of search-engine operators ('dorks') and example queries that 
 
 **URL:** https://www.exploit-db.com/google-hacking-database
 
-**Alternatives:** netlas dorks (github)
+**Alternatives:** gitdorker
 
 
 

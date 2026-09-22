@@ -2,208 +2,627 @@
   "id": "container",
   "name": "Container & Kubernetes Security",
   "emoji": "📦",
-  "tagline": "Defending your own clusters: image scanning, SBOM, runtime detection, CIS posture, and admission policy.",
+  "tagline": "Defending your own clusters: image scanning, SBOM, runtime detection, CIS posture, admission policy, Sigstore signing, and offensive lab checks.",
   "class": "defense",
   "categories": [
     {
       "id": "image-scanning",
       "name": "Image & Registry Vulnerability Scanning",
-      "tools": [
+      "subcategories": [
         {
-          "name": "Trivy",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "Aqua Security's comprehensive scanner covering container images, filesystems, git repos, VMs, and Kubernetes; detects CVEs, misconfigurations, secrets, and licenses from one binary.",
-          "when": "Gate every image build in CI and scan at push time; add trivy-operator (or Kubescape) for in-cluster image monitoring.",
-          "install": "brew install trivy",
-          "url": "https://github.com/aquasecurity/trivy",
-          "alt": ["grype", "syft (SBOM)", "kubescape scan image"]
+          "id": "standalone-scanners",
+          "name": "Standalone CVE scanners",
+          "tools": [
+            {
+              "name": "Trivy",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Aqua Security's comprehensive scanner covering container images, filesystems, git repos, VMs, and Kubernetes; detects CVEs, misconfigurations, secrets, and licenses from one binary.",
+              "when": "Gate every image build in CI and scan at push time; add trivy-operator (or Kubescape) for in-cluster image monitoring.",
+              "install": "brew install trivy",
+              "url": "https://github.com/aquasecurity/trivy",
+              "alt": ["grype", "syft (SBOM)", "kubescape scan image"]
+            },
+            {
+              "name": "Grype",
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Anchore's fast vulnerability scanner for images, filesystems, and SBOMs; pairs with Syft and adds EPSS, KEV, and OpenVEX filtering to prioritize real risk.",
+              "when": "Speed-first CI scans, or scan an SBOM you already generated instead of re-pulling and re-analyzing the image.",
+              "install": "curl -sSfL https://get.anchore.io/grype | sudo sh -s -- -b /usr/local/bin",
+              "url": "https://github.com/anchore/grype",
+              "alt": ["trivy", "syft (SBOM)"]
+            },
+            {
+              "name": "Clair",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Quay/Red Hat's v4 vulnerability database server for registries: ingests manifests and exposes a gRPC API that clairctl, clair-hook, or admission controllers query for container-layer CVE data.",
+              "when": "Deploy next to Quay (or your own registry) for server-side scanning of every pushed image instead of one-off CI scans.",
+              "install": "docker run -d --name clair -p 6060:6060 quay.io/projectquay/clair:latest",
+              "url": "https://github.com/quay/clair",
+              "alt": ["trivy", "anchore"]
+            },
+            {
+              "name": "Anchore (Enterprise)",
+              "rating": 3,
+              "effort": "advanced",
+              "desc": "Commercial policy-and-compliance platform built on the Grype/Syft engine with admission control (anchore-admission-controller) and scheduled registry scanning; the legacy open-source anchore-engine CLI is deprecated.",
+              "when": "When you need continuous registry posture, feeds/webhooks, and audited policy gates as a platform rather than a single binary.",
+              "install": "helm repo add anchore https://charts.anchore.io && helm install anchore anchore/anchore-enterprise",
+              "url": "https://anchore.com",
+              "alt": ["grype", "trivy", "clair"]
+            }
+          ]
         },
         {
-          "name": "Grype",
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Anchore's fast vulnerability scanner for images, filesystems, and SBOMs; pairs with Syft and adds EPSS, KEV, and OpenVEX filtering to prioritize real risk.",
-          "when": "Speed-first CI scans, or scan an SBOM you already generated instead of re-pulling and re-analyzing the image.",
-          "install": "curl -sSfL https://get.anchore.io/grype | sudo sh -s -- -b /usr/local/bin",
-          "url": "https://github.com/anchore/grype",
-          "alt": ["trivy", "syft (SBOM)"]
+          "id": "vendor-scanners",
+          "name": "Vendor & SaaS scanning",
+          "tools": [
+            {
+              "name": "Docker Scout",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Docker's image analyzer for CVEs, provenance, and supply-chain compliance; highlights CISA KEV reachability and suggests base-image/model upgrades, integrated into Docker Desktop and CI.",
+              "when": "Fastest starting point for teams already on Docker — compare images, audit a registry, and enforce policies without another platform.",
+              "install": "brew install docker/scout/docker-scout",
+              "url": "https://github.com/docker/scout-cli",
+              "alt": ["snyk container", "trivy"]
+            },
+            {
+              "name": "Snyk Container",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Snyk's container scanning CLI ('snyk container test') covering images plus Kubernetes/IaC config, with base-image upgrade paths and registry/workspace integration.",
+              "when": "Teams already using Snyk for SCA/app-sec want container coverage in the same console and policy engine.",
+              "install": "npm install -g snyk",
+              "url": "https://github.com/snyk/cli",
+              "alt": ["docker scout", "trivy"]
+            }
+          ]
+        },
+        {
+          "id": "dockerfile-lint",
+          "name": "Dockerfile & image best-practice lint",
+          "tools": [
+            {
+              "name": "hadolint",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Haskell Dockerfile linter that parses the Dockerfile AST and applies best-practice rules, delegating inline shell checks to ShellCheck (DL- and SC-prefixed findings).",
+              "when": "Lint Dockerfiles in CI to catch untagged images, root users, and unsafe RUN commands before the image is ever built.",
+              "install": "brew install hadolint",
+              "url": "https://github.com/hadolint/hadolint",
+              "alt": ["dockle", "trivy (misconfig)"]
+            },
+            {
+              "name": "dockle",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Container image linter that audits the built image against CIS Docker image checkpoints and best practices (non-root user, HEALTHCHECK, setuid/setgid files, content trust).",
+              "when": "Audit the built image itself, complementing Dockerfile lint, right before pushing to a production registry.",
+              "install": "brew install goodwithtech/r/dockle",
+              "url": "https://github.com/goodwithtech/dockle",
+              "alt": ["hadolint"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "sbom",
+      "id": "sbom-supply-chain",
       "name": "SBOM Generation & Management",
-      "tools": [
+      "subcategories": [
         {
-          "name": "Syft",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Generates SBOMs for container images, filesystems, and archives in CycloneDX, SPDX, and Syft JSON; feeds Grype directly and supports signed in-toto attestations.",
-          "when": "Produce a machine-readable dependency inventory at build time and ship it with the image to prove supply-chain provenance.",
-          "install": "curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sudo sh -s -- -b /usr/local/bin",
-          "url": "https://github.com/anchore/syft",
-          "alt": ["trivy", "cyclonedx-cli"]
+          "id": "sbom-generators",
+          "name": "Generators",
+          "tools": [
+            {
+              "name": "Syft",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Generates SBOMs for container images, filesystems, and archives in CycloneDX, SPDX, and Syft JSON; feeds Grype directly and supports signed in-toto attestations.",
+              "when": "Produce a machine-readable dependency inventory at build time and ship it with the image to prove supply-chain provenance.",
+              "install": "curl -sSfL https://raw.githubusercontent.com/anchore/syft/main/install.sh | sudo sh -s -- -b /usr/local/bin",
+              "url": "https://github.com/anchore/syft",
+              "alt": ["trivy", "cyclonedx-cli"]
+            }
+          ]
         },
         {
-          "name": "Trivy",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Cross-reference entry: `trivy image --format cyclonedx|spdx` emits SBOMs, and Trivy will also scan an existing SBOM document for vulnerabilities.",
-          "when": "You standardize on Trivy already and want SBOM output without introducing a second cataloging tool.",
-          "install": "brew install trivy",
-          "url": "https://github.com/aquasecurity/trivy",
-          "alt": ["syft"]
-        },
-        {
-          "name": "cyclonedx-cli",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "OWASP CycloneDX CLI to validate, merge, diff, convert, sign, and verify CycloneDX and SPDX BOMs; exits non-zero on invalid input for CI gating.",
-          "when": "Normalize third-party vendor SBOMs into one format, diff releases to catch dependency drift, or enforce schema-valid BOMs in the pipeline.",
-          "install": "docker run --rm -v \"$(pwd):/data\" cyclonedx/cyclonedx-cli validate --input-file /data/sbom.json",
-          "url": "https://github.com/CycloneDX/cyclonedx-cli",
-          "alt": ["syft", "trivy"]
+          "id": "sbom-quality",
+          "name": "Validation & quality scoring",
+          "tools": [
+            {
+              "name": "CycloneDX CLI",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "OWASP CycloneDX CLI to validate, merge, diff, convert, sign, and verify CycloneDX and SPDX BOMs; exits non-zero on invalid input for CI gating.",
+              "when": "Normalize third-party vendor SBOMs into one format, diff releases to catch dependency drift, or enforce schema-valid BOMs in the pipeline.",
+              "install": "docker run --rm -v \"$(pwd):/data\" cyclonedx/cyclonedx-cli validate --input-file /data/sbom.json",
+              "url": "https://github.com/CycloneDX/cyclonedx-cli",
+              "alt": ["sbomqs", "syft"]
+            },
+            {
+              "name": "sbomqs",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Interlynk's SBOM quality & compliance scorer: grades SPDX/CycloneDX BOMs on completeness, licensing, relationships, and format correctness, then filters by quality score.",
+              "when": "Score vendor-supplied and generated SBOMs in CI so you can reject 'good enough' BOMs and see which tooling produces trustworthy output.",
+              "install": "go install github.com/interlynk-io/sbomqs@latest",
+              "url": "https://github.com/interlynk-io/sbomqs",
+              "alt": ["cyclonedx-cli"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "runtime-security",
-      "name": "Runtime Threat Detection",
-      "tools": [
+      "id": "registry-supply-chain",
+      "name": "Signing, Provenance & Base-Image Policy",
+      "subcategories": [
         {
-          "name": "Falco",
-          "best": true,
-          "rating": 5,
-          "effort": "advanced",
-          "desc": "CNCF-graduated kernel monitoring agent (eBPF or driver) that watches syscalls enriched with container and Kubernetes metadata, alerting via a flexible rules engine.",
-          "when": "Deploy on every production node for real-time detection of shells in containers, privileged pods, and sensitive-file access.",
-          "install": "helm repo add falcosecurity https://falcosecurity.github.io/charts && helm install falco falcosecurity/falco",
-          "url": "https://github.com/falcosecurity/falco",
-          "alt": ["docker-bench-security", "kubescape (operator runtime)"]
+          "id": "image-signing",
+          "name": "Image signing (Sigstore / Notary)",
+          "subcategories": [
+            {
+              "id": "signing-clis",
+              "name": "Signing CLIs",
+              "tools": [
+                {
+                  "name": "Cosign",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "Sigstore CLI to sign and verify images, blobs, and SBOM attestations with keyless (OIDC) or key-based signatures stored as OCI artifacts, backed by the Rekor transparency log.",
+                  "when": "Sign every image in CI and verify at admission time (Kyverno, Gatekeeper, or the sigstore policy controller) to stop unsigned/mutated image pulls.",
+                  "install": "brew install cosign",
+                  "url": "https://github.com/sigstore/cosign",
+                  "alt": ["notation", "docker content trust"]
+                },
+                {
+                  "name": "Notation",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "CNCF Notary Project CLI (OCI 1.1 signatures) for signing and verifying artifacts with X.509/SPIFFE certificates; keeps signatures as native OCI artifacts and integrates with Azure/AWS KMS signers.",
+                  "when": "Enterprise environments that already run X.509 PKI/KMS and want cert-managed signing rather than Sigstore's ephemeral, keyless model.",
+                  "install": "brew install notation",
+                  "url": "https://github.com/notaryproject/notation",
+                  "alt": ["cosign"]
+                }
+              ]
+            },
+            {
+              "id": "verification-infra",
+              "name": "Verification & transparency infrastructure",
+              "tools": [
+                {
+                  "name": "Sigstore Policy Controller",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "advanced",
+                  "desc": "Sigstore's admission controller that verifies signatures and attestations on every pod creation, mutating the request to enforce trust policies cluster-wide.",
+                  "when": "Cluster-wide 'only signed/attested images run here' enforcement as an image-policy layer, complementary to schema-style admission policies like Kyverno.",
+                  "install": "helm repo add sigstore https://sigstore.github.io/helm-charts && helm install policy-controller sigstore/policy-controller -n cosign-system --create-namespace",
+                  "url": "https://github.com/sigstore/policy-controller",
+                  "alt": ["kyverno (verify-images)", "cosign verify"]
+                },
+                {
+                  "name": "Rekor CLI",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Query and verify entries in the Rekor transparency log (DSSE/tekton/blob/cosign types): confirm a signature was logged at a point in time and detect tampered/duplicate entries.",
+                  "when": "Forensic checks that complement signature verification — prove an artifact existed in the log, correlate with incident timelines, or audit your own signing records.",
+                  "install": "brew install sigstore/tap/rekor-cli",
+                  "url": "https://github.com/sigstore/rekor",
+                  "alt": ["cosign verify --certificate-log-url"]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "docker-bench-security",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Docker's CIS Docker Benchmark script auditing the Docker/containerd host, daemon, and running containers against dozens of best-practice checks.",
-          "when": "Harden and periodically re-audit the container host after workloads are deployed; quick compliance readout for a single host.",
-          "install": "git clone https://github.com/docker/docker-bench-security.git && cd docker-bench-security && sudo sh docker-bench-security.sh",
-          "url": "https://github.com/docker/docker-bench-security",
-          "alt": ["falco"]
+          "id": "base-image-policy",
+          "name": "Distroless base images",
+          "tools": [
+            {
+              "name": "Distroless",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Google's minimal base images with no shell, package managers, or runtimes — static, cc, and Debian variants with nonroot tags that slash attack surface and image size.",
+              "when": "Production images that never need a shell: shift all debugging to the builder stage or sidecars and run the runtime stage as non-root by default.",
+              "install": "FROM gcr.io/distroless/static-debian12:nonroot",
+              "url": "https://github.com/GoogleContainerTools/distroless",
+              "alt": ["wolfi", "chainguard images"]
+            },
+            {
+              "name": "Wolfi",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Chainguard's apk-based, no-glibc-bloat OS purpose-built for containers — the upstream of hardened Chainguard images, reproducibly assembled with apko into slim distroless-style images.",
+              "when": "Teams needing a lean, fully open-source base where you still install apk packages and build tools inside multi-stage builds without bloating the runtime image.",
+              "install": "FROM cgr.dev/chainguard/wolfi-base:latest",
+              "url": "https://github.com/wolfi-dev/os",
+              "alt": ["distroless"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "cluster-posture",
-      "name": "Cluster Posture & Compliance",
-      "tools": [
+      "id": "kubernetes",
+      "name": "Kubernetes Cluster Security",
+      "subcategories": [
         {
-          "name": "Kubescape",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "CNCF-incubating Kubernetes security platform scanning clusters, manifests, Helm charts, git repos, and images against CIS, NSA-CISA, and MITRE ATT&CK; operator mode adds continuous posture and eBPF runtime.",
-          "when": "First full-posture sweep of a cluster and as a CI gate on manifests; install the operator for continuous compliance monitoring.",
-          "install": "curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | bash",
-          "url": "https://github.com/kubescape/kubescape",
-          "alt": ["kube-bench", "kube-hunter", "popeye"]
+          "id": "cis-compliance",
+          "name": "CIS benchmark & compliance",
+          "tools": [
+            {
+              "name": "kube-bench",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Aqua's Go tool that runs the CIS Kubernetes Benchmark against control plane, etcd, and worker node configuration, matched to the running Kubernetes version.",
+              "when": "Validate a specific hardened baseline after cluster upgrades, node onboarding, or as a scheduled per-node job.",
+              "install": "kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml",
+              "url": "https://github.com/aquasecurity/kube-bench",
+              "alt": ["kubescape", "docker-bench-security"]
+            },
+            {
+              "name": "docker-bench-security",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Docker's CIS Docker Benchmark script auditing the Docker/containerd host, daemon, and running containers against dozens of best-practice checks.",
+              "when": "Harden and periodically re-audit the container host on worker nodes after workloads are deployed; quick compliance readout for a single host.",
+              "install": "git clone https://github.com/docker/docker-bench-security.git && cd docker-bench-security && sudo sh docker-bench-security.sh",
+              "url": "https://github.com/docker/docker-bench-security",
+              "alt": ["kube-bench"]
+            }
+          ]
         },
         {
-          "name": "kube-bench",
-          "rating": 5,
-          "effort": "medium",
-          "desc": "Aqua's Go tool that runs the CIS Kubernetes Benchmark against control plane, etcd, and worker node configuration, matched to the running Kubernetes version.",
-          "when": "Validate a specific hardened baseline after cluster upgrades, node onboarding, or as a scheduled per-node job.",
-          "install": "kubectl apply -f https://raw.githubusercontent.com/aquasecurity/kube-bench/main/job.yaml",
-          "url": "https://github.com/aquasecurity/kube-bench",
-          "alt": ["kubescape", "docker-bench-security"]
+          "id": "cluster-posture",
+          "name": "Continuous posture & drift",
+          "tools": [
+            {
+              "name": "Kubescape",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "CNCF-incubating Kubernetes security platform scanning clusters, manifests, Helm charts, git repos, and images against CIS, NSA-CISA, and MITRE ATT&CK; operator mode adds continuous posture and eBPF runtime.",
+              "when": "First full-posture sweep of a cluster and as a CI gate on manifests; install the operator for continuous compliance monitoring.",
+              "install": "curl -s https://raw.githubusercontent.com/kubescape/kubescape/master/install.sh | bash",
+              "url": "https://github.com/kubescape/kubescape",
+              "alt": ["kube-bench", "popeye"]
+            },
+            {
+              "name": "Popeye",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Read-only live-cluster sanitizer that lints deployed workloads for misconfigurations, dead resources, port mismatches, and missing probes, scoring overall cluster health.",
+              "when": "Periodic 'wide-open' sweep to catch drift and operational debt that static manifest review misses.",
+              "install": "go install github.com/derailed/popeye@latest",
+              "url": "https://github.com/derailed/popeye",
+              "alt": ["kubescape"]
+            }
+          ]
         },
         {
-          "name": "Popeye",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Read-only live-cluster sanitizer that lints deployed workloads for misconfigurations, dead resources, port mismatches, and missing probes, scoring overall cluster health.",
-          "when": "Periodic 'wide-open' sweep to catch drift and operational debt that static manifest review misses.",
-          "install": "go install github.com/derailed/popeye@latest",
-          "url": "https://github.com/derailed/popeye",
-          "alt": ["kubescape"]
+          "id": "manifest-audit",
+          "name": "Manifest & YAML lint",
+          "tools": [
+            {
+              "name": "kube-linter",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "StackRox (Red Hat) static analyzer for Kubernetes YAML and Helm charts with 40+ built-in checks (privileged containers, insecure service types, missing resource limits) and SARIF output for CI.",
+              "when": "Pre-deploy linting in CI — catch risky manifests before apply, complementing runtime posture and admission checks.",
+              "install": "brew install kube-linter",
+              "url": "https://github.com/stackrox/kube-linter",
+              "alt": ["kubeaudit", "popeye"]
+            },
+            {
+              "name": "kubeaudit",
+              "rating": 3,
+              "effort": "medium",
+              "desc": "Audits manifests and live clusters against security controls (privileged, hostNetwork, capabilities, allowPrivilegeEscalation) and can auto-fix them; repo is archived and the brew formula deprecated as of 2025.",
+              "when": "Only where an existing pipeline integrates its autofix mode; otherwise prefer kube-linter + kube-bench for actively maintained coverage.",
+              "install": "brew install kubeaudit",
+              "url": "https://github.com/Shopify/kubeaudit",
+              "alt": ["kube-linter", "kube-bench"]
+            }
+          ]
         },
         {
-          "name": "kube-hunter",
-          "rating": 3,
-          "effort": "easy",
-          "desc": "Legacy Aqua pen-test tool that finds cluster weaknesses from an attacker's perspective (exposed dashboards, leaked secrets, weak RBAC); officially no longer under active development.",
-          "when": "Offense-style spot check on a cluster you own; treat findings as a starting list since it is not actively maintained.",
-          "install": "docker run --rm -it aquasec/kube-hunter",
-          "url": "https://github.com/aquasecurity/kube-hunter",
-          "alt": ["kubescape", "trivy (k8s scan)"]
+          "id": "admission-policy",
+          "name": "Admission control & policy-as-code",
+          "subcategories": [
+            {
+              "id": "policy-engines",
+              "name": "Policy engines",
+              "tools": [
+                {
+                  "name": "OPA Gatekeeper",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "advanced",
+                  "desc": "CNCF policy controller that enforces Rego-based policy through constraint templates and constraints, with admission webhooks, audit, and mutation support.",
+                  "when": "Enforce registry allowlists, required labels, and security-context rules at admission when you already know Rego or want the largest policy ecosystem.",
+                  "install": "kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/master/deploy/gatekeeper.yaml",
+                  "url": "https://github.com/open-policy-agent/gatekeeper",
+                  "alt": ["kyverno", "polaris"]
+                },
+                {
+                  "name": "Kyverno",
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "CNCF-graduated Kubernetes-native policy engine using YAML (no new language) to validate, mutate, generate, and clean up resources; verifies image signatures via cosign.",
+                  "when": "Teams that prefer familiar YAML and want mutation, image verification, and policy-as-a-resource without learning Rego.",
+                  "install": "helm repo add kyverno https://kyverno.github.io/helm-charts && helm install kyverno kyverno/kyverno -n kyverno --create-namespace",
+                  "url": "https://github.com/kyverno/kyverno",
+                  "alt": ["opa gatekeeper", "polaris"]
+                },
+                {
+                  "name": "Polaris",
+                  "rating": 3,
+                  "effort": "easy",
+                  "desc": "Fairwinds policy-as-code with 30+ built-in checks across security, networking, reliability, and efficiency; runs as a dashboard, CI CLI, or mutating admission webhook.",
+                  "when": "Drop-in baseline enforcement with a visible compliance dashboard when full OPA or Kyverno is overkill.",
+                  "install": "kubectl apply -f https://github.com/FairwindsOps/polaris/releases/latest/download/dashboard.yaml",
+                  "url": "https://github.com/FairwindsOps/polaris",
+                  "alt": ["kyverno", "opa gatekeeper", "popeye"]
+                }
+              ]
+            },
+            {
+              "id": "policy-testing",
+              "name": "Local policy testing & OPA tooling",
+              "tools": [
+                {
+                  "name": "Conftest",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Tests Kubernetes manifests, Helm values, Terraform, and CUE against Rego policies from the CLI; CI-friendly and shares the same policy language as OPA Gatekeeper.",
+                  "when": "Control-plane-free policy checks in pre-commit/CI, or validate the exact Rego you will enforce with Gatekeeper before installing anything.",
+                  "install": "brew install conftest",
+                  "url": "https://github.com/open-policy-agent/conftest",
+                  "alt": ["opa gatekeeper", "kyverno CLI test"]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "network-segmentation",
+          "name": "Network policy enforcement",
+          "tools": [
+            {
+              "name": "Cilium",
+              "best": true,
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "eBPF-based CNI enforcing Kubernetes NetworkPolicy and extended CiliumNetworkPolicy with identity-based rules (no IP juggling), plus Hubble for policy-aware flow observability.",
+              "when": "Strict workload micro-segmentation with per-L4/L7 rules and visibility; it replaces your CNI, so plan a rollout, not a drop-in patch.",
+              "install": "helm repo add cilium https://helm.cilium.io && helm install cilium cilium/cilium --namespace kube-system",
+              "url": "https://github.com/cilium/cilium",
+              "alt": ["calico"]
+            },
+            {
+              "name": "Calico",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Project Calico/Tigera CNI delivering the Kubernetes NetworkPolicy API plus GlobalNetworkPolicy and host-endpoint policy for traffic entering/leaving nodes.",
+              "when": "Clusters already on Calico, or when you need global (not just namespace-scoped) network policy that covers host endpoints.",
+              "install": "kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml",
+              "url": "https://github.com/projectcalico/calico",
+              "alt": ["cilium"]
+            }
+          ]
+        },
+        {
+          "id": "adversarial-validation",
+          "name": "Adversarial assessment (self-check)",
+          "tools": [
+            {
+              "name": "kube-hunter",
+              "best": true,
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Legacy Aqua pen-test tool that finds cluster weaknesses from an attacker's perspective (exposed dashboards, leaked secrets, weak RBAC); officially no longer under active development.",
+              "when": "Offense-style spot check on a cluster you own; treat findings as a starting list since it is not actively maintained.",
+              "install": "docker run --rm -it aquasec/kube-hunter",
+              "url": "https://github.com/aquasecurity/kube-hunter",
+              "alt": ["kubescape", "trivy (k8s scan)"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "policy-engines",
-      "name": "Admission Control & Policy-as-Code",
-      "tools": [
+      "id": "runtime-defense",
+      "name": "Runtime Threat Detection & RBAC",
+      "subcategories": [
         {
-          "name": "OPA Gatekeeper",
-          "best": true,
-          "rating": 5,
-          "effort": "advanced",
-          "desc": "CNCF policy controller that enforces Rego-based policy through constraint templates and constraints, with admission webhooks, audit, and mutation support.",
-          "when": "Enforce registry allowlists, required labels, and security-context rules at admission when you already know Rego or want the largest policy ecosystem.",
-          "install": "kubectl apply -f https://raw.githubusercontent.com/open-policy-agent/gatekeeper/master/deploy/gatekeeper.yaml",
-          "url": "https://github.com/open-policy-agent/gatekeeper",
-          "alt": ["kyverno", "polaris"]
+          "id": "kernel-detection-ebpf",
+          "name": "eBPF kernel detection",
+          "tools": [
+            {
+              "name": "Falco",
+              "best": true,
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "CNCF-graduated kernel monitoring agent (eBPF or driver) that watches syscalls enriched with container and Kubernetes metadata, alerting via a flexible rules engine.",
+              "when": "Deploy on every production node for real-time detection of shells in containers, privileged pods, and sensitive-file access.",
+              "install": "helm repo add falcosecurity https://falcosecurity.github.io/charts && helm install falco falcosecurity/falco",
+              "url": "https://github.com/falcosecurity/falco",
+              "alt": ["tetragon", "kubescape (operator runtime)"]
+            },
+            {
+              "name": "Tetragon",
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "Cilium's eBPF-based runtime security and observability with no userspace for traffic paths: policy-driven tracing of syscalls and network events, plus kubectl-level enrichment.",
+              "when": "High-throughput, eBPF-first detection with built-in network insights and lower operational moving parts than a driver-based agent.",
+              "install": "helm repo add cilium https://helm.cilium.io && helm install tetragon cilium/tetragon -n kube-system",
+              "url": "https://github.com/cilium/tetragon",
+              "alt": ["falco"]
+            }
+          ]
         },
         {
-          "name": "Kyverno",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "CNCF-graduated Kubernetes-native policy engine using YAML (no new language) to validate, mutate, generate, and clean up resources; verifies image signatures via cosign.",
-          "when": "Teams that prefer familiar YAML and want mutation, image verification, and policy-as-a-resource without learning Rego.",
-          "install": "helm repo add kyverno https://kyverno.github.io/helm-charts && helm install kyverno kyverno/kyverno -n kyverno --create-namespace",
-          "url": "https://github.com/kyverno/kyverno",
-          "alt": ["opa gatekeeper", "polaris"]
-        },
-        {
-          "name": "Polaris",
-          "rating": 3,
-          "effort": "easy",
-          "desc": "Fairwinds policy-as-code with 30+ built-in checks across security, networking, reliability, and efficiency; runs as a dashboard, CI CLI, or mutating admission webhook.",
-          "when": "Drop-in baseline enforcement with a visible compliance dashboard when full OPA or Kyverno is overkill.",
-          "install": "kubectl apply -f https://github.com/FairwindsOps/polaris/releases/latest/download/dashboard.yaml",
-          "url": "https://github.com/FairwindsOps/polaris",
-          "alt": ["kyverno", "opa gatekeeper", "popeye"]
+          "id": "rbac-review",
+          "name": "RBAC review & least privilege",
+          "tools": [
+            {
+              "name": "rbac-lookup",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Fairwinds CLI that reverses RBAC: give it a user, service account, or group and it prints every Role/ClusterRole bound to that identity, resolving the bindings for you.",
+              "when": "Audit 'what can this identity actually do?' across namespaces — the fastest path from a SA name to a least-privilege review.",
+              "install": "brew install FairwindsOps/tap/rbac-lookup",
+              "url": "https://github.com/FairwindsOps/rbac-lookup",
+              "alt": ["kubectl auth can-i", "kubiScan"]
+            },
+            {
+              "name": "kubectl auth can-i",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Built-in kubectl authorization self-check; 'kubectl auth can-i --list -A' dumps the full permission matrix for the current context in one shot.",
+              "when": "Zero-install RBAC sanity checks in an incident or review loop — verify a spyed SA cannot escalate before trusting it.",
+              "install": "kubectl auth can-i --list -A",
+              "url": "https://kubernetes.io/docs/reference/kubectl/generated/kubectl_auth/",
+              "alt": ["rbac-lookup"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "dockerfile-lint",
-      "name": "Dockerfile & Image Best-Practice Lint",
-      "tools": [
+      "id": "ci-pipeline",
+      "name": "CI/CD Pipeline Security Gates",
+      "subcategories": [
         {
-          "name": "hadolint",
-          "best": true,
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Haskell Dockerfile linter that parses the Dockerfile AST and applies best-practice rules, delegating inline shell checks to ShellCheck (DL- and SC-prefixed findings).",
-          "when": "Lint Dockerfiles in CI to catch untagged images, root users, and unsafe RUN commands before the image is ever built.",
-          "install": "brew install hadolint",
-          "url": "https://github.com/hadolint/hadolint",
-          "alt": ["dockle", "trivy (misconfig)"]
+          "id": "scanning-actions",
+          "name": "GitHub Actions for scan & SBOM",
+          "tools": [
+            {
+              "name": "Trivy Action",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "aquasecurity/trivy-action wraps Trivy in GitHub Actions for image, filesystem, config, and SBOM scans with severity gates and SARIF upload to code scanning.",
+              "when": "Per-PR image/filesystem scanning that fails the build above a severity threshold and feeds findings into GitHub Security tab.",
+              "install": "uses: aquasecurity/trivy-action@main",
+              "url": "https://github.com/aquasecurity/trivy-action",
+              "alt": ["anchore scan action", "snyk action"]
+            },
+            {
+              "name": "Anchore Scan Action",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "anchore/scan-action runs Grype with fine-grained gating (only-fixed, severity cutoff, OpenVEX) and emits SARIF, JSON, or CycloneDX outputs from images, paths, or existing SBOMs.",
+              "when": "Grype-grounded, license-clean security scanning where you want VEX and fix-availability filters ahead of generic fail-on-high scans.",
+              "install": "uses: anchore/scan-action@v4",
+              "url": "https://github.com/anchore/scan-action",
+              "alt": ["trivy action"]
+            },
+            {
+              "name": "SBOM Action",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "anchore/sbom-action generates Syft SBOMs in CI, publishing them as release artifacts or GitHub SBOM attestations so downstream scanners (Clair, Grype, Docker Scout) consume them.",
+              "when": "Attach a CycloneDX/SPDX BOM to every released image git-tag artifact, proving what shipped for audit and supply-chain consumers.",
+              "install": "uses: anchore/sbom-action@v0",
+              "url": "https://github.com/anchore/sbom-action",
+              "alt": ["syft"]
+            }
+          ]
         },
         {
-          "name": "dockle",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Container image linter that audits the built image against CIS Docker image checkpoints and best practices (non-root user, HEALTHCHECK, setuid/setgid files, content trust).",
-          "when": "Audit the built image itself, complementing Dockerfile lint, right before pushing to a production registry.",
-          "install": "brew install goodwithtech/r/dockle",
-          "url": "https://github.com/goodwithtech/dockle",
-          "alt": ["hadolint"]
+          "id": "policy-libraries",
+          "name": "Policy libraries for pipelines & clusters",
+          "tools": [
+            {
+              "name": "Kyverno Policies",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Kyverno's community policy library: 130+ tested YAML policies covering Pod Security Standards, image signatures, network policy checks, and compliance presets.",
+              "when": "Start from a maintained, battle-tested policy set and adapt, rather than authoring every admission rule from scratch.",
+              "install": "git clone https://github.com/kyverno/policies",
+              "url": "https://github.com/kyverno/policies",
+              "alt": ["polaris", "conftest"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "attack-paths",
+      "name": "Attack Paths & Container Escapes (Lab / Offense)",
+      "subcategories": [
+        {
+          "id": "attack-graphs",
+          "name": "Kubernetes attack-graph analysis",
+          "tools": [
+            {
+              "name": "KubeHound",
+              "best": true,
+              "rating": 5,
+              "effort": "advanced",
+              "desc": "DataDog's attack-graph engine: a collector ingests cluster RBAC, workload, and network data, then a graph query layer returns BloodHound-style attack paths between assets.",
+              "when": "Continuously model 'can this workload or identity reach the kubelet/cluster?' — ideal for validating least privilege and red-team path enumeration on your own cluster.",
+              "install": "brew install kubehound",
+              "url": "https://github.com/DataDog/KubeHound",
+              "alt": ["kubiScan"]
+            },
+            {
+              "name": "KubiScan",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "CyberArk's RBAC attack-path scanner: lists risky roles, subjects, and clusterrolebindings, and highlights the write-access paths (secrets, exec) an attacker can abuse for cluster takeover.",
+              "when": "Systematically map RBAC escape routes on clusters you own and gather remediation evidence (which SA grants secret read, exec into pods, etc.).",
+              "install": "git clone https://github.com/CyberArk/KubiScan.git && cd KubiScan && sudo python3 setup.py install",
+              "url": "https://github.com/CyberArk/KubiScan",
+              "alt": ["kube-hound", "rbac-lookup"]
+            }
+          ]
+        },
+        {
+          "id": "escape-and-abuse",
+          "name": "Container escape & post-exploitation",
+          "tools": [
+            {
+              "name": "deepce",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "DEEPCE (Docker Enumeration, Escalation of Privileges and Container Escapes) is a single bash script that enumerates capabilities, mounts, sockets, env, and metadata, then suggests and attempts escapes.",
+              "when": "Fast assessment of a container you own in a lab/engagement: one script goes from recon to working escape candidates before you write custom exploit code.",
+              "install": "git clone https://github.com/stealthcopter/deepce.git && bash deepce/deepce.sh --run-all",
+              "url": "https://github.com/stealthcopter/deepce",
+              "alt": ["cdk"]
+            },
+            {
+              "name": "CDK",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Zero-dependency Go container/Kubernetes penetration toolkit: capability evaluation, no-curl/wget binary delivery, and exploits for runC, docker.sock, containerd, etcd tokens, plus tunneling and reverse shells.",
+              "when": "Post-exploitation payload to drop into minimal/scratch containers where curl and wget are absent but you still need networking, probes, and K8s API calls.",
+              "install": "Download the release binary from github.com/cdk-team/CDK/releases",
+              "url": "https://github.com/cdk-team/CDK",
+              "alt": ["deepce"]
+            }
+          ]
         }
       ]
     }

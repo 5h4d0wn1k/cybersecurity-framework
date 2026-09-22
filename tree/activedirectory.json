@@ -2,211 +2,706 @@
   "id": "activedirectory",
   "name": "Active Directory Security",
   "emoji": "🏰",
-  "tagline": "Map, audit, and score Active Directory attack paths — graph enumeration, Kerberos/protocol tooling, credential-exposure testing, and risk health checks — for authorized assessments and blue-team defense.",
+  "tagline": "Map, audit, and score Active Directory attack paths — graph enumeration, LDAP/ADSI querying, Kerberos/NTLM protocol tooling, legacy CVE PoCs, GPO/ACL abuse, credential-exposure testing, and risk health checks — for authorized assessments and blue-team defense.",
   "class": "offense",
   "categories": [
     {
-      "id": "enumeration-graph",
+      "id": "attack-path",
       "name": "Attack-Path Enumeration & Graphing",
-      "tools": [
+      "subcategories": [
         {
-          "name": "BloodHound CE",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "The current-generation attack-path engine: ingests SharpHound data into a Neo4j graph and reveals how users, groups, computers, sessions, GPOs, ACLs, trusts, and ADCS enrollments chain into paths to Domain Admin — including ADCS, NTLM, and delegation abuse conditions.",
-          "when": "The core analysis step after collection: visualize and triage which abusable identity relationships are the shortest paths to Tier-0, and why they matter to defenders.",
-          "install": "wget https://github.com/SpecterOps/bloodhound-cli/releases/latest/download/bloodhound-cli-linux-amd64.tar.gz (see the CE Quickstart for the Docker-Compose deployment)",
-          "url": "https://github.com/SpecterOps/BloodHound",
-          "alt": ["SharpHound", "PlumHound", "BloodHound.py"]
+          "id": "bloodhound-pipeline",
+          "name": "BloodHound Pipeline",
+          "subcategories": [
+            {
+              "id": "collectors",
+              "name": "Collectors & Ingestors",
+              "subcategories": [
+                {
+                  "id": "windows-native",
+                  "name": "Windows-native collection",
+                  "tools": [
+                    {
+                      "name": "SharpHound",
+                      "best": true,
+                      "rating": 5,
+                      "effort": "medium",
+                      "desc": "C# collector for BloodHound CE that runs on a domain-joined Windows host and exports users, groups, sessions, local admins, ACLs, GPOs, trusts and more via LDAP and SMB — the dataset the whole graph is built from.",
+                      "when": "Authorized collection from a domain-joined host with valid credentials; feed the produced zip into BloodHound CE for graph analysis.",
+                      "install": "Download the SharpHound CE collector from the BloodHound CE UI (Settings → Download Collectors) or the SpecterOps release page",
+                      "url": "https://github.com/SpecterOps/SharpHound",
+                      "alt": ["BloodHound.py"]
+                    }
+                  ]
+                },
+                {
+                  "id": "linux-blind",
+                  "name": "Linux-native collection",
+                  "tools": [
+                    {
+                      "name": "BloodHound.py",
+                      "best": true,
+                      "rating": 4,
+                      "effort": "medium",
+                      "desc": "Python/Impacket ingestor that collects users, groups, trusts, ACLs, sessions, and local admins from Linux using only credentials — no Windows host or SharpHound binary required.",
+                      "when": "When you need BloodHound data for an authorized scope but only hold a Linux foothold or domain credentials.",
+                      "install": "git clone https://github.com/dirkjanm/BloodHound.py && pip install -r requirements.txt (or the bloodhound-ce fork's CLI)",
+                      "url": "https://github.com/dirkjanm/BloodHound.py",
+                      "alt": ["SharpHound"]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "analysis",
+              "name": "Graph Analysis & Reporting",
+              "tools": [
+                {
+                  "name": "BloodHound CE",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "Current-generation attack-path engine: ingests SharpHound data into Neo4j and reveals how users, groups, computers, sessions, GPOs, ACLs, trusts, and ADCS enrollments chain into paths to Domain Admin, including ADCS, NTLM, and delegation abuse conditions.",
+                  "when": "The core analysis step after collection: visualize and triage which abusable identity relationships are the shortest paths to Tier-0 in your own estate.",
+                  "install": "curl -L https://ghst.ly/BHCE-QS | bash (official CE quickstart, or the Docker Compose deployment from the docs)",
+                  "url": "https://github.com/SpecterOps/BloodHound",
+                  "alt": ["PlumHound", "Adalanche"]
+                },
+                {
+                  "name": "PlumHound",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Wraps BloodHound's Neo4j Cypher backend into repeatable HTML reports and task lists; surfaces the busiest paths to Domain Admin and which relationship to break to sever a given path.",
+                  "when": "Turn collected BloodHound data into operations-ready findings for blue/purple-team remediation planning and scheduled reporting.",
+                  "install": "pipx install plumhound",
+                  "url": "https://github.com/PlumHound/PlumHound",
+                  "alt": ["BloodHound CE"]
+                }
+              ]
+            },
+            {
+              "id": "alternate-renderers",
+              "name": "Alternate visualizers",
+              "tools": [
+                {
+                  "name": "Adalanche",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Standalone attack-graph visualizer from lkarlslund that collects and graph-explores who is *really* Domain Admin, rebuilding the effective reachability without a Neo4j stack.",
+                  "when": "A lighter-weight second opinion alongside BloodHound in labs or quick scoping when you want immediate graph answers without standing up the full CE stack.",
+                  "install": "Download the release binary and run the built-in collector against your AD read credentials or an existing dump",
+                  "url": "https://github.com/lkarlslund/Adalanche",
+                  "alt": ["BloodHound CE"]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "SharpHound",
-          "rating": 5,
-          "effort": "medium",
-          "desc": "C# data collector for BloodHound CE that runs on domain-joined Windows and exports a zip of users, groups, sessions, local admins, ACLs, GPOs, trusts, and more via LDAP and SMB — the dataset the graph is built from.",
-          "when": "Run first from any authorized domain-joined host or as a standalone binary, then feed the output into BloodHound CE for graph analysis.",
-          "install": "Download the SharpHound CE binary from the BloodHound CE UI (Settings → Download Collectors) or the GitHub releases page",
-          "url": "https://github.com/SpecterOps/SharpHound",
-          "alt": ["BloodHound.py"]
-        },
-        {
-          "name": "PlumHound",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Wraps BloodHound's Neo4j Cypher backend into repeatable HTML reports and task lists; surfaces the busiest paths to Domain Admin and which relationship to break to sever a given path.",
-          "when": "Turn a collected BloodHound graph into consumable, operations-ready findings for blue/purple-team remediation planning and scheduled reporting.",
-          "install": "pipx install plumhound",
-          "url": "https://github.com/PlumHound/PlumHound",
-          "alt": ["BloodHound CE", "BloodHound.py"]
+          "id": "domain-scan",
+          "name": "Domain-Wide Enumeration & Scoring",
+          "subcategories": [
+            {
+              "id": "peas",
+              "name": "Privilege-escalation sweeps",
+              "tools": [
+                {
+                  "name": "adPEAS",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "easy",
+                  "desc": "Active-Directory-flavored PEAS: a PowerShell sweep that checklists misconfigurations across users, groups, GPOs, ACLs, Kerberos, and delegation from a single domain-joined run.",
+                  "when": "Fast, readable AD hygiene sweep during authorized testing or internal audits when you want a findings checklist before deeper graph work.",
+                  "install": "git clone https://github.com/ajm4n/adPEAS && run adPEAS.ps1 from an authenticated domain session",
+                  "url": "https://github.com/ajm4n/adPEAS",
+                  "alt": ["PowerView", "ldapdomaindump"]
+                }
+              ]
+            },
+            {
+              "id": "scorecards",
+              "name": "Assessment scorecards",
+              "tools": [
+                {
+                  "name": "Purple Knight",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Free commercial scoring (Semperis) that rates hybrid AD, Entra ID, and Okta estates against 150+ indicators of exposure and compromise, with MITRE ATT&CK mapping and prioritized guidance.",
+                  "when": "Complement PingCastle when you also manage Entra ID or Okta and want an easy scorecard plus IoC checks over the hybrid estate.",
+                  "install": "Download the Windows agent from https://www.semperis.com/purple-knight/ (free registration required)",
+                  "url": "https://www.semperis.com/purple-knight/",
+                  "alt": ["PingCastle", "ADRecon"]
+                }
+              ]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "protocol-toolkit",
-      "name": "Protocol Toolkit (Linux-side)",
-      "tools": [
+      "id": "ldap-query",
+      "name": "LDAP & ADSI Directory Queries",
+      "subcategories": [
         {
-          "name": "Impacket",
-          "rating": 5,
-          "effort": "medium",
-          "desc": "Fortra's Python library of Windows network protocol implementations plus ~100 example scripts — secretsdump (remote SAM/LSA/NTDS credential extraction over DRSUAPI/DCOM/registry in mimikatz-compatible hash format), psexec/wmiexec/atexec remote execution, ntlmrelayx, and a full Kerberos toolbox.",
-          "when": "The foundation for nearly all Linux-side AD work: secretsdump is the standard way to audit credential hygiene on controllers and hosts during an authorized assessment.",
-          "install": "python3 -m pipx install impacket",
-          "url": "https://github.com/fortra/impacket",
-          "alt": ["NetExec"]
+          "id": "raw-clients",
+          "name": "Raw query clients",
+          "tools": [
+            {
+              "name": "ldapsearch",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "OpenLDAP's ubiquitous CLI for anonymous and authenticated LDAP queries — users, groups, computers, GPOs, ACLs, and schema, filterable on any attribute.",
+              "when": "The first read-only look at any authorized directory: quick non-invasive enumeration and attribute mining that touches nothing on disk.",
+              "install": "apt-get install -y ldap-utils",
+              "url": "https://www.openldap.org/",
+              "alt": ["ADFind", "windapsearch", "NetExec (nxc ldap)"]
+            },
+            {
+              "name": "ADFind",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Joeware's battle-tested Windows LDAP search tool with terser output and built-in switches for common ADC, trust, PSO, and password-policy queries.",
+              "when": "Scripted one-line AD queries from Windows during audits where switch-friendly output beats raw LDIF.",
+              "install": "Download adfind.exe from https://www.joeware.net/freetools/tools/adfind/",
+              "url": "https://www.joeware.net/freetools/tools/adfind/",
+              "alt": ["ldapsearch", "windapsearch"]
+            },
+            {
+              "name": "windapsearch",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Python LDAP enumerator tuned for penetration workflow: dumps domain users with their group memberships, computers, privileged groups, and more from a single credential.",
+              "when": "Fast user/group enumeration during authorized testing when you want structured output instead of hand-rolled ldapsearch filters.",
+              "install": "git clone https://github.com/ropnop/windapsearch && pip install -r requirements.txt",
+              "url": "https://github.com/ropnop/windapsearch",
+              "alt": ["ldapdomaindump", "ldapsearch"]
+            }
+          ]
         },
         {
-          "name": "NetExec",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "The maintained successor to CrackMapExec: multi-protocol (SMB, LDAP, MSSQL, SSH, WinRM, RDP) credential validation that rapidly tests which identities work where, sprays passwords, and enumerates shares, users, sessions, domains, and password policy across a fleet.",
-          "when": "Fast credential-driven health-check across many hosts in one pass — who is effective as admin, which policy is weakest, and which shares are open.",
-          "install": "pipx install git+https://github.com/Pennyw0rth/NetExec",
-          "url": "https://github.com/Pennyw0rth/NetExec",
-          "alt": ["Impacket"]
+          "id": "dumpers",
+          "name": "Bulk enumerators & GUI explorers",
+          "tools": [
+            {
+              "name": "ldapdomaindump",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Dumps the entire domain object surface — groups, users, computers, GPOs, DNS zones, trusts, and shares — to browesable grep-friendly files using just domain credentials.",
+              "when": "Baseline full-directory export during authorized engagements for later offline review and scripted analysis.",
+              "install": "pipx install ldapdomaindump",
+              "url": "https://github.com/dirkjanm/ldapdomaindump",
+              "alt": ["windapsearch", "AD Explorer"]
+            },
+            {
+              "name": "Active Directory Explorer (AD Explorer)",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Sysinternals viewer that snapshots and browsably compares the full AD database — including every security descriptor and ACL — with hex views of attribute values.",
+              "when": "Interactive ACL/attribute forensics and before-after comparison of changes during an authorized assessment or blue-team review.",
+              "install": "Download AD Explorer from the Microsoft Sysinternals page (https://learn.microsoft.com/sysinternals/downloads/adexplorer)",
+              "url": "https://learn.microsoft.com/sysinternals/downloads/adexplorer",
+              "alt": ["ADSI Edit", "ldapdomaindump"]
+            },
+            {
+              "name": "ADSI Edit (MMC)",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Microsoft's built-in snap-in for direct read/write access to every AD object and attribute, including configuration and schema partitions.",
+              "when": "Point-and-click verification of specific attribute values and ACLs during audits without writing scripts.",
+              "install": "Add via 'Turn Windows features on or off' → AD DS and AD LDS Tools (native on domain controllers)",
+              "url": "https://learn.microsoft.com/windows-server/identity/ad-ds/get-started/adsi-edit",
+              "alt": ["AD Explorer", "ldapsearch"]
+            }
+          ]
         },
         {
-          "name": "Kerbrute",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Go tool that validates AD usernames and tests passwords through Kerberos AS-REQ/AS-REP exchanges; its userenum mode never triggers account lockout, while passwordspray/bruteforce do and are meant for policy-aware testing.",
-          "when": "Discover which candidate usernames actually exist during recon, and safely prove a single reused weak password across a user list you monitor in your own logs.",
-          "install": "go install github.com/ropnop/kerbrute@latest",
-          "url": "https://github.com/ropnop/kerbrute",
-          "alt": ["Rubeus", "NetExec"]
-        },
-        {
-          "name": "Rubeus",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "C# toolset for raw Kerberos interaction — ticket requests and passthe-ticket, overpass-the-hash, golden/silver/diamond ticket forging, Kerberoasting, AS-REP roasting, and s4u delegation testing, compiled to run on Windows.",
-          "when": "Windows-side Kerberos validation: check which service accounts are Kerberoastable and how delegation and ticket caching expose lateral movement in your domain.",
-          "install": "Prebuilt binaries ship under Rubeus/Release — or compile with dotnet build against the repo source",
-          "url": "https://github.com/GhostPack/Rubeus",
-          "alt": ["Impacket (getTGT/getTGS)", "Kerbrute"]
+          "id": "fleet",
+          "name": "Fleet-wide LDAP & credential validation",
+          "tools": [
+            {
+              "name": "NetExec",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "The maintained successor to CrackMapExec: multi-protocol (SMB, LDAP, MSSQL, SSH, WinRM, RDP) credential validation that rapidly tests which identities work where, sprays passwords, and enumerates shares, users, sessions, domains, and password policy across a fleet.",
+              "when": "Fast credential-driven health-check across many hosts in one pass — including `nxc ldap` for user/policy enumeration — during authorized assessments.",
+              "install": "pipx install git+https://github.com/Pennyw0rth/NetExec",
+              "url": "https://github.com/Pennyw0rth/NetExec",
+              "alt": ["windapsearch", "ldapdomaindump"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "credential-abuse",
-      "name": "Credential Exposure Testing",
-      "tools": [
+      "id": "kerberos",
+      "name": "Kerberos Attacks & Ticket Abuse",
+      "subcategories": [
         {
-          "name": "Mimikatz",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "The canonical Windows credential tool: sekurlsa extracts plaintext passwords, NTLM hashes, PINs, and Kerberos tickets from LSASS memory, while lsadump covers SAM, LSA secrets, DCSync, and DCShadow, plus pass-the-hash/ticket and token manipulation.",
-          "when": "On an authorized host with local admin to prove whether LSASS-accessible credentials leak and whether protections like LSA Protection or Credential Guard actually hold.",
-          "install": "Download prebuilt binaries from https://github.com/gentilkiwi/mimikatz/releases",
-          "url": "https://github.com/gentilkiwi/mimikatz",
-          "alt": ["pypykatz", "lsassy"]
+          "id": "roasting",
+          "name": "Roasting",
+          "subcategories": [
+            {
+              "id": "kerberoast",
+              "name": "Kerberoasting",
+              "tools": [
+                {
+                  "name": "Rubeus",
+                  "best": true,
+                  "rating": 5,
+                  "effort": "medium",
+                  "desc": "C# toolset for raw Kerberos interaction — ticket requests, passthe-ticket, overpass-the-hash, ticket forging, Kerberoasting, AS-REP roasting, and s4u delegation testing, compiled to run on Windows.",
+                  "when": "Windows-side Kerberos validation: check which service accounts are Kerberoastable and how delegation and ticket caching expose lateral movement in your domain.",
+                  "install": "git clone https://github.com/GhostPack/Rubeus && dotnet build (or run a compiled release binary)",
+                  "url": "https://github.com/GhostPack/Rubeus",
+                  "alt": ["Impacket GetUserSPNs", "kekeo"]
+                },
+                {
+                  "name": "Impacket GetUserSPNs",
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Impacket example script that requests TGS tickets for every registered SPN account and exports the encrypted segments in crackable hashcat/Hashcat format from Linux.",
+                  "when": "Linux-side Kerberoasting with just domain credentials — pair the output with hashcat to prove weak service-account passwords in authorized tests.",
+                  "install": "pipx install impacket",
+                  "url": "https://github.com/fortra/impacket",
+                  "alt": ["Rubeus"]
+                }
+              ]
+            },
+            {
+              "id": "asrep",
+              "name": "AS-REP Roasting",
+              "tools": [
+                {
+                  "name": "Impacket GetNPUsers",
+                  "best": true,
+                  "rating": 4,
+                  "effort": "medium",
+                  "desc": "Impacket example script that requests pre-authentication-free AS-REPs for accounts with 'Do not require Kerberos pre-authentication' and exports crackable hash segments.",
+                  "when": "Identify and prove weak passwords on accounts without Kerberos pre-auth during authorized audits from Linux.",
+                  "install": "pipx install impacket",
+                  "url": "https://github.com/fortra/impacket",
+                  "alt": ["ASREPRoast"]
+                },
+                {
+                  "name": "ASREPRoast",
+                  "rating": 3,
+                  "effort": "medium",
+                  "desc": "HarmJ0y's PowerShell toolkit that retrieves crackable hashes from KRB5 AS-REP responses for user enumeration and pre-auth-disabled account auditing.",
+                  "when": "Windows-side AS-REP roasting when you are already in a network session and want the native PowerShell route.",
+                  "install": "git clone https://github.com/HarmJ0y/ASREPRoast",
+                  "url": "https://github.com/HarmJ0y/ASREPRoast",
+                  "alt": ["Impacket GetNPUsers"]
+                }
+              ]
+            }
+          ]
         },
         {
-          "name": "pypykatz",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "Pure-Python reimplementation of Mimikatz's sekurlsa: parses live LSASS memory or minidump files on any OS to recover NT hashes, plaintext credentials, Kerberos tickets, and DPAPI keys.",
-          "when": "Analyze an LSASS dump from Linux during incident response or assessment when you hold the dump rather than a live Windows host.",
-          "install": "pipx install pypykatz",
-          "url": "https://github.com/skelsec/pypykatz",
-          "alt": ["Mimikatz", "lsassy"]
+          "id": "tickets",
+          "name": "Ticket requests & delegation",
+          "tools": [
+            {
+              "name": "Impacket getTGT / getST",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Impacket scripts that obtain TGTs (with password or NT hash via AES/RC4) and service tickets via S4U2Self/S4U2Proxy, enabling constrained-delegation and resource-based-delegation validation from Linux.",
+              "when": "Prove unconstrained/constrained/resource-based delegation abuse paths in authorized tests without any Windows-side pieces.",
+              "install": "pipx install impacket",
+              "url": "https://github.com/fortra/impacket",
+              "alt": ["Rubeus", "kekeo"]
+            },
+            {
+              "name": "kekeo",
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Gentilkiwi's Kerberos suite for ticket generation, renewal, and fabrication (including golden/silver tickets and s4u abuse) as a lighter companion to Mimikatz.",
+              "when": "Windows-native ticket forging and delegation testing where you want a purpose-built alternative to the C# tooling.",
+              "install": "git clone https://github.com/gentilkiwi/kekeo && build with Visual Studio (binaries under x64/Release)",
+              "url": "https://github.com/gentilkiwi/kekeo",
+              "alt": ["Rubeus", "Impacket getTGT / getST"]
+            }
+          ]
         },
         {
-          "name": "lsassy",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Python tool that remotely dumps LSASS (comsvcs, Procdump, nanodump, and more methods) over SMB/WMI from whole fleets at once and extracts credentials in place with pypykatz.",
-          "when": "When you hold admin on a set of Windows hosts and want to audit logged-on credential exposure across the fleet without interactive sessions on each box.",
-          "install": "pipx install lsassy",
-          "url": "https://github.com/login-securite/lsassy",
-          "alt": ["Mimikatz", "pypykatz"]
+          "id": "spraying",
+          "name": "Username enumeration & password spraying",
+          "tools": [
+            {
+              "name": "Kerbrute",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Go tool that validates AD usernames and tests passwords through Kerberos AS-REQ/AS-REP exchanges; its userenum mode never triggers account lockout, while passwordspray/bruteforce do and are meant for policy-aware testing.",
+              "when": "Discover which candidate usernames actually exist during recon, and safely prove a single reused weak password across a user list you monitor in your own logs.",
+              "install": "go install github.com/ropnop/kerbrute@latest",
+              "url": "https://github.com/ropnop/kerbrute",
+              "alt": ["DomainPasswordSpray", "NetExec"]
+            },
+            {
+              "name": "DomainPasswordSpray",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Dafthack's PowerShell sprayer that gathers the user list from AD, checks the domain lockout policy, and tests one password per user (or a small set) with delay controls to stay under thresholds.",
+              "when": "Lockout-safe password-spray audit of your own domain when you need built-in policy-awareness and randomized delays.",
+              "install": "git clone https://github.com/dafthack/DomainPasswordSpray && .\\DomainPasswordSpray.ps1",
+              "url": "https://github.com/dafthack/DomainPasswordSpray",
+              "alt": ["Kerbrute", "NetExec"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "powershell",
-      "name": "PowerShell & Scripted Enumeration",
-      "tools": [
+      "id": "ntlm-relay",
+      "name": "NTLM Relaying & Protocol Poisoning",
+      "subcategories": [
         {
-          "name": "PowerView",
-          "best": true,
-          "rating": 5,
-          "effort": "easy",
-          "desc": "Pure-PowerShell AD enumerator (PowerSploit) turning LDAP into one-liner cmdlets for users, groups, computers, GPOs, ACLs, shares, and trust maps; also hunts which machines specific users log into and where you have local admin.",
-          "when": "From a domain-joined PowerShell session when you need fast, scriptable situational awareness without dropping a binary on disk — and to see exactly what attackers enumerate first.",
-          "install": "git clone https://github.com/PowerShellMafia/PowerSploit && Import-Module .\\Recon\\PowerView.ps1",
-          "url": "https://github.com/PowerShellMafia/PowerSploit",
-          "alt": ["PowerUp", "BloodHound.py"]
+          "id": "poisoning",
+          "name": "Name-resolution poisoning (LLMNR / NBT-NS / mDNS)",
+          "tools": [
+            {
+              "name": "Responder",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "The reference LLMNR/NBT-NS/mDNS poisoner and SMB/HTTP/LDAP rogue-server that captures NetNTLMv2 challenges for cracking or relay in lab and authorized bipedal-spook-and-serve testing.",
+              "when": "Confirm whether name resolution poisoned traffic and NTLM challenge responses are being accepted on your own lab network.",
+              "install": "git clone https://github.com/lgandx/Responder && sudo python3 Responder.py -I eth0",
+              "url": "https://github.com/lgandx/Responder",
+              "alt": ["Inveigh", "mitm6"]
+            },
+            {
+              "name": "mitm6",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "IPv6 DNS poisoning tool (by the PetitPotam author) that answers DHCPv6/RA traffic to route a victim's updates to an attacker-controlled DNS, enabling WPAD or LDAP relay chains.",
+              "when": "IPv6-first poisoning in lab environments to demonstrate why IPv6 without mitigations is a relay avenue.",
+              "install": "pipx install mitm6",
+              "url": "https://github.com/dirkjanm/mitm6",
+              "alt": ["Responder"]
+            },
+            {
+              "name": "Inveigh",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Kevin-Robertson's Windows PowerShell/C# LLMNR/NBT-NS/mDNS/SMBv1 responder and NTLMv1/v2 challenge-capturer with Console and Web GUI views.",
+              "when": "Windows-native poisoning lab where you want a pure-PowerShell or compiled alternative to the Linux Responder.",
+              "install": "iwr https://raw.githubusercontent.com/Kevin-Robertson/Inveigh/master/Scripts/Inveigh.ps1",
+              "url": "https://github.com/Kevin-Robertson/Inveigh",
+              "alt": ["Responder"]
+            }
+          ]
         },
         {
-          "name": "PowerUp",
-          "rating": 4,
-          "effort": "easy",
-          "desc": "PowerSploit module that audits a Windows host for common local privilege-escalation misconfigurations — unquoted service paths, writable service binaries, modifiable services, AlwaysInstallElevated — and reports each with abuse-ready detail.",
-          "when": "Local privilege-escalation audit of a single host during sanctioned testing or as part of hardening a fleet that lacks LAPS and least-privilege discipline.",
-          "install": "git clone https://github.com/PowerShellMafia/PowerSploit && Import-Module .\\Privesc\\PowerUp.ps1",
-          "url": "https://github.com/PowerShellMafia/PowerSploit",
-          "alt": ["PowerView"]
+          "id": "relay",
+          "name": "Relay chains",
+          "tools": [
+            {
+              "name": "Impacket ntlmrelayx",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Impacket's NTLM relay server that forwards captured NetNTLM challenges to SMB, LDAP(S), HTTP(S), and MSSQL targets, with built-in modules for dumping SAM, creating users, and targeting printers (CVE-2019-1040 MIC-removal support).",
+              "when": "In a controlled lab, relay an intercepted challenge to an authorized target to prove what NTLM-signing-off and relay protections are really enforcing.",
+              "install": "pipx install impacket",
+              "url": "https://github.com/fortra/impacket",
+              "alt": ["Responder"]
+            }
+          ]
         },
         {
-          "name": "BloodHound.py",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Python/Impacket ingestor for BloodHound CE that collects users, computers, groups, trusts, ACLs, sessions, and local admins from Linux using only credentials — no Windows host or SharpHound binary required.",
-          "when": "When you need BloodHound data but have no Windows foothold; the Linux-native collection counterpart to SharpHound.",
-          "install": "pipx install bloodhound-ce (bloodhound-ce branch adds the bloodhound-ce-python CLI)",
-          "url": "https://github.com/dirkjanm/BloodHound.py",
-          "alt": ["PowerView"]
+          "id": "coercion",
+          "name": "Auth coercion (printer-bug family)",
+          "tools": [
+            {
+              "name": "printerbug.py",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Decoder-it's DCERPC-only printerbug.py that triggers the MS-RPRN printer bug to coerce a host into authenticating to your listener — the cornerstone of unconstrained/relay abuse chains.",
+              "when": "Coerce an authorized target machine account to authenticate to your relay/responder in lab environments for relay and delegation abuse scenarios.",
+              "install": "git clone https://github.com/decoder-it/printerbugnew && python3 printerbug.py domain/user:pass@target attacker_ip",
+              "url": "https://github.com/decoder-it/printerbugnew",
+              "alt": ["SpoolSample", "PetitPotam"]
+            },
+            {
+              "name": "SpoolSample",
+              "rating": 3,
+              "effort": "advanced",
+              "desc": "The original MS-RPRN spoolsv.exe abuse PoC that forces a target to authenticate back to you, historically tuned for unconstrained delegation attacks.",
+              "when": "Lab-only coercion lab where you want the original Windows-side compiled spooler-sampler reference implementation.",
+              "install": "git clone https://github.com/leechristensen/SpoolSample && build with Visual Studio",
+              "url": "https://github.com/leechristensen/SpoolSample",
+              "alt": ["printerbug.py"]
+            }
+          ]
         }
       ]
     },
     {
-      "id": "ad-audit",
-      "name": "AD Risk & Health Auditing",
-      "tools": [
+      "id": "legacy-pocs",
+      "name": "Legacy Attack Labs (PoC repos — lab only)",
+      "subcategories": [
         {
-          "name": "PingCastle",
-          "best": true,
-          "rating": 5,
-          "effort": "medium",
-          "desc": "Active Directory risk and maturity audit (by Netwrix) that scores a domain 0–100 across ~10 axes — accounts, ADCS, Kerberos, trusts, delegation, GPOs, infrastructure — and emits a CISO-ready HTML report with prioritized remediation via a read-only healthcheck.",
-          "when": "The default first formal AD security assessment: minutes to run, zero writes, and ideal as a recurring blue-team health check or engagement kickoff.",
-          "install": "Download standalone PingCastle.exe from https://github.com/netwrix/pingcastle/releases and run on a domain-joined Windows host (.NET 8)",
-          "url": "https://github.com/netwrix/pingcastle",
-          "alt": ["Purple Knight", "ADRecon"]
+          "id": "cve",
+          "name": "Critical CVE PoCs",
+          "tools": [
+            {
+              "name": "Zerologon PoC (CVE-2020-1472)",
+              "best": true,
+              "rating": 4,
+              "effort": "advanced",
+              "desc": "Dirkjanm's canonical PoC for the Zerologon Netlogon cryptographic bypass that resets a DC machine-account password to empty and allows Domain-Admin takeover.",
+              "when": "Practice reproducing a fully-patched-against critical flaw in an isolated lab domain controller only; restore passwords immediately as in dirkjanm's reinstall/restore flow.",
+              "install": "git clone https://github.com/dirkjanm/CVE-2020-1472 && pip3 install -r requirements.txt (lab VMs only)",
+              "url": "https://github.com/dirkjanm/CVE-2020-1472",
+              "alt": ["PetitPotam"]
+            },
+            {
+              "name": "PetitPotam",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "EFS-prone authentication coercion PoC (CVE-2021-36942) that forces a Windows host to authenticate to your listener via the Encrypting File System RPC — enabling relay to LDAP-based DC-auth abuse.",
+              "when": "Lab demonstrations of EFS-based coercion and NTLM relay to LDAP(S) signing; SMB signing and LDAP channel-binding mitigations should be validated as the control.",
+              "install": "git clone https://github.com/topotam/PetitPotam && python3 PetitPotam.py attacker_ip target (lab only)",
+              "url": "https://github.com/topotam/PetitPotam",
+              "alt": ["printerbug.py", "Zerologon PoC (CVE-2020-1472)"]
+            }
+          ]
         },
         {
-          "name": "Purple Knight",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "Free commercial assessment from Semperis scoring hybrid AD, Entra ID, and Okta estates against 150+ indicators of exposure and compromise, with MITRE ATT&CK mapping and prioritized executive guidance.",
-          "when": "Complement PingCastle when you also manage Entra ID or Okta and want an easy scorecard plus IoC checks across the hybrid estate.",
-          "install": "Download the Windows agent from https://www.semperis.com/purple-knight/ (free registration required)",
-          "url": "https://www.semperis.com/purple-knight/",
-          "alt": ["PingCastle", "ADRecon"]
+          "id": "ntlmv1",
+          "name": "NTLMv1 downgrade & legacy protocol testing",
+          "tools": [
+            {
+              "name": "smbclient (NTLMv1 dialect)",
+              "best": true,
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Samba's authenticated SMB client whose `-m NT1` mode forces the legacy NTLMv1/RC4 dialect, making it a quick probe for whether a host still accepts NTLMv1.",
+              "when": "Lab-only check that a test host rejects NTLMv1 (LanMan-compat) as configured, or proving a downgrade lane in an isolated test environment.",
+              "install": "apt-get install -y smbclient",
+              "url": "https://www.samba.org/samba/docs/current/man-html/smbclient.1.html",
+              "alt": ["Responder"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "gpo-acl",
+      "name": "GPO & ACL Exploitation Tooling",
+      "subcategories": [
+        {
+          "id": "acl",
+          "name": "ACL analysis & abuse",
+          "tools": [
+            {
+              "name": "ADACLScanner",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "the SysArc ADACL scanner that reports dangerous ACL entries — GenericAll/WriteDacl/WriteOwner/ForceChangePassword — across domain, OUs, groups, and users in readable HTML.",
+              "when": "Read-only ACL risk sweep of your own domain to find object-owner and self-abuse-style issues before an attacker graphs them.",
+              "install": "git clone https://github.com/canix1/ADACLScanner && .\\ADACLScan.ps1 from a domain-joined Windows host",
+              "url": "https://github.com/canix1/ADACLScanner",
+              "alt": ["Impacket dacledit", "BloodHound CE"]
+            },
+            {
+              "name": "Impacket dacledit",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Impacket example script that leverages a control-established object ace (WriteDACL/WriteOwner/GenericAll) to edit target ACLs — including adding a full-control ACE for the attacker.",
+              "when": "Step through shelf ACL-abuse chains in a lab — the standard 'I own the ACE, so I own this object' proof step.",
+              "install": "pipx install impacket",
+              "url": "https://github.com/fortra/impacket",
+              "alt": ["ADACLScanner"]
+            }
+          ]
         },
         {
-          "name": "ADRecon",
-          "rating": 4,
-          "effort": "medium",
-          "desc": "PowerShell tool that extracts a wide slice of AD state — users, groups, OUs, GPOs, trusts, ACLs, password policies, DNS zones, and optionally LAPS/BitLocker keys and Kerberoastable SPNs — and consolidates it into a summary Excel workbook.",
-          "when": "Broad read-only documentation of an environment for audit reports; runs as an ordinary domain user and works from non-member hosts over LDAP.",
-          "install": "git clone https://github.com/adrecon/ADRecon && .\\ADRecon.ps1 on a Windows host",
-          "url": "https://github.com/adrecon/ADRecon",
-          "alt": ["PingCastle", "AD-Audit"]
+          "id": "gpo",
+          "name": "Group Policy abuse",
+          "tools": [
+            {
+              "name": "SharpGPOAbuse",
+              "best": true,
+              "rating": 4,
+              "effort": "medium",
+              "desc": "C# tool that edits GPO DACLs you already control to add immediate scheduled tasks, services, or registry changes — the standard Writeable-GPO machine-takeover primitive (kept alive by the ReversecLabs mirror).",
+              "when": "Demonstrate the impact of writable GPOs in authorized tests once a user holds a GPO-modify privilege; roll back the GPO after testing.",
+              "install": "git clone https://github.com/ReversecLabs/SharpGPOAbuse && dotnet build (or run a compiled release binary)",
+              "url": "https://github.com/ReversecLabs/SharpGPOAbuse",
+              "alt": ["pyGPOAbuse", "PowerView (Get-GPO)"]
+            },
+            {
+              "name": "pyGPOAbuse",
+              "rating": 3,
+              "effort": "easy",
+              "desc": "Hackndo's Python port that adds an immediate scheduled task to a writable GPO from Linux, mirroring SharpGPOAbuse without a Windows binary.",
+              "when": "GPO-edit proof from a Linux foothold during authorized multi-step chain construction in labs.",
+              "install": "git clone https://github.com/Hackndo/pyGPOAbuse && python3 gpoabuse.py -d domain -u user -p pass ...",
+              "url": "https://github.com/Hackndo/pyGPOAbuse",
+              "alt": ["SharpGPOAbuse"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "credential-exposure",
+      "name": "Credential-Access Testing",
+      "subcategories": [
+        {
+          "id": "lsass",
+          "name": "LSASS & memory credential access",
+          "tools": [
+            {
+              "name": "Mimikatz",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "The canonical Windows credential tool: `sekurlsa` extracts plaintext passwords, NTLM hashes, PINs, and Kerberos tickets from LSASS memory while `lsadump` covers SAM, LSA secrets, DCSync, and DCShadow.",
+              "when": "On an authorized host with local admin to prove whether LSASS-accessible credentials leak and whether protections like LSA Protection or Credential Guard actually hold.",
+              "install": "Download prebuilt binaries from https://github.com/gentilkiwi/mimikatz/releases",
+              "url": "https://github.com/gentilkiwi/mimikatz",
+              "alt": ["pypykatz", "lsassy"]
+            },
+            {
+              "name": "pypykatz",
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Pure-Python reimplementation of Mimikatz's sekurlsa that parses live LSASS memory or minidumps on any OS to recover NT hashes, plaintext credentials, Kerberos tickets, and DPAPI keys.",
+              "when": "Analyze an LSASS minidump from Linux during incident-response or assessment when you hold the dump rather than a live Windows host.",
+              "install": "pipx install pypykatz",
+              "url": "https://github.com/skelsec/pypykatz",
+              "alt": ["Mimikatz"]
+            },
+            {
+              "name": "lsassy",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "Python tool that remotely dumps LSASS (comsvcs, Procdump, nanodump, and more methods) over SMB/WMI from whole fleets and extracts credentials in place with pypykatz.",
+              "when": "When you hold admin on an authorized set of Windows hosts and want to audit logged-on credential exposure across the fleet without interactive sessions.",
+              "install": "pipx install lsassy",
+              "url": "https://github.com/login-securite/lsassy",
+              "alt": ["Mimikatz", "pypykatz"]
+            }
+          ]
         },
         {
-          "name": "AD-Audit",
-          "rating": 3,
-          "effort": "medium",
-          "desc": "Modular PowerShell auditing suite aligned to Microsoft security best practices: user/computer hygiene, group policy, domain-controller security, credential-theft prevention, least privilege, AD FS, event monitoring, and ADCS checks with SQLite-backed findings.",
-          "when": "Teams wanting an extensible, automation-friendly policy-check audit (CI/CD output) rather than a single maturity score.",
-          "install": "git clone https://github.com/adrian207/AD-Audit && Import-Module .\\AD-Audit.psd1 (requires PowerShell 5.1+ and the RSAT ActiveDirectory module)",
-          "url": "https://github.com/adrian207/AD-Audit",
-          "alt": ["ADRecon", "PingCastle"]
+          "id": "remote-dcsync",
+          "name": "Remote domain-credential extraction",
+          "tools": [
+            {
+              "name": "Impacket secretsdump",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Impacket's flagship script that remotely extracts SAM/LSA/DRSUAPI/NTDS passwords and hashes in mimikatz-compatible format over DCOM, registry, and hypothetical replication.",
+              "when": "The standard authorized way to audit password-hash hygiene on DCs and hosts from Linux — directory-replication rights permitting.",
+              "install": "pipx install impacket",
+              "url": "https://github.com/fortra/impacket",
+              "alt": ["lsassy", "Mimikatz"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "scripted-enum",
+      "name": "PowerShell Scripted Enumeration",
+      "subcategories": [
+        {
+          "id": "ad-recon",
+          "name": "AD recon cmdlets",
+          "tools": [
+            {
+              "name": "PowerView",
+              "best": true,
+              "rating": 5,
+              "effort": "easy",
+              "desc": "Pure-PowerShell AD enumerator (PowerSploit) turning LDAP into one-liner cmdlets for users, groups, computers, GPOs, ACLs, shares, and trust maps; also hunts which machines specific users log into.",
+              "when": "From a domain-joined PowerShell session when you need fast, scriptable situational awareness without dropping a binary on disk — and to see exactly what attackers enumerate first.",
+              "install": "git clone https://github.com/PowerShellMafia/PowerSploit && Import-Module .\\Recon\\PowerView.ps1",
+              "url": "https://github.com/PowerShellMafia/PowerSploit",
+              "alt": ["adPEAS", "BloodHound.py"]
+            }
+          ]
+        },
+        {
+          "id": "privesc",
+          "name": "Local privilege-escalation auditing",
+          "tools": [
+            {
+              "name": "PowerUp",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "PowerSploit module that audits a Windows host for common local privesc misconfigurations — unquoted service paths, writable service binaries, modifiable services, AlwaysInstallElevated — with abuse-ready detail.",
+              "when": "Local privilege-escalation audit of a single host during sanctioned testing or hardening a fleet that lacks LAPS and least-privilege discipline.",
+              "install": "git clone https://github.com/PowerShellMafia/PowerSploit && Import-Module .\\Privesc\\PowerUp.ps1",
+              "url": "https://github.com/PowerShellMafia/PowerSploit",
+              "alt": ["PowerView"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "blueview",
+      "name": "Blue-Team Visibility & Lab Hardening",
+      "subcategories": [
+        {
+          "id": "laps",
+          "name": "Local admin password (LAPS) hygiene",
+          "tools": [
+            {
+              "name": "LAPSToolkit",
+              "best": true,
+              "rating": 4,
+              "effort": "easy",
+              "desc": "Leoloobeek's PowerShell suite that audits LAPS-deployed estates — enumerating computers with expired/missing passwords, readable LAPS attributes, and delegations that expose admin passwords.",
+              "when": "Verify LAPS coverage and that delegation groups can't read passwords, before attackers abuse unexpired or overly-broad LAPS delegation.",
+              "install": "git clone https://github.com/leoloobeek/LAPSToolkit && .\\LAPSToolkit.ps1 (Windows LAPS also ships as built-in AD/Entra policy tooling)",
+              "url": "https://github.com/leoloobeek/LAPSToolkit",
+              "alt": ["ADRecon", "PingCastle"]
+            }
+          ]
+        },
+        {
+          "id": "health",
+          "name": "AD health & risk scoring",
+          "tools": [
+            {
+              "name": "PingCastle",
+              "best": true,
+              "rating": 5,
+              "effort": "medium",
+              "desc": "Active Directory risk and maturity audit (by Netwrix) that scores a domain 0–100 across ~10 axes — accounts, ADCS, Kerberos, trusts, delegation, GPOs, infrastructure — with a CISO-ready HTML report via read-only healthcheck.",
+              "when": "The default first formal AD security assessment: minutes to run, zero writes, ideal as a recurring blue-team health check or engagement kickoff.",
+              "install": "Download standalone PingCastle.exe from https://github.com/netwrix/pingcastle/releases and run on a domain-joined Windows host (.NET 8)",
+              "url": "https://github.com/netwrix/pingcastle",
+              "alt": ["Purple Knight", "ADRecon"]
+            },
+            {
+              "name": "ADRecon",
+              "rating": 4,
+              "effort": "medium",
+              "desc": "PowerShell tool that extracts a wide slice of AD state — users, groups, OUs, GPOs, trusts, ACLs, password policies, DNS zones, optionally LAPS/BitLocker keys and Kerberoastable SPNs — into a summary Excel workbook.",
+              "when": "Broad read-only documentation of an environment for audit reports; runs as an ordinary domain user and works from non-member hosts over LDAP.",
+              "install": "git clone https://github.com/adrecon/ADRecon && .\\ADRecon.ps1 on a Windows host",
+              "url": "https://github.com/adrecon/ADRecon",
+              "alt": ["PingCastle", "ADACLScanner"]
+            }
+          ]
         }
       ]
     }
