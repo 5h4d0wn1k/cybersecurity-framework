@@ -79,6 +79,28 @@ contain:
 
 `"class": "offense"` (red/attack) or `"class": "defense"` (blue/defend).
 
+## Top-level pillar structure (`tree/_structure.json`)
+
+The site map boots in an "all domains" view. That view is defined by
+`tree/_structure.json`, which groups the 27 domains into **two pillars**,
+each holding **main categories** that follow the attack/defense lifecycle:
+
+```json
+{
+  "pillars": [
+    { "id": "offense", "name": "Offensive Security", "class": "offense",
+      "groups": [
+        { "id": "recon", "name": "Reconnaissance & OSINT", "domains": ["osint", "recon"] }
+      ] },
+    { "id": "defense", "name": "Defensive Security", "class": "defense", "groups": [ ... ] }
+  ]
+}
+```
+
+The rendered hierarchy is: **Pillar → main category → domain → category → subcategory → tool**.
+Ids in `domains[]` must match `tree/<id>.json` files. `build.py` resolves them into the
+merged `docs/data/tree.json` under `pillars`.
+
 ## Markdown mirror
 
 `tree/<domain-id>.md` mirrors the JSON in readable markdown (## categories, ### tools,

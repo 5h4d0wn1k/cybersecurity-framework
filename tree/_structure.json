@@ -1,0 +1,38 @@
+{
+  "pillars": [
+    {
+      "id": "offense",
+      "name": "Offensive Security",
+      "emoji": "⚔️",
+      "class": "offense",
+      "tagline": "Recon → attack → breach: the tools an attacker (or authorized red teamer) reaches for at each stage.",
+      "groups": [
+        { "id": "recon",     "name": "Reconnaissance & OSINT",   "domains": ["osint", "recon"] },
+        { "id": "scanning",  "name": "Scanning & Assessment",    "domains": ["vuln-scan", "network"] },
+        { "id": "webapps",   "name": "Web & Mobile Apps",        "domains": ["web", "mobile"] },
+        { "id": "identity",  "name": "Identity & Active Directory", "domains": ["activedirectory"] },
+        { "id": "secrets",   "name": "Passwords & Crypto Attacks",  "domains": ["passwords", "crypto"] },
+        { "id": "exploit",   "name": "Exploitation & Payloads",  "domains": ["exploit", "binary", "privesc"] },
+        { "id": "c2",        "name": "C2 & Red Team Ops",        "domains": ["c2", "redteam"] },
+        { "id": "social",    "name": "Phishing & Social Engineering", "domains": ["phishing-social"] },
+        { "id": "embedded",  "name": "Wireless, Embedded & IoT", "domains": ["wireless", "iot"] }
+      ]
+    },
+    {
+      "id": "defense",
+      "name": "Defensive Security",
+      "emoji": "🛡️",
+      "class": "defense",
+      "tagline": "Detect → defend → recover: the tools for monitoring, hardening, forensics and resilience.",
+      "groups": [
+        { "id": "detection",   "name": "Detection & Monitoring",     "domains": ["blueteam", "threatintel"] },
+        { "id": "appsec",      "name": "Application Assurance",      "domains": ["appsec"] },
+        { "id": "dfir",        "name": "Forensics & Incident Response", "domains": ["forensics"] },
+        { "id": "malware",     "name": "Malware & Threat Analysis",  "domains": ["malware"] },
+        { "id": "hardening",   "name": "Hardening & Compliance",     "domains": ["hardening"] },
+        { "id": "cloud",       "name": "Cloud & Container Security", "domains": ["cloud", "container"] },
+        { "id": "deception",   "name": "Deception & Adversary Emulation", "domains": ["honeypots", "purpleteam"] }
+      ]
+    }
+  ]
+}

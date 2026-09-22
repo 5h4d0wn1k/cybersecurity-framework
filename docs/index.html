@@ -12,6 +12,7 @@
     --dim:#64748e; --acc:#4aa8ff; --acc2:#3d8bff;
     --grn:#3ddc97; --grn2:#2aa16f; --warn:#ffc94d; --red:#ff6b6b;
     --off:#ff8a5c; --def:#4dd6ff; --auth:#c084fc;
+    --off-bg:#1a1118; --def-bg:#0d1520;
     --node:#0f1522; --node-line:#2c3b57;
     --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
     --sans:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
@@ -22,6 +23,7 @@
     --dim:#7a89a6; --acc:#1d7fe0; --acc2:#0f6bc4; --grn:#0f9d63;
     --grn2:#0c7a4d; --warn:#b97600; --red:#d72f2f; --off:#d95a24;
     --def:#0a7fae; --auth:#7c3aed; --node:#ffffff; --node-line:#c3cde4;
+    --off-bg:#ffe9e0; --def-bg:#e6f4fb;
   }
   *{box-sizing:border-box}
   html,body{margin:0;height:100%}
@@ -57,17 +59,27 @@
   .link{fill:none;stroke:var(--line2);stroke-width:1.2;opacity:.7}
   .node{cursor:pointer}
   .node .bg{fill:var(--node);stroke:var(--node-line);stroke-width:1.2}
-  .node.d0 .bg{fill:var(--bg2);stroke:var(--acc2);stroke-width:1.8}
-  .node.d1 .bg{fill:var(--panel);stroke:var(--line2)}
-  .node.d2 .bg{fill:var(--node)}
+  .node.d0 .bg{fill:var(--bg2);stroke-width:2}
+  .node.d0.c-offense .bg{stroke:var(--off);fill:var(--off-bg)}
+  .node.d0.c-defense .bg{stroke:var(--def);fill:var(--def-bg)}
+  .node.d1 .bg{fill:var(--panel);stroke:var(--acc2);stroke-width:1.6}
+  .node.d2 .bg{fill:var(--panel);stroke:var(--line2);stroke-width:1.4}
+  .node.d2.c-offense .bg{stroke:var(--off)}
+  .node.d2.c-defense .bg{stroke:var(--def)}
   .node.d3 .bg{fill:var(--node)}
+  .node.d4 .bg{fill:var(--node)}
+  .node.d5 .bg{fill:var(--node)}
   .node text{fill:var(--txt);font:600 12.5px var(--mono);dominant-baseline:middle}
-  .node.d0 text{font-size:13px}
-  .node.d1 text{fill:var(--muted)}
-  .node.d2 text{fill:var(--muted);font-size:12px}
-  .node.d3 text{fill:var(--dim);font-size:12px}
+  .node.d0 text{font-size:14px}
+  .node.d1 text{font-size:13.5px;fill:var(--acc)}
+  .node.d2 text{fill:var(--muted)}
+  .node.d3 text{fill:var(--muted);font-size:12px}
+  .node.d4 text{fill:var(--dim);font-size:11.5px}
+  .node.d5 text{fill:var(--dim);font-size:11.5px}
   .node .chev{fill:none;stroke:var(--dim);stroke-width:2}
+  .node.d0 .chev{stroke:var(--acc2)}
   .node .cnt{fill:var(--dim);font:10px var(--mono);dominant-baseline:middle}
+  .node.d0 .cnt{fill:var(--muted)}
   .node .auth{fill:var(--auth);font:bold 9px var(--mono);dominant-baseline:middle}
   .node.d0 .auth{fill:var(--auth)}
   .tool{fill:var(--txt);font:600 11.5px var(--mono);dominant-baseline:middle}
@@ -205,24 +217,49 @@
     }
     return node;
   }
-  function mkDomain(dom, defColl) {
+  function mkDomain(dom, collapsed) {
     const root = { type: "domain", label: (dom.emoji ? dom.emoji + " " : "") + dom.name,
       cls: dom.cls, dom: dom.name, domIdx: dom._i, path: dom.name,
-      collapsed: !!defColl, children: [] };
+      collapsed: !!collapsed, children: [] };
     for (const c of dom.categories) root.children.push(mkCat(c, dom, dom.name));
     return root;
   }
+  function mkGroup(g, pillar) {
+    return { type: "group", label: g.name, cls: pillar.cls, pillar: pillar.id,
+      path: pillar.id + "/" + g.id, collapsed: true,
+      children: g.domains.map(d => mkDomain(d, true)) };
+  }
+  function mkPillar(p) {
+    return { type: "pillar", label: (p.emoji ? p.emoji + " " : "") + p.name,
+      cls: p.cls, path: p.id, tagline: p.tagline || "", collapsed: false,
+      children: (p.groups || []).map(g => mkGroup(g, p)) };
+  }
+  function setDepth(root) {
+    (function walk(n, pd) {
+      let d;
+      if (n.type === "pillar") d = 0;
+      else if (n.type === "group") d = 1;
+      else if (n.type === "domain") d = 2;
+      else d = pd + 1;
+      n.dv = Math.min(d, 5);
+      for (const c of (n.children || [])) walk(c, d);
+    })(root, 0);
+    return root;
+  }
 
+  let PILLS = [];
   let allRoot = null;
   let curRoot = null;
   let mode = "single";     // "single" | "all"
   let di = 0;
-  const LV = 30, VL = 28, WDOM = 210, WOTH = 170;
+  const LV = 30, VL = 28, WDOM = 220, WGRP = 300, WOTH = 170;
 
   function nodeWidth(n) {
     const l = (n.label || "").length;
-    const w = n.type === "domain" ? Math.max(WDOM, l * 8.8 + 64)
-           : n.type === "cat"      ? Math.max(WOTH, l * 8.4 + 60)
+    const w = n.type === "pillar" ? Math.max(WDOM + 60, l * 9.6 + 90)
+           : n.type === "group"   ? Math.max(WGRP, l * 8.8 + 70)
+           : n.type === "domain"  ? Math.max(WDOM, l * 8.8 + 64)
+           : n.type === "cat"     ? Math.max(WOTH, l * 8.4 + 60)
            : Math.max(150, l * 8.2 + (n.by ? 60 : 40));
     return w;
   }
@@ -280,19 +317,26 @@
       } else {
         const kidsT = (n.children || []).filter(k => k.type === "tool").length;
         const kidsC = (n.children || []).filter(k => k.type !== "tool").length;
-        const d = Math.min(n.d, 3);
-        el.setAttribute("class", "node d" + d);
+        el.setAttribute("class", "node d" + n.dv + " t" + n.type + " c" + n.cls);
         const w = nodeWidth(n);
-        const tpl = n.type === "domain"
+        const lx = n.type === "pillar" ? 26 : n.type === "group" ? 22 : n.type === "domain" ? 20 : 12;
+        const tpl = n.type === "pillar"
+          ? (`
+            <rect class="bg" x="-14" y="-17" width="${w}" height="34" rx="11"/>
+            <path class="chev" d="${chevPath(n.open)}"/>
+            <text x="${lx}" y="1">${esc(n.label)}</text>
+            <text class="cnt" x="${w - 10}" y="1" text-anchor="end">${childrenTools(n)} tools</text>
+            <title>${esc(n.tagline)}</title>`)
+          : n.type === "group"
           ? (`
             <rect class="bg" x="-12" y="-15" width="${w}" height="30" rx="10"/>
             <path class="chev" d="${chevPath(n.open)}"/>
-            <text x="20" y="1">${esc(n.label)}</text>
+            <text x="${lx}" y="1">${esc(n.label)}</text>
             <text class="cnt" x="${w - 8}" y="1" text-anchor="end">${childrenTools(n)}</text>`)
           : (`
             <rect class="bg" x="-10" y="-13" width="${w}" height="26" rx="8"/>
             <path class="chev" d="${chevPath(n.open)}"/>
-            <text x="12" y="1">${esc(n.label)}</text>
+            <text x="${lx}" y="1">${esc(n.label)}</text>
             <text class="cnt" x="${w - 8}" y="1" text-anchor="end">${kidsT ? kidsT + " 🛠" : ""}${kidsC ? (kidsT ? " " : "") + kidsC + " ▸" : ""}</text>`);
         innerHTML(el, tpl);
         bind(el, n);
@@ -326,6 +370,10 @@
     if (n.type === "tool") {
       el.addEventListener("click", () => openPanel(n));
       el.addEventListener("dblclick", e => { e.stopPropagation(); if (n.url) window.open(n.url, "_blank"); });
+    } else if (n.type === "domain") {
+      // single click toggles; double-click jumps into the domain
+      el.addEventListener("click", () => { if (mode === "all") { n.collapsed = !n.collapsed; build(); } else { n.collapsed = !n.collapsed; build(); } });
+      el.addEventListener("dblclick", e => { e.stopPropagation(); pick(n.domIdx); });
     } else {
       el.addEventListener("click", () => { n.collapsed = !n.collapsed; build(); });
     }
@@ -338,6 +386,7 @@
     mode = "single";
     di = (i + DATA.length) % DATA.length;
     curRoot = mkDomain(DATA[di]);
+    setDepth(curRoot);
     g.__fitted = 0;
     transform = { x: 24, y: 60, k: 1 };
     $("#dnavName").textContent = DATA[di].emoji + " " + DATA[di].name;
@@ -345,10 +394,10 @@
   }
   function pickAll() {
     mode = "all";
-    curRoot = allRoot;
+    curRoot = setDepth(allRoot);
     g.__fitted = 0;
     transform = { x: 24, y: 60, k: 1 };
-    $("#dnavName").textContent = "all 27 domains";
+    $("#dnavName").textContent = "all 27 domains — " + stats.tools + " tools";
     build();
   }
 
@@ -472,20 +521,18 @@
   $("#pclose").addEventListener("click", () => panel.classList.remove("open"));
 
   /* ---------------- expand / collapse ---------------- */
+  const foldable = n => n.type !== "tool" && n.type !== "all";
   $("#expandAll").addEventListener("click", () => {
     (function e(n) { for (const c of (n.children || [])) { if (c.type === "tool") continue; c.collapsed = false; e(c); } })(curRoot);
     build();
   });
   $("#collapseAll").addEventListener("click", () => {
-    (function c(n, depth) {
+    (function c(n, top) {
       for (const ch of (n.children || [])) {
         if (ch.type === "tool") continue;
-        if (ch.type === "cat") {
-          ch.collapsed = true;
-          c(ch, depth + 1);
-        }
+        if (foldable(ch)) { ch.collapsed = true; c(ch, false); }
       }
-    })(curRoot, 0);
+    })(curRoot, true);
     build();
   });
 
@@ -508,14 +555,15 @@
     }
     DATA = data.domains;
     stats = data.stats;
+    PILLS = data.pillars || [];
     DATA.forEach((dom, i) => dom._i = i);
     $("#st-domains").textContent = stats.domains;
     $("#st-cats").textContent = stats.categories;
     $("#st-tools").textContent = stats.tools;
     buildIndex();
-    allRoot = { type: "all", label: "◎ all 27 domains", cls: "defense", dom: "all", path: "all",
-      collapsed: false, children: DATA.map(dom => mkDomain(dom, true)) };
-    pick(0);
+    allRoot = { type: "all", label: "◎ all " + stats.domains + " domains", cls: "defense", dom: "all", path: "all",
+      collapsed: false, children: PILLS.map(mkPillar) };
+    pickAll();
   })();
 })();
 </script>

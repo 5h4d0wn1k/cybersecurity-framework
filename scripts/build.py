@@ -25,6 +25,25 @@ def sort_key(d):
     )
 
 
+def read_structure(domains_by_id):
+    """Load tree/_structure.json and expand domain refs into embedded domain objects."""
+    sp = TREE / "_structure.json"
+    if not sp.exists():
+        return []
+    struct = json.loads(sp.read_text())
+    pillars = []
+    for pillar in struct.get("pillars", []):
+        groups = []
+        for g in pillar.get("groups", []):
+            doms = []
+            for did in g.get("domains", []):
+                if did in domains_by_id:
+                    doms.append(domains_by_id[did])
+            groups.append({"id": g["id"], "name": g["name"], "domains": doms})
+        pillars.append({k: pillar.get(k) for k in ("id", "name", "emoji", "class", "tagline")} | {"groups": groups})
+    return pillars
+
+
 def normalize_effort(node):
     for t in node.get("tools", []):
         if t.get("effort") == "beginner":
@@ -84,6 +103,8 @@ def build():
     domains, refs = [], {}
 
     for p in sorted(TREE.glob("*.json")):
+        if p.name.startswith("_"):
+            continue
         d = json.loads(p.read_text())
         domains.append(d)
         for cat in d.get("categories", []):
@@ -97,11 +118,15 @@ def build():
 
     domains.sort(key=sort_key)
 
+    domains_by_id = {d["id"]: d for d in domains}
+    pillars = read_structure(domains_by_id)
+
     total_cats = sum(sum(count_cats(c) for c in d.get("categories", [])) for d in domains)
     total_tools = sum(sum(count_tools(c) for c in d.get("categories", [])) for d in domains)
 
     merged = {
         "domains": domains,
+        "pillars": pillars,
         "refs": refs,
         "stats": {"domains": len(domains), "categories": total_cats, "tools": total_tools},
     }
