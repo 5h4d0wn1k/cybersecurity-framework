@@ -369,7 +369,7 @@
     <button class="ibtn" id="fitB" title="Fit tree to screen">⛶<span class="lbl">&nbsp;fit</span></button>
     <button class="ibtn" id="coB" title="Collapse everything back to the top">⊟<span class="lbl">&nbsp;reset</span></button>
     <button class="ibtn" id="exB" title="Expand the whole tree">⊞<span class="lbl">&nbsp;all</span></button>
-    <button class="ibtn" id="themeB" title="Toggle theme" aria-label="Toggle theme">◐</button>
+    <button class="ibtn" id="themeB" title="Toggle theme" aria-label="Toggle theme" aria-pressed="false">◐</button>
   </div>
 </header>
 
@@ -1008,7 +1008,7 @@
     res.innerHTML =
       `<div class="count" aria-live="polite">${all.length} of ${toolIndex.length} tools indexed</div>` +
       (hits.map((t, i) =>
-        `<div class="row" data-i="${i}">
+        `<div class="row" data-i="${i}" role="option" aria-selected="false">
           <span class="t">${t.best ? "★ " : ""}${t.by ? "◆ " : ""}${esc(t.label)}</span>
           <span class="p">${esc(t.path)}</span>
           <span class="st">
@@ -1021,7 +1021,7 @@
   }
   function markRow() {
     const rows = res.querySelectorAll(".row");
-    rows.forEach((r, i) => r.classList.toggle("sel", i === res.__idx));
+    rows.forEach((r, i) => { const on = i === res.__idx; r.classList.toggle("sel", on); r.setAttribute("aria-selected", on ? "true" : "false"); });
     const sel = rows[res.__idx];
     if (sel) sel.scrollIntoView({ block: "nearest" });
   }
@@ -1111,10 +1111,13 @@
 
   /* ============ theme / keys ============ */
   const themeBtn = $("#themeB");
+  const syncTheme = () => themeBtn.setAttribute("aria-pressed", document.documentElement.classList.contains("light") ? "true" : "false");
   themeBtn.addEventListener("click", () => {
     document.documentElement.classList.toggle("light");
+    syncTheme();
     try { localStorage.setItem("theme", document.documentElement.classList.contains("light") ? "light" : "dark"); } catch (err) {}
   });
+  syncTheme();
   try { if (localStorage.getItem("theme") === "light") document.documentElement.classList.add("light"); } catch (err) {}
   document.addEventListener("keydown", e => {
     if (e.key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey && document.activeElement !== q) { e.preventDefault(); q.focus(); }
