@@ -323,7 +323,7 @@
       } else {
         const kidsT = (n.children || []).filter(k => k.type === "tool").length;
         const kidsC = (n.children || []).filter(k => k.type !== "tool").length;
-        el.setAttribute("class", "node d" + n.dv + " t" + n.type + " c" + n.cls);
+        el.setAttribute("class", "node d" + n.dv + " t" + n.type + " c-" + n.cls);
         const w = nodeWidth(n);
         const lx = n.type === "pillar" ? 26 : n.type === "group" ? 22 : n.type === "domain" ? 20 : 12;
         const tpl = n.type === "all"
