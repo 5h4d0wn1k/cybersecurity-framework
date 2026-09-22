@@ -16,28 +16,73 @@
 <meta property="og:description" content="The open-source map of everything in cybersecurity: 27 domains, 776 categories, 1067 curated offensive & defensive tools with effort ratings and when-to-use guidance." />
 <meta property="og:url" content="https://5h4d0wn1k.github.io/cybersecurity-framework/" />
 <meta property="og:locale" content="en_US" />
+<meta property="og:image" content="https://5h4d0wn1k.github.io/cybersecurity-framework/og.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Interactive tree-map of the CyberOps Framework: 27 cybersecurity domains, 776 categories, 1067 tools." />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="CyberOps Framework — Interactive Map of Every Cybersecurity Tool" />
 <meta name="twitter:description" content="27 domains, 776 categories, 1067 curated offensive & defensive security tools — the open-source map of everything in cybersecurity." />
+<meta name="twitter:image" content="https://5h4d0wn1k.github.io/cybersecurity-framework/og.png" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='4' fill='%230b1220'/%3E%3Cpath d='M8 2l5 1.8v3.4c0 3.4-2.2 5.9-5 6.8-2.8-.9-5-3.4-5-6.8V3.8z' fill='none' stroke='%236f8bff' stroke-width='1.3'/%3E%3Ccircle cx='8' cy='8' r='1.7' fill='%2334d399'/%3E%3C/svg%3E" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "CyberOps Framework",
-  "alternateName": "Cybersecurity Framework",
-  "url": "https://5h4d0wn1k.github.io/cybersecurity-framework/",
-  "description": "An open-source interactive tree-map of the entire cybersecurity landscape: 27 domains, 776 categories and 1067 curated offensive and defensive security tools, each with effort ratings and when-to-use guidance.",
-  "inLanguage": "en",
-  "publisher": { "@type": "Organization", "name": "5h4d0wn1k", "url": "https://github.com/5h4d0wn1k" }
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "name": "CyberOps Framework",
+      "alternateName": "Cybersecurity Framework",
+      "url": "https://5h4d0wn1k.github.io/cybersecurity-framework/",
+      "description": "An open-source interactive tree-map of the entire cybersecurity landscape: 27 domains, 776 categories and 1067 curated offensive and defensive security tools, each with effort ratings and when-to-use guidance.",
+      "inLanguage": "en",
+      "publisher": { "@type": "Organization", "name": "5h4d0wn1k", "url": "https://github.com/5h4d0wn1k" }
+    },
+    {
+      "@type": "ItemList",
+      "name": "Cybersecurity domains covered by the CyberOps Framework",
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "numberOfItems": 27,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Active Directory Security" },
+        { "@type": "ListItem", "position": 2, "name": "Application Security (SAST, DAST, Secrets & SCA)" },
+        { "@type": "ListItem", "position": 3, "name": "Binary Exploitation & Reverse Engineering" },
+        { "@type": "ListItem", "position": 4, "name": "Blue Team — Defense & Detection" },
+        { "@type": "ListItem", "position": 5, "name": "Command & Control Frameworks" },
+        { "@type": "ListItem", "position": 6, "name": "Cloud Security — AWS, Azure & GCP" },
+        { "@type": "ListItem", "position": 7, "name": "Container & Kubernetes Security" },
+        { "@type": "ListItem", "position": 8, "name": "Cryptography Toolkit & Cryptoanalysis" },
+        { "@type": "ListItem", "position": 9, "name": "Exploitation & Payload Generation" },
+        { "@type": "ListItem", "position": 10, "name": "Digital Forensics & Incident Response" },
+        { "@type": "ListItem", "position": 11, "name": "System Hardening, Compliance & Secure Configuration" },
+        { "@type": "ListItem", "position": 12, "name": "Honeypots & Deception Technology" },
+        { "@type": "ListItem", "position": 13, "name": "IoT, Embedded & Firmware Security" },
+        { "@type": "ListItem", "position": 14, "name": "Malware Analysis & Reverse Engineering" },
+        { "@type": "ListItem", "position": 15, "name": "Mobile Application Security (Android & iOS)" },
+        { "@type": "ListItem", "position": 16, "name": "Network Attacks & Analysis" },
+        { "@type": "ListItem", "position": 17, "name": "OSINT — People, Infrastructure & Metadata" },
+        { "@type": "ListItem", "position": 18, "name": "Password Attacks & Cracking" },
+        { "@type": "ListItem", "position": 19, "name": "Phishing & Social Engineering" },
+        { "@type": "ListItem", "position": 20, "name": "Privilege Escalation (Linux & Windows)" },
+        { "@type": "ListItem", "position": 21, "name": "Purple Team, BAS & Adversary Emulation" },
+        { "@type": "ListItem", "position": 22, "name": "Reconnaissance & OSINT" },
+        { "@type": "ListItem", "position": 23, "name": "Red Team Infrastructure & Operations" },
+        { "@type": "ListItem", "position": 24, "name": "Threat Intelligence, Sharing & Detection Engineering" },
+        { "@type": "ListItem", "position": 25, "name": "Vulnerability Scanning & Assessment" },
+        { "@type": "ListItem", "position": 26, "name": "Web Application Security" },
+        { "@type": "ListItem", "position": 27, "name": "Wireless & Bluetooth Security" }
+      ]
+    }
+  ]
 }
 </script>
 <style>
   :root{
+    --hdr:58px;
     --bg:#070b13; --bg2:#0b111e;
     --glass:rgba(12,17,30,.72); --card:#0e1526; --card2:#16203a;
     --line:rgba(148,163,210,.14); --line2:rgba(148,163,210,.28);
-    --txt:#e9effc; --muted:#9aa7c5; --dim:#61708f;
+    --txt:#e9effc; --muted:#9aa7c5; --dim:#8799b8;
     --acc:#6f8bff; --acc2:#93aaff;
     --off:#ff6b57; --def:#38c7ff;
     --off-dim:rgba(255,107,87,.15); --def-dim:rgba(56,199,255,.13);
@@ -52,11 +97,11 @@
     --bg:#eef2fb; --bg2:#e3e9f6;
     --glass:rgba(255,255,255,.82); --card:#ffffff; --card2:#f1f5fd;
     --line:rgba(40,55,95,.12); --line2:rgba(40,55,95,.24);
-    --txt:#141d38; --muted:#4b5a7a; --dim:#8593b2;
+    --txt:#141d38; --muted:#4b5a7a; --dim:#40507a;
     --acc:#4f6bf0; --acc2:#3b58e8;
     --off:#d94e2b; --def:#067fb4;
     --off-dim:rgba(217,78,43,.12); --def-dim:rgba(6,127,180,.10);
-    --grn:#0f9d63; --warn:#9a6c00; --red:#c53030; --own:#7c3aed; --best:#a86900;
+    --grn:#0f9d63; --warn:#7c5300; --red:#c53030; --own:#7c3aed; --best:#8a5c00;
     --vign:rgba(150,175,225,.22);
     --shadow:0 16px 40px rgba(25,40,90,.16);
   }
@@ -81,7 +126,7 @@
   }
   .brand{display:flex;align-items:center;gap:12px;min-width:0;user-select:none}
   .mark{width:34px;height:34px;flex:none;filter:drop-shadow(0 4px 14px rgba(111,139,255,.4))}
-  .brand .name{font-size:16px;font-weight:800;letter-spacing:-.4px;white-space:nowrap}
+  .brand .name{font-size:16px;font-weight:800;letter-spacing:-.4px;white-space:nowrap;margin:0}
   .brand .name .acc{color:var(--acc2)}
   .brand .name .g{background:linear-gradient(90deg,var(--grn),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
   .brand .tag{font:10px var(--mono);color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:300px}
@@ -113,9 +158,11 @@
   #res .tag{font:9.5px var(--mono);border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:0 6px}
   #res .tag.c-offense{color:var(--off);border-color:var(--off)}
   #res .tag.c-defense{color:var(--def);border-color:var(--def)}
+  #res .tag.c-commercial{color:var(--best);border-color:var(--best)}
   #res .tag.c-easy{color:var(--grn);border-color:var(--grn)}
+  #res .tag.c-medium{color:var(--warn);border-color:var(--warn)}
   #res .tag.c-advanced{color:var(--red);border-color:var(--red)}
-  #res .tag.c-moderate{color:var(--warn);border-color:var(--warn)}
+  #res .row.sel{background:var(--card2);border-left-color:var(--acc)}
   #res .empty{font:11px var(--mono);color:var(--dim);padding:14px 16px}
 
   .tools{display:flex;gap:8px;align-items:center}
@@ -133,8 +180,10 @@
   }
   .ibtn:hover{color:var(--txt);border-color:var(--acc);transform:translateY(-1px);box-shadow:0 8px 20px -12px rgba(111,139,255,.55)}
 
+  .skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--card);color:var(--acc2);padding:10px 16px;border-radius:0 0 10px 0;font:12px var(--sans);text-decoration:none}
+  .skip:focus{left:0;color:var(--txt)}
   #crd{
-    position:fixed;top:66px;left:50%;transform:translateX(-50%);z-index:55;
+    position:fixed;top:66px;left:50%;transform:translateX(-50%);z-index:90;
     pointer-events:none;opacity:0;transition:opacity .18s,transform .25s var(--ease);
     font:10.5px var(--mono);color:var(--muted);background:var(--glass);
     border:1px solid var(--line2);border-radius:10px;padding:5px 13px;
@@ -154,7 +203,7 @@
   .ch-off{background:var(--off)} .ch-def{background:var(--def)}
   .hint{position:fixed;right:16px;bottom:14px;z-index:40;font:10px var(--mono);color:var(--dim);text-align:right;line-height:1.7}
 
-  #stage{position:fixed;inset:58px 0 0 0;overflow:hidden;
+  #stage{position:fixed;inset:var(--hdr) 0 0 0;overflow:hidden;
     background:radial-gradient(115% 115% at 50% 32%, transparent 52%, var(--vign) 100%);}
   #stage::before,#stage::after{content:"";position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
   #stage::before{width:540px;height:540px;left:-150px;top:-130px;
@@ -188,6 +237,7 @@
   .node rect.pill{fill:var(--card);stroke:var(--line2);stroke-width:1.2;transition:fill .2s,stroke-opacity .2s}
   .node.c-offense rect.pill{stroke:var(--off);stroke-opacity:.5}
   .node.c-defense rect.pill{stroke:var(--def);stroke-opacity:.5}
+  .node.c-commercial rect.pill{stroke:var(--best);stroke-opacity:.5}
   .node.open rect.pill{fill:var(--card2)}
   .node.open.c-offense rect.pill{stroke-opacity:1}
   .node.open.c-defense rect.pill{stroke-opacity:1}
@@ -198,9 +248,10 @@
   .node.pulse .skin{animation:pulseglow .55s var(--ease)}
   @keyframes pulseglow{0%,100%{filter:drop-shadow(0 0 0 rgba(111,139,255,0))}45%{filter:drop-shadow(0 0 20px var(--acc))}}
 
-  .node .chev{transform-origin:center;transform-box:fill-box;transition:transform .3s var(--ease)}
-  .node .chev path{fill:none;stroke:var(--muted);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-  .node.open .chev{transform:rotate(90deg)}
+  .node .chev path{fill:none;stroke:var(--muted);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;
+    transform-origin:center;transform-box:fill-box;transition:transform .3s var(--ease)}
+  .node.open .chev path{transform:rotate(90deg)}
+  .node:focus-visible .skin{outline:2px solid var(--acc);outline-offset:5px;outline-style:solid}
 
   .node.all .rootc{fill:url(#rg);stroke:var(--acc2);stroke-width:2}
   .node.all .rot{stroke:var(--acc);stroke-width:1;stroke-dasharray:3 10;animation:spin 18s linear infinite;transform-origin:center;transform-box:fill-box;opacity:.7}
@@ -209,7 +260,7 @@
   .node.all .lb{font-weight:800;font-size:13px}
 
   #panel{
-    position:fixed;top:58px;right:0;bottom:0;width:min(430px,94vw);z-index:70;
+    position:fixed;top:var(--hdr);right:0;bottom:0;width:min(430px,94vw);z-index:70;
     background:var(--glass);backdrop-filter:blur(22px) saturate(1.25);border-left:1px solid var(--line2);
     box-shadow:var(--shadow);transform:translateX(105%);transition:transform .3s var(--ease);
     display:flex;flex-direction:column;
@@ -231,9 +282,10 @@
   .chap{font:9.5px var(--mono);border:1px solid var(--line2);color:var(--muted);border-radius:7px;padding:2px 9px}
   .chap.c-offense{color:var(--off);border-color:var(--off)}
   .chap.c-defense{color:var(--def);border-color:var(--def)}
+  .chap.c-commercial{color:var(--best);border-color:var(--best)}
   .chap.c-easy{color:var(--grn);border-color:var(--grn)}
+  .chap.c-medium{color:var(--warn);border-color:var(--warn)}
   .chap.c-advanced{color:var(--red);border-color:var(--red)}
-  .chap.c-moderate{color:var(--warn);border-color:var(--warn)}
   .chap.best{color:var(--best);border-color:var(--best)}
   .chap.by{color:var(--own);border-color:var(--own)}
   .rate{display:flex;gap:5px;align-items:center}
@@ -263,30 +315,30 @@
     .hint{display:none}
   }
   @media (max-width:640px){
-    .tools .ibtn{display:none}
+    .tools .ibtn{padding:6px 8px;font-size:11px}
     .tools select{max-width:120px}
     header{flex-wrap:wrap;height:auto;padding:10px 12px;gap:10px}
     .search{order:3;flex:1 1 100%;max-width:none}
-    #stage{top:auto}
-    #panel{top:auto}
+    #panel{width:100vw}
   }
 </style>
 </head>
 <body>
+<a class="skip" href="#stage">Skip to the interactive tree</a>
 <header>
   <div class="brand">
     <svg class="mark" viewBox="0 0 34 34"><defs><linearGradient id="shg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6f8bff"/><stop offset="1" stop-color="#34d399"/></linearGradient></defs><rect x="1" y="1" width="32" height="32" rx="9" fill="var(--card)" stroke="var(--line2)"/><path d="M17 7l8 3v5.5c0 5.4-3.4 9.2-8 10.5-4.6-1.3-8-5.1-8-10.5V10z" fill="none" stroke="url(#shg)" stroke-width="1.8"/><circle cx="17" cy="17" r="3" fill="var(--grn)"/></svg>
     <div>
-      <div class="name"><span class="acc">Cyber</span>Ops <span class="g">Framework</span></div>
+      <h1 class="name"><span class="acc">Cyber</span>Ops <span class="g">Framework</span></h1>
       <div class="tag" id="stline">loading…</div>
     </div>
   </div>
 
-  <div class="search">
+  <div class="search" role="search">
     <svg class="ic" width="14" height="14" viewBox="0 0 16 16"><circle cx="7" cy="7" r="4.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.4"/></svg>
-    <input id="q" placeholder="Search tools…" autocomplete="off" />
+    <input id="q" placeholder="Search tools…" autocomplete="off" aria-label="Search tools" role="combobox" aria-expanded="false" aria-controls="res" aria-autocomplete="list" />
     <span id="qk">/</span>
-    <div id="res"></div>
+    <div id="res" role="listbox" aria-label="Search results"></div>
   </div>
 
   <div class="tools">
@@ -294,7 +346,7 @@
     <button class="ibtn" id="fitB" title="Fit tree to screen">⛶&nbsp;fit</button>
     <button class="ibtn" id="coB" title="Collapse everything back to the top">⊟&nbsp;reset</button>
     <button class="ibtn" id="exB" title="Expand the whole tree">⊞&nbsp;all</button>
-    <button class="ibtn" id="themeB" title="Toggle theme">◐</button>
+    <button class="ibtn" id="themeB" title="Toggle theme" aria-label="Toggle theme">◐</button>
   </div>
 </header>
 
@@ -308,7 +360,19 @@
 </div>
 <div class="hint">click · expand / open tool<br/>drag · pan&nbsp;&nbsp;wheel · zoom<br/>dbl-click tool · jump to page</div>
 
-<div id="stage">
+<noscript>
+  <div style="max-width:860px;margin:90px auto 40px;padding:24px;background:#0e1526;border:1px solid rgba(148,163,210,.2);border-radius:14px;color:#e9effc;font:14px/1.6 system-ui">
+    <h2 style="margin-top:0">CyberOps Framework — 27 cybersecurity domains, 776 categories, 1067 tools</h2>
+    <p>An open-source interactive map of the entire cybersecurity landscape. JavaScript is required to explore the tree, but here are the top-level domains:</p>
+    <ul>
+      <li><strong>⚔️ Offensive Security</strong> — Reconnaissance &amp; OSINT, Scanning &amp; Assessment, Web &amp; Mobile Apps, Identity &amp; Active Directory, Passwords &amp; Crypto Attacks, Exploitation &amp; Payloads, C2 &amp; Red Team Ops, Phishing &amp; Social Engineering, Wireless/Embedded &amp; IoT</li>
+      <li><strong>🛡️ Defensive Security</strong> — Detection &amp; Monitoring, Application Assurance, Forensics &amp; Incident Response, Malware &amp; Threat Analysis, Hardening &amp; Compliance, Cloud &amp; Container Security, Deception &amp; Adversary Emulation</li>
+    </ul>
+    <p>Full source, schema and contribution guide on <a href="https://github.com/5h4d0wn1k/cybersecurity-framework">GitHub</a>.</p>
+  </div>
+</noscript>
+
+<div id="stage" tabindex="-1">
   <svg id="svg" role="figure" aria-label="Cybersecurity framework tree">
     <defs>
       <radialGradient id="rg" cx=".5" cy=".5" r=".5">
@@ -320,8 +384,8 @@
         <circle cx="1.2" cy="1.2" r="1" fill="var(--line2)"/>
       </pattern>
     </defs>
+    <rect id="grid" width="100%" height="100%" fill="url(#dg)"></rect>
     <g id="vp">
-      <rect id="grid" width="100%" height="100%" fill="url(#dg)"></rect>
       <g id="links"></g>
       <g id="nodes"></g>
     </g>
@@ -461,8 +525,7 @@
     for (const n of out) { if (n.x < mn) mn = n.x; if (n.x > mx) mx = n.x; }
     const spanUnits = (mx - mn) || 1;
     const spanPx = spanUnits * ROW;
-    const vhCap = (svg.clientHeight || 800) * 1.5;
-    const Hv = Math.min(spanPx + 2 * ROW, vhCap);
+    const Hv = spanPx + 2 * ROW;
     for (const n of out) n.x = ROW + ((n.x - mn) / spanUnits) * (Hv - 2 * ROW);
     return out;
   }
@@ -509,9 +572,9 @@
       let lx = cx + 15;
       inner = `<rect class="pill" x="${cx}" y="-13" width="${W}" height="26" rx="13"/>`;
       inner += `<text class="lb" x="${lx}" dy=".36em">${esc(txt)}</text>`;
-      if (n.tools) { const cnt = String(n.tools); inner += `<text class="cnt" x="${lx + txt.length * CHARW + 7}" dy=".36em">${cnt}</text>`; }
+      if (n.tools) { const cnt = String(n.tools); let cx2 = lx + txt.length * CHARW + 8; if (cx2 + cnt.length * 5.6 + 8 > W / 2 - 17) cx2 = W / 2 - 17 - cnt.length * 5.6 - 4; inner += `<text class="cnt" x="${cx2}" dy=".36em">${cnt}</text>`; }
       const chevX = W / 2 - 17;
-      inner += `<g class="chev" transform="translate(${chevX} 0)"><path d="M0 -4 L5 0 0 4"/></g>`;
+      if (n.children && n.children.length) inner += `<g class="chev" transform="translate(${chevX} 0)"><path d="M0 -4 L5 0 0 4"/></g>`;
     }
     n._W = (n.type === "all") ? 0 : pillW(n);
     if (n.desc || n.label !== dispLabel(n)) inner += `<title>${esc(n.desc || n.label)}</title>`;
@@ -538,6 +601,7 @@
     g.setAttribute("transform", "translate(" + x.toFixed(2) + " " + y.toFixed(2) + ")");
     g.__x = x; g.__y = y;
   }
+  function clsOf(n) { let s = n; while (s && !s.cls) s = s.parent; return s ? s.cls : ""; }
   const lerp = (a, b, e) => a + (b - a) * e;
   const easeOut = t => 1 - Math.pow(1 - t, 3);
 
@@ -563,7 +627,7 @@
         el.setAttribute("class", "link");
         const c = byPath.get(p);
         el.__pp = c.parent.path;
-        el.style.stroke = c.cls === "offense" ? "var(--off)" : "var(--def)";
+        el.style.stroke = clsOf(c) === "offense" ? "var(--off)" : "var(--def)";
         linksG.appendChild(el);
         linkEls.set(p, el);
       }
@@ -582,8 +646,8 @@
         nodeEls.set(n.path, el);
       } else {
         g.setAttribute("class", elClass(n));
+        g.setAttribute("aria-expanded", (n.type !== "tool" && n.type !== "all" && n.children.length) ? (n.open ? "true" : "false") : "");
         g.innerHTML = nodeInner(n);
-        if (n.type === "tool") bindNode(g, n);
       }
     }
 
@@ -680,16 +744,26 @@
 
   function bindNode(g, n) {
     g._n = n;
+    g.setAttribute("tabindex", "0");
+    const lbl = n.path + (n.tools ? ` (${n.tools} tools)` : "");
+    g.setAttribute("aria-label", lbl);
+    const isBranch = n.type !== "tool" && n.type !== "all" && n.children.length > 0;
+    if (isBranch) g.setAttribute("role", "button");
     g.addEventListener("click", e => {
       e.stopPropagation();
+      if (e.detail > 1) return;
       if (n.type === "tool") openPanel(n);
       else if (n.type === "all") { resetTop(); render(); autoFit(); }
       else {
         n.open = !n.open;
+        if (isBranch) g.setAttribute("aria-expanded", n.open ? "true" : "false");
         const el = nodeEls.get(n.path);
         if (el) { el.classList.add("pulse"); setTimeout(() => el.classList.remove("pulse"), 650); }
         render();
       }
+    });
+    g.addEventListener("keydown", e => {
+      if ((e.key === "Enter" || e.key === " ") && isBranch) { e.preventDefault(); g.dispatchEvent(new MouseEvent("click", { bubbles: true })); }
     });
     g.addEventListener("dblclick", e => {
       if (n.type === "tool" && n.url) window.open(n.url, "_blank");
@@ -719,42 +793,82 @@
     const vw = svg.clientWidth || 1200, vh = svg.clientHeight || 800, pad = 60;
     const bw = (maxX - minX) || 1, bh = (maxY - minY) || 1;
     let k = Math.min((vw - pad * 2) / bw, (vh - pad * 2) / bh);
-    k = Math.max(0.3, Math.min(k, 1.25));
+    k = Math.max(0.01, Math.min(k, 1.25));
     const cx = (minX + maxX) / 2, cy = (minY + maxY) / 2;
     transform = { x: vw / 2 - cx * k, y: vh / 2 - cy * k, k };
     apply();
   }
   $("#fitB").addEventListener("click", autoFit);
 
-  let dragging = false, sx = 0, sy = 0;
-  svg.addEventListener("mousedown", e => {
-    if (e.target.closest(".node") || e.target.closest(".link")) return;
-    dragging = true; sx = e.clientX - transform.x; sy = e.clientY - transform.y; svg.classList.add("drag");
+  let dragging = false, sx = 0, sy = 0, pts = new Map(), pdist = 0, pstart = null;
+  function ptrXY(e) { const r = svg.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; }
+  svg.addEventListener("pointerdown", e => {
+    const onNode = e.target.closest(".node") || e.target.closest(".link");
+    if (e.pointerType === "mouse" && onNode) return;
+    pts.set(e.pointerId, ptrXY(e));
+    if (pts.size === 1) { dragging = true; sx = e.clientX - transform.x; sy = e.clientY - transform.y; svg.classList.add("drag"); svg.setPointerCapture(e.pointerId); }
+    else if (pts.size === 2) {
+      const [a, b] = [...pts.values()];
+      pdist = Math.hypot(a.x - b.x, a.y - b.y);
+      pstart = { k: transform.k, mid: { x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 } };
+      dragging = false;
+    }
   });
-  window.addEventListener("mousemove", e => { if (dragging) { transform.x = e.clientX - sx; transform.y = e.clientY - sy; apply(); } });
-  window.addEventListener("mouseup", () => { dragging = false; svg.classList.remove("drag"); });
+  svg.addEventListener("pointermove", e => {
+    if (!pts.has(e.pointerId)) return;
+    if (pts.size === 1) {
+      if (!dragging) return;
+      transform.x = e.clientX - sx; transform.y = e.clientY - sy; apply();
+      pts.set(e.pointerId, ptrXY(e));
+    } else if (pts.size === 2 && pdist && pstart) {
+      pts.set(e.pointerId, ptrXY(e));
+      const [a, b] = [...pts.values()];
+      const d = Math.hypot(a.x - b.x, a.y - b.y);
+      const k2 = Math.max(0.01, Math.min(4, pstart.k * d / pdist));
+      const wx = (pstart.mid.x - transform.x) / transform.k, wy = (pstart.mid.y - transform.y) / transform.k;
+      transform.k = k2; transform.x = pstart.mid.x - wx * k2; transform.y = pstart.mid.y - wy * k2;
+      apply();
+    }
+  }, { passive: true });
+  function endPtr(e) {
+    pts.delete(e.pointerId);
+    if (pts.size < 2) { pdist = 0; pstart = null; }
+    if (pts.size === 0) { dragging = false; svg.classList.remove("drag"); }
+  }
+  svg.addEventListener("pointerup", endPtr);
+  svg.addEventListener("pointercancel", endPtr);
+  svg.addEventListener("pointerleave", endPtr);
   svg.addEventListener("wheel", e => {
     e.preventDefault();
     const r = svg.getBoundingClientRect();
     const mx = e.clientX - r.left, my = e.clientY - r.top;
-    const f = e.deltaY < 0 ? 1.1 : 0.9;
-    const k2 = Math.max(0.15, Math.min(4, transform.k * f));
+    let dy = e.deltaY;
+    if (e.deltaMode === 1) dy *= 16;
+    else if (e.deltaMode === 2) dy *= 100;
+    const f = dy < 0 ? 1.1 : 0.9;
+    const k2 = Math.max(0.01, Math.min(4, transform.k * (e.ctrlKey ? Math.pow(1.002, -dy) : f)));
     const wx = (mx - transform.x) / transform.k, wy = (my - transform.y) / transform.k;
     transform.k = k2; transform.x = mx - wx * k2; transform.y = my - wy * k2;
     apply();
   }, { passive: false });
 
+  /* re-fit on resize / device rotation */
+  let rzT = 0;
+  window.addEventListener("resize", () => { clearTimeout(rzT); rzT = setTimeout(() => { autoFit(); setTimeout(autoFit, 160); }, 120); });
+
   /* ============ expand / collapse / reset ============ */
+  function closeDeep(n) { n.open = false; for (const c of n.children) if (c.children.length) closeDeep(c); }
   function resetTop() {
+    if (!allRoot) return;
     allRoot.open = true;
-    for (const pp of allRoot.children) { pp.open = true; for (const cc of pp.children) cc.open = false; }
+    for (const pp of allRoot.children) { pp.open = true; for (const cc of pp.children) closeDeep(cc); }
   }
   function expandAll(n) {
-    n.open = n.children.length > 0;
+    if (n.children.length) n.open = true;
     for (const c of n.children) if (c.children.length) expandAll(c);
   }
-  $("#exB").addEventListener("click", () => { expandAll(allRoot); render(); autoFit(); });
-  $("#coB").addEventListener("click", () => { resetTop(); render(); autoFit(); });
+  $("#exB").addEventListener("click", () => { if (!allRoot) return; expandAll(allRoot); render(); autoFit(); });
+  $("#coB").addEventListener("click", () => { if (!allRoot) return; resetTop(); render(); autoFit(); });
 
   /* ============ search ============ */
   const q = $("#q"), res = $("#res");
@@ -778,7 +892,7 @@
     else target.parent.open = true;
     render();
     const vw = svg.clientWidth || 1200, vh = svg.clientHeight || 800;
-    const k = Math.max(transform.k, 0.9);
+    const k = Math.min(Math.max(transform.k, 0.9), 1.25);
     transform.k = k;
     transform.x = vw / 2 - target.y * k - 80;
     transform.y = vh / 2 - target.x * k;
@@ -787,32 +901,58 @@
     if (g) { g.classList.add("hl"); setTimeout(() => g.classList.remove("hl"), 1600); }
     if (target.type === "tool") openPanel(target);
   }
+  function buildHays() { for (const t of toolIndex) t._hay = (t.label + " " + t.path + " " + (t.desc || "") + " " + (t.when || "") + " " + (t.install || "")).toLowerCase(); }
+  let haysBuilt = false;
   function doSearch(s) {
     s = (s || "").trim().toLowerCase();
-    if (!s) { res.classList.remove("open"); res.innerHTML = ""; return; }
-    const hits = toolIndex.filter(t => t.label.toLowerCase().includes(s) || t.path.toLowerCase().includes(s)).slice(0, 40);
+    if (!s) { res.classList.remove("open"); res.innerHTML = ""; res.__hits = []; return; }
+    if (!haysBuilt) { buildHays(); haysBuilt = true; }
+    const all = toolIndex.filter(t => t._hay.includes(s));
+    const hits = all.slice(0, 40);
+    res.__hits = hits; res.__idx = -1;
     res.innerHTML =
-      `<div class="count">${hits.length} of ${toolIndex.length} tools indexed</div>` +
-      (hits.slice(0, 24).map((t, i) =>
+      `<div class="count">${all.length} of ${toolIndex.length} tools indexed</div>` +
+      (hits.map((t, i) =>
         `<div class="row" data-i="${i}">
           <span class="t">${t.best ? "★ " : ""}${t.by ? "◆ " : ""}${esc(t.label)}</span>
           <span class="p">${esc(t.path)}</span>
           <span class="st">
             ${t.effort ? `<span class="tag c-${esc(t.effort)}">${esc(t.effort)}</span>` : ""}
-            <span class="tag">${t.rating}/5</span>
-            ${t.cls ? `<span class="tag c-${esc(t.cls)}">${esc(t.cls)}</span>` : ""}
+            <span class="tag">${(t.rating ? t.rating : "?")}/5</span>
+            ${clsOf(t) ? `<span class="tag c-${esc(clsOf(t))}">${esc(clsOf(t))}</span>` : ""}
           </span>
         </div>`).join("") || `<div class="empty">no matches for "${esc(s)}"</div>`);
-    res.__hits = hits;
     res.classList.add("open");
+  }
+  function markRow() {
+    const rows = res.querySelectorAll(".row");
+    rows.forEach((r, i) => r.classList.toggle("sel", i === res.__idx));
+    const sel = rows[res.__idx];
+    if (sel) sel.scrollIntoView({ block: "nearest" });
   }
   q.addEventListener("input", () => doSearch(q.value));
   $("#qk").addEventListener("click", () => q.focus());
+  q.addEventListener("keydown", e => {
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      if (!res.classList.contains("open") || !res.__hits.length) return;
+      e.preventDefault();
+      if (res.__idx < 0) res.__idx = e.key === "ArrowDown" ? 0 : res.__hits.length - 1;
+      else res.__idx = (res.__idx + (e.key === "ArrowDown" ? 1 : -1) + res.__hits.length) % res.__hits.length;
+      markRow();
+    }
+    if (e.key === "Enter" && res.classList.contains("open") && res.__idx >= 0) {
+      e.preventDefault();
+      const t = res.__hits[res.__idx];
+      if (t) { reveal(t); res.classList.remove("open"); res.__hits = []; q.value = ""; }
+    }
+  });
   res.addEventListener("click", e => {
     const row = e.target.closest(".row");
     if (!row || !res.__hits) return;
     reveal(res.__hits[+row.dataset.i]);
     res.classList.remove("open");
+    q.value = "";
+    res.__hits = [];
     q.blur();
   });
   document.addEventListener("click", e => { if (!e.target.closest(".search")) res.classList.remove("open"); });
@@ -846,7 +986,9 @@
   }
   $("#pclose").addEventListener("click", () => panel.classList.remove("open"));
   document.addEventListener("mousedown", e => {
-    if (panel.classList.contains("open") && !panel.contains(e.target) && !e.target.closest(".node") && !e.target.closest(".search")) panel.classList.remove("open");
+    if (!panel.classList.contains("open")) return;
+    if (e.target.closest(".node") || e.target.closest(".search") || e.target.closest("#panel")) return;
+    panel.classList.remove("open");
   });
   $("#pbody").addEventListener("click", e => {
     const b = e.target.closest(".cpy");
@@ -865,11 +1007,11 @@
   const themeBtn = $("#themeB");
   themeBtn.addEventListener("click", () => {
     document.body.classList.toggle("light");
-    localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark");
+    try { localStorage.setItem("theme", document.body.classList.contains("light") ? "light" : "dark"); } catch (err) {}
   });
-  if (localStorage.getItem("theme") === "light") document.body.classList.add("light");
+  try { if (localStorage.getItem("theme") === "light") document.body.classList.add("light"); } catch (err) {}
   document.addEventListener("keydown", e => {
-    if (e.key === "/" && document.activeElement !== q) { e.preventDefault(); q.focus(); }
+    if (e.key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey && document.activeElement !== q) { e.preventDefault(); q.focus(); }
     if (e.key === "Escape") { panel.classList.remove("open"); res.classList.remove("open"); }
   });
 
@@ -906,6 +1048,13 @@
     render();
     autoFit();
     setTimeout(autoFit, 120);
+
+    /* keep --hdr in sync with the real header height (header wraps on narrow viewports) */
+    const hdrEl = document.querySelector("header");
+    const syncHdr = () => document.documentElement.style.setProperty("--hdr", hdrEl.offsetHeight + "px");
+    syncHdr();
+    if (window.ResizeObserver) new ResizeObserver(syncHdr).observe(hdrEl);
+    window.addEventListener("resize", syncHdr);
   })();
 })();
 </script>

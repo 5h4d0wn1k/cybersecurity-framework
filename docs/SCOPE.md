@@ -31,4 +31,5 @@ If you find a real vuln on a third party during authorized testing of a parent e
 ---
 
 This checklist is the *operational* half of [ETHICS.md](ETHICS.md). The map stays legal and
-useful because the user stays scoped.
+useful because the user stays scoped. See [VISION.md](VISION.md) §7 for the permanent scope
+boundaries of the project — including what will never be added to the map.
