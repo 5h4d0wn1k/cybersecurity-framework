@@ -193,16 +193,15 @@
             {
               "name": "Darkmoon",
               "rating": 5,
-              "effort": "advanced",
-              "desc": "Open-source (GPL-3.0) autonomous AI penetration-testing platform: an LLM orchestrates specialist agents (web, Active Directory, Kubernetes, CMS) and offensive tools over MCP, runs on a local model, and proves each finding with a real exploit; exports SARIF/JSON.",
-              "when": "Running autonomous, end-to-end offensive engagements against systems you own or are authorized to test, with findings validated by real exploitation.",
-              "install": "git clone https://github.com/ASCIT31/Dark-Moon",
-              "url": "https://github.com/ASCIT31/Dark-Moon",
+              "effort": "medium",
+              "desc": "Autonomous AI penetration-testing platform (GPL-3.0): LLM orchestrates specialist agents (web, AD, Kubernetes, CMS) and offensive tools over MCP, runs on a local model, validates each finding by reproducing it with a real exploit, and exports SARIF/JSON.",
+              "when": "Running authorized, autonomous offensive engagements against systems you own or are authorized to test, validating findings with reproducible exploits and generating audit-ready reports.",
+              "install": "git clone https://github.com/5h4d0wn1k/Darkmoon",
+              "url": "https://github.com/5h4d0wn1k/Darkmoon",
               "alt": [
-                "PentestGPT",
-                "hackingBuddyGPT"
+                "Open-source (GPL-3.0) \u2014 lab/authorized use only"
               ],
-              "by": "ASCIT31"
+              "by": "5h4d0wn1k"
             }
           ]
         }
