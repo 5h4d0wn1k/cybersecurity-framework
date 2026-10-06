@@ -189,6 +189,21 @@ Adversarial AI/ML security studio — data poisoning, model backdoors, extractio
 **Alternatives:** Own tool — lab/authorized use only
 
 
+##### Darkmoon ◆ by ASCIT31
+
+Open-source (GPL-3.0) autonomous AI penetration-testing platform: an LLM orchestrates specialist agents (web, Active Directory, Kubernetes, CMS) and offensive tools over MCP, runs on a local model, and proves each finding with a real exploit; exports SARIF/JSON.
+
+**When:** Running autonomous, end-to-end offensive engagements against systems you own or are authorized to test, with findings validated by real exploitation.
+
+**Effort:** advanced  ·  **Rating:** 5/5
+
+**Install:** `git clone https://github.com/ASCIT31/Dark-Moon`
+
+**URL:** https://github.com/ASCIT31/Dark-Moon
+
+**Alternatives:** PentestGPT, hackingBuddyGPT
+
+
 
 ## Operations & Reporting Platforms
 
